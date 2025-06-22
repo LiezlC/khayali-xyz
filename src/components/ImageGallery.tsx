@@ -2,35 +2,43 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { getAllCosmicImages, getImagesForGallery } from '@/utils/imageManager';
+import Image from 'next/image';
 
 interface ImageGalleryProps {
   category: 'cosmic' | 'saraloosa' | 'generated' | 'all';
   columns?: 2 | 3 | 4;
   showCaptions?: boolean;
   theme?: 'dark' | 'cosmic' | 'organic';
+  maxImages?: number;
 }
 
 export default function ImageGallery({ 
   category = 'all', 
   columns = 3, 
   showCaptions = true,
-  theme = 'dark'
+  theme = 'dark',
+  maxImages = 12
 }: ImageGalleryProps) {
   const [images, setImages] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Will dynamically load images based on category
-    // For now, using placeholder structure
-    const mockImages = [
-      '/images/cosmic/placeholder1.jpg',
-      '/images/cosmic/placeholder2.jpg', 
-      '/images/saraloosa/placeholder3.jpg',
-    ];
+    // Load your actual uploaded images
+    let imageList: string[] = [];
     
-    setImages(mockImages);
+    if (category === 'cosmic' || category === 'all') {
+      imageList = getAllCosmicImages();
+    }
+    
+    // Limit to maxImages
+    if (maxImages && imageList.length > maxImages) {
+      imageList = imageList.slice(0, maxImages);
+    }
+    
+    setImages(imageList);
     setLoading(false);
-  }, [category]);
+  }, [category, maxImages]);
 
   const gridClasses = {
     2: 'grid-cols-1 md:grid-cols-2',
@@ -55,21 +63,22 @@ export default function ImageGallery({
   return (
     <div className={`p-6 rounded-xl ${themeClasses[theme]}`}>
       <div className={`grid gap-4 ${gridClasses[columns]}`}>
-        {images.map((image, index) => (
-          <div key={index} className="group relative overflow-hidden rounded-lg bg-gray-800">
-            <div className="aspect-square bg-gradient-to-br from-purple-500/20 to-blue-500/20 flex items-center justify-center">
-              {/* Placeholder until real images are uploaded */}
-              <div className="text-4xl">
-                {category === 'cosmic' ? '?' : category === 'saraloosa' ? '?' : '?'}
-              </div>
+        {images.map((imageSrc, index) => (
+          <div key={index} className="group relative overflow-hidden rounded-lg bg-gray-800 hover:scale-105 transition-transform duration-300">
+            <div className="aspect-square relative">
+              <Image
+                src={imageSrc}
+                alt={`Consciousness visualization ${index + 1}`}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
             </div>
             
             {showCaptions && (
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity">
                 <p className="text-sm text-white">
-                  {category === 'cosmic' ? 'Consciousness Visualization' : 
-                   category === 'saraloosa' ? 'Farm Life Moment' : 
-                   'Creative Expression'} #{index + 1}
+                  Cosmic Consciousness #{index + 1}
                 </p>
               </div>
             )}
@@ -77,11 +86,11 @@ export default function ImageGallery({
         ))}
       </div>
       
-      <div className="mt-6 text-center">
-        <p className="text-gray-400 text-sm">
-          Upload your images to see them dynamically integrated here!
-        </p>
-      </div>
+      {images.length === 0 && (
+        <div className="text-center py-12">
+          <p className="text-gray-400 text-lg">No images found for this category yet.</p>
+        </div>
+      )}
     </div>
   );
 }

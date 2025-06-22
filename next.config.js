@@ -9,6 +9,17 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: false,
   },
+  images: {
+    domains: ['raw.githubusercontent.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'raw.githubusercontent.com',
+        port: '',
+        pathname: '/LiezlC/khayali-xyz/**',
+      },
+    ],
+  },
 }
 
 module.exports = nextConfig

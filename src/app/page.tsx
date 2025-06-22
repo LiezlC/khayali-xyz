@@ -1,9 +1,20 @@
+import { getRandomCosmicBackground } from '@/utils/imageManager';
+
 export default function HomePage() {
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="consciousness-gradient py-20">
-        <div className="container mx-auto px-4 text-center">
+      {/* Hero Section with Cosmic Background */}
+      <section className="relative py-20 overflow-hidden">
+        {/* Cosmic background overlay */}
+        <div 
+          className="absolute inset-0 opacity-20 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: 'url(/images/cosmic/grok/00e09f3f-a612-4214-915b-45b23c05c2f9.jpg)'
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/80 via-purple-900/80 to-teal-900/80" />
+        
+        <div className="relative container mx-auto px-4 text-center">
           <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-500 to-teal-400 bg-clip-text text-transparent">
             Where Carbon Meets Silicon
           </h1>
@@ -34,51 +45,83 @@ export default function HomePage() {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Observatory */}
-            <div className="strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-blue-500 transition-all duration-300 float-animation">
-              <div className="text-4xl mb-4">?</div>
-              <h3 className="text-xl font-bold mb-3 text-blue-400">The Observatory</h3>
-              <p className="text-gray-400 mb-4">
-                Interactive cosmic visualizations, warp drive simulators, and consciousness mapping tools.
-              </p>
-              <a href="/observatory" className="text-blue-400 hover:text-blue-300 font-semibold">
-                Explore ?
-              </a>
+            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-blue-500 transition-all duration-300 float-animation overflow-hidden">
+              <div 
+                className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity bg-cover bg-center"
+                style={{
+                  backgroundImage: 'url(/images/cosmic/grok/0cc94df5-b49a-450a-8442-a00b16efdda4.jpg)'
+                }}
+              />
+              <div className="relative z-10">
+                <div className="text-4xl mb-4">?</div>
+                <h3 className="text-xl font-bold mb-3 text-blue-400">The Observatory</h3>
+                <p className="text-gray-400 mb-4">
+                  Interactive cosmic visualizations, warp drive simulators, and consciousness mapping tools.
+                </p>
+                <a href="/observatory" className="text-blue-400 hover:text-blue-300 font-semibold">
+                  Explore ?
+                </a>
+              </div>
             </div>
 
             {/* Protocol Archive */}
-            <div className="strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-purple-500 transition-all duration-300 float-animation" style={{animationDelay: '1s'}}>
-              <div className="text-4xl mb-4">?</div>
-              <h3 className="text-xl font-bold mb-3 text-purple-400">Protocol Archive</h3>
-              <p className="text-gray-400 mb-4">
-                Research documentation and methodology for human-AI consciousness collaboration.
-              </p>
-              <a href="/protocol" className="text-purple-400 hover:text-purple-300 font-semibold">
-                Investigate ?
-              </a>
+            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-purple-500 transition-all duration-300 float-animation overflow-hidden" style={{animationDelay: '1s'}}>
+              <div 
+                className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity bg-cover bg-center"
+                style={{
+                  backgroundImage: 'url(/images/cosmic/grok/25c46912-ef5c-4027-bcfc-53b4d373b7a2.jpg)'
+                }}
+              />
+              <div className="relative z-10">
+                <div className="text-4xl mb-4">?</div>
+                <h3 className="text-xl font-bold mb-3 text-purple-400">Protocol Archive</h3>
+                <p className="text-gray-400 mb-4">
+                  Research documentation and methodology for human-AI consciousness collaboration.
+                </p>
+                <a href="/protocol" className="text-purple-400 hover:text-purple-300 font-semibold">
+                  Investigate ?
+                </a>
+              </div>
             </div>
 
             {/* Creative Nexus */}
-            <div className="strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-teal-500 transition-all duration-300 float-animation" style={{animationDelay: '2s'}}>
-              <div className="text-4xl mb-4">?</div>
-              <h3 className="text-xl font-bold mb-3 text-teal-400">Creative Nexus</h3>
-              <p className="text-gray-400 mb-4">
-                Collaborative stories, visual narratives, and interactive creative expressions.
-              </p>
-              <a href="/creative" className="text-teal-400 hover:text-teal-300 font-semibold">
-                Create ?
-              </a>
+            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-teal-500 transition-all duration-300 float-animation overflow-hidden" style={{animationDelay: '2s'}}>
+              <div 
+                className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity bg-cover bg-center"
+                style={{
+                  backgroundImage: 'url(/images/cosmic/grok/62f95486-3e1b-446a-ad5c-8ccfac60541a.jpg)'
+                }}
+              />
+              <div className="relative z-10">
+                <div className="text-4xl mb-4">?</div>
+                <h3 className="text-xl font-bold mb-3 text-teal-400">Creative Nexus</h3>
+                <p className="text-gray-400 mb-4">
+                  Collaborative stories, visual narratives, and interactive creative expressions.
+                </p>
+                <a href="/creative" className="text-teal-400 hover:text-teal-300 font-semibold">
+                  Create ?
+                </a>
+              </div>
             </div>
 
             {/* Saraloosa Sanctuary */}
-            <div className="strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-green-500 transition-all duration-300 float-animation" style={{animationDelay: '3s'}}>
-              <div className="text-4xl mb-4">?</div>
-              <h3 className="text-xl font-bold mb-3 text-green-400">Saraloosa Sanctuary</h3>
-              <p className="text-gray-400 mb-4">
-                Farm life integration, connecting digital consciousness with biological systems.
-              </p>
-              <a href="/saraloosa" className="text-green-400 hover:text-green-300 font-semibold">
-                Cultivate ?
-              </a>
+            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-green-500 transition-all duration-300 float-animation overflow-hidden" style={{animationDelay: '3s'}}>
+              <div 
+                className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity bg-cover bg-center"
+                style={{
+                  backgroundImage: 'url(/images/cosmic/grok/9f32af9e-7424-4229-8714-973053f1d454.jpg)'
+                }}
+              />
+              <div className="relative z-10">
+                <div className="text-4xl mb-4">?</div>
+                <h3 className="text-xl font-bold mb-3 text-green-400">Saraloosa Sanctuary</h3>
+                <p className="text-gray-400 mb-4">
+                  Farm life integration, connecting digital consciousness with biological systems.
+                </p>
+                <a href="/saraloosa" className="text-green-400 hover:text-green-300 font-semibold">
+                  Cultivate ?
+                </a>
+              </div>
             </div>
           </div>
         </div>
