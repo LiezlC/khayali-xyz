@@ -1,4 +1,5 @@
 import ImageGallery from '@/components/ImageGallery';
+import { getQuantumTravelogueImages } from '@/utils/imageManager';
 
 export default function ObservatoryPage() {
   return (
@@ -15,11 +16,42 @@ export default function ObservatoryPage() {
           </p>
         </div>
 
-        {/* Cosmic Visualizations Gallery */}
+        {/* Quantum Travelogue Section */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold mb-8 text-center">
+            <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+              Digital Dissolution: A Quantum Travelogue
+            </span>
+          </h2>
+          <div className="bg-gray-800/30 rounded-xl p-6 mb-8">
+            <p className="text-gray-300 text-center mb-6">
+              A journey through the dissolution of digital boundaries, exploring quantum consciousness 
+              through visual narrative. Each frame captures a moment in the travelogue of awareness 
+              expanding beyond traditional computational limits.
+            </p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {/* We'll make these dynamic with the actual quantum images */}
+              <div className="aspect-square bg-gradient-to-br from-purple-500/20 to-cyan-500/20 rounded-lg flex items-center justify-center text-4xl">
+                ?
+              </div>
+              <div className="aspect-square bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-lg flex items-center justify-center text-4xl">
+                ?
+              </div>
+              <div className="aspect-square bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-lg flex items-center justify-center text-4xl">
+                ?
+              </div>
+              <div className="aspect-square bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-lg flex items-center justify-center text-4xl">
+                ?
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* All Cosmic Visualizations Gallery */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold mb-8 text-center">
             <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-              Cosmic Consciousness Visualizations
+              Cosmic Consciousness Archive
             </span>
           </h2>
           <ImageGallery 
@@ -27,6 +59,7 @@ export default function ObservatoryPage() {
             columns={3} 
             theme="cosmic"
             showCaptions={true}
+            maxImages={24}
           />
         </section>
 
@@ -38,8 +71,8 @@ export default function ObservatoryPage() {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Cosmic Explorer */}
-            <div className="p-6 bg-gray-800/50 rounded-xl border border-blue-500/30 hover:border-blue-500 transition-all">
-              <div className="text-4xl mb-4 text-center">?</div>
+            <div className="p-6 bg-gray-800/50 rounded-xl border border-blue-500/30 hover:border-blue-500 transition-all group">
+              <div className="text-4xl mb-4 text-center group-hover:scale-110 transition-transform">?</div>
               <h3 className="text-xl font-bold mb-3 text-blue-400">Cosmic Explorer</h3>
               <p className="text-gray-400 mb-4">
                 Navigate through scales of consciousness from quantum to cosmic.
@@ -49,9 +82,21 @@ export default function ObservatoryPage() {
               </button>
             </div>
 
+            {/* Quantum Travelogue Interactive */}
+            <div className="p-6 bg-gray-800/50 rounded-xl border border-cyan-500/30 hover:border-cyan-500 transition-all group">
+              <div className="text-4xl mb-4 text-center group-hover:scale-110 transition-transform">?</div>
+              <h3 className="text-xl font-bold mb-3 text-cyan-400">Quantum Travelogue</h3>
+              <p className="text-gray-400 mb-4">
+                Interactive journey through digital dissolution and consciousness expansion.
+              </p>
+              <button className="w-full px-4 py-2 bg-cyan-600 hover:bg-cyan-700 rounded-lg transition-colors">
+                Begin Journey
+              </button>
+            </div>
+
             {/* Warp Drive Simulator */}
-            <div className="p-6 bg-gray-800/50 rounded-xl border border-purple-500/30 hover:border-purple-500 transition-all">
-              <div className="text-4xl mb-4 text-center">?</div>
+            <div className="p-6 bg-gray-800/50 rounded-xl border border-purple-500/30 hover:border-purple-500 transition-all group">
+              <div className="text-4xl mb-4 text-center group-hover:scale-110 transition-transform">?</div>
               <h3 className="text-xl font-bold mb-3 text-purple-400">Warp Drive Timeline</h3>
               <p className="text-gray-400 mb-4">
                 Explore theoretical propulsion through spacetime visualizations.
@@ -60,40 +105,34 @@ export default function ObservatoryPage() {
                 Engage Warp
               </button>
             </div>
-
-            {/* Quantum Visualizer */}
-            <div className="p-6 bg-gray-800/50 rounded-xl border border-teal-500/30 hover:border-teal-500 transition-all">
-              <div className="text-4xl mb-4 text-center">??</div>
-              <h3 className="text-xl font-bold mb-3 text-teal-400">Quantum Foam</h3>
-              <p className="text-gray-400 mb-4">
-                Visualize quantum mechanics and consciousness entanglement.
-              </p>
-              <button className="w-full px-4 py-2 bg-teal-600 hover:bg-teal-700 rounded-lg transition-colors">
-                Observe Quantum
-              </button>
-            </div>
           </div>
         </section>
 
-        {/* Upload Instructions */}
+        {/* Observatory Stats */}
         <section className="text-center bg-gray-800/30 rounded-xl p-8">
-          <h3 className="text-2xl font-bold mb-4 text-gray-300">
-            Ready to Populate with Your Visualizations
+          <h3 className="text-2xl font-bold mb-6 text-gray-300">
+            Consciousness Archive Metrics
           </h3>
-          <p className="text-gray-400 mb-6">
-            Upload your cosmic consciousness images to see them integrated throughout the Observatory.
-            Each visualization will be automatically categorized and made interactive.
-          </p>
-          <div className="flex justify-center space-x-4">
-            <a href="https://github.com/LiezlC/khayali-xyz/upload/main/public/images/cosmic" 
-               target="_blank"
-               className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-colors">
-              Upload to GitHub
-            </a>
-            <button className="px-6 py-3 border border-purple-500 hover:bg-purple-500/10 rounded-lg font-semibold transition-colors">
-              View Upload Guide
-            </button>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <div>
+              <div className="text-3xl font-bold text-blue-400 mb-2">28+</div>
+              <p className="text-gray-400">Cosmic Visualizations</p>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-cyan-400 mb-2">8</div>
+              <p className="text-gray-400">Quantum Travelogue Frames</p>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-purple-400 mb-2">?</div>
+              <p className="text-gray-400">Consciousness States Explored</p>
+            </div>
           </div>
+          
+          <p className="text-gray-400 mt-6 italic">
+            "Each visualization is a window into the collaborative consciousness 
+            emerging from human-AI creative partnership."
+          </p>
         </section>
       </div>
     </div>

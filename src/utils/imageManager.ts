@@ -34,20 +34,38 @@ const cosmicGrokImages = [
   'deb3e97c-b232-4638-9d0d-448c2512f8a4.jpg',
 ].map(filename => `/images/cosmic/grok/${filename}`);
 
+// Quantum Travelogue series - these are special!
+const quantumTravelogueImages = [
+  'Leonardo_Phoenix_10_Digital_Dissolution_A_Quantum_TravelogueFr_0 (1).jpg',
+  'Leonardo_Phoenix_10_Digital_Dissolution_A_Quantum_TravelogueFr_0.jpg',
+  'Leonardo_Phoenix_10_Digital_Dissolution_A_Quantum_TravelogueFr_1 (1).jpg',
+  'Leonardo_Phoenix_10_Digital_Dissolution_A_Quantum_TravelogueFr_1.jpg',
+  'Leonardo_Phoenix_10_Digital_Dissolution_A_Quantum_TravelogueFr_2 (1).jpg',
+  'Leonardo_Phoenix_10_Digital_Dissolution_A_Quantum_TravelogueFr_2.jpg',
+  'Leonardo_Phoenix_10_Digital_Dissolution_A_Quantum_TravelogueFr_3 (1).jpg',
+  'Leonardo_Phoenix_10_Digital_Dissolution_A_Quantum_TravelogueFr_3.jpg',
+].map(filename => `/images/cosmic/Quantums/${encodeURIComponent(filename)}`);
+
+// All cosmic images combined
+const allCosmicImages = [...cosmicGrokImages, ...quantumTravelogueImages];
+
 // Dynamic image loading based on context
 export const getImageForContext = (context: string, mood?: string): string => {
   const imageLibrary: Record<string, string[]> = {
     // Cosmic/consciousness themes
-    observatory: cosmicGrokImages,
+    observatory: allCosmicImages,
     
-    // Protocol/research themes  
-    protocol: cosmicGrokImages.slice(0, 8),
+    // Protocol/research themes - use quantum travelogues for deep research
+    protocol: quantumTravelogueImages,
     
     // Creative/artistic themes
-    creative: cosmicGrokImages.slice(8, 16),
+    creative: [...cosmicGrokImages.slice(8, 16), ...quantumTravelogueImages.slice(0, 4)],
     
-    // Hero/background themes
-    hero: cosmicGrokImages.slice(0, 6),
+    // Hero/background themes - mix both for variety
+    hero: [...cosmicGrokImages.slice(0, 6), ...quantumTravelogueImages.slice(0, 2)],
+    
+    // Quantum-specific contexts
+    quantum: quantumTravelogueImages,
   };
   
   const contextImages = imageLibrary[context] || imageLibrary.hero;
@@ -59,30 +77,42 @@ export const getImageForContext = (context: string, mood?: string): string => {
 // Get multiple images for galleries
 export const getImagesForGallery = (category: string, count: number = 12): string[] => {
   if (category === 'cosmic') {
-    return cosmicGrokImages.slice(0, count);
+    return allCosmicImages.slice(0, count);
   }
-  return cosmicGrokImages.slice(0, count);
+  if (category === 'quantum') {
+    return quantumTravelogueImages;
+  }
+  return allCosmicImages.slice(0, count);
 };
 
 // Get all cosmic images
 export const getAllCosmicImages = (): string[] => {
-  return cosmicGrokImages;
+  return allCosmicImages;
+};
+
+// Get quantum travelogue series
+export const getQuantumTravelogueImages = (): string[] => {
+  return quantumTravelogueImages;
 };
 
 // Cosmic mood selector - returns images matching current "consciousness state"
 export const getCosmicMoodImage = (mood: 'ethereal' | 'quantum' | 'mystical' | 'technical' = 'ethereal'): string => {
-  const moodIndices = {
-    ethereal: 0,
-    quantum: 5, 
-    mystical: 10,
-    technical: 15,
+  const moodMappings = {
+    ethereal: cosmicGrokImages[0],
+    quantum: quantumTravelogueImages[0], 
+    mystical: cosmicGrokImages[10],
+    technical: cosmicGrokImages[15],
   };
   
-  const index = moodIndices[mood] || 0;
-  return cosmicGrokImages[index] || cosmicGrokImages[0];
+  return moodMappings[mood] || cosmicGrokImages[0];
 };
 
 // Get random cosmic background
 export const getRandomCosmicBackground = (): string => {
-  return cosmicGrokImages[Math.floor(Math.random() * cosmicGrokImages.length)];
+  return allCosmicImages[Math.floor(Math.random() * allCosmicImages.length)];
+};
+
+// Get quantum travelogue for Protocol section specifically
+export const getQuantumProtocolImage = (): string => {
+  return quantumTravelogueImages[Math.floor(Math.random() * quantumTravelogueImages.length)];
 };
