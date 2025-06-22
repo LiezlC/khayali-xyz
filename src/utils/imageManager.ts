@@ -46,7 +46,7 @@ const quantumTravelogueImages = [
   'Leonardo_Phoenix_10_Digital_Dissolution_A_Quantum_TravelogueFr_3.jpg',
 ].map(filename => `/images/cosmic/Quantums/${encodeURIComponent(filename)}`);
 
-// Saraloosa farm images - biological consciousness grounding
+// Saraloosa farm images - the biological consciousness side
 const saraloosaFarmImages = [
   '20231107_191248.jpg',
   '20240127_200030.jpg',
@@ -78,7 +78,7 @@ const saraloosaFarmImages = [
   'Saraloosa-Farm-Branches-Roped.jpg',
   'Saraloosa-Farm-Sunrise.jpg',
   'WhatsApp Image 2024-08-31 at 15.59.26_eb78392f.jpg',
-].map(filename => `/images/saraloosa/${encodeURIComponent(filename)}`);
+].map(filename => `/images/saraloosa/${filename}`);
 
 // All cosmic images combined
 const allCosmicImages = [...cosmicGrokImages, ...quantumTravelogueImages];
@@ -95,20 +95,21 @@ export const getImageForContext = (context: string, mood?: string): string => {
     // Protocol/research themes - use quantum travelogues for deep research
     protocol: quantumTravelogueImages,
     
-    // Creative/artistic themes - mix cosmic and farm for creative tension
-    creative: [...cosmicGrokImages.slice(8, 16), ...quantumTravelogueImages.slice(0, 4), ...saraloosaFarmImages.slice(0, 4)],
+    // Creative/artistic themes - mix digital and biological
+    creative: [...cosmicGrokImages.slice(8, 16), ...saraloosaFarmImages.slice(0, 8)],
     
-    // Farm/nature themes
+    // Saraloosa/farm themes
     saraloosa: saraloosaFarmImages,
+    farm: saraloosaFarmImages,
     
-    // Hero/background themes - mix all for complete consciousness spectrum
-    hero: [...cosmicGrokImages.slice(0, 4), ...quantumTravelogueImages.slice(0, 2), ...saraloosaFarmImages.slice(0, 4)],
+    // Hero/background themes - mix all for variety
+    hero: [...cosmicGrokImages.slice(0, 4), ...saraloosaFarmImages.slice(0, 4)],
     
     // Quantum-specific contexts
     quantum: quantumTravelogueImages,
     
-    // Balance - cosmic and biological together
-    balance: [...allCosmicImages.slice(0, 6), ...saraloosaFarmImages.slice(0, 6)],
+    // Balanced digital-biological
+    balanced: [...allCosmicImages.slice(0, 10), ...saraloosaFarmImages.slice(0, 10)],
   };
   
   const contextImages = imageLibrary[context] || imageLibrary.hero;
@@ -125,13 +126,19 @@ export const getImagesForGallery = (category: string, count: number = 12): strin
   if (category === 'quantum') {
     return quantumTravelogueImages;
   }
-  if (category === 'saraloosa') {
+  if (category === 'saraloosa' || category === 'farm') {
     return saraloosaFarmImages.slice(0, count);
   }
   if (category === 'all') {
-    return allImages.slice(0, count);
+    // Mix everything for full archive view
+    const mixed = [];
+    const maxPerCategory = Math.ceil(count / 3);
+    mixed.push(...cosmicGrokImages.slice(0, maxPerCategory));
+    mixed.push(...quantumTravelogueImages.slice(0, Math.min(maxPerCategory, quantumTravelogueImages.length)));
+    mixed.push(...saraloosaFarmImages.slice(0, maxPerCategory));
+    return mixed.slice(0, count);
   }
-  return allCosmicImages.slice(0, count);
+  return allImages.slice(0, count);
 };
 
 // Get all cosmic images
@@ -140,7 +147,7 @@ export const getAllCosmicImages = (): string[] => {
 };
 
 // Get all farm images
-export const getAllSaraloosaImages = (): string[] => {
+export const getAllFarmImages = (): string[] => {
   return saraloosaFarmImages;
 };
 
@@ -149,59 +156,35 @@ export const getQuantumTravelogueImages = (): string[] => {
   return quantumTravelogueImages;
 };
 
-// Cosmic mood selector - returns images matching current "consciousness state"
-export const getCosmicMoodImage = (mood: 'ethereal' | 'quantum' | 'mystical' | 'technical' = 'ethereal'): string => {
+// Consciousness mood selector - balances digital and biological
+export const getConsciousnessMoodImage = (mood: 'cosmic' | 'quantum' | 'biological' | 'balanced' = 'balanced'): string => {
   const moodMappings = {
-    ethereal: cosmicGrokImages[0],
+    cosmic: cosmicGrokImages[0],
     quantum: quantumTravelogueImages[0], 
-    mystical: cosmicGrokImages[10],
-    technical: cosmicGrokImages[15],
-  };
-  
-  return moodMappings[mood] || cosmicGrokImages[0];
-};
-
-// Farm life moment selector
-export const getFarmMoodImage = (mood: 'peaceful' | 'active' | 'seasonal' | 'animals' = 'peaceful'): string => {
-  const moodMappings = {
-    peaceful: saraloosaFarmImages[26], // Saraloosa-Farm-Sunrise.jpg
-    active: saraloosaFarmImages[5], // Daily farm work
-    seasonal: saraloosaFarmImages[25], // After storm
-    animals: saraloosaFarmImages[10], // Animal photos
+    biological: saraloosaFarmImages[0],
+    balanced: Math.random() > 0.5 ? allCosmicImages[0] : saraloosaFarmImages[0],
   };
   
   return moodMappings[mood] || saraloosaFarmImages[0];
 };
 
-// Get random cosmic background
-export const getRandomCosmicBackground = (): string => {
-  return allCosmicImages[Math.floor(Math.random() * allCosmicImages.length)];
+// Get random background from any category
+export const getRandomBackground = (): string => {
+  return allImages[Math.floor(Math.random() * allImages.length)];
 };
 
-// Get random farm background  
-export const getRandomFarmBackground = (): string => {
+// Get farm sunrise for special moments
+export const getFarmSunrise = (): string => {
+  return '/images/saraloosa/Saraloosa-Farm-Sunrise.jpg';
+};
+
+// Get storm recovery image
+export const getStormRecovery = (): string => {
+  return '/images/saraloosa/Saraloosa-Farm-After-Storm.jpg';
+};
+
+// Get seasonal farm image
+export const getSeasonalFarmImage = (season?: 'spring' | 'summer' | 'autumn' | 'winter'): string => {
+  // Return random farm image, could be enhanced with seasonal logic
   return saraloosaFarmImages[Math.floor(Math.random() * saraloosaFarmImages.length)];
-};
-
-// Get balanced cosmic-farm background
-export const getBalancedBackground = (): string => {
-  const balancedImages = [...allCosmicImages.slice(0, 10), ...saraloosaFarmImages.slice(0, 10)];
-  return balancedImages[Math.floor(Math.random() * balancedImages.length)];
-};
-
-// Get quantum travelogue for Protocol section specifically
-export const getQuantumProtocolImage = (): string => {
-  return quantumTravelogueImages[Math.floor(Math.random() * quantumTravelogueImages.length)];
-};
-
-// Archive statistics
-export const getArchiveStats = () => {
-  return {
-    totalImages: allImages.length,
-    cosmicImages: allCosmicImages.length,
-    quantumFrames: quantumTravelogueImages.length,
-    farmImages: saraloosaFarmImages.length,
-    timespan: '2019-2025',
-    themes: ['Digital Consciousness', 'Quantum Dissolution', 'Farm Life', 'Biological Awareness']
-  };
 };

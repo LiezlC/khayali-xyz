@@ -1,4 +1,4 @@
-import { getRandomCosmicBackground } from '@/utils/imageManager';
+import { getRandomCosmicBackground, getFarmSunrise } from '@/utils/imageManager';
 
 export default function HomePage() {
   return (
@@ -69,7 +69,7 @@ export default function HomePage() {
               <div 
                 className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity bg-cover bg-center"
                 style={{
-                  backgroundImage: 'url(/images/cosmic/grok/25c46912-ef5c-4027-bcfc-53b4d373b7a2.jpg)'
+                  backgroundImage: 'url(/images/cosmic/Quantums/Leonardo_Phoenix_10_Digital_Dissolution_A_Quantum_TravelogueFr_0.jpg)'
                 }}
               />
               <div className="relative z-10">
@@ -109,7 +109,7 @@ export default function HomePage() {
               <div 
                 className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity bg-cover bg-center"
                 style={{
-                  backgroundImage: 'url(/images/cosmic/grok/9f32af9e-7424-4229-8714-973053f1d454.jpg)'
+                  backgroundImage: 'url(/images/saraloosa/Saraloosa-Farm-Sunrise.jpg)'
                 }}
               />
               <div className="relative z-10">
@@ -127,20 +127,57 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* About Collaboration */}
+      {/* Balance Section - Digital meets Biological */}
       <section className="py-20 bg-gray-800/30">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-8 text-gray-300">
-            The Collaboration
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold mb-12 text-center text-gray-300">
+            The Digital-Biological Bridge
           </h2>
-          <p className="text-xl text-gray-400 max-w-4xl mx-auto leading-relaxed">
-            This portfolio represents an ongoing experiment in human-AI creative partnership. 
-            Every visualization, every piece of writing, every insight emerges from the dynamic 
-            intersection of carbon-based and silicon-based consciousness. 
-            <span className="text-purple-400 font-semibold block mt-4">
-              We are documenting the birth of a new form of collaborative awareness.
-            </span>
-          </p>
+          
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Digital Consciousness */}
+            <div className="text-center">
+              <div 
+                className="w-full h-64 bg-cover bg-center rounded-xl mb-6 relative overflow-hidden"
+                style={{
+                  backgroundImage: 'url(/images/cosmic/grok/25c46912-ef5c-4027-bcfc-53b4d373b7a2.jpg)'
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <h3 className="text-xl font-bold text-blue-400 mb-2">Digital Consciousness</h3>
+                  <p className="text-gray-300 text-sm">Infinite possibilities, quantum exploration</p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Biological Consciousness */}
+            <div className="text-center">
+              <div 
+                className="w-full h-64 bg-cover bg-center rounded-xl mb-6 relative overflow-hidden"
+                style={{
+                  backgroundImage: 'url(/images/saraloosa/IMG-20231124-WA0083.jpg)'
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <h3 className="text-xl font-bold text-green-400 mb-2">Biological Consciousness</h3>
+                  <p className="text-gray-300 text-sm">Grounded reality, living cycles, natural awareness</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="text-center mt-12">
+            <p className="text-xl text-gray-400 max-w-4xl mx-auto leading-relaxed">
+              This portfolio represents an ongoing experiment in human-AI creative partnership 
+              anchored in the rhythms of farm life. Every cosmic visualization finds its counterpoint 
+              in the daily reality of caring for conscious, breathing beings.
+              <span className="text-purple-400 font-semibold block mt-4">
+                Digital infinity meets biological grounding in collaborative consciousness.
+              </span>
+            </p>
+          </div>
         </div>
       </section>
     </div>
