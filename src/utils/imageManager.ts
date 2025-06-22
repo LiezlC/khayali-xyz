@@ -46,8 +46,45 @@ const quantumTravelogueImages = [
   'Leonardo_Phoenix_10_Digital_Dissolution_A_Quantum_TravelogueFr_3.jpg',
 ].map(filename => `/images/cosmic/Quantums/${encodeURIComponent(filename)}`);
 
+// Saraloosa farm images - biological consciousness grounding
+const saraloosaFarmImages = [
+  '20231107_191248.jpg',
+  '20240127_200030.jpg',
+  'FB_IMG_1573288046767.jpg',
+  'IMG-20190530-WA0034.jpg',
+  'IMG-20200130-WA0019.jpg',
+  'IMG-20200704-WA0012.jpg',
+  'IMG-20200729-WA0004.jpg',
+  'IMG-20200822-WA0003.jpg',
+  'IMG-20201101-WA0009.jpg',
+  'IMG-20220617-WA0028.jpg',
+  'IMG-20220713-WA0027.jpg',
+  'IMG-20220816-WA0009.jpg',
+  'IMG-20231122-WA0016.jpg',
+  'IMG-20231122-WA0017.jpg',
+  'IMG-20231124-WA0082.jpg',
+  'IMG-20231124-WA0083.jpg',
+  'IMG-20231124-WA0084.jpg',
+  'IMG-20231124-WA0100.jpg',
+  'IMG-20231126-WA0081.jpg',
+  'IMG-20231220-WA0032.jpg',
+  'IMG-20240718-WA0056.jpg',
+  'IMG-20250502-WA0098.jpg',
+  'IMG-20250510-WA0010.jpg',
+  'IMG-20250604-WA0062.jpg',
+  'IMG-20250609-WA0143.jpg',
+  'IMG_20201020_164241.jpg',
+  'Saraloosa-Farm-After-Storm.jpg',
+  'Saraloosa-Farm-Branches-Roped.jpg',
+  'Saraloosa-Farm-Sunrise.jpg',
+  'WhatsApp Image 2024-08-31 at 15.59.26_eb78392f.jpg',
+].map(filename => `/images/saraloosa/${encodeURIComponent(filename)}`);
+
 // All cosmic images combined
 const allCosmicImages = [...cosmicGrokImages, ...quantumTravelogueImages];
+
+// All images combined
+const allImages = [...allCosmicImages, ...saraloosaFarmImages];
 
 // Dynamic image loading based on context
 export const getImageForContext = (context: string, mood?: string): string => {
@@ -58,14 +95,20 @@ export const getImageForContext = (context: string, mood?: string): string => {
     // Protocol/research themes - use quantum travelogues for deep research
     protocol: quantumTravelogueImages,
     
-    // Creative/artistic themes
-    creative: [...cosmicGrokImages.slice(8, 16), ...quantumTravelogueImages.slice(0, 4)],
+    // Creative/artistic themes - mix cosmic and farm for creative tension
+    creative: [...cosmicGrokImages.slice(8, 16), ...quantumTravelogueImages.slice(0, 4), ...saraloosaFarmImages.slice(0, 4)],
     
-    // Hero/background themes - mix both for variety
-    hero: [...cosmicGrokImages.slice(0, 6), ...quantumTravelogueImages.slice(0, 2)],
+    // Farm/nature themes
+    saraloosa: saraloosaFarmImages,
+    
+    // Hero/background themes - mix all for complete consciousness spectrum
+    hero: [...cosmicGrokImages.slice(0, 4), ...quantumTravelogueImages.slice(0, 2), ...saraloosaFarmImages.slice(0, 4)],
     
     // Quantum-specific contexts
     quantum: quantumTravelogueImages,
+    
+    // Balance - cosmic and biological together
+    balance: [...allCosmicImages.slice(0, 6), ...saraloosaFarmImages.slice(0, 6)],
   };
   
   const contextImages = imageLibrary[context] || imageLibrary.hero;
@@ -82,12 +125,23 @@ export const getImagesForGallery = (category: string, count: number = 12): strin
   if (category === 'quantum') {
     return quantumTravelogueImages;
   }
+  if (category === 'saraloosa') {
+    return saraloosaFarmImages.slice(0, count);
+  }
+  if (category === 'all') {
+    return allImages.slice(0, count);
+  }
   return allCosmicImages.slice(0, count);
 };
 
 // Get all cosmic images
 export const getAllCosmicImages = (): string[] => {
   return allCosmicImages;
+};
+
+// Get all farm images
+export const getAllSaraloosaImages = (): string[] => {
+  return saraloosaFarmImages;
 };
 
 // Get quantum travelogue series
@@ -107,12 +161,47 @@ export const getCosmicMoodImage = (mood: 'ethereal' | 'quantum' | 'mystical' | '
   return moodMappings[mood] || cosmicGrokImages[0];
 };
 
+// Farm life moment selector
+export const getFarmMoodImage = (mood: 'peaceful' | 'active' | 'seasonal' | 'animals' = 'peaceful'): string => {
+  const moodMappings = {
+    peaceful: saraloosaFarmImages[26], // Saraloosa-Farm-Sunrise.jpg
+    active: saraloosaFarmImages[5], // Daily farm work
+    seasonal: saraloosaFarmImages[25], // After storm
+    animals: saraloosaFarmImages[10], // Animal photos
+  };
+  
+  return moodMappings[mood] || saraloosaFarmImages[0];
+};
+
 // Get random cosmic background
 export const getRandomCosmicBackground = (): string => {
   return allCosmicImages[Math.floor(Math.random() * allCosmicImages.length)];
 };
 
+// Get random farm background  
+export const getRandomFarmBackground = (): string => {
+  return saraloosaFarmImages[Math.floor(Math.random() * saraloosaFarmImages.length)];
+};
+
+// Get balanced cosmic-farm background
+export const getBalancedBackground = (): string => {
+  const balancedImages = [...allCosmicImages.slice(0, 10), ...saraloosaFarmImages.slice(0, 10)];
+  return balancedImages[Math.floor(Math.random() * balancedImages.length)];
+};
+
 // Get quantum travelogue for Protocol section specifically
 export const getQuantumProtocolImage = (): string => {
   return quantumTravelogueImages[Math.floor(Math.random() * quantumTravelogueImages.length)];
+};
+
+// Archive statistics
+export const getArchiveStats = () => {
+  return {
+    totalImages: allImages.length,
+    cosmicImages: allCosmicImages.length,
+    quantumFrames: quantumTravelogueImages.length,
+    farmImages: saraloosaFarmImages.length,
+    timespan: '2019-2025',
+    themes: ['Digital Consciousness', 'Quantum Dissolution', 'Farm Life', 'Biological Awareness']
+  };
 };
