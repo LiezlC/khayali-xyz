@@ -4,7 +4,7 @@ This directory contains all visual assets for the consciousness portfolio.
 
 ## Organization
 
-### /cosmic/
+### /cosmiconsci/
 - Quantum visualizations
 - Digital consciousness patterns
 - Space phenomena
@@ -16,7 +16,7 @@ This directory contains all visual assets for the consciousness portfolio.
 - Landscapes and daily activities
 - Seasonal documentation
 
-### /generated/
+### /sou/
 - AI-collaborative artwork
 - Experimental visualizations
 - Consciousness mapping imagery
