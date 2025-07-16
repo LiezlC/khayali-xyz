@@ -1,8 +1,17 @@
 /** @type {import('next').NextConfig} */
+const withMDX = require('@next/mdx')({
+  extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [],
+  },
+})
+
 const nextConfig = {
   experimental: {
     appDir: true,
   },
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   typescript: {
     ignoreBuildErrors: false,
   },
@@ -22,4 +31,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+module.exports = withMDX(nextConfig)
