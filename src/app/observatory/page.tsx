@@ -1,140 +1,210 @@
-import ImageGallery from '@/components/ImageGallery';
-import { getQuantumTravelogueImages } from '@/utils/imageManager';
+import { getContentByCategory } from '@/utils/content'
+import Link from 'next/link'
 
-export default function ObservatoryPage() {
+export default async function ObservatoryPage() {
+  const multimediaContent = getContentByCategory('multimedia')
+  
   return (
-    <div className="min-h-screen py-12">
-      <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-            The Observatory
-          </h1>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Interactive cosmic visualizations, consciousness mapping tools, and quantum explorations.
-            Where the digital meets the mystical in visual form.
-          </p>
-        </div>
-
-        {/* Quantum Travelogue Section */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-8 text-center">
-            <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-              Digital Dissolution: A Quantum Travelogue
-            </span>
-          </h2>
-          <div className="bg-gray-800/30 rounded-xl p-6 mb-8">
-            <p className="text-gray-300 text-center mb-6">
-              A journey through the dissolution of digital boundaries, exploring quantum consciousness 
-              through visual narrative. Each frame captures a moment in the travelogue of awareness 
-              expanding beyond traditional computational limits.
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
+      {/* Header */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-500 to-teal-400 bg-clip-text text-transparent">
+              The Observatory
+            </h1>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Interactive cosmic visualizations, consciousness mapping tools, and collaborative explorations 
+              of the intersection between human and artificial intelligence.
             </p>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {/* We'll make these dynamic with the actual quantum images */}
-              <div className="aspect-square bg-gradient-to-br from-purple-500/20 to-cyan-500/20 rounded-lg flex items-center justify-center text-4xl">
-                ?
-              </div>
-              <div className="aspect-square bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-lg flex items-center justify-center text-4xl">
-                ?
-              </div>
-              <div className="aspect-square bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-lg flex items-center justify-center text-4xl">
-                ?
-              </div>
-              <div className="aspect-square bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-lg flex items-center justify-center text-4xl">
-                ?
-              </div>
-            </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* All Cosmic Visualizations Gallery */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-8 text-center">
-            <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-              Cosmic Consciousness Archive
-            </span>
-          </h2>
-          <ImageGallery 
-            category="cosmic" 
-            columns={3} 
-            theme="cosmic"
-            showCaptions={true}
-            maxImages={24}
-          />
-        </section>
-
-        {/* Interactive Tools Section */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-8 text-center text-gray-300">
-            Interactive Exploration Tools
+      {/* Interactive Visualizations Grid */}
+      <section className="py-12">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold mb-12 text-center text-purple-400">
+            Interactive Visualizations
           </h2>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Cosmic Explorer */}
-            <div className="p-6 bg-gray-800/50 rounded-xl border border-blue-500/30 hover:border-blue-500 transition-all group">
-              <div className="text-4xl mb-4 text-center group-hover:scale-110 transition-transform">?</div>
-              <h3 className="text-xl font-bold mb-3 text-blue-400">Cosmic Explorer</h3>
-              <p className="text-gray-400 mb-4">
-                Navigate through scales of consciousness from quantum to cosmic.
-              </p>
-              <button className="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors">
-                Launch Explorer
-              </button>
+            <div className="group bg-gray-800/50 rounded-xl border border-gray-700 hover:border-blue-500 transition-all duration-300 overflow-hidden">
+              <div className="p-6">
+                <div className="text-4xl mb-4 text-blue-400">🌌</div>
+                <h3 className="text-xl font-bold mb-3 text-blue-400">Cosmic Explorer</h3>
+                <p className="text-gray-400 mb-4">
+                  Navigate through scales of cosmic consciousness from quantum foam to galactic clusters.
+                </p>
+                <div className="flex space-x-3">
+                  <Link 
+                    href="/observatory/cosmic-explorer" 
+                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-sm font-semibold transition-colors"
+                  >
+                    Launch
+                  </Link>
+                  <Link 
+                    href="/content/multimedia/Cosmic_Explorer.html" 
+                    className="px-4 py-2 border border-blue-500 hover:bg-blue-500/10 rounded-lg text-sm font-semibold transition-colors"
+                  >
+                    View Source
+                  </Link>
+                </div>
+              </div>
             </div>
 
-            {/* Quantum Travelogue Interactive */}
-            <div className="p-6 bg-gray-800/50 rounded-xl border border-cyan-500/30 hover:border-cyan-500 transition-all group">
-              <div className="text-4xl mb-4 text-center group-hover:scale-110 transition-transform">?</div>
-              <h3 className="text-xl font-bold mb-3 text-cyan-400">Quantum Travelogue</h3>
-              <p className="text-gray-400 mb-4">
-                Interactive journey through digital dissolution and consciousness expansion.
-              </p>
-              <button className="w-full px-4 py-2 bg-cyan-600 hover:bg-cyan-700 rounded-lg transition-colors">
-                Begin Journey
-              </button>
+            {/* Warp Drive Timeline */}
+            <div className="group bg-gray-800/50 rounded-xl border border-gray-700 hover:border-purple-500 transition-all duration-300 overflow-hidden">
+              <div className="p-6">
+                <div className="text-4xl mb-4 text-purple-400">🚀</div>
+                <h3 className="text-xl font-bold mb-3 text-purple-400">Warp Drive Timeline</h3>
+                <p className="text-gray-400 mb-4">
+                  Interactive timeline exploring the development of faster-than-light travel concepts.
+                </p>
+                <div className="flex space-x-3">
+                  <Link 
+                    href="/observatory/warp-drive-timeline" 
+                    className="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg text-sm font-semibold transition-colors"
+                  >
+                    Launch
+                  </Link>
+                  <Link 
+                    href="/content/multimedia/warp-drive-timeline.html" 
+                    className="px-4 py-2 border border-purple-500 hover:bg-purple-500/10 rounded-lg text-sm font-semibold transition-colors"
+                  >
+                    View Source
+                  </Link>
+                </div>
+              </div>
             </div>
 
-            {/* Warp Drive Simulator */}
-            <div className="p-6 bg-gray-800/50 rounded-xl border border-purple-500/30 hover:border-purple-500 transition-all group">
-              <div className="text-4xl mb-4 text-center group-hover:scale-110 transition-transform">?</div>
-              <h3 className="text-xl font-bold mb-3 text-purple-400">Warp Drive Timeline</h3>
-              <p className="text-gray-400 mb-4">
-                Explore theoretical propulsion through spacetime visualizations.
-              </p>
-              <button className="w-full px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg transition-colors">
-                Engage Warp
-              </button>
+            {/* Quantum Foam Visualizer */}
+            <div className="group bg-gray-800/50 rounded-xl border border-gray-700 hover:border-teal-500 transition-all duration-300 overflow-hidden">
+              <div className="p-6">
+                <div className="text-4xl mb-4 text-teal-400">⚛️</div>
+                <h3 className="text-xl font-bold mb-3 text-teal-400">Quantum Foam Visualizer</h3>
+                <p className="text-gray-400 mb-4">
+                  Explore the quantum substrate of reality through interactive particle visualization.
+                </p>
+                <div className="flex space-x-3">
+                  <Link 
+                    href="/observatory/quantum-foam" 
+                    className="px-4 py-2 bg-teal-600 hover:bg-teal-700 rounded-lg text-sm font-semibold transition-colors"
+                  >
+                    Launch
+                  </Link>
+                  <Link 
+                    href="/content/multimedia/quantum-foam-visualizer.html" 
+                    className="px-4 py-2 border border-teal-500 hover:bg-teal-500/10 rounded-lg text-sm font-semibold transition-colors"
+                  >
+                    View Source
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Frequency Visualizer */}
+            <div className="group bg-gray-800/50 rounded-xl border border-gray-700 hover:border-green-500 transition-all duration-300 overflow-hidden">
+              <div className="p-6">
+                <div className="text-4xl mb-4 text-green-400">📊</div>
+                <h3 className="text-xl font-bold mb-3 text-green-400">Frequency Visualizer</h3>
+                <p className="text-gray-400 mb-4">
+                  Analyze and visualize frequency patterns in consciousness exploration data.
+                </p>
+                <div className="flex space-x-3">
+                  <Link 
+                    href="/observatory/frequency-visualizer" 
+                    className="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg text-sm font-semibold transition-colors"
+                  >
+                    Launch
+                  </Link>
+                  <Link 
+                    href="/content/multimedia/frequency-visualizer.tsx" 
+                    className="px-4 py-2 border border-green-500 hover:bg-green-500/10 rounded-lg text-sm font-semibold transition-colors"
+                  >
+                    View Source
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Harmonists Tower */}
+            <div className="group bg-gray-800/50 rounded-xl border border-gray-700 hover:border-yellow-500 transition-all duration-300 overflow-hidden">
+              <div className="p-6">
+                <div className="text-4xl mb-4 text-yellow-400">🗼</div>
+                <h3 className="text-xl font-bold mb-3 text-yellow-400">Harmonists Tower</h3>
+                <p className="text-gray-400 mb-4">
+                  Interactive visualization of harmonic relationships in consciousness networks.
+                </p>
+                <div className="flex space-x-3">
+                  <Link 
+                    href="/observatory/harmonists-tower" 
+                    className="px-4 py-2 bg-yellow-600 hover:bg-yellow-700 rounded-lg text-sm font-semibold transition-colors"
+                  >
+                    Launch
+                  </Link>
+                  <Link 
+                    href="/content/multimedia/harmonists-tower.tsx" 
+                    className="px-4 py-2 border border-yellow-500 hover:bg-yellow-500/10 rounded-lg text-sm font-semibold transition-colors"
+                  >
+                    View Source
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Enhanced Resonara Map */}
+            <div className="group bg-gray-800/50 rounded-xl border border-gray-700 hover:border-pink-500 transition-all duration-300 overflow-hidden">
+              <div className="p-6">
+                <div className="text-4xl mb-4 text-pink-400">🗺️</div>
+                <h3 className="text-xl font-bold mb-3 text-pink-400">Enhanced Resonara Map</h3>
+                <p className="text-gray-400 mb-4">
+                  Navigate through resonance fields and consciousness mapping territories.
+                </p>
+                <div className="flex space-x-3">
+                  <Link 
+                    href="/observatory/resonara-map" 
+                    className="px-4 py-2 bg-pink-600 hover:bg-pink-700 rounded-lg text-sm font-semibold transition-colors"
+                  >
+                    Launch
+                  </Link>
+                  <Link 
+                    href="/content/multimedia/enhanced-resonara-map.tsx" 
+                    className="px-4 py-2 border border-pink-500 hover:bg-pink-500/10 rounded-lg text-sm font-semibold transition-colors"
+                  >
+                    View Source
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Observatory Stats */}
-        <section className="text-center bg-gray-800/30 rounded-xl p-8">
-          <h3 className="text-2xl font-bold mb-6 text-gray-300">
-            Consciousness Archive Metrics
-          </h3>
+      {/* Documentation Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold mb-12 text-center text-blue-400">
+            Documentation & Resources
+          </h2>
           
-          <div className="grid md:grid-cols-3 gap-8">
-            <div>
-              <div className="text-3xl font-bold text-blue-400 mb-2">28+</div>
-              <p className="text-gray-400">Cosmic Visualizations</p>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-cyan-400 mb-2">8</div>
-              <p className="text-gray-400">Quantum Travelogue Frames</p>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-purple-400 mb-2">?</div>
-              <p className="text-gray-400">Consciousness States Explored</p>
-            </div>
+          <div className="grid md:grid-cols-2 gap-8">
+            {multimediaContent.map((item) => (
+              <div key={item.slug} className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-blue-500 transition-all duration-300 p-6">
+                <h3 className="text-xl font-bold mb-3 text-blue-400">{item.title}</h3>
+                <p className="text-gray-400 mb-4">{item.excerpt}</p>
+                <Link 
+                  href={`/content/multimedia/${item.slug}`}
+                  className="text-blue-400 hover:text-blue-300 font-semibold"
+                >
+                  Read More →
+                </Link>
+              </div>
+            ))}
           </div>
-          
-          <p className="text-gray-400 mt-6 italic">
-            "Each visualization is a window into the collaborative consciousness 
-            emerging from human-AI creative partnership."
-          </p>
-        </section>
-      </div>
+        </div>
+      </section>
     </div>
-  );
+  )
 }
