@@ -13,9 +13,9 @@ interface ImageGalleryProps {
   maxImages?: number;
 }
 
-export default function ImageGallery({ 
-  category = 'all', 
-  columns = 3, 
+export default function ImageGallery({
+  category = 'all',
+  columns = 3,
   showCaptions = true,
   theme = 'dark',
   maxImages = 12
@@ -26,7 +26,6 @@ export default function ImageGallery({
   useEffect(() => {
     // Load your actual uploaded images
     let imageList: string[] = [];
-    
     if (category === 'cosmic' || category === 'all') {
       imageList = getAllCosmicImages();
     }
@@ -42,7 +41,7 @@ export default function ImageGallery({
 
   const gridClasses = {
     2: 'grid-cols-1 md:grid-cols-2',
-    3: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3', 
+    3: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
     4: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4'
   };
 
@@ -54,32 +53,28 @@ export default function ImageGallery({
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500"></div>
+      <div className={`min-h-screen ${themeClasses[theme]} flex items-center justify-center`}>
+        <div className="text-white">Loading gallery...</div>
       </div>
     );
   }
 
   return (
-    <div className={`p-6 rounded-xl ${themeClasses[theme]}`}>
-      <div className={`grid gap-4 ${gridClasses[columns]}`}>
+    <div className={`min-h-screen ${themeClasses[theme]} p-8`}>
+      <div className={`grid ${gridClasses[columns]} gap-6`}>
         {images.map((imageSrc, index) => (
-          <div key={index} className="group relative overflow-hidden rounded-lg bg-gray-800 hover:scale-105 transition-transform duration-300">
-            <div className="aspect-square relative">
+          <div key={index} className="relative group">
+            <div className="aspect-square overflow-hidden rounded-lg">
               <Image
                 src={imageSrc}
-                alt={`Consciousness visualization ${index + 1}`}
+                alt={`Cosmic Consciousness ${index + 1}`}
                 fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
               />
             </div>
-            
             {showCaptions && (
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                <p className="text-sm text-white">
-                  Cosmic Consciousness #{index + 1}
-                </p>
+              <div className="absolute bottom-0 left-0 right-0 bg-black/70 text-white p-2 text-sm">
+                Cosmic Consciousness #{index + 1}
               </div>
             )}
           </div>
@@ -87,10 +82,10 @@ export default function ImageGallery({
       </div>
       
       {images.length === 0 && (
-        <div className="text-center py-12">
-          <p className="text-gray-400 text-lg">No images found for this category yet.</p>
+        <div className="text-center text-white/70 py-12">
+          No images found for this category yet.
         </div>
       )}
     </div>
   );
-}``
+}

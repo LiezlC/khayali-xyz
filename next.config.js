@@ -8,9 +8,7 @@ const withMDX = require('@next/mdx')({
 })
 
 const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
+  // REMOVE the deprecated appDir configuration
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   typescript: {
     ignoreBuildErrors: false,
