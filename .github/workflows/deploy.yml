@@ -1,0 +1,14 @@
+name: Deploy to Vercel
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Vercel Deployment
+        run: |
+          echo "Deployment triggered at $(date)"
+          echo "Latest commit: ${{ github.sha }}"
