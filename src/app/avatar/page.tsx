@@ -4,7 +4,6 @@ export default function AvatarPage() {
       <div className="container mx-auto px-4 py-8">
         <div 
           className="prose prose-lg max-w-none"
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
