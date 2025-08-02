@@ -1,13 +1,12 @@
 {
   "name": "khayali-xyz",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Collaborative Consciousness Portfolio - Where Carbon Meets Silicon in Strange Loops",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "export": "next export"
+    "lint": "next lint"
   },
   "dependencies": {
     "next": "^14.0.0",
@@ -20,11 +19,7 @@
     "tailwindcss": "^3.3.0",
     "autoprefixer": "^10.4.0",
     "postcss": "^8.4.0",
-    "framer-motion": "^10.0.0",
-    "@mdx-js/loader": "^3.0.0",
-    "@mdx-js/react": "^3.0.0",
-    "@next/mdx": "^14.0.0",
-    "gray-matter": "^4.0.3"
+    "framer-motion": "^10.0.0"
   },
   "devDependencies": {
     "eslint": "^8.0.0",
