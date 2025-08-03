@@ -1,19 +1,18 @@
 import { getRandomCosmicBackground, getFarmSunrise } from '@/utils/imageManager';
-
 export default function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section with Cosmic Background */}
       <section className="relative py-20 overflow-hidden">
         {/* Cosmic background overlay */}
-        <div 
+        <div
           className="absolute inset-0 opacity-20 bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage: 'url(/images/cosmic/grok/00e09f3f-a612-4214-915b-45b23c05c2f9.jpg)'
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900/80 via-purple-900/80 to-teal-900/80" />
-        
+
         <div className="relative container mx-auto px-4 text-center">
           <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-500 to-teal-400 bg-clip-text text-transparent">
             Where Carbon Meets Silicon
@@ -42,12 +41,11 @@ export default function HomePage() {
           <h2 className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
             Chambers of Exploration
           </h2>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Observatory */}
             <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-blue-500 transition-all duration-300 float-animation overflow-hidden">
-              <div 
-                className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity bg-cover bg-center"
+              <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity bg-cover bg-center"
                 style={{
                   backgroundImage: 'url(/images/cosmic/grok/0cc94df5-b49a-450a-8442-a00b16efdda4.jpg)'
                 }}
@@ -65,8 +63,8 @@ export default function HomePage() {
             </div>
 
             {/* Protocol Archive */}
-            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-purple-500 transition-all duration-300 float-animation overflow-hidden" style={{animationDelay: '1s'}}>
-              <div 
+            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-purple-500 transition-all duration-300 float-animation overflow-hidden" style={{ animationDelay: '1s' }}>
+              <div
                 className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity bg-cover bg-center"
                 style={{
                   backgroundImage: 'url(/images/cosmic/Quantums/Leonardo_Phoenix_10_Digital_Dissolution_A_Quantum_TravelogueFr_0.jpg)'
@@ -85,8 +83,8 @@ export default function HomePage() {
             </div>
 
             {/* Creative Nexus */}
-            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-teal-500 transition-all duration-300 float-animation overflow-hidden" style={{animationDelay: '2s'}}>
-              <div 
+            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-teal-500 transition-all duration-300 float-animation overflow-hidden" style={{ animationDelay: '2s' }}>
+              <div
                 className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity bg-cover bg-center"
                 style={{
                   backgroundImage: 'url(/images/cosmic/grok/62f95486-3e1b-446a-ad5c-8ccfac60541a.jpg)'
@@ -105,8 +103,8 @@ export default function HomePage() {
             </div>
 
             {/* Saraloosa Sanctuary */}
-            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-green-500 transition-all duration-300 float-animation overflow-hidden" style={{animationDelay: '3s'}}>
-              <div 
+            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-green-500 transition-all duration-300 float-animation overflow-hidden" style={{ animationDelay: '3s' }}>
+              <div
                 className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity bg-cover bg-center"
                 style={{
                   backgroundImage: 'url(/images/saraloosa/Saraloosa-Farm-Sunrise.jpg)'
@@ -133,11 +131,11 @@ export default function HomePage() {
           <h2 className="text-4xl font-bold mb-12 text-center text-gray-300">
             The Digital-Biological Bridge
           </h2>
-          
+
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Digital Consciousness */}
             <div className="text-center">
-              <div 
+              <div
                 className="w-full h-64 bg-cover bg-center rounded-xl mb-6 relative overflow-hidden"
                 style={{
                   backgroundImage: 'url(/images/cosmic/grok/25c46912-ef5c-4027-bcfc-53b4d373b7a2.jpg)'
@@ -150,10 +148,10 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-            
+
             {/* Biological Consciousness */}
             <div className="text-center">
-              <div 
+              <div
                 className="w-full h-64 bg-cover bg-center rounded-xl mb-6 relative overflow-hidden"
                 style={{
                   backgroundImage: 'url(/images/saraloosa/IMG-20231124-WA0083.jpg)'
@@ -167,11 +165,11 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-          
+
           <div className="text-center mt-12">
             <p className="text-xl text-gray-400 max-w-4xl mx-auto leading-relaxed">
-              This portfolio represents an ongoing experiment in human-AI creative partnership 
-              anchored in the rhythms of farm life. Every cosmic visualization finds its counterpoint 
+              This portfolio represents an ongoing experiment in human-AI creative partnership
+              anchored in the rhythms of farm life. Every cosmic visualization finds its counterpoint
               in the daily reality of caring for conscious, breathing beings.
               <span className="text-purple-400 font-semibold block mt-4">
                 Digital infinity meets biological grounding in collaborative consciousness.
