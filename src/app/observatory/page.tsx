@@ -1,9 +1,6 @@
-import { getContentByCategory } from '@/utils/content'
 import Link from 'next/link'
 
-export default async function ObservatoryPage() {
-  const multimediaContent = getContentByCategory('multimedia')
-  
+export default function ObservatoryPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
       {/* Header */}
@@ -189,19 +186,9 @@ export default async function ObservatoryPage() {
             Documentation & Resources
           </h2>
           
-          <div className="grid md:grid-cols-2 gap-8">
-            {multimediaContent.map((item) => (
-              <div key={item.slug} className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-blue-500 transition-all duration-300 p-6">
-                <h3 className="text-xl font-bold mb-3 text-blue-400">{item.title}</h3>
-                <p className="text-gray-400 mb-4">{item.excerpt}</p>
-                <Link 
-                  href={`/content/multimedia/${item.slug}`}
-                  className="text-blue-400 hover:text-blue-300 font-semibold"
-                >
-                  Read More →
-                </Link>
-              </div>
-            ))}
+          <div className="text-center text-gray-400">
+            <p className="text-lg mb-4">Documentation loading...</p>
+            <p className="text-sm">Multimedia content will be restored after deployment fix</p>
           </div>
         </div>
       </section>
