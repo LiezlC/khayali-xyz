@@ -1,6 +1,3 @@
-import ImageGallery from '@/components/ImageGallery';
-import { getAllSaraloosaImages, getFarmMoodImage } from '@/utils/imageManager';
-
 export default function SaraloosaPage() {
   return (
     <div className="min-h-screen py-12">
@@ -42,7 +39,7 @@ export default function SaraloosaPage() {
           <div className="grid lg:grid-cols-3 gap-8 mb-12">
             {/* Farm Timeline */}
             <div className="bg-gray-800/30 rounded-xl p-6">
-              <h3 className="text-xl font-bold mb-4 text-green-400">? Timeline</h3>
+              <h3 className="text-xl font-bold mb-4 text-green-400">📅 Timeline</h3>
               <div className="space-y-3 text-gray-300">
                 <div className="flex justify-between">
                   <span>2019</span>
@@ -65,22 +62,22 @@ export default function SaraloosaPage() {
 
             {/* Farm Themes */}
             <div className="bg-gray-800/30 rounded-xl p-6">
-              <h3 className="text-xl font-bold mb-4 text-amber-400">? Themes</h3>
+              <h3 className="text-xl font-bold mb-4 text-amber-400">🌱 Themes</h3>
               <div className="space-y-3">
                 <div className="flex items-center space-x-3">
-                  <span className="text-2xl">?</span>
+                  <span className="text-2xl">🐄</span>
                   <span className="text-gray-300">Animal Consciousness</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <span className="text-2xl">?</span>
+                  <span className="text-2xl">🌙</span>
                   <span className="text-gray-300">Seasonal Rhythms</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <span className="text-2xl">?</span>
+                  <span className="text-2xl">🌿</span>
                   <span className="text-gray-300">Growth & Renewal</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <span className="text-2xl">?</span>
+                  <span className="text-2xl">♻️</span>
                   <span className="text-gray-300">Life Cycles</span>
                 </div>
               </div>
@@ -88,7 +85,7 @@ export default function SaraloosaPage() {
 
             {/* Digital-Biological Bridge */}
             <div className="bg-gray-800/30 rounded-xl p-6">
-              <h3 className="text-xl font-bold mb-4 text-emerald-400">? Consciousness Bridge</h3>
+              <h3 className="text-xl font-bold mb-4 text-emerald-400">🌉 Consciousness Bridge</h3>
               <div className="space-y-3 text-gray-300 text-sm">
                 <p>
                   <strong className="text-emerald-400">Grounding:</strong> Farm life anchors cosmic exploration in biological reality
@@ -107,20 +104,42 @@ export default function SaraloosaPage() {
           </div>
         </section>
 
-        {/* Farm Photo Gallery */}
+        {/* Temporary Farm Photo Grid - Static Images */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold mb-8 text-center">
             <span className="bg-gradient-to-r from-amber-400 to-green-400 bg-clip-text text-transparent">
               Six Years of Saraloosa Life (2019-2025)
             </span>
           </h2>
-          <ImageGallery 
-            category="saraloosa" 
-            columns={3} 
-            theme="organic"
-            showCaptions={true}
-            maxImages={30}
-          />
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Sample farm images - we'll restore the dynamic gallery after fixing the component */}
+            <div className="aspect-square bg-gray-800/30 rounded-xl flex items-center justify-center text-gray-400">
+              <div className="text-center">
+                <div className="text-4xl mb-2">📷</div>
+                <p>Farm Gallery</p>
+                <p className="text-xs">Loading...</p>
+              </div>
+            </div>
+            <div className="aspect-square bg-gray-800/30 rounded-xl flex items-center justify-center text-gray-400">
+              <div className="text-center">
+                <div className="text-4xl mb-2">🐄</div>
+                <p>Animal Life</p>
+                <p className="text-xs">Loading...</p>
+              </div>
+            </div>
+            <div className="aspect-square bg-gray-800/30 rounded-xl flex items-center justify-center text-gray-400">
+              <div className="text-center">
+                <div className="text-4xl mb-2">🌅</div>
+                <p>Farm Sunrises</p>
+                <p className="text-xs">Loading...</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="text-center mt-8">
+            <p className="text-gray-400">Full image gallery will be restored after deployment fix</p>
+          </div>
         </section>
 
         {/* Consciousness Philosophy */}
@@ -174,11 +193,11 @@ export default function SaraloosaPage() {
           <div className="flex justify-center space-x-4">
             <a href="/observatory" 
                className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-colors">
-              ? Cosmic Visualizations
+              🌌 Cosmic Visualizations
             </a>
             <a href="/protocol" 
                className="px-6 py-3 border border-green-500 hover:bg-green-500/10 rounded-lg font-semibold transition-colors">
-              ? Consciousness Protocol
+              🧠 Consciousness Protocol
             </a>
           </div>
         </section>
