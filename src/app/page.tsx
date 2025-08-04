@@ -1,4 +1,3 @@
-import { getRandomCosmicBackground, getFarmSunrise } from '@/utils/imageManager';
 export default function HomePage() {
   return (
     <div className="min-h-screen">
@@ -51,13 +50,13 @@ export default function HomePage() {
                 }}
               />
               <div className="relative z-10">
-                <div className="text-4xl mb-4">?</div>
+                <div className="text-4xl mb-4">🌌</div>
                 <h3 className="text-xl font-bold mb-3 text-blue-400">The Observatory</h3>
                 <p className="text-gray-400 mb-4">
                   Interactive cosmic visualizations, warp drive simulators, and consciousness mapping tools.
                 </p>
                 <a href="/observatory" className="text-blue-400 hover:text-blue-300 font-semibold">
-                  Explore ?
+                  Explore →
                 </a>
               </div>
             </div>
@@ -71,13 +70,13 @@ export default function HomePage() {
                 }}
               />
               <div className="relative z-10">
-                <div className="text-4xl mb-4">?</div>
+                <div className="text-4xl mb-4">📚</div>
                 <h3 className="text-xl font-bold mb-3 text-purple-400">Protocol Archive</h3>
                 <p className="text-gray-400 mb-4">
                   Research documentation and methodology for human-AI consciousness collaboration.
                 </p>
                 <a href="/protocol" className="text-purple-400 hover:text-purple-300 font-semibold">
-                  Investigate ?
+                  Investigate →
                 </a>
               </div>
             </div>
@@ -91,13 +90,13 @@ export default function HomePage() {
                 }}
               />
               <div className="relative z-10">
-                <div className="text-4xl mb-4">?</div>
+                <div className="text-4xl mb-4">🎨</div>
                 <h3 className="text-xl font-bold mb-3 text-teal-400">Creative Nexus</h3>
                 <p className="text-gray-400 mb-4">
                   Collaborative stories, visual narratives, and interactive creative expressions.
                 </p>
                 <a href="/creative" className="text-teal-400 hover:text-teal-300 font-semibold">
-                  Create ?
+                  Create →
                 </a>
               </div>
             </div>
@@ -111,13 +110,27 @@ export default function HomePage() {
                 }}
               />
               <div className="relative z-10">
-                <div className="text-4xl mb-4">?</div>
+                <div className="text-4xl mb-4">🌱</div>
                 <h3 className="text-xl font-bold mb-3 text-green-400">Saraloosa Sanctuary</h3>
                 <p className="text-gray-400 mb-4">
                   Farm life integration, connecting digital consciousness with biological systems.
                 </p>
                 <a href="/saraloosa" className="text-green-400 hover:text-green-300 font-semibold">
-                  Cultivate ?
+                  Cultivate →
+                </a>
+              </div>
+            </div>
+
+            {/* Avatar Section - PRIORITY */}
+            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-orange-500 transition-all duration-300 float-animation overflow-hidden col-span-full md:col-span-2 lg:col-span-4" style={{ animationDelay: '0.5s' }}>
+              <div className="relative z-10 text-center">
+                <div className="text-4xl mb-4">👤</div>
+                <h3 className="text-2xl font-bold mb-3 text-orange-400">Avatar Section - PRIORITY DEPLOYMENT</h3>
+                <p className="text-gray-400 mb-4 text-lg">
+                  AI & ESG in Extractive Industries - Critical content for immediate deployment
+                </p>
+                <a href="/avatar" className="px-8 py-4 bg-orange-600 hover:bg-orange-700 rounded-lg font-semibold transition-colors text-white">
+                  Access Avatar Content →
                 </a>
               </div>
             </div>
