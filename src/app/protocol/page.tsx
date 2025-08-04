@@ -1,10 +1,6 @@
-import { getContentByCategory } from '@/utils/content'
 import Link from 'next/link'
 
-export default async function ProtocolPage() {
-  const chatsContent = getContentByCategory('chats')
-  const protocolContent = getContentByCategory('khayali-protocol')
-  
+export default function ProtocolPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-blue-900">
       {/* Header */}
@@ -102,26 +98,16 @@ export default async function ProtocolPage() {
         </div>
       </section>
 
-      {/* Conversation Archives */}
+      {/* Placeholder for Conversation Archives */}
       <section className="py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-12 text-center text-blue-400">
             Conversation Archives
           </h2>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {chatsContent.map((item) => (
-              <div key={item.slug} className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-blue-500 transition-all duration-300 p-6">
-                <h3 className="text-lg font-bold mb-3 text-blue-400">{item.title}</h3>
-                <p className="text-gray-400 mb-4 text-sm">{item.excerpt}</p>
-                <Link 
-                  href={`/content/chats/${item.slug}`}
-                  className="text-blue-400 hover:text-blue-300 font-semibold text-sm"
-                >
-                  Read Conversation →
-                </Link>
-              </div>
-            ))}
+          <div className="text-center text-gray-400">
+            <p className="text-lg mb-4">Conversation archive loading...</p>
+            <p className="text-sm">Chat content will be restored after deployment fix</p>
           </div>
         </div>
       </section>
