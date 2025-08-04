@@ -1,9 +1,6 @@
-import { getContentByCategory } from '@/utils/content'
 import Link from 'next/link'
 
-export default async function CreativePage() {
-  const writingsContent = getContentByCategory('writings')
-  
+export default function CreativePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-teal-900 to-purple-900">
       {/* Header */}
@@ -175,26 +172,16 @@ export default async function CreativePage() {
         </div>
       </section>
 
-      {/* Complete Works Archive */}
+      {/* Placeholder for Archive - Will be restored once content.ts is working */}
       <section className="py-20 bg-gray-800/30">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-12 text-center text-teal-400">
             Complete Works Archive
           </h2>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {writingsContent.map((item) => (
-              <div key={item.slug} className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-teal-500 transition-all duration-300 p-6">
-                <h3 className="text-lg font-bold mb-3 text-teal-400">{item.title}</h3>
-                <p className="text-gray-400 mb-4 text-sm">{item.excerpt}</p>
-                <Link 
-                  href={`/content/writings/${item.slug}`}
-                  className="text-teal-400 hover:text-teal-300 font-semibold text-sm"
-                >
-                  Read Work →
-                </Link>
-              </div>
-            ))}
+          <div className="text-center text-gray-400">
+            <p className="text-lg mb-4">Content archive loading...</p>
+            <p className="text-sm">Dynamic content will be restored after deployment fix</p>
           </div>
         </div>
       </section>
