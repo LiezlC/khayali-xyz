@@ -132,6 +132,15 @@
         .mapping-table tr:nth-child(even) {
             background-color: #F8FAFC; /* Slate 50 */
         }
+        .case-study-link {
+            color: inherit;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .case-study-link:hover {
+            color: #0F766E; /* Teal 700 */
+            transform: translateY(-1px);
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -234,7 +243,11 @@
             </div>
             <div class="grid md:grid-cols-2 gap-8">
                 <div class="card p-8">
-                    <h3 class="text-2xl font-semibold mb-4">Aries Consult & "Chatbot da Vinci": An AI Collaborator</h3>
+                    <h3 class="text-2xl font-semibold mb-4">
+                        <a href="https://ariesconsult.eu/welcome-our-newest-staff-chatbot-da-vinci" target="_blank" class="case-study-link">
+                            Aries Consult & "Chatbot da Vinci": An AI Collaborator
+                        </a>
+                    </h3>
                     <p class="text-slate-600 mb-4">Aries Consult has uniquely integrated an AI, "Chatbot da Vinci," as a full-fledged member of their team, acting as an AI Collaborator, Proposal Architect, and Narrative Companion. This integration enhances their ability to address complex humanitarian and development challenges, contributing to robust social impact assessments and MEL frameworks.</p>
                     <ul class="space-y-3 text-slate-600">
                         <li class="flex items-start"><span class="text-teal-600 font-bold mr-2">✔</span> <strong>Proposal Design & Narrative Architecture:</strong> Contributes to technical and financial proposals, ensuring methodological soundness and linguistic sharpness, relevant for disclosures on project planning and stakeholder engagement (e.g., GRI 2-29).</li>
@@ -244,7 +257,11 @@
                     <p class="mt-4 text-sm text-slate-500 italic">This represents a deep, holistic integration of AI into the core workflow and values of a social impact consultancy, enhancing their capacity for comprehensive and ethical ESG-aligned project delivery.</p>
                 </div>
                 <div class="card p-8">
-                    <h3 class="text-2xl font-semibold mb-4">Arpit Sharma's Custom GPT: ESG Reporting Frameworks Mapping</h3>
+                    <h3 class="text-2xl font-semibold mb-4">
+                        <a href="https://chatgpt.com/g/g-687e382fb2c08191b95d9766f9b9d5fe-esg-reporting-frameworks-mapping" target="_blank" class="case-study-link">
+                            Arpit Sharma's Custom GPT: ESG Reporting Frameworks Mapping
+                        </a>
+                    </h3>
                     <p class="text-slate-600 mb-4">Arpit Sharma, a Staff Data Scientist at Walmart Global Tech, leveraged his deep expertise in Natural Language Understanding (NLU) to develop a custom GPT specifically for mapping complex ESG reporting frameworks. This tool streamlines the process of aligning company data with various disclosure standards.</p>
                     <ul class="space-y-3 text-slate-600">
                         <li class="flex items-start"><span class="text-amber-600 font-bold mr-2">✔</span> <strong>Specialized Automation:</strong> Designed to automate the complex, text-heavy task of aligning internal data with external ESG standards (e.g., GRI, ISSB, BRSR), significantly improving reporting efficiency.</li>
@@ -806,5 +823,92 @@
             buildDiagram(systems.guardian.agents, document.querySelector('.agent-diagram'));
         });
     </script>
+    <script>
+// Navigation handling for both desktop and mobile
+document.addEventListener('DOMContentLoaded', function() {
+    // Desktop navigation
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = this.getAttribute('data-target');
+            showSection(target);
+            updateActiveLink(this);
+        });
+    });
+
+    // Mobile navigation
+    const mobileNav = document.getElementById('mobile-nav');
+    mobileNav.addEventListener('change', function() {
+        showSection(this.value);
+    });
+
+    function showSection(sectionId) {
+        // Hide all sections
+        document.querySelectorAll('.content-section').forEach(section => {
+            section.classList.remove('active');
+        });
+        // Show selected section
+        document.getElementById(sectionId).classList.add('active');
+    }
+
+    function updateActiveLink(activeLink) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        activeLink.classList.add('active');
+        // Update mobile nav to match
+        mobileNav.value = activeLink.getAttribute('data-target');
+    }
+
+    // Initialize the landscape chart
+    const ctx = document.getElementById('landscapeChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: [
+                'Operational Efficiency',
+                'Worker Safety',
+                'Environmental Monitoring',
+                'Social Impact Analysis',
+                'ESG Reporting & Compliance'
+            ],
+            datasets: [{
+                data: [30, 20, 20, 15, 15],
+                backgroundColor: [
+                    '#0F766E', // Teal 700
+                    '#0D9488', // Teal 600
+                    '#14B8A6', // Teal 500
+                    '#2DD4BF', // Teal 400
+                    '#5EEAD4'  // Teal 300
+                ],
+                borderWidth: 2,
+                borderColor: '#FFFFFF'
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        padding: 20,
+                        font: {
+                            family: "'Inter', sans-serif",
+                            size: 14
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return `${context.label}: ${context.raw}%`;
+                        }
+                    }
+                }
+            },
+            cutout: '60%'
+        }
+    });
+});
+</script>
 </body>
 </html>
