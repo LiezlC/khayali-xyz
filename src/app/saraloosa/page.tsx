@@ -1,3 +1,5 @@
+import ImageGallery from '@/components/ImageGallery'
+
 export default function SaraloosaPage() {
   return (
     <div className="min-h-screen py-12">
@@ -104,7 +106,7 @@ export default function SaraloosaPage() {
           </div>
         </section>
 
-        {/* Temporary Farm Photo Grid - Static Images */}
+        {/* Dynamic Farm Photo Gallery - RESTORED */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold mb-8 text-center">
             <span className="bg-gradient-to-r from-amber-400 to-green-400 bg-clip-text text-transparent">
@@ -112,34 +114,14 @@ export default function SaraloosaPage() {
             </span>
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Sample farm images - we'll restore the dynamic gallery after fixing the component */}
-            <div className="aspect-square bg-gray-800/30 rounded-xl flex items-center justify-center text-gray-400">
-              <div className="text-center">
-                <div className="text-4xl mb-2">📷</div>
-                <p>Farm Gallery</p>
-                <p className="text-xs">Loading...</p>
-              </div>
-            </div>
-            <div className="aspect-square bg-gray-800/30 rounded-xl flex items-center justify-center text-gray-400">
-              <div className="text-center">
-                <div className="text-4xl mb-2">🐄</div>
-                <p>Animal Life</p>
-                <p className="text-xs">Loading...</p>
-              </div>
-            </div>
-            <div className="aspect-square bg-gray-800/30 rounded-xl flex items-center justify-center text-gray-400">
-              <div className="text-center">
-                <div className="text-4xl mb-2">🌅</div>
-                <p>Farm Sunrises</p>
-                <p className="text-xs">Loading...</p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="text-center mt-8">
-            <p className="text-gray-400">Full image gallery will be restored after deployment fix</p>
-          </div>
+          {/* Restored ImageGallery component */}
+          <ImageGallery 
+            category="saraloosa"
+            columns={3}
+            showCaptions={true}
+            theme="organic"
+            maxImages={24}
+          />
         </section>
 
         {/* Consciousness Philosophy */}
