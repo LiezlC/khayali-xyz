@@ -273,8 +273,642 @@
             </div>
         </section>
 
-        <!-- Rest of the file remains the same from here... -->
-        <!-- Due to length constraints, I'll continue with the complete file -->
+        <!-- Broader Applications Section -->
+        <section id="applications" class="content-section">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Broader Industry Applications: AI Across ESG Pillars</h2>
+                <p class="max-w-3xl mx-auto text-lg text-slate-600">AI's impact extends across all three pillars of ESG in the extractive industries. Use the filters below to explore specific applications and see how technology is being used to improve environmental stewardship, social performance, and governance, with explicit links to relevant ESG reporting standards.</p>
+            </div>
+
+            <div class="flex justify-center space-x-2 mb-8">
+                <button class="btn btn-secondary btn-filter active" data-filter="all">All</button>
+                <button class="btn btn-secondary btn-filter" data-filter="E">Environmental</button>
+                <button class="btn btn-secondary btn-filter" data-filter="S">Social</button>
+                <button class="btn btn-secondary btn-filter" data-filter="G">Governance</button>
+            </div>
+
+            <div id="app-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Cards will be injected here by JS -->
+            </div>
+        </section>
+
+        <!-- Advanced Solutions Section -->
+        <section id="advanced" class="content-section">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Advanced Multi-Agent AI Solutions for Social Impact</h2>
+                <p class="max-w-3xl mx-auto text-lg text-slate-600">Beyond current applications, visionary multi-agent AI frameworks are being conceptualized to address systemic challenges in social impact management within the extractive sector. These systems represent the next frontier of AI in ESG, enabling proactive and comprehensive approaches. Click on an agent in the diagram below to learn about its specific function and ESG relevance.</p>
+            </div>
+
+            <div class="card p-6 md:p-8">
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-2">
+                        <h3 id="agent-system-title" class="text-2xl font-semibold mb-4 text-center">Guardian Network: Real-Time Compliance Monitoring</h3>
+                        <div id="guardian-diagram" class="agent-diagram p-4 rounded-lg space-y-4">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="agent-diagram-node card p-4 text-center" data-title="Satellite Agent" data-desc="Monitors land use changes and environmental indicators via satellite imagery, providing insights to prevent violations before they occur. This aligns with environmental disclosure requirements under GRI 304 (Biodiversity) and IFRS S2 (Climate-related physical risks), and supports BRSR Q26 on environmental monitoring.">
+                                    <h4 class="font-semibold">🛰️ Satellite Agent</h4>
+                                </div>
+                                <div class="agent-diagram-node card p-4 text-center" data-title="Community Voice Agent" data-desc="Processes social media, community reports, and grievance data in local languages to ensure local concerns are heard and addressed. This directly supports disclosures under GRI 413 (Local Communities) and BRSR Q25 (Complaints handling across stakeholder groups).">
+                                    <h4 class="font-semibold">🗣️ Community Voice Agent</h4>
+                                </div>
+                                <div class="agent-diagram-node card p-4 text-center" data-title="Regulatory Agent" data-desc="Tracks changing standards across jurisdictions (IFC, World Bank, national frameworks) to maintain compliance with evolving regulations. This is crucial for governance disclosures under GRI 2-23 (Policy Commitments) and IFRS S1 (General Requirements for Disclosure of Sustainability-related Financial Information).">
+                                    <h4 class="font-semibold">⚖️ Regulatory Agent</h4>
+                                </div>
+                                <div class="agent-diagram-node card p-4 text-center" data-title="Risk Assessment Agent" data-desc="Synthesizes inputs from all other agents to predict compliance violations and social risks before they occur. This directly informs risk management disclosures under IFRS S2 (Climate-related risks and opportunities) and BRSR Principle 9 (Responsible Business Conduct).">
+                                    <h4 class="font-semibold">📈 Risk Assessment Agent</h4>
+                                </div>
+                            </div>
+                            <div class="agent-diagram-node card p-4 text-center bg-teal-50" data-title="Alert Orchestrator" data-desc="The central hub that manages escalation protocols and stakeholder notifications to ensure timely responses to potential issues identified by the network. This supports transparent grievance mechanisms and incident reporting, relevant for GRI 2-26 (Mechanisms for raising concerns) and BRSR Q25.">
+                                <h4 class="font-semibold">🚨 Alert Orchestrator</h4>
+                            </div>
+                        </div>
+                         <div class="flex justify-center space-x-2 mt-6">
+                            <button class="btn btn-secondary system-switcher active" data-system="guardian">Guardian Network</button>
+                            <button class="btn btn-secondary system-switcher" data-system="wisdom">Wisdom Syndicate</button>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                        <h4 id="agent-detail-title" class="text-xl font-semibold mb-3 text-slate-800">Select an Agent</h4>
+                        <p id="agent-detail-desc" class="text-slate-600">Click on any agent in the diagram to the left to see a detailed description of its role and function within the multi-agent system, including its ESG relevance.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12">
+                 <h3 class="text-2xl font-semibold text-center mb-8">Key Technical Innovations for Advanced ESG Solutions</h3>
+                 <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="icon bg-red-100 text-red-700 mx-auto">
+                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" /></svg>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-2">Edge AI for Remote Monitoring</h4>
+                        <p class="text-slate-600">Deploying AI models on local devices in remote locations with limited connectivity enables real-time processing of community feedback and environmental data. This is crucial for timely social and environmental performance monitoring, supporting disclosures under GRI 303 (Water & Effluents) and GRI 413 (Local Communities).</p>
+                    </div>
+                     <div class="text-center">
+                        <div class="icon bg-blue-100 text-blue-700 mx-auto">
+                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" /></svg>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-2">Blockchain for Supply Chain Transparency</h4>
+                        <p class="text-slate-600">Using immutable, decentralized ledgers to record commitments, payments, and grievance resolutions. This creates verifiable, trustworthy records for all stakeholders, enhancing human rights due diligence (GRI 408, BRSR Principle 5) and supply chain transparency (GRI 308, GRI 414).</p>
+                    </div>
+                     <div class="text-center">
+                        <div class="icon bg-green-100 text-green-700 mx-auto">
+                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.375 1.438l-2.025.987a.75.75 0 01-1.012-.416l-.21-1.051a.75.75 0 00-.637-.637l-1.05-.21a.75.75 0 01-.417-1.012l.987-2.025A3 3 0 017.25 9h1.007a3 3 0 012.25-1.007A3 3 0 0112.75 9h1.007a3 3 0 012.625 1.625l.987 2.025a.75.75 0 01-.416 1.012l-1.05.21a.75.75 0 00-.637.637l-.21 1.05a.75.75 0 01-1.012.417l-2.025-.987A3 3 0 0115 18.257v-1.007A3 3 0 0112.75 15h-1.5A3 3 0 019 17.25z" /></svg>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-2">Federated Learning for Sensitive Data</h4>
+                        <p class="text-slate-600">Training AI models on decentralized data sources (like community data) without centralizing sensitive information. This enables cross-project learning while preserving privacy, crucial for ethical data governance and human rights disclosures (GRI 418, BRSR Principle 6).</p>
+                    </div>
+                 </div>
+            </div>
+            <div class="mt-12 text-center text-sm text-slate-500 italic">
+                <p>The concepts presented in this section represent a forward-looking vision for AI in social impact. If you have relevant experience to share, or are interested in partnering to explore these ventures further, please feel free to reach out.</p>
+            </div>
+        </section>
+
+        <!-- ESG Frameworks & Mapping Section -->
+        <section id="mappings-table" class="content-section">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">AI Use Case to ESG Disclosure Mapping</h2>
+                <p class="max-w-3xl mx-auto text-lg text-slate-600">This table provides a comprehensive overview of how various AI use cases within the extractive industries align with key ESG reporting frameworks, including GRI, IFRS S1/S2, and BRSR. It highlights the relevance for disclosure and potential assurance requirements, along with relevant Sustainable Development Goals (SDGs).</p>
+            </div>
+            <div class="overflow-x-auto rounded-lg shadow-md">
+                <table class="min-w-full bg-white mapping-table">
+                    <thead>
+                        <tr>
+                            <th>AI Use Case</th>
+                            <th>GRI Standard (§)</th>
+                            <th>IFRS S1/S2 (§/¶)</th>
+                            <th>BRSR (§/Q)</th>
+                            <th>Mapping Type</th>
+                            <th>Assurance?</th>
+                            <th>Relevant SDGs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Real-Time Environmental Monitoring (e.g., Water, Air, Biodiversity)</td>
+                            <td>GRI 303-3 (Water Discharge), GRI 305-1 (Emissions), GRI 304-2 (Biodiversity)</td>
+                            <td>IFRS S2 ¶12 (Climate-related physical risks)</td>
+                            <td>BRSR Q26 (Environmental monitoring of key parameters)</td>
+                            <td>💯 Full</td>
+                            <td>⚠️ Yes (BRSR Core)</td>
+                            <td>SDG 6, SDG 13, SDG 15</td>
+                        </tr>
+                        <tr>
+                            <td>AI-Optimized Resource Efficiency (e.g., Drilling, Ore Sorting)</td>
+                            <td>GRI 302-5 (Energy efficiency improvements), GRI 306-2 (Waste management)</td>
+                            <td>IFRS S2 ¶13 (Impact of climate risks on operations)</td>
+                            <td>BRSR Q26 (Resource consumption)</td>
+                            <td>💯 Full</td>
+                            <td>⚠️ Yes (BRSR Core)</td>
+                            <td>SDG 7, SDG 9, SDG 12</td>
+                        </tr>
+                        <tr>
+                            <td>AI-Powered Community Sentiment Analysis & Engagement</td>
+                            <td>GRI 413-1 (Operations with local community engagement), GRI 2-26 (Mechanisms for raising concerns)</td>
+                            <td>IFRS S1 ¶17 (Social risks that affect cash flows)</td>
+                            <td>BRSR Q25 (Complaints handling across stakeholder groups)</td>
+                            <td>💯 Full</td>
+                            <td>⚠️ Yes (BRSR Core)</td>
+                            <td>SDG 16</td>
+                        </tr>
+                        <tr>
+                            <td>AI-Enhanced Workforce Safety & Predictive Maintenance</td>
+                            <td>GRI 403-2 (Hazard identification and AI-led incident prediction), GRI 403-5 (Worker health and safety)</td>
+                            <td>IFRS S2 ¶13 (Effects of climate risks on operations)</td>
+                            <td>BRSR Q22 (Worker turnover & safety trends)</td>
+                            <td>💯 Full</td>
+                            <td>⚠️ Yes (BRSR Core)</td>
+                            <td>SDG 8</td>
+                        </tr>
+                        <tr>
+                            <td>AI for Human Rights Due Diligence in Supply Chains</td>
+                            <td>GRI 408-1 (Child labor), GRI 409-1 (Forced or compulsory labor), GRI 308-1 (Environmental screening of suppliers)</td>
+                            <td>IFRS S1 ¶21 (Connectivity with value chain and social impacts)</td>
+                            <td>BRSR Principle 5 (Human rights), Q23 (Supply chain social audits)</td>
+                            <td>💯 Full</td>
+                            <td>⚠️ Yes (BRSR Core)</td>
+                            <td>SDG 8, SDG 16</td>
+                        </tr>
+                        <tr>
+                            <td>AI-Automated ESG Reporting & Framework Mapping</td>
+                            <td>GRI 2-23 (Policy commitments), GRI 2-30 (Collective bargaining agreements)</td>
+                            <td>IFRS S1 ¶17 (Identification of sustainability-related risks and opportunities)</td>
+                            <td>BRSR Q19 (c) (Types of customers and community impact)</td>
+                            <td>💯 Full</td>
+                            <td>⚠️ Yes (BRSR Core)</td>
+                            <td>SDG 17</td>
+                        </tr>
+                        <tr>
+                            <td>AI for Intelligent Resettlement Planning (ResettleSmart)</td>
+                            <td>GRI 411-1 (Operations impacting indigenous communities), GRI 413-1 (Local communities)</td>
+                            <td>IFRS S1 ¶21 (Connectivity with value chain and social impacts)</td>
+                            <td>BRSR Q19 (c) (Community impact)</td>
+                            <td>🌓 Partial</td>
+                            <td>No</td>
+                            <td>SDG 10, SDG 11</td>
+                        </tr>
+                        <tr>
+                            <td>AI for Cross-Project Learning & Best Practice Curation (Wisdom Syndicate)</td>
+                            <td>GRI 2-23 (Policy commitments), GRI 2-29 (Approach to stakeholder engagement)</td>
+                            <td>IFRS S1 ¶17 (Identification of sustainability-related risks and opportunities)</td>
+                            <td>BRSR Principle 8 (Customer value), Q19 (b) (Product lifecycle responsibility)</td>
+                            <td>💡 Conceptual</td>
+                            <td>No</td>
+                            <td>SDG 9, SDG 17</td>
+                        </tr>
+                        <tr>
+                            <td>Extractives Impact Metaverse (Predictive Modeling, Co-Design)</td>
+                            <td>GRI 2-29 (Approach to stakeholder engagement), GRI 413-1 (Local communities)</td>
+                            <td>IFRS S1 ¶17 (Identification of sustainability-related risks and opportunities), IFRS S2 ¶13 (Impact of climate risks on operations)</td>
+                            <td>BRSR Principle 9 (Responsible Business Conduct)</td>
+                            <td>💡 Conceptual</td>
+                            <td>No</td>
+                            <td>SDG 11, SDG 17</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Career Path Section -->
+        <section id="career" class="content-section">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Charting Your Path in Tech-Enabled Sustainability</h2>
+                <p class="max-w-3xl mx-auto text-lg text-slate-600">The convergence of AI and ESG creates new roles and demands new skills. Deep domain expertise in social sciences is becoming more valuable than ever, providing the critical context and ethical oversight that technology alone cannot. Your 25 years of experience in E&SIA, M&E, and social research is not obsolete—it's essential.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card p-8">
+                    <h3 class="text-2xl font-semibold mb-4">Leveraging Your Domain Expertise in the AI-ESG Nexus</h3>
+                    <p class="text-slate-600 mb-6">As AI increasingly automates many operational and environmental monitoring tasks, the human element—encompassing community engagement, human rights, workforce transition, and ethical governance—becomes even more critical and less amenable to full automation. Your expertise in these areas is therefore invaluable for ensuring AI is deployed responsibly and effectively.</p>
+                    <div class="space-y-4">
+                        <div class="bg-slate-50 p-4 rounded-lg">
+                            <h4 class="font-semibold">AI Ethics & Governance Specialist</h4>
+                            <p class="text-sm text-slate-600">Advise on responsible AI deployment, develop frameworks for bias detection, and establish ethical guidelines for AI use in sensitive ESG contexts, ensuring alignment with human rights and environmental principles (e.g., BRSR Principle 6).</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-lg">
+                            <h4 class="font-semibold">Human Rights Due Diligence (HRDD) & Supply Chain Transparency Lead</h4>
+                            <p class="text-sm text-slate-600">Oversee AI-powered supply chain monitoring to ensure ethical sourcing and compliance with HRDD regulations (e.g., GRI 408, IFRS S1 ¶21), particularly for extractive industries.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-lg">
+                            <h4 class="font-semibold">Community Engagement & Social Impact Strategist</h4>
+                            <p class="text-sm text-slate-600">Design and manage AI-supported community engagement strategies, utilizing AI for sentiment analysis and monitoring initiative effectiveness (e.g., GRI 413), especially where automation impacts local populations.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card p-8 bg-teal-600 text-white">
+                    <h3 class="text-2xl font-semibold mb-4">Actionable Strategies for Transition & Impact</h3>
+                    <p class="text-teal-100 mb-6">To position yourself at the forefront of this shift, consider these strategic steps to enhance your impact and career trajectory.</p>
+                     <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="text-xl mr-3">🎯</span>
+                            <div>
+                                <h4 class="font-semibold">Targeted Outreach & Collaboration</h4>
+                                <p class="text-teal-100 text-sm">Engage with innovators like Aries Consult and Arpit Sharma, or companies developing multi-agent systems and digital twins for ESG. Your domain expertise is critical for shaping practical and ethical solutions.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-xl mr-3">🌐</span>
+                            <div>
+                                <h4 class="font-semibold">Industry Forums & Thought Leadership</h4>
+                                <p class="text-teal-100 text-sm">Participate in conferences on AI in ESG, sustainable mining, and responsible tech. Publish articles or speak on the social and ethical implications of AI in extractives, leveraging your deep experience to establish yourself as a thought leader.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-xl mr-3">✍️</span>
+                            <div>
+                                <h4 class="font-semibold">Niche Skill Development</h4>
+                                <p class="text-teal-100 text-sm">Focus on developing skills in AI auditing, data validation, and ethical framework development. The ability to critically interpret AI outputs and identify biases is paramount for ensuring genuine and equitable ESG outcomes.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
     </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const mobileNav = document.getElementById('mobile-nav');
+            const sections = document.querySelectorAll('.content-section');
+
+            function showSection(targetId) {
+                sections.forEach(section => {
+                    section.classList.remove('active');
+                    if (section.id === targetId) {
+                        section.classList.add('active');
+                    }
+                });
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.dataset.target === targetId) {
+                        link.classList.add('active');
+                    }
+                });
+                if (mobileNav.value !== targetId) {
+                    mobileNav.value = targetId;
+                }
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = e.target.dataset.target;
+                    showSection(targetId);
+                });
+            });
+
+            mobileNav.addEventListener('change', (e) => {
+                showSection(e.target.value);
+            });
+
+            // Chart.js for Landscape Section
+            const landscapeCtx = document.getElementById('landscapeChart').getContext('2d');
+            const landscapeChart = new Chart(landscapeCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Operational Efficiency', 'Worker Safety', 'Environmental Monitoring', 'Community/Social Impact', 'Governance & Compliance'],
+                    datasets: [{
+                        label: 'Focus of AI Applications',
+                        data: [30, 20, 25, 15, 10], /* Adjusted data for more balanced representation, reflecting shift */
+                        backgroundColor: [
+                            '#64748B', // Slate 500
+                            '#94A3B8', // Slate 400
+                            '#14B8A6', // Teal 500
+                            '#F59E0B', // Amber 500
+                            '#38BDF8'  // Sky 400
+                        ],
+                        borderColor: '#FDFBF8',
+                        borderWidth: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#334155',
+                                font: {
+                                    size: 14
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        label += context.parsed + '%';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Broader Applications Section Logic
+            const appData = [
+                { category: 'E', title: 'Environmental Performance Monitoring', desc: 'Using computer vision on drones and satellites to track water/air quality, land rehabilitation, and biodiversity, aligning with environmental disclosure requirements.', icon: '🌍',
+                  mappings: {
+                      gri: 'GRI 303-3 (Water Discharge), GRI 305-1 (Emissions), GRI 304-2 (Biodiversity)',
+                      ifrs: 'IFRS S2 ¶12 (Climate-related physical risks)',
+                      brsr: 'BRSR Q26 (Environmental monitoring of key parameters)',
+                      assurance: '⚠️ Yes (BRSR Core)',
+                      sdgs: 'SDG 6, SDG 13, SDG 15'
+                  }
+                },
+                { category: 'E', title: 'AI-Optimized Resource Efficiency', desc: 'Applying machine learning to optimize drilling, extraction, and energy usage, minimizing waste and predicting mineral deposits. This supports disclosures on energy and waste management.', icon: '⚙️',
+                  mappings: {
+                      gri: 'GRI 302-5 (Energy efficiency improvements), GRI 306-2 (Waste management)',
+                      ifrs: 'IFRS S2 ¶13 (Impact of climate risks on operations)',
+                      brsr: 'BRSR Q26 (Resource consumption)',
+                      assurance: '⚠️ Yes (BRSR Core)',
+                      sdgs: 'SDG 7, SDG 9, SDG 12'
+                  }
+                },
+                { category: 'E', title: 'Real-Time Pollution Control & GHG Emission Reduction', desc: 'Deploying sensor networks with AI to monitor emissions like methane in real-time and alert operators to leaks or inefficiencies, thereby reducing environmental impact and supporting GHG disclosures.', icon: '💨',
+                  mappings: {
+                      gri: 'GRI 305-1 (Direct GHG Emissions), GRI 305-2 (Energy Indirect GHG Emissions)',
+                      ifrs: 'IFRS S2 ¶13 (Climate-related transition risks)',
+                      brsr: 'BRSR Q26 (GHG emissions)',
+                      assurance: '⚠️ Yes (BRSR Core)',
+                      sdgs: 'SDG 13'
+                  }
+                },
+                { category: 'S', title: 'AI-Powered Community Sentiment Analysis & Engagement', desc: 'Analyzing public data and social media with sentiment analysis to understand community concerns, which directly aids in planning engagement strategies and monitoring their effectiveness. This enhances the Social License to Operate (SLO).', icon: '💬',
+                  mappings: {
+                      gri: 'GRI 413-1 (Operations with local community engagement), GRI 2-26 (Mechanisms for raising concerns)',
+                      ifrs: 'IFRS S1 ¶17 (Social risks that affect cash flows)',
+                      brsr: 'BRSR Q25 (Complaints handling across stakeholder groups)',
+                      assurance: '⚠️ Yes (BRSR Core)',
+                      sdgs: 'SDG 16'
+                  }
+                },
+                { category: 'S', title: 'AI-Enhanced Workforce Safety & Predictive Maintenance', desc: 'Equipping workers with wearable sensors that use AI to monitor vital signs, detect fatigue, and identify hazardous conditions. AI also enables predictive maintenance for equipment, reducing operational risks and supporting worker health and safety disclosures.', icon: '👷',
+                  mappings: {
+                      gri: 'GRI 403-2 (Hazard identification and AI-led incident prediction), GRI 403-5 (Worker health and safety)',
+                      ifrs: 'IFRS S2 ¶13 (Effects of climate risks on operations)',
+                      brsr: 'BRSR Q22 (Worker turnover & safety trends)',
+                      assurance: '⚠️ Yes (BRSR Core)',
+                      sdgs: 'SDG 8'
+                  }
+                },
+                { category: 'S', title: 'AI-Driven Workforce Transition & Reskilling', desc: 'Utilizing AI-driven VR simulations to provide immersive, safe training for new roles and reskilling programs, addressing workforce displacement due to automation and supporting fair labor practices.', icon: '🎓',
+                  mappings: {
+                      gri: 'GRI 404-2 (Training and education), GRI 401-1 (New employee hires and employee turnover)',
+                      ifrs: 'IFRS S1 ¶17 (Social risks related to human capital)',
+                      brsr: 'BRSR Principle 5 (Human rights), Q20 (Employee training)',
+                      assurance: 'No',
+                      sdgs: 'SDG 4, SDG 8, SDG 10'
+                  }
+                },
+                { category: 'G', title: 'AI for Human Rights Due Diligence in Supply Chains', desc: 'Using NLP to analyze supplier disclosures and news sources to identify hidden risks of forced labor or other human rights violations in supply chains, streamlining compliance with global regulations.', icon: '🤝',
+                  mappings: {
+                      gri: 'GRI 408-1 (Child labor), GRI 409-1 (Forced or compulsory labor), GRI 308-1 (Environmental screening of suppliers)',
+                      ifrs: 'IFRS S1 ¶21 (Connectivity with value chain and social impacts)',
+                      brsr: 'BRSR Principle 5 (Human rights), Q23 (Supply chain social audits)',
+                      assurance: '⚠️ Yes (BRSR Core)',
+                      sdgs: 'SDG 8, SDG 16'
+                  }
+                },
+                { category: 'G', title: 'AI-Automated ESG Reporting & Framework Mapping', desc: 'Automating the collection of GHG data and mapping company activities to multiple, complex reporting frameworks (e.g., GRI, ISSB, BRSR), significantly improving reporting accuracy and efficiency.', icon: '📊',
+                  mappings: {
+                      gri: 'GRI 2-23 (Policy commitments), GRI 2-30 (Collective bargaining agreements)',
+                      ifrs: 'IFRS S1 ¶17 (Identification of sustainability-related risks and opportunities)',
+                      brsr: 'BRSR Q19 (c) (Types of customers and community impact)',
+                      assurance: '⚠️ Yes (BRSR Core)',
+                      sdgs: 'SDG 17'
+                  }
+                },
+                { category: 'G', title: 'AI for Ethical AI Governance & Bias Detection', desc: 'Implementing AI systems to audit other AI models for bias, ensuring fair and transparent decision-making, and mitigating ESG risks related to AI deployment.', icon: '🛡️',
+                  mappings: {
+                      gri: 'GRI 2-23 (Policy commitments), GRI 418-1 (Customer privacy)',
+                      ifrs: 'IFRS S1 ¶17 (Identification of sustainability-related risks and opportunities)',
+                      brsr: 'BRSR Principle 6 (Responsible business conduct for consumers)',
+                      assurance: 'No',
+                      sdgs: 'SDG 16'
+                  }
+                }
+            ];
+
+            const appGrid = document.getElementById('app-grid');
+            const filterBtns = document.querySelectorAll('.btn-filter');
+
+            function renderApps(filter) {
+                appGrid.innerHTML = '';
+                const filteredData = (filter === 'all') ? appData : appData.filter(app => app.category === filter);
+                
+                filteredData.forEach(app => {
+                    const card = document.createElement('div');
+                    card.className = 'card p-6 flex flex-col app-card';
+                    card.dataset.category = app.category;
+                    card.innerHTML = `
+                        <div class="text-4xl mb-4">${app.icon}</div>
+                        <h4 class="text-lg font-semibold mb-2">${app.title}</h4>
+                        <p class="text-slate-600 flex-grow mb-3">${app.desc}</p>
+                        <details class="text-sm text-slate-700 bg-slate-50 p-3 rounded-md border border-slate-200 mt-auto">
+                            <summary class="font-semibold cursor-pointer text-teal-700 hover:text-teal-800">View ESG Mappings</summary>
+                            <ul class="mt-2 space-y-1">
+                                <li><strong>GRI:</strong> ${app.mappings.gri}</li>
+                                <li><strong>IFRS S1/S2:</strong> ${app.mappings.ifrs}</li>
+                                <li><strong>BRSR:</strong> ${app.mappings.brsr}</li>
+                                <li><strong>Assurance:</strong> ${app.mappings.assurance}</li>
+                                <li><strong>SDGs:</strong> ${app.mappings.sdgs}</li>
+                            </ul>
+                        </details>
+                    `;
+                    appGrid.appendChild(card);
+                });
+            }
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    renderApps(btn.dataset.filter);
+                });
+            });
+
+            renderApps('all');
+
+            // Advanced Solutions Section Logic
+            const agentDetailTitle = document.getElementById('agent-detail-title');
+            const agentDetailDesc = document.getElementById('agent-detail-desc');
+            
+            const systemSwitchers = document.querySelectorAll('.system-switcher');
+            const agentSystemTitle = document.getElementById('agent-system-title');
+            
+            const systems = {
+                guardian: {
+                    title: "Guardian Network: Real-Time Compliance Monitoring",
+                    agents: [
+                        { el: 'div', class: 'grid grid-cols-2 gap-4', children: [
+                            { el: 'div', class: 'agent-diagram-node card p-4 text-center', 'data-title': "Satellite Agent", 'data-desc': "Monitors land use changes and environmental indicators via satellite imagery, providing insights to prevent violations before they occur. This aligns with environmental disclosure requirements under GRI 304 (Biodiversity) and IFRS S2 (Climate-related physical risks), and supports BRSR Q26 on environmental monitoring.", html: '<h4 class="font-semibold">🛰️ Satellite Agent</h4>' },
+                            { el: 'div', class: 'agent-diagram-node card p-4 text-center', 'data-title': "Community Voice Agent", 'data-desc': "Processes social media, community reports, and grievance data in local languages to ensure local concerns are heard and addressed. This directly supports disclosures under GRI 413 (Local Communities) and BRSR Q25 (Complaints handling across stakeholder groups).", html: '<h4 class="font-semibold">🗣️ Community Voice Agent</h4>' },
+                            { el: 'div', class: 'agent-diagram-node card p-4 text-center', 'data-title': "Regulatory Agent", 'data-desc': "Tracks changing standards across jurisdictions (IFC, World Bank, national frameworks) to maintain compliance with evolving regulations. This is crucial for governance disclosures under GRI 2-23 (Policy Commitments) and IFRS S1 (General Requirements for Disclosure of Sustainability-related Financial Information).", html: '<h4 class="font-semibold">⚖️ Regulatory Agent</h4>' },
+                            { el: 'div', class: 'agent-diagram-node card p-4 text-center', 'data-title': "Risk Assessment Agent", 'data-desc': "Synthesizes inputs from all other agents to predict compliance violations and social risks before they occur. This directly informs risk management disclosures under IFRS S2 (Climate-related risks and opportunities) and BRSR Principle 9 (Responsible Business Conduct).", html: '<h4 class="font-semibold">📈 Risk Assessment Agent</h4>' },
+                        ]},
+                        { el: 'div', class: 'agent-diagram-node card p-4 text-center bg-teal-50', 'data-title': "Alert Orchestrator", 'data-desc': "The central hub that manages escalation protocols and stakeholder notifications to ensure timely responses to potential issues identified by the network. This supports transparent grievance mechanisms and incident reporting, relevant for GRI 2-26 (Mechanisms for raising concerns) and BRSR Q25.", html: '<h4 class="font-semibold">🚨 Alert Orchestrator</h4>' },
+                    ]
+                },
+                wisdom: {
+                    title: "Wisdom Syndicate: Cross-Project Learning & Standards Evolution",
+                    agents: [
+                         { el: 'div', class: 'grid grid-cols-2 gap-4', children: [
+                            { el: 'div', class: 'agent-diagram-node card p-4 text-center', 'data-title': "Pattern Recognition Agent", 'data-desc': "Identifies recurring issues and successful patterns across projects globally, preventing repeated mistakes and highlighting effective strategies. This supports continuous improvement disclosures under GRI 2-12 (Collective Bargaining Agreements) and BRSR Principle 8.", html: '<h4 class="font-semibold">🔍 Pattern Recognition Agent</h4>' },
+                            { el: 'div', class: 'agent-diagram-node card p-4 text-center', 'data-title': "Best Practice Curator", 'data-desc': "Continuously updates methodology libraries by extracting and documenting proven solutions from successful projects. This enhances knowledge management and supports disclosures on innovation and process improvement.", html: '<h4 class="font-semibold">📚 Best Practice Curator</h4>' },
+                            { el: 'div', class: 'agent-diagram-node card p-4 text-center', 'data-title': "Standards Evolution Agent", 'data-desc': "Tracks emerging regulatory requirements and social standards, recommending proactive adaptations to project frameworks. This is crucial for governance disclosures under GRI 2-23 (Policy Commitments) and IFRS S1 (General Requirements for Disclosure of Sustainability-related Financial Information).", html: '<h4 class="font-semibold">⚖️ Standards Evolution Agent</h4>' },
+                            { el: 'div', class: 'agent-diagram-node card p-4 text-center', 'data-title': "Peer Network Agent", 'data-desc': "Connects practitioners and teams facing similar challenges, facilitating direct knowledge sharing and collaboration. This supports disclosures on stakeholder engagement and capacity building.", html: '<h4 class="font-semibold">🧑‍🤝‍🧑 Peer Network Agent</h4>' },
+                        ]},
+                        { el: 'div', class: 'agent-diagram-node card p-4 text-center bg-amber-50', 'data-title': "Knowledge Synthesis Agent", 'data-desc': "The core agent that transforms raw data, case studies, and reports into actionable, easy-to-digest guidance for project teams. This enhances internal reporting and decision-making for ESG performance.", html: '<h4 class="font-semibold">💡 Knowledge Synthesis Agent</h4>' },
+                    ]
+                }
+            };
+
+            function buildDiagram(agentData, container) {
+                container.innerHTML = '';
+                agentData.forEach(item => {
+                    const parent = document.createElement(item.el);
+                    parent.className = item.class;
+                    if (item.children) {
+                        item.children.forEach(childData => {
+                            const child = document.createElement(childData.el);
+                            child.className = childData.class;
+                            child.dataset.title = childData['data-title'];
+                            child.dataset.desc = childData['data-desc'];
+                            child.innerHTML = childData.html;
+                            parent.appendChild(child);
+                        });
+                    } else {
+                        parent.dataset.title = item['data-title'];
+                        parent.dataset.desc = item['data-desc'];
+                        parent.innerHTML = item.html;
+                    }
+                    container.appendChild(parent);
+                });
+                
+                container.querySelectorAll('.agent-diagram-node').forEach(node => {
+                    node.addEventListener('click', () => {
+                        container.querySelectorAll('.agent-diagram-node').forEach(n => n.classList.remove('selected'));
+                        node.classList.add('selected');
+                        agentDetailTitle.textContent = node.dataset.title;
+                        agentDetailDesc.textContent = node.dataset.desc;
+                    });
+                });
+            }
+
+            systemSwitchers.forEach(switcher => {
+                switcher.addEventListener('click', () => {
+                    systemSwitchers.forEach(s => s.classList.remove('active'));
+                    switcher.classList.add('active');
+                    const systemKey = switcher.dataset.system;
+                    const system = systems[systemKey];
+                    agentSystemTitle.textContent = system.title;
+                    const diagramContainer = document.querySelector('.agent-diagram');
+                    buildDiagram(system.agents, diagramContainer);
+                    agentDetailTitle.textContent = "Select an Agent";
+                    agentDetailDesc.textContent = "Click on any agent in the diagram to the left to see a detailed description of its role and function within the multi-agent system, including its ESG relevance.";
+                });
+            });
+
+            // Initial build of Guardian Network diagram
+            buildDiagram(systems.guardian.agents, document.querySelector('.agent-diagram'));
+        });
+    </script>
+    <script>
+// Navigation handling for both desktop and mobile
+document.addEventListener('DOMContentLoaded', function() {
+    // Desktop navigation
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = this.getAttribute('data-target');
+            showSection(target);
+            updateActiveLink(this);
+        });
+    });
+
+    // Mobile navigation
+    const mobileNav = document.getElementById('mobile-nav');
+    mobileNav.addEventListener('change', function() {
+        showSection(this.value);
+    });
+
+    function showSection(sectionId) {
+        // Hide all sections
+        document.querySelectorAll('.content-section').forEach(section => {
+            section.classList.remove('active');
+        });
+        // Show selected section
+        document.getElementById(sectionId).classList.add('active');
+    }
+
+    function updateActiveLink(activeLink) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        activeLink.classList.add('active');
+        // Update mobile nav to match
+        mobileNav.value = activeLink.getAttribute('data-target');
+    }
+
+    // Initialize the landscape chart
+    const ctx = document.getElementById('landscapeChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: [
+                'Operational Efficiency',
+                'Worker Safety',
+                'Environmental Monitoring',
+                'Social Impact Analysis',
+                'ESG Reporting & Compliance'
+            ],
+            datasets: [{
+                data: [30, 20, 20, 15, 15],
+                backgroundColor: [
+                    '#0F766E', // Teal 700
+                    '#0D9488', // Teal 600
+                    '#14B8A6', // Teal 500
+                    '#2DD4BF', // Teal 400
+                    '#5EEAD4'  // Teal 300
+                ],
+                borderWidth: 2,
+                borderColor: '#FFFFFF'
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        padding: 20,
+                        font: {
+                            family: "'Inter', sans-serif",
+                            size: 14
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return `${context.label}: ${context.raw}%`;
+                        }
+                    }
+                }
+            },
+            cutout: '60%'
+        }
+    });
+});
+</script>
 </body>
 </html>
