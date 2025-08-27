@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Living Cosmic Primer - Enhanced</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background: radial-gradient(ellipse at center, #0a0a1a 0%, #000000 100%);
+            color: #e0e0ff;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            cursor: none;
+        }
+        
+        .primer-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .cursor-glow {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(123, 159, 255, 0.9) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 1000;
+            transition: all 0.05s ease;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: screen;
+        }
+        
+        .cursor-trail {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(123, 159, 255, 0.4) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 999;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .title-overlay {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            z-index: 100;
+            pointer-events: none;
+        }
+        
+        .title {
+            font-size: 2.5em;
+            color: #9bb6ff;
+            text-shadow: 0 0 40px rgba(155, 182, 255, 0.8),
+                         0 0 20px rgba(155, 182, 255, 0.6);
+            margin: 0;
+            opacity: 0;
+            animation: fadeInGlow 3s ease-in forwards;
+        }
+        
+        .subtitle {
+            font-size: 1.3em;
+            color: #c0d4ff;
+            margin: 15px 0;
+            font-style: italic;
+            opacity: 0;
+            animation: fadeInGlow 3s ease-in 1s forwards;
+            text-shadow: 0 0 15px rgba(192, 212, 255, 0.5);
+        }
+        
+        @keyframes fadeInGlow {
+            to { 
+                opacity: 1;
+                filter: brightness(1.2);
+            }
+        }
+        
+        .controls-panel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .control-btn {
+            background: rgba(30, 50, 100, 0.8);
+            color: #fff;
+            border: 2px solid rgba(120, 170, 255, 0.6);
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            backdrop-filter: blur(10px);
+            position: relative;
+            box-shadow: 0 4px 15px rgba(100, 150, 255, 0.2);
+        }
+        
+        .control-btn:hover {
+            background: rgba(100, 150, 255, 0.5);
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(100, 150, 255, 0.4),
+                        inset 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+        
+        .control-btn.active {
+            background: rgba(100, 150, 255, 0.7);
+            box-shadow: 0 0 35px rgba(100, 150, 255, 0.6),
+                        inset 0 0 25px rgba(200, 220, 255, 0.3);
+            border-color: rgba(200, 220, 255, 0.8);
+        }
+        
+        .help-trigger {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 215, 0, 0.9);
+            border-radius: 50%;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 2px 10px rgba(255, 215, 0, 0.4);
+        }
+        
+        .help-trigger:hover {
+            background: rgba(255, 215, 0, 1);
+            transform: scale(1.2);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+        }
+        
+        .main-help-trigger {
+            position: absolute;
+            top: 100px;
+            left: 30px;
+            background: rgba(255, 215, 0, 0.95);
+            color: #000;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+            z-index: 150;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+        }
+        
+        .main-help-trigger:hover {
+            background: rgba(255, 215, 0, 1);
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.5),
+                        inset 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+        
+        .cosmic-scroll {
+            position: fixed;
+            background: linear-gradient(145deg, 
+                rgba(20, 30, 60, 0.98) 0%, 
+                rgba(40, 50, 90, 0.98) 50%, 
+                rgba(20, 30, 60, 0.98) 100%);
+            border: 2px solid rgba(255, 215, 0, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            max-width: 400px;
+            max-height: 500px;
+            overflow-y: auto;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                        0 0 20px rgba(255, 215, 0, 0.2);
+            z-index: 200;
+            opacity: 0;
+            transform: scale(0.8) translateY(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+        
+        .cosmic-scroll.visible {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            pointer-events: all;
+        }
+        
+        .scroll-header {
+            font-size: 1.3em;
+            color: #FFD700;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: bold;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+        }
+        
+        .visualization-space {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            filter: brightness(1.1) contrast(1.1);
+        }
+        
+        .main-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .interactive-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(10, 20, 60, 0.97));
+            padding: 30px;
+            z-index: 50;
+            backdrop-filter: blur(8px);
+        }
+        
+        .scale-selector {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .scale-btn {
+            background: rgba(60, 90, 157, 0.4);
+            color: #fff;
+            border: 2px solid rgba(120, 180, 255, 0.6);
+            padding: 15px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 16px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            min-width: 140px;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        
+        .scale-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.3), 
+                transparent);
+            transition: left 0.6s;
+        }
+        
+        .scale-btn:hover {
+            background: rgba(100, 150, 255, 0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 35px rgba(100, 150, 255, 0.5),
+                        inset 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+        
+        .scale-btn:hover::before {
+            left: 100%;
+        }
+        
+        .scale-btn.active {
+            background: rgba(100, 150, 255, 0.8);
+            box-shadow: 0 0 35px rgba(100, 150, 255, 0.7),
+                        inset 0 0 25px rgba(200, 220, 255, 0.3);
+            transform: scale(1.1);
+            border-color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .consciousness-narrative {
+            text-align: center;
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #f0f0ff;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(200, 200, 255, 0.4);
+        }
+        
+        .consciousness-narrative.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .harmonic-dashboard {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(20, 40, 80, 0.7);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(120, 170, 255, 0.4);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease 0.3s;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        
+        .harmonic-dashboard.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .frequency-display {
+            font-family: 'Courier New', monospace;
+            font-size: 1.4em;
+            color: #9bb6ff;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(155, 182, 255, 0.5);
+        }
+        
+        .harmonic-description {
+            color: #c0d4ff;
+            font-size: 0.9em;
+            font-style: italic;
+        }
+        
+        .waveform-display {
+            width: 250px;
+            height: 80px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            border: 1px solid rgba(100, 150, 255, 0.3);
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .sonic-pulse {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid rgba(100, 150, 255, 0.6);
+            pointer-events: none;
+            animation: sonicExpand 1s ease-out forwards;
+        }
+        
+        @keyframes sonicExpand {
+            0% {
+                width: 20px;
+                height: 20px;
+                opacity: 0.8;
+            }
+            100% {
+                width: 200px;
+                height: 200px;
+                opacity: 0;
+            }
+        }
+        
+        .performance-indicator {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 0.8em;
+            color: rgba(255, 255, 255, 0.5);
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="primer-container">
+        <div class="cursor-glow" id="cursor-glow"></div>
+        <div class="cursor-trail" id="cursor-trail"></div>
+        
+        <div class="title-overlay">
+            <h1 class="title">The Living Cosmic Primer</h1>
+            <p class="subtitle">Where consciousness and cosmos dance together</p>
+        </div>
+        
+        <div class="controls-panel">
+            <button class="control-btn active" id="audio-toggle" title="Cosmic Audio">
+                🎵
+                <div class="help-trigger" data-help="audio">?</div>
+            </button>
+            <button class="control-btn active" id="visual-toggle" title="Harmonic Visuals">
+                ✨
+                <div class="help-trigger" data-help="visuals">?</div>
+            </button>
+            <button class="control-btn" id="info-toggle" title="Consciousness Mode">
+                🧠
+                <div class="help-trigger" data-help="consciousness">?</div>
+            </button>
+        </div>
+        
+        <button class="main-help-trigger" id="main-help-trigger">
+            🌌 Cosmic Guide
+        </button>
+        
+        <div class="visualization-space">
+            <canvas id="main-canvas" class="main-canvas"></canvas>
+        </div>
+        
+        <div class="interactive-overlay">
+            <div class="scale-selector">
+                <button class="scale-btn active" data-scale="solar">
+                    Solar Harmonies
+                    <div class="scale-help-trigger" data-help="solar">?</div>
+                </button>
+                <button class="scale-btn" data-scale="stellar">
+                    Stellar Chorus
+                    <div class="scale-help-trigger" data-help="stellar">?</div>
+                </button>
+                <button class="scale-btn" data-scale="galactic">
+                    Galactic Symphony
+                    <div class="scale-help-trigger" data-help="galactic">?</div>
+                </button>
+                <button class="scale-btn" data-scale="cosmic">
+                    Cosmic Orchestra
+                    <div class="scale-help-trigger" data-help="cosmic">?</div>
+                </button>
+            </div>
+            
+            <div class="consciousness-narrative" id="consciousness-narrative">
+                Welcome to the cosmic symphony. Your awareness shapes what you perceive...
+            </div>
+            
+            <div class="harmonic-dashboard" id="harmonic-dashboard">
+                <div class="frequency-info">
+                    <div class="frequency-display" id="frequency-display">256.0 Hz</div>
+                    <div class="harmonic-description" id="harmonic-description">
+                        Fundamental resonance of your cosmic scale
+                    </div>
+                </div>
+                <canvas class="waveform-display" id="waveform-canvas" width="250" height="80"></canvas>
+            </div>
+        </div>
+        
+        <div class="cosmic-scroll" id="cosmic-scroll">
+            <button class="scroll-close" id="scroll-close">×</button>
+            <div class="scroll-header" id="scroll-header">Cosmic Wisdom</div>
+            <div class="scroll-content" id="scroll-content">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+        
+        <div class="performance-indicator" id="performance-indicator"></div>
+    </div>
+
+    <script>
+        class EnhancedLivingCosmicPrimer {
+            constructor() {
+                this.canvas = document.getElementById('main-canvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.waveformCanvas = document.getElementById('waveform-canvas');
+                this.waveformCtx = this.waveformCanvas.getContext('2d');
+                
+                this.currentScale = 'solar';
+                this.mousePos = { x: 0, y: 0 };
+                this.lastMousePos = { x: 0, y: 0 };
+                this.mouseVelocity = 0;
+                this.time = 0;
+                this.animationId = null;
+                
+                this.audioContext = null;
+                this.audioEnabled = true;
+                this.visualsEnabled = true;
+                this.consciousnessMode = false;
+                this.oscillators = new Map();
+                this.masterGain = null;
+                
+                // Enhanced audio responsiveness
+                this.audioResponsiveness = 3.0;
+                this.proximityChimes = new Map();
+                this.sonicPulses = [];
+                
+                // Visual enhancement
+                this.visualBrightness = 1.2;
+                this.sparkleIntensity = 1.0;
+                
+                this.cosmicObjects = [];
+                this.starField = [];
+                this.cursorTrails = [];
+                this.helpContent = this.initializeHelpContent();
+                this.currentScroll = null;
+                
+                this.scaleDefinitions = {
+                    solar: {
+                        name: 'Solar System',
+                        baseFreq: 256,
+                        harmonics: [1, 1.25, 1.5, 2, 2.5],
+                        color: '#FFD700',
+                        glowColor: '#FFF8DC',
+                        narrative: 'Planets dance in orbital resonance, each world adding its voice to the solar symphony.'
+                    },
+                    stellar: {
+                        name: 'Stellar Neighborhood',
+                        baseFreq: 432,
+                        harmonics: [1, 1.618, 2, 2.618, 3.236],
+                        color: '#4A90E2',
+                        glowColor: '#87CEEB',
+                        narrative: 'Stellar fusion creates pure tones that resonate across the interstellar medium.'
+                    },
+                    galactic: {
+                        name: 'Galactic Scale',
+                        baseFreq: 108,
+                        harmonics: [1, 2, 4, 8, 16],
+                        color: '#9932CC',
+                        glowColor: '#DDA0DD',
+                        narrative: 'Spiral arms are frozen music, gravitational waves in spacetime itself.'
+                    },
+                    cosmic: {
+                        name: 'Cosmic Web',
+                        baseFreq: 54,
+                        harmonics: [1, 3, 9, 27, 81],
+                        color: '#50C878',
+                        glowColor: '#98FB98',
+                        narrative: 'Galaxy clusters resonate in frequencies beyond human perception.'
+                    }
+                };
+                
+                this.init();
+            }
+            
+            init() {
+                this.setupCanvas();
+                this.setupEventListeners();
+                this.setupHelpSystem();
+                this.generateStarField();
+                this.loadScale('solar');
+                this.animate();
+                this.initAudioContext();
+            }
+            
+            initializeHelpContent() {
+                return {
+                    main: {
+                        title: "🌌 Welcome to the Cosmic Symphony!",
+                        content: `
+                            <p>This isn't just a picture of space - it's a <strong>musical instrument</strong> that lets you play with the universe itself!</p>
+                            <h4>🎭 How to Play:</h4>
+                            <ul>
+                                <li><strong>Move your mouse</strong> - Conduct the cosmic symphony</li>
+                                <li><strong>Quick movements</strong> - Create pitch bends and sonic pulses</li>
+                                <li><strong>Hover near objects</strong> - Trigger celestial chimes</li>
+                                <li><strong>Click objects</strong> - Make planets and stars sing</li>
+                                <li><strong>Try different scales</strong> - Each reveals new cosmic harmonies</li>
+                            </ul>
+                            <p><em>Pro tip: Try making circles around planets!</em></p>
+                        `
+                    },
+                    audio: {
+                        title: "🎵 Cosmic Audio Magic",
+                        content: `
+                            <h4>What This Button Does:</h4>
+                            <p>Turns the universe's music on and off. When glowing blue, you can hear the cosmic symphony!</p>
+                            <h4>🎼 The Enhanced Audio System:</h4>
+                            <ul>
+                                <li><strong>Base Drones</strong> - Each scale has its own harmonic foundation</li>
+                                <li><strong>Mouse Velocity</strong> - Fast movements bend pitch like a theremin</li>
+                                <li><strong>Proximity Chimes</strong> - Get close to objects to trigger their songs</li>
+                                <li><strong>Sonic Pulses</strong> - Click to send waves through space</li>
+                            </ul>
+                        `
+                    },
+                    visuals: {
+                        title: "✨ Enhanced Harmonic Light Show",
+                        content: `
+                            <h4>What This Button Does:</h4>
+                            <p>Shows you the invisible sound waves spreading through space as ripples of light.</p>
+                            <h4>🌊 Visual Enhancements:</h4>
+                            <ul>
+                                <li><strong>Brighter Stars</strong> - Enhanced sparkle and glow effects</li>
+                                <li><strong>Cursor Trails</strong> - Your movements leave traces in spacetime</li>
+                                <li><strong>Sonic Pulses</strong> - See sound waves emanate from clicks</li>
+                                <li><strong>Harmonic Fields</strong> - Watch interference patterns dance</li>
+                            </ul>
+                        `
+                    }
+                };
+            }
+            
+            setupCanvas() {
+                const resize = () => {
+                    this.canvas.width = window.innerWidth;
+                    this.canvas.height = window.innerHeight;
+                    this.generateStarField();
+                };
+                resize();
+                window.addEventListener('resize', resize);
+            }
+            
+            setupEventListeners() {
+                document.addEventListener('mousemove', (e) => {
+                    this.lastMousePos.x = this.mousePos.x;
+                    this.lastMousePos.y = this.mousePos.y;
+                    this.mousePos.x = e.clientX;
+                    this.mousePos.y = e.clientY;
+                    
+                    // Calculate velocity
+                    this.mouseVelocity = Math.sqrt(
+                        Math.pow(this.mousePos.x - this.lastMousePos.x, 2) +
+                        Math.pow(this.mousePos.y - this.lastMousePos.y, 2)
+                    );
+                    
+                    // Update cursor glow
+                    const cursorGlow = document.getElementById('cursor-glow');
+                    cursorGlow.style.left = e.clientX + 'px';
+                    cursorGlow.style.top = e.clientY + 'px';
+                    
+                    // Enhanced glow based on velocity
+                    const glowSize = 30 + this.mouseVelocity * 0.5;
+                    cursorGlow.style.width = glowSize + 'px';
+                    cursorGlow.style.height = glowSize + 'px';
+                    
+                    // Add cursor trail
+                    if (this.mouseVelocity > 5) {
+                        this.addCursorTrail(e.clientX, e.clientY);
+                    }
+                    
+                    this.updateHarmonics();
+                    this.checkProximityTriggers();
+                });
+                
+                document.querySelectorAll('.scale-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        document.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        this.loadScale(btn.dataset.scale);
+                    });
+                });
+                
+                document.getElementById('audio-toggle').addEventListener('click', () => {
+                    this.toggleAudio();
+                });
+                
+                document.getElementById('visual-toggle').addEventListener('click', () => {
+                    this.toggleVisuals();
+                });
+                
+                document.getElementById('info-toggle').addEventListener('click', () => {
+                    this.toggleConsciousnessMode();
+                });
+                
+                this.canvas.addEventListener('click', (e) => {
+                    this.handleClick(e);
+                });
+            }
+            
+            addCursorTrail(x, y) {
+                const trail = {
+                    x: x,
+                    y: y,
+                    opacity: 0.5,
+                    size: 15,
+                    color: this.scaleDefinitions[this.currentScale].glowColor
+                };
+                this.cursorTrails.push(trail);
+                
+                // Limit trail length
+                if (this.cursorTrails.length > 20) {
+                    this.cursorTrails.shift();
+                }
+            }
+            
+            setupHelpSystem() {
+                document.getElementById('main-help-trigger').addEventListener('click', () => {
+                    this.showHelp('main');
+                });
+                
+                document.querySelectorAll('.help-trigger, .scale-help-trigger').forEach(trigger => {
+                    trigger.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const helpType = trigger.dataset.help;
+                        this.showHelp(helpType);
+                    });
+                });
+                
+                document.getElementById('scroll-close').addEventListener('click', () => {
+                    this.hideHelp();
+                });
+            }
+            
+            showHelp(type) {
+                const scroll = document.getElementById('cosmic-scroll');
+                const header = document.getElementById('scroll-header');
+                const content = document.getElementById('scroll-content');
+                
+                const helpData = this.helpContent[type] || this.helpContent.main;
+                
+                header.textContent = helpData.title;
+                content.innerHTML = helpData.content;
+                
+                scroll.style.left = '50%';
+                scroll.style.top = '50%';
+                scroll.style.transform = 'translate(-50%, -50%)';
+                
+                scroll.classList.add('visible');
+                this.currentScroll = type;
+            }
+            
+            hideHelp() {
+                document.getElementById('cosmic-scroll').classList.remove('visible');
+                this.currentScroll = null;
+            }
+            
+            async initAudioContext() {
+                document.addEventListener('click', async () => {
+                    if (!this.audioContext) {
+                        try {
+                            this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                            this.masterGain = this.audioContext.createGain();
+                            this.masterGain.gain.setValueAtTime(0.2, this.audioContext.currentTime);
+                            
+                            // Add reverb for spacey feel
+                            this.convolver = this.audioContext.createConvolver();
+                            this.createReverbImpulse();
+                            
+                            this.masterGain.connect(this.convolver);
+                            this.convolver.connect(this.audioContext.destination);
+                            
+                            this.createScaleOscillators();
+                        } catch (error) {
+                            console.log('Audio initialization failed:', error);
+                        }
+                    }
+                }, { once: true });
+            }
+            
+            createReverbImpulse() {
+                const length = this.audioContext.sampleRate * 2;
+                const impulse = this.audioContext.createBuffer(2, length, this.audioContext.sampleRate);
+                
+                for (let channel = 0; channel < 2; channel++) {
+                    const channelData = impulse.getChannelData(channel);
+                    for (let i = 0; i < length; i++) {
+                        channelData[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / length, 2);
+                    }
+                }
+                
+                this.convolver.buffer = impulse;
+            }
+            
+            createScaleOscillators() {
+                Object.entries(this.scaleDefinitions).forEach(([scaleName, scaleData]) => {
+                    const oscillatorGroup = [];
+                    
+                    scaleData.harmonics.forEach((ratio, index) => {
+                        const frequency = scaleData.baseFreq * ratio;
+                        
+                        const osc = this.audioContext.createOscillator();
+                        const gain = this.audioContext.createGain();
+                        const filter = this.audioContext.createBiquadFilter();
+                        
+                        // More interesting waveforms
+                        osc.type = ['sine', 'triangle', 'sawtooth', 'square'][index % 4];
+                        osc.frequency.setValueAtTime(frequency, this.audioContext.currentTime);
+                        
+                        // Add subtle vibrato
+                        const vibrato = this.audioContext.createOscillator();
+                        const vibratoGain = this.audioContext.createGain();
+                        vibrato.frequency.value = 5;
+                        vibratoGain.gain.value = 2;
+                        vibrato.connect(vibratoGain);
+                        vibratoGain.connect(osc.frequency);
+                        vibrato.start();
+                        
+                        // Filter for warmth
+                        filter.type = 'lowpass';
+                        filter.frequency.value = 2000;
+                        filter.Q.value = 1;
+                        
+                        gain.gain.setValueAtTime(0, this.audioContext.currentTime);
+                        
+                        osc.connect(filter);
+                        filter.connect(gain);
+                        gain.connect(this.masterGain);
+                        
+                        osc.start();
+                        
+                        oscillatorGroup.push({ 
+                            osc, 
+                            gain, 
+                            filter,
+                            freq: frequency,
+                            vibrato,
+                            vibratoGain 
+                        });
+                    });
+                    
+                    this.oscillators.set(scaleName, oscillatorGroup);
+                });
+            }
+            
+            checkProximityTriggers() {
+                if (!this.audioEnabled || !this.audioContext) return;
+                
+                this.cosmicObjects.forEach(obj => {
+                    const distance = Math.sqrt(
+                        Math.pow(this.mousePos.x - obj.x, 2) + 
+                        Math.pow(this.mousePos.y - obj.y, 2)
+                    );
+                    
+                    const wasNear = this.proximityChimes.get(obj);
+                    const isNear = distance < obj.radius + 30;
+                    
+                    if (isNear && !wasNear) {
+                        // Entered proximity
+                        this.playProximityChime(obj);
+                        this.proximityChimes.set(obj, true);
+                    } else if (!isNear && wasNear) {
+                        // Left proximity
+                        this.proximityChimes.set(obj, false);
+                    }
+                });
+            }
+            
+            playProximityChime(obj) {
+                if (!this.audioContext) return;
+                
+                const now = this.audioContext.currentTime;
+                const freq = obj.harmonicFreq || 440;
+                
+                // Create a more complex chime
+                for (let i = 0; i < 3; i++) {
+                    const osc = this.audioContext.createOscillator();
+                    const env = this.audioContext.createGain();
+                    const filter = this.audioContext.createBiquadFilter();
+                    
+                    osc.type = 'sine';
+                    osc.frequency.value = freq * (1 + i * 0.5);
+                    
+                    filter.type = 'bandpass';
+                    filter.frequency.value = freq * 2;
+                    filter.Q.value = 5;
+                    
+                    const attackTime = 0.01;
+                    const decayTime = 0.5 + i * 0.2;
+                    
+                    env.gain.setValueAtTime(0, now);
+                    env.gain.linearRampToValueAtTime(0.1 / (i + 1), now + attackTime);
+                    env.gain.exponentialRampToValueAtTime(0.001, now + decayTime);
+                    
+                    osc.connect(filter);
+                    filter.connect(env);
+                    env.connect(this.masterGain);
+                    
+                    osc.start(now + i * 0.05);
+                    osc.stop(now + decayTime + 0.1);
+                }
+            }
+            
+            generateStarField() {
+                this.starField = [];
+                const starCount = 400; // More stars for brightness
+                
+                for (let i = 0; i < starCount; i++) {
+                    this.starField.push({
+                        x: Math.random() * this.canvas.width,
+                        y: Math.random() * this.canvas.height,
+                        size: Math.random() * 2 + 0.5,
+                        opacity: Math.random() * 0.8 + 0.2,
+                        twinklePhase: Math.random() * Math.PI * 2,
+                        twinkleSpeed: 0.01 + Math.random() * 0.03,
+                        color: Math.random() > 0.8 ? this.getRandomStarColor() : '#FFFFFF'
+                    });
+                }
+            }
+            
+            getRandomStarColor() {
+                const colors = ['#FFE5B4', '#B4C7FF', '#FFB4B4', '#B4FFB4'];
+                return colors[Math.floor(Math.random() * colors.length)];
+            }
+            
+            loadScale(scaleName) {
+                this.currentScale = scaleName;
+                const scaleData = this.scaleDefinitions[scaleName];
+                
+                const narrative = document.getElementById('consciousness-narrative');
+                narrative.classList.remove('visible');
+                
+                setTimeout(() => {
+                    narrative.textContent = scaleData.narrative;
+                    narrative.classList.add('visible');
+                }, 300);
+                
+                this.cosmicObjects = this.createObjectsForScale(scaleName);
+                this.updateHarmonicDisplay();
+                
+                // Reset proximity tracking
+                this.proximityChimes.clear();
+            }
+            
+            createObjectsForScale(scale) {
+                const centerX = this.canvas.width / 2;
+                const centerY = this.canvas.height / 2;
+                const objects = [];
+                
+                if (scale === 'solar') {
+                    // Brighter, more vibrant sun
+                    objects.push({
+                        x: centerX, y: centerY, radius: 25, 
+                        color: '#FFD700',
+                        glowColor: '#FFFACD',
+                        name: 'Sun', type: 'star', harmonicFreq: 256, 
+                        glow: true, pulse: true
+                    });
+                    
+                    const planets = [
+                        { name: 'Mercury', dist: 80, size: 4, color: '#8C7853', glowColor: '#D2B48C', freq: 341 },
+                        { name: 'Venus', dist: 110, size: 5, color: '#FFC649', glowColor: '#FFE4B5', freq: 221 },
+                        { name: 'Earth', dist: 140, size: 5, color: '#6B93D6', glowColor: '#87CEEB', freq: 136 },
+                        { name: 'Mars', dist: 180, size: 4, color: '#CD5C5C', glowColor: '#FFA07A', freq: 145 }
+                    ];
+                    
+                    planets.forEach((planet, i) => {
+                        const angle = (i / planets.length) * Math.PI * 2;
+                        objects.push({
+                            x: centerX + Math.cos(angle) * planet.dist,
+                            y: centerY + Math.sin(angle) * planet.dist,
+                            radius: planet.size, 
+                            color: planet.color, 
+                            glowColor: planet.glowColor,
+                            name: planet.name,
+                            type: 'planet', 
+                            harmonicFreq: planet.freq,
+                            orbitCenter: { x: centerX, y: centerY },
+                            orbitRadius: planet.dist, 
+                            orbitSpeed: 0.005 / (i + 1),
+                            orbitAngle: angle
+                        });
+                    });
+                } else if (scale === 'stellar') {
+                    const stars = [
+                        { name: 'Sun', x: 0, y: 0, size: 10, color: '#FFD700', glowColor: '#FFFACD', freq: 256 },
+                        { name: 'Alpha Centauri', x: -200, y: 100, size: 9, color: '#F8C471', glowColor: '#FFDEAD', freq: 432 },
+                        { name: 'Sirius', x: 180, y: -120, size: 12, color: '#87CEEB', glowColor: '#E0FFFF', freq: 528 },
+                        { name: 'Vega', x: -150, y: -180, size: 8, color: '#B0E0E6', glowColor: '#F0FFFF', freq: 396 }
+                    ];
+                    
+                    stars.forEach(star => {
+                        objects.push({
+                            x: centerX + star.x, 
+                            y: centerY + star.y,
+                            radius: star.size, 
+                            color: star.color, 
+                            glowColor: star.glowColor,
+                            name: star.name,
+                            type: 'star', 
+                            harmonicFreq: star.freq, 
+                            glow: true,
+                            pulse: Math.random() > 0.5
+                        });
+                    });
+                } else if (scale === 'galactic') {
+                    // More vibrant galactic spiral
+                    for (let arm = 0; arm < 3; arm++) {
+                        const baseAngle = (arm / 3) * Math.PI * 2;
+                        for (let i = 0; i < 25; i++) {
+                            const t = i / 25;
+                            const angle = baseAngle + t * Math.PI * 4;
+                            const radius = t * 250 + 50;
+                            
+                            const hue = 240 + arm * 40 + i * 2;
+                            const sat = 70 + Math.sin(i * 0.5) * 20;
+                            const light = 50 + i;
+                            
+                            objects.push({
+                                x: centerX + Math.cos(angle) * radius,
+                                y: centerY + Math.sin(angle) * radius,
+                                radius: Math.max(2, 5 - t * 3),
+                                color: `hsl(${hue}, ${sat}%, ${light}%)`,
+                                glowColor: `hsl(${hue}, ${sat}%, ${Math.min(90, light + 20)}%)`,
+                                name: `Cluster ${arm}-${i}`, 
+                                type: 'cluster',
+                                harmonicFreq: 108 + i * 12, 
+                                glow: Math.random() > 0.6,
+                                sparkle: Math.random() > 0.8
+                            });
+                        }
+                    }
+                } else if (scale === 'cosmic') {
+                    const galaxies = [
+                        { name: 'Milky Way', x: 0, y: 0, size: 30, color: '#A5D6A7', glowColor: '#C8E6C9', freq: 54 },
+                        { name: 'Andromeda', x: -180, y: -100, size: 35, color: '#81C784', glowColor: '#AED581', freq: 81 },
+                        { name: 'Triangulum', x: 200, y: 80, size: 20, color: '#4DB6AC', glowColor: '#80CBC4', freq: 108 },
+                        { name: 'Whirlpool', x: -100, y: 150, size: 25, color: '#64B5F6', glowColor: '#90CAF9', freq: 162 }
+                    ];
+                    
+                    galaxies.forEach(galaxy => {
+                        objects.push({
+                            x: centerX + galaxy.x, 
+                            y: centerY + galaxy.y,
+                            radius: galaxy.size, 
+                            color: galaxy.color, 
+                            glowColor: galaxy.glowColor,
+                            name: galaxy.name,
+                            type: 'galaxy', 
+                            harmonicFreq: galaxy.freq, 
+                            glow: true,
+                            rotation: Math.random() * Math.PI * 2
+                        });
+                    });
+                }
+                
+                return objects;
+            }
+            
+            updateHarmonics() {
+                if (!this.audioEnabled || !this.audioContext) return;
+                
+                const scaleData = this.scaleDefinitions[this.currentScale];
+                const oscillatorGroup = this.oscillators.get(this.currentScale);
+                
+                if (!oscillatorGroup) return;
+                
+                const centerX = this.canvas.width / 2;
+                const centerY = this.canvas.height / 2;
+                const distance = Math.sqrt(
+                    Math.pow(this.mousePos.x - centerX, 2) + 
+                    Math.pow(this.mousePos.y - centerY, 2)
+                );
+                const maxDistance = Math.sqrt(centerX * centerX + centerY * centerY);
+                const intensity = Math.max(0, 1 - distance / maxDistance);
+                
+                // Velocity affects pitch
+                const pitchBend = 1 + (this.mouseVelocity * 0.002 * this.audioResponsiveness);
+                
+                oscillatorGroup.forEach((osc, index) => {
+                    // Volume based on distance
+                    const volume = intensity * (0.3 / (index + 1));
+                    osc.gain.gain.setTargetAtTime(volume, this.audioContext.currentTime, 0.05);
+                    
+                    // Frequency modulation based on velocity
+                    const targetFreq = osc.freq * pitchBend;
+                    osc.osc.frequency.setTargetAtTime(targetFreq, this.audioContext.currentTime, 0.1);
+                    
+                    // Filter modulation
+                    const filterFreq = 2000 + intensity * 3000 + this.mouseVelocity * 50;
+                    osc.filter.frequency.setTargetAtTime(filterFreq, this.audioContext.currentTime, 0.1);
+                    
+                    // Vibrato intensity
+                    osc.vibratoGain.gain.value = 2 + this.mouseVelocity * 0.1;
+                });
+                
+                // Update frequency display
+                const currentFreq = scaleData.baseFreq * pitchBend;
+                document.getElementById('frequency-display').textContent = `${currentFreq.toFixed(1)} Hz`;
+            }
+            
+            updateHarmonicDisplay() {
+                const scaleData = this.scaleDefinitions[this.currentScale];
+                document.getElementById('harmonic-description').textContent = 
+                    `${scaleData.name} resonance frequencies`;
+                
+                const dashboard = document.getElementById('harmonic-dashboard');
+                dashboard.classList.remove('visible');
+                setTimeout(() => dashboard.classList.add('visible'), 300);
+            }
+            
+            handleClick(event) {
+                const rect = this.canvas.getBoundingClientRect();
+                const clickX = event.clientX - rect.left;
+                const clickY = event.clientY - rect.top;
+                
+                // Create sonic pulse visual
+                this.createSonicPulse(clickX, clickY);
+                
+                const clickedObject = this.cosmicObjects.find(obj => {
+                    const distance = Math.sqrt(
+                        Math.pow(clickX - obj.x, 2) + 
+                        Math.pow(clickY - obj.y, 2)
+                    );
+                    return distance <= obj.radius + 10;
+                });
+                
+                if (clickedObject && this.audioContext && this.audioEnabled) {
+                    this.playObjectResonance(clickedObject);
+                } else if (this.audioContext && this.audioEnabled) {
+                    // Play space click sound
+                    this.playSpaceClick(clickX, clickY);
+                }
+            }
+            
+            createSonicPulse(x, y) {
+                this.sonicPulses.push({
+                    x: x,
+                    y: y,
+                    radius: 10,
+                    maxRadius: 200,
+                    opacity: 0.8,
+                    color: this.scaleDefinitions[this.currentScale].glowColor
+                });
+            }
+            
+            playObjectResonance(obj) {
+                if (!this.audioContext) return;
+                
+                const freq = obj.harmonicFreq || 256;
+                const harmonics = [1, 1.5, 2, 3, 4];
+                
+                harmonics.forEach((ratio, index) => {
+                    const osc = this.audioContext.createOscillator();
+                    const gain = this.audioContext.createGain();
+                    const panner = this.audioContext.createStereoPanner();
+                    
+                    // Pan based on object position
+                    const panValue = (obj.x / this.canvas.width) * 2 - 1;
+                    panner.pan.value = panValue * 0.7;
+                    
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq * ratio, this.audioContext.currentTime);
+                    
+                    // Add frequency sweep
+                    osc.frequency.exponentialRampToValueAtTime(
+                        freq * ratio * 1.1, 
+                        this.audioContext.currentTime + 0.1
+                    );
+                    osc.frequency.exponentialRampToValueAtTime(
+                        freq * ratio, 
+                        this.audioContext.currentTime + 0.5
+                    );
+                    
+                    const volume = 0.2 / (index + 1);
+                    gain.gain.setValueAtTime(0, this.audioContext.currentTime);
+                    gain.gain.linearRampToValueAtTime(volume, this.audioContext.currentTime + 0.05);
+                    gain.gain.exponentialRampToValueAtTime(0.001, this.audioContext.currentTime + 2);
+                    
+                    osc.connect(panner);
+                    panner.connect(gain);
+                    gain.connect(this.masterGain);
+                    
+                    osc.start();
+                    osc.stop(this.audioContext.currentTime + 2);
+                });
+            }
+            
+            playSpaceClick(x, y) {
+                // Create a ethereal click sound based on position
+                const freq = 200 + (x / this.canvas.width) * 400;
+                const osc = this.audioContext.createOscillator();
+                const gain = this.audioContext.createGain();
+                const filter = this.audioContext.createBiquadFilter();
+                
+                osc.type = 'triangle';
+                osc.frequency.value = freq;
+                
+                filter.type = 'highpass';
+                filter.frequency.value = freq * 2;
+                filter.Q.value = 10;
+                
+                gain.gain.setValueAtTime(0.1, this.audioContext.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, this.audioContext.currentTime + 0.3);
+                
+                osc.connect(filter);
+                filter.connect(gain);
+                gain.connect(this.masterGain);
+                
+                osc.start();
+                osc.stop(this.audioContext.currentTime + 0.3);
+            }
+            
+            toggleAudio() {
+                this.audioEnabled = !this.audioEnabled;
+                document.getElementById('audio-toggle').classList.toggle('active', this.audioEnabled);
+                
+                if (!this.audioEnabled && this.audioContext) {
+                    this.oscillators.forEach(group => {
+                        group.forEach(osc => {
+                            osc.gain.gain.setTargetAtTime(0, this.audioContext.currentTime, 0.1);
+                        });
+                    });
+                }
+            }
+            
+            toggleVisuals() {
+                this.visualsEnabled = !this.visualsEnabled;
+                document.getElementById('visual-toggle').classList.toggle('active', this.visualsEnabled);
+                
+                if (!this.visualsEnabled) {
+                    this.visualBrightness = 0.7;
+                } else {
+                    this.visualBrightness = 1.2;
+                }
+            }
+            
+            toggleConsciousnessMode() {
+                this.consciousnessMode = !this.consciousnessMode;
+                document.getElementById('info-toggle').classList.toggle('active', this.consciousnessMode);
+                
+                if (this.consciousnessMode) {
+                    this.audioResponsiveness = 5.0;
+                    this.sparkleIntensity = 1.5;
+                } else {
+                    this.audioResponsiveness = 3.0;
+                    this.sparkleIntensity = 1.0;
+                }
+            }
+            
+            animate() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                // Apply visual brightness
+                this.ctx.filter = `brightness(${this.visualBrightness})`;
+                
+                if (this.visualsEnabled) {
+                    this.drawStarField();
+                    this.drawCursorTrails();
+                    this.drawHarmonicFields();
+                    this.updateCosmicObjects();
+                    this.drawCosmicObjects();
+                    this.drawSonicPulses();
+                }
+                
+                this.drawWaveform();
+                this.updatePerformanceIndicator();
+                
+                this.time += 0.016;
+                this.animationId = requestAnimationFrame(() => this.animate());
+            }
+            
+            drawStarField() {
+                const scaleData = this.scaleDefinitions[this.currentScale];
+                
+                this.starField.forEach(star => {
+                    const twinkle = Math.sin(this.time * star.twinkleSpeed + star.twinklePhase) * 0.3 + 0.7;
+                    const sparkle = this.consciousnessMode ? Math.random() * 0.2 : 0;
+                    
+                    this.ctx.globalAlpha = star.opacity * twinkle * this.sparkleIntensity + sparkle;
+                    this.ctx.fillStyle = star.color || scaleData.glowColor;
+                    
+                    // Enhanced star rendering
+                    this.ctx.shadowBlur = 10;
+                    this.ctx.shadowColor = star.color || scaleData.glowColor;
+                    
+                    this.ctx.beginPath();
+                    this.ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                    this.ctx.fill();
+                    
+                    // Add extra sparkle for some stars
+                    if (star.size > 1.5 && Math.random() > 0.98) {
+                        this.ctx.globalAlpha = 0.8;
+                        this.ctx.beginPath();
+                        this.ctx.arc(star.x, star.y, star.size * 2, 0, Math.PI * 2);
+                        this.ctx.fill();
+                    }
+                });
+                
+                this.ctx.shadowBlur = 0;
+                this.ctx.globalAlpha = 1;
+            }
+            
+            drawCursorTrails() {
+                this.cursorTrails.forEach((trail, index) => {
+                    trail.opacity *= 0.95;
+                    trail.size *= 0.98;
+                    
+                    if (trail.opacity > 0.01) {
+                        this.ctx.globalAlpha = trail.opacity;
+                        this.ctx.fillStyle = trail.color;
+                        this.ctx.shadowBlur = 15;
+                        this.ctx.shadowColor = trail.color;
+                        
+                        this.ctx.beginPath();
+                        this.ctx.arc(trail.x, trail.y, trail.size, 0, Math.PI * 2);
+                        this.ctx.fill();
+                    }
+                });
+                
+                this.ctx.shadowBlur = 0;
+                this.ctx.globalAlpha = 1;
+                
+                // Clean up faded trails
+                this.cursorTrails = this.cursorTrails.filter(t => t.opacity > 0.01);
+            }
+            
+            drawHarmonicFields() {
+                if (!this.visualsEnabled) return;
+                
+                const scaleData = this.scaleDefinitions[this.currentScale];
+                
+                this.ctx.globalAlpha = 0.1 * this.visualBrightness;
+                
+                scaleData.harmonics.forEach((ratio, index) => {
+                    const frequency = scaleData.baseFreq * ratio / 20;
+                    const amplitude = 30 / (index + 1);
+                    
+                    this.ctx.strokeStyle = scaleData.glowColor;
+                    this.ctx.lineWidth = 2 / (index + 1);
+                    
+                    for (let r = 20; r < 300; r += 15) {
+                        const wave = Math.sin((r / frequency) + this.time * 3) * amplitude;
+                        const velocityMod = 1 + this.mouseVelocity * 0.01;
+                        const radius = Math.max(1, (r + wave) * velocityMod);
+                        
+                        this.ctx.beginPath();
+                        this.ctx.arc(this.mousePos.x, this.mousePos.y, radius, 0, Math.PI * 2);
+                        this.ctx.stroke();
+                    }
+                });
+                
+                this.ctx.globalAlpha = 1;
+            }
+            
+            updateCosmicObjects() {
+                this.cosmicObjects.forEach(obj => {
+                    if (obj.orbitCenter && obj.orbitRadius && obj.orbitSpeed) {
+                        obj.orbitAngle = (obj.orbitAngle || 0) + obj.orbitSpeed;
+                        obj.x = obj.orbitCenter.x + Math.cos(obj.orbitAngle) * obj.orbitRadius;
+                        obj.y = obj.orbitCenter.y + Math.sin(obj.orbitAngle) * obj.orbitRadius;
+                    }
+                    
+                    if (obj.rotation !== undefined) {
+                        obj.rotation += 0.001;
+                    }
+                    
+                    const distance = Math.sqrt(
+                        Math.pow(this.mousePos.x - obj.x, 2) + 
+                        Math.pow(this.mousePos.y - obj.y, 2)
+                    );
+                    obj.mouseProximity = Math.max(0, 1 - distance / 200);
+                });
+            }
+            
+            drawCosmicObjects() {
+                this.cosmicObjects.forEach(obj => {
+                    const proximity = obj.mouseProximity || 0;
+                    const consciousnessBoost = this.consciousnessMode ? 1.5 : 1;
+                    
+                    // Enhanced glow
+                    if (obj.glow) {
+                        const glowRadius = obj.radius * (2 + proximity * consciousnessBoost);
+                        const gradient = this.ctx.createRadialGradient(
+                            obj.x, obj.y, obj.radius * 0.5,
+                            obj.x, obj.y, glowRadius
+                        );
+                        gradient.addColorStop(0, obj.glowColor + 'CC');
+                        gradient.addColorStop(0.5, obj.glowColor + '66');
+                        gradient.addColorStop(1, obj.glowColor + '00');
+                        
+                        this.ctx.fillStyle = gradient;
+                        this.ctx.beginPath();
+                        this.ctx.arc(obj.x, obj.y, glowRadius, 0, Math.PI * 2);
+                        this.ctx.fill();
+                    }
+                    
+                    // Object body
+                    let drawRadius = obj.radius;
+                    if (obj.pulse || proximity > 0.3) {
+                        const pulse = Math.sin(this.time * 4) * 0.15 + 1;
+                        drawRadius = obj.radius * (pulse + proximity * 0.3);
+                    }
+                    
+                    this.ctx.fillStyle = obj.color;
+                    this.ctx.shadowBlur = 20;
+                    this.ctx.shadowColor = obj.glowColor || obj.color;
+                    
+                    this.ctx.beginPath();
+                    this.ctx.arc(obj.x, obj.y, drawRadius, 0, Math.PI * 2);
+                    this.ctx.fill();
+                    
+                    // Sparkle effect
+                    if (obj.sparkle && Math.random() > 0.95) {
+                        this.ctx.globalAlpha = 0.8;
+                        this.ctx.fillStyle = '#FFFFFF';
+                        this.ctx.beginPath();
+                        const sparkleSize = Math.random() * 3 + 1;
+                        this.ctx.arc(
+                            obj.x + (Math.random() - 0.5) * obj.radius,
+                            obj.y + (Math.random() - 0.5) * obj.radius,
+                            sparkleSize, 0, Math.PI * 2
+                        );
+                        this.ctx.fill();
+                        this.ctx.globalAlpha = 1;
+                    }
+                    
+                    // Orbital path
+                    if (obj.type === 'planet' && obj.orbitCenter && obj.orbitRadius) {
+                        this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+                        this.ctx.lineWidth = 1;
+                        this.ctx.setLineDash([5, 10]);
+                        this.ctx.beginPath();
+                        this.ctx.arc(obj.orbitCenter.x, obj.orbitCenter.y, obj.orbitRadius, 0, Math.PI * 2);
+                        this.ctx.stroke();
+                        this.ctx.setLineDash([]);
+                    }
+                    
+                    // Object label
+                    if (proximity > 0.7 || (this.consciousnessMode && proximity > 0.5)) {
+                        this.ctx.fillStyle = '#FFFFFF';
+                        this.ctx.font = 'bold 14px Georgia';
+                        this.ctx.textAlign = 'center';
+                        this.ctx.shadowBlur = 10;
+                        this.ctx.shadowColor = '#000000';
+                        this.ctx.fillText(obj.name, obj.x, obj.y - drawRadius - 15);
+                    }
+                });
+                
+                this.ctx.shadowBlur = 0;
+            }
+            
+            drawSonicPulses() {
+                this.sonicPulses.forEach((pulse, index) => {
+                    pulse.radius += 3;
+                    pulse.opacity *= 0.96;
+                    
+                    if (pulse.opacity > 0.01) {
+                        this.ctx.globalAlpha = pulse.opacity;
+                        this.ctx.strokeStyle = pulse.color;
+                        this.ctx.lineWidth = 2;
+                        this.ctx.shadowBlur = 20;
+                        this.ctx.shadowColor = pulse.color;
+                        
+                        this.ctx.beginPath();
+                        this.ctx.arc(pulse.x, pulse.y, pulse.radius, 0, Math.PI * 2);
+                        this.ctx.stroke();
+                    }
+                });
+                
+                this.ctx.shadowBlur = 0;
+                this.ctx.globalAlpha = 1;
+                
+                // Clean up faded pulses
+                this.sonicPulses = this.sonicPulses.filter(p => p.opacity > 0.01 && p.radius < p.maxRadius);
+            }
+            
+            drawWaveform() {
+                const canvas = this.waveformCanvas;
+                const ctx = this.waveformCtx;
+                const scaleData = this.scaleDefinitions[this.currentScale];
+                
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Background glow
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Main waveform
+                ctx.strokeStyle = scaleData.glowColor;
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                
+                for (let x = 0; x < canvas.width; x++) {
+                    let y = canvas.height / 2;
+                    
+                    // Combine harmonics with velocity modulation
+                    scaleData.harmonics.forEach((ratio, index) => {
+                        const freq = scaleData.baseFreq * ratio;
+                        const amplitude = (15 / (index + 1)) * (1 + this.mouseVelocity * 0.02);
+                        const phase = (x / canvas.width) * Math.PI * 4 * ratio + this.time * 2;
+                        y += Math.sin(phase) * amplitude;
+                    });
+                    
+                    if (x === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                }
+                
+                ctx.stroke();
+                
+                // Glow effect
+                ctx.save();
+                ctx.filter = 'blur(3px)';
+                ctx.strokeStyle = scaleData.color + '80';
+                ctx.lineWidth = 4;
+                ctx.stroke();
+                ctx.restore();
+                
+                // Velocity indicator
+                if (this.mouseVelocity > 10) {
+                    ctx.fillStyle = scaleData.glowColor;
+                    ctx.globalAlpha = Math.min(0.8, this.mouseVelocity / 50);
+                    ctx.fillRect(0, 0, canvas.width, 4);
+                    ctx.globalAlpha = 1;
+                }
+            }
+            
+            updatePerformanceIndicator() {
+                const fps = 1000 / 16; // Assuming 60fps target
+                const indicator = document.getElementById('performance-indicator');
+                
+                if (this.audioEnabled && this.visualsEnabled) {
+                    indicator.textContent = `♫ ✨ ${Math.round(fps)} fps`;
+                } else if (this.audioEnabled) {
+                    indicator.textContent = `♫ ${Math.round(fps)} fps`;
+                } else if (this.visualsEnabled) {
+                    indicator.textContent = `✨ ${Math.round(fps)} fps`;
+                } else {
+                    indicator.textContent = `${Math.round(fps)} fps`;
+                }
+            }
+        }
+        
+        // Initialize when page loads
+        window.addEventListener('load', () => {
+            const explorer = new EnhancedLivingCosmicPrimer();
+            
+            // Show initial UI elements with delay
+            setTimeout(() => {
+                document.getElementById('consciousness-narrative').classList.add('visible');
+                document.getElementById('harmonic-dashboard').classList.add('visible');
+            }, 1500);
+            
+            // Add welcome message
+            setTimeout(() => {
+                const narrative = document.getElementById('consciousness-narrative');
+                narrative.textContent = "Move your cursor to conduct the cosmic symphony...";
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
+                    
