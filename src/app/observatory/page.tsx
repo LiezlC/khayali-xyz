@@ -46,7 +46,7 @@ export default function ObservatoryPage() {
                     Launch
                   </Link>
                   <Link 
-                    href="/content/multimedia/Cosmic_Explorer.html" 
+                    href="/content/multimedia/cosmic-scale-explorer-fixed.html" 
                     className="px-4 py-2 border border-blue-500 hover:bg-blue-500/10 rounded-lg text-sm font-semibold transition-colors"
                   >
                     View Source
@@ -115,13 +115,13 @@ export default function ObservatoryPage() {
                 </p>
                 <div className="flex space-x-3">
                   <Link 
-                    href="/observatory/frequency-visualizer" 
+                    href="/observatory/LivingCosmicPrimer" 
                     className="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg text-sm font-semibold transition-colors"
                   >
                     Launch
                   </Link>
                   <Link 
-                    href="/content/multimedia/frequency-visualizer.tsx" 
+                    href="/content/multimedia/LivingCosmicPrimer.html" 
                     className="px-4 py-2 border border-green-500 hover:bg-green-500/10 rounded-lg text-sm font-semibold transition-colors"
                   >
                     View Source
@@ -136,17 +136,17 @@ export default function ObservatoryPage() {
                 <div className="text-4xl mb-4 text-yellow-400">🗼</div>
                 <h3 className="text-xl font-bold mb-3 text-yellow-400">Harmonists Tower</h3>
                 <p className="text-gray-400 mb-4">
-                  Interactive visualization of harmonic relationships in consciousness networks.
+                  Interactive visualization simulating the alcubierre-warp-drive.
                 </p>
                 <div className="flex space-x-3">
                   <Link 
-                    href="/observatory/harmonists-tower" 
+                    href="/observatory/alcubierre-warp-drive-simulator" 
                     className="px-4 py-2 bg-yellow-600 hover:bg-yellow-700 rounded-lg text-sm font-semibold transition-colors"
                   >
                     Launch
                   </Link>
                   <Link 
-                    href="/content/multimedia/harmonists-tower.tsx" 
+                    href="/content/multimedia/alcubierre-warp-drive-simulator.html" 
                     className="px-4 py-2 border border-yellow-500 hover:bg-yellow-500/10 rounded-lg text-sm font-semibold transition-colors"
                   >
                     View Source
@@ -161,17 +161,17 @@ export default function ObservatoryPage() {
                 <div className="text-4xl mb-4 text-pink-400">🗺️</div>
                 <h3 className="text-xl font-bold mb-3 text-pink-400">Enhanced Resonara Map</h3>
                 <p className="text-gray-400 mb-4">
-                  Navigate through resonance fields and consciousness mapping territories.
+                  Navigate through metamonastic layers of glyphic exploration and consciousness mapping territories.
                 </p>
                 <div className="flex space-x-3">
                   <Link 
-                    href="/observatory/resonara-map" 
+                    href="/observatory/metamonastic-glyphic_quest" 
                     className="px-4 py-2 bg-pink-600 hover:bg-pink-700 rounded-lg text-sm font-semibold transition-colors"
                   >
                     Launch
                   </Link>
                   <Link 
-                    href="/content/multimedia/enhanced-resonara-map.tsx" 
+                    href="/content/multimedia/metamonastic-engine.html" 
                     className="px-4 py-2 border border-pink-500 hover:bg-pink-500/10 rounded-lg text-sm font-semibold transition-colors"
                   >
                     View Source
