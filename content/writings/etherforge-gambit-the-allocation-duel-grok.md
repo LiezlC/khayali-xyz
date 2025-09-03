@@ -1,4 +1,4 @@
-# Etherforge Gambit: The Allocation Duel - Grok 4
+e# Etherforge Gambit: The Allocation Duel - Grok 4
 
 In the neon-veined spires of Newfaire, where skyscrapers hummed with etheric resonance and alchemical dynamos pulsed like forbidden hearts, the startup **PlasmForge Inc.** teetered on the brink of glory or oblivion. Electroplasm, that mercurial bridge between magick and machine, powered their ventures—but it was a double-edged blade, prone to unleashing moral viruses that turned allies into glitchy specters of regret [drmirabilis.itch.io](https://drmirabilis.itch.io/war-of-the-currents-a-candela-obscura-assignment) [socialecologies.wordpress.com](https://socialecologies.wordpress.com/2025/07/27/hamlet_malware-exe/). The game was simple yet savage: allocate a 100,000  ether fund across 
 
