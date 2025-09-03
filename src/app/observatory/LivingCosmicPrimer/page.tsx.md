@@ -22,6 +22,7 @@ export default function AvatarPage() {
             border: 'none'
           }}
           title="Living Cosmic Primer"
+        />
       </div>
     </div>
   );
