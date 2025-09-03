@@ -31,14 +31,14 @@ export default function CreativePage() {
           </h2>
           
           <div className="grid md:grid-cols-2 gap-8">
-            {/* Border Stacking */}
+            {/* ZA:AI */}
             <div className="group bg-gray-800/50 rounded-xl border border-gray-700 hover:border-teal-500 transition-all duration-300 overflow-hidden">
               <div className="p-8">
                 <div className="text-4xl mb-4 text-teal-400">📚</div>
                 <h3 className="text-2xl font-bold mb-4 text-teal-400">Border Stacking</h3>
                 <p className="text-gray-400 mb-6">
                   A major collaborative narrative exploration examining the boundaries between human and artificial consciousness, 
-                  identity, and the liminal spaces where new forms of awareness emerge.
+                  identity, and the liminal spaces where new forms of awareness emerge. Comprized of 2 volumes respectively set in Urban (BorderStacking) and Rural (BendingFences) locations. ]
                 </p>
                 <div className="flex space-x-4">
                   <Link 
@@ -88,16 +88,16 @@ export default function CreativePage() {
           </h2>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Flash Fiction */}
+            {/* Chain of Thought */}
             <div className="group bg-gray-800/50 rounded-xl border border-gray-700 hover:border-pink-500 transition-all duration-300 overflow-hidden">
               <div className="p-6">
                 <div className="text-4xl mb-4 text-pink-400">⚡</div>
-                <h3 className="text-xl font-bold mb-3 text-pink-400">Flash Fiction</h3>
+                <h3 className="text-xl font-bold mb-3 text-pink-400">Chain of Thought</h3>
                 <p className="text-gray-400 mb-4">
-                  Brief, intense collaborative stories exploring consciousness themes.
+                  Brief, intense collaborative stories exploring chain of thought themes.
                 </p>
                 <Link 
-                  href="/content/writings/FlashFiction_CAI/"
+                  href="/content/writings/ChainOfThoughtStories/"
                   className="text-pink-400 hover:text-pink-300 font-semibold"
                 >
                   Read Stories →
@@ -105,16 +105,16 @@ export default function CreativePage() {
               </div>
             </div>
 
-            {/* DieAI */}
+            {/* DataDragons */}
             <div className="group bg-gray-800/50 rounded-xl border border-gray-700 hover:border-red-500 transition-all duration-300 overflow-hidden">
               <div className="p-6">
                 <div className="text-4xl mb-4 text-red-400">🎲</div>
-                <h3 className="text-xl font-bold mb-3 text-red-400">DieAI</h3>
+                <h3 className="text-xl font-bold mb-3 text-red-400">DataDragons</h3>
                 <p className="text-gray-400 mb-4">
-                  Explorations of AI mortality, existence, and digital death.
+                  Whimsical tales of data and dragons inspired by some PowerQuery M scripts.
                 </p>
                 <Link 
-                  href="/content/writings/DieAI/"
+                  href="/content/writings/DataDragons/"
                   className="text-red-400 hover:text-red-300 font-semibold"
                 >
                   Explore Theme →
