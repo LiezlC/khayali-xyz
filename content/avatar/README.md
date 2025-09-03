@@ -8,7 +8,8 @@ This subfolder contains an interactive, single-page application exploring how Ar
 
 It is also a launchpad for a digitwin—a Heygen-powered proxy that represents a lived 25-year journey through resettlement, resistance, and remapping the narratives of “development.”
 
-## To Deploy via GitHub Pages:
+## To Deploy via GitHub Pages
+
 1. Push this folder to your GitHub repo under `/avatar`
 2. Go to **Settings > Pages**
 3. Under **Source**, set:
@@ -16,12 +17,15 @@ It is also a launchpad for a digitwin—a Heygen-powered proxy that represents a
    - **Folder**: `/avatar`
 
 ## Optional: Custom Domain Setup (Namecheap)
-**CNAME Record**
+
+*CNAME Record*
+
 - Type: CNAME
 - Host: `www`
 - Value: `liezlc.github.io`
 
-**A Records**
+*A Records*
+
 - Host: `@`
 - Values:
   - 185.199.108.153
