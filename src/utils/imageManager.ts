@@ -78,7 +78,7 @@ const saraloosaFarmImages = [
   'Saraloosa-Farm-Branches-Roped.jpg',
   'Saraloosa-Farm-Sunrise.jpg',
   'WhatsApp Image 2024-08-31 at 15.59.26_eb78392f.jpg',
-].map(filename => `/images/saraloosa/${filename}`);
+].map(filename => `/saraloosa/${filename}`);
 
 // All cosmic images combined
 const allCosmicImages = [...cosmicGrokImages, ...quantumTravelogueImages];

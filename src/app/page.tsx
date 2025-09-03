@@ -106,7 +106,7 @@ export default function HomePage() {
               <div
                 className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity bg-cover bg-center"
                 style={{
-                  backgroundImage: 'url(/images/saraloosa/Saraloosa-Farm-Sunrise.jpg)'
+                  backgroundImage: 'url(/saraloosa/Saraloosa-Farm-Sunrise.jpg)'
                 }}
               />
               <div className="relative z-10">
@@ -167,7 +167,7 @@ export default function HomePage() {
               <div
                 className="w-full h-64 bg-cover bg-center rounded-xl mb-6 relative overflow-hidden"
                 style={{
-                  backgroundImage: 'url(/images/saraloosa/IMG-20231124-WA0083.jpg)'
+                  backgroundImage: 'url(/saraloosa/IMG-20231124-WA0083.jpg)'
                 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
