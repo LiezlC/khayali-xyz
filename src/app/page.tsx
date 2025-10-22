@@ -84,46 +84,6 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Creative Nexus */}
-            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-teal-500 transition-all duration-300 float-animation overflow-hidden" style={{ animationDelay: '2s' }}>
-              <div
-                className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity bg-cover bg-center"
-                style={{
-                  backgroundImage: 'url(/images/cosmic/grok/62f95486-3e1b-446a-ad5c-8ccfac60541a.jpg)'
-                }}
-              />
-              <div className="relative z-10">
-                <div className="text-4xl mb-4">🎨</div>
-                <h3 className="text-xl font-bold mb-3 text-teal-400">Creative Nexus</h3>
-                <p className="text-gray-400 mb-4">
-                  Collaborative stories, visual narratives, and interactive creative expressions.
-                </p>
-                <a href="/creative" className="text-teal-400 hover:text-teal-300 font-semibold">
-                  Create →
-                </a>
-              </div>
-            </div>
-
-            {/* Saraloosa Sanctuary */}
-            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-green-500 transition-all duration-300 float-animation overflow-hidden" style={{ animationDelay: '3s' }}>
-              <div
-                className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity bg-cover bg-center"
-                style={{
-                  backgroundImage: 'url(/images/saraloosa/Saraloosa-Farm-Sunrise.jpg)'
-                }}
-              />
-              <div className="relative z-10">
-                <div className="text-4xl mb-4">🌱</div>
-                <h3 className="text-xl font-bold mb-3 text-green-400">Saraloosa Sanctuary</h3>
-                <p className="text-gray-400 mb-4">
-                  Farm life integration, connecting digital consciousness with biological systems.
-                </p>
-                <a href="/saraloosa" className="text-green-400 hover:text-green-300 font-semibold">
-                  Cultivate →
-                </a>
-              </div>
-            </div>
-
             {/* Writings Chamber */}
             <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-pink-500 transition-all duration-300 float-animation overflow-hidden" style={{ animationDelay: '4s' }}>
               <div className="relative z-10">
