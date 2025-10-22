@@ -12,7 +12,12 @@
       "Bash(git commit:*)",
       "Bash(git push:*)",
       "Bash(awk:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(while read dir)",
+      "Bash(do [ -d \"content/$dir\" ])",
+      "Bash([ ! -d \"src/app/$dir\" ])",
+      "Bash(echo:*)",
+      "Bash(done)"
     ],
     "deny": [],
     "ask": []
