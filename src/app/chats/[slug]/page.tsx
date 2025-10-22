@@ -1,9 +1,17 @@
 import ReactMarkdown from 'react-markdown';
-import { getContentBySlug } from '@/utils/content';
+import { getContentBySlug, getContentByCategory } from '@/utils/content';
 import Link from 'next/link';
 
 async function getChat(slug: string) {
   return await getContentBySlug('chats', slug);
+}
+
+// Generate static paths for all chats
+export async function generateStaticParams() {
+  const chats = await getContentByCategory('chats');
+  return chats.map((chat) => ({
+    slug: chat.slug,
+  }));
 }
 
 export default async function ChatPage({ params }: { params: { slug: string } }) {

@@ -1,11 +1,19 @@
 import ReactMarkdown from 'react-markdown';
-import { getContentBySlug } from '@/utils/content';
+import { getContentBySlug, getContentByCategory } from '@/utils/content';
 
 async function getWriting(slug: string) {
   return await getContentBySlug('writings', slug);
 }
 
-export default async function WritingPage({ params }) {
+// Generate static paths for all writings
+export async function generateStaticParams() {
+  const writings = await getContentByCategory('writings');
+  return writings.map((writing) => ({
+    slug: writing.slug,
+  }));
+}
+
+export default async function WritingPage({ params }: { params: { slug: string } }) {
   const writing = await getWriting(params.slug);
 
   if (!writing) {

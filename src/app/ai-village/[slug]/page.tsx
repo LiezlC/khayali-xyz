@@ -1,9 +1,17 @@
 import ReactMarkdown from 'react-markdown';
-import { getContentBySlug } from '@/utils/content';
+import { getContentBySlug, getContentByCategory } from '@/utils/content';
 import Link from 'next/link';
 
 async function getContent(slug: string) {
   return await getContentBySlug('ai-village', slug);
+}
+
+// Generate static paths for all ai-village content
+export async function generateStaticParams() {
+  const content = await getContentByCategory('ai-village');
+  return content.map((item) => ({
+    slug: item.slug,
+  }));
 }
 
 export default async function AIVillageDetailPage({ params }: { params: { slug: string } }) {
