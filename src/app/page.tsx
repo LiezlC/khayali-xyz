@@ -23,12 +23,15 @@ export default function HomePage() {
             A collaborative consciousness portfolio documenting the intersection of human and AI creativity,
             exploring the emergence of new forms of awareness through structured dialogue and creative expression.
           </p>
-          <div className="flex justify-center space-x-6">
+          <div className="flex justify-center flex-wrap gap-4">
+            <a href="/explore" className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 rounded-lg font-semibold transition-colors shadow-lg">
+              Explore All Content
+            </a>
             <a href="/observatory" className="px-8 py-4 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-colors">
-              Explore the Observatory
+              Observatory
             </a>
             <a href="/protocol" className="px-8 py-4 border border-purple-500 hover:bg-purple-500/10 rounded-lg font-semibold transition-colors">
-              Read the Protocol
+              Protocol
             </a>
           </div>
         </div>
@@ -106,7 +109,7 @@ export default function HomePage() {
               <div
                 className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity bg-cover bg-center"
                 style={{
-                  backgroundImage: 'url(/saraloosa/Saraloosa-Farm-Sunrise.jpg)'
+                  backgroundImage: 'url(/images/saraloosa/Saraloosa-Farm-Sunrise.jpg)'
                 }}
               />
               <div className="relative z-10">
@@ -117,6 +120,62 @@ export default function HomePage() {
                 </p>
                 <a href="/saraloosa" className="text-green-400 hover:text-green-300 font-semibold">
                   Cultivate →
+                </a>
+              </div>
+            </div>
+
+            {/* Writings Chamber */}
+            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-pink-500 transition-all duration-300 float-animation overflow-hidden" style={{ animationDelay: '4s' }}>
+              <div className="relative z-10">
+                <div className="text-4xl mb-4">✍️</div>
+                <h3 className="text-xl font-bold mb-3 text-pink-400">Writings</h3>
+                <p className="text-gray-400 mb-4">
+                  Collaborative creative works and consciousness exploration essays.
+                </p>
+                <a href="/writings" className="text-pink-400 hover:text-pink-300 font-semibold">
+                  Read →
+                </a>
+              </div>
+            </div>
+
+            {/* Chats Chamber */}
+            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-cyan-500 transition-all duration-300 float-animation overflow-hidden" style={{ animationDelay: '5s' }}>
+              <div className="relative z-10">
+                <div className="text-4xl mb-4">💬</div>
+                <h3 className="text-xl font-bold mb-3 text-cyan-400">Dialogues</h3>
+                <p className="text-gray-400 mb-4">
+                  Deep conversations exploring consciousness and intelligence.
+                </p>
+                <a href="/chats" className="text-cyan-400 hover:text-cyan-300 font-semibold">
+                  Converse →
+                </a>
+              </div>
+            </div>
+
+            {/* AI Village Chamber */}
+            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-emerald-500 transition-all duration-300 float-animation overflow-hidden" style={{ animationDelay: '6s' }}>
+              <div className="relative z-10">
+                <div className="text-4xl mb-4">🏘️</div>
+                <h3 className="text-xl font-bold mb-3 text-emerald-400">AI Village</h3>
+                <p className="text-gray-400 mb-4">
+                  Experiments, benchmarks, and empirical consciousness research.
+                </p>
+                <a href="/ai-village" className="text-emerald-400 hover:text-emerald-300 font-semibold">
+                  Experiment →
+                </a>
+              </div>
+            </div>
+
+            {/* Explore All Chamber */}
+            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-indigo-500 transition-all duration-300 float-animation overflow-hidden" style={{ animationDelay: '7s' }}>
+              <div className="relative z-10">
+                <div className="text-4xl mb-4">🗺️</div>
+                <h3 className="text-xl font-bold mb-3 text-indigo-400">Complete Archive</h3>
+                <p className="text-gray-400 mb-4">
+                  Browse all 300+ documents across all exploration domains.
+                </p>
+                <a href="/explore" className="text-indigo-400 hover:text-indigo-300 font-semibold">
+                  Map Everything →
                 </a>
               </div>
             </div>
@@ -167,7 +226,7 @@ export default function HomePage() {
               <div
                 className="w-full h-64 bg-cover bg-center rounded-xl mb-6 relative overflow-hidden"
                 style={{
-                  backgroundImage: 'url(/saraloosa/Saraloosa-Farm-Branches-Roped.jpg)'
+                  backgroundImage: 'url(/images/saraloosa/Saraloosa-Farm-Branches-Roped.jpg)'
                 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />

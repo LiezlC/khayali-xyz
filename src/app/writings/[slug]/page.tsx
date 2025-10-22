@@ -1,58 +1,8 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
 import ReactMarkdown from 'react-markdown';
+import { getContentBySlug } from '@/utils/content';
 
-function findFileBySlug(slug) {
-  const directories = [
-    path.join(process.cwd(), 'content', 'deploy'),
-    path.join(process.cwd(), 'content', 'khayali-protocol', 'seed'),
-  ];
-
-  for (const dir of directories) {
-    const files = fs.readdirSync(dir, { withFileTypes: true });
-    for (const file of files) {
-      const fullPath = path.join(dir, file.name);
-      if (file.isDirectory()) {
-        const found = findFileRecursive(fullPath, slug);
-        if (found) return found;
-      } else if (path.basename(file.name, '.md') === slug) {
-        return fullPath;
-      }
-    }
-  }
-  return null;
-}
-
-function findFileRecursive(dir, slug) {
-  const files = fs.readdirSync(dir, { withFileTypes: true });
-  for (const file of files) {
-    const fullPath = path.join(dir, file.name);
-    if (file.isDirectory()) {
-      const found = findFileRecursive(fullPath, slug);
-      if (found) return found;
-    } else if (path.basename(file.name, '.md') === slug) {
-      return fullPath;
-    }
-  }
-  return null;
-}
-
-async function getWriting(slug) {
-  const filePath = findFileBySlug(slug);
-
-  if (!filePath) {
-    return null;
-  }
-
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  const { data, content } = matter(fileContents);
-
-  return {
-    title: data.title || slug,
-    summary: data.summary || '',
-    content,
-  };
+async function getWriting(slug: string) {
+  return await getContentBySlug('writings', slug);
 }
 
 export default async function WritingPage({ params }) {
@@ -68,10 +18,26 @@ export default async function WritingPage({ params }) {
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <article className="prose lg:prose-xl">
-        <h1>{writing.title}</h1>
-        <p className="lead">{writing.summary}</p>
-        <ReactMarkdown>{writing.content}</ReactMarkdown>
+      <article className="prose lg:prose-xl max-w-4xl mx-auto">
+        <h1 className="bg-gradient-to-r from-purple-600 to-blue-600 text-transparent bg-clip-text">
+          {writing.title}
+        </h1>
+        {writing.date && (
+          <p className="text-sm text-gray-500">{new Date(writing.date).toLocaleDateString()}</p>
+        )}
+        {writing.excerpt && <p className="lead text-xl text-gray-600">{writing.excerpt}</p>}
+        {writing.tags && writing.tags.length > 0 && (
+          <div className="flex flex-wrap gap-2 my-4">
+            {writing.tags.map((tag) => (
+              <span key={tag} className="text-xs px-3 py-1 bg-purple-100 text-purple-700 rounded-full">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+        <div className="mt-8">
+          <ReactMarkdown>{writing.content || ''}</ReactMarkdown>
+        </div>
       </article>
     </div>
   );
