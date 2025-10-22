@@ -166,15 +166,29 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Explore All Chamber */}
+            {/* World Workshop Chamber */}
             <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-indigo-500 transition-all duration-300 float-animation overflow-hidden" style={{ animationDelay: '7s' }}>
               <div className="relative z-10">
+                <div className="text-4xl mb-4">🌍</div>
+                <h3 className="text-xl font-bold mb-3 text-indigo-400">World Workshop</h3>
+                <p className="text-gray-400 mb-4">
+                  Collaborative worldbuilding including Project Aethel and beyond.
+                </p>
+                <a href="/worldworkshop" className="text-indigo-400 hover:text-indigo-300 font-semibold">
+                  Create Worlds →
+                </a>
+              </div>
+            </div>
+
+            {/* Explore All Chamber */}
+            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-violet-500 transition-all duration-300 float-animation overflow-hidden" style={{ animationDelay: '8s' }}>
+              <div className="relative z-10">
                 <div className="text-4xl mb-4">🗺️</div>
-                <h3 className="text-xl font-bold mb-3 text-indigo-400">Complete Archive</h3>
+                <h3 className="text-xl font-bold mb-3 text-violet-400">Complete Archive</h3>
                 <p className="text-gray-400 mb-4">
                   Browse all 300+ documents across all exploration domains.
                 </p>
-                <a href="/explore" className="text-indigo-400 hover:text-indigo-300 font-semibold">
+                <a href="/explore" className="text-violet-400 hover:text-violet-300 font-semibold">
                   Map Everything →
                 </a>
               </div>
