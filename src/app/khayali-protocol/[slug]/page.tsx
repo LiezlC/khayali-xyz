@@ -28,11 +28,12 @@ export default async function KhayaliProtocolDetailPage({ params }: { params: { 
   }
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      <Link href="/khayali-protocol" className="text-purple-600 hover:underline mb-4 inline-block">
-        ← Back to Khayali Protocol
-      </Link>
-      <article className="prose lg:prose-xl max-w-4xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-50">
+      <div className="container mx-auto px-4 py-12">
+        <Link href="/khayali-protocol" className="text-purple-600 hover:underline mb-4 inline-block">
+          ← Back to Khayali Protocol
+        </Link>
+        <article className="prose lg:prose-xl max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
         <h1 className="bg-gradient-to-r from-purple-600 to-indigo-600 text-transparent bg-clip-text">
           {content.title}
         </h1>
@@ -52,7 +53,8 @@ export default async function KhayaliProtocolDetailPage({ params }: { params: { 
         <div className="mt-8">
           <ReactMarkdown>{content.content || ''}</ReactMarkdown>
         </div>
-      </article>
+        </article>
+      </div>
     </div>
   );
 }

@@ -28,11 +28,12 @@ export default async function SoulspacesDetailPage({ params }: { params: { slug:
   }
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      <Link href="/soulspaces" className="text-indigo-600 hover:underline mb-4 inline-block">
-        ← Back to Soulspaces
-      </Link>
-      <article className="prose lg:prose-xl max-w-4xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50">
+      <div className="container mx-auto px-4 py-12">
+        <Link href="/soulspaces" className="text-indigo-600 hover:underline mb-4 inline-block">
+          ← Back to Soulspaces
+        </Link>
+        <article className="prose lg:prose-xl max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
         <h1 className="bg-gradient-to-r from-indigo-600 to-purple-600 text-transparent bg-clip-text">
           {content.title}
         </h1>
@@ -52,7 +53,8 @@ export default async function SoulspacesDetailPage({ params }: { params: { slug:
         <div className="mt-8">
           <ReactMarkdown>{content.content || ''}</ReactMarkdown>
         </div>
-      </article>
+        </article>
+      </div>
     </div>
   );
 }

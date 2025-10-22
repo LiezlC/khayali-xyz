@@ -29,11 +29,12 @@ export default async function AIVillageDetailPage({ params }: { params: { slug: 
   }
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      <Link href="/ai-village" className="text-green-600 hover:underline mb-4 inline-block">
-        ← Back to AI Village
-      </Link>
-      <article className="prose lg:prose-xl max-w-4xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
+      <div className="container mx-auto px-4 py-12">
+        <Link href="/ai-village" className="text-green-600 hover:underline mb-4 inline-block">
+          ← Back to AI Village
+        </Link>
+        <article className="prose lg:prose-xl max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
         <h1 className="bg-gradient-to-r from-green-600 to-blue-600 text-transparent bg-clip-text">
           {content.title}
         </h1>
@@ -53,7 +54,8 @@ export default async function AIVillageDetailPage({ params }: { params: { slug: 
         <div className="mt-8">
           <ReactMarkdown>{content.content || ''}</ReactMarkdown>
         </div>
-      </article>
+        </article>
+      </div>
     </div>
   );
 }

@@ -29,11 +29,12 @@ export default async function ChatPage({ params }: { params: { slug: string } })
   }
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      <Link href="/chats" className="text-blue-600 hover:underline mb-4 inline-block">
-        ← Back to all conversations
-      </Link>
-      <article className="prose lg:prose-xl max-w-4xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-teal-50">
+      <div className="container mx-auto px-4 py-12">
+        <Link href="/chats" className="text-blue-600 hover:underline mb-4 inline-block">
+          ← Back to all conversations
+        </Link>
+        <article className="prose lg:prose-xl max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
         <h1 className="bg-gradient-to-r from-blue-600 to-teal-600 text-transparent bg-clip-text">
           {chat.title}
         </h1>
@@ -53,7 +54,8 @@ export default async function ChatPage({ params }: { params: { slug: string } })
         <div className="mt-8">
           <ReactMarkdown>{chat.content || ''}</ReactMarkdown>
         </div>
-      </article>
+        </article>
+      </div>
     </div>
   );
 }

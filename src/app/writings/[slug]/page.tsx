@@ -25,8 +25,9 @@ export default async function WritingPage({ params }: { params: { slug: string }
   }
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      <article className="prose lg:prose-xl max-w-4xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50">
+      <div className="container mx-auto px-4 py-12">
+        <article className="prose lg:prose-xl max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
         <h1 className="bg-gradient-to-r from-purple-600 to-blue-600 text-transparent bg-clip-text">
           {writing.title}
         </h1>
@@ -46,7 +47,8 @@ export default async function WritingPage({ params }: { params: { slug: string }
         <div className="mt-8">
           <ReactMarkdown>{writing.content || ''}</ReactMarkdown>
         </div>
-      </article>
+        </article>
+      </div>
     </div>
   );
 }
