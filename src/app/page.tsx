@@ -112,6 +112,20 @@ export default function HomePage() {
               </div>
             </div>
 
+            {/* GrieVoice Chamber */}
+            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-teal-500 transition-all duration-300 float-animation overflow-hidden" style={{ animationDelay: '2s' }}>
+              <div className="relative z-10">
+                <div className="text-4xl mb-4">🎙️</div>
+                <h3 className="text-xl font-bold mb-3 text-teal-400">GrieVoice</h3>
+                <p className="text-gray-400 mb-4">
+                  AI-powered grievance systems for worker voice with multilingual voice agents.
+                </p>
+                <a href="/grievoice" className="text-teal-400 hover:text-teal-300 font-semibold">
+                  Explore System →
+                </a>
+              </div>
+            </div>
+
             {/* AI Village Chamber */}
             <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-emerald-500 transition-all duration-300 float-animation overflow-hidden" style={{ animationDelay: '6s' }}>
               <div className="relative z-10">

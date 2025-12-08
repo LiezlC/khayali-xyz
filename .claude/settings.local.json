@@ -17,7 +17,8 @@
       "Bash(do [ -d \"content/$dir\" ])",
       "Bash([ ! -d \"src/app/$dir\" ])",
       "Bash(echo:*)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(mv:*)"
     ],
     "deny": [],
     "ask": []
