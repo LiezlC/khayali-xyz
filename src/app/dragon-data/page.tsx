@@ -90,8 +90,7 @@ export default function DragonDataPage() {
                 <h3 className="text-xl font-bold text-emerald-300 mb-2">{story.title}</h3>
                 <p className="text-gray-400 text-sm mb-4">{story.description}</p>
                 <a
-                  href={`/dragon-data/${story.file}`}
-                  target="_blank"
+                  href={`/dragon-data/${story.file.replace('.md', '')}`}
                   className="text-emerald-400 hover:text-emerald-300 text-sm font-semibold"
                 >
                   Read Story →
@@ -116,8 +115,7 @@ export default function DragonDataPage() {
                 <h3 className="text-xl font-bold text-purple-300 mb-2">{fw.title}</h3>
                 <p className="text-gray-400 text-sm mb-4">{fw.description}</p>
                 <a
-                  href={`/dragon-data/${fw.file}`}
-                  target="_blank"
+                  href={`/dragon-data/${fw.file.replace('.md', '')}`}
                   className="text-purple-400 hover:text-purple-300 text-sm font-semibold"
                 >
                   Read More →

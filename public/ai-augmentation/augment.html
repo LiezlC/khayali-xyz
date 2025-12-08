@@ -1,0 +1,611 @@
+<artifacts>
+<artifact identifier="ai-elevation-campaign" type="text/html" title="AI Elevation Campaign: Consolidated Viral Concept">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Great Reframe: AI Amplifies Humanity</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        line-height: 1.6;
+        color: #1a1a1a;
+        overflow-x: hidden;
+    }
+
+    /* Hero Section */
+    .hero {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+        background-size: 50px 50px;
+        animation: float 20s infinite linear;
+    }
+
+    @keyframes float {
+        0% { transform: translate(-50%, -50%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    .hero-content {
+        max-width: 900px;
+        padding: 2rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    .manifesto {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 700;
+        margin-bottom: 2rem;
+        line-height: 1.2;
+        text-shadow: 0 2px 20px rgba(0,0,0,0.2);
+    }
+
+    .subtitle {
+        font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+        opacity: 0.95;
+        max-width: 700px;
+        margin: 0 auto 3rem;
+    }
+
+    /* Vision Toggle */
+    .vision-switch {
+        display: inline-flex;
+        background: rgba(255,255,255,0.2);
+        border-radius: 50px;
+        padding: 0.5rem;
+        margin-bottom: 3rem;
+    }
+
+    .vision-btn {
+        padding: 1rem 2rem;
+        border: none;
+        background: transparent;
+        color: white;
+        cursor: pointer;
+        border-radius: 40px;
+        transition: all 0.3s ease;
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .vision-btn.active {
+        background: white;
+        color: #667eea;
+        transform: scale(1.05);
+    }
+
+    /* Comparison Section */
+    .comparison {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+        transition: all 0.5s ease;
+    }
+
+    .narrative-card {
+        background: rgba(255,255,255,0.95);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+
+    .old-narrative {
+        border-top: 5px solid #ef4444;
+        opacity: 0.7;
+        transform: scale(0.95);
+    }
+
+    .new-narrative {
+        border-top: 5px solid #10b981;
+        transform: scale(1.05);
+    }
+
+    .narrative-card h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .old-narrative h3 { color: #ef4444; }
+    .new-narrative h3 { color: #10b981; }
+
+    /* Quick Transformer */
+    .transformer {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        padding: 4rem 2rem;
+        text-align: center;
+    }
+
+    .transformer h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: #333;
+    }
+
+    .transform-box {
+        max-width: 600px;
+        margin: 2rem auto;
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .transform-input {
+        flex: 1;
+        padding: 1rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+    }
+
+    .transform-input:focus {
+        outline: none;
+        border-color: #667eea;
+        transform: scale(1.02);
+    }
+
+    .transform-btn {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+    }
+
+    .transform-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+    }
+
+    .transform-result {
+        margin-top: 2rem;
+        padding: 2rem;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        display: none;
+        animation: slideUp 0.5s ease;
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Real Examples */
+    .examples {
+        padding: 4rem 2rem;
+        background: white;
+    }
+
+    .examples h2 {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        color: #333;
+    }
+
+    .example-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .example-card {
+        background: linear-gradient(135deg, #f3f4f6, #ffffff);
+        border-radius: 15px;
+        padding: 2rem;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .example-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+    }
+
+    .example-card:hover::before {
+        transform: scaleX(1);
+    }
+
+    .example-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+
+    .transformation-arrow {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin: 1rem 0;
+        font-weight: 600;
+    }
+
+    .arrow {
+        font-size: 2rem;
+        color: #10b981;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+    }
+
+    /* Share Section */
+    .share {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 4rem 2rem;
+        text-align: center;
+    }
+
+    .share h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .hashtags {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 2rem 0;
+    }
+
+    .hashtag {
+        background: rgba(255,255,255,0.2);
+        padding: 0.5rem 1.5rem;
+        border-radius: 25px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .hashtag:hover {
+        background: rgba(255,255,255,0.3);
+        transform: scale(1.05);
+    }
+
+    .share-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 2rem;
+    }
+
+    .share-btn {
+        padding: 1rem 2rem;
+        background: white;
+        color: #667eea;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .share-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+        .comparison {
+            grid-template-columns: 1fr;
+        }
+        
+        .transform-box {
+            flex-direction: column;
+        }
+        
+        .transform-input {
+            width: 100%;
+        }
+    }
+</style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="manifesto">The Great Reframe</h1>
+            <p class="subtitle">
+                What if every "AI replaced X workers" headline became 
+                "AI amplified X humans to solve impossible problems"?
+            </p>
+        <div class="vision-switch">
+            <button class="vision-btn active" onclick="toggleVision('old')">Old Story</button>
+            <button class="vision-btn" onclick="toggleVision('new')">New Story</button>
+        </div>
+        
+        <div class="comparison" id="comparison">
+            <div class="narrative-card old-narrative" id="old-narrative">
+                <h3>😔 The Elimination Narrative</h3>
+                <ul style="list-style: none; padding: 0; color: #333;">
+                    <li style="margin: 1rem 0;">❌ "AI replaced 500 developers"</li>
+                    <li style="margin: 1rem 0;">❌ "Cut costs by 40%"</li>
+                    <li style="margin: 1rem 0;">❌ "Automated entire departments"</li>
+                    <li style="margin: 1rem 0;">❌ "Same work, fewer humans"</li>
+                </ul>
+                <p style="color: #666; margin-top: 1.5rem;">
+                    <strong>Result:</strong> Fear, displacement, wasted potential
+                </p>
+            </div>
+            
+            <div class="narrative-card new-narrative" id="new-narrative">
+                <h3>🚀 The Elevation Narrative</h3>
+                <ul style="list-style: none; padding: 0; color: #333;">
+                    <li style="margin: 1rem 0;">✅ "500 devs became Climate Solution Architects"</li>
+                    <li style="margin: 1rem 0;">✅ "Solved clean water for 2M people"</li>
+                    <li style="margin: 1rem 0;">✅ "Created carbon-negative supply chains"</li>
+                    <li style="margin: 1rem 0;">✅ "10x impact, same workforce"</li>
+                </ul>
+                <p style="color: #666; margin-top: 1.5rem;">
+                    <strong>Result:</strong> Innovation, purpose, world-changing outcomes
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Transformer -->
+<section class="transformer">
+    <h2>Transform Any Role</h2>
+    <p style="color: #666; margin-bottom: 2rem;">Enter a job title to discover its world-changing potential</p>
+    
+    <div class="transform-box">
+        <input 
+            type="text" 
+            class="transform-input" 
+            id="roleInput" 
+            placeholder="e.g., Customer Service Rep"
+            onkeypress="if(event.key === 'Enter') transformRole()"
+        >
+        <button class="transform-btn" onclick="transformRole()">Transform →</button>
+    </div>
+    
+    <div class="transform-result" id="transformResult"></div>
+</section>
+
+<!-- Real Examples -->
+<section class="examples">
+    <h2>Real Transformations Happening Now</h2>
+    
+    <div class="example-grid">
+        <div class="example-card" onclick="expandExample(this)">
+            <h3 style="color: #667eea;">Call Center → Crisis Response</h3>
+            <div class="transformation-arrow">
+                <span>📞 Phone Support</span>
+                <span class="arrow">→</span>
+                <span>🌍 Global Impact</span>
+            </div>
+            <p><strong>500 agents</strong> retrained to coordinate AI-powered disaster response, saving thousands during climate events.</p>
+            <p style="color: #666; margin-top: 1rem;">Skills: AI dashboards, predictive modeling, crisis management</p>
+        </div>
+        
+        <div class="example-card" onclick="expandExample(this)">
+            <h3 style="color: #667eea;">Data Entry → Climate Analytics</h3>
+            <div class="transformation-arrow">
+                <span>⌨️ Manual Input</span>
+                <span class="arrow">→</span>
+                <span>🌱 Earth Healing</span>
+            </div>
+            <p><strong>200 clerks</strong> became satellite data analysts tracking deforestation and coordinating reforestation efforts.</p>
+            <p style="color: #666; margin-top: 1rem;">Skills: GIS tools, environmental modeling, impact measurement</p>
+        </div>
+        
+        <div class="example-card" onclick="expandExample(this)">
+            <h3 style="color: #667eea;">Bank Teller → Financial Inclusion</h3>
+            <div class="transformation-arrow">
+                <span>🏦 Transactions</span>
+                <span class="arrow">→</span>
+                <span>💡 Innovation</span>
+            </div>
+            <p><strong>1,000 tellers</strong> now design AI-powered microfinance systems bringing banking to 2M unbanked people.</p>
+            <p style="color: #666; margin-top: 1rem;">Skills: Financial modeling, community development, AI tools</p>
+        </div>
+    </div>
+</section>
+
+<!-- Share Section -->
+<section class="share">
+    <h2>Start the Movement</h2>
+    <p style="font-size: 1.2rem; margin-bottom: 2rem;">
+        Every share rewrites the narrative. Every story changes minds.
+    </p>
+    
+    <div class="hashtags">
+        <div class="hashtag">#GreatReframe</div>
+        <div class="hashtag">#AIElevation</div>
+        <div class="hashtag">#HumansWithAI</div>
+    </div>
+    
+    <div class="share-buttons">
+        <a href="#" class="share-btn" onclick="shareTwitter()">Share on Twitter</a>
+        <a href="#" class="share-btn" onclick="shareLinkedIn()">Share on LinkedIn</a>
+        <a href="#" class="share-btn" onclick="copyLink()">Copy Link</a>
+    </div>
+</section>
+
+<script>
+    // Vision Toggle
+    let currentVision = 'new';
+    
+    function toggleVision(vision) {
+        const btns = document.querySelectorAll('.vision-btn');
+        const oldCard = document.getElementById('old-narrative');
+        const newCard = document.getElementById('new-narrative');
+        
+        btns.forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        
+        if (vision === 'old') {
+            oldCard.style.opacity = '1';
+            oldCard.style.transform = 'scale(1.05)';
+            newCard.style.opacity = '0.7';
+            newCard.style.transform = 'scale(0.95)';
+        } else {
+            newCard.style.opacity = '1';
+            newCard.style.transform = 'scale(1.05)';
+            oldCard.style.opacity = '0.7';
+            oldCard.style.transform = 'scale(0.95)';
+        }
+    }
+
+    // Role Transformer
+    const transformations = {
+        'customer service rep': {
+            title: 'Community Crisis Coordinator',
+            description: 'Using AI-powered sentiment analysis and predictive modeling to identify and prevent community crises before they escalate.',
+            impact: 'Prevented 500+ mental health emergencies through early intervention',
+            skills: 'AI dashboards, crisis intervention, community psychology'
+        },
+        'accountant': {
+            title: 'Carbon Credit Architect',
+            description: 'Designing blockchain-based carbon tracking systems that fund reforestation through automated micro-transactions.',
+            impact: 'Generated $2M for rainforest restoration from corporate emissions',
+            skills: 'Environmental accounting, blockchain, sustainability metrics'
+        },
+        'truck driver': {
+            title: 'Supply Chain Optimizer',
+            description: 'Orchestrating AI-powered logistics networks that reduce emissions while ensuring medicine reaches remote areas.',
+            impact: 'Cut delivery emissions by 40% while expanding rural healthcare access',
+            skills: 'Route optimization, fleet management AI, community logistics'
+        },
+        'retail worker': {
+            title: 'Circular Economy Designer',
+            description: 'Creating AI-assisted recycling and upcycling programs that transform retail waste into community resources.',
+            impact: 'Diverted 10,000 tons of waste into affordable housing materials',
+            skills: 'Sustainability design, material science basics, community engagement'
+        },
+        'teacher': {
+            title: 'Global Education Architect',
+            description: 'Building AI-enhanced learning systems that adapt to every child\'s needs across languages and cultures.',
+            impact: 'Reached 50,000 students in underserved communities with personalized education',
+            skills: 'EdTech platforms, learning analytics, cross-cultural design'
+        }
+    };
+
+    function transformRole() {
+        const input = document.getElementById('roleInput').value.toLowerCase().trim();
+        const resultDiv = document.getElementById('transformResult');
+        
+        if (!input) {
+            resultDiv.style.display = 'none';
+            return;
+        }
+        
+        const transformation = transformations[input] || {
+            title: 'Innovation Catalyst',
+            description: `Leveraging AI tools to solve challenges we haven't even imagined yet in the ${input} space.`,
+            impact: 'The potential is limitless when human creativity meets AI capability',
+            skills: 'AI collaboration, creative problem-solving, domain expertise evolution'
+        };
+        
+        resultDiv.innerHTML = `
+            <h3 style="color: #667eea; margin-bottom: 1rem;">
+                ${input.charAt(0).toUpperCase() + input.slice(1)} → ${transformation.title}
+            </h3>
+            <p style="margin-bottom: 1rem;">${transformation.description}</p>
+            <p style="color: #10b981; font-weight: 600;">
+                <strong>Real Impact:</strong> ${transformation.impact}
+            </p>
+            <p style="color: #666; margin-top: 1rem;">
+                <strong>Key Skills:</strong> ${transformation.skills}
+            </p>
+        `;
+        
+        resultDiv.style.display = 'block';
+    }
+
+    // Example Expansion
+    function expandExample(card) {
+        card.style.transform = 'scale(1.02)';
+        setTimeout(() => {
+            card.style.transform = '';
+        }, 300);
+    }
+
+    // Sharing Functions
+    function shareTwitter() {
+        const text = "What if every 'AI replaced X workers' became 'AI amplified X humans to solve impossible problems'? Join the #GreatReframe";
+        const url = window.location.href;
+        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+    }
+
+    function shareLinkedIn() {
+        const url = window.location.href;
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank');
+    }
+
+    function copyLink() {
+        navigator.clipboard.writeText(window.location.href);
+        event.target.textContent = 'Copied!';
+        setTimeout(() => {
+            event.target.textContent = 'Copy Link';
+        }, 2000);
+    }
+
+    // Auto-switch vision for demonstration
+    setInterval(() => {
+        currentVision = currentVision === 'old' ? 'new' : 'old';
+        const btn = document.querySelector(`.vision-btn${currentVision === 'old' ? '' : ':last-child'}`);
+        btn.click();
+    }, 5000);
+</script>
+
+</body>
+</html>
+</artifact>
+</artifacts>

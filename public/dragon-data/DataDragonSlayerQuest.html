@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<!--
+  Data Dragons Quest Academy
+
+  This single–file web application implements a pared‑down version of the
+  “Data Dragons Quest” learning experience.  It is designed to run
+  directly in the browser without any server and demonstrates how the
+  various quests, entity resolution challenges and supporting reference
+  materials could be organised.  The code uses TailwindCSS for layout
+  and styling and Alpine.js for client‑side reactivity.  LocalStorage
+  is used to persist progress between sessions and a simple import/export
+  mechanism allows learners to carry their state between devices.  The
+  tone and theming lean toward medieval fantasy with parchment styling
+  and rich colours, yet the underlying content remains squarely focused
+  on practical dimensional modelling technique.
+-->
+<html lang="en" x-data="app()" x-init="init()" :class="{ 'dark': settings.darkMode }">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Dragons Quest Academy</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js for reactivity -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.2/dist/cdn.min.js"></script>
+    <style>
+      /* Parchment background and subtle texture */
+      body {
+        @apply bg-yellow-50 dark:bg-gray-900 dark:text-gray-100 min-h-screen flex flex-col;
+      }
+      .parchment {
+        @apply bg-yellow-100 dark:bg-gray-800 border border-yellow-300 dark:border-gray-700 shadow-md rounded-lg p-4;
+        background-image: linear-gradient(to bottom, rgba(255,255,255,0.6), rgba(255,255,255,0.4));
+      }
+      /* Scrollbar styling */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        @apply bg-yellow-200 dark:bg-gray-700;
+      }
+      ::-webkit-scrollbar-thumb {
+        @apply bg-yellow-400 dark:bg-gray-600 rounded-full;
+      }
+      .highlight {
+        /* Duplicate row highlighting.  Use explicit colours because @apply directives
+           are not processed when using the CDN build of Tailwind. */
+        background-color: #fecaca; /* tailwind red-200 */
+      }
+      .dark .highlight {
+        background-color: #7f1d1d; /* darker red for dark mode */
+      }
+      @media print {
+        /* Simplify for print */
+        body { @apply bg-white text-black; }
+        .no-print { display: none !important; }
+        .parchment { @apply border-none shadow-none p-0; }
+      }
+    </style>
+  </head>
+  <body class="font-serif">
+    <!-- Top navigation bar -->
+    <header class="no-print sticky top-0 z-10 bg-yellow-200 dark:bg-gray-800 bg-opacity-90 backdrop-blur-sm shadow-md">
+      <div class="max-w-6xl mx-auto px-4 py-2 flex items-center justify-between">
+        <h1 class="text-2xl font-extrabold tracking-wide text-red-800 dark:text-yellow-200">
+          🐉 Data Dragons Quest Academy
+        </h1>
+        <div class="flex items-center space-x-4">
+          <!-- Progress display -->
+          <div class="text-sm text-gray-700 dark:text-gray-300">
+            Progress: <span x-text="completedQuests"></span>/6
+          </div>
+          <!-- Dark mode toggle -->
+          <label class="flex items-center cursor-pointer">
+            <span class="mr-2 text-sm">🌗</span>
+            <input type="checkbox" class="form-checkbox h-4 w-4" x-model="settings.darkMode" @change="saveState" />
+          </label>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main content area -->
+    <main class="flex-1 max-w-6xl mx-auto p-4 space-y-6">
+      <!-- Realm Map (navigation) -->
+      <section x-show="view === 'map'" x-cloak>
+        <div class="parchment">
+          <h2 class="text-xl font-bold mb-4">Realm Map</h2>
+          <p class="mb-4 text-sm text-gray-600 dark:text-gray-400">
+            Choose your quest. Each path teaches a key dimensional modelling concept and includes a visit from the Shapeshifter.
+          </p>
+          <ul class="space-y-2">
+            <template x-for="quest in quests" >
+              <li>
+                <button
+                  :disabled="quest.locked"
+                  @click="startQuest(quest.id)"
+                  class="w-full flex items-center justify-between px-4 py-2 rounded-lg border border-yellow-300 dark:border-gray-700 text-left"
+                  :class="{
+                    'bg-yellow-300 dark:bg-gray-700 text-gray-800 dark:text-gray-200': !quest.completed && !quest.locked,
+                    'bg-green-200 dark:bg-green-700 text-gray-800 dark:text-gray-100': quest.completed,
+                    'bg-gray-200 dark:bg-gray-600 text-gray-400 dark:text-gray-400 cursor-not-allowed': quest.locked
+                  }"
+                >
+                  <span>
+                    <span x-text="quest.emoji"></span>
+                    <span class="ml-2" x-text="quest.name"></span>
+                  </span>
+                  <span x-show="quest.completed">✓</span>
+                  <span x-show="!quest.completed && !quest.locked">▶</span>
+                  <span x-show="quest.locked">🔒</span>
+                </button>
+              </li>
+            </template>
+          </ul>
+          <!-- Link to reference and achievements -->
+          <div class="mt-6 flex flex-wrap gap-4 text-sm">
+            <button class="px-3 py-1 bg-blue-200 dark:bg-blue-700 rounded" @click="view='grimoire'">🔮 Shapeshifter's Grimoire</button>
+            <button class="px-3 py-1 bg-blue-200 dark:bg-blue-700 rounded" @click="view='lexicon'">📚 Lexicon</button>
+            <button class="px-3 py-1 bg-blue-200 dark:bg-blue-700 rounded" @click="view='achievements'">🏆 Achievements</button>
+            <button class="px-3 py-1 bg-blue-200 dark:bg-blue-700 rounded" @click="view='settings'">⚙️ Settings</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quest pages -->
+      <!-- Quest 1: Grain Declaration Trial -->
+      <section x-show="view === 'quest1'" x-cloak>
+        <div class="parchment space-y-4">
+          <h2 class="text-xl font-bold">⚔️ Quest 1: Grain Declaration Trial</h2>
+          <!-- Step navigation -->
+          <div class="flex items-center space-x-2 text-sm">
+            <template x-for="(stepLabel, idx) in quest1Steps" :key="idx">
+              <button
+                @click="quest1.currentStep = idx"
+                class="px-2 py-1 rounded border"
+                :class="{
+                  'bg-green-300 dark:bg-green-700': idx < quest1.currentStep,
+                  'bg-yellow-300 dark:bg-gray-700': idx === quest1.currentStep,
+                  'bg-gray-100 dark:bg-gray-600': idx > quest1.currentStep
+                }"
+              >
+                Step <span x-text="idx+1"></span>
+              </button>
+            </template>
+          </div>
+          <!-- Step content -->
+          <div>
+            <!-- Step 1: Problem revealed -->
+            <div x-show="quest1.currentStep === 0">
+              <p class="mb-2">Thornwood Trading Company needs to know their total sales for January in the North region. Below is the messy dataset they've handed you. Try to calculate the sales manually — you may be surprised by the result!</p>
+              <!-- Data grid: using CSS grids instead of a table so Alpine
+                   can easily render rows via x-for inside a <template>.
+                   Each row has five columns corresponding to order fields. -->
+              <div class="border border-gray-300 dark:border-gray-700 rounded overflow-x-auto text-xs">
+                <!-- Header row -->
+                <div class="grid grid-cols-5 bg-yellow-300 dark:bg-gray-700 font-semibold">
+                  <div class="p-1">Order ID</div>
+                  <div class="p-1">Customer ID</div>
+                  <div class="p-1">Date</div>
+                  <div class="p-1">Region</div>
+                  <div class="p-1">Status</div>
+                </div>
+                <!-- Data rows are inserted as raw HTML via renderOrders() to avoid table/template quirks -->
+                <div x-html="ordersHtml"></div>
+              </div>
+              <p class="mt-2 text-sm italic text-gray-600 dark:text-gray-400">Rows highlighted in red indicate duplicate orders that will artificially inflate your totals.</p>
+              <!-- Debug: show number of orders to ensure data binding is working -->
+              <p class="text-xs text-blue-500" x-text="thornwoodData.orders.length"></p>
+              <div class="mt-4">
+                <label for="manualSales" class="block text-sm font-semibold mb-1">Enter your total sales guess:</label>
+                <input id="manualSales" type="number" step="0.01" class="w-full border p-2 rounded" x-model="quest1.manualGuess" />
+                <button class="mt-2 px-4 py-1 bg-blue-500 text-white rounded" @click="checkManualGuess()">Check Answer</button>
+                <div class="mt-2 text-sm" x-text="quest1.manualFeedback"></div>
+              </div>
+            </div>
+
+            <!-- Step 2: Grain options -->
+            <div x-show="quest1.currentStep === 1">
+              <p class="mb-2">To get this right, you need to decide the proper grain for the Sales fact table. Which grain makes sense?</p>
+              <div class="space-y-2">
+                <label class="flex items-center space-x-2">
+                  <input type="radio" x-model="quest1.grainChoice" value="order" />
+                  <span>One row per order</span>
+                </label>
+                <label class="flex items-center space-x-2">
+                  <input type="radio" x-model="quest1.grainChoice" value="line" />
+                  <span>One row per line item</span>
+                </label>
+                <label class="flex items-center space-x-2">
+                  <input type="radio" x-model="quest1.grainChoice" value="shipment" />
+                  <span>One row per shipment</span>
+                </label>
+              </div>
+              <button class="mt-4 px-4 py-1 bg-blue-500 text-white rounded" @click="evaluateGrainChoice()">Continue</button>
+              <div class="mt-2 text-sm" x-text="quest1.grainFeedback"></div>
+            </div>
+
+            <!-- Step 3: Consequences -->
+            <div x-show="quest1.currentStep === 2">
+              <p class="mb-2">Here's what happens with each grain choice:</p>
+              <ul class="list-disc pl-6 space-y-1 text-sm">
+                <li><span class="font-semibold">Order grain:</span> loses product level detail and returns total order value only.</li>
+                <li><span class="font-semibold">Line item grain:</span> <span class="text-green-700 dark:text-green-400">correct</span> – the atomic level, can roll up to orders, and analyze by product.</li>
+                <li><span class="font-semibold">Shipment grain:</span> duplicates order value when orders ship in multiple packages.</li>
+              </ul>
+              <button class="mt-4 px-4 py-1 bg-blue-500 text-white rounded" @click="quest1.currentStep = 3">Next</button>
+            </div>
+
+            <!-- Step 4: Correct answer explained -->
+            <div x-show="quest1.currentStep === 3">
+              <p>Line item grain is the right choice. By modelling each line item separately, you retain detail and avoid double counting shipments. You can still get order totals by summing line items.</p>
+              <button class="mt-4 px-4 py-1 bg-blue-500 text-white rounded" @click="quest1.currentStep = 4">Meet the Shapeshifter</button>
+            </div>
+
+            <!-- Step 5: Shapeshifter moment -->
+            <div x-show="quest1.currentStep === 4">
+              <p class="mb-2">The CEO now asks: <em>"Who is our biggest customer?"</em></p>
+              <p class="mb-2">Here are the customer records:</p>
+              <!-- Customer list rendered as a grid instead of a table for compatibility -->
+              <div class="border border-gray-300 dark:border-gray-700 rounded overflow-x-auto text-xs">
+                <!-- Header -->
+                <div class="grid grid-cols-4 bg-yellow-300 dark:bg-gray-700 font-semibold">
+                  <div class="p-1">Customer ID</div>
+                  <div class="p-1">Name</div>
+                  <div class="p-1">City</div>
+                  <div class="p-1">State</div>
+                </div>
+                <!-- Rows -->
+                <div>
+                  <template x-for="cust in thornwoodData.customers" :key="cust.customer_id">
+                    <div class="grid grid-cols-4 border-t border-gray-200 dark:border-gray-600">
+                      <div class="p-1" x-text="cust.customer_id"></div>
+                      <div class="p-1" x-text="cust.name"></div>
+                      <div class="p-1" x-text="cust.city"></div>
+                      <div class="p-1" x-text="cust.state"></div>
+                    </div>
+                  </template>
+                </div>
+              </div>
+              <p class="mt-2">Before you can answer, you must decide whether C100, C101 and C102 are the same customer. This is the Shapeshifter's challenge: entity resolution.</p>
+              <div class="mt-4 space-y-2">
+                <p class="text-sm">Are these three rows the same real company?</p>
+                <label class="flex items-center space-x-2">
+                  <input type="radio" x-model="quest1.entityDecision" value="same" />
+                  <span>Yes, they are variations of the same customer</span>
+                </label>
+                <label class="flex items-center space-x-2">
+                  <input type="radio" x-model="quest1.entityDecision" value="different" />
+                  <span>No, they are distinct customers</span>
+                </label>
+                <label class="flex items-center space-x-2">
+                  <input type="radio" x-model="quest1.entityDecision" value="unsure" />
+                  <span>Not sure – more info needed</span>
+                </label>
+              </div>
+              <button class="mt-4 px-4 py-1 bg-blue-500 text-white rounded" @click="evaluateEntityDecision()">Continue</button>
+              <div class="mt-2 text-sm" x-text="quest1.entityFeedback"></div>
+            </div>
+
+            <!-- Step 6: Practice exercise -->
+            <div x-show="quest1.currentStep === 5">
+              <p class="mb-2">Practice: The CFO wants to track shipping costs. What should be the grain of the Shipping fact table?</p>
+              <div class="space-y-2">
+                <label class="flex items-center space-x-2">
+                  <input type="radio" x-model="quest1.shippingGrain" value="order" />
+                  <span>One row per order</span>
+                </label>
+                <label class="flex items-center space-x-2">
+                  <input type="radio" x-model="quest1.shippingGrain" value="shipment" />
+                  <span>One row per shipment</span>
+                </label>
+                <label class="flex items-center space-x-2">
+                  <input type="radio" x-model="quest1.shippingGrain" value="line" />
+                  <span>One row per line item</span>
+                </label>
+              </div>
+              <button class="mt-4 px-4 py-1 bg-blue-500 text-white rounded" @click="evaluateShippingGrain()">Finish Quest</button>
+              <div class="mt-2 text-sm" x-text="quest1.shippingFeedback"></div>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <button class="px-3 py-1 bg-gray-300 dark:bg-gray-700 rounded" @click="endQuest(1)" x-show="quest1.currentStep >= 5">Return to Realm Map</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quest 2: Slowly Changing Customer Enigma -->
+      <section x-show="view === 'quest2'" x-cloak>
+        <div class="parchment space-y-4">
+          <h2 class="text-xl font-bold">⏳ Quest 2: Slowly Changing Enigma</h2>
+          <p class="text-sm">This quest explores Type 1 and Type 2 slowly changing dimensions. For brevity, this implementation summarises the key concepts; feel free to expand it further.</p>
+          <!-- Show timeline -->
+          <div>
+            <h3 class="font-semibold mb-2">Customer History</h3>
+            <!-- Timeline displayed using grids for consistent rendering -->
+            <div class="border border-gray-300 dark:border-gray-700 rounded overflow-x-auto text-xs">
+              <!-- Header row -->
+              <div class="grid grid-cols-7 bg-yellow-300 dark:bg-gray-700 font-semibold">
+                <div class="p-1">Effective Date</div>
+                <div class="p-1">Name</div>
+                <div class="p-1">City</div>
+                <div class="p-1">State</div>
+                <div class="p-1">Tier</div>
+                <div class="p-1">Account Manager</div>
+                <div class="p-1">Contract</div>
+              </div>
+              <!-- Data rows -->
+              <div>
+                <template x-for="row in customerHistory.timeline" :key="row.effective_date + row.customer_name">
+                  <div class="grid grid-cols-7 border-t border-gray-200 dark:border-gray-600">
+                    <div class="p-1" x-text="row.effective_date"></div>
+                    <div class="p-1" x-text="row.customer_name"></div>
+                    <div class="p-1" x-text="row.city"></div>
+                    <div class="p-1" x-text="row.state"></div>
+                    <div class="p-1" x-text="row.tier"></div>
+                    <div class="p-1" x-text="row.account_manager"></div>
+                    <div class="p-1" x-text="row.annual_contract_value.toLocaleString('en-US',{style:'currency',currency:'USD'})"></div>
+                  </div>
+                </template>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3 class="font-semibold mb-2">Question</h3>
+            <p class="mb-2">How much revenue did Sarah Miller generate in 2023?</p>
+            <div class="space-y-2">
+              <label class="flex items-center space-x-2">
+                <input type="radio" x-model="quest2.answer" value="0" />
+                <span>$0 (current account manager only)</span>
+              </label>
+              <label class="flex items-center space-x-2">
+                <input type="radio" x-model="quest2.answer" value="75000" />
+                <span>$75,000 (using Type 2 history)</span>
+              </label>
+              <label class="flex items-center space-x-2">
+                <input type="radio" x-model="quest2.answer" value="37500" />
+                <span>$37,500 (half of the year)</span>
+              </label>
+            </div>
+            <button class="mt-3 px-4 py-1 bg-blue-500 text-white rounded" @click="evaluateQuest2()">Check</button>
+            <div class="mt-2 text-sm" x-text="quest2.feedback"></div>
+          </div>
+          <div class="mt-4">
+            <button class="px-3 py-1 bg-gray-300 dark:bg-gray-700 rounded" @click="endQuest(2)">Return to Realm Map</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Placeholder for other quests -->
+      <section x-show="view === 'quest3'" x-cloak>
+        <div class="parchment">
+          <h2 class="text-xl font-bold">🏰 Quest 3: Conformed Dimension Summit</h2>
+          <p>In a full version of the app you would build a conformed Region and Customer dimension here. Use the Grimoire to review entity resolution techniques.</p>
+          <button class="mt-4 px-3 py-1 bg-gray-300 dark:bg-gray-700 rounded" @click="endQuest(3)">Return to Realm Map</button>
+        </div>
+      </section>
+      <section x-show="view === 'quest4'" x-cloak>
+        <div class="parchment">
+          <h2 class="text-xl font-bold">🔥 Quest 4: Forge of Transformation</h2>
+          <p>The Forge of Transformation guides you through cleansing messy source data and resolving fuzzy duplicates. Due to space, the interactive sub‑quest has been summarised; check the Grimoire for details.</p>
+          <button class="mt-4 px-3 py-1 bg-gray-300 dark:bg-gray-700 rounded" @click="endQuest(4)">Return to Realm Map</button>
+        </div>
+      </section>
+      <section x-show="view === 'quest5'" x-cloak>
+        <div class="parchment">
+          <h2 class="text-xl font-bold">⭐ Quest 5: Star Schema Smithy</h2>
+          <p>This quest would normally include a drag‑and‑drop schema builder for the Starfall University case. Here, consider which dimensions you would need: Student, Course, Instructor, Date, and perhaps a Master Student identifier.</p>
+          <button class="mt-4 px-3 py-1 bg-gray-300 dark:bg-gray-700 rounded" @click="endQuest(5)">Return to Realm Map</button>
+        </div>
+      </section>
+      <section x-show="view === 'quest6'" x-cloak>
+        <div class="parchment">
+          <h2 class="text-xl font-bold">🌉 Quest 6: Bridge Table Trial</h2>
+          <p>Here you would build a bridge table to correctly allocate sales across multiple authors. Beware of duplicate authors – the Shapeshifter lurks here too.</p>
+          <button class="mt-4 px-3 py-1 bg-gray-300 dark:bg-gray-700 rounded" @click="endQuest(6)">Return to Realm Map</button>
+        </div>
+      </section>
+
+      <!-- Shapeshifter's Grimoire -->
+      <section x-show="view === 'grimoire'" x-cloak>
+        <div class="parchment">
+          <h2 class="text-xl font-bold">🔮 Shapeshifter's Grimoire</h2>
+          <p class="mb-4">Entity resolution is the art of determining when two records refer to the same real‑world entity. Below are key techniques and concepts. Use this knowledge throughout your quests.</p>
+          <h3 class="font-semibold mb-1">Techniques</h3>
+          <ul class="list-disc pl-6 text-sm space-y-1">
+            <li><strong>Exact matching:</strong> compare natural keys directly (customer_id).</li>
+            <li><strong>Normalized matching:</strong> upper‑case, trim whitespace, remove punctuation before comparing.</li>
+            <li><strong>Fuzzy string matching:</strong> algorithms like Levenshtein distance or Jaro‑Winkler for spelling differences.</li>
+            <li><strong>Phonetic matching:</strong> algorithms like Soundex or Metaphone for names that sound alike.</li>
+            <li><strong>Domain knowledge:</strong> email domains, addresses, phone numbers help confirm matches.</li>
+          </ul>
+          <h3 class="font-semibold mt-3 mb-1">Concepts</h3>
+          <ul class="list-disc pl-6 text-sm space-y-1">
+            <li><strong>Match confidence scores:</strong> quantify the probability that two records refer to the same entity.</li>
+            <li><strong>Threshold tuning:</strong> adjust match thresholds to balance false positives and false negatives.</li>
+            <li><strong>Survivorship rules:</strong> determine which source attribute values become the “golden record.”</li>
+            <li><strong>Golden record:</strong> the canonical representation of an entity after resolution.</li>
+            <li><strong>Ongoing process:</strong> entity resolution is not one‑and‑done. New data may merge or split existing entities.</li>
+          </ul>
+          <button class="mt-4 px-3 py-1 bg-gray-300 dark:bg-gray-700 rounded" @click="view='map'">Return to Realm Map</button>
+        </div>
+      </section>
+
+      <!-- Lexicon -->
+      <section x-show="view === 'lexicon'" x-cloak>
+        <div class="parchment">
+          <h2 class="text-xl font-bold">📚 Lexicon</h2>
+          <p class="mb-4">A glossary of terms used in dimensional modelling and entity resolution.</p>
+          <dl class="space-y-3 text-sm">
+            <div>
+              <dt class="font-semibold">Grain</dt>
+              <dd>The level of detail represented by a row in a fact table.</dd>
+            </div>
+            <div>
+              <dt class="font-semibold">Fact Table</dt>
+              <dd>A table containing measurable, numeric data about a business process.</dd>
+            </div>
+            <div>
+              <dt class="font-semibold">Dimension Table</dt>
+              <dd>A table containing descriptive attributes that give context to facts.</dd>
+            </div>
+            <div>
+              <dt class="font-semibold">Slowly Changing Dimension (SCD)</dt>
+              <dd>A technique for tracking how dimension attributes change over time.</dd>
+            </div>
+            <div>
+              <dt class="font-semibold">Conformed Dimension</dt>
+              <dd>A dimension that is shared across multiple fact tables to enable cross‑process analysis.</dd>
+            </div>
+            <div>
+              <dt class="font-semibold">Bridge Table</dt>
+              <dd>A table used to resolve many‑to‑many relationships between a fact and a dimension.</dd>
+            </div>
+            <div>
+              <dt class="font-semibold">Entity Resolution</dt>
+              <dd>The process of determining when two or more records refer to the same real‑world entity.</dd>
+            </div>
+          </dl>
+          <button class="mt-4 px-3 py-1 bg-gray-300 dark:bg-gray-700 rounded" @click="view='map'">Return to Realm Map</button>
+        </div>
+      </section>
+
+      <!-- Achievements -->
+      <section x-show="view === 'achievements'" x-cloak>
+        <div class="parchment">
+          <h2 class="text-xl font-bold">🏆 Achievements</h2>
+          <p class="mb-4 text-sm">Your badges for accomplishments in the academy.</p>
+          <ul class="space-y-2 text-sm">
+            <li><span>🏅 Grain Master:</span> complete Quest 1.</li>
+            <li><span>🏅 Keeper of History:</span> complete Quest 2.</li>
+            <li><span>🏅 Realm Unifier:</span> complete Quest 3.</li>
+            <li><span>🏅 Master Smith:</span> complete Quest 4.</li>
+            <li><span>🏅 Star Forger:</span> complete Quest 5.</li>
+            <li><span>🏅 Bridge Builder:</span> complete Quest 6.</li>
+            <li><span>🏆 Dragon Tamer:</span> complete all quests.</li>
+          </ul>
+          <button class="mt-4 px-3 py-1 bg-gray-300 dark:bg-gray-700 rounded" @click="view='map'">Return to Realm Map</button>
+        </div>
+      </section>
+
+      <!-- Settings -->
+      <section x-show="view === 'settings'" x-cloak>
+        <div class="parchment">
+          <h2 class="text-xl font-bold">⚙️ Settings</h2>
+          <p class="text-sm mb-3">Adjust your preferences and manage your progress.</p>
+          <div class="space-y-4">
+            <div>
+              <label class="flex items-center space-x-2">
+                <input type="checkbox" x-model="settings.darkMode" @change="saveState" />
+                <span>Enable dark mode</span>
+              </label>
+            </div>
+            <div>
+              <button class="px-3 py-1 bg-red-500 text-white rounded" @click="resetProgress()">Reset Progress</button>
+            </div>
+            <div>
+              <button class="px-3 py-1 bg-green-500 text-white rounded" @click="exportState()">Export Progress</button>
+              <input type="file" id="importFile" class="mt-2 w-full text-sm" accept="application/json" @change="importState($event)" />
+            </div>
+          </div>
+          <button class="mt-4 px-3 py-1 bg-gray-300 dark:bg-gray-700 rounded" @click="view='map'">Return to Realm Map</button>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      /**
+       * Main Alpine.js application.  Contains state, initialisation,
+       * navigation and helper functions for each quest.  Progress
+       * is persisted to localStorage under the key 'ddqapp'.
+       */
+      function app() {
+        return {
+          // general application state
+          view: 'map',
+          quests: [
+            { id: 1, name: 'Quest 1: Grain Declaration Trial', emoji: '⚔️', completed: false, locked: false },
+            { id: 2, name: 'Quest 2: Slowly Changing Enigma', emoji: '⏳', completed: false, locked: true },
+            { id: 3, name: 'Quest 3: Conformed Dimension Summit', emoji: '🏰', completed: false, locked: true },
+            { id: 4, name: 'Quest 4: Forge of Transformation', emoji: '🔥', completed: false, locked: true },
+            { id: 5, name: 'Quest 5: Star Schema Smithy', emoji: '⭐', completed: false, locked: true },
+            { id: 6, name: 'Quest 6: Bridge Table Trial', emoji: '🌉', completed: false, locked: true }
+          ],
+          settings: {
+            darkMode: false
+          },
+          // Quest 1 specific state
+          quest1: {
+            currentStep: 0,
+            manualGuess: '',
+            manualFeedback: '',
+            grainChoice: '',
+            grainFeedback: '',
+            entityDecision: '',
+            entityFeedback: '',
+            shippingGrain: '',
+            shippingFeedback: ''
+          },
+          quest1Steps: ['Problem', 'Grain Options', 'Consequences', 'Explanation', 'Shapeshifter', 'Practice'],
+          // Quest 2 state
+          quest2: {
+            answer: '',
+            feedback: ''
+          },
+          // Pre-rendered HTML for orders; populated in markDuplicates()
+          ordersHtml: '',
+          // Data sets
+          thornwoodData: {
+            orders: [
+              { order_id: 'ORD-001', customer_id: 'C100', order_date: '2024-01-15', region: 'North', status: 'completed' },
+              { order_id: 'ORD-001', customer_id: 'C100', order_date: '2024-01-15', region: 'North', status: 'completed' },
+              { order_id: 'ORD-002', customer_id: 'C101', order_date: '2024-01-16', region: 'South', status: 'completed' },
+              { order_id: 'ORD-003', customer_id: 'C102', order_date: '2024-01-17', region: 'North', status: 'completed' },
+              { order_id: 'ORD-004', customer_id: 'C100', order_date: '2024-01-18', region: 'North', status: 'completed' }
+            ],
+            line_items: [
+              { order_id: 'ORD-001', line_num: 1, product_id: 'P001', quantity: 2, unit_price: 29.99, extended_price: 59.98 },
+              { order_id: 'ORD-001', line_num: 2, product_id: 'P002', quantity: 1, unit_price: 149.99, extended_price: 149.99 },
+              { order_id: 'ORD-002', line_num: 1, product_id: 'P001', quantity: 5, unit_price: 29.99, extended_price: 149.95 },
+              { order_id: 'ORD-003', line_num: 1, product_id: 'P003', quantity: 1, unit_price: 299.99, extended_price: 299.99 },
+              { order_id: 'ORD-004', line_num: 1, product_id: 'P001', quantity: 3, unit_price: 29.99, extended_price: 89.97 }
+            ],
+            customers: [
+              { customer_id: 'C100', name: 'Northwind Traders', city: 'Chicago', state: 'IL' },
+              { customer_id: 'C101', name: 'Northwind Trading Co', city: 'Chicago', state: 'Illinois' },
+              { customer_id: 'C102', name: 'Northwind Traders LLC', city: 'Chicago', state: 'IL' }
+            ],
+            shipments: [
+              { shipment_id: 'SHP-001', order_id: 'ORD-001', ship_date: '2024-01-17', carrier: 'FastShip', tracking: 'FS12345' },
+              { shipment_id: 'SHP-002', order_id: 'ORD-001', ship_date: '2024-01-18', carrier: 'FastShip', tracking: 'FS12346' }
+            ],
+            returns: [
+              { return_id: 'RET-001', order_id: 'ORD-001', line_num: 2, return_date: '2024-01-25', reason: 'defective', refund_amount: 149.99 }
+            ]
+          },
+          customerHistory: {
+            customer_id: 'C100',
+            timeline: [
+              {
+                effective_date: '2022-01-01',
+                customer_name: 'Acme Industries',
+                city: 'San Francisco',
+                state: 'CA',
+                tier: 'Growth',
+                account_manager: 'Sarah Miller',
+                annual_contract_value: 50000
+              },
+              {
+                effective_date: '2023-03-15',
+                customer_name: 'Acme Industries',
+                city: 'Austin',
+                state: 'TX',
+                tier: 'Growth',
+                account_manager: 'Sarah Miller',
+                annual_contract_value: 50000,
+                change: 'Relocated headquarters'
+              },
+              {
+                effective_date: '2023-09-01',
+                customer_name: 'Acme Global',
+                city: 'Austin',
+                state: 'TX',
+                tier: 'Enterprise',
+                account_manager: 'Sarah Miller',
+                annual_contract_value: 150000,
+                change: 'Rebranded, upgraded tier'
+              },
+              {
+                effective_date: '2024-02-01',
+                customer_name: 'Acme Global',
+                city: 'Austin',
+                state: 'TX',
+                tier: 'Enterprise',
+                account_manager: 'Marcus Webb',
+                annual_contract_value: 150000,
+                change: 'Account manager transition'
+              }
+            ],
+            transactions: [
+              { date: '2022-03-15', amount: 12500, type: 'quarterly_payment' },
+              { date: '2022-06-15', amount: 12500, type: 'quarterly_payment' },
+              { date: '2022-09-15', amount: 12500, type: 'quarterly_payment' },
+              { date: '2022-12-15', amount: 12500, type: 'quarterly_payment' },
+              { date: '2023-03-15', amount: 12500, type: 'quarterly_payment' },
+              { date: '2023-06-15', amount: 12500, type: 'quarterly_payment' },
+              { date: '2023-09-15', amount: 37500, type: 'quarterly_payment' },
+              { date: '2023-12-15', amount: 37500, type: 'quarterly_payment' },
+              { date: '2024-03-15', amount: 37500, type: 'quarterly_payment' }
+            ],
+            mystery_record: {
+              source: 'marketing_system',
+              company_name: 'Acme Ind.',
+              contact_email: 'info@acme-industries.com',
+              city: 'San Francisco',
+              last_campaign_response: '2022-06-01'
+            }
+          },
+          /** Initialisation: load state from localStorage and unlock quests */
+          init() {
+            this.loadState();
+            this.updateQuestLocks();
+            // Precompute duplicate flags on orders so templates can bind directly without calling functions
+            this.markDuplicates();
+          },
+          /** Determine duplicates in orders */
+          isDuplicateOrder(order) {
+            // Deprecated: duplicate calculation moved to markDuplicates() for efficiency.
+            const duplicates = this.thornwoodData.orders.filter(o => o.order_id === order.order_id && o.customer_id === order.customer_id);
+            return duplicates.length > 1;
+          },
+
+          /** Mark duplicate orders with a boolean flag for easier templating */
+          markDuplicates() {
+            this.thornwoodData.orders.forEach(order => {
+              const duplicates = this.thornwoodData.orders.filter(o => o.order_id === order.order_id && o.customer_id === order.customer_id);
+              order.duplicate = duplicates.length > 1;
+            });
+            // Also build the ordersHtml string for Step 1 display
+            this.ordersHtml = this.thornwoodData.orders.map(order => {
+              const highlight = order.duplicate ? ' highlight' : '';
+              return `\
+                <div class="grid grid-cols-5 border-t border-gray-200 dark:border-gray-600${highlight}">\
+                  <div class="p-1">${order.order_id}</div>\
+                  <div class="p-1">${order.customer_id}</div>\
+                  <div class="p-1">${order.order_date}</div>\
+                  <div class="p-1">${order.region}</div>\
+                  <div class="p-1">${order.status}</div>\
+                </div>`;
+            }).join('');
+          },
+
+          /** Render the orders grid as HTML string.  We avoid x-for inside tables by building
+           * a string of divs.  Duplicate orders get the 'highlight' CSS class. */
+          renderOrders() {
+            // Fallback: return the computed ordersHtml property
+            return this.ordersHtml;
+          },
+          /** Calculate total sales for January North region for manual guess check */
+          calculateTrueSales() {
+            let total = 0;
+            const januaryOrders = this.thornwoodData.orders.filter(o => o.order_date.startsWith('2024-01') && o.region === 'North');
+            januaryOrders.forEach(order => {
+              const items = this.thornwoodData.line_items.filter(li => li.order_id === order.order_id);
+              items.forEach(li => {
+                const returnItem = this.thornwoodData.returns.find(r => r.order_id === order.order_id && r.line_num === li.line_num);
+                const refund = returnItem ? returnItem.refund_amount : 0;
+                total += li.extended_price - refund;
+              });
+            });
+            return parseFloat(total.toFixed(2));
+          },
+          /** Evaluate manual guess */
+          checkManualGuess() {
+            const guess = parseFloat(this.quest1.manualGuess);
+            const correct = this.calculateTrueSales();
+            if (isNaN(guess)) {
+              this.quest1.manualFeedback = 'Please enter a number.';
+            } else if (Math.abs(guess - correct) < 0.01) {
+              this.quest1.manualFeedback = 'Correct! But you probably had to clean up the data mentally.';
+              this.quest1.currentStep = 1;
+            } else {
+              this.quest1.manualFeedback = `Not quite. The correct total is $${correct.toLocaleString()}. Duplicate orders and returns affected your calculation.`;
+              this.quest1.currentStep = 1;
+            }
+          },
+          /** Evaluate grain choice */
+          evaluateGrainChoice() {
+            if (!this.quest1.grainChoice) {
+              this.quest1.grainFeedback = 'Please select a grain option.';
+              return;
+            }
+            if (this.quest1.grainChoice === 'line') {
+              this.quest1.grainFeedback = 'Correct – line item grain preserves detail and avoids duplication.';
+            } else if (this.quest1.grainChoice === 'order') {
+              this.quest1.grainFeedback = 'Order grain will lose product detail. Try again if you are unsure.';
+            } else {
+              this.quest1.grainFeedback = 'Shipment grain causes double counting when there are multiple shipments per order.';
+            }
+            this.quest1.currentStep = 2;
+          },
+          /** Evaluate entity decision */
+          evaluateEntityDecision() {
+            if (!this.quest1.entityDecision) {
+              this.quest1.entityFeedback = 'Please choose an option.';
+              return;
+            }
+            if (this.quest1.entityDecision === 'same') {
+              this.quest1.entityFeedback = 'Likely correct – names are similar and cities match. Without resolution you cannot answer accurately.';
+            } else if (this.quest1.entityDecision === 'different') {
+              this.quest1.entityFeedback = 'Possibly wrong – the names are variants of the same company. But you might need more data.';
+            } else {
+              this.quest1.entityFeedback = 'Fair enough; additional data such as address or tax ID would help.';
+            }
+            this.quest1.currentStep = 5;
+          },
+          /** Evaluate shipping grain */
+          evaluateShippingGrain() {
+            if (!this.quest1.shippingGrain) {
+              this.quest1.shippingFeedback = 'Please select an option.';
+              return;
+            }
+            if (this.quest1.shippingGrain === 'shipment') {
+              this.quest1.shippingFeedback = 'Correct – shipping facts should be at the shipment grain.';
+            } else {
+              this.quest1.shippingFeedback = 'Incorrect – shipping facts should be recorded per shipment.';
+            }
+            this.completeQuest(1);
+          },
+          /** Evaluate Quest 2 answer */
+          evaluateQuest2() {
+            if (!this.quest2.answer) {
+              this.quest2.feedback = 'Please select an answer.';
+              return;
+            }
+            if (this.quest2.answer === '75000') {
+              this.quest2.feedback = 'Correct – Type 2 history preserves the attribution to Sarah for 2023.';
+              this.completeQuest(2);
+            } else if (this.quest2.answer === '0') {
+              this.quest2.feedback = 'Incorrect – that’s what a Type 1 approach would show, but it loses history.';
+            } else {
+              this.quest2.feedback = 'Not quite – review the timeline to see how much was paid in 2023.';
+            }
+          },
+          /** Mark quest as completed and unlock next */
+          completeQuest(id) {
+            const idx = this.quests.findIndex(q => q.id === id);
+            if (idx !== -1) {
+              this.quests[idx].completed = true;
+              if (idx + 1 < this.quests.length) {
+                this.quests[idx + 1].locked = false;
+              }
+              this.saveState();
+            }
+          },
+          endQuest(id) {
+            this.view = 'map';
+            if (id === 1) {
+              this.quest1.currentStep = 0;
+            }
+            this.updateQuestLocks();
+          },
+          /** Start a quest */
+          startQuest(id) {
+            const quest = this.quests.find(q => q.id === id);
+            if (!quest.locked) {
+              this.view = 'quest' + id;
+              if (id === 2) this.quest2.answer = '';
+            }
+          },
+          /** Update quest locked status based on completion */
+          updateQuestLocks() {
+            for (let i = 0; i < this.quests.length; i++) {
+              this.quests[i].locked = (i > 0 && !this.quests[i - 1].completed);
+            }
+          },
+          /** Count completed quests */
+          get completedQuests() {
+            return this.quests.filter(q => q.completed).length;
+          },
+          /** Save state to localStorage */
+          saveState() {
+            const state = {
+              quests: this.quests,
+              settings: this.settings
+            };
+            localStorage.setItem('ddqapp', JSON.stringify(state));
+          },
+          /** Load state from localStorage */
+          loadState() {
+            try {
+              const state = JSON.parse(localStorage.getItem('ddqapp'));
+              if (state) {
+                this.quests = state.quests || this.quests;
+                this.settings = { ...this.settings, ...state.settings };
+              }
+            } catch (e) {
+              console.error('Failed to load state', e);
+            }
+          },
+          /** Reset progress */
+          resetProgress() {
+            if (confirm('Reset all progress?')) {
+              localStorage.removeItem('ddqapp');
+              location.reload();
+            }
+          },
+          /** Export state as JSON file */
+          exportState() {
+            const data = localStorage.getItem('ddqapp');
+            if (!data) {
+              alert('No progress to export');
+              return;
+            }
+            const blob = new Blob([data], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'ddq-progress.json';
+            link.click();
+            URL.revokeObjectURL(url);
+          },
+          /** Import state from uploaded JSON */
+          importState(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              try {
+                const state = JSON.parse(e.target.result);
+                if (state.quests) {
+                  localStorage.setItem('ddqapp', JSON.stringify(state));
+                  location.reload();
+                } else {
+                  alert('Invalid file');
+                }
+              } catch (err) {
+                alert('Failed to parse file');
+              }
+            };
+            reader.readAsText(file);
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

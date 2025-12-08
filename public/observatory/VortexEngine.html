@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vortex Engine | Interactive Particle Simulation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap');
+
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #050505;
+            font-family: 'Inter', sans-serif;
+            color: white;
+        }
+
+        canvas {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        /* Glassmorphism UI */
+        .glass-panel {
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        .control-group label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #a1a1aa;
+        }
+
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+            margin-top: 0.5rem;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #fff;
+            cursor: pointer;
+            margin-top: -6px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+        }
+
+        .btn-neon {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-neon::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn-neon:hover::after {
+            left: 100%;
+        }
+
+        .btn-neon:active {
+            transform: scale(0.95);
+        }
+
+        /* Animations */
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 243, 255, 0.2); }
+            50% { box-shadow: 0 0 40px rgba(0, 243, 255, 0.5); }
+        }
+
+        .hud-text {
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Canvas -->
+    <canvas id="vortexCanvas"></canvas>
+
+    <!-- UI Overlay -->
+    <div class="relative z-10 h-screen w-full pointer-events-none flex flex-col justify-between p-6">
+        
+        <!-- Header -->
+        <div class="flex justify-between items-start pointer-events-auto">
+            <div class="glass-panel rounded-xl p-6 max-w-xs animate-fade-in-down">
+                <h1 class="text-3xl font-extrabold tracking-tighter mb-1 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 hud-text">
+                    VORTEX ENGINE
+                </h1>
+                <p class="text-xs text-gray-400 font-mono mb-4">SINGULARITY SIMULATION v1.0</p>
+                <div class="text-xs text-gray-300 leading-relaxed">
+                    Interact with the flow field. <br>
+                    <span class="text-cyan-400">Left Click</span> to spawn matter.<br>
+                    <span class="text-orange-400">Right Click</span> to create gravity well.
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="glass-panel rounded-lg px-4 py-2 hidden md:block">
+                <div class="font-mono text-xs text-cyan-300" id="particle-counter">PARTICLES: 0</div>
+                <div class="font-mono text-xs text-orange-300" id="fps-counter">FPS: 60</div>
+            </div>
+        </div>
+
+        <!-- Controls Bottom -->
+        <div class="flex justify-center items-end pb-8 pointer-events-auto">
+            <div class="glass-panel rounded-2xl p-6 w-full max-w-2xl grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- Control Group 1 -->
+                <div class="control-group">
+                    <div class="flex justify-between">
+                        <label>Time Dilation (Speed)</label>
+                        <span id="val-speed" class="text-xs font-mono text-cyan-400">1.0x</span>
+                    </div>
+                    <input type="range" id="speed" min="0.1" max="5" step="0.1" value="1.5">
+                </div>
+
+                <!-- Control Group 2 -->
+                <div class="control-group">
+                    <div class="flex justify-between">
+                        <label>Event Horizon (Pull)</label>
+                        <span id="val-pull" class="text-xs font-mono text-orange-400">50%</span>
+                    </div>
+                    <input type="range" id="pull" min="0" max="100" value="40">
+                </div>
+
+                <!-- Control Group 3 -->
+                <div class="control-group">
+                    <div class="flex justify-between">
+                        <label>Entropy (Chaos)</label>
+                        <span id="val-chaos" class="text-xs font-mono text-purple-400">Low</span>
+                    </div>
+                    <input type="range" id="chaos" min="0" max="100" value="10">
+                </div>
+
+                <!-- Actions -->
+                <div class="col-span-1 md:col-span-3 flex gap-4 mt-2">
+                    <button id="btn-warp" class="btn-neon flex-1 bg-gradient-to-r from-orange-600 to-red-600 py-3 rounded-lg font-bold text-sm tracking-widest uppercase shadow-lg shadow-orange-900/20">
+                        WARP JUMP
+                    </button>
+                    <button id="btn-reset" class="btn-neon flex-1 bg-gray-800 hover:bg-gray-700 py-3 rounded-lg font-bold text-sm tracking-widest uppercase border border-gray-600">
+                        Stabilize
+                    </button>
+                    <button id="btn-color" class="btn-neon flex-1 bg-gradient-to-r from-cyan-600 to-blue-600 py-3 rounded-lg font-bold text-sm tracking-widest uppercase shadow-lg shadow-cyan-900/20">
+                        Shift Spectrum
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('vortexCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // State
+        let width, height;
+        let particles = [];
+        let mouse = { x: 0, y: 0, active: false, rightClick: false };
+        let hueBase = 200; // Cyan/Blue base
+        let frameCount = 0;
+        let lastTime = 0;
+        
+        // Configuration (Controlled by UI)
+        const config = {
+            particleCount: 1500,
+            baseSpeed: 1.5,
+            pullStrength: 0.05,
+            chaos: 0.1,
+            trailOpacity: 0.15,
+            colors: ['#00f3ff', '#0066ff', '#ff0055', '#ff7b00'] // Cyan, Blue, Red, Orange
+        };
+
+        // UI Elements
+        const ui = {
+            speed: document.getElementById('speed'),
+            pull: document.getElementById('pull'),
+            chaos: document.getElementById('chaos'),
+            valSpeed: document.getElementById('val-speed'),
+            valPull: document.getElementById('val-pull'),
+            valChaos: document.getElementById('val-chaos'),
+            counter: document.getElementById('particle-counter'),
+            fps: document.getElementById('fps-counter')
+        };
+
+        // Resize Handling
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            mouse.x = width / 2;
+            mouse.y = height / 2;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        // Particle Class
+        class Particle {
+            constructor(x, y, type = 'default') {
+                this.reset(x, y, type);
+            }
+
+            reset(x, y, type) {
+                this.x = x || Math.random() * width;
+                this.y = y || Math.random() * height;
+                this.prevX = this.x;
+                this.prevY = this.y;
+                
+                // Physics
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = Math.random() * 2 + 1;
+                this.vx = Math.cos(angle) * velocity;
+                this.vy = Math.sin(angle) * velocity;
+                
+                this.friction = 0.96;
+                this.size = Math.random() * 2 + 0.5;
+                
+                // Visuals
+                if (type === 'burst') {
+                    this.life = 100;
+                    this.maxLife = 100;
+                    this.color = '#ffffff';
+                    this.vx *= 5;
+                    this.vy *= 5;
+                } else {
+                    this.life = Infinity;
+                    // Assign color based on palette
+                    this.color = config.colors[Math.floor(Math.random() * config.colors.length)];
+                }
+                this.type = type;
+            }
+
+            update() {
+                this.prevX = this.x;
+                this.prevY = this.y;
+
+                // Center of gravity (Mouse or Screen Center)
+                let targetX = mouse.active ? mouse.x : width / 2;
+                let targetY = mouse.active ? mouse.y : height / 2;
+
+                // Calculate distance to center
+                const dx = targetX - this.x;
+                const dy = targetY - this.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                
+                // Physics: Swirl Force (Tangential)
+                // We create a vector perpendicular to the radius
+                const angle = Math.atan2(dy, dx);
+                const swirlAngle = angle + Math.PI / 2; // 90 degrees offset
+                
+                const swirlForce = 0.5 * config.baseSpeed;
+                this.vx += Math.cos(swirlAngle) * swirlForce;
+                this.vy += Math.sin(swirlAngle) * swirlForce;
+
+                // Physics: Gravity (Radial)
+                const pull = (dist > 50) ? config.pullStrength : -0.5; // Repel if too close to avoid singularity clumping
+                this.vx += Math.cos(angle) * pull * config.baseSpeed;
+                this.vy += Math.sin(angle) * pull * config.baseSpeed;
+
+                // Physics: Chaos/Brownian Motion
+                this.vx += (Math.random() - 0.5) * config.chaos;
+                this.vy += (Math.random() - 0.5) * config.chaos;
+
+                // Apply Velocity
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Friction
+                this.vx *= this.friction;
+                this.vy *= this.friction;
+
+                // Bounds & Respawn
+                // If particle goes off screen or gets trapped in center
+                if (this.x < 0 || this.x > width || this.y < 0 || this.y > height || (dist < 10 && Math.random() > 0.9)) {
+                    if (this.type === 'default') {
+                        // Respawn at edges randomly
+                        if (Math.random() > 0.5) {
+                            this.x = Math.random() > 0.5 ? 0 : width;
+                            this.y = Math.random() * height;
+                        } else {
+                            this.x = Math.random() * width;
+                            this.y = Math.random() > 0.5 ? 0 : height;
+                        }
+                        this.prevX = this.x;
+                        this.prevY = this.y;
+                        this.vx = 0;
+                        this.vy = 0;
+                    }
+                }
+
+                // Life for burst particles
+                if (this.type === 'burst') {
+                    this.life--;
+                }
+            }
+
+            draw() {
+                // Draw trails using lines from prev position
+                ctx.beginPath();
+                ctx.strokeStyle = this.color;
+                ctx.lineWidth = this.size;
+                ctx.lineCap = 'round';
+                
+                // Fade out burst particles
+                if (this.type === 'burst') {
+                    ctx.globalAlpha = this.life / this.maxLife;
+                } else {
+                    // Speed based opacity
+                    const speed = Math.sqrt(this.vx*this.vx + this.vy*this.vy);
+                    ctx.globalAlpha = Math.min(speed / 10, 1);
+                }
+
+                ctx.moveTo(this.prevX, this.prevY);
+                ctx.lineTo(this.x, this.y);
+                ctx.stroke();
+                ctx.globalAlpha = 1;
+            }
+        }
+
+        // Initialization
+        function init() {
+            particles = [];
+            for (let i = 0; i < config.particleCount; i++) {
+                particles.push(new Particle(Math.random() * width, Math.random() * height));
+            }
+        }
+
+        // Animation Loop
+        function animate(time) {
+            // FPS Calculation
+            const delta = time - lastTime;
+            if (delta >= 1000) {
+                ui.fps.innerText = `FPS: ${Math.round(frameCount * 1000 / delta)}`;
+                frameCount = 0;
+                lastTime = time;
+            }
+            frameCount++;
+
+            // Trail Effect: Don't clear completely, draw a semi-transparent rect
+            ctx.fillStyle = `rgba(5, 5, 5, ${config.trailOpacity})`;
+            ctx.fillRect(0, 0, width, height);
+
+            // Update & Draw Particles
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.update();
+                p.draw();
+                if (p.type === 'burst' && p.life <= 0) {
+                    particles.splice(i, 1);
+                }
+            }
+
+            // Update UI Counter
+            if (frameCount % 10 === 0) {
+                ui.counter.innerText = `PARTICLES: ${particles.length}`;
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        // Interactions
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        window.addEventListener('mousedown', (e) => {
+            mouse.active = true;
+            
+            if (e.button === 0) { // Left Click: Burst
+                for (let i = 0; i < 50; i++) {
+                    particles.push(new Particle(mouse.x, mouse.y, 'burst'));
+                }
+            } else if (e.button === 2) { // Right Click
+                mouse.rightClick = true;
+                config.pullStrength = 2.0; // Super gravity
+            }
+        });
+
+        window.addEventListener('mouseup', () => {
+            mouse.active = false;
+            mouse.rightClick = false;
+            config.pullStrength = ui.pull.value / 500; // Reset gravity
+        });
+
+        window.addEventListener('contextmenu', e => e.preventDefault());
+
+        // UI Event Listeners
+        ui.speed.addEventListener('input', (e) => {
+            config.baseSpeed = parseFloat(e.target.value);
+            ui.valSpeed.innerText = config.baseSpeed.toFixed(1) + 'x';
+        });
+
+        ui.pull.addEventListener('input', (e) => {
+            // Map 0-100 to 0-0.2
+            config.pullStrength = parseInt(e.target.value) / 500;
+            ui.valPull.innerText = e.target.value + '%';
+        });
+
+        ui.chaos.addEventListener('input', (e) => {
+            config.chaos = parseInt(e.target.value) / 50;
+            ui.valChaos.innerText = e.target.value > 50 ? 'HIGH' : 'LOW';
+        });
+
+        document.getElementById('btn-warp').addEventListener('click', () => {
+            // Explosion effect
+            particles.forEach(p => {
+                const angle = Math.random() * Math.PI * 2;
+                const force = 50;
+                p.vx = Math.cos(angle) * force;
+                p.vy = Math.sin(angle) * force;
+            });
+            // Flash
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.fillRect(0,0,width,height);
+        });
+
+        document.getElementById('btn-reset').addEventListener('click', () => {
+            particles.forEach(p => {
+                p.vx *= 0.1;
+                p.vy *= 0.1;
+            });
+            ui.speed.value = 1.5;
+            config.baseSpeed = 1.5;
+            ui.valSpeed.innerText = '1.5x';
+        });
+
+        document.getElementById('btn-color').addEventListener('click', () => {
+            // Shift Hue
+            hueBase = (hueBase + 60) % 360;
+            const newColors = [];
+            for(let i=0; i<4; i++) {
+                newColors.push(`hsl(${(hueBase + i*30) % 360}, 100%, 50%)`);
+            }
+            config.colors = newColors;
+            // Update existing particles
+            particles.forEach(p => {
+                if(p.type === 'default') {
+                    p.color = config.colors[Math.floor(Math.random() * config.colors.length)];
+                }
+            });
+        });
+
+        // Start
+        init();
+        animate(0);
+
+    </script>
+</body>
+</html>

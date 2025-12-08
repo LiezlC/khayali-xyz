@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Data Dragon Realms - Master the Arts of Data</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/d3@7"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Crimson Pro', Georgia, serif;
+      background-color: #020617;
+      color: #e2e8f0;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+    h1, h2, h3, h4, h5, h6, .font-display {
+      font-family: 'Cinzel', serif;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    
+    /* Glass Panel Effect */
+    .glass-panel {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(148, 163, 184, 0.15);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+    
+    /* Neon Text Effects */
+    .neon-gold {
+      text-shadow: 0 0 5px #facc15, 0 0 15px #a16207, 0 0 30px #854d0e;
+    }
+    .neon-red {
+      text-shadow: 0 0 5px #f87171, 0 0 15px #991b1b;
+    }
+    .neon-blue {
+      text-shadow: 0 0 5px #60a5fa, 0 0 15px #1d4ed8;
+    }
+    .neon-purple {
+      text-shadow: 0 0 5px #c084fc, 0 0 15px #7c3aed;
+    }
+    .neon-green {
+      text-shadow: 0 0 5px #4ade80, 0 0 15px #15803d;
+    }
+    .neon-orange {
+      text-shadow: 0 0 5px #fb923c, 0 0 15px #c2410c;
+    }
+    
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    
+    /* Animations */
+    @keyframes pulse-glow {
+      0%, 100% { filter: drop-shadow(0 0 8px currentColor); }
+      50% { filter: drop-shadow(0 0 20px currentColor); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+    .animate-float { animation: float 3s ease-in-out infinite; }
+    .animate-fadeIn { animation: fadeIn 0.3s ease-out forwards; }
+    .animate-slideIn { animation: slideIn 0.4s ease-out forwards; }
+    .animate-scaleIn { animation: scaleIn 0.3s ease-out forwards; }
+    
+    /* Shimmer effect for locked items */
+    .shimmer {
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      background-size: 200% 100%;
+      animation: shimmer 2s infinite;
+    }
+    
+    /* Boss node pulsing border */
+    .boss-border {
+      box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.5), 0 0 20px rgba(239, 68, 68, 0.3);
+    }
+    
+    /* Quiz option hover */
+    .quiz-option {
+      transition: all 0.2s ease;
+    }
+    .quiz-option:hover:not(:disabled) {
+      transform: translateX(4px);
+      border-color: rgba(250, 204, 21, 0.5);
+    }
+    
+    /* Starfield background */
+    .starfield {
+      background-image: 
+        radial-gradient(1px 1px at 20px 30px, white, transparent),
+        radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 50px 160px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 90px 40px, white, transparent),
+        radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(2px 2px at 160px 120px, rgba(96, 165, 250, 0.8), transparent);
+      background-size: 200px 200px;
+    }
+    
+    /* Progress bar shine */
+    .progress-shine {
+      position: relative;
+      overflow: hidden;
+    }
+    .progress-shine::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      animation: shimmer 2s infinite;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  
+  <script>
+    // ============================================
+    // DATA & TYPES
+    // ============================================
+    
+    const NodeType = {
+      REALM: 'REALM',
+      TOPIC: 'TOPIC',
+      BOSS: 'BOSS'
+    };
+    
+    const Realm = {
+      KIMBALL: 'The Kimball Stronghold',
+      M_TOWER: 'The M-Mage Tower',
+      WRANGLING_WILDS: 'The Wrangling Wilds',
+      ETL_ENGINE: 'The ETL Engine',
+      AUDIT_ARCHIVES: 'The Audit Archives'
+    };
+    
+    const REALM_COLORS = {
+      [Realm.KIMBALL]: { primary: '#3b82f6', glow: 'neon-blue' },
+      [Realm.M_TOWER]: { primary: '#a855f7', glow: 'neon-purple' },
+      [Realm.WRANGLING_WILDS]: { primary: '#22c55e', glow: 'neon-green' },
+      [Realm.ETL_ENGINE]: { primary: '#ef4444', glow: 'neon-red' },
+      [Realm.AUDIT_ARCHIVES]: { primary: '#f97316', glow: 'neon-orange' }
+    };
+    
+    // Challenge/Quiz data for each node
+    const CHALLENGES = {
+      'kimball_core': {
+        type: 'quiz',
+        question: 'What is the primary goal of dimensional modeling according to Kimball?',
+        options: [
+          'Minimize storage space at all costs',
+          'Make data understandable to business users while enabling fast queries',
+          'Normalize all data to third normal form',
+          'Create as many tables as possible'
+        ],
+        correct: 1,
+        explanation: 'Kimball methodology prioritizes two things: making data structures intuitive for business users, and enabling high-performance analytical queries.'
+      },
+      'star_schema': {
+        type: 'quiz',
+        question: 'In a star schema, what sits at the center?',
+        options: [
+          'A dimension table with all attributes',
+          'A fact table containing measurements',
+          'A bridge table for many-to-many relationships',
+          'A staging table for ETL'
+        ],
+        correct: 1,
+        explanation: 'The star schema gets its name from the shape: a central Fact table (containing numeric measurements) surrounded by Dimension tables (containing descriptive context).'
+      },
+      'fact_tables': {
+        type: 'quiz',
+        question: 'Which of these is NOT a type of fact table in Kimball methodology?',
+        options: [
+          'Transaction Fact',
+          'Periodic Snapshot Fact',
+          'Accumulating Snapshot Fact',
+          'Dimensional Fact'
+        ],
+        correct: 3,
+        explanation: 'The three fact table types are: Transaction (one row per event), Periodic Snapshot (one row per time period), and Accumulating Snapshot (one row per process instance, updated as it progresses).'
+      },
+      'dimension_tables': {
+        type: 'quiz',
+        question: 'Dimension tables answer which types of questions about your data?',
+        options: [
+          'How much? How many?',
+          'Who? What? Where? When? Why? How?',
+          'Is it valid? Is it complete?',
+          'Can we join? Can we aggregate?'
+        ],
+        correct: 1,
+        explanation: 'Dimensions provide the descriptive context around facts. They answer the "who, what, where, when, why, and how" of your measurements.'
+      },
+      'scd': {
+        type: 'quiz',
+        question: 'A customer moves from New York to Los Angeles. With SCD Type 2, what happens?',
+        options: [
+          'The old address is deleted, new address overwrites it',
+          'A new row is created with the new address; old row is preserved with date ranges',
+          'Both addresses are stored in the same row in different columns',
+          'The change is rejected until manually approved'
+        ],
+        correct: 1,
+        explanation: 'Type 2 SCDs preserve history by creating a new row for the entity, marking the old row as expired. This allows accurate historical analysis.'
+      },
+      'surrogate_keys': {
+        type: 'quiz',
+        question: 'Why use surrogate keys instead of natural business keys?',
+        options: [
+          'They are always shorter and save space',
+          'They insulate the warehouse from source system changes and support SCD Type 2',
+          'They are required by SQL standards',
+          'They make queries run faster in all cases'
+        ],
+        correct: 1,
+        explanation: 'Surrogate keys (warehouse-assigned integers) protect your data model from source system key changes and enable tracking multiple versions of the same business entity.'
+      },
+      'snowflaking': {
+        type: 'quiz',
+        question: 'Why does Kimball recommend AGAINST snowflaking dimension tables?',
+        options: [
+          'It violates database normalization rules',
+          'It increases query complexity and reduces performance for analytical workloads',
+          'It requires more storage space',
+          'It is not supported by modern databases'
+        ],
+        correct: 1,
+        explanation: 'Snowflaking (normalizing dimensions) adds joins that hurt query performance and make the model harder for business users to understand.'
+      },
+      'm_tower_core': {
+        type: 'quiz',
+        question: 'What type of language is M (Power Query)?',
+        options: [
+          'Object-oriented',
+          'Procedural',
+          'Functional',
+          'Declarative SQL'
+        ],
+        correct: 2,
+        explanation: 'M is a functional language where everything is an expression that evaluates to a value. No side effects, no variable mutation.'
+      },
+      'm_language': {
+        type: 'quiz',
+        question: 'In M, what is the difference between a Record and a List?',
+        options: [
+          'Records use [] and have named fields; Lists use {} and are ordered sequences',
+          'Records are faster; Lists are slower',
+          'Records can only contain text; Lists can contain any type',
+          'There is no difference, they are aliases'
+        ],
+        correct: 0,
+        explanation: 'Records use square brackets with named fields [Name="John", Age=30]. Lists use curly braces with ordered items {1, 2, 3}.'
+      },
+      'let_in': {
+        type: 'quiz',
+        question: 'What does the "in" keyword specify in a let...in expression?',
+        options: [
+          'Which variables to import from other queries',
+          'The final output value of the expression',
+          'The data source to connect to',
+          'The error handling behavior'
+        ],
+        correct: 1,
+        explanation: 'The "let" block defines steps/variables, and "in" specifies which value to return as the result of the entire expression.'
+      },
+      'structured_types': {
+        type: 'quiz',
+        question: 'How would you access the "Name" field from a record stored in variable "customer"?',
+        options: [
+          'customer.Name',
+          'customer[Name]',
+          'customer("Name")',
+          'customer->Name'
+        ],
+        correct: 1,
+        explanation: 'In M, you access record fields using square bracket notation: customer[Name].'
+      },
+      'custom_functions': {
+        type: 'quiz',
+        question: 'Which syntax correctly defines a custom function in M that doubles a number?',
+        options: [
+          'function double(x) { return x * 2; }',
+          '(x) => x * 2',
+          'def double(x): return x * 2',
+          'CREATE FUNCTION double AS x * 2'
+        ],
+        correct: 1,
+        explanation: 'M uses fat arrow syntax for functions: (parameters) => expression. No return keyword needed.'
+      },
+      'error_handling_m': {
+        type: 'quiz',
+        question: 'How do you provide a default value when an expression might error in M?',
+        options: [
+          'IF ERROR THEN default',
+          'COALESCE(expression, default)',
+          'try expression otherwise default',
+          'expression ?? default'
+        ],
+        correct: 2,
+        explanation: 'M uses try...otherwise for error handling: try riskyExpression otherwise fallbackValue.'
+      },
+      'wrangling_core': {
+        type: 'quiz',
+        question: 'What should be your FIRST step when working with unfamiliar data?',
+        options: [
+          'Start transforming immediately',
+          'Profile the data to understand its structure, quality, and distributions',
+          'Load it directly into the final model',
+          'Delete all null values'
+        ],
+        correct: 1,
+        explanation: 'Always profile first! Understanding column quality, value distributions, and data types prevents costly mistakes later.'
+      },
+      'profiling': {
+        type: 'quiz',
+        question: 'Which is NOT typically part of data profiling?',
+        options: [
+          'Checking for null values and their percentage',
+          'Examining value distributions and unique counts',
+          'Writing complex transformation logic',
+          'Identifying data type mismatches'
+        ],
+        correct: 2,
+        explanation: 'Profiling is about UNDERSTANDING data before transforming it. Transformation comes after you know what you are working with.'
+      },
+      'cleaning_techniques': {
+        type: 'quiz',
+        question: 'What is the safest order for text cleaning operations?',
+        options: [
+          'Change case → Trim → Remove non-printable characters',
+          'Remove non-printable characters → Trim → Change case',
+          'It does not matter, order is irrelevant',
+          'Trim → Change case → Remove non-printable characters'
+        ],
+        correct: 1,
+        explanation: 'Remove garbage characters first, then trim whitespace, then standardize case. This prevents edge cases where trimming fails due to hidden characters.'
+      },
+      'pivoting': {
+        type: 'quiz',
+        question: 'When should you UNPIVOT data?',
+        options: [
+          'When you have too many rows and need fewer',
+          'When you have data spread across columns that should be in rows (e.g., Jan, Feb, Mar columns)',
+          'When you want to create a summary table',
+          'When joining two tables together'
+        ],
+        correct: 1,
+        explanation: 'Unpivot converts columns to rows. Classic example: months as columns → single "Month" column with values in rows. Essential for proper modeling.'
+      },
+      'merging_appending': {
+        type: 'quiz',
+        question: 'What is the key difference between Merge and Append?',
+        options: [
+          'Merge is faster, Append is slower',
+          'Merge adds columns (like SQL JOIN), Append adds rows (like SQL UNION)',
+          'Merge works on text, Append works on numbers',
+          'There is no difference'
+        ],
+        correct: 1,
+        explanation: 'Merge = horizontal combination (JOIN). Append = vertical combination (UNION). Very different operations!'
+      },
+      'etl_core': {
+        type: 'quiz',
+        question: 'What does ETL stand for?',
+        options: [
+          'Extract, Transform, Load',
+          'Enter, Test, Launch',
+          'Evaluate, Track, Log',
+          'Export, Transfer, Link'
+        ],
+        correct: 0,
+        explanation: 'Extract (get data from sources), Transform (clean and reshape), Load (put into target system).'
+      },
+      'query_folding': {
+        type: 'quiz',
+        question: 'Why is query folding important for performance?',
+        options: [
+          'It compresses the data to use less memory',
+          'It pushes transformation logic to the source database, reducing data transferred',
+          'It caches results for faster repeat queries',
+          'It parallelizes operations across multiple CPUs'
+        ],
+        correct: 1,
+        explanation: 'When queries fold, the source database does the filtering/transformation. You transfer less data and leverage database optimization.'
+      },
+      'incremental_refresh': {
+        type: 'quiz',
+        question: 'Incremental refresh is most valuable when:',
+        options: [
+          'Your data never changes',
+          'You have small datasets that load quickly',
+          'You have large datasets where only recent data changes frequently',
+          'You want to delete old data automatically'
+        ],
+        correct: 2,
+        explanation: 'Incremental refresh shines with large datasets. Only load new/changed partitions instead of reprocessing everything.'
+      },
+      'staging_queries': {
+        type: 'quiz',
+        question: 'What is the purpose of disabling "Enable Load" on staging queries?',
+        options: [
+          'To make them run faster',
+          'To hide them from other users',
+          'To prevent them from loading into the data model while still being available for reference',
+          'To enable query folding'
+        ],
+        correct: 2,
+        explanation: 'Staging queries with Load disabled are processed but not loaded to the model. They organize your ETL logic without cluttering the final model.'
+      },
+      'audit_core': {
+        type: 'quiz',
+        question: 'What is the primary purpose of data reconciliation?',
+        options: [
+          'To make data look prettier in reports',
+          'To verify that data matches between different sources or systems',
+          'To delete duplicate records',
+          'To encrypt sensitive information'
+        ],
+        correct: 1,
+        explanation: 'Reconciliation compares data between systems (e.g., source vs. warehouse, or finance vs. operations) to find and resolve discrepancies.'
+      },
+      'fuzzy_matching': {
+        type: 'shapeshifter',
+        scenario: 'The Shapeshifter has fragmented your customer records!',
+        records: [
+          { id: 'A', name: 'Jonathan Smith', email: 'jsmith@acme.com', city: 'New York' },
+          { id: 'B', name: 'Jon Smith', email: 'jonathan.smith@acme.com', city: 'New York' },
+          { id: 'C', name: 'John Smyth', email: 'jsmyth@globex.com', city: 'Boston' }
+        ],
+        question: 'Which records likely represent the SAME real-world entity?',
+        options: [
+          'A and B only (same person, different name formats)',
+          'A and C only (similar names)',
+          'B and C only (both have "John" sound)',
+          'All three are different people',
+          'All three are the same person'
+        ],
+        correct: 0,
+        explanation: 'A and B share the same email domain (@acme.com), same city, and "Jonathan/Jon" are common name variations. C has a different email domain, different city, and "Smyth" is a different surname spelling - likely a different person.'
+      },
+      'reconciliation_logic': {
+        type: 'quiz',
+        question: 'When comparing Master Data to Tracker Data, what determines a "Match"?',
+        options: [
+          'The records have the same number of characters',
+          'Key fields align AND amounts/values reconcile within tolerance',
+          'The records were created on the same date',
+          'The records have identical formatting'
+        ],
+        correct: 1,
+        explanation: 'Reconciliation matches on business keys (employee ID, transaction ID, etc.) then compares values. Small differences may be tolerated; large discrepancies are flagged.'
+      }
+    };
+    
+    // Game Data with prerequisites
+    const GAME_DATA = {
+      nodes: [
+        // KIMBALL STRONGHOLD
+        { id: 'kimball_core', label: 'Kimball Core', type: NodeType.REALM, realm: Realm.KIMBALL,
+          description: 'The ancient citadel of dimensional modeling. Here begins your journey into the art of structuring data for insight.',
+          xpValue: 100, prerequisites: [] },
+        { id: 'star_schema', label: 'Star Schema', type: NodeType.BOSS, realm: Realm.KIMBALL,
+          description: 'The legendary blade of data architecture. A central Fact table surrounded by Dimension tables - elegant, powerful, fast.',
+          xpValue: 500, prerequisites: ['kimball_core'] },
+        { id: 'fact_tables', label: 'Fact Tables', type: NodeType.TOPIC, realm: Realm.KIMBALL,
+          description: 'Tables containing the measurements of business processes. Transaction, Periodic Snapshot, and Accumulating Snapshot types await.',
+          xpValue: 150, prerequisites: ['star_schema'] },
+        { id: 'dimension_tables', label: 'Dimension Tables', type: NodeType.TOPIC, realm: Realm.KIMBALL,
+          description: 'The context of your data. Who bought it? What was it? Where? When? Why? The dimensions tell the story.',
+          xpValue: 150, prerequisites: ['star_schema'] },
+        { id: 'scd', label: 'Slowly Changing Dimensions', type: NodeType.BOSS, realm: Realm.KIMBALL,
+          description: 'The temporal magic of tracking history. Type 1 overwrites, Type 2 preserves - choose wisely for each attribute.',
+          xpValue: 400, prerequisites: ['dimension_tables'] },
+        { id: 'surrogate_keys', label: 'Surrogate Keys', type: NodeType.TOPIC, realm: Realm.KIMBALL,
+          description: 'Warehouse-assigned identifiers that shield your model from the chaos of source system changes.',
+          xpValue: 100, prerequisites: ['dimension_tables'] },
+        { id: 'snowflaking', label: 'Avoid Snowflaking', type: NodeType.TOPIC, realm: Realm.KIMBALL,
+          description: 'A tempting but treacherous path! Normalizing dimensions hurts performance and confuses users. Resist!',
+          xpValue: 120, prerequisites: ['star_schema'] },
+        
+        // M-MAGE TOWER
+        { id: 'm_tower_core', label: 'The M Tower', type: NodeType.REALM, realm: Realm.M_TOWER,
+          description: 'A spiraling tower of functional incantations. The M language powers all Power Query transformations.',
+          xpValue: 100, prerequisites: [] },
+        { id: 'm_language', label: 'M Language', type: NodeType.TOPIC, realm: Realm.M_TOWER,
+          description: 'The functional, case-sensitive language behind Power Query. Everything is an expression; every expression returns a value.',
+          xpValue: 200, prerequisites: ['m_tower_core'] },
+        { id: 'let_in', label: 'Let...In Expression', type: NodeType.BOSS, realm: Realm.M_TOWER,
+          description: 'The spell of encapsulation. "Let" defines your steps, "In" specifies what emerges. Master this, master M.',
+          xpValue: 350, prerequisites: ['m_language'] },
+        { id: 'structured_types', label: 'Structured Types', type: NodeType.TOPIC, realm: Realm.M_TOWER,
+          description: 'Lists {}, Records [], and Tables - the three containers of power. Know their shapes; know their access patterns.',
+          xpValue: 250, prerequisites: ['m_language'] },
+        { id: 'custom_functions', label: 'Custom Functions', type: NodeType.BOSS, realm: Realm.M_TOWER,
+          description: 'Advanced sorcery. Create reusable logic to invoke across multiple datasets. (x) => transform(x)',
+          xpValue: 600, prerequisites: ['let_in', 'structured_types'] },
+        { id: 'error_handling_m', label: 'Error Handling', type: NodeType.TOPIC, realm: Realm.M_TOWER,
+          description: 'Defensive magic. try...otherwise prevents query crashes when data misbehaves.',
+          xpValue: 200, prerequisites: ['m_language'] },
+        
+        // WRANGLING WILDS
+        { id: 'wrangling_core', label: 'Wrangling Wilds', type: NodeType.REALM, realm: Realm.WRANGLING_WILDS,
+          description: 'The untamed frontier of raw data. Your mission: transform chaos into clarity through cleansing and shaping.',
+          xpValue: 100, prerequisites: [] },
+        { id: 'profiling', label: 'Data Profiling', type: NodeType.TOPIC, realm: Realm.WRANGLING_WILDS,
+          description: 'Scout the terrain before battle. Check column quality, distributions, and patterns before cleaning.',
+          xpValue: 150, prerequisites: ['wrangling_core'] },
+        { id: 'cleaning_techniques', label: 'Cleaning Techniques', type: NodeType.TOPIC, realm: Realm.WRANGLING_WILDS,
+          description: 'Trim, transform, standardize. Remove the grime of inconsistent casing, trailing spaces, and garbage characters.',
+          xpValue: 150, prerequisites: ['profiling'] },
+        { id: 'pivoting', label: 'Pivot & Unpivot', type: NodeType.BOSS, realm: Realm.WRANGLING_WILDS,
+          description: 'Reshape reality itself. Unpivot columns to rows; Pivot rows to columns. The shape must serve the question.',
+          xpValue: 300, prerequisites: ['wrangling_core'] },
+        { id: 'merging_appending', label: 'Merge & Append', type: NodeType.TOPIC, realm: Realm.WRANGLING_WILDS,
+          description: 'Merge adds columns (JOIN). Append adds rows (UNION). Two very different spells - know the difference.',
+          xpValue: 200, prerequisites: ['wrangling_core'] },
+        
+        // ETL ENGINE
+        { id: 'etl_core', label: 'ETL Engine', type: NodeType.REALM, realm: Realm.ETL_ENGINE,
+          description: 'The mechanical heart driving all data movement. Extract, Transform, Load - the eternal cycle.',
+          xpValue: 100, prerequisites: [] },
+        { id: 'query_folding', label: 'Query Folding', type: NodeType.BOSS, realm: Realm.ETL_ENGINE,
+          description: 'The golden rule of performance! Push logic to the source database. Less data transferred = faster everything.',
+          xpValue: 600, prerequisites: ['etl_core', 'm_tower_core'] },
+        { id: 'incremental_refresh', label: 'Incremental Refresh', type: NodeType.TOPIC, realm: Realm.ETL_ENGINE,
+          description: 'For massive datasets: load only what changed. Partition by time, refresh only recent windows.',
+          xpValue: 300, prerequisites: ['etl_core'] },
+        { id: 'staging_queries', label: 'Staging Queries', type: NodeType.TOPIC, realm: Realm.ETL_ENGINE,
+          description: 'Intermediate queries that organize logic without cluttering the model. Disable "Enable Load" to use them as building blocks.',
+          xpValue: 150, prerequisites: ['etl_core'] },
+        
+        // AUDIT ARCHIVES
+        { id: 'audit_core', label: 'Audit Archives', type: NodeType.REALM, realm: Realm.AUDIT_ARCHIVES,
+          description: 'The vault of verification. Reconciliation, validation, and the eternal hunt for discrepancies.',
+          xpValue: 100, prerequisites: [] },
+        { id: 'fuzzy_matching', label: 'Fuzzy Matching', type: NodeType.TOPIC, realm: Realm.AUDIT_ARCHIVES,
+          description: 'When exact matches fail, fuzzy logic prevails. "Jon" vs "John", "Corp." vs "Corporation" - find the truth beneath the noise.',
+          xpValue: 250, prerequisites: ['audit_core'] },
+        { id: 'reconciliation_logic', label: 'Reconciliation Logic', type: NodeType.BOSS, realm: Realm.AUDIT_ARCHIVES,
+          description: 'Compare Master vs Tracker. Match on keys, compare on values, flag the discrepancies. Trust but verify.',
+          xpValue: 400, prerequisites: ['fuzzy_matching', 'merging_appending'] }
+      ],
+      links: [
+        // Kimball internal
+        { source: 'kimball_core', target: 'star_schema' },
+        { source: 'star_schema', target: 'fact_tables' },
+        { source: 'star_schema', target: 'dimension_tables' },
+        { source: 'star_schema', target: 'snowflaking' },
+        { source: 'dimension_tables', target: 'scd' },
+        { source: 'dimension_tables', target: 'surrogate_keys' },
+        
+        // M Tower internal
+        { source: 'm_tower_core', target: 'm_language' },
+        { source: 'm_language', target: 'let_in' },
+        { source: 'm_language', target: 'structured_types' },
+        { source: 'm_language', target: 'error_handling_m' },
+        { source: 'let_in', target: 'custom_functions' },
+        { source: 'structured_types', target: 'custom_functions' },
+        
+        // Wrangling internal
+        { source: 'wrangling_core', target: 'profiling' },
+        { source: 'profiling', target: 'cleaning_techniques' },
+        { source: 'wrangling_core', target: 'pivoting' },
+        { source: 'wrangling_core', target: 'merging_appending' },
+        
+        // ETL internal
+        { source: 'etl_core', target: 'query_folding' },
+        { source: 'etl_core', target: 'incremental_refresh' },
+        { source: 'etl_core', target: 'staging_queries' },
+        
+        // Audit internal
+        { source: 'audit_core', target: 'fuzzy_matching' },
+        { source: 'fuzzy_matching', target: 'reconciliation_logic' },
+        
+        // Cross-realm connections
+        { source: 'kimball_core', target: 'etl_core' },
+        { source: 'etl_core', target: 'm_tower_core' },
+        { source: 'm_tower_core', target: 'wrangling_core' },
+        { source: 'wrangling_core', target: 'audit_core' },
+        { source: 'cleaning_techniques', target: 'error_handling_m' },
+        { source: 'merging_appending', target: 'reconciliation_logic' }
+      ]
+    };
+    
+    // ============================================
+    // UTILITY FUNCTIONS
+    // ============================================
+    
+    const getRank = (level) => {
+      if (level < 3) return "Novice Wrangler";
+      if (level < 5) return "Query Apprentice";
+      if (level < 8) return "Fact Architect";
+      if (level < 12) return "Dimension Master";
+      if (level < 15) return "Schema Sage";
+      return "Dragon Slayer";
+    };
+    
+    const INITIAL_XP_REQ = 400;
+    
+    const isNodeUnlocked = (nodeId, completedNodes, allNodes) => {
+      const node = allNodes.find(n => n.id === nodeId);
+      if (!node) return false;
+      if (!node.prerequisites || node.prerequisites.length === 0) return true;
+      return node.prerequisites.every(prereq => completedNodes.includes(prereq));
+    };
+    
+    const getRealmProgress = (realm, completedNodes, allNodes) => {
+      const realmNodes = allNodes.filter(n => n.realm === realm);
+      const completed = realmNodes.filter(n => completedNodes.includes(n.id));
+      return { completed: completed.length, total: realmNodes.length };
+    };
+    
+    // ============================================
+    // REACT COMPONENTS
+    // ============================================
+    
+    const { useState, useEffect, useRef, useCallback, useMemo } = React;
+    
+    // Icon component using Lucide
+    function Icon({ name, className = "w-5 h-5" }) {
+      const ref = useRef(null);
+      useEffect(() => {
+        if (ref.current && lucide[name]) {
+          ref.current.innerHTML = '';
+          const icon = lucide.createElement(lucide[name]);
+          icon.classList.add(...className.split(' '));
+          ref.current.appendChild(icon);
+        }
+      }, [name, className]);
+      return React.createElement('span', { ref, className: 'inline-flex items-center justify-center' });
+    }
+    
+    // Hero HUD Component
+    function HeroHUD({ userState }) {
+      const progressPercent = (userState.currentXp / userState.maxXp) * 100;
+      
+      return React.createElement('div', {
+        className: 'absolute top-0 left-0 right-0 h-20 z-30 flex items-center justify-between px-6 bg-gradient-to-b from-slate-900 via-slate-900/95 to-transparent'
+      },
+        // Title
+        React.createElement('div', { className: 'flex flex-col' },
+          React.createElement('h1', { 
+            className: 'text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200 font-display tracking-wider neon-gold'
+          }, 'DATA DRAGON REALMS'),
+          React.createElement('p', { className: 'text-xs text-slate-500 tracking-widest' }, 'Master the Arts of Data')
+        ),
+        
+        // Stats
+        React.createElement('div', { className: 'flex items-center gap-4' },
+          // Rank Badge
+          React.createElement('div', { 
+            className: 'flex items-center gap-2 glass-panel px-4 py-2 rounded-lg border border-amber-500/30'
+          },
+            React.createElement(Icon, { name: 'Trophy', className: 'w-5 h-5 text-amber-400' }),
+            React.createElement('div', { className: 'flex flex-col' },
+              React.createElement('span', { className: 'text-[10px] text-slate-500 uppercase tracking-wider' }, 'Rank'),
+              React.createElement('span', { className: 'text-sm font-display text-amber-100' }, userState.rank)
+            )
+          ),
+          
+          // XP Bar
+          React.createElement('div', { className: 'w-40 md:w-56' },
+            React.createElement('div', { className: 'flex justify-between text-xs mb-1' },
+              React.createElement('span', { className: 'flex items-center gap-1 text-slate-300' },
+                React.createElement(Icon, { name: 'User', className: 'w-3 h-3' }),
+                'Level ', userState.level
+              ),
+              React.createElement('span', { className: 'flex items-center gap-1 text-amber-400' },
+                React.createElement(Icon, { name: 'Star', className: 'w-3 h-3' }),
+                userState.currentXp, ' / ', userState.maxXp, ' XP'
+              )
+            ),
+            React.createElement('div', { 
+              className: 'h-3 w-full bg-slate-800 rounded-full overflow-hidden border border-slate-700'
+            },
+              React.createElement('div', {
+                className: 'h-full bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-300 transition-all duration-700 ease-out progress-shine',
+                style: { width: `${Math.min(progressPercent, 100)}%` }
+              })
+            )
+          ),
+          
+          // Nodes Completed
+          React.createElement('div', { 
+            className: 'hidden md:flex items-center gap-2 glass-panel px-4 py-2 rounded-lg border border-slate-600/30'
+          },
+            React.createElement(Icon, { name: 'CheckCircle', className: 'w-5 h-5 text-emerald-400' }),
+            React.createElement('div', { className: 'flex flex-col' },
+              React.createElement('span', { className: 'text-[10px] text-slate-500 uppercase tracking-wider' }, 'Conquered'),
+              React.createElement('span', { className: 'text-sm text-slate-100' }, 
+                userState.completedNodes.length, ' / ', GAME_DATA.nodes.length
+              )
+            )
+          )
+        )
+      );
+    }
+    
+    // Challenge Modal Component
+    function ChallengeModal({ node, challenge, onComplete, onClose }) {
+      const [selectedAnswer, setSelectedAnswer] = useState(null);
+      const [showResult, setShowResult] = useState(false);
+      const [isCorrect, setIsCorrect] = useState(false);
+      
+      const handleSubmit = () => {
+        if (selectedAnswer === null) return;
+        const correct = selectedAnswer === challenge.correct;
+        setIsCorrect(correct);
+        setShowResult(true);
+      };
+      
+      const handleContinue = () => {
+        if (isCorrect) {
+          onComplete(node.id, node.xpValue);
+        }
+        onClose();
+      };
+      
+      const isShapeshifter = challenge.type === 'shapeshifter';
+      
+      return React.createElement('div', {
+        className: 'fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm animate-fadeIn'
+      },
+        React.createElement('div', {
+          className: `glass-panel rounded-2xl p-8 max-w-2xl w-full mx-4 animate-scaleIn ${isShapeshifter ? 'border-purple-500/50' : ''}`
+        },
+          // Header
+          React.createElement('div', { className: 'flex items-center gap-3 mb-6' },
+            React.createElement('div', { 
+              className: `p-3 rounded-xl ${isShapeshifter ? 'bg-purple-900/50 border border-purple-500/50' : 'bg-amber-900/50 border border-amber-500/50'}`
+            },
+              React.createElement(Icon, { 
+                name: isShapeshifter ? 'Ghost' : 'Scroll', 
+                className: `w-6 h-6 ${isShapeshifter ? 'text-purple-400' : 'text-amber-400'}` 
+              })
+            ),
+            React.createElement('div', null,
+              React.createElement('h3', { 
+                className: `text-xl font-display ${isShapeshifter ? 'text-purple-200 neon-purple' : 'text-amber-200 neon-gold'}`
+              }, isShapeshifter ? '🔮 The Shapeshifter Appears!' : '📜 Trial of Knowledge'),
+              React.createElement('p', { className: 'text-sm text-slate-400' }, node.label)
+            )
+          ),
+          
+          // Shapeshifter scenario
+          isShapeshifter && challenge.scenario && React.createElement('div', {
+            className: 'mb-4 p-4 bg-purple-950/30 border border-purple-500/30 rounded-lg'
+          },
+            React.createElement('p', { className: 'text-purple-200 italic' }, challenge.scenario),
+            challenge.records && React.createElement('div', { className: 'mt-3 space-y-2' },
+              challenge.records.map((rec, i) => 
+                React.createElement('div', { 
+                  key: i,
+                  className: 'text-xs font-mono bg-slate-900/50 p-2 rounded border border-slate-700'
+                },
+                  React.createElement('span', { className: 'text-purple-400' }, `[${rec.id}] `),
+                  React.createElement('span', { className: 'text-slate-300' }, rec.name),
+                  React.createElement('span', { className: 'text-slate-500' }, ` | ${rec.email} | ${rec.city}`)
+                )
+              )
+            )
+          ),
+          
+          // Question
+          React.createElement('p', { className: 'text-lg text-slate-200 mb-6' }, challenge.question),
+          
+          // Options
+          !showResult && React.createElement('div', { className: 'space-y-3 mb-6' },
+            challenge.options.map((option, index) => 
+              React.createElement('button', {
+                key: index,
+                onClick: () => setSelectedAnswer(index),
+                className: `w-full p-4 text-left rounded-lg border transition-all quiz-option ${
+                  selectedAnswer === index 
+                    ? 'border-amber-500 bg-amber-950/30 text-amber-100' 
+                    : 'border-slate-700 bg-slate-800/50 text-slate-300 hover:bg-slate-800'
+                }`
+              },
+                React.createElement('span', { className: 'flex items-center gap-3' },
+                  React.createElement('span', { 
+                    className: `w-6 h-6 rounded-full border flex items-center justify-center text-sm ${
+                      selectedAnswer === index ? 'border-amber-500 text-amber-500' : 'border-slate-600 text-slate-500'
+                    }`
+                  }, String.fromCharCode(65 + index)),
+                  option
+                )
+              )
+            )
+          ),
+          
+          // Result
+          showResult && React.createElement('div', {
+            className: `p-4 rounded-lg mb-6 ${isCorrect ? 'bg-emerald-950/30 border border-emerald-500/30' : 'bg-red-950/30 border border-red-500/30'}`
+          },
+            React.createElement('div', { className: 'flex items-center gap-2 mb-2' },
+              React.createElement(Icon, { 
+                name: isCorrect ? 'CheckCircle' : 'XCircle', 
+                className: `w-5 h-5 ${isCorrect ? 'text-emerald-400' : 'text-red-400'}` 
+              }),
+              React.createElement('span', { 
+                className: `font-display ${isCorrect ? 'text-emerald-200' : 'text-red-200'}`
+              }, isCorrect ? 'Correct!' : 'Not quite...')
+            ),
+            React.createElement('p', { className: 'text-slate-300 text-sm' }, challenge.explanation),
+            isCorrect && React.createElement('p', { className: 'text-amber-400 text-sm mt-2 flex items-center gap-1' },
+              React.createElement(Icon, { name: 'Star', className: 'w-4 h-4' }),
+              `+${node.xpValue} XP`
+            )
+          ),
+          
+          // Actions
+          React.createElement('div', { className: 'flex gap-3' },
+            !showResult && React.createElement('button', {
+              onClick: handleSubmit,
+              disabled: selectedAnswer === null,
+              className: `flex-1 py-3 rounded-lg font-display transition-all ${
+                selectedAnswer === null 
+                  ? 'bg-slate-700 text-slate-500 cursor-not-allowed'
+                  : 'bg-amber-600 hover:bg-amber-500 text-white'
+              }`
+            }, 'Submit Answer'),
+            showResult && React.createElement('button', {
+              onClick: handleContinue,
+              className: `flex-1 py-3 rounded-lg font-display transition-all ${
+                isCorrect 
+                  ? 'bg-emerald-600 hover:bg-emerald-500 text-white'
+                  : 'bg-slate-600 hover:bg-slate-500 text-white'
+              }`
+            }, isCorrect ? 'Claim Reward!' : 'Try Again Later'),
+            React.createElement('button', {
+              onClick: onClose,
+              className: 'px-6 py-3 rounded-lg border border-slate-600 text-slate-400 hover:bg-slate-800 transition-all'
+            }, showResult ? 'Close' : 'Flee')
+          )
+        )
+      );
+    }
+    
+    // Quest Panel Component
+    function QuestPanel({ node, onClose, onComplete, isCompleted, isLocked, completedNodes }) {
+      const [showChallenge, setShowChallenge] = useState(false);
+      const isBoss = node.type === NodeType.BOSS;
+      const challenge = CHALLENGES[node.id];
+      const realmColor = REALM_COLORS[node.realm];
+      
+      // Find missing prerequisites
+      const missingPrereqs = node.prerequisites?.filter(p => !completedNodes.includes(p)) || [];
+      const missingNodes = missingPrereqs.map(p => GAME_DATA.nodes.find(n => n.id === p)?.label).filter(Boolean);
+      
+      const handleStartChallenge = () => {
+        if (challenge) {
+          setShowChallenge(true);
+        } else {
+          // No challenge, just complete
+          onComplete(node.id, node.xpValue);
+        }
+      };
+      
+      return React.createElement('div', {
+        className: `absolute right-4 top-24 bottom-4 w-96 glass-panel rounded-2xl p-6 flex flex-col z-20 animate-slideIn ${isBoss ? 'border-red-500/30' : ''}`
+      },
+        // Close button
+        React.createElement('button', {
+          onClick: onClose,
+          className: 'absolute top-4 right-4 text-slate-400 hover:text-white transition-colors p-1'
+        }, React.createElement(Icon, { name: 'X', className: 'w-5 h-5' })),
+        
+        // Header
+        React.createElement('div', { className: 'flex items-start gap-4 mb-4' },
+          React.createElement('div', {
+            className: `p-3 rounded-xl border ${isBoss ? 'bg-red-950/50 border-red-500/50' : 'bg-slate-800/50 border-slate-600/50'}`
+          },
+            React.createElement(Icon, {
+              name: node.type === NodeType.REALM ? 'Castle' : node.type === NodeType.BOSS ? 'Skull' : 'BookOpen',
+              className: `w-7 h-7 ${isBoss ? 'text-red-400' : 'text-slate-300'}`
+            })
+          ),
+          React.createElement('div', { className: 'flex-1' },
+            React.createElement('div', { 
+              className: `text-xs uppercase tracking-wider font-bold mb-1`,
+              style: { color: realmColor.primary }
+            }, node.realm),
+            React.createElement('h2', {
+              className: `text-xl font-display ${isBoss ? 'text-red-100 neon-red' : 'text-slate-100'}`
+            }, node.label)
+          )
+        ),
+        
+        // Divider
+        React.createElement('div', { 
+          className: `h-px w-full mb-4 ${isBoss ? 'bg-red-500/30' : 'bg-slate-700/50'}` 
+        }),
+        
+        // Content
+        React.createElement('div', { className: 'flex-1 overflow-y-auto pr-2' },
+          React.createElement('p', { className: 'text-slate-300 leading-relaxed mb-6' }, node.description),
+          
+          // Prerequisites warning if locked
+          isLocked && missingNodes.length > 0 && React.createElement('div', {
+            className: 'p-4 bg-slate-900/50 border border-slate-700/50 rounded-lg mb-4'
+          },
+            React.createElement('h4', { 
+              className: 'text-xs uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-2'
+            },
+              React.createElement(Icon, { name: 'Lock', className: 'w-3 h-3' }),
+              'Prerequisites Required'
+            ),
+            React.createElement('ul', { className: 'text-sm text-slate-400 space-y-1' },
+              missingNodes.map((name, i) => 
+                React.createElement('li', { key: i, className: 'flex items-center gap-2' },
+                  React.createElement(Icon, { name: 'Circle', className: 'w-2 h-2 text-red-400' }),
+                  name
+                )
+              )
+            )
+          ),
+          
+          // Challenge info
+          challenge && !isCompleted && !isLocked && React.createElement('div', {
+            className: `p-4 rounded-lg mb-4 border ${
+              challenge.type === 'shapeshifter' 
+                ? 'bg-purple-950/20 border-purple-500/30' 
+                : 'bg-amber-950/20 border-amber-500/30'
+            }`
+          },
+            React.createElement('h4', {
+              className: `text-xs uppercase tracking-wider mb-2 flex items-center gap-2 ${
+                challenge.type === 'shapeshifter' ? 'text-purple-400' : 'text-amber-400'
+              }`
+            },
+              React.createElement(Icon, { 
+                name: challenge.type === 'shapeshifter' ? 'Ghost' : 'HelpCircle', 
+                className: 'w-3 h-3' 
+              }),
+              challenge.type === 'shapeshifter' ? 'Shapeshifter Encounter!' : 'Knowledge Trial'
+            ),
+            React.createElement('p', { className: 'text-sm text-slate-400' },
+              challenge.type === 'shapeshifter' 
+                ? 'An entity resolution challenge awaits. Can you identify the true forms?'
+                : 'Answer correctly to claim your reward.'
+            )
+          ),
+          
+          // Lore
+          !isLocked && React.createElement('div', {
+            className: `p-4 rounded-lg border ${isBoss ? 'bg-red-950/20 border-red-500/20' : 'bg-slate-900/50 border-slate-700/50'}`
+          },
+            React.createElement('h4', {
+              className: `text-xs uppercase tracking-wider mb-2 flex items-center gap-2 ${isBoss ? 'text-red-400' : 'text-slate-500'}`
+            },
+              React.createElement(Icon, { name: 'Scroll', className: 'w-3 h-3' }),
+              isBoss ? 'Dragon Knowledge' : 'Ancient Wisdom'
+            ),
+            React.createElement('ul', { className: 'text-sm text-slate-400 space-y-2' },
+              React.createElement('li', null, '• Mastery requires understanding the underlying logic.'),
+              React.createElement('li', null, `• This concept connects deeply to ${node.realm}.`),
+              isBoss && React.createElement('li', { className: 'text-red-400 font-semibold' }, 
+                '• ⚠️ High complexity. A true test of skill.'
+              )
+            )
+          )
+        ),
+        
+        // Footer
+        React.createElement('div', { className: `mt-4 pt-4 border-t ${isBoss ? 'border-red-500/30' : 'border-slate-700/50'}` },
+          React.createElement('div', { className: 'flex justify-between items-center mb-4' },
+            React.createElement('span', { className: 'text-slate-400' }, 'Reward:'),
+            React.createElement('span', { className: 'text-amber-400 font-display text-xl flex items-center gap-1' },
+              React.createElement(Icon, { name: 'Star', className: 'w-5 h-5' }),
+              node.xpValue, ' XP'
+            )
+          ),
+          
+          isCompleted 
+            ? React.createElement('button', {
+                disabled: true,
+                className: 'w-full py-3 bg-emerald-900/50 border border-emerald-500/50 text-emerald-400 font-display rounded-lg flex items-center justify-center gap-2'
+              },
+                React.createElement(Icon, { name: 'CheckCircle', className: 'w-5 h-5' }),
+                'Conquered'
+              )
+            : isLocked
+            ? React.createElement('button', {
+                disabled: true,
+                className: 'w-full py-3 bg-slate-800/50 border border-slate-600/50 text-slate-500 font-display rounded-lg flex items-center justify-center gap-2'
+              },
+                React.createElement(Icon, { name: 'Lock', className: 'w-5 h-5' }),
+                'Locked'
+              )
+            : React.createElement('button', {
+                onClick: handleStartChallenge,
+                className: `w-full py-3 font-display rounded-lg transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 ${
+                  isBoss
+                    ? 'bg-red-700 hover:bg-red-600 text-white border border-red-500'
+                    : 'bg-indigo-600 hover:bg-indigo-500 text-white'
+                }`
+              },
+                React.createElement(Icon, { name: isBoss ? 'Sword' : 'BookOpen', className: 'w-5 h-5' }),
+                isBoss ? 'Face the Dragon!' : 'Begin Trial'
+              )
+        ),
+        
+        // Challenge Modal
+        showChallenge && challenge && React.createElement(ChallengeModal, {
+          node,
+          challenge,
+          onComplete,
+          onClose: () => setShowChallenge(false)
+        })
+      );
+    }
+    
+    // Constellation Map Component
+    function ConstellationMap({ data, onNodeClick, completedNodes }) {
+      const svgRef = useRef(null);
+      const containerRef = useRef(null);
+      const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
+      
+      useEffect(() => {
+        const handleResize = () => {
+          if (containerRef.current) {
+            setDimensions({
+              width: containerRef.current.clientWidth,
+              height: containerRef.current.clientHeight
+            });
+          }
+        };
+        window.addEventListener('resize', handleResize);
+        handleResize();
+        return () => window.removeEventListener('resize', handleResize);
+      }, []);
+      
+      const drawGraph = useCallback(() => {
+        if (!svgRef.current || !data.nodes.length) return;
+        
+        const svg = d3.select(svgRef.current);
+        svg.selectAll('*').remove();
+        
+        const { width, height } = dimensions;
+        
+        // Defs for filters
+        const defs = svg.append('defs');
+        
+        // Glow filter
+        const glow = defs.append('filter').attr('id', 'glow').attr('x', '-50%').attr('y', '-50%').attr('width', '200%').attr('height', '200%');
+        glow.append('feGaussianBlur').attr('stdDeviation', '3').attr('result', 'blur');
+        const glowMerge = glow.append('feMerge');
+        glowMerge.append('feMergeNode').attr('in', 'blur');
+        glowMerge.append('feMergeNode').attr('in', 'SourceGraphic');
+        
+        // Boss glow
+        const bossGlow = defs.append('filter').attr('id', 'bossGlow').attr('x', '-100%').attr('y', '-100%').attr('width', '300%').attr('height', '300%');
+        bossGlow.append('feGaussianBlur').attr('stdDeviation', '6').attr('result', 'blur');
+        const bossMerge = bossGlow.append('feMerge');
+        bossMerge.append('feMergeNode').attr('in', 'blur');
+        bossMerge.append('feMergeNode').attr('in', 'SourceGraphic');
+        
+        // Create zoom container
+        const g = svg.append('g');
+        const zoom = d3.zoom()
+          .scaleExtent([0.3, 3])
+          .on('zoom', (event) => g.attr('transform', event.transform));
+        svg.call(zoom);
+        
+        // Set initial transform to center
+        svg.call(zoom.transform, d3.zoomIdentity.translate(width/4, height/4).scale(0.8));
+        
+        // Simulation
+        const nodes = data.nodes.map(d => ({...d}));
+        const links = data.links.map(d => ({...d}));
+        
+        const simulation = d3.forceSimulation(nodes)
+          .force('link', d3.forceLink(links).id(d => d.id).distance(140))
+          .force('charge', d3.forceManyBody().strength(-600))
+          .force('center', d3.forceCenter(width / 2, height / 2))
+          .force('collide', d3.forceCollide().radius(60).strength(0.8));
+        
+        // Draw links
+        const link = g.append('g')
+          .selectAll('line')
+          .data(links)
+          .join('line')
+          .attr('stroke', d => {
+            const sourceId = d.source.id || d.source;
+            const targetId = d.target.id || d.target;
+            const sourceDone = completedNodes.includes(sourceId);
+            const targetDone = completedNodes.includes(targetId);
+            return (sourceDone && targetDone) ? '#fbbf24' : '#334155';
+          })
+          .attr('stroke-width', d => {
+            const sourceId = d.source.id || d.source;
+            const targetId = d.target.id || d.target;
+            return (completedNodes.includes(sourceId) && completedNodes.includes(targetId)) ? 2.5 : 1;
+          })
+          .attr('stroke-opacity', d => {
+            const sourceId = d.source.id || d.source;
+            const targetId = d.target.id || d.target;
+            return (completedNodes.includes(sourceId) && completedNodes.includes(targetId)) ? 0.9 : 0.25;
+          });
+        
+        // Draw nodes
+        const node = g.append('g')
+          .selectAll('g')
+          .data(nodes)
+          .join('g')
+          .attr('cursor', 'pointer')
+          .call(d3.drag()
+            .on('start', (event, d) => {
+              if (!event.active) simulation.alphaTarget(0.3).restart();
+              d.fx = d.x;
+              d.fy = d.y;
+            })
+            .on('drag', (event, d) => {
+              d.fx = event.x;
+              d.fy = event.y;
+            })
+            .on('end', (event, d) => {
+              if (!event.active) simulation.alphaTarget(0);
+              d.fx = null;
+              d.fy = null;
+            })
+          )
+          .on('click', (event, d) => {
+            event.stopPropagation();
+            onNodeClick(d);
+          });
+        
+        // Draw node shapes
+        node.each(function(d) {
+          const el = d3.select(this);
+          const isCompleted = completedNodes.includes(d.id);
+          const isUnlocked = isNodeUnlocked(d.id, completedNodes, data.nodes);
+          const baseColor = REALM_COLORS[d.realm]?.primary || '#64748b';
+          const color = isCompleted ? '#fbbf24' : isUnlocked ? baseColor : '#475569';
+          
+          if (d.type === NodeType.REALM) {
+            // Realm: Large star with orbit
+            el.append('circle')
+              .attr('r', 16)
+              .attr('fill', color)
+              .style('filter', 'url(#bossGlow)');
+            el.append('circle')
+              .attr('r', 24)
+              .attr('fill', 'none')
+              .attr('stroke', color)
+              .attr('stroke-width', 1.5)
+              .attr('opacity', 0.5)
+              .attr('stroke-dasharray', '4,4');
+          } else if (d.type === NodeType.BOSS) {
+            // Boss: Diamond
+            const diamond = d3.symbol().type(d3.symbolDiamond).size(600);
+            el.append('path')
+              .attr('d', diamond)
+              .attr('fill', isCompleted ? '#fbbf24' : isUnlocked ? '#ef4444' : '#475569')
+              .style('filter', 'url(#bossGlow)');
+            el.append('circle')
+              .attr('r', 4)
+              .attr('fill', '#0f172a');
+          } else {
+            // Topic: Circle
+            el.append('circle')
+              .attr('r', 8)
+              .attr('fill', color)
+              .attr('stroke', isCompleted ? '#fff' : 'none')
+              .attr('stroke-width', 2)
+              .style('filter', 'url(#glow)');
+          }
+          
+          // Locked indicator
+          if (!isUnlocked && !isCompleted) {
+            el.append('text')
+              .text('🔒')
+              .attr('x', 0)
+              .attr('y', 4)
+              .attr('text-anchor', 'middle')
+              .attr('font-size', '10px');
+          }
+          
+          // Label
+          el.append('text')
+            .text(d.label)
+            .attr('x', d.type === NodeType.REALM ? 30 : 16)
+            .attr('y', 5)
+            .attr('font-size', d.type === NodeType.REALM ? '14px' : '11px')
+            .attr('font-family', 'Cinzel, serif')
+            .attr('fill', isCompleted ? '#fbbf24' : isUnlocked ? '#e2e8f0' : '#64748b')
+            .attr('opacity', isUnlocked ? 0.9 : 0.5)
+            .style('text-shadow', '2px 2px 4px #000')
+            .style('pointer-events', 'none');
+        });
+        
+        // Tick
+        simulation.on('tick', () => {
+          link
+            .attr('x1', d => d.source.x)
+            .attr('y1', d => d.source.y)
+            .attr('x2', d => d.target.x)
+            .attr('y2', d => d.target.y);
+          node.attr('transform', d => `translate(${d.x},${d.y})`);
+        });
+        
+        return () => simulation.stop();
+      }, [data, dimensions, completedNodes, onNodeClick]);
+      
+      useEffect(() => {
+        drawGraph();
+      }, [drawGraph]);
+      
+      return React.createElement('div', {
+        ref: containerRef,
+        className: 'w-full h-full relative overflow-hidden bg-slate-950'
+      },
+        // Starfield
+        React.createElement('div', {
+          className: 'absolute inset-0 starfield opacity-30 pointer-events-none'
+        }),
+        // Radial gradient overlay
+        React.createElement('div', {
+          className: 'absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#020617_70%)] pointer-events-none'
+        }),
+        React.createElement('svg', {
+          ref: svgRef,
+          width: '100%',
+          height: '100%',
+          className: 'relative z-10'
+        })
+      );
+    }
+    
+    // Realm Progress Badge
+    function RealmBadge({ realm, completedNodes }) {
+      const progress = getRealmProgress(realm, completedNodes, GAME_DATA.nodes);
+      const isComplete = progress.completed === progress.total;
+      const realmColor = REALM_COLORS[realm];
+      
+      return React.createElement('div', {
+        className: `p-3 rounded-lg border transition-all ${
+          isComplete 
+            ? 'bg-amber-950/30 border-amber-500/50' 
+            : 'bg-slate-900/50 border-slate-700/30 opacity-70'
+        }`
+      },
+        React.createElement('div', { className: 'flex items-center gap-2 mb-1' },
+          isComplete && React.createElement(Icon, { name: 'Crown', className: 'w-4 h-4 text-amber-400' }),
+          React.createElement('span', { 
+            className: 'text-xs font-display truncate',
+            style: { color: isComplete ? '#fbbf24' : realmColor.primary }
+          }, realm.replace('The ', ''))
+        ),
+        React.createElement('div', { className: 'text-[10px] text-slate-500' },
+          `${progress.completed}/${progress.total}`
+        )
+      );
+    }
+    
+    // Main App
+    function App() {
+      const [selectedNode, setSelectedNode] = useState(null);
+      const [userState, setUserState] = useState(() => {
+        const saved = localStorage.getItem('dataDragonState_v2');
+        if (saved) {
+          try {
+            return JSON.parse(saved);
+          } catch (e) {
+            console.error('Failed to parse saved state');
+          }
+        }
+        return {
+          level: 1,
+          currentXp: 0,
+          maxXp: INITIAL_XP_REQ,
+          completedNodes: [],
+          rank: "Novice Wrangler"
+        };
+      });
+      
+      // Save state
+      useEffect(() => {
+        localStorage.setItem('dataDragonState_v2', JSON.stringify(userState));
+      }, [userState]);
+      
+      const handleNodeClick = (node) => {
+        setSelectedNode(node);
+      };
+      
+      const handleClosePanel = () => {
+        setSelectedNode(null);
+      };
+      
+      const handleCompleteQuest = (id, xpValue) => {
+        if (userState.completedNodes.includes(id)) return;
+        
+        setUserState(prev => {
+          let newXp = prev.currentXp + xpValue;
+          let newLevel = prev.level;
+          let newMaxXp = prev.maxXp;
+          
+          // Level up
+          while (newXp >= newMaxXp) {
+            newXp = newXp - newMaxXp;
+            newLevel += 1;
+            newMaxXp = Math.floor(newMaxXp * 1.4);
+          }
+          
+          return {
+            level: newLevel,
+            currentXp: newXp,
+            maxXp: newMaxXp,
+            completedNodes: [...prev.completedNodes, id],
+            rank: getRank(newLevel)
+          };
+        });
+      };
+      
+      const isSelectedCompleted = useMemo(() => {
+        if (!selectedNode) return false;
+        return userState.completedNodes.includes(selectedNode.id);
+      }, [selectedNode, userState.completedNodes]);
+      
+      const isSelectedLocked = useMemo(() => {
+        if (!selectedNode) return false;
+        return !isNodeUnlocked(selectedNode.id, userState.completedNodes, GAME_DATA.nodes);
+      }, [selectedNode, userState.completedNodes]);
+      
+      return React.createElement('div', {
+        className: 'relative w-screen h-screen bg-slate-950 text-slate-100 overflow-hidden'
+      },
+        // Map
+        React.createElement(ConstellationMap, {
+          data: GAME_DATA,
+          onNodeClick: handleNodeClick,
+          completedNodes: userState.completedNodes
+        }),
+        
+        // HUD
+        React.createElement(HeroHUD, { userState }),
+        
+        // Realm Progress (bottom left)
+        React.createElement('div', {
+          className: 'absolute bottom-4 left-4 z-20 flex flex-col gap-2'
+        },
+          React.createElement('div', { className: 'text-xs text-slate-500 uppercase tracking-wider mb-1' }, 'Realm Mastery'),
+          Object.values(Realm).map(realm => 
+            React.createElement(RealmBadge, { 
+              key: realm, 
+              realm, 
+              completedNodes: userState.completedNodes 
+            })
+          )
+        ),
+        
+        // Quest Panel
+        selectedNode && React.createElement(QuestPanel, {
+          node: selectedNode,
+          onClose: handleClosePanel,
+          onComplete: handleCompleteQuest,
+          isCompleted: isSelectedCompleted,
+          isLocked: isSelectedLocked,
+          completedNodes: userState.completedNodes
+        }),
+        
+        // Intro hint
+        !selectedNode && React.createElement('div', {
+          className: 'absolute bottom-8 left-1/2 transform -translate-x-1/2 text-slate-500 text-sm pointer-events-none animate-pulse'
+        }, 'Click on a star to begin your quest... • Scroll to zoom • Drag to pan'),
+        
+        // Reset button (for testing)
+        React.createElement('button', {
+          onClick: () => {
+            if (confirm('Reset all progress?')) {
+              localStorage.removeItem('dataDragonState_v2');
+              location.reload();
+            }
+          },
+          className: 'absolute bottom-4 right-4 z-20 text-xs text-slate-600 hover:text-slate-400 transition-colors'
+        }, 'Reset Progress')
+      );
+    }
+    
+    // Mount
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(React.createElement(App));
+  </script>
+</body>
+</html>

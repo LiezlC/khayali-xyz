@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nebula Forge: Interactive Galaxy Engine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #050505;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+            color: white;
+        }
+
+        #canvas-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* Glassmorphism UI */
+        .glass-panel {
+            background: rgba(20, 20, 30, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .control-group label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #a0a0a0;
+            margin-bottom: 0.25rem;
+            display: block;
+        }
+
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+            margin: 8px 0;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+            margin-top: -6px;
+            box-shadow: 0 0 10px rgba(255,255,255,0.8);
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: rgba(255,255,255,0.2);
+            border-radius: 2px;
+        }
+
+        .btn-glow {
+            transition: all 0.3s ease;
+        }
+        .btn-glow:hover {
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+            transform: translateY(-1px);
+        }
+        
+        .title-font {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Pulse animation for the core */
+        @keyframes pulse-core {
+            0% { box-shadow: 0 0 20px rgba(255, 100, 50, 0.2); }
+            50% { box-shadow: 0 0 50px rgba(255, 100, 50, 0.6); }
+            100% { box-shadow: 0 0 20px rgba(255, 100, 50, 0.2); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Canvas Background -->
+    <div id="canvas-container">
+        <canvas id="galaxyCanvas"></canvas>
+    </div>
+
+    <!-- UI Overlay -->
+    <div class="absolute z-10 top-0 left-0 w-full h-full pointer-events-none flex flex-col justify-between p-6">
+        
+        <!-- Header -->
+        <div class="flex justify-between items-start pointer-events-auto">
+            <div class="glass-panel rounded-xl p-6 max-w-xs">
+                <h1 class="text-3xl font-bold title-font bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-red-400 to-purple-500 mb-2">
+                    NEBULA FORGE
+                </h1>
+                <p class="text-sm text-gray-300 leading-relaxed">
+                    Interactive simulation of the galactic spiral. 
+                    <br><span class="text-xs text-blue-300 mt-2 block">Drag to rotate. Scroll to zoom. Click to create gravity wells.</span>
+                </p>
+                
+                <div class="mt-4 flex gap-2">
+                    <div class="flex items-center gap-1 text-xs text-orange-400">
+                        <span class="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
+                        Simulation Live
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="glass-panel rounded-lg px-4 py-2 flex gap-6 text-xs font-mono">
+                <div>
+                    <span class="text-gray-500 block">STARS</span>
+                    <span id="starCountDisplay" class="text-white">2000</span>
+                </div>
+                <div>
+                    <span class="text-gray-500 block">VELOCITY</span>
+                    <span id="velocityDisplay" class="text-white">1.0x</span>
+                </div>
+                <div>
+                    <span class="text-gray-500 block">CORE TEMP</span>
+                    <span class="text-red-400">15MK</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls Bottom -->
+        <div class="flex justify-center pointer-events-auto mb-4">
+            <div class="glass-panel rounded-2xl p-6 w-full max-w-2xl grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- Control 1 -->
+                <div class="control-group">
+                    <label>Galactic Spin</label>
+                    <input type="range" id="speedControl" min="0" max="5" step="0.1" value="1">
+                </div>
+
+                <!-- Control 2 -->
+                <div class="control-group">
+                    <label>Spiral Tightness</label>
+                    <input type="range" id="spiralControl" min="0.1" max="2" step="0.1" value="0.5">
+                </div>
+
+                <!-- Control 3 -->
+                <div class="control-group">
+                    <label>Star Density</label>
+                    <input type="range" id="densityControl" min="500" max="5000" step="100" value="2000">
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="md:col-span-3 flex justify-center gap-4 mt-2">
+                    <button id="warpBtn" class="btn-glow bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded-full font-bold text-sm tracking-wider uppercase">
+                        Warp Speed
+                    </button>
+                    <button id="explodeBtn" class="btn-glow bg-red-600 hover:bg-red-500 text-white px-6 py-2 rounded-full font-bold text-sm tracking-wider uppercase">
+                        Supernova
+                    </button>
+                    <button id="resetBtn" class="btn-glow bg-gray-700 hover:bg-gray-600 text-white px-6 py-2 rounded-full font-bold text-sm tracking-wider uppercase">
+                        Reset
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('galaxyCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // State
+        let width, height;
+        let centerX, centerY;
+        let particles = [];
+        let animationId;
+        let mouse = { x: 0, y: 0, active: false, isDown: false };
+        
+        // Config
+        const config = {
+            particleCount: 2000,
+            baseSpeed: 1,
+            spiralTightness: 0.5,
+            armCount: 2, // Two main arms like the image
+            coreSize: 20,
+            perspective: 300, // For 3D tilt effect
+            tilt: 0.6, // Tilt of the galaxy
+            colors: [
+                { r: 255, g: 200, b: 150 }, // Core White/Yellow
+                { r: 255, g: 100, b: 50 },  // Inner Red/Orange
+                { r: 200, g: 50, b: 50 },   // Mid Red
+                { r: 100, g: 150, b: 255 }, // Outer Blue
+                { r: 50, g: 0, b: 100 }     // Deep Space Purple
+            ]
+        };
+
+        // DOM Elements
+        const speedControl = document.getElementById('speedControl');
+        const spiralControl = document.getElementById('spiralControl');
+        const densityControl = document.getElementById('densityControl');
+        const starCountDisplay = document.getElementById('starCountDisplay');
+        const velocityDisplay = document.getElementById('velocityDisplay');
+
+        // Resize Handler
+        function resize() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+            centerX = width / 2;
+            centerY = height / 2;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        // Particle Class
+        class Particle {
+            constructor(isCore = false) {
+                this.reset(isCore);
+            }
+
+            reset(isCore = false) {
+                // Polar coordinates for spiral
+                // Distance from center (randomized with bias towards center)
+                const randomVal = Math.random();
+                this.radius = isCore ? Math.random() * 50 : Math.pow(randomVal, 2) * (Math.min(width, height) / 1.5);
+                
+                // Angle
+                this.angle = Math.random() * Math.PI * 2;
+                
+                // Spiral offset logic
+                if (!isCore) {
+                    // Add spiral structure
+                    const armAngle = (Math.random() > 0.5 ? 0 : Math.PI); // 2 Arms
+                    const spiralOffset = this.radius * config.spiralTightness * 0.005;
+                    this.angle = armAngle + spiralOffset + (Math.random() - 0.5) * 1.5; // Add noise (scatter)
+                }
+
+                // Physics
+                this.x = 0;
+                this.y = 0;
+                this.z = (Math.random() - 0.5) * (isCore ? 20 : 50); // Thickness of galaxy
+                
+                // Orbital velocity (closer = faster)
+                this.velocity = (100 / (this.radius + 10)) * 0.02;
+                
+                // Appearance
+                this.size = isCore ? Math.random() * 2 + 1 : Math.random() * 1.5 + 0.5;
+                
+                // Color selection based on distance
+                const distRatio = this.radius / (Math.min(width, height) / 2);
+                let colorIndex = Math.floor(distRatio * (config.colors.length - 1));
+                colorIndex = Math.max(0, Math.min(colorIndex, config.colors.length - 1));
+                
+                // Add some randomness to color mixing
+                if (Math.random() > 0.7) colorIndex = Math.floor(Math.random() * config.colors.length);
+
+                this.color = config.colors[colorIndex];
+                this.alpha = Math.random() * 0.5 + 0.5;
+            }
+
+            update() {
+                // Orbital movement
+                this.angle += this.velocity * config.baseSpeed;
+
+                // Mouse Interaction (Gravity Well)
+                if (mouse.isDown) {
+                    // Calculate distance to mouse in 3D space projected to 2D
+                    const dx = this.screenX - mouse.x;
+                    const dy = this.screenY - mouse.y;
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+                    
+                    if (dist < 300) {
+                        const force = (300 - dist) / 300;
+                        this.angle += force * 0.1; // Spin faster
+                        this.radius -= force * 2; // Suck in
+                        if (this.radius < 10) this.radius = Math.min(width, height)/2; // Recycle
+                    }
+                }
+
+                // Calculate 3D position
+                const cosA = Math.cos(this.angle);
+                const sinA = Math.sin(this.angle);
+                
+                // Basic 3D rotation for tilt effect
+                // Rotate around X axis (tilt)
+                const yTilt = this.radius * sinA * Math.cos(config.tilt) - this.z * Math.sin(config.tilt);
+                const zTilt = this.radius * sinA * Math.sin(config.tilt) + this.z * Math.cos(config.tilt);
+                const xTilt = this.radius * cosA;
+
+                // Perspective projection
+                const scale = config.perspective / (config.perspective + zTilt + 500); // +500 pushes it back
+                
+                this.screenX = centerX + xTilt * scale;
+                this.screenY = centerY + yTilt * scale;
+                this.currentScale = scale;
+            }
+
+            draw() {
+                if (this.currentScale < 0) return; // Behind camera
+
+                const size = this.size * this.currentScale;
+                
+                ctx.beginPath();
+                ctx.arc(this.screenX, this.screenY, size, 0, Math.PI * 2);
+                
+                // Color with depth fading
+                const depthAlpha = Math.max(0.1, Math.min(1, this.alpha * this.currentScale));
+                ctx.fillStyle = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${depthAlpha})`;
+                ctx.fill();
+            }
+        }
+
+        // Initialization
+        function initParticles() {
+            particles = [];
+            // Core particles
+            for(let i = 0; i < config.particleCount * 0.2; i++) {
+                particles.push(new Particle(true));
+            }
+            // Arm particles
+            for(let i = 0; i < config.particleCount * 0.8; i++) {
+                particles.push(new Particle(false));
+            }
+            starCountDisplay.innerText = particles.length;
+        }
+
+        // Animation Loop
+        function animate() {
+            // Trail effect
+            ctx.fillStyle = 'rgba(5, 5, 10, 0.3)'; // Low opacity black clears previous frame but leaves trails
+            ctx.fillRect(0, 0, width, height);
+
+            // Draw Core Glow
+            const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 100);
+            gradient.addColorStop(0, 'rgba(255, 200, 150, 0.2)');
+            gradient.addColorStop(1, 'rgba(255, 100, 50, 0)');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, width, height);
+
+            // Update and Draw Particles
+            // Sort by Z (depth) for proper rendering order if we wanted perfect 3D, 
+            // but for performance and "nebula" look, simple iteration is fine.
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            animationId = requestAnimationFrame(animate);
+        }
+
+        // Event Listeners
+        
+        // Mouse Tracking
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+            mouse.active = true;
+        });
+
+        window.addEventListener('mousedown', () => mouse.isDown = true);
+        window.addEventListener('mouseup', () => mouse.isDown = false);
+        
+        // Touch support
+        window.addEventListener('touchstart', (e) => {
+            mouse.x = e.touches[0].clientX;
+            mouse.y = e.touches[0].clientY;
+            mouse.isDown = true;
+        });
+        window.addEventListener('touchend', () => mouse.isDown = false);
+
+        // UI Controls
+        speedControl.addEventListener('input', (e) => {
+            config.baseSpeed = parseFloat(e.target.value);
+            velocityDisplay.innerText = config.baseSpeed.toFixed(1) + 'x';
+        });
+
+        spiralControl.addEventListener('input', (e) => {
+            config.spiralTightness = parseFloat(e.target.value);
+            initParticles(); // Re-gen needed for shape change
+        });
+
+        densityControl.addEventListener('input', (e) => {
+            config.particleCount = parseInt(e.target.value);
+            initParticles();
+        });
+
+        // Buttons
+        document.getElementById('warpBtn').addEventListener('click', () => {
+            const originalSpeed = config.baseSpeed;
+            let speed = 20;
+            
+            // Animation to ramp up speed then slow down
+            const interval = setInterval(() => {
+                config.baseSpeed = speed;
+                speed *= 0.95;
+                velocityDisplay.innerText = speed.toFixed(1) + 'x';
+                if (speed < originalSpeed) {
+                    clearInterval(interval);
+                    config.baseSpeed = originalSpeed;
+                    velocityDisplay.innerText = originalSpeed.toFixed(1) + 'x';
+                }
+            }, 50);
+        });
+
+        document.getElementById('explodeBtn').addEventListener('click', () => {
+            particles.forEach(p => {
+                // Push everything away from center
+                p.radius += Math.random() * 200;
+                p.velocity *= 0.5;
+            });
+        });
+
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            config.baseSpeed = 1;
+            config.spiralTightness = 0.5;
+            config.particleCount = 2000;
+            
+            speedControl.value = 1;
+            spiralControl.value = 0.5;
+            densityControl.value = 2000;
+            
+            initParticles();
+        });
+
+        // Start
+        initParticles();
+        animate();
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Data Dragon Slayer Program - Complete Course</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(20, 33, 61, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            color: #667eea;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 0.4rem;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-wrap: wrap;
+                padding: 1rem;
+            }
+
+            nav .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                gap: 1rem;
+                margin-top: 1rem;
+            }
+
+            nav .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+        }
+
+        /* Main container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Sections */
+        section {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #142145;
+        }
+
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #142145;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+
+        section h3 {
+            font-size: 1.3rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #764ba2;
+        }
+
+        section p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #142145 0%, #667eea 100%);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .hero h1 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .hero .tagline {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        /* Dragon Grid */
+        .dragon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .dragon-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid #eee;
+            position: relative;
+        }
+
+        .dragon-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+
+        .dragon-number {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: #667eea;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .dragon-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .dragon-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #142145;
+            margin-bottom: 0.3rem;
+        }
+
+        .dragon-latin {
+            font-size: 0.9rem;
+            color: #764ba2;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .dragon-tagline {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .dragon-details {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .dragon-details.active {
+            display: block;
+        }
+
+        .details-section {
+            margin-bottom: 1rem;
+        }
+
+        .details-section strong {
+            color: #764ba2;
+            display: block;
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+        }
+
+        .details-section ul {
+            margin-left: 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        .details-section li {
+            margin-bottom: 0.3rem;
+            color: #555;
+        }
+
+        /* Module Accordion */
+        .module {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .module-header {
+            padding: 1.5rem;
+            background: #142145;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        .module-header:hover {
+            background: #667eea;
+        }
+
+        .module-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .module-duration {
+            background: rgba(255,255,255,0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .module-toggle {
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .module-content {
+            display: none;
+            padding: 1.5rem;
+            background: white;
+        }
+
+        .module-content.active {
+            display: block;
+        }
+
+        .module-section {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .module-section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-duration {
+            font-size: 0.85rem;
+            color: #999;
+            margin-bottom: 0.5rem;
+        }
+
+        /* SQL Queries */
+        .query-card {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+        }
+
+        .query-name {
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 0.3rem;
+        }
+
+        .query-purpose {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.8rem;
+        }
+
+        code {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1rem;
+            border-radius: 4px;
+            display: block;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-bottom: 0.8rem;
+        }
+
+        .copy-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: #764ba2;
+        }
+
+        /* Quiz */
+        .quiz-question {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+        }
+
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #142145;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .quiz-option {
+            background: white;
+            border: 2px solid #ddd;
+            padding: 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quiz-option:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .quiz-option.selected {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .quiz-option.correct {
+            border-color: #10b981;
+            background: #ecfdf5;
+            color: #10b981;
+        }
+
+        .quiz-option.incorrect {
+            border-color: #ef4444;
+            background: #fef2f2;
+            color: #ef4444;
+        }
+
+        .quiz-score {
+            text-align: center;
+            padding: 1rem;
+            background: #f0f4ff;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        /* Resources */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .resource-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .resource-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .resource-name {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #142145;
+        }
+
+        .download-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+
+        .download-btn:hover {
+            background: #764ba2;
+        }
+
+        /* Footer */
+        footer {
+            background: #142145;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        /* Print styles */
+        @media print {
+            nav, .hamburger, .copy-btn, .download-btn, .action-buttons {
+                display: none;
+            }
+
+            section {
+                page-break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+
+        /* Utility classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-2 {
+            margin-top: 2rem;
+        }
+
+        .mb-2 {
+            margin-bottom: 2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 0.8rem;
+            text-align: left;
+        }
+
+        table th {
+            background: #f0f4ff;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .creed {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-left: 4px solid #667eea;
+            padding: 1.5rem;
+            border-radius: 4px;
+            font-style: italic;
+            color: #555;
+            margin: 2rem 0;
+            line-height: 1.8;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .badge.foundation {
+            background: #10b981;
+        }
+
+        .badge.intermediate {
+            background: #f59e0b;
+        }
+
+        .badge.advanced {
+            background: #ef4444;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">🐉 Data Dragon Slayer</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a onclick="scrollToSection('hero')">Home</a></li>
+            <li><a onclick="scrollToSection('dragons')">Dragons</a></li>
+            <li><a onclick="scrollToSection('modules')">Modules</a></li>
+            <li><a onclick="scrollToSection('lab')">Detection Lab</a></li>
+            <li><a onclick="scrollToSection('quiz')">Quiz</a></li>
+            <li><a onclick="scrollToSection('resources')">Resources</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+            <h1>🐉 The Data Dragon Slayer Program</h1>
+            <div class="subtitle">Taming Chaos, Unleashing Potential</div>
+            <div class="tagline">Transform data quality decay into an exciting quest</div>
+            <div style="margin-top: 2rem;">
+                <p style="font-size: 1rem; margin-bottom: 1rem;">8 hours of modular, self-paced or instructor-led training</p>
+                <button class="download-btn" onclick="downloadFile('quick-reference')">⬇️ Download Quick Reference Card</button>
+            </div>
+        </section>
+
+        <!-- Course Overview -->
+        <section>
+            <h2>Welcome to Your Quest</h2>
+            <p>Data quality problems aren't bugs or errors—they're <strong>living creatures that evolve, reproduce, and thrive</strong> in certain environments. Understanding their ecology is the first step to taming them.</p>
+            <p>This program transforms the often-dry topic of data quality decay into an engaging quest, using dragon mythology as a memorable framework for identifying, tracking, and preventing data quality issues.</p>
+
+            <h3>Target Audience</h3>
+            <ul style="margin-left: 1.5rem;">
+                <li>Data analysts and engineers</li>
+                <li>Database administrators</li>
+                <li>Business intelligence teams</li>
+                <li>Data governance professionals</li>
+                <li>Anyone responsible for data quality</li>
+            </ul>
+
+            <h3>What You'll Learn</h3>
+            <ul style="margin-left: 1.5rem;">
+                <li>Identify the six primary types of data quality decay</li>
+                <li>Implement proactive monitoring systems to detect decay early</li>
+                <li>Apply remediation strategies appropriate to decay type</li>
+                <li>Design decay-resistant data architectures</li>
+                <li>Create sustainable data quality maintenance protocols</li>
+            </ul>
+        </section>
+
+        <!-- Dragons Section -->
+        <section id="dragons">
+            <h2>Meet the Six Dragons of Data Decay</h2>
+            <p>Click on any dragon to reveal its secrets, breeding grounds, and detection methods.</p>
+
+            <div class="dragon-grid" id="dragonGrid"></div>
+        </section>
+
+        <!-- Modules Section -->
+        <section id="modules">
+            <h2>Your Learning Journey - 4 Modules, 8 Hours</h2>
+            <p>Choose your path: Foundation (1 hour), Intermediate (2 hours), Advanced (3 hours), or Express Track (1 hour).</p>
+            <div id="modulesContainer"></div>
+        </section>
+
+        <!-- Detection Lab -->
+        <section id="lab">
+            <h2>The Dragon Tracker's Toolkit - SQL Detection Lab</h2>
+            <p>Ready-to-use SQL queries for detecting each dragon type. Click the query card to reveal the SQL, then use the copy button.</p>
+            <div id="queriesContainer"></div>
+        </section>
+
+        <!-- Quiz -->
+        <section id="quiz">
+            <h2>Test Your Dragon Knowledge</h2>
+            <div class="quiz-score">Score: <span id="quizScore">0</span>/5</div>
+            <div id="quizContainer"></div>
+            <div style="text-align: center; margin-top: 1rem;">
+                <button class="download-btn" onclick="resetQuiz()">Reset Quiz</button>
+            </div>
+        </section>
+
+        <!-- Resources -->
+        <section id="resources">
+            <h2>Supplementary Materials</h2>
+            <p>Download all course materials in one convenient collection.</p>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">📋</div>
+                    <div class="resource-name">Quick Reference Card</div>
+                    <button class="download-btn" onclick="downloadFile('quick-reference')">Download PDF</button>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">📖</div>
+                    <div class="resource-name">Complete Course Guide</div>
+                    <button class="download-btn" onclick="downloadFile('course-guide')">Download PDF</button>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">🔧</div>
+                    <div class="resource-name">SQL Query Library</div>
+                    <button class="download-btn" onclick="downloadFile('sql-library')">Download .SQL</button>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">🎓</div>
+                    <div class="resource-name">Certification Badge</div>
+                    <button class="download-btn" onclick="downloadFile('certification')">Get Your Badge</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Creed -->
+        <section>
+            <h2>The Dragon Keeper's Creed</h2>
+            <div class="creed">
+                "I will seek dragons, not to slay them, but to understand what they're trying to tell me about my data systems. For every dragon is a sign that reality and database have drifted apart—and my job is to bring them back together."
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>The Data Dragon Slayer Program</strong></p>
+        <p>Taming Chaos, Unleashing Potential</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">© 2025 Data Dragon Academy. All dragons reserved.</p>
+    </footer>
+
+    <script>
+        // Dragon Data
+        const dragons = [
+            {
+                id: 1,
+                name: "The Void Dragon",
+                latin: "Dragonus Incompletis",
+                icon: "👻",
+                tagline: "The Ghost in Your Database",
+                bornFrom: [
+                    "Optional fields that become convenient to skip",
+                    "We'll fill that in later (narrator: they never did)",
+                    "Required fields with no validation"
+                ],
+                feedsOn: [
+                    "Empty cells, NULL values, N/A everywhere",
+                    "Email fields containing noEmail@company.com",
+                    "Middle name fields nobody ever completes"
+                ],
+                businessImpact: [
+                    "Incomplete customer profiles",
+                    "Unable to contact customers",
+                    "Analytics with 40% missing values"
+                ],
+                example: "A customer database where 40% of email fields are empty, making email campaigns impossible.",
+                detection: "SELECT COUNT(*) - COUNT(email) as void_count FROM customers;"
+            },
+            {
+                id: 2,
+                name: "The Structure Dragon",
+                latin: "Dragonus Rigidus",
+                icon: "🏗️",
+                tagline: "The Schema That Time Forgot",
+                bornFrom: [
+                    "Business evolution trapped in 10-year-old databases",
+                    "Can't change the schema, everything depends on it",
+                    "New payment methods in Bank Account Only field"
+                ],
+                feedsOn: [
+                    "Phone numbers forced into landline-only fields",
+                    "Modern payments (Venmo, PayPal, crypto) in Check Number columns",
+                    "International addresses in USA-only forms"
+                ],
+                businessImpact: [
+                    "Workarounds become standard procedure",
+                    "Data squeezed into wrong-shaped containers",
+                    "Technical debt compounds daily"
+                ],
+                example: "Mobile phone numbers stored in a 10-digit landline field, forcing users to drop the country code.",
+                detection: "SELECT column_name FROM information_schema WHERE column_name LIKE '%misc%' OR column_name LIKE '%other%';"
+            },
+            {
+                id: 3,
+                name: "The Semantic Dragon",
+                latin: "Dragonus Ambiguus",
+                icon: "🤔",
+                tagline: "The Meaning Depends on Who You Ask",
+                bornFrom: [
+                    "Terms meaning different things to different departments",
+                    "Categories evolved without documentation",
+                    "We know what it means (but nobody wrote it down)"
+                ],
+                feedsOn: [
+                    "Premium customer (>$1000 spend? >$10,000? VIP service?)",
+                    "Metro area (City proper? Metropolitan region? Tri-state?)",
+                    "ASAP (Urgent? Today? This week? Eventually?)"
+                ],
+                businessImpact: [
+                    "Different departments speaking different languages",
+                    "Impossible to aggregate data across teams",
+                    "Reports everyone interprets differently"
+                ],
+                example: "Sales calls them Premier clients, Support calls them Regular customers, Collections calls them Delinquent accounts—all the same people.",
+                detection: "-- Ask 3 departments to define 'active customer' - get 3 different answers"
+            },
+            {
+                id: 4,
+                name: "The Time Dragon",
+                latin: "Dragonus Obsoletus",
+                icon: "⏰",
+                tagline: "The Data That Was True... Yesterday",
+                bornFrom: [
+                    "The gap between what was true and what is true now",
+                    "Status fields that never update",
+                    "Active customer flags on 3-year dormant accounts"
+                ],
+                feedsOn: [
+                    "Old addresses, expired phones, defunct email accounts",
+                    "Current employee status of people who left 18 months ago",
+                    "Pricing data from 2019 still used in 2025"
+                ],
+                businessImpact: [
+                    "Decisions based on yesterday's reality",
+                    "Marketing to customers who moved away",
+                    "Compliance violations (GDPR right to be forgotten)"
+                ],
+                example: "Payroll system sending salary to an employee 18 months after they resigned.",
+                detection: "SELECT COUNT(*) FROM employees WHERE last_updated < CURRENT_DATE - INTERVAL '6 months' AND status = 'Active';"
+            },
+            {
+                id: 5,
+                name: "The Chaos Dragon",
+                latin: "Dragonus Duplicatus",
+                icon: "🔀",
+                tagline: "The Many-Faced Monster",
+                bornFrom: [
+                    "Same entity entered multiple ways by different people",
+                    "No standardization of data entry",
+                    "Multiple systems with no master data management"
+                ],
+                feedsOn: [
+                    "Jane Smith, Jane A. Smith, J. Smith, Smith, Jane (same person, 4 records)",
+                    "IBM, IBM Corp, International Business Machines, I.B.M. (same company)",
+                    "Customer records multiplying every phone call"
+                ],
+                businessImpact: [
+                    "Impossible customer 360° view",
+                    "Duplicate marketing sends and opt-outs",
+                    "Analytics counting same entity multiple times"
+                ],
+                example: "A company with 5 different customer IDs because they called from different phones.",
+                detection: "SELECT customer_name, COUNT(*) FROM customers GROUP BY customer_name HAVING COUNT(*) > 1;"
+            },
+            {
+                id: 6,
+                name: "The Error Dragon",
+                latin: "Dragonus Typosaurus",
+                icon: "⌨️",
+                tagline: "The Keyboard Warrior's Nemesis",
+                bornFrom: [
+                    "Manual data entry at speed",
+                    "Copy-paste errors",
+                    "Fat-finger syndrome during Monday morning entry"
+                ],
+                feedsOn: [
+                    "Transposed digits in phone numbers",
+                    "Creative spelling (Jon, John, Jhon, Jahn)",
+                    "Birthdates claiming someone is 247 years old"
+                ],
+                businessImpact: [
+                    "Failed email campaigns from typos",
+                    "Duplicate records looking almost identical",
+                    "Impossible analytics (average age: 127 years)"
+                ],
+                example: "HR database birthday listed as February 30, 1986—not even leap years work that way!",
+                detection: "SELECT * FROM customers WHERE birthdate < '1900-01-01' OR birthdate > CURRENT_DATE;"
+            }
+        ];
+
+        // Modules Data
+        const modules = [
+            {
+                id: "M1",
+                title: "Module 1: Meeting Your Data Dragons",
+                duration: "1 hour",
+                level: "Foundation",
+                sections: [
+                    { title: "Opening Hook: The Legend Begins", duration: "5 min", content: "A data analyst enters CUSTOMER001 into the CRM system. In that moment, the first Data Dragon is born..." },
+                    { title: "Meet the Six Dragons of Decay", duration: "25 min", content: "Detailed introduction to each dragon with visual cards" },
+                    { title: "Dragon Ecology: How They Multiply", duration: "20 min", content: "Understanding dragon breeding grounds and how dragons multiply" },
+                    { title: "Your First Quest", duration: "10 min", content: "Go find ONE dragon in your database. Name it. Understand what it eats." }
+                ]
+            },
+            {
+                id: "M2",
+                title: "Module 2: Dragon Detection & Tracking",
+                duration: "2 hours",
+                level: "Foundation/Intermediate",
+                sections: [
+                    { title: "The Dragon Tracker's Toolkit", duration: "25 min", content: "Introduction to detection techniques and SQL tools" },
+                    { title: "SQL Detection Exercises", duration: "60 min", content: "Hands-on practice with detection queries for each dragon type" },
+                    { title: "Interpreting Dragon Signs", duration: "20 min", content: "Understanding severity levels and prioritization" },
+                    { title: "Lab: Hunt Dragons", duration: "15 min", content: "Interactive database exploration exercise" }
+                ]
+            },
+            {
+                id: "M3",
+                title: "Module 3: Dragon First Aid",
+                duration: "2 hours",
+                level: "Intermediate",
+                sections: [
+                    { title: "Triage: Which Dragon First?", duration: "15 min", content: "Priority assessment and impact analysis" },
+                    { title: "Remediation by Dragon Type", duration: "45 min", content: "Specific treatment strategies for each dragon" },
+                    { title: "Prevention Techniques", duration: "30 min", content: "Proactive measures and best practices" },
+                    { title: "Dragon-Resistant Systems", duration: "30 min", content: "Architecture patterns that prevent dragon breeding" }
+                ]
+            },
+            {
+                id: "M4",
+                title: "Module 4: Advanced Dragon Keeping",
+                duration: "3 hours",
+                level: "Advanced",
+                sections: [
+                    { title: "Automated Detection Systems", duration: "45 min", content: "Tools: Great Expectations, Deequ, custom scripts" },
+                    { title: "Quality Monitoring Dashboards", duration: "45 min", content: "Visualization, alerting, and tracking" },
+                    { title: "Dragon Prevention Culture", duration: "45 min", content: "Organizational change and quality mindset" },
+                    { title: "Certification Project", duration: "45 min", content: "Build your own detection system" }
+                ]
+            }
+        ];
+
+        // Quiz Data
+        const quizQuestions = [
+            {
+                question: "Which dragon is caused by optional fields that users skip?",
+                options: ["Void Dragon", "Time Dragon", "Chaos Dragon", "Error Dragon"],
+                correct: 0
+            },
+            {
+                question: "What feeds the Time Dragon?",
+                options: ["Typos", "Stale data", "Duplicates", "Schema issues"],
+                correct: 1
+            },
+            {
+                question: "Which dragon appears when the same customer has 5 different IDs?",
+                options: ["Structure Dragon", "Void Dragon", "Chaos Dragon", "Semantic Dragon"],
+                correct: 2
+            },
+            {
+                question: "The Semantic Dragon is born from what?",
+                options: ["Missing data", "Schema problems", "Ambiguous definitions", "Impossible dates"],
+                correct: 2
+            },
+            {
+                question: "Which dragon represents impossible values like birthdates in the future?",
+                options: ["Error Dragon", "Structure Dragon", "Void Dragon", "Time Dragon"],
+                correct: 0
+            }
+        ];
+
+        let quizAnswers = new Array(quizQuestions.length).fill(-1);
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderDragons();
+            renderModules();
+            renderQueries();
+            renderQuiz();
+            setupHamburger();
+        });
+
+        // Render Dragons
+        function renderDragons() {
+            const grid = document.getElementById('dragonGrid');
+            grid.innerHTML = dragons.map(dragon => `
+                <div class="dragon-card" onclick="toggleDragonDetails(this)">
+                    <div class="dragon-number">${dragon.id}</div>
+                    <div class="dragon-icon">${dragon.icon}</div>
+                    <div class="dragon-name">${dragon.name}</div>
+                    <div class="dragon-latin">${dragon.latin}</div>
+                    <div class="dragon-tagline">${dragon.tagline}</div>
+                    <div class="dragon-details" id="dragon-${dragon.id}">
+                        <div class="details-section">
+                            <strong>Born From:</strong>
+                            <ul>${dragon.bornFrom.map(item => `<li>${item}</li>`).join('')}</ul>
+                        </div>
+                        <div class="details-section">
+                            <strong>Feeds On:</strong>
+                            <ul>${dragon.feedsOn.map(item => `<li>${item}</li>`).join('')}</ul>
+                        </div>
+                        <div class="details-section">
+                            <strong>Business Impact:</strong>
+                            <ul>${dragon.businessImpact.map(item => `<li>${item}</li>`).join('')}</ul>
+                        </div>
+                        <div class="details-section">
+                            <strong>Example:</strong>
+                            <p style="margin: 0; color: #555;">${dragon.example}</p>
+                        </div>
+                        <div class="details-section">
+                            <strong>Quick Detection:</strong>
+                            <code style="margin: 0.5rem 0; font-size: 0.75rem;">${dragon.detection}</code>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleDragonDetails(element) {
+            const details = element.querySelector('.dragon-details');
+            details.classList.toggle('active');
+        }
+
+        // Render Modules
+        function renderModules() {
+            const container = document.getElementById('modulesContainer');
+            container.innerHTML = modules.map(module => `
+                <div class="module">
+                    <div class="module-header" onclick="toggleModule(this)">
+                        <div>
+                            <div class="module-title">${module.title}</div>
+                            <span class="badge ${module.level.toLowerCase().replace(/\s+/g, '-')}">${module.level}</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div class="module-duration">${module.duration}</div>
+                            <div class="module-toggle">▼</div>
+                        </div>
+                    </div>
+                    <div class="module-content" id="module-${module.id}">
+                        ${module.sections.map(section => `
+                            <div class="module-section">
+                                <div class="section-title">${section.title}</div>
+                                <div class="section-duration">Duration: ${section.duration}</div>
+                                <p>${section.content}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleModule(element) {
+            const content = element.nextElementSibling;
+            const toggle = element.querySelector('.module-toggle');
+            content.classList.toggle('active');
+            toggle.style.transform = content.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0)';
+        }
+
+        // Render SQL Queries
+        function renderQueries() {
+            const container = document.getElementById('queriesContainer');
+            const queries = [
+                {
+                    name: "The Void Seeker",
+                    purpose: "Reveals Void Dragons hiding in required fields",
+                    sql: "SELECT column_name, COUNT(*) as total, COUNT(*) - COUNT(column_name) as empty, ROUND(100.0 * (COUNT(*) - COUNT(column_name)) / COUNT(*), 2) as void_percentage FROM customers GROUP BY column_name HAVING void_percentage > 0;"
+                },
+                {
+                    name: "The Freshness Check",
+                    purpose: "Reveals Time Dragons in stale data",
+                    sql: "SELECT COUNT(*) as stale_records FROM employees WHERE last_updated < CURRENT_DATE - INTERVAL '6 months' AND status = 'Active';"
+                },
+                {
+                    name: "The Duplicate Finder",
+                    purpose: "Reveals Chaos Dragons creating confusion",
+                    sql: "SELECT customer_name, COUNT(*) as record_count FROM customers GROUP BY customer_name HAVING COUNT(*) > 1 ORDER BY record_count DESC;"
+                },
+                {
+                    name: "The Error Detector",
+                    purpose: "Reveals Error Dragons in impossible values",
+                    sql: "SELECT COUNT(*) as impossible_dates FROM customers WHERE birthdate < '1900-01-01' OR birthdate > CURRENT_DATE;"
+                }
+            ];
+
+            container.innerHTML = queries.map(q => `
+                <div class="query-card">
+                    <div class="query-name">${q.name}</div>
+                    <div class="query-purpose">${q.purpose}</div>
+                    <code>${q.sql}</code>
+                    <button class="copy-btn" onclick="copyToClipboard('${q.sql.replace(/'/g, "\'")}')">📋 Copy Query</button>
+                </div>
+            `).join('');
+        }
+
+        // Render Quiz
+        function renderQuiz() {
+            const container = document.getElementById('quizContainer');
+            container.innerHTML = quizQuestions.map((q, idx) => `
+                <div class="quiz-question">
+                    <div class="question-text">${idx + 1}. ${q.question}</div>
+                    <div class="quiz-options">
+                        ${q.options.map((opt, optIdx) => `
+                            <div class="quiz-option" onclick="selectQuizAnswer(${idx}, ${optIdx})">
+                                ${opt}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function selectQuizAnswer(questionIdx, optionIdx) {
+            quizAnswers[questionIdx] = optionIdx;
+            updateQuizDisplay();
+        }
+
+        function updateQuizDisplay() {
+            let score = 0;
+            quizQuestions.forEach((q, idx) => {
+                const options = document.querySelectorAll(`.quiz-question:nth-child(${idx + 1}) .quiz-option`);
+                options.forEach((opt, optIdx) => {
+                    opt.classList.remove('selected', 'correct', 'incorrect');
+                    if (quizAnswers[idx] === optIdx) {
+                        opt.classList.add('selected');
+                        if (optIdx === q.correct) {
+                            opt.classList.add('correct');
+                            score++;
+                        } else {
+                            opt.classList.add('incorrect');
+                        }
+                    }
+                });
+            });
+            document.getElementById('quizScore').textContent = score;
+        }
+
+        function resetQuiz() {
+            quizAnswers = new Array(quizQuestions.length).fill(-1);
+            renderQuiz();
+            document.getElementById('quizScore').textContent = '0';
+        }
+
+        // Utilities
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+                document.getElementById('navLinks').classList.remove('active');
+            }
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Query copied to clipboard!');
+            });
+        }
+
+        function downloadFile(type) {
+            let filename, content, mimeType;
+
+            if (type === 'quick-reference') {
+                filename = 'Dragon_Quick_Reference.txt';
+                content = generateQuickReference();
+                mimeType = 'text/plain';
+            } else if (type === 'course-guide') {
+                filename = 'Data_Dragon_Complete_Guide.txt';
+                content = generateCourseGuide();
+                mimeType = 'text/plain';
+            } else if (type === 'sql-library') {
+                filename = 'Dragon_SQL_Library.sql';
+                content = generateSQLLibrary();
+                mimeType = 'text/plain';
+            } else if (type === 'certification') {
+                filename = 'Dragon_Keeper_Certification.txt';
+                content = 'DATA DRAGON KEEPER CERTIFICATION\n\nCongratulations! You have successfully completed The Data Dragon Slayer Program.\n\nYou are now a certified Dragon Keeper.\n\nIssued: ' + new Date().toLocaleDateString() + '\n\nYour quest to tame data chaos continues...';
+                mimeType = 'text/plain';
+            }
+
+            const element = document.createElement('a');
+            element.setAttribute('href', 'data:' + mimeType + ';charset=utf-8,' + encodeURIComponent(content));
+            element.setAttribute('download', filename);
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        }
+
+        function generateQuickReference() {
+            return `DATA DRAGON QUICK REFERENCE CARD
+The Data Dragon Slayer Program
+
+THE SIX DRAGONS OF DATA DECAY
+` + dragons.map(d => `
+${d.id}. ${d.name} (${d.latin})
+Tagline: ${d.tagline}
+Quick Detection: ${d.detection}
+Example: ${d.example}
+`).join('\n') + `
+DRAGON SIZE GUIDE
+0-5%: Small Dragon (🟢 Low Threat)
+5-20%: Medium Dragon (🟡 Moderate Threat)
+20-50%: Large Dragon (🟠 High Threat)
+50%+: Ancient Dragon (🔴 Critical Threat)
+
+THE DRAGON KEEPER'S CREED
+"I will seek dragons, not to slay them, but to understand what they're trying to tell me about my data systems."`;
+        }
+
+        function generateCourseGuide() {
+            return `DATA DRAGON SLAYER PROGRAM - COMPLETE COURSE GUIDE
+Taming Chaos, Unleashing Potential
+
+COURSE OVERVIEW
+Duration: 8 hours modular
+Format: Self-paced or instructor-led online
+Target Audience: Data analysts, DB admins, BI teams, data governance professionals
+
+MODULES
+` + modules.map(m => `
+${m.title}
+Duration: ${m.duration}
+Level: ${m.level}
+Sections:
+${m.sections.map(s => `- ${s.title} (${s.duration})`).join('\n')}
+`).join('\n') + `
+THE SIX DRAGONS
+` + dragons.map(d => `
+${d.name} - ${d.latin}
+${d.tagline}
+Born From: ${d.bornFrom.join(', ')}
+Feeds On: ${d.feedsOn.join(', ')}
+Business Impact: ${d.businessImpact.join(', ')}
+Example: ${d.example}
+`).join('\n') + `
+THE DRAGON KEEPER'S CREED
+"I will seek dragons, not to slay them, but to understand what they're trying to tell me about my data systems. For every dragon is a sign that reality and database have drifted apart—and my job is to bring them back together."`;
+        }
+
+        function generateSQLLibrary() {
+            return `-- DATA DRAGON DETECTION QUERY LIBRARY
+-- The Data Dragon Slayer Program
+-- Ready-to-use SQL queries for detecting all six types of data quality decay
+
+-- USAGE:
+-- 1. Modify table and column names to match your schema
+-- 2. Run queries on a regular schedule (weekly/monthly)
+-- 3. Track trends over time to catch dragons early
+-- 4. Set up alerts when thresholds are exceeded
+
+` + dragons.map(d => `
+-- DRAGON ${d.id}: ${d.name.toUpperCase()}
+-- ${d.latin}
+-- ${d.tagline}
+
+-- Quick Detection:
+${d.detection}
+
+-- Full details:
+-- Born From: ${d.bornFrom.join('; ')}
+-- Feeds On: ${d.feedsOn.join('; ')}
+-- Business Impact: ${d.businessImpact.join('; ')}
+`).join('\n') + `
+
+-- TIPS FOR DRAGON KEEPERS
+-- 1. Start Small: Master one dragon type at a time
+-- 2. Customize: Modify queries for your schema
+-- 3. Automate: Schedule queries to run regularly
+-- 4. Alert: Set up notifications for threshold breaches
+-- 5. Track Trends: Compare results over time
+-- 6. Document: Keep notes on dragons found
+-- 7. Prevent: Use findings to improve data entry processes
+
+-- THE DRAGON KEEPER'S CREED
+-- "I will seek dragons, not to slay them, but to understand what they're telling me about my data systems."`;
+        }
+
+        // Hamburger Menu
+        function setupHamburger() {
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('navLinks');
+
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>
