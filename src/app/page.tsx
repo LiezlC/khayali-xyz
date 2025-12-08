@@ -154,13 +154,27 @@ export default function HomePage() {
               </div>
             </div>
 
+            {/* AI Arena Chamber */}
+            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-orange-500 transition-all duration-300 float-animation overflow-hidden" style={{ animationDelay: '6s' }}>
+              <div className="relative z-10">
+                <div className="text-4xl mb-4">🎭</div>
+                <h3 className="text-xl font-bold mb-3 text-orange-400">AI Arena</h3>
+                <p className="text-gray-400 mb-4">
+                  Multi-model roundtables where AI systems collaborate on complex questions.
+                </p>
+                <a href="/ai-arena" className="text-orange-400 hover:text-orange-300 font-semibold">
+                  Join Dialogue →
+                </a>
+              </div>
+            </div>
+
             {/* Blogs & Essays Chamber */}
-            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-amber-500 transition-all duration-300 float-animation overflow-hidden" style={{ animationDelay: '6s' }}>
+            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-amber-500 transition-all duration-300 float-animation overflow-hidden" style={{ animationDelay: '9s' }}>
               <div className="relative z-10">
                 <div className="text-4xl mb-4">📝</div>
                 <h3 className="text-xl font-bold mb-3 text-amber-400">Blogs & Essays</h3>
                 <p className="text-gray-400 mb-4">
-                  Interactive essays on AI consciousness, emergence, and human-machine futures.
+                  Individual essays on AI consciousness, emergence, and human-machine futures.
                 </p>
                 <a href="/blogs" className="text-amber-400 hover:text-amber-300 font-semibold">
                   Read Essays →

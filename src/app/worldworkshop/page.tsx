@@ -25,9 +25,13 @@ export default async function WorldWorkshopPage() {
           <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
             World Workshop
           </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-4">
             Collaborative worldbuilding experiments—creating rich fictional universes
             through human-AI co-creation, including Project Aethel and beyond.
+          </p>
+          <p className="text-md text-gray-400 max-w-2xl mx-auto">
+            Part of the <a href="/ai-arena" className="text-indigo-400 hover:text-indigo-300 underline">AI Arena</a> multi-model
+            roundtable methodology, where different AI systems contribute unique perspectives to shared creative challenges.
           </p>
         </div>
       </section>

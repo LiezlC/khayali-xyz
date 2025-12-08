@@ -20,16 +20,6 @@ export default function BlogsPage() {
       title: "Human-Centric AI Future",
       file: "Blogs Human-Centric AI Future.html",
       description: "Designing artificial intelligence that serves human flourishing"
-    },
-    {
-      title: "Comparative Analysis: Post-AGI",
-      file: "comparative_analysis-postagi.html",
-      description: "Analyzing scenarios and possibilities in the post-AGI world"
-    },
-    {
-      title: "The Convergence Thesis",
-      file: "convergence-thesis-v7.html",
-      description: "How digital and biological consciousness converge in collaborative systems"
     }
   ];
 
@@ -61,7 +51,7 @@ export default function BlogsPage() {
 
       {/* Blogs Grid */}
       <div className="container mx-auto max-w-6xl px-4 pb-20">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 gap-6">
           {blogs.map((blog, idx) => (
             <a
               key={idx}
