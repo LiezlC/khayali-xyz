@@ -22,10 +22,9 @@ export default function RootLayout({
               </h1>
               <div className="space-x-6">
                 <a href="/" className="hover:text-blue-400 transition-colors">Home</a>
+                <a href="/avatar" className="hover:text-orange-400 transition-colors">Avatar</a>
                 <a href="/observatory" className="hover:text-blue-400 transition-colors">Observatory</a>
-                <a href="/protocol" className="hover:text-blue-400 transition-colors">Protocol</a>
-                <a href="/creative" className="hover:text-blue-400 transition-colors">Creative</a>
-                <a href="/saraloosa" className="hover:text-blue-400 transition-colors">Saraloosa</a>
+                <a href="/protocol" className="hover:text-purple-400 transition-colors">Protocol</a>
               </div>
             </div>
           </nav>

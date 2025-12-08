@@ -98,20 +98,6 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Chats Chamber */}
-            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-cyan-500 transition-all duration-300 float-animation overflow-hidden" style={{ animationDelay: '5s' }}>
-              <div className="relative z-10">
-                <div className="text-4xl mb-4">💬</div>
-                <h3 className="text-xl font-bold mb-3 text-cyan-400">Dialogues</h3>
-                <p className="text-gray-400 mb-4">
-                  Deep conversations exploring consciousness and intelligence.
-                </p>
-                <a href="/chats" className="text-cyan-400 hover:text-cyan-300 font-semibold">
-                  Converse →
-                </a>
-              </div>
-            </div>
-
             {/* GrieVoice Chamber */}
             <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-teal-500 transition-all duration-300 float-animation overflow-hidden" style={{ animationDelay: '2s' }}>
               <div className="relative z-10">
@@ -126,16 +112,16 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* AI Village Chamber */}
-            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-emerald-500 transition-all duration-300 float-animation overflow-hidden" style={{ animationDelay: '6s' }}>
+            {/* Dragon Data Course Chamber */}
+            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-purple-500 transition-all duration-300 float-animation overflow-hidden" style={{ animationDelay: '3s' }}>
               <div className="relative z-10">
-                <div className="text-4xl mb-4">🏘️</div>
-                <h3 className="text-xl font-bold mb-3 text-emerald-400">AI Village</h3>
+                <div className="text-4xl mb-4">🐉</div>
+                <h3 className="text-xl font-bold mb-3 text-purple-400">Dragon Data Course</h3>
                 <p className="text-gray-400 mb-4">
-                  Experiments, benchmarks, and empirical consciousness research.
+                  Data ethics education through fantasy narratives, interactive games, and mythical metaphors.
                 </p>
-                <a href="/ai-village" className="text-emerald-400 hover:text-emerald-300 font-semibold">
-                  Experiment →
+                <a href="/dragon-data" className="text-purple-400 hover:text-purple-300 font-semibold">
+                  Enter the Realm →
                 </a>
               </div>
             </div>
