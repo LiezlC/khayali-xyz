@@ -125,6 +125,63 @@ export default function DragonDataPage() {
           </div>
         </section>
 
+        {/* Interactive Experiences */}
+        <section className="mb-16">
+          <h2 className="text-4xl font-bold mb-8 text-cyan-400 flex items-center gap-3">
+            <span>🎮</span>
+            Interactive Experiences
+          </h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-gray-800/50 rounded-xl p-6 border border-gray-700 hover:border-cyan-500 transition-all">
+              <h3 className="text-xl font-bold text-cyan-300 mb-2">Data Dragon Realms</h3>
+              <p className="text-gray-400 text-sm mb-4">Explore the complete dragon data realms</p>
+              <a
+                href="/dragon-data/data-dragon-realms-complete.html"
+                target="_blank"
+                className="text-cyan-400 hover:text-cyan-300 text-sm font-semibold"
+              >
+                Enter Realms →
+              </a>
+            </div>
+
+            <div className="bg-gray-800/50 rounded-xl p-6 border border-gray-700 hover:border-cyan-500 transition-all">
+              <h3 className="text-xl font-bold text-cyan-300 mb-2">Data Dragon Slayer</h3>
+              <p className="text-gray-400 text-sm mb-4">Complete data dragon slayer experience</p>
+              <a
+                href="/dragon-data/data-dragon-slayer-complete.html"
+                target="_blank"
+                className="text-cyan-400 hover:text-cyan-300 text-sm font-semibold"
+              >
+                Start Quest →
+              </a>
+            </div>
+
+            <div className="bg-gray-800/50 rounded-xl p-6 border border-gray-700 hover:border-cyan-500 transition-all">
+              <h3 className="text-xl font-bold text-cyan-300 mb-2">Dragon Slayer Quest</h3>
+              <p className="text-gray-400 text-sm mb-4">Interactive quest game</p>
+              <a
+                href="/dragon-data/DataDragonSlayerQuest.html"
+                target="_blank"
+                className="text-cyan-400 hover:text-cyan-300 text-sm font-semibold"
+              >
+                Begin Quest →
+              </a>
+            </div>
+
+            <div className="bg-gray-800/50 rounded-xl p-6 border border-gray-700 hover:border-cyan-500 transition-all">
+              <h3 className="text-xl font-bold text-cyan-300 mb-2">Dragon Taming 101</h3>
+              <p className="text-gray-400 text-sm mb-4">Learn to tame data dragons</p>
+              <a
+                href="/dragon-data/DataDragonTaming101.html"
+                target="_blank"
+                className="text-cyan-400 hover:text-cyan-300 text-sm font-semibold"
+              >
+                Start Training →
+              </a>
+            </div>
+          </div>
+        </section>
+
         {/* Resources */}
         <section className="mb-16">
           <h2 className="text-4xl font-bold mb-8 text-blue-400 flex items-center gap-3">

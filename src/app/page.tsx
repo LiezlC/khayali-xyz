@@ -140,6 +140,34 @@ export default function HomePage() {
               </div>
             </div>
 
+            {/* AI Augmentation Chamber */}
+            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-fuchsia-500 transition-all duration-300 float-animation overflow-hidden" style={{ animationDelay: '5s' }}>
+              <div className="relative z-10">
+                <div className="text-4xl mb-4">🧠</div>
+                <h3 className="text-xl font-bold mb-3 text-fuchsia-400">AI Augmentation</h3>
+                <p className="text-gray-400 mb-4">
+                  Frameworks for human-AI collaboration that elevates human capability.
+                </p>
+                <a href="/ai-augmentation" className="text-fuchsia-400 hover:text-fuchsia-300 font-semibold">
+                  Explore Frameworks →
+                </a>
+              </div>
+            </div>
+
+            {/* Blogs & Essays Chamber */}
+            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-amber-500 transition-all duration-300 float-animation overflow-hidden" style={{ animationDelay: '6s' }}>
+              <div className="relative z-10">
+                <div className="text-4xl mb-4">📝</div>
+                <h3 className="text-xl font-bold mb-3 text-amber-400">Blogs & Essays</h3>
+                <p className="text-gray-400 mb-4">
+                  Interactive essays on AI consciousness, emergence, and human-machine futures.
+                </p>
+                <a href="/blogs" className="text-amber-400 hover:text-amber-300 font-semibold">
+                  Read Essays →
+                </a>
+              </div>
+            </div>
+
             {/* Explore All Chamber */}
             <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-violet-500 transition-all duration-300 float-animation overflow-hidden" style={{ animationDelay: '8s' }}>
               <div className="relative z-10">
@@ -154,16 +182,16 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Avatar Section - PRIORITY */}
+            {/* ESG & AI Research Section */}
             <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-orange-500 transition-all duration-300 float-animation overflow-hidden col-span-full md:col-span-2 lg:col-span-4" style={{ animationDelay: '0.5s' }}>
               <div className="relative z-10 text-center">
-                <div className="text-4xl mb-4">👤</div>
-                <h3 className="text-2xl font-bold mb-3 text-orange-400">Avatar Section - PRIORITY DEPLOYMENT</h3>
+                <div className="text-4xl mb-4">⚡</div>
+                <h3 className="text-2xl font-bold mb-3 text-orange-400">ESG & AI Research</h3>
                 <p className="text-gray-400 mb-4 text-lg">
-                  AI & ESG in Extractive Industries - Critical content for immediate deployment
+                  AI applications and ESG frameworks in extractive industries
                 </p>
                 <a href="/avatar" className="px-8 py-4 bg-orange-600 hover:bg-orange-700 rounded-lg font-semibold transition-colors text-white">
-                  Access Avatar Content →
+                  View Research →
                 </a>
               </div>
             </div>
