@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Just Development: Live Enforcement Dashboard</title>
+<style>
+  /* Previous styles plus new dashboard elements */
+  .metric-tile {
+    position: relative;
+    cursor: pointer;
+  }
+  .dashboard-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 800px;
+    max-height: 80vh;
+    background: #0f141f;
+    border: 2px solid #00c9ff;
+    border-radius: 12px;
+    padding: 2rem;
+    z-index: 1000;
+    overflow-y: auto;
+  }
+  .dashboard-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 999;
+  }
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #2a2f3e;
+    padding-bottom: 1rem;
+  }
+  .live-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #00ff88;
+    font-weight: 600;
+  }
+  .live-dot {
+    width: 8px; height: 8px;
+    background: #00ff88;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+  }
+  .data-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  .data-card {
+    background: #1a1f2e;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #2a2f3e;
+  }
+  .data-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #00c9ff;
+    display: block;
+  }
+  .data-label {
+    font-size: 0.85rem;
+    color: #8892b0;
+  }
+  .source-badge {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+  }
+  .source-community { background: #00ff88; color: #0a0f1b; }
+  .source-thirdparty { background: #00c9ff; color: #0a0f1b; }
+  .source-developer { background: #ff9f43; color: #0a0f1b; }
+  .alert-banner {
+    background: rgba(255, 71, 87, 0.1);
+    border: 1px solid #ff4757;
+    color: #ff4757;
+    padding: 0.75rem;
+    border-radius: 6px;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .trigger-timeline {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+  }
+  .timeline-item {
+    flex: 1;
+    text-align: center;
+    padding: 0.5rem;
+    position: relative;
+  }
+  .timeline-item.completed { color: #00ff88; }
+  .timeline-item.active { color: #00c9ff; font-weight: bold; }
+  .timeline-item::after {
+    content: '';
+    position: absolute;
+    right: -50%;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+    background: #2a2f3e;
+    z-index: -1;
+  }
+  .timeline-item:last-child::after { display: none; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Just Development Rights Framework</h1>
+  <p class="subtitle">Click any metric tile to open its live enforcement dashboard</p>
+  
+  <!-- Step 1 Metric Tile (Clickable) -->
+  <div class="step-card">
+    <div class="step-header">
+      <div class="step-number">1</div>
+      <h2 class="step-title">Access to Information & Independent Support</h2>
+    </div>
+    <div class="metric-tile" onclick="openDashboard('ctf')">
+      <strong>Community Technical Fund (CTF)</strong><br>
+      Target: 0.5% of Project CAPEX<br>
+      Status: <span style="color: #ff4757;">UNDERFUNDED</span> <span class="trigger-tag">LOAN FROZEN</span><br>
+      Current: $2.1M / $5M required<br>
+      <small>⏱️ Last update: 2025-12-08 14:23 UTC | Source: Community Fiduciary</small>
+    </div>
+    <p style="color: #8892b0; font-size: 0.9rem;">Click metric tile for detailed audit trail and disbursement logs</p>
+  </div>
+
+  <!-- Dashboard Popup for CTF -->
+  <div class="dashboard-overlay" id="overlay-ctf" onclick="closeDashboard('ctf')"></div>
+  <div class="dashboard-popup" id="dashboard-ctf">
+    <div class="dashboard-header">
+      <h2>CTF Dashboard: Community Technical Fund</h2>
+      <div class="live-indicator"><div class="live-dot"></div>LIVE FEED</div>
+    </div>
+    
+    <div class="data-grid">
+      <div class="data-card">
+        <span class="data-value">$2.1M</span>
+        <span class="data-label">Deposited to Escrow</span>
+        <span class="source-badge source-developer">Source: Developer</span>
+        <div style="margin-top: 0.5rem; color: #ff4757;">
+          ↓ $2.9M shortfall
+        </div>
+      </div>
+      <div class="data-card">
+        <span class="data-value">$850K</span>
+        <span class="data-label">Disbursed to Community</span>
+        <span class="source-badge source-community">Source: Fiduciary Board</span>
+        <div style="margin-top: 0.5rem; color: #00ff88;">
+          ✓ Baseline study underway
+        </div>
+      </div>
+      <div class="data-card">
+        <span class="data-value">T+47</span>
+        <span class="data-label">Days Since Approval</span>
+        <span class="source-badge source-thirdparty">Source: DFI Monitor</span>
+        <div style="margin-top: 0.5rem; color: #ff9f43;">
+          ⚠️ 17 days past deadline
+        </div>
+      </div>
+    </div>
+
+    <div class="alert-banner">
+      🚨 <strong>TRIGGER ACTIVATED:</strong> Loan disbursement suspended at Day 30 due to incomplete CTF capitalization. Project remains in pre-construction phase.
+    </div>
+
+    <div class="trigger-timeline">
+      <div class="timeline-item completed">✓ Step 1: Project Approval</div>
+      <div class="timeline-item completed">✓ Step 2: Fund Established</div>
+      <div class="timeline-item active">⏳ Step 3: Full Capitalization (OVERDUE)</div>
+      <div class="timeline-item">⏸ Step 4: Construction Loan Release</div>
+    </div>
+
+    <div class="audit-protocol">
+      <h3>Verification Chain</h3>
+      <ul style="margin-left: 1rem; color: #8892b0;">
+        <li><strong>Day 15:</strong> Community board appointed (verified by third-party fiduciary)</li>
+        <li><strong>Day 23:</strong> Baseline study RFP issued (community-funded)</li>
+        <li><strong>Day 30:</strong> <span style="color: #ff4757;">Deadine missed—$2.9M shortfall remains</span></li>
+        <li><strong>Day 47 (TODAY):</strong> DFI monitor logs complaint; automatic loan freeze protocol active</li>
+      </ul>
+      <p style="margin-top: 1rem; color: #00c9ff;">
+        <strong>Next Action:</strong> Developer must deposit $2.9M by 2025-12-15 or project approval lapses (automatic after 60 days).
+      </p>
+    </div>
+  </div>
+
+  <!-- Step 5 Metric Tile (Clickable) -->
+  <div class="step-card">
+    <div class="step-header">
+      <div class="step-number">5</div>
+      <h2 class="step-title">Ensure Agreements are Monitored & Enforceable</h2>
+    </div>
+    <div class="metric-tile" onclick="openDashboard('vulnerable')">
+      <strong>Vulnerable Group Gap Ratio</strong><br>
+      Target: ≥80% of median income<br>
+      Status: <span style="color: #ff9f43;">AT RISK</span><br>
+      Current: 73% (women-headed households)<br>
+      Trend: ↓ 12% vs. last quarter<br>
+      <span class="trigger-tag">AUDIT FAILURE IMMINENT</span>
+    </div>
+  </div>
+
+  <!-- Dashboard for Vulnerable Group Gap -->
+  <div class="dashboard-overlay" id="overlay-vulnerable" onclick="closeDashboard('vulnerable')"></div>
+  <div class="dashboard-popup" id="dashboard-vulnerable">
+    <div class="dashboard-header">
+      <h2>Vulnerable Group Income Tracker</h2>
+      <div class="live-indicator"><div class="live-dot"></div>LIVE FEED</div>
+    </div>
+
+    <div class="data-grid">
+      <div class="data-card">
+        <span class="data-value">73%</span>
+        <span class="data-label">Women-headed HHs vs Median</span>
+        <span class="source-badge source-community">Community Survey</span>
+        <div style="margin-top: 0.5rem; color: #ff4757;">
+          ⚠️ Below 80% threshold
+        </div>
+      </div>
+      <div class="data-card">
+        <span class="data-value">89%</span>
+        <span class="data-label">Elderly-headed HHs vs Median</span>
+        <span class="source-badge source-thirdparty">Third-party Audit</span>
+        <div style="margin-top: 0.5rem; color: #00ff88;">
+          ✓ Above target
+        </div>
+      </div>
+      <div class="data-card">
+        <span class="data-value">Q3 2025</span>
+        <span class="data-label">Next Audit Date</span>
+        <span class="source-badge source-developer">Project Schedule</span>
+        <div style="margin-top: 0.5rem; color: #ff9f43;">
+          23 days remaining
+        </div>
+      </div>
+    </div>
+
+    <div class="alert-banner">
+      🚨 <strong>RISK ALERT:</strong> If ratio remains <80% at Q3 audit, Performance Bond ($12.5M) will be released to community + 12-month project suspension triggered per Kimi K2 protocol.
+    </div>
+
+    <div class="data-card" style="margin: 1rem 0;">
+      <h4>Root Cause Analysis (Community-reported)</h4>
+      <ul style="margin-left: 1rem; color: #8892b0;">
+        <li>Training programs delivered in wrong language (reported Day 182)</li>
+        <li>Childcare stipends not disbursed (reported Day 195)</li>
+        <li>Market access road construction delayed 6 months (verified Day 210)</li>
+      </ul>
+      <p style="margin-top: 0.5rem; color: #00c9ff;">
+        <strong>Corrective Action:</strong> Developer has 14 days to submit revised livelihood plan (required by Day 238).
+      </p>
+    </div>
+  </div>
+
+  <!-- Add other steps similarly... -->
+</div>
+
+<script>
+  function openDashboard(metricId) {
+    document.getElementById(`dashboard-${metricId}`).style.display = 'block';
+    document.getElementById(`overlay-${metricId}`).style.display = 'block';
+  }
+  
+  function closeDashboard(metricId) {
+    document.getElementById(`dashboard-${metricId}`).style.display = 'none';
+    document.getElementById(`overlay-${metricId}`).style.display = 'none';
+  }
+  
+  // Simulate real-time updates every 30 seconds
+  setInterval(() => {
+    const dots = document.querySelectorAll('.live-dot');
+    dots.forEach(dot => {
+      dot.style.opacity = dot.style.opacity === '0.3' ? '1' : '0.3';
+    });
+  }, 30000);
+</script>
+</body>
+</html>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Just Development Rights: Enforceable Metrics Framework</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: #0a0f1b;
+    color: #e0e0e0;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  h1 {
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, #00c9ff 0%, #92fe9d 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+  }
+  .subtitle {
+    color: #8892b0;
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+  }
+  .framework-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .step-card {
+    background: #1a1f2e;
+    border: 1px solid #2a2f3e;
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+  }
+  .step-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 201, 255, 0.15);
+  }
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .step-number {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #00c9ff 0%, #92fe9d 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #0a0f1b;
+  }
+  .step-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #f0f0f0;
+  }
+  .principle-section, .enforceable-section {
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 8px;
+  }
+  .principle-section {
+    background: rgba(255, 193, 7, 0.1);
+    border-left: 4px solid #ffc107;
+  }
+  .enforceable-section {
+    background: rgba(0, 201, 255, 0.1);
+    border-left: 4px solid #00c9ff;
+  }
+  .section-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .metric-tile {
+    background: #0f141f;
+    border: 1px solid #2a2f3e;
+    border-radius: 6px;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+  }
+  .trigger-tag {
+    display: inline-block;
+    background: #ff4757;
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    margin-left: 0.5rem;
+  }
+  .audit-protocol {
+    background: rgba(46, 204, 113, 0.1);
+    border-left: 4px solid #2ecc71;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 0 8px 8px 0;
+  }
+  .collapsible {
+    max-height: 600px;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+  }
+  .collapsible.collapsed {
+    max-height: 120px;
+  }
+  .toggle-btn {
+    background: linear-gradient(135deg, #00c9ff 0%, #92fe9d 100%);
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
+    color: #0a0f1b;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: opacity 0.3s;
+  }
+  .toggle-btn:hover {
+    opacity: 0.85;
+  }
+  .tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: help;
+    border-bottom: 1px dotted #00c9ff;
+  }
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 300px;
+    background: #1a1f2e;
+    color: #e0e0e0;
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #00c9ff;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -150px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.85rem;
+  }
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+  @media print {
+    body { background: white; color: black; }
+    .step-card { break-inside: avoid; border: 1px solid #ccc; }
+  }
+  @media (prefers-color-scheme: light) {
+    body { background: #f5f7fa; color: #1a1f2e; }
+    .step-card { background: white; border-color: #d1d8e0; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Just Development Rights Framework</h1>
+  <p class="subtitle">From Principles to Enforceable Metrics: The Six-Layer Enforcement Stack</p>
+  
+  <div class="framework-grid">
+    <!-- Step 1 -->
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-number">1</div>
+        <h2 class="step-title">Empower Communities with Independent Support</h2>
+      </div>
+      <div class="collapsible collapsed" id="step1">
+        <div class="principle-section">
+          <div class="section-title">📋 Current Proposal</div>
+          <p>"Provide funds for communities to hire their own legal and technical experts"</p>
+        </div>
+        <div class="enforceable-section">
+          <div class="section-title">⚖️ Enforceable Metric <span class="trigger-tag">AUDIT TRIGGER</span></div>
+          <div class="metric-tile">
+            Community Technical Fund (CTF) = 0.5% × Project CAPEX<br>
+            Escrow deposit deadline: T+30 days from project approval<br>
+            Administrator: Third-party fiduciary with community board majority<br>
+            <strong>FUNDING CONDITION PRECEDENT:</strong> No disbursement of project capital until CTF fully capitalized
+          </div>
+          <div class="audit-protocol">
+            <strong>Audit Protocol:</strong> Quarterly financial audits + community satisfaction surveys. Community can trigger emergency audit with 25% signature threshold.
+          </div>
+        </div>
+      </div>
+      <button class="toggle-btn" onclick="toggle('step1')">Expand Full Metrics</button>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-number">2</div>
+        <h2 class="step-title">Prioritise Designs that Avoid Displacement</h2>
+      </div>
+      <div class="collapsible collapsed" id="step2">
+        <div class="principle-section">
+          <div class="section-title">📋 Current Proposal</div>
+          <p>"Explore all innovative solutions to avoid displacement even if costs increase"</p>
+        </div>
+        <div class="enforceable-section">
+          <div class="section-title">⚖️ Enforceable Metric <span class="trigger-tag">PROJECT KILL SWITCH</span></div>
+          <div class="metric-tile">
+            Displacement Impact Ratio (DIR) = Affected_Hectares / Project_MW <span class="tooltip">(?)</span>
+            <span class="tooltiptext">MW for energy projects; adapt for other sectors</span><br>
+            Threshold: DIR > 0.5 triggers <strong>mandatory redesign phase</strong><br>
+            Cost flexibility: Up to 15% CAPEX increase permitted for DIR reduction<br>
+            Community veto: DIR > 1.0 gives communities unilateral "no-go zone" designation right
+          </div>
+          <div class="audit-protocol">
+            <strong>Verification:</strong> Independent engineering review panel (3 members: 1 developer, 1 community-selected, 1 neutral expert). Decision binding in 45 days.
+          </div>
+        </div>
+      </div>
+      <button class="toggle-btn" onclick="toggle('step2')">Expand Full Metrics</button>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-number">3</div>
+        <h2 class="step-title">Mediate to Address Power Imbalances</h2>
+      </div>
+      <div class="collapsible collapsed" id="step3">
+        <div class="principle-section">
+          <div class="section-title">📋 Current Proposal</div>
+          <p>"Use neutral, expert mediators for fair, rights-respecting negotiations"</p>
+        </div>
+        <div class="enforceable-section">
+          <div class="section-title">⚖️ Enforceable Metric <span class="trigger-tag">ESCALATION CLOCK</span></div>
+          <div class="metric-tile">
+            Mediator Selection: Joint list of 5 experts; each side vetoes 2; random draw from remaining<br>
+            Timeline: Negotiations max 90 days; mediation max 30 days<br>
+            <strong>DEADLOCK TRIGGER:</strong> Day 121 → automatic binding arbitration under Hague Rules<br>
+            Cost allocation: Developer pays 75% of mediation fees; 100% if they reject mediated settlement
+          </div>
+          <div class="audit-protocol">
+            <strong>Outcome Metric:</strong> ≥70% community approval via secret ballot required for agreement validity. Sub-group veto: ≤60% approval among women/youth = mandatory renegotiation of those provisions.
+          </div>
+        </div>
+      </div>
+      <button class="toggle-btn" onclick="toggle('step3')">Expand Full Metrics</button>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-number">4</div>
+        <h2 class="step-title">Use Expropriation Only as Last Resort</h2>
+      </div>
+      <div class="collapsible collapsed" id="step4">
+        <div class="principle-section">
+          <div class="section-title">📋 Current Proposal</div>
+          <p>"Compulsory acquisition only in exceptional circumstances with human rights assessment"</p>
+        </div>
+        <div class="enforceable-section">
+          <div class="section-title">⚖️ Enforceable Metric <span class="trigger-tag">HUMAN RIGHTS GATE</span></div>
+          <div class="metric-tile">
+            Necessity Test: Benefits must outweigh costs by <strong>5:1 ratio</strong> (QALYs or equivalent metric)<span class="tooltip">(?)</span>
+            <span class="tooltiptext">Quality-Adjusted Life Years or culturally equivalent community-defined metric</span><br>
+            Proportionality Cap: <strong>Max 10% displacement</strong> of any Indigenous subgroup's total land base<br>
+            Consent Standard: ≥75% community approval + ≥66% approval from women & youth sub-groups<br>
+            No-Go Zone: Community designates >20% of territory as untouchable; requires 90% community supermajority to override
+          </div>
+          <div class="audit-protocol">
+            <strong>Independent Review:</strong> Human Rights Impact Assessment by UN Special Rapporteur-endorsed panel. Developer pays panel costs. Assessment published 60 days before any acquisition vote.
+          </div>
+        </div>
+      </div>
+      <button class="toggle-btn" onclick="toggle('step4')">Expand Full Metrics</button>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-number">5</div>
+        <h2 class="step-title">Ensure Agreements are Monitored & Enforceable</h2>
+      </div>
+      <div class="collapsible collapsed" id="step5">
+        <div class="principle-section">
+          <div class="section-title">📋 Current Proposal</div>
+          <p>"Legally binding agreements with independent monitoring and community enforcement"</p>
+        </div>
+        <div class="enforceable-section">
+          <div class="section-title">⚖️ Enforceable Metric <span class="trigger-tag">PERFORMANCE BOND</span></div>
+          <div class="metric-tile">
+            Community Performance Bond: 5% of project revenue held in escrow<br>
+            Vulnerable Group Gap Ratio: <span class="tooltip">Income of at-risk families vs median</span>
+            <span class="tooltiptext">As praised in AI-vs-IFC transcript: measures women/elderly/PWD-headed households</span><br>
+            Target: ≥80% median income within 24 months of displacement<br>
+            <strong>AUDIT FAILURE:</strong> Ratio <80% → 12-month project suspension + bond release to community for direct support programs
+          </div>
+          <div class="audit-protocol">
+            <strong>Monitoring:</strong> Quarterly income surveys by community-hired researchers. Disputes resolved via Hague arbitration. Community legal costs drawn from CTF (Step 1).
+          </div>
+        </div>
+      </div>
+      <button class="toggle-btn" onclick="toggle('step5')">Expand Full Metrics</button>
+    </div>
+
+    <!-- Step 6 -->
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-number">6</div>
+        <h2 class="step-title">Use Financial & Supply Chain Leverage</h2>
+      </div>
+      <div class="collapsible collapsed" id="step6">
+        <div class="principle-section">
+          <div class="section-title">📋 Current Proposal</div>
+          <p>"Lenders, investors, buyers must require this approach as a business condition"</p>
+        </div>
+        <div class="enforceable-section">
+          <div class="section-title">⚖️ Enforceable Metric <span class="trigger-tag">CAPITAL FREEZE</span></div>
+          <div class="metric-tile">
+            Loan Disbursement Schedule: Tied to <strong>verified completion</strong> of Steps 1-5 milestones<br>
+            Disclosure Requirement: All agreements public on OpenContracting portal within 15 days<br>
+            Shareholder Resolution: ≥5% shareholder equity can trigger compliance audit<br>
+            <strong>BLACKLIST TRIGGER:</strong> 2 verified violations in 5 years = automatic exclusion from DFI financing for 7 years
+          </div>
+          <div class="audit-protocol">
+            <strong>Enforcement:</strong> DFIs must publish compliance dashboard. Buyers must embed requirements in procurement policies. Violations reported by communities via encrypted hotline; 30-day investigation turnaround.
+          </div>
+        </div>
+      </div>
+      <button class="toggle-btn" onclick="toggle('step6')">Expand Full Metrics</button>
+    </div>
+  </div>
+
+  <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #2a2f3e; text-align: center; color: #8892b0;">
+    <p>Enforceability Stack: Quantified → Independent → Time-bound → Third-party → Material → Community-initiated</p>
+    <p>Generated from Just Development Rights Framework + AI-vs-IFC transcript analysis</p>
+  </footer>
+</div>
+
+<script>
+  function toggle(id) {
+    const element = document.getElementById(id);
+    element.classList.toggle('collapsed');
+    const btn = element.nextElementSibling;
+    btn.textContent = element.classList.contains('collapsed') ? 'Expand Full Metrics' : 'Collapse';
+  }
+  
+  // Add smooth scroll
+  document.querySelectorAll('.step-card').forEach(card => {
+    card.addEventListener('click', function(e) {
+      if (e.target.classList.contains('toggle-btn')) return;
+      const collapsible = this.querySelector('.collapsible');
+      if (collapsible.classList.contains('collapsed')) {
+        toggle(collapsible.id);
+      }
+    });
+  });
+</script>
+</body>
+</html>

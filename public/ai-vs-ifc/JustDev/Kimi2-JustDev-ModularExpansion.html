@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Just Development: Modular Enforcement Toolkit</title>
+<style>
+  /* Previous styles + new modular tabs */
+  body { font-family: system-ui, sans-serif; background: #0a0f1b; color: #e0e0e0; }
+  .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+  .tab-nav { display: flex; gap: 0.5rem; margin-bottom: 2rem; border-bottom: 2px solid #2a2f3e; }
+  .tab-btn {
+    padding: 0.75rem 1.5rem;
+    background: #1a1f2e;
+    border: none;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    font-weight: 600;
+    color: #8892b0;
+    transition: all 0.3s;
+  }
+  .tab-btn.active {
+    background: #00c9ff;
+    color: #0a0f1b;
+  }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+  
+  /* Role-based playbook styles */
+  .role-card {
+    background: #1a1f2e;
+    border: 1px solid #2a2f3e;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+  }
+  .checklist-item {
+    display: flex;
+    gap: 1rem;
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+    background: #0f141f;
+    border-radius: 6px;
+    align-items: center;
+  }
+  .checkbox {
+    width: 20px; height: 20px;
+    border: 2px solid #00c9ff;
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .checkbox.checked { background: #00c9ff; }
+  
+  /* Cultural metrics calculator */
+  .metric-builder {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr auto;
+    gap: 0.5rem;
+    align-items: center;
+    margin: 0.5rem 0;
+    padding: 0.75rem;
+    background: #0f141f;
+    border-radius: 6px;
+  }
+  .metric-input {
+    background: #1a1f2e;
+    border: 1px solid #2a2f3e;
+    color: #e0e0e0;
+    padding: 0.5rem;
+    border-radius: 4px;
+  }
+  .weight-slider { width: 100%; }
+  .calc-result {
+    background: rgba(0, 201, 255, 0.1);
+    border: 1px solid #00c9ff;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+  }
+  
+  /* Redline comparison */
+  .redline-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .redline-panel {
+    background: #1a1f2e;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #2a2f3e;
+  }
+  .redline-original { color: #ff4757; text-decoration: line-through; }
+  .redline-insert { background: rgba(0, 255, 136, 0.2); color: #00ff88; font-weight: 600; }
+  .clause-number { color: #00c9ff; font-weight: bold; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1 style="margin-bottom: 1rem;">Modular Enforcement Toolkit</h1>
+  
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="showTab('playbooks')">Actor Playbooks</button>
+    <button class="tab-btn" onclick="showTab('cultural')">Cultural Metrics Builder</button>
+    <button class="tab-btn" onclick="showTab('ifc')">Redlined IFC Standards</button>
+  </div>
+
+  <!-- Tab 1: Actor-Specific Playbooks -->
+  <div id="playbooks" class="tab-content active">
+    <h2>Role-Based Compliance Checklists</h2>
+    <p style="color: #8892b0; margin-bottom: 2rem;">Same metrics, filtered for what each actor controls at decision points</p>
+    
+    <div class="role-card">
+      <h3>🏦 DFI Loan Officer: Disbursement Gate Checklist</h3>
+      <p style="color: #8892b0; font-size: 0.9rem;"><strong>Authority:</strong> Withhold loan tranches if any item is unchecked. No override without board vote.</p>
+      
+      <div class="checklist-item">
+        <div class="checkbox" onclick="toggleCheck(this)"></div>
+        <div>
+          <strong>CTF Capitalization Check</strong><br>
+          <small>Verify: Community Technical Fund = 0.5% CAPEX ($5M for $1B project) deposited in escrow with third-party fiduciary. Community board majority confirmed.</small>
+          <div style="margin-top: 0.5rem;"><span style="color: #00ff88;">✓ Verified:</span> $5M deposited | Fiduciary: Indigenous Rights Foundation | Board: 4 community, 2 DFI, 1 neutral</div>
+        </div>
+      </div>
+
+      <div class="checklist-item">
+        <div class="checkbox" onclick="toggleCheck(this)"></div>
+        <div>
+          <strong>Displacement Impact Ratio (DIR) Verification</strong><br>
+          <small>Confirm: Independent engineering panel (community-selected expert included) has certified DIR ≤ 0.5. If DIR > 0.5, community "no-go zone" designation must be on file.</small>
+          <div style="margin-top: 0.5rem;"><span style="color: #ff4757;">⚠️ Flag:</span> DIR = 0.67 exceeds threshold. Community designated 25% of territory as no-go. Redesign in progress.</div>
+        </div>
+      </div>
+
+      <div class="checklist-item">
+        <div class="checkbox" onclick="toggleCheck(this)"></div>
+        <div>
+          <strong>Mediation Agreement Status</strong><br>
+          <small>Check: Rights-based mediation completed with ≥70% community approval. Sub-group veto resolved. Agreement published on OpenContracting portal.</small>
+              <div style="margin-top: 0.5rem;"><span style="color: #00ff88;">✓ Verified:</span> 89% approval overall; 72% women & youth. Agreement live at <a href="#" style="color: #00c9ff;">open-contracting.org/dispute-2025-347</a></div>
+        </div>
+      </div>
+
+      <div class="checklist-item">
+        <div class="checkbox" onclick="toggleCheck(this)"></div>
+        <div>
+          <strong>Vulnerable Group Gap Ratio Baseline</strong><br>
+          <small>Require: Community-hired researchers have submitted baseline income data for women/elderly/PWD-headed households. Median established. Target: ≥80% within 24 months.</small>
+          <div style="margin-top: 0.5rem;"><span style="color: #00ff88;">✓ Baseline submitted:</span> Women-headed HH median = $2,400/year. 24-month target = $1,920/year.</div>
+        </div>
+      </div>
+
+      <div class="alert-banner" style="margin-top: 1rem;">
+        🎯 <strong>Next Tranche Release Condition:</strong> All boxes must be checked by 2026-01-15 or loan enters default review.
+      </div>
+    </div>
+
+    <div class="role-card">
+      <h3>🏭 Buyer Procurement Team: Supplier Contract Clauses</h3>
+      <p style="color: #8892b0; font-size: 0.9rem;"><strong>Authority:</strong> Embed these clauses in purchase agreements. Material breach = contract termination + blacklist.</p>
+      
+      <div class="checklist-item">
+        <div class="checkbox" onclick="toggleCheck(this)"></div>
+        <div>
+          <strong>Clause 7.3: Community Performance Bond</strong><br>
+          <small>Insert: "Supplier shall post 5% of contract value as Community Performance Bond, released only upon certified achievement of Vulnerable Group Gap Ratio ≥80% for 4 consecutive quarters."</small>
+          <div style="margin-top: 0.5rem;"><strong>Template:</strong> <code style="background: #0a0f1b; padding: 0.25rem; border-radius: 4px;">Bond_Escrow_Agreement_2025.docx</code></div>
+        </div>
+      </div>
+
+      <div class="checklist-item">
+        <div class="checkbox" onclick="toggleCheck(this)"></div>
+        <div>
+          <strong>Clause 8.1: Real-Time Dashboard Access</strong><br>
+          <small>Insert: "Supplier must provide Buyer read-only API access to live enforcement dashboard metrics (CTF status, DIR, Gap Ratio). Buyer may pause orders if any metric enters 'At Risk' status for >30 days."</small>
+        </div>
+      </div>
+
+      <div class="checklist-item">
+        <div class="checkbox" onclick="toggleCheck(this)"></div>
+        <div>
+          <strong>Clause 9.4: Subcontractor Cascade</strong><br>
+          <small>Insert: "All subcontractors must adhere to same metrics. Prime supplier liable for subcontractor breaches. Community hotline number must appear on all subcontractor work sites."</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab 2: Cultural Metrics Builder -->
+  <div id="cultural" class="tab-content">
+    <h2>Community-Defined Well-Being Metrics</h2>
+    <p style="color: #8892b0; margin-bottom: 1rem;">Replace QALYs with culturally specific indicators. Set weights, baseline, and watch the 5:1 necessity test recalculate.</p>
+    
+    <div style="background: #1a1f2e; padding: 1.5rem; border-radius: 12px;">
+      <h3>Project: [Community Name] Hydroelectric Impact Assessment</h3>
+      <p style="color: #8892b0; font-size: 0.9rem;">Define what "well-being" means in your community's terms</p>
+    </div>
+
+    <div style="margin: 1rem 0;">
+      <div class="metric-builder">
+        <input class="metric-input" placeholder="e.g., Annual salmon runs" value="Annual salmon runs (thousand fish)">
+        <input class="metric-input" type="number" placeholder="Baseline" value="45">
+        <input class="metric-input" type="number" placeholder="Post-project" value="12">
+        <input class="weight-slider" type="range" min="0" max="100" value="35" oninput="calculateWellbeing()">
+        <span id="weight-0">35%</span>
+        <button onclick="removeMetric(this)" style="background: #ff4757; border: none; color: white; padding: 0.5rem; border-radius: 4px;">×</button>
+      </div>
+
+      <div class="metric-builder">
+        <input class="metric-input" placeholder="e.g., Ceremonial site access" value="Days/year ceremonial sites accessible">
+        <input class="metric-input" type="number" placeholder="Baseline" value="120">
+        <input class="metric-input" type="number" placeholder="Post-project" value="45">
+        <input class="weight-slider" type="range" min="0" max="100" value="30" oninput="calculateWellbeing()">
+        <span id="weight-1">30%</span>
+        <button onclick="removeMetric(this)" style="background: #ff4757; border: none; color: white; padding: 0.5rem; border-radius: 4px;">×</button>
+      </div>
+
+      <div class="metric-builder">
+        <input class="metric-input" placeholder="e.g., Indigenous language speakers" value="Fluent speakers (age 5-25)">
+        <input class="metric-input" type="number" placeholder="Baseline" value="340">
+        <input class="metric-input" type="number" placeholder="Post-project" value="335">
+        <input class="weight-slider" type="range" min="0" max="100" value="25" oninput="calculateWellbeing()">
+        <span id="weight-2">25%</span>
+        <button onclick="removeMetric(this)" style="background: #ff4757; border: none; color: white; padding: 0.5rem; border-radius: 4px;">×</button>
+      </div>
+
+      <button onclick="addMetric()" style="background: #00ff88; border: none; color: #0a0f1b; padding: 0.75rem 1.5rem; border-radius: 6px; font-weight: 600; margin: 1rem 0;">+ Add Another Indicator</button>
+    </div>
+
+    <div class="calc-result">
+      <h3>5:1 Necessity Test Result</h3>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+        <div>
+          <h4>Community Well-Being Loss</h4>
+          <div class="data-value" id="community-loss" style="color: #ff4757;">-68.2 units</div>
+          <p style="color: #8892b0; font-size: 0.9rem;">Weighted degradation across all indicators</p>
+        </div>
+        <div>
+          <h4>Project Benefit (Energy Output)</h4>
+          <div class="data-value" id="project-benefit" style="color: #00ff88;">+285 MW</div>
+          <p style="color: #8892b0; font-size: 0.9rem;">Convert to comparable units</p>
+        </div>
+      </div>
+      
+      <div style="margin-top: 1.5rem; padding: 1rem; background: #0f141f; border-radius: 8px;">
+        <strong>Ratio: <span id="necessity-ratio" style="color: #ff4757;">1.04 : 1</span></strong>
+        <p style="color: #8892b0; font-size: 0.9rem;">Project benefit ÷ Community loss (target: ≥5:1)</p>
+        <div class="alert-banner" style="margin-top: 0.5rem;">
+          ❌ <strong>FAILS</strong> Human Rights Necessity Test. Displacement not justified. Project must redesign or obtain supermajority consent (90%).
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 2rem; background: rgba(0, 201, 255, 0.1); padding: 1rem; border-radius: 8px;">
+      <h4>How this works:</h4>
+      <ul style="margin-left: 1.5rem; color: #8892b0;">
+        <li>Community defines indicators that matter *to them* (not developer consultants)</li>
+        <li>Baseline measured *by community-hired researchers* (Step 1 CTF funds)</li>
+        <li>Post-project projection from independent impact assessment *with community veto power*</li>
+        <li>Weights set by community assembly (not external experts)</li>
+        <li>5:1 ratio is *hard law*, not guideline. If ratio <5, project cannot proceed without 90% community supermajority (Step 4).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Tab 3: Redlined IFC Standards -->
+  <div id="ifc" class="tab-content">
+    <h2>Performance Standards 5 & 7: Track-Changes for Enforcement</h2>
+    <p style="color: #8892b0; margin-bottom: 1rem;">Direct text replacements to convert aspirational standards into auditable code</p>
+    
+    <div class="role-card">
+      <h3>IFC Performance Standard 5: Land Acquisition & Involuntary Resettlement</h3>
+      <p style="color: #8892b0; font-size: 0.9rem;">Target: Update 2026 Sustainability Framework | Status: Draft Advocacy Text</p>
+    </div>
+
+    <div class="redline-container">
+      <div class="redline-panel">
+        <h4>Current PS5 (Aspirational)</h4>
+        <p>Para 8: "The client will pay <span class="redline-original">particular attention to</span> vulnerable groups..."</p>
+        <p>Para 15: "If vulnerable groups are at risk of being further disadvantaged, <span class="redline-original">the client will take measures to ensure that they receive appropriate benefits</span>."</p>
+        <p>Para 22: "The client will establish a grievance mechanism <span class="redline-original">to receive and facilitate resolution of concerns</span>."</p>
+      </div>
+      <div class="redline-panel">
+        <h4>Proposed PS5 (Enforceable)</h4>
+        <p>Para 8: "The client will pay <span class="redline-insert">measurable and auditable attention to</span> vulnerable groups..."</p>
+        <p>Para 15: "If vulnerable groups' income falls below <span class="redline-insert">80% of the median income for 2 consecutive quarters, the client shall automatically release 50% of the Community Performance Bond within 30 days and submit a corrective action plan subject to community veto</span>."</p>
+        <p>Para 22: "The client will establish a grievance mechanism <span class="redline-insert">with mandatory binding external recourse: unresolved grievances automatically escalate to independent mediation within 60 days, whose decision is legally binding on the client and enforceable via Hague arbitration</span>."</p>
+      </div>
+    </div>
+
+    <div class="role-card" style="margin-top: 2rem;">
+      <h3>IFC Performance Standard 7: Indigenous Peoples</h3>
+      <p style="color: #8892b0; font-size: 0.9rem;"><strong>Key Addition:</strong> "Community-defined well-being metrics" clause</p>
+    </div>
+
+    <div class="redline-container">
+      <div class="redline-panel">
+        <h4>Current PS7 (Process-Focused)</h4>
+        <p>Para 13: "The client will document <span class="redline-original">the FPIC process</span> and the outcome of Indigenous Peoples' consent."</p>
+        <p>Para 19: "The client will implement measures to <span class="redline-original">avoid, minimize, or compensate for</span> impacts."</p>
+        <p><em>No quantified necessity test.</em></p>
+      </div>
+      <div class="redline-panel">
+        <h4>Proposed PS7 (Rightsholder-Powered)</h4>
+        <p>Para 13: "The client will document <span class="redline-insert">the community-defined well-being metrics, the independent baseline study funded by CTF, and the 5:1 necessity test outcome</span> and the outcome of Indigenous Peoples' consent."</p>
+        <p>Para 19: "The client will implement measures <span class="redline-insert">only after community-led verification that post-project well-being scores do not fall below 80% of baseline, and only if the 5:1 necessity test is passed as certified by a UN Special Rapporteur-endorsed panel</span>."</p>
+        <p><strong>New Para 25:</strong> "Community-defined no-go zones shall be legally binding. Any expropriation within these zones requires 90% community supermajority consent via secret ballot."</p>
+      </div>
+    </div>
+
+    <div class="role-card" style="margin-top: 2rem;">
+      <h3>Implementation Notes for Advocates</h3>
+      <ul style="margin-left: 1.5rem; color: #8892b0;">
+        <li><strong>PS5 Para 15:</strong> The "80% median income" comes directly from the Kimi K2 Vulnerable Group Gap Ratio example. This makes the transcript's insight into binding law.</li>
+        <li><strong>PS7 Para 13:</strong> "Community-defined metrics" is the cultural calculator from Tab 2. It prevents IFC's standard from being captured by developer consultants.</li>
+        <li><strong>New Para 25:</strong> Gives communities the "no-go zone" designation power referenced in the Just Development framework, making it an enforceable right, not a request.</li>
+      </ul>
+      <button style="background: #00ff88; border: none; color: #0a0f1b; padding: 0.75rem 1.5rem; border-radius: 6px; font-weight: 600; margin-top: 1rem;">
+        📥 Download Track-Changes Word File
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Tab switching
+function showTab(tabName) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(tabName).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// Checklist toggle
+function toggleCheck(el) {
+  el.classList.toggle('checked');
+}
+
+// Cultural metrics calculator
+function calculateWellbeing() {
+  const metrics = document.querySelectorAll('.metric-builder');
+  let totalLoss = 0;
+  let totalWeight = 0;
+  
+  metrics.forEach((metric, i) => {
+    const baseline = parseFloat(metric.children[1].value) || 0;
+    const post = parseFloat(metric.children[2].value) || 0;
+    const weight = parseFloat(metric.children[3].value) || 0;
+    const weightDisplay = metric.children[4];
+    
+    // Normalize weight to 100%
+    totalWeight += weight;
+    weightDisplay.textContent = `${weight}%`;
+    
+    // Calculate loss (0-100 scale)
+    const loss = baseline > 0 ? ((baseline - post) / baseline) * 100 : 0;
+    totalLoss += loss * (weight / 100);
+  });
+  
+  // Simple example: convert MW to "wellbeing units" (in real use, this would be community-defined conversion)
+  const projectBenefit = 285; // MW
+  const communityLoss = totalLoss.toFixed(1);
+  const ratio = (projectBenefit / Math.abs(communityLoss)).toFixed(2);
+  
+  document.getElementById('community-loss').textContent = `-${communityLoss} units`;
+  document.getElementById('necessity-ratio').textContent = `${ratio} : 1`;
+}
+
+// Add/remove metrics
+function addMetric() {
+  const container = document.querySelector('#cultural > div:nth-child(4)');
+  const newMetric = document.createElement('div');
+  newMetric.className = 'metric-builder';
+  newMetric.innerHTML = `<input class="metric-input" placeholder="e.g., Language immersion hours"><input class="metric-input" type="number" placeholder="Baseline"><input class="metric-input" type="number" placeholder="Post-project"><input class="weight-slider" type="range" min="0" max="100" value="10" oninput="calculateWellbeing()"><span>10%</span><button onclick="removeMetric(this)" style="background: #ff4757; border: none; color: white; padding: 0.5rem; border-radius: 4px;">×</button>`;
+  container.appendChild(newMetric);
+  calculateWellbeing();
+}
+
+function removeMetric(btn) {
+  btn.parentElement.remove();
+  calculateWellbeing();
+}
+
+// Initialize
+calculateWellbeing();
+</script>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Just Development: WORKING AI Agent (Demo Mode)</title>
+<style>
+  /* WORKING STYLES - No more broken controls */
+  body { margin: 0; overflow: hidden; font-family: 'Segoe UI', sans-serif; background: #0a0f1b; color: #e0e0e0; }
+  .presentation-mode {
+    height: 100vh; width: 100vw;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    padding: 4rem; text-align: center;
+  }
+  .slide-title {
+    font-size: 4rem; font-weight: 800;
+    background: linear-gradient(135deg, #00c9ff 0%, #92fe9d 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 2rem;
+  }
+  .slide-content {
+    font-size: 2rem; line-height: 1.4; max-width: 1200px;
+  }
+  .slide-metric {
+    font-size: 6rem; font-weight: bold; color: #00ff88;
+    margin: 2rem 0;
+  }
+  
+  /* WORKING CONTROL BAR */
+  .controls-bar {
+    position: fixed; bottom: 20px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; gap: 1rem; align-items: center;
+    background: #1a1f2e; padding: 1rem; border-radius: 12px;
+    border: 1px solid #00c9ff;
+  }
+  .control-btn {
+    background: #00c9ff; color: #0a0f1b;
+    border: none; padding: 0.75rem 1.5rem;
+    border-radius: 6px; font-weight: 600;
+    cursor: pointer; font-size: 1rem;
+  }
+  
+  /* WORKING CHAT */
+  .chat-widget {
+    position: fixed; bottom: 20px; right: 20px;
+    width: 450px; height: 600px;
+    background: #1a1f2e; border: 2px solid #00c9ff;
+    border-radius: 12px; display: none;
+    flex-direction: column; overflow: hidden;
+  }
+  .chat-widget.active { display: flex; }
+  .chat-header {
+    background: #00c9ff; color: #0a0f1b;
+    padding: 0.75rem; font-weight: 600;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .chat-body {
+    flex: 1; padding: 0.75rem; overflow-y: auto;
+  }
+  .chat-message {
+    margin: 0.5rem 0; padding: 0.75rem;
+    border-radius: 6px; max-width: 85%;
+  }
+  .chat-user {
+    background: #00c9ff; color: #0a0f1b;
+    margin-left: auto; text-align: right;
+  }
+  .chat-agent {
+    background: #0f141f; color: #e0e0e0;
+  }
+  .chat-input {
+    padding: 0.5rem; border-top: 1px solid #2a2f3e;
+  }
+  
+  /* CLICKABLE QUESTION BANK */
+  .question-bank {
+    background: #0f141f; border-radius: 6px;
+    padding: 0.75rem; margin-top: 0.5rem;
+    max-height: 180px; overflow-y: auto;
+    border: 1px solid #2a2f3e;
+  }
+  .question-item {
+    background: #1a1f2e; border: 1px solid #2a2f3e;
+    padding: 0.5rem; margin: 0.25rem 0;
+    border-radius: 4px; cursor: pointer;
+    font-size: 0.9rem;
+  }
+  .question-item:hover {
+    border-color: #00c9ff; background: rgba(0, 201, 255, 0.1);
+  }
+  .demo-warning {
+    background: rgba(255, 193, 7, 0.1);
+    border: 1px solid #ffc107;
+    color: #ffc107;
+    padding: 0.5rem; border-radius: 6px;
+    text-align: center; font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* WORKING NOTES */
+  .presenter-notes {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: rgba(0, 0, 0, 0.95); color: #00ff88;
+    padding: 1rem; font-size: 1.2rem;
+    transform: translateY(100%); transition: transform 0.3s;
+  }
+  .presenter-notes.visible { transform: translateY(0); }
+</style>
+</head>
+<body>
+<div class="presentation-mode" id="slide-container">
+  <div class="slide-title" id="slide-title">Just Development Enforcement Framework</div>
+  <div class="slide-content" id="slide-content">
+    AI-powered capital locks that communities can audit, edit, and trigger. No black boxes.
+  </div>
+</div>
+
+<!-- WORKING CONTROLS -->
+<div class="controls-bar">
+  <button class="control-btn" onclick="prevSlide()">⬅️ Previous</button>
+  <button class="control-btn" onclick="nextSlide()">Next ➡️</button>
+  <button class="control-btn" onclick="toggleChat()">💬 Chat</button>
+  <button class="control-btn" onclick="toggleNotes()">📝 Notes</button>
+</div>
+
+<!-- WORKING CHAT -->
+<div class="chat-widget" id="chat-widget">
+  <div class="chat-header">
+    <span>🤖 Just Dev AI Agent (Demo)</span>
+    <button onclick="toggleChat()" style="background: none; border: none; color: #0a0f1b; font-size: 1.5rem; cursor: pointer;">×</button>
+  </div>
+  <div class="chat-body" id="chat-body">
+    <div class="demo-warning">
+      ⚠️ <strong>DEMO MODE:</strong> Click a question below or type your own.
+    </div>
+    <div class="chat-message chat-agent">
+      Hi! I'm a rules-based agent—not an LLM. Every answer is auditable code logic.
+    </div>
+  </div>
+  
+  <!-- Clickable Question Bank -->
+  <div class="question-bank" id="question-bank">
+    <div class="question-item" onclick="askQuestion('What exactly triggers a loan freeze?')">
+      What exactly triggers a loan freeze?
+    </div>
+    <div class="question-item" onclick="askQuestion('How is this NOT a black box like COMPAS?')">
+      How is this NOT a black box like COMPAS?
+    </div>
+    <div class="question-item" onclick="askQuestion('Can communities edit metrics—and what are the limits?')">
+      Can communities edit metrics—and what are the limits?
+    </div>
+    <div class="question-item" onclick="askQuestion('Can humans override the AI decisions?')">
+      Can humans override the AI decisions?
+    </div>
+    <div class="question-item" onclick="askQuestion('Show me the IFC redline changes')">
+      Show me the IFC redline changes
+    </div>
+    <div class="question-item" onclick="askQuestion('Explain the 5:1 necessity test')">
+      Explain the 5:1 necessity test
+    </div>
+  </div>
+  
+  <div class="chat-input">
+    <input type="text" id="chat-input" placeholder="Or type your own question..." onkeypress="handleChat(event)">
+    <button onclick="sendMessage()" class="control-btn" style="padding: 0.5rem 1rem;">Send</button>
+  </div>
+</div>
+
+<!-- WORKING NOTES -->
+<div class="presenter-notes" id="presenter-notes">
+  <strong>📢 PRESENTER NOTES:</strong> <span id="notes-text">Use controls to navigate. Chat is fully functional. Click questions to demo.</span>
+</div>
+
+<script>
+// === WORKING SLIDE DATA ===
+const slides = [
+  {
+    title: "Just Development Enforcement Framework",
+    content: "AI-powered capital locks that communities can audit, edit, and trigger. No black boxes.",
+    notes: "Intro: This operationalizes Kimi K2's auditability. Use controls below to navigate."
+  },
+  {
+    title: "Step 1: Community Technical Fund",
+    content: "<div class='slide-metric'>0.5%</div>of project CAPEX in escrow within 30 days—or <strong style='color:#ff4757;'>loan freezes automatically</strong>.",
+    notes: "Foundation: No CTF = no project. This is the community's independent funding source."
+  },
+  {
+    title: "Step 5: Vulnerable Group Gap Ratio",
+    content: "Target: ≥80% median income. If ratio drops below 80%: <div class='slide-metric'>12-month</div>suspension + $5M bond released to community.",
+    notes: "Kimi K2 metric in action. AI executes threshold—community defined the threshold."
+  },
+  {
+    title: "Transparency Architecture",
+    content: "🎱 <strong>BLACK BOX:</strong> COMPAS logic is secret.<br>🔍 <strong>GLASS BOX:</strong> Our if/then rules are public, editable, auto-execute.",
+    notes: "Key point: AI is bailiff, not judge. All logic at github.com/justdev/rules"
+  },
+  {
+    title: "Q&A: Click a Question Below",
+    content: "💬 The chat widget is live. Click any question to see rules-based responses—no LLM hallucination.",
+    notes: "Demo: Click 'Can communities edit metrics?' to show the 'within reason' governance logic."
+  }
+];
+
+let currentSlide = 0;
+
+// === WORKING NAVIGATION ===
+function updateSlide() {
+  const slide = slides[currentSlide];
+  document.getElementById('slide-title').innerHTML = slide.title;
+  document.getElementById('slide-content').innerHTML = slide.content;
+  document.getElementById('notes-text').innerHTML = slide.notes;
+}
+
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % slides.length;
+  updateSlide();
+}
+
+function prevSlide() {
+  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+  updateSlide();
+}
+
+// === WORKING CHAT ===
+function toggleChat() {
+  document.getElementById('chat-widget').classList.toggle('active');
+}
+
+function askQuestion(question) {
+  document.getElementById('chat-input').value = question;
+  sendMessage();
+}
+
+function sendMessage() {
+  const input = document.getElementById('chat-input');
+  const message = input.value.trim();
+  if (!message) return;
+  
+  addChatMessage(message, 'user');
+  input.value = '';
+  
+  setTimeout(() => {
+    const response = generateResponse(message);
+    addChatMessage(response, 'agent');
+  }, 500);
+}
+
+function addChatMessage(text, sender) {
+  const body = document.getElementById('chat-body');
+  const msg = document.createElement('div');
+  msg.className = `chat-message chat-${sender}`;
+  msg.textContent = text;
+  body.appendChild(msg);
+  body.scrollTop = body.scrollHeight;
+}
+
+function generateResponse(question) {
+  const q = question.toLowerCase();
+  
+  // THE KEY RESPONSE: "Within Reason" Limits
+  if (q.includes('edit') && q.includes('metric') && q.includes('limit')) {
+    return "✅ YES—within mathematical limits. Communities edit INDICATORS (salmon runs, ceremonies) and WEIGHTS (how much each matters). They CANNOT change the 5:1 necessity ratio or 80% equity floor—these are human rights law minima. If weights make 5:1 impossible, the system flags 'Necessity Test Unsatisfiable' and project requires 90% community supermajority. That's 'within reason': you can't break math, but you set any bar above the legal floor.";
+  }
+  else if (q.includes('loan freeze') || q.includes('tranche') || q.includes('disburse')) {
+    return "✅ Loan freezes when: 1) CTF < 0.5% CAPEX at Day 30, OR 2) Vulnerable Group Gap Ratio < 80% at audit. NO override—requires board + community rep vote.";
+  }
+  else if (q.includes('black box') || q.includes('transparent') || q.includes('secret') || q.includes('compas')) {
+    return "✅ NOT a black box! All rules are public if/then statements. Example: IF ratio < 0.8 THEN freeze(). Communities can edit weights via assembly vote. Logic lives at github.com/justdev/rules v1.2.3 (SHA256: a3f9...).";
+  }
+  else if (q.includes('community') && q.includes('change') || q.includes('edit')) {
+    return "✅ YES! Communities edit metrics via quadratic voting in assembly. Example: Mankayan increased 'ceremonial site access' weight from 30% → 45% on 2025-12-08. Changes logged immutably at block #8473921.";
+  }
+  else if (q.includes('override') || q.includes('human') || q.includes('stop') || q.includes('pause')) {
+    return "✅ Humans can PAUSE but not OVERRIDE. Board can delay freeze for 7 days to submit corrective plan, but community rep must approve. The AI is bailiff, not judge—executes rules humans democratically set.";
+  }
+  else if (q.includes('ifc') || q.includes('standard') || q.includes('redline')) {
+    return "✅ IFC PS5 Para 15: Replace 'particular attention' with '80% median income hard target'. PS7 Para 13: Insert community-defined metrics. Full track-changes: justdevelopment.org/ifc-redlines-v2026.";
+  }
+  else if (q.includes('5:1') || q.includes('necessity') || q.includes('ratio')) {
+    return "✅ 5:1 = Project benefit ÷ Community loss. If ratio <5, displacement ILLEGAL unless 90% community supermajority. Current Mankayan hydro: 1.04:1 = PROJECT BLOCKED. Communities can adjust weights but cannot change the ratio—it's the human rights floor.";
+  }
+  else {
+    return "✅ Click a question above or ask about: loan freezes, black box concerns, community edit limits, overrides, IFC redlines, or 5:1 test.";
+  }
+}
+
+function handleChat(event) {
+  if (event.key === 'Enter') sendMessage();
+}
+
+// === WORKING NOTES ===
+function toggleNotes() {
+  document.getElementById('presenter-notes').classList.toggle('visible');
+}
+
+// === INITIALIZE ===
+document.addEventListener('DOMContentLoaded', () => {
+  updateSlide();
+  console.log("✅ Agent ready. Use controls, keyboard arrows, or click questions.");
+});
+</script>
+</body>
+</html>

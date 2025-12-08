@@ -20,9 +20,18 @@ export default function RootLayout({
               <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
                 Khayali.xyz
               </h1>
-              <div className="space-x-6">
+              <div className="flex items-center space-x-6">
                 <a href="/" className="hover:text-blue-400 transition-colors">Home</a>
-                <a href="/avatar" className="hover:text-orange-400 transition-colors">Avatar</a>
+                <div className="relative group">
+                  <button className="hover:text-orange-400 transition-colors cursor-pointer">
+                    AI & ESG ▾
+                  </button>
+                  <div className="absolute left-0 mt-2 w-48 bg-gray-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                    <a href="/avatar" className="block px-4 py-2 hover:bg-gray-700 rounded-t-lg">ESG Agents</a>
+                    <a href="/avatar/justdev" className="block px-4 py-2 hover:bg-gray-700">Just Dev</a>
+                    <a href="/avatar/grievoice" className="block px-4 py-2 hover:bg-gray-700 rounded-b-lg">GrieVoice</a>
+                  </div>
+                </div>
                 <a href="/observatory" className="hover:text-blue-400 transition-colors">Observatory</a>
                 <a href="/protocol" className="hover:text-purple-400 transition-colors">Protocol</a>
               </div>

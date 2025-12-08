@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Just Development Rights: AI-Powered Enforcement Framework</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: #0a0f1b;
+  color: #e0e0e0;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Navigation */
+.nav-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(10, 15, 27, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #2a2f3e;
+  z-index: 1000;
+  padding: 1rem 2rem;
+}
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-logo {
+  font-size: 1.3rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #00c9ff 0%, #92fe9d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.nav-menu {
+  display: flex;
+  gap: 0.5rem;
+  list-style: none;
+}
+.nav-btn {
+  background: none;
+  border: none;
+  color: #8892b0;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+.nav-btn:hover, .nav-btn.active {
+  background: #1a1f2e;
+  color: #00c9ff;
+}
+
+/* Main Content */
+.main-content {
+  margin-top: 80px;
+  padding: 2rem;
+}
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.section {
+  display: none;
+  animation: fadeIn 0.5s;
+}
+.section.active {
+  display: block;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: linear-gradient(180deg, rgba(0, 201, 255, 0.1) 0%, transparent 100%);
+  border-radius: 12px;
+  margin-bottom: 3rem;
+}
+.hero-title {
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #00c9ff 0%, #92fe9d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+}
+.hero-subtitle {
+  font-size: 1.3rem;
+  color: #8892b0;
+  margin-bottom: 2rem;
+}
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.cta-btn {
+  background: linear-gradient(135deg, #00c9ff 0%, #92fe9d 100%);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  color: #0a0f1b;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.cta-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 201, 255, 0.3);
+}
+.cta-btn.secondary {
+  background: #1a1f2e;
+  color: #00c9ff;
+  border: 1px solid #00c9ff;
+}
+
+/* Framework Cards */
+.framework-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+.step-card {
+  background: #1a1f2e;
+  border: 1px solid #2a2f3e;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+.step-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 201, 255, 0.15);
+}
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.step-number {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #00c9ff 0%, #92fe9d 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #0a0f1b;
+  flex-shrink: 0;
+}
+.step-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #f0f0f0;
+}
+.step-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+.step-card.expanded .step-content {
+  max-height: 1000px;
+}
+.principle-section {
+  margin: 1rem 0;
+  padding: 1rem;
+  border-radius: 8px;
+  background: rgba(255, 193, 7, 0.1);
+  border-left: 4px solid #ffc107;
+}
+.enforceable-section {
+  margin: 1rem 0;
+  padding: 1rem;
+  border-radius: 8px;
+  background: rgba(0, 201, 255, 0.1);
+  border-left: 4px solid #00c9ff;
+}
+.metric-tile {
+  background: #0f141f;
+  border: 1px solid #2a2f3e;
+  border-radius: 6px;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+}
+.trigger-tag {
+  display: inline-block;
+  background: #ff4757;
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  margin-left: 0.5rem;
+}
+.audit-protocol {
+  background: rgba(46, 204, 113, 0.1);
+  border-left: 4px solid #2ecc71;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 0 8px 8px 0;
+}
+
+/* Comparison Grid */
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+.comparison-card {
+  background: #1a1f2e;
+  border: 2px solid;
+  border-radius: 12px;
+  padding: 2rem;
+}
+.black-box {
+  border-color: #ff4757;
+  background: rgba(255, 71, 87, 0.1);
+}
+.glass-box {
+  border-color: #00ff88;
+  background: rgba(0, 255, 136, 0.1);
+}
+.card-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.feature-list {
+  list-style: none;
+  margin: 1rem 0;
+}
+.feature-list li {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #2a2f3e;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+.icon { font-size: 1.5rem; flex-shrink: 0; }
+
+/* Technical Architecture */
+.arch-section {
+  background: #1a1f2e;
+  border: 1px solid #2a2f3e;
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+.arch-title {
+  font-size: 1.5rem;
+  color: #00c9ff;
+  margin-bottom: 1rem;
+}
+.arch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.arch-card {
+  background: #0f141f;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #00c9ff;
+}
+.code-block {
+  background: #0a0f1b;
+  border: 1px solid #00c9ff;
+  border-radius: 6px;
+  padding: 1rem;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+  margin: 1rem 0;
+  overflow-x: auto;
+}
+
+/* Timeline */
+.timeline-container {
+  margin: 2rem 0;
+}
+.timeline-item {
+  background: #1a1f2e;
+  border-left: 4px solid #00c9ff;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  position: relative;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  background: #00c9ff;
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+.timeline-date {
+  color: #00c9ff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+.timeline-urgent {
+  border-left-color: #ff4757;
+}
+.timeline-urgent::before {
+  background: #ff4757;
+}
+
+/* Urgency Banner */
+.urgency-banner {
+  background: linear-gradient(135deg, #ff4757 0%, #ff9f43 100%);
+  color: #0a0f1b;
+  padding: 1.5rem;
+  border-radius: 12px;
+  font-weight: 800;
+  text-align: center;
+  font-size: 1.2rem;
+  margin: 2rem 0;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+/* Interactive Agent */
+.agent-container {
+  background: #1a1f2e;
+  border: 2px solid #00c9ff;
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+.chat-demo {
+  background: #0f141f;
+  border-radius: 8px;
+  padding: 1.5rem;
+  max-height: 500px;
+  overflow-y: auto;
+}
+.chat-message {
+  margin: 1rem 0;
+  padding: 1rem;
+  border-radius: 8px;
+}
+.chat-agent {
+  background: rgba(0, 201, 255, 0.1);
+  border-left: 4px solid #00c9ff;
+}
+.chat-user {
+  background: rgba(0, 255, 136, 0.1);
+  border-left: 4px solid #00ff88;
+}
+.question-bank {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.question-item {
+  background: #1a1f2e;
+  border: 1px solid #2a2f3e;
+  padding: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.question-item:hover {
+  border-color: #00c9ff;
+  background: rgba(0, 201, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Resources */
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+.resource-card {
+  background: #1a1f2e;
+  border: 1px solid #2a2f3e;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s;
+}
+.resource-card:hover {
+  border-color: #00c9ff;
+  transform: translateY(-5px);
+}
+.resource-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+.resource-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #00c9ff;
+  margin-bottom: 0.5rem;
+}
+.download-btn {
+  background: #00c9ff;
+  color: #0a0f1b;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 1rem;
+  transition: all 0.3s;
+}
+.download-btn:hover {
+  background: #00ff88;
+  transform: scale(1.05);
+}
+
+/* Footer */
+.footer {
+  margin-top: 4rem;
+  padding: 2rem;
+  text-align: center;
+  border-top: 1px solid #2a2f3e;
+  color: #8892b0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .comparison-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-title {
+    font-size: 2rem;
+  }
+  .nav-menu {
+    flex-wrap: wrap;
+  }
+  .framework-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="nav-header">
+  <div class="nav-container">
+    <div class="nav-logo">Just Development</div>
+    <ul class="nav-menu">
+      <li><button class="nav-btn active" onclick="showSection('home')">Home</button></li>
+      <li><button class="nav-btn" onclick="showSection('framework')">Framework</button></li>
+      <li><button class="nav-btn" onclick="showSection('transparency')">Transparency</button></li>
+      <li><button class="nav-btn" onclick="showSection('agent')">AI Agent</button></li>
+      <li><button class="nav-btn" onclick="showSection('campaign')">2026 Campaign</button></li>
+      <li><button class="nav-btn" onclick="showSection('resources')">Resources</button></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="main-content">
+  <div class="container">
+
+    <!-- HOME SECTION -->
+    <section id="home" class="section active">
+      <div class="hero">
+        <h1 class="hero-title">Just Development Rights Framework</h1>
+        <p class="hero-subtitle">AI-Powered Capital Locks That Communities Can Audit, Edit, and Trigger</p>
+        <div class="hero-cta">
+          <button class="cta-btn" onclick="showSection('framework')">Explore the Framework</button>
+          <button class="cta-btn secondary" onclick="showSection('agent')">Try the AI Agent</button>
+        </div>
+      </div>
+
+      <div class="arch-section">
+        <h2 class="arch-title">The Problem We Solve</h2>
+        <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
+          Development projects that forcibly displace Indigenous Peoples and land-connected communities
+          are incompatible with a just energy transition. Current approaches have failed, leading to
+          landlessness, food insecurity, and cultural survival threats. The IFC Performance Standards,
+          while well-intentioned, lack enforcement mechanisms.
+        </p>
+
+        <div class="comparison-grid">
+          <div class="comparison-card black-box">
+            <div class="card-title">
+              <span class="icon">⚠️</span>
+              Current Approach
+            </div>
+            <ul class="feature-list">
+              <li><span class="icon">❌</span><strong>Vague Standards:</strong> "Particular attention" to vulnerable groups</li>
+              <li><span class="icon">❌</span><strong>No Metrics:</strong> Compliance unmeasurable</li>
+              <li><span class="icon">❌</span><strong>Weak Enforcement:</strong> Good plans, poor implementation</li>
+              <li><span class="icon">❌</span><strong>Power Imbalance:</strong> Communities as "stakeholders," not rights-holders</li>
+            </ul>
+          </div>
+
+          <div class="comparison-card glass-box">
+            <div class="card-title">
+              <span class="icon">✅</span>
+              Just Development
+            </div>
+            <ul class="feature-list">
+              <li><span class="icon">✓</span><strong>Hard Metrics:</strong> 80% median income target for vulnerable groups</li>
+              <li><span class="icon">✓</span><strong>Automated Triggers:</strong> Loan freeze at Day 30 if CTF underfunded</li>
+              <li><span class="icon">✓</span><strong>Capital Locks:</strong> Performance bonds released to community</li>
+              <li><span class="icon">✓</span><strong>Rights-Based:</strong> Communities control data, metrics, and audit triggers</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-section">
+        <h2 class="arch-title">The AI vs IFC Story</h2>
+        <p style="margin-bottom: 1rem;">
+          In late 2025, an "accidental anthropologist" conducted an experiment: testing 15 AI models
+          against IFC Performance Standards using real-world ethical dilemmas from high-stakes project finance.
+        </p>
+        <p style="margin-bottom: 1rem;">
+          <strong>The result?</strong> Kimi K2 didn't just memorize the rules—it proposed a brand new,
+          auditable metric that operationalizes fairness: the <strong>Vulnerable Group Gap Ratio</strong>.
+          It measures income of at-risk families (women, elderly, people with disabilities) vs. median income,
+          with automatic consequences if the ratio drops below 80%.
+        </p>
+        <p style="color: #00c9ff; font-weight: 600;">
+          This framework operationalizes that AI insight into a complete enforcement system.
+        </p>
+      </div>
+    </section>
+
+    <!-- FRAMEWORK SECTION -->
+    <section id="framework" class="section">
+      <h1 style="font-size: 2.5rem; background: linear-gradient(135deg, #00c9ff 0%, #92fe9d 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem;">
+        The Six-Step Enforcement Framework
+      </h1>
+      <p style="font-size: 1.1rem; color: #8892b0; margin-bottom: 2rem;">
+        From aspirational principles to enforceable metrics. Click each step to see the audit protocol.
+      </p>
+
+      <div class="framework-grid">
+        <!-- Step 1 -->
+        <div class="step-card" onclick="this.classList.toggle('expanded')">
+          <div class="step-header">
+            <div class="step-number">1</div>
+            <h2 class="step-title">Access to Information & Independent Support</h2>
+          </div>
+          <div class="step-content">
+            <div class="principle-section">
+              <strong>📋 Current Proposal:</strong>
+              <p>Provide funds for communities to hire their own legal and technical experts</p>
+            </div>
+            <div class="enforceable-section">
+              <strong>⚖️ Enforceable Metric</strong> <span class="trigger-tag">AUDIT TRIGGER</span>
+              <div class="metric-tile">
+                Community Technical Fund (CTF) = 0.5% × Project CAPEX<br>
+                Escrow deposit deadline: T+30 days from project approval<br>
+                Administrator: Third-party fiduciary with community board majority<br>
+                <strong>FUNDING CONDITION PRECEDENT:</strong> No disbursement of project capital until CTF fully capitalized
+              </div>
+              <div class="audit-protocol">
+                <strong>Audit Protocol:</strong> Quarterly financial audits + community satisfaction surveys.
+                Community can trigger emergency audit with 25% signature threshold.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-card" onclick="this.classList.toggle('expanded')">
+          <div class="step-header">
+            <div class="step-number">2</div>
+            <h2 class="step-title">Prioritise Designs that Avoid Displacement</h2>
+          </div>
+          <div class="step-content">
+            <div class="principle-section">
+              <strong>📋 Current Proposal:</strong>
+              <p>Explore all innovative solutions to avoid displacement even if costs increase</p>
+            </div>
+            <div class="enforceable-section">
+              <strong>⚖️ Enforceable Metric</strong> <span class="trigger-tag">PROJECT KILL SWITCH</span>
+              <div class="metric-tile">
+                Displacement Impact Ratio (DIR) = Affected_Hectares / Project_MW<br>
+                Threshold: DIR > 0.5 triggers <strong>mandatory redesign phase</strong><br>
+                Cost flexibility: Up to 15% CAPEX increase permitted for DIR reduction<br>
+                Community veto: DIR > 1.0 gives communities unilateral "no-go zone" designation right
+              </div>
+              <div class="audit-protocol">
+                <strong>Verification:</strong> Independent engineering review panel (3 members: 1 developer,
+                1 community-selected, 1 neutral expert). Decision binding in 45 days.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-card" onclick="this.classList.toggle('expanded')">
+          <div class="step-header">
+            <div class="step-number">3</div>
+            <h2 class="step-title">Rights-Based Mediation</h2>
+          </div>
+          <div class="step-content">
+            <div class="principle-section">
+              <strong>📋 Current Proposal:</strong>
+              <p>Use neutral, expert mediators for fair, rights-respecting negotiations</p>
+            </div>
+            <div class="enforceable-section">
+              <strong>⚖️ Enforceable Metric</strong> <span class="trigger-tag">ESCALATION CLOCK</span>
+              <div class="metric-tile">
+                Mediator Selection: Joint list of 5 experts; each side vetoes 2; random draw from remaining<br>
+                Timeline: Negotiations max 90 days; mediation max 30 days<br>
+                <strong>DEADLOCK TRIGGER:</strong> Day 121 → automatic binding arbitration under Hague Rules<br>
+                Cost allocation: Developer pays 75% of mediation fees; 100% if they reject mediated settlement
+              </div>
+              <div class="audit-protocol">
+                <strong>Outcome Metric:</strong> ≥70% community approval via secret ballot required for agreement validity.
+                Sub-group veto: ≤60% approval among women/youth = mandatory renegotiation of those provisions.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step-card" onclick="this.classList.toggle('expanded')">
+          <div class="step-header">
+            <div class="step-number">4</div>
+            <h2 class="step-title">Expropriation Only as Last Resort</h2>
+          </div>
+          <div class="step-content">
+            <div class="principle-section">
+              <strong>📋 Current Proposal:</strong>
+              <p>Compulsory acquisition only in exceptional circumstances with human rights assessment</p>
+            </div>
+            <div class="enforceable-section">
+              <strong>⚖️ Enforceable Metric</strong> <span class="trigger-tag">HUMAN RIGHTS GATE</span>
+              <div class="metric-tile">
+                Necessity Test: Benefits must outweigh costs by <strong>5:1 ratio</strong> (QALYs or equivalent metric)<br>
+                Proportionality Cap: <strong>Max 10% displacement</strong> of any Indigenous subgroup's total land base<br>
+                Consent Standard: ≥75% community approval + ≥66% approval from women & youth sub-groups<br>
+                No-Go Zone: Community designates >20% of territory as untouchable; requires 90% community supermajority to override
+              </div>
+              <div class="audit-protocol">
+                <strong>Independent Review:</strong> Human Rights Impact Assessment by UN Special Rapporteur-endorsed panel.
+                Developer pays panel costs. Assessment published 60 days before any acquisition vote.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="step-card" onclick="this.classList.toggle('expanded')">
+          <div class="step-header">
+            <div class="step-number">5</div>
+            <h2 class="step-title">Monitored & Enforceable Agreements</h2>
+          </div>
+          <div class="step-content">
+            <div class="principle-section">
+              <strong>📋 Current Proposal:</strong>
+              <p>Legally binding agreements with independent monitoring and community enforcement</p>
+            </div>
+            <div class="enforceable-section">
+              <strong>⚖️ Enforceable Metric</strong> <span class="trigger-tag">PERFORMANCE BOND</span>
+              <div class="metric-tile">
+                Community Performance Bond: 5% of project revenue held in escrow<br>
+                <strong>Vulnerable Group Gap Ratio:</strong> Income of at-risk families vs median<br>
+                Target: ≥80% median income within 24 months of displacement<br>
+                <strong>AUDIT FAILURE:</strong> Ratio <80% → 12-month project suspension + bond release to community for direct support programs
+              </div>
+              <div class="audit-protocol">
+                <strong>Monitoring:</strong> Quarterly income surveys by community-hired researchers.
+                Disputes resolved via Hague arbitration. Community legal costs drawn from CTF (Step 1).
+                <br><br>
+                <em>This metric was proposed by Kimi K2 AI in the AI-vs-IFC experiment, converting the vague
+                "pay special attention" into a hard, verifiable number.</em>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 6 -->
+        <div class="step-card" onclick="this.classList.toggle('expanded')">
+          <div class="step-header">
+            <div class="step-number">6</div>
+            <h2 class="step-title">Financial & Supply Chain Leverage</h2>
+          </div>
+          <div class="step-content">
+            <div class="principle-section">
+              <strong>📋 Current Proposal:</strong>
+              <p>Lenders, investors, buyers must require this approach as a business condition</p>
+            </div>
+            <div class="enforceable-section">
+              <strong>⚖️ Enforceable Metric</strong> <span class="trigger-tag">CAPITAL FREEZE</span>
+              <div class="metric-tile">
+                Loan Disbursement Schedule: Tied to <strong>verified completion</strong> of Steps 1-5 milestones<br>
+                Disclosure Requirement: All agreements public on OpenContracting portal within 15 days<br>
+                Shareholder Resolution: ≥5% shareholder equity can trigger compliance audit<br>
+                <strong>BLACKLIST TRIGGER:</strong> 2 verified violations in 5 years = automatic exclusion from DFI financing for 7 years
+              </div>
+              <div class="audit-protocol">
+                <strong>Enforcement:</strong> DFIs must publish compliance dashboard. Buyers must embed requirements
+                in procurement policies. Violations reported by communities via encrypted hotline; 30-day investigation turnaround.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-section" style="margin-top: 3rem;">
+        <h3 class="arch-title">Enforceability Stack: What Makes This Real</h3>
+        <p style="margin-bottom: 1.5rem;">Every metric includes six enforcement layers:</p>
+        <div class="arch-grid">
+          <div class="arch-card">
+            <strong>1. Quantified</strong>
+            <p>0.5% CAPEX, 5:1 ratio, 80% median income</p>
+          </div>
+          <div class="arch-card">
+            <strong>2. Independent</strong>
+            <p>Third-party fiduciary, community-hired researchers, Hague arbitration</p>
+          </div>
+          <div class="arch-card">
+            <strong>3. Time-bound</strong>
+            <p>T+30 days, 60 days, 24 months</p>
+          </div>
+          <div class="arch-card">
+            <strong>4. Third-party</strong>
+            <p>UN panel, random mediator draw, OpenContracting portal</p>
+          </div>
+          <div class="arch-card">
+            <strong>5. Material</strong>
+            <p>Project suspension, bond release, 12-month delay, 7-year blacklist</p>
+          </div>
+          <div class="arch-card">
+            <strong>6. Community-initiated</strong>
+            <p>25% signature threshold, automatic escalation, sub-group veto</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRANSPARENCY SECTION -->
+    <section id="transparency" class="section">
+      <h1 style="font-size: 2.5rem; background: linear-gradient(135deg, #00c9ff 0%, #92fe9d 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem;">
+        Glass Box Architecture: Avoiding Algorithmic Capture
+      </h1>
+      <p style="font-size: 1.1rem; color: #8892b0; margin-bottom: 2rem;">
+        How this is NOT a black box like COMPAS
+      </p>
+
+      <div class="comparison-grid">
+        <div class="comparison-card black-box">
+          <div class="card-title">
+            <span class="icon">🎱</span>
+            COMPAS-Style Black Box
+          </div>
+          <ul class="feature-list">
+            <li><span class="icon">❌</span><strong>Logic:</strong> Proprietary, trade-secret protected</li>
+            <li><span class="icon">❌</span><strong>Data:</strong> State arrest records (biased, unaudited)</li>
+            <li><span class="icon">❌</span><strong>Override:</strong> None—judge defers to "algorithm"</li>
+            <li><span class="icon">❌</span><strong>Accountability:</strong> "The computer said so"</li>
+            <li><span class="icon">❌</span><strong>Result:</strong> Eric Loomis, no recourse</li>
+          </ul>
+          <div class="code-block" style="color: #ff4757;">
+            // Code: Not Available<br>
+            // Methodology: Confidential<br>
+            // Accountability: NULL
+          </div>
+        </div>
+
+        <div class="comparison-card glass-box">
+          <div class="card-title">
+            <span class="icon">🔍</span>
+            Just Development Glass Box
+          </div>
+          <ul class="feature-list">
+            <li><span class="icon">✅</span><strong>Logic:</strong> Public if/then rules, community-editable</li>
+            <li><span class="icon">✅</span><strong>Data:</strong> Community-hired researchers + third-party audits</li>
+            <li><span class="icon">✅</span><strong>Override:</strong> Human board vote + community rep required</li>
+            <li><span class="icon">✅</span><strong>Accountability:</strong> Immutable audit trail on blockchain</li>
+            <li><span class="icon">✅</span><strong>Result:</strong> Loan frozen, community compensated</li>
+          </ul>
+          <div class="code-block">
+            // Rule: IF vulnerable_group_gap_ratio < 0.8<br>
+            // THEN freeze_loan_disbursement()<br>
+            // AND release_performance_bond_to_community()
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-section">
+        <h2 class="arch-title">Technical Implementation Architecture</h2>
+        <p style="margin-bottom: 1.5rem;">
+          This isn't a reporting system—it's a governance system where data feeds directly control capital.
+        </p>
+
+        <div class="arch-grid">
+          <div class="arch-card">
+            <h4 style="color: #00c9ff; margin-bottom: 0.5rem;">Data Sources (Triangulated)</h4>
+            <ul style="margin-left: 1.5rem; color: #8892b0;">
+              <li><strong>Community:</strong> Smartphone-based surveys, GPS-tagged grievances, encrypted hotline</li>
+              <li><strong>Third-Party:</strong> Independent engineers, UN panel appointees, fiduciary auditors</li>
+              <li><strong>Developer:</strong> Financial disclosures, project schedules, disbursement records</li>
+            </ul>
+          </div>
+
+          <div class="arch-card">
+            <h4 style="color: #00c9ff; margin-bottom: 0.5rem;">Automated Triggers</h4>
+            <ul style="margin-left: 1.5rem; color: #8892b0;">
+              <li>Smart contracts on permissioned blockchain (Hyperledger)</li>
+              <li>Each milestone requires multi-sig verification</li>
+              <li>When trigger fires (ratio <80%), contract auto-releases penalty</li>
+              <li>No human gatekeeping—executes rules democratically set by community</li>
+            </ul>
+          </div>
+
+          <div class="arch-card">
+            <h4 style="color: #00c9ff; margin-bottom: 0.5rem;">Community Data Sovereignty</h4>
+            <ul style="margin-left: 1.5rem; color: #8892b0;">
+              <li>Communities run offline-first data collection (ODK/KoboToolbox)</li>
+              <li>Data hashed & timestamped; only hashes uploaded</li>
+              <li>Protects sensitive info while proving integrity</li>
+              <li>Disputes: Community provides raw data to arbitrator; hash mismatch = developer penalty</li>
+            </ul>
+          </div>
+
+          <div class="arch-card">
+            <h4 style="color: #00c9ff; margin-bottom: 0.5rem;">Capital Sensitivity</h4>
+            <ul style="margin-left: 1.5rem; color: #8892b0;">
+              <li>DFI loan management system API-integrated with dashboard</li>
+              <li>"Loan Frozen" status is literal—disbursement module receives kill signal</li>
+              <li>No loan officer override without board + community rep approval</li>
+              <li>Rights without cost to capital are just suggestions</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="code-block" style="margin-top: 2rem;">
+<strong>// Example Enforcement Logic (Auditable Code)</strong><br><br>
+function checkVulnerableGroupRatio() {<br>
+&nbsp;&nbsp;const data = getVerifiedData('community_survey');<br>
+&nbsp;&nbsp;const developerData = getVerifiedData('developer_report');<br>
+&nbsp;&nbsp;const auditData = getVerifiedData('third_party_audit');<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;// Require 2-of-3 data source agreement<br>
+&nbsp;&nbsp;if (triangulateData([data, developerData, auditData]) === false) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;triggerDataDisputeProtocol();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return;<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;// Calculate ratio<br>
+&nbsp;&nbsp;const ratio = data.vulnerableIncome / data.medianIncome;<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;// Hard threshold enforcement<br>
+&nbsp;&nbsp;if (ratio < 0.8) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;freezeLoanDisbursement();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;releasePerformanceBond(community);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;suspendProject(duration: '12 months');<br>
+&nbsp;&nbsp;&nbsp;&nbsp;notifyCommunity();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;notifyDFI();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;logToBlockchain({<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;trigger: 'VULNERABLE_GROUP_GAP_RATIO',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ratio: ratio,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;timestamp: Date.now(),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;irrevocable: true<br>
+&nbsp;&nbsp;&nbsp;&nbsp;});<br>
+&nbsp;&nbsp;}<br>
+}
+        </div>
+      </div>
+
+      <div class="arch-section">
+        <h2 class="arch-title">🎯 The Key Insight: AI as Bailiff, Not Judge</h2>
+        <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+          <strong>Why AI enforcement works:</strong> It doesn't get captured by developer promises, government pressure,
+          or fatigue. It executes the rules as written—rules the community can read, edit, and verify.
+        </p>
+        <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+          <strong>Why it's safe:</strong> The logic is simpler than a spreadsheet. No hidden layers, no training data secrets.
+          If the community's survey says income is 73% of median, the loan freezes. Full stop.
+        </p>
+        <p style="font-size: 1.1rem; color: #00c9ff;">
+          <strong>The human role:</strong> Not to override the AI, but to <strong>audit the data</strong> and
+          <strong>update the rules</strong> through democratic process. AI handles consistency; humans handle justice.
+        </p>
+      </div>
+    </section>
+
+    <!-- AI AGENT SECTION -->
+    <section id="agent" class="section">
+      <h1 style="font-size: 2.5rem; background: linear-gradient(135deg, #00c9ff 0%, #92fe9d 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem;">
+        Interactive AI Agent Demo
+      </h1>
+      <p style="font-size: 1.1rem; color: #8892b0; margin-bottom: 2rem;">
+        This is a rules-based agent—not an LLM. Every answer is auditable code logic.
+      </p>
+
+      <div class="agent-container">
+        <div style="background: rgba(255, 193, 7, 0.1); border: 1px solid #ffc107; color: #ffc107; padding: 1rem; border-radius: 6px; margin-bottom: 1.5rem; text-align: center;">
+          ⚠️ <strong>DEMO MODE:</strong> Click a question below to see how the agent responds
+        </div>
+
+        <div class="question-bank">
+          <div class="question-item" onclick="askQuestion('loan-freeze')">
+            What exactly triggers a loan freeze?
+          </div>
+          <div class="question-item" onclick="askQuestion('black-box')">
+            How is this NOT a black box like COMPAS?
+          </div>
+          <div class="question-item" onclick="askQuestion('edit-metrics')">
+            Can communities edit metrics—and what are the limits?
+          </div>
+          <div class="question-item" onclick="askQuestion('override')">
+            Can humans override the AI decisions?
+          </div>
+          <div class="question-item" onclick="askQuestion('ifc-redline')">
+            Show me the IFC redline changes
+          </div>
+          <div class="question-item" onclick="askQuestion('necessity-test')">
+            Explain the 5:1 necessity test
+          </div>
+        </div>
+
+        <div class="chat-demo" id="chat-demo">
+          <div class="chat-message chat-agent">
+            <strong>🤖 Just Dev AI Agent:</strong><br>
+            Hi! I'm a rules-based agent—not an LLM. Every answer is auditable code logic. Click a question above to see how I respond to common concerns about enforceability and transparency.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAMPAIGN SECTION -->
+    <section id="campaign" class="section">
+      <h1 style="font-size: 2.5rem; background: linear-gradient(135deg, #00c9ff 0%, #92fe9d 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem;">
+        The 2026 IFC Window: Act Now or Wait Until 2035
+      </h1>
+
+      <div class="urgency-banner">
+        ⚠️ DEADLINE: IFC Public Comment Period Ends December 2025 — Next opportunity: 2035
+      </div>
+
+      <p style="font-size: 1.1rem; color: #8892b0; margin: 2rem 0;">
+        The IFC is updating its Sustainability Framework for the first time since 2012. If enforceable metrics
+        aren't embedded now, communities will face another decade of "comply but displace" projects.
+      </p>
+
+      <div class="timeline-container">
+        <div class="timeline-item">
+          <div class="timeline-date">NOW - Dec 2025</div>
+          <p><strong>Window Open:</strong> Public comment period active. Metrics can be embedded.
+          This is the moment to flood IFC with demands for enforceable standards.</p>
+        </div>
+
+        <div class="timeline-item timeline-urgent">
+          <div class="timeline-date">Jan 2026</div>
+          <p><strong>Framework Finalized:</strong> Language locked for next 7-10 years.
+          Without enforcement, standards remain aspirational window-dressing.</p>
+        </div>
+
+        <div class="timeline-item timeline-urgent">
+          <div class="timeline-date">2026-2030</div>
+          <p><strong>Lost Decade:</strong> Projects "comply" with vague standards but communities lose land.
+          Conflicts escalate. $10B+ projects blockaded (repeat of Bougainville).</p>
+        </div>
+
+        <div class="timeline-item timeline-urgent">
+          <div class="timeline-date">2030</div>
+          <p><strong>Portfolio Collapse:</strong> DFI credit risk spikes. Sustainability-linked bonds default.
+          Emergency review called—but takes years to implement.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">2035+</div>
+          <p><strong>Maybe Enforcement:</strong> Next scheduled review <em>might</em> add metrics.
+          Another generation of communities displaced in the meantime.</p>
+        </div>
+      </div>
+
+      <div class="arch-section">
+        <h2 class="arch-title">Campaign Strategy: Three-Phase Approach</h2>
+
+        <div style="margin: 2rem 0;">
+          <h3 style="color: #00c9ff; margin-bottom: 1rem;">🎯 Phase 1: Q1 2025 (NOW)</h3>
+          <div class="arch-card">
+            <ul style="margin-left: 1.5rem; color: #e0e0e0;">
+              <li><strong>Launch:</strong> Public repo of Redlined IFC Standards + Metrics Calculator</li>
+              <li><strong>Target:</strong> 50 DFI credit risk departments—demo loan freeze protocol</li>
+              <li><strong>Goal:</strong> 5 DFIs pilot the stack in 2025 lending cycle</li>
+            </ul>
+            <p style="color: #ffc107; margin-top: 1rem;">
+              <strong>Urgency:</strong> DFI boards approve 2026 strategies in Q1 2025.
+              No metrics = 7 years of bad loans locked in.
+            </p>
+          </div>
+        </div>
+
+        <div style="margin: 2rem 0;">
+          <h3 style="color: #00c9ff; margin-bottom: 1rem;">🌍 Phase 2: Q2-Q3 2025</h3>
+          <div class="arch-card">
+            <ul style="margin-left: 1.5rem; color: #e0e0e0;">
+              <li><strong>Mobilize:</strong> Community federations adopt cultural metrics</li>
+              <li><strong>Submit:</strong> Flood IFC with 10,000+ redline demands</li>
+              <li><strong>Pressure:</strong> Investors threaten to withhold IFC bonds</li>
+            </ul>
+            <p style="color: #8892b0; margin-top: 1rem;">
+              Timeline: Community assemblies must adopt by <strong>March 2025</strong> to be cited in submissions.
+            </p>
+          </div>
+        </div>
+
+        <div style="margin: 2rem 0;">
+          <h3 style="color: #00c9ff; margin-bottom: 1rem;">⚖️ Phase 3: Q4 2025 (Last Chance)</h3>
+          <div class="arch-card">
+            <ul style="margin-left: 1.5rem; color: #e0e0e0;">
+              <li><strong>Escalate:</strong> File UN complaint (violates UNDRIP Article 32)</li>
+              <li><strong>Final Push:</strong> Live demo of capital freeze on real project</li>
+              <li><strong>Lock:</strong> IFC embeds enforcement or admits window-dressing</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-section" style="background: rgba(255,71,87,0.1); border-color: #ff4757;">
+        <h3 style="color: #ff4757; margin-bottom: 1rem;">💸 The Alternative: A Lost Decade</h3>
+        <ul style="color: #ff9f43; margin-left: 1.5rem;">
+          <li>2026-2030: Projects "comply" but communities lose land</li>
+          <li>2028: First $10B blockaded (repeat Bougainville)</li>
+          <li>2030: DFI portfolio risk collapses; SLBs default</li>
+          <li>2035: <strong>Maybe</strong> enforcement added—but another generation displaced</li>
+        </ul>
+        <p style="color: #e0e0e0; margin-top: 1rem;">
+          Communities can't wait 10 years. Neither can the planet.
+        </p>
+      </div>
+    </section>
+
+    <!-- RESOURCES SECTION -->
+    <section id="resources" class="section">
+      <h1 style="font-size: 2.5rem; background: linear-gradient(135deg, #00c9ff 0%, #92fe9d 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem;">
+        Resources & Downloads
+      </h1>
+      <p style="font-size: 1.1rem; color: #8892b0; margin-bottom: 2rem;">
+        Everything you need to implement or advocate for the Just Development framework
+      </p>
+
+      <div class="resource-grid">
+        <div class="resource-card">
+          <div class="resource-icon">📄</div>
+          <div class="resource-title">Policy Framework PDF</div>
+          <p style="color: #8892b0; margin: 0.5rem 0;">
+            Complete "Just Alternative to Development-Forced Displacement" policy proposal with
+            6-part framework endorsed by international CSOs.
+          </p>
+          <button class="download-btn" onclick="window.location.href='Just_Development_Rights_Framework_Batch Compress.pdf'">
+            Download PDF
+          </button>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-icon">🎤</div>
+          <div class="resource-title">AI vs IFC Transcript</div>
+          <p style="color: #8892b0; margin: 0.5rem 0;">
+            The story of how Kimi K2 proposed the Vulnerable Group Gap Ratio—the metric that
+            operationalizes fairness.
+          </p>
+          <button class="download-btn" onclick="window.location.href='AI-vs-IFC-mp4-31a715a5-9397.pdf'">
+            Read Transcript
+          </button>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-icon">🗺️</div>
+          <div class="resource-title">Mind Map & Infographic</div>
+          <p style="color: #8892b0; margin: 0.5rem 0;">
+            Visual overview of the framework structure, actor roles, and enforcement mechanisms.
+          </p>
+          <button class="download-btn" onclick="downloadImages()">
+            Download Images
+          </button>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-icon">📊</div>
+          <div class="resource-title">Metrics Framework HTML</div>
+          <p style="color: #8892b0; margin: 0.5rem 0;">
+            Interactive 6-step enforcement framework with collapsible metric cards and audit protocols.
+          </p>
+          <button class="download-btn" onclick="window.location.href='Kimi2-JiustDevMetrics.html'">
+            Open Interactive
+          </button>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-icon">🔍</div>
+          <div class="resource-title">Live Dashboard Demo</div>
+          <p style="color: #8892b0; margin: 0.5rem 0;">
+            Clickable metrics with real-time data feeds, audit trails, and trigger visualization.
+          </p>
+          <button class="download-btn" onclick="window.location.href='Kimi2-JustDev-AuditTrailFeed.html'">
+            Open Dashboard
+          </button>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-icon">🛠️</div>
+          <div class="resource-title">Modular Toolkit</div>
+          <p style="color: #8892b0; margin: 0.5rem 0;">
+            Actor playbooks, cultural metrics builder, and redlined IFC standards for advocacy.
+          </p>
+          <button class="download-btn" onclick="window.location.href='Kimi2-JustDev-ModularExpansion.html'">
+            Open Toolkit
+          </button>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-icon">🤖</div>
+          <div class="resource-title">AI Agent Presentation</div>
+          <p style="color: #8892b0; margin: 0.5rem 0;">
+            Full presentation mode with slides, chat bot, and Q&A for demonstrating the concept.
+          </p>
+          <button class="download-btn" onclick="window.location.href='Kimi2-JustDev-Agent.html'">
+            Launch Presentation
+          </button>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-icon">📋</div>
+          <div class="resource-title">Implementation Notes</div>
+          <p style="color: #8892b0; margin: 0.5rem 0;">
+            Technical architecture details: data sources, smart contracts, community data sovereignty.
+          </p>
+          <button class="download-btn" onclick="window.location.href='justdev-notes.md'">
+            Read Notes
+          </button>
+        </div>
+      </div>
+
+      <div class="arch-section" style="margin-top: 3rem;">
+        <h2 class="arch-title">📞 Get Involved</h2>
+        <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
+          Interested in implementing this framework, licensing the enforcement stack, or contributing to the 2026 campaign?
+        </p>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <button class="cta-btn">Contact for Licensing</button>
+          <button class="cta-btn secondary">Join Campaign</button>
+          <button class="cta-btn secondary">Submit IFC Comment</button>
+        </div>
+        <p style="margin-top: 1.5rem; color: #8892b0; font-size: 0.9rem;">
+          <strong>Licensing Model:</strong> 0.5% of project CAPEX for metrics stack integration into loan management systems.
+          One prevented $50M conflict = 10× ROI.
+        </p>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <p><strong>Enforceability Stack:</strong> Quantified → Independent → Time-bound → Third-party → Material → Community-initiated</p>
+  <p style="margin-top: 0.5rem;">Generated from Just Development Rights Framework + AI-vs-IFC transcript analysis</p>
+  <p style="margin-top: 0.5rem;">Endorsed by: BRICS Feminist Watch | Centre for Human Rights and Development Mongolia | Center for Energy, Ecology and Development | Pakistan Fisherfolk Forum | Freedom from Debt Coalition (Philippines) | Pakaid | EcoLur International | Legal Rights and Natural Resources Center (Philippines)</p>
+</footer>
+
+<script>
+// Navigation
+function showSection(sectionId) {
+  // Hide all sections
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+
+  // Show selected section
+  document.getElementById(sectionId).classList.add('active');
+  event.target.classList.add('active');
+
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// AI Agent Responses
+const responses = {
+  'loan-freeze': `✅ <strong>Loan freezes when:</strong><br>
+1) CTF < 0.5% CAPEX at Day 30, OR<br>
+2) Vulnerable Group Gap Ratio < 80% at audit.<br><br>
+<strong>NO override</strong> without board + community rep vote. This is capital sensitivity:
+the loan management system API receives a literal kill signal. No loan officer discretion.`,
+
+  'black-box': `✅ <strong>NOT a black box!</strong><br>
+All rules are public if/then statements. Example:<br>
+<code>IF ratio < 0.8 THEN freeze()</code><br><br>
+Communities can edit weights via assembly vote. Logic lives at github.com/justdev/rules v1.2.3 (SHA256: a3f9...).
+Every trigger is logged immutably to blockchain. Compare this to COMPAS: proprietary logic, no community input,
+judge can't see the reasoning.`,
+
+  'edit-metrics': `✅ <strong>YES—within mathematical limits.</strong><br>
+Communities edit INDICATORS (salmon runs, ceremonies) and WEIGHTS (how much each matters).<br><br>
+They CANNOT change the 5:1 necessity ratio or 80% equity floor—these are human rights law minima.<br><br>
+If weights make 5:1 impossible, system flags "Necessity Test Unsatisfiable" and project requires 90% community
+supermajority. That's "within reason": you can't break math, but you set any bar above the legal floor.<br><br>
+Example: Mankayan community increased "ceremonial site access" weight from 30% → 45% on 2025-12-08.
+Change logged at block #8473921.`,
+
+  'override': `✅ <strong>Humans can PAUSE but not OVERRIDE.</strong><br>
+Board can delay freeze for 7 days to submit corrective plan, but community rep must approve.<br><br>
+The AI is <strong>bailiff, not judge</strong>—executes rules humans democratically set. This prevents
+capital capture: no developer promise or government pressure can override a triggered metric.
+The only way to change the outcome is to change the underlying reality (improve community income,
+capitalize the CTF, etc.).`,
+
+  'ifc-redline': `✅ <strong>IFC Redlines:</strong><br>
+<strong>PS5 Para 15:</strong> Replace "particular attention" with "80% median income hard target with automatic bond release."<br>
+<strong>PS7 Para 13:</strong> Insert "community-defined metrics with 5:1 necessity test certified by UN panel."<br>
+<strong>New Para 25:</strong> "Community-defined no-go zones legally binding; 90% supermajority required to override."<br><br>
+Full track-changes: <a href="Kimi2-JustDev-ModularExpansion.html" style="color: #00c9ff;">Open Modular Toolkit → IFC Tab</a>`,
+
+  'necessity-test': `✅ <strong>5:1 Necessity Test:</strong><br>
+Project benefit ÷ Community loss must be ≥ 5:1.<br><br>
+<strong>Community defines "loss":</strong> salmon runs, ceremonial access, language speakers—measured in
+culturally appropriate units, not just QALYs.<br><br>
+If ratio < 5, displacement is <strong>ILLEGAL</strong> unless 90% community supermajority approves.<br><br>
+Example: Current Mankayan hydro project: 1.04:1 ratio = <strong>PROJECT BLOCKED</strong>.
+Communities can adjust indicator weights but cannot change the 5:1 floor—that's the human rights minimum.`
+};
+
+function askQuestion(questionKey) {
+  const chatDemo = document.getElementById('chat-demo');
+
+  // Add user question
+  const userMsg = document.createElement('div');
+  userMsg.className = 'chat-message chat-user';
+  userMsg.innerHTML = `<strong>You:</strong><br>${event.target.textContent}`;
+  chatDemo.appendChild(userMsg);
+
+  // Add agent response
+  setTimeout(() => {
+    const agentMsg = document.createElement('div');
+    agentMsg.className = 'chat-message chat-agent';
+    agentMsg.innerHTML = `<strong>🤖 Just Dev AI Agent:</strong><br>${responses[questionKey]}`;
+    chatDemo.appendChild(agentMsg);
+    chatDemo.scrollTop = chatDemo.scrollHeight;
+  }, 500);
+}
+
+function downloadImages() {
+  alert('Image downloads: JustDev Mind Map.png and JustDev InfoGraphic.png are available in this directory.');
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('✅ Just Development Framework loaded');
+});
+</script>
+</body>
+</html>

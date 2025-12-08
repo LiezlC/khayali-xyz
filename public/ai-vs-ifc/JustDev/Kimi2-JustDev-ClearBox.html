@@ -1,0 +1,64 @@
+<!-- In the tab-nav, add -->
+<button class="tab-btn" onclick="showTab('transparency')">🔍 Transparency Architecture</button>
+
+<!-- In tab-content, add -->
+<div id="transparency" class="tab-content">
+  <h2>Glass Box Design: How We Avoid Algorithmic Capture</h2>
+  
+  <div class="role-card">
+    <h3>1. Open-Source Logic Layer</h3>
+    <p>All enforcement rules are <strong>public if/then functions</strong>. No neural nets, no "trade secrets."</p>
+    <div class="transparent-code">
+      function checkVulnerableGroupRatio() {<br>
+      &nbsp;&nbsp;const data = getVerifiedData('community_survey');<br>
+      &nbsp;&nbsp;if (data.vulnerableIncome < data.medianIncome * 0.8) {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;triggerLoanFreeze();<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;notifyCommunity();<br>
+      &nbsp;&nbsp;}<br>
+      }
+    </div>
+  </div>
+
+  <div class="role-card">
+    <h3>2. Multi-Signer Data Verification</h3>
+    <p>Every metric requires <strong>3 signatures</strong> from different stakeholder classes:</p>
+    <ul>
+      <li>📊 Community-hired researcher (hashes data on-chain)</li>
+      <li>🏢 Developer consultant (independent verification)</li>
+      <li>⚖️ Third-party auditor (UN panel member)</li>
+    </ul>
+    <p>2-of-3 approval needed for data to be valid. Community can veto developer's signature by 60% assembly vote.</p>
+  </div>
+
+  <div class="role-card">
+    <h3>3. Community-Editable Weights</h3>
+    <p>Indigenous communities can adjust metric weights via <strong>quadratic voting</strong> assembly. Changes logged immutably.</p>
+    <div class="audit-trail">
+      <strong>Example Audit Log:</strong><br>
+      2025-12-09 14:47:23 UTC | Community Assembly Mankayan<br>
+      Action: Increased "Ceremonial site access" weight from 30% → 45%<br>
+      Votes: 342 participants | Quorum: 289<br>
+      Hash: 0x8f3a...b2c1
+    </div>
+  </div>
+
+  <div class="role-card">
+    <h3>4. Immutable Trigger Ledger</h3>
+    <p>All enforcement actions are <strong>automatic</strong> and <strong>irrevocable</strong> once conditions are met. No "human override" for capital-friendly outcomes.</p>
+    <div class="transparent-code" style="color: #00ff88;">
+      // Loan Freeze Triggered: 2025-12-08 03:12:45 UTC<br>
+      // Condition: CTF deposit = $2.1M / $5M required (42%)<br>
+      // Deadline: T+30 days exceeded by 17 days<br>
+      // Status: DISBURSEMENT_HALTED<br>
+      // Board override: Requires 7 days notice + community rep vote<br>
+      // Next possible disbursement: 2025-12-15 (if CTF fully capitalized)
+    </div>
+  </div>
+
+  <div class="role-card" style="background: rgba(0, 255, 136, 0.1); border-color: #00ff88;">
+    <h3>🎯 The Advantage: AI as Consistent Bailiff</h3>
+    <p><strong>Why AI enforcement works:</strong> It doesn't get captured by developer promises, government pressure, or fatigue. It executes the rules as written—rules the community can read, edit, and verify.</p>
+    <p><strong>Why it's safe:</strong> The logic is simpler than a spreadsheet. No hidden layers, no training data secrets. If the community's survey says income is 73% of median, the loan freezes. Full stop.</p>
+    <p><strong>The human role:</strong> Not to override the AI, but to **audit the data** and **update the rules** through democratic process. AI handles consistency; humans handle justice.</p>
+  </div>
+</div>

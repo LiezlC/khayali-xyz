@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Just Development: AI Enforcement + Glass Box Design</title>
+<style>
+  /* Same presentation styles + new comparison grid */
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+  .comparison-card {
+    background: #1a1f2e;
+    border: 2px solid;
+    border-radius: 12px;
+    padding: 2rem;
+  }
+  .black-box {
+    border-color: #ff4757;
+    background: rgba(255, 71, 87, 0.1);
+  }
+  .glass-box {
+    border-color: #00ff88;
+    background: rgba(0, 255, 136, 0.1);
+  }
+  .card-title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .feature-list {
+    list-style: none;
+    margin: 1rem 0;
+  }
+  .feature-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #2a2f3e;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .icon { font-size: 1.5rem; }
+  .transparent-code {
+    background: #0f141f;
+    border: 1px solid #00c9ff;
+    border-radius: 6px;
+    padding: 1rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+    margin: 1rem 0;
+  }
+  .audit-trail {
+    background: rgba(0, 201, 255, 0.1);
+    border-left: 4px solid #00c9ff;
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+</style>
+</head>
+<body>
+<div class="presentation-mode" id="slide-container">
+  <!-- Slide: Glass Box vs Black Box -->
+  <div class="slide-title" id="slide-title">AI Enforcement Without the Black Box</div>
+  <div class="slide-content" id="slide-content">
+    <div class="comparison-grid">
+      <div class="comparison-card black-box">
+        <div class="card-title">
+          <span class="icon">🎱</span>
+          COMPAS-Style Black Box
+        </div>
+        <ul class="feature-list">
+          <li><span class="icon">❌</span><strong>Logic:</strong> Proprietary, trade-secret protected</li>
+          <li><span class="icon">❌</span><strong>Data:</strong> State arrest records (biased, unaudited)</li>
+          <li><span class="icon">❌</span><strong>Override:</strong> None—judge defers to "algorithm"</li>
+          <li><span class="icon">❌</span><strong>Accountability:</strong> "The computer said so"</li>
+          <li><span class="icon">❌</span><strong>Result:</strong> Eric Loomis, no recourse</li>
+        </ul>
+        <div class="transparent-code" style="color: #ff4757;">
+          // Code: Not Available<br>
+          // Methodology: Confidential<br>
+          // Accountability: NULL
+        </div>
+      </div>
+      
+      <div class="comparison-card glass-box">
+        <div class="card-title">
+          <span class="icon">🔍</span>
+          Just Development Glass Box
+        </div>
+        <ul class="feature-list">
+          <li><span class="icon">✅</span><strong>Logic:</strong> Public if/then rules, community-editable</li>
+          <li><span class="icon">✅</span><strong>Data:</strong> Community-hired researchers + third-party audits</li>
+          <li><span class="icon">✅</span><strong>Override:</strong> Human board vote + community rep required</li>
+          <li><span class="icon">✅</span><strong>Accountability:</strong> Immutable audit trail on blockchain</li>
+          <li><span class="icon">✅</span><strong>Result:</strong> Loan frozen, community compensated</li>
+        </ul>
+        <div class="transparent-code">
+          // Rule: IF vulnerable_group_gap_ratio < 0.8<br>
+          // THEN freeze_loan_disbursement()<br>
+          // AND release_performance_bond_to_community()
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Language toggle -->
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" onclick="setLang('es')">ES</button>
+  <button class="lang-btn" onclick="setLang('fr')">FR</button>
+  <button class="lang-btn" onclick="setLang('zh')">中文</button>
+  <button class="lang-btn" onclick="setLang('ar')">العربية</button>
+</div>
+
+<!-- Add to presentation slides array -->
+<script>
+const slides = [
+  // Previous slides...
+  {
+    title: "AI Enforcement Without the Black Box",
+    content: document.getElementById('slide-content').innerHTML,
+    notes: "Emphasize: The AI is the bailiff, not the judge. Community controls the data and weights. Every trigger is auditable."
+  }
+];
+
+// Rest of presentation logic...
+</script>
+</body>
+</html>
