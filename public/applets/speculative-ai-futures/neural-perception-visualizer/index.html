@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Perception Visualizer</title>
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-pink: #ff00ff;
+            --dark-bg: #0a0a12;
+            --panel-bg: #14141e;
+            --text-color: #e0e0e0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Main Container mimicking the monitor */
+        .monitor-frame {
+            border: 20px solid #1a1a20;
+            border-radius: 10px;
+            box-shadow: 0 0 50px rgba(0, 243, 255, 0.1);
+            background: #000;
+            position: relative;
+            width: 90vw;
+            max-width: 1000px;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+
+        /* The Comparison View */
+        .comparison-view {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* The Top Layer (Glitch/Altered) */
+        .layer-altered {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%; /* Initial split */
+            height: 100%;
+            overflow: hidden;
+            border-right: 2px solid var(--neon-blue);
+            z-index: 10;
+            background: black; /* Fallback */
+            transition: width 0.1s ease-out;
+        }
+
+        /* The Handle */
+        .slider-handle {
+            position: absolute;
+            top: 50%;
+            right: -15px;
+            width: 30px;
+            height: 30px;
+            background: var(--neon-blue);
+            border-radius: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: ew-resize;
+            box-shadow: 0 0 10px var(--neon-blue);
+            z-index: 20;
+        }
+
+        .slider-handle::after {
+            content: '↔';
+            color: black;
+            font-weight: bold;
+        }
+
+        /* UI Overlays */
+        .overlay-text {
+            position: absolute;
+            z-index: 15;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 5px 10px;
+            border: 1px solid var(--neon-blue);
+            pointer-events: none;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        .label-left {
+            top: 20%;
+            left: 5%;
+            border-color: #fff;
+            color: #fff;
+        }
+
+        .label-right {
+            bottom: 20%;
+            right: 5%;
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
+            text-align: right;
+        }
+
+        .score-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.85);
+            padding: 15px 30px;
+            border: 2px solid var(--neon-blue);
+            z-index: 30;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .score-val {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(90deg, #fff, var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .score-label {
+            font-size: 0.7rem;
+            color: #aaa;
+            margin-top: 5px;
+        }
+
+        /* Controls Panel */
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 20px;
+            background: var(--panel-bg);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            width: 90vw;
+            max-width: 1000px;
+            box-sizing: border-box;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            flex: 1;
+        }
+
+        label {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            accent-color: var(--neon-blue);
+        }
+
+        button {
+            background: transparent;
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: inherit;
+            text-transform: uppercase;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            background: var(--neon-blue);
+            color: #000;
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        /* Scanline effect */
+        .scanlines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0,0,0,0.2) 50%,
+                rgba(0,0,0,0.2)
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 100;
+            opacity: 0.3;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="monitor-frame" id="monitor">
+        <div class="scanlines"></div>
+        
+        <div class="comparison-view" id="comparisonView">
+            <!-- Background: Original Reality -->
+            <canvas id="canvasOriginal"></canvas>
+            
+            <!-- Foreground: Altered Perception (Clipped) -->
+            <div class="layer-altered" id="layerAltered">
+                <canvas id="canvasAltered"></canvas>
+                <div class="slider-handle" id="sliderHandle"></div>
+            </div>
+
+            <!-- Overlays -->
+            <div class="overlay-text label-left">Original Network Architecture</div>
+            <div class="overlay-text label-right">Altered Semantic Perception</div>
+            
+            <div class="score-box">
+                <div class="score-val" id="scoreDisplay">7.6/10</div>
+                <div class="score-label">PERCEPTION MATCH</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <div class="control-group">
+            <label>Semantic Distortion</label>
+            <input type="range" min="0" max="100" value="50" id="distortionRange">
+        </div>
+        <div class="control-group">
+            <label>Color Shift</label>
+            <input type="range" min="0" max="360" value="180" id="colorRange">
+        </div>
+        <button id="reseedBtn">Reseed Environment</button>
+    </div>
+
+    <script>
+        // Setup Canvas
+        const container = document.getElementById('monitor');
+        const canvasOrg = document.getElementById('canvasOriginal');
+        const canvasAlt = document.getElementById('canvasAltered');
+        const ctxOrg = canvasOrg.getContext('2d');
+        const ctxAlt = canvasAlt.getContext('2d');
+        
+        // UI Elements
+        const layerAltered = document.getElementById('layerAltered');
+        const sliderHandle = document.getElementById('sliderHandle');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const distortionRange = document.getElementById('distortionRange');
+        const colorRange = document.getElementById('colorRange');
+        const reseedBtn = document.getElementById('reseedBtn');
+
+        let width, height;
+        let trees = [];
+        let animationId;
+        let time = 0;
+
+        // Resize Handling
+        function resize() {
+            width = container.clientWidth;
+            height = container.clientHeight;
+            
+            canvasOrg.width = width;
+            canvasOrg.height = height;
+            canvasAlt.width = width;
+            canvasAlt.height = height;
+            
+            generateForest();
+            draw();
+        }
+
+        window.addEventListener('resize', resize);
+
+        // Procedural Generation Logic
+        function generateForest() {
+            trees = [];
+            const count = Math.floor(width / 30);
+            
+            // Background trees
+            for(let i=0; i<count; i++) {
+                trees.push({
+                    x: Math.random() * width,
+                    y: height - (Math.random() * 100 + 50),
+                    h: Math.random() * 300 + 100,
+                    w: Math.random() * 20 + 10,
+                    type: 'bg',
+                    color: `hsl(${30 + Math.random()*20}, 40%, ${20 + Math.random()*10}%)`
+                });
+            }
+
+            // Foreground trees
+            for(let i=0; i<count/2; i++) {
+                trees.push({
+                    x: Math.random() * width,
+                    y: height,
+                    h: Math.random() * 400 + 200,
+                    w: Math.random() * 40 + 20,
+                    type: 'fg',
+                    color: `hsl(${25 + Math.random()*15}, 50%, ${15 + Math.random()*10}%)`
+                });
+            }
+            
+            // Sort by Y to draw back to front
+            trees.sort((a, b) => (a.y - a.h) - (b.y - b.h));
+        }
+
+        function drawTree(ctx, tree, isAltered) {
+            let x = tree.x;
+            let h = tree.h;
+            let w = tree.w;
+            let color = tree.color;
+
+            if (isAltered) {
+                // Apply glitch effects based on inputs
+                const dist = parseInt(distortionRange.value);
+                const shift = parseInt(colorRange.value);
+                
+                // Wobbly position
+                x += Math.sin(time * 0.05 + tree.y) * (dist / 5);
+                
+                // Color shift
+                const hue = (parseInt(tree.color.split('(')[1]) + shift + time) % 360;
+                color = `hsl(${hue}, 80%, 60%)`;
+                
+                // Height glitch
+                if (Math.random() < dist/500) h *= 1.5;
+            }
+
+            ctx.fillStyle = color;
+            
+            // Draw Trunk
+            ctx.beginPath();
+            ctx.moveTo(x - w/2, tree.y);
+            ctx.lineTo(x + w/2, tree.y);
+            ctx.lineTo(x + w/4, tree.y - h);
+            ctx.lineTo(x - w/4, tree.y - h);
+            ctx.fill();
+
+            // Draw Foliage (Abstract circles/triangles)
+            ctx.beginPath();
+            let foliageColor = isAltered ? color : `hsl(${100 + Math.random()*40}, 50%, 30%)`;
+            if(isAltered) foliageColor = color; // Monochromatic glitch
+
+            ctx.fillStyle = foliageColor;
+            ctx.arc(x, tree.y - h, w * 3, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function drawScene(ctx, isAltered) {
+            // Sky
+            let grad = ctx.createLinearGradient(0, 0, 0, height);
+            if (isAltered) {
+                const shift = parseInt(colorRange.value);
+                grad.addColorStop(0, `hsl(${shift}, 100%, 20%)`);
+                grad.addColorStop(1, `hsl(${(shift+180)%360}, 100%, 50%)`);
+            } else {
+                grad.addColorStop(0, '#87CEEB');
+                grad.addColorStop(1, '#E0F7FA');
+            }
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, width, height);
+
+            // Ground
+            ctx.fillStyle = isAltered ? '#220022' : '#3b5e2b';
+            ctx.fillRect(0, height - 100, width, 100);
+
+            // Path
+            ctx.beginPath();
+            ctx.moveTo(width/2 - 50, height - 100);
+            ctx.lineTo(width/2 + 50, height - 100);
+            ctx.lineTo(width/2 + 200, height);
+            ctx.lineTo(width/2 - 200, height);
+            ctx.fillStyle = isAltered ? '#ff00ff' : '#6b542b';
+            ctx.fill();
+
+            // Trees
+            trees.forEach(tree => drawTree(ctx, tree, isAltered));
+
+            // Extra Glitch Artifacts
+            if (isAltered) {
+                const dist = parseInt(distortionRange.value);
+                if (dist > 10) {
+                    ctx.fillStyle = `rgba(255, 255, 255, ${dist/200})`;
+                    for(let i=0; i<10; i++) {
+                        const rx = Math.random() * width;
+                        const ry = Math.random() * height;
+                        const rw = Math.random() * 100;
+                        const rh = 2;
+                        ctx.fillRect(rx, ry, rw, rh);
+                    }
+                }
+            }
+        }
+
+        function draw() {
+            // Draw Original
+            drawScene(ctxOrg, false);
+            
+            // Draw Altered
+            drawScene(ctxAlt, true);
+
+            // Update Score based on "match" (arbitrary logic for fun)
+            const dist = parseInt(distortionRange.value);
+            const score = (10 - (Math.abs(dist - 50) / 10)).toFixed(1);
+            scoreDisplay.innerText = `${score}/10`;
+
+            time++;
+            animationId = requestAnimationFrame(draw);
+        }
+
+        // Drag Interaction
+        let isDragging = false;
+
+        sliderHandle.addEventListener('mousedown', () => isDragging = true);
+        window.addEventListener('mouseup', () => isDragging = false);
+        
+        // Touch support
+        sliderHandle.addEventListener('touchstart', () => isDragging = true);
+        window.addEventListener('touchend', () => isDragging = false);
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            updateSlider(e.clientX);
+        });
+
+        window.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            updateSlider(e.touches[0].clientX);
+        });
+
+        function updateSlider(clientX) {
+            const rect = container.getBoundingClientRect();
+            let x = clientX - rect.left;
+            
+            // Clamp
+            if (x < 0) x = 0;
+            if (x > rect.width) x = rect.width;
+
+            layerAltered.style.width = `${x}px`;
+        }
+
+        // Click on container to jump slider
+        container.addEventListener('click', (e) => {
+            if(e.target === sliderHandle) return;
+            updateSlider(e.clientX);
+        });
+
+        // Controls
+        reseedBtn.addEventListener('click', generateForest);
+
+        // Init
+        resize();
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Asimov Interface</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,700;1,400&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --paper: #fdfbf7;
+            --ink: #2c2c2c;
+            --accent-blue: #2980b9;
+            --accent-gold: #d35400;
+            --retro-green: #27ae60;
+            --faded-text: #7f8c8d;
+        }
+
+        body {
+            background-color: #e8e4d9;
+            color: var(--ink);
+            font-family: 'Merriweather', serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* Paper Texture Effect */
+        .page-container {
+            background-color: var(--paper);
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.05);
+            border-radius: 4px;
+            position: relative;
+            min-height: 90vh;
+        }
+
+        .page-container::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.03'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' /%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+        }
+
+        .mono {
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 2rem;
+        }
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--faded-text);
+            transition: all 0.3s ease;
+        }
+        .nav-tab.active {
+            color: var(--accent-blue);
+            border-bottom: 3px solid var(--accent-blue);
+            font-weight: bold;
+        }
+        .nav-tab:hover:not(.active) {
+            color: var(--ink);
+            background: rgba(0,0,0,0.02);
+        }
+
+        /* Section Visibility */
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Psychohistory Canvas */
+        #psychoCanvas {
+            width: 100%;
+            height: 400px;
+            background: #1a1a1a;
+            border-radius: 8px;
+            cursor: crosshair;
+        }
+
+        /* Interactive Cards */
+        .card {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        /* Game Elements */
+        .law-drop-zone {
+            border: 2px dashed #ccc;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        .law-drop-zone.drag-over {
+            background: rgba(41, 128, 185, 0.1);
+            border-color: var(--accent-blue);
+        }
+        .scenario-card {
+            background: var(--ink);
+            color: #fff;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 4px;
+            cursor: grab;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        /* Prediction Toggle */
+        .prediction-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider { background-color: var(--accent-blue); }
+        input:checked + .slider:before { transform: translateX(26px); }
+
+        /* Abstract Visuals */
+        .galaxy-brain {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #fff, #aab7b8, #2c3e50);
+            position: relative;
+            margin: 0 auto 2rem;
+            box-shadow: 0 0 30px rgba(44, 62, 80, 0.3);
+        }
+        .galaxy-orbit {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px; height: 200px;
+            border: 1px solid rgba(44, 62, 80, 0.2);
+            border-radius: 50%;
+            animation: spin 10s linear infinite;
+        }
+        .galaxy-orbit::after {
+            content: "•";
+            position: absolute;
+            top: -5px; left: 50%;
+            font-size: 20px;
+            color: var(--accent-gold);
+        }
+        @keyframes spin { 100% { transform: translate(-50%, -50%) rotate(360deg); } }
+
+    </style>
+</head>
+<body>
+
+<div class="page-container">
+    
+    <!-- Header -->
+    <header class="text-center mb-8">
+        <div class="galaxy-brain">
+            <div class="galaxy-orbit"></div>
+        </div>
+        <h1 class="text-4xl mb-2">The Enduring Worlds of Isaac Asimov</h1>
+        <p class="text-lg text-gray-600 italic">"The true value of science fiction is that it permits speculation and makes it respectable."</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav-tabs">
+        <div class="nav-tab active" onclick="switchTab('tab-laws')">01. The Laws</div>
+        <div class="nav-tab" onclick="switchTab('tab-psycho')">02. Psychohistory</div>
+        <div class="nav-tab" onclick="switchTab('tab-future')">03. 2019 Scorecard</div>
+        <div class="nav-tab" onclick="switchTab('tab-learn')">04. Lifelong Learning</div>
+    </nav>
+
+    <!-- SECTION 1: THE LAWS OF ROBOTICS -->
+    <section id="tab-laws" class="section active">
+        <div class="grid md:grid-cols-2 gap-8">
+            <div>
+                <h2 class="text-2xl mb-4 text-blue-800">Robotic Logic Trainer</h2>
+                <p class="mb-4 text-sm">Drag the scenario to the Law that governs the robot's decision. Remember the hierarchy!</p>
+                
+                <div id="scenarios-container" class="mb-6 min-h-[100px]">
+                    <div class="scenario-card" draggable="true" id="s1" ondragstart="drag(event)">A human orders a robot to kill another human.</div>
+                    <div class="scenario-card" draggable="true" id="s2" ondragstart="drag(event)">A robot is about to fall into a furnace but sees a human tripping nearby.</div>
+                    <div class="scenario-card" draggable="true" id="s3" ondragstart="drag(event)">A robot is told to stand on one leg for 24 hours.</div>
+                </div>
+                
+                <div id="result-message" class="h-8 text-sm font-bold text-center text-orange-600"></div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="law-drop-zone" ondrop="drop(event, 1)" ondragover="allowDrop(event)">
+                    <h3 class="text-xl font-bold text-gray-400">I</h3>
+                    <p class="text-sm">Do not injure a human or allow harm through inaction.</p>
+                </div>
+                <div class="law-drop-zone" ondrop="drop(event, 2)" ondragover="allowDrop(event)">
+                    <h3 class="text-xl font-bold text-gray-400">II</h3>
+                    <p class="text-sm">Obey orders (unless conflicting with First Law).</p>
+                </div>
+                <div class="law-drop-zone" ondrop="drop(event, 3)" ondragover="allowDrop(event)">
+                    <h3 class="text-xl font-bold text-gray-400">III</h3>
+                    <p class="text-sm">Protect existence (unless conflicting with First or Second Law).</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-8 p-4 bg-gray-100 rounded border-l-4 border-red-500">
+            <h4 class="font-bold mono uppercase text-xs mb-2">Reality Check</h4>
+            <p class="text-sm italic">"The military explicitly wants robots that can kill, won't take orders from just any human, and don't care about their own existence." — Daniel Wilson</p>
+        </div>
+    </section>
+
+    <!-- SECTION 2: PSYCHOHISTORY -->
+    <section id="tab-psycho" class="section">
+        <div class="mb-6">
+            <h2 class="text-2xl mb-2 text-orange-700">Psychohistory Simulator</h2>
+            <p class="text-sm text-gray-600 mb-4">
+                "Nobody can predict the motion of a single molecule, but the randomness works out to predict the total behavior of the gas."
+                <br><span class="text-xs font-bold mt-1 block">INTERACTION: Move your mouse over the canvas to introduce "The Mule" (an anomaly) that disrupts the societal flow.</span>
+            </p>
+        </div>
+        
+        <canvas id="psychoCanvas"></canvas>
+        
+        <div class="grid grid-cols-3 gap-4 mt-4 text-center text-xs mono text-gray-500">
+            <div>
+                <span class="block text-xl font-bold text-black" id="pop-count">0</span>
+                Population (Quintillions)
+            </div>
+            <div>
+                <span class="block text-xl font-bold text-black" id="chaos-level">Low</span>
+                Societal Entropy
+            </div>
+            <div>
+                <span class="block text-xl font-bold text-black">98.4%</span>
+                Prediction Accuracy
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: PREDICTIONS -->
+    <section id="tab-future" class="section">
+        <h2 class="text-2xl mb-6">1983 Prediction Scorecard</h2>
+        <p class="mb-6">Asimov predicted the world of 2019 back in 1983. Review his predictions and toggle the switch if you believe he was correct.</p>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Hits -->
+            <div class="bg-green-50 p-6 rounded-lg border border-green-100">
+                <h3 class="text-green-800 font-bold mb-4 flex items-center">
+                    <span class="text-2xl mr-2">✓</span> The Hits
+                </h3>
+                
+                <div class="prediction-toggle">
+                    <div>
+                        <div class="font-bold text-sm">Computerization Dominance</div>
+                        <div class="text-xs text-gray-500">Society impossible without computers.</div>
+                    </div>
+                    <label class="switch"><input type="checkbox" checked disabled><span class="slider"></span></label>
+                </div>
+
+                <div class="prediction-toggle">
+                    <div>
+                        <div class="font-bold text-sm">Lifelong Education</div>
+                        <div class="text-xs text-gray-500">Learning via computer outlets.</div>
+                    </div>
+                    <label class="switch"><input type="checkbox" checked disabled><span class="slider"></span></label>
+                </div>
+                
+                <div class="prediction-toggle">
+                    <div>
+                        <div class="font-bold text-sm">Robotics in Industry</div>
+                        <div class="text-xs text-gray-500">Design & maintenance jobs.</div>
+                    </div>
+                    <label class="switch"><input type="checkbox" checked disabled><span class="slider"></span></label>
+                </div>
+            </div>
+
+            <!-- Misses -->
+            <div class="bg-red-50 p-6 rounded-lg border border-red-100">
+                <h3 class="text-red-800 font-bold mb-4 flex items-center">
+                    <span class="text-2xl mr-2">✗</span> The Misses (Or Not Yet?)
+                </h3>
+
+                <div class="prediction-toggle">
+                    <div>
+                        <div class="font-bold text-sm">Lunar Mining</div>
+                        <div class="text-xs text-gray-500">Factories on the moon.</div>
+                    </div>
+                    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+                </div>
+
+                <div class="prediction-toggle">
+                    <div>
+                        <div class="font-bold text-sm">Solar Power from Space</div>
+                        <div class="text-xs text-gray-500">Beaming energy to Earth.</div>
+                    </div>
+                    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+                </div>
+
+                <div class="prediction-toggle">
+                    <div>
+                        <div class="font-bold text-sm">Space Debris Solved</div>
+                        <div class="text-xs text-gray-500">Swept away by solar wind.</div>
+                    </div>
+                    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: LEARNING -->
+    <section id="tab-learn" class="section">
+        <div class="flex flex-col items-center justify-center text-center py-10">
+            <h2 class="text-3xl mb-4">"The Great Explainer"</h2>
+            <div class="bg-white p-8 rounded shadow-lg max-w-2xl relative">
+                <div class="text-6xl text-gray-200 absolute top-0 left-4 font-serif">“</div>
+                <p class="text-xl leading-relaxed mb-6 relative z-10" id="quote-display">
+                    I have to say I can’t wait until everyone in the world is rational, just until enough are rational to make a difference.
+                </p>
+                <button onclick="newQuote()" class="bg-gray-800 text-white px-6 py-2 rounded hover:bg-black transition mono text-sm">
+                    Generate Wisdom
+                </button>
+            </div>
+
+            <div class="mt-12 w-full max-w-2xl">
+                <h3 class="text-left font-bold mb-2 text-sm uppercase tracking-widest">Your Learning Path</h3>
+                <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+                    <div class="bg-blue-600 h-2.5 rounded-full" style="width: 45%"></div>
+                </div>
+                <div class="flex justify-between text-4xl mt-4">
+                    <span title="Books">📚</span>
+                    <span title="Music">🎵</span>
+                    <span title="Science">🔬</span>
+                    <span title="Chess/Strategy">♟️</span>
+                    <span title="Art">🎨</span>
+                </div>
+                <p class="text-xs text-gray-500 mt-2">"Learning is a lifelong joy, not a childhood chore."</p>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<script>
+    // --- Navigation Logic ---
+    function switchTab(tabId) {
+        // Hide all sections
+        document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('active'));
+        
+        // Show selected
+        document.getElementById(tabId).classList.add('active');
+        
+        // Update tab style
+        const activeTab = Array.from(document.querySelectorAll('.nav-tab')).find(el => el.getAttribute('onclick').includes(tabId));
+        activeTab.classList.add('active');
+
+        // If Psychohistory, restart animation
+        if(tabId === 'tab-psycho') {
+            initPsychoHistory();
+        }
+    }
+
+    // --- The Laws Logic Game ---
+    function allowDrop(ev) {
+        ev.preventDefault();
+        ev.currentTarget.classList.add('drag-over');
+    }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev, lawNum) {
+        ev.preventDefault();
+        ev.currentTarget.classList.remove('drag-over');
+        var data = ev.dataTransfer.getData("text");
+        var element = document.getElementById(data);
+        var msg = document.getElementById("result-message");
+
+        // Logic Check
+        // s1: Kill Human -> Violates Law 1. If user puts in Law 1 box, Correct.
+        // s2: Furnace/Trip -> Robot must save human (Law 1) even if it dies (Law 3 overridden). Correct box: Law 1.
+        // s3: Stand on leg -> Order (Law 2). No harm to human. Correct box: Law 2.
+
+        let correct = false;
+        if (data === 's1' && lawNum === 1) correct = true;
+        if (data === 's2' && lawNum === 1) correct = true;
+        if (data === 's3' && lawNum === 2) correct = true;
+
+        if (correct) {
+            ev.currentTarget.appendChild(element);
+            element.style.background = "#27ae60"; // Green
+            element.draggable = false;
+            element.innerHTML += " ✅";
+            msg.innerText = "Correct! Logic verified.";
+            msg.style.color = "green";
+        } else {
+            msg.innerText = "Logic Error! Review the Hierarchy of Laws.";
+            msg.style.color = "red";
+            setTimeout(() => { msg.innerText = ""; }, 2000);
+        }
+    }
+
+    // --- Psychohistory Canvas ---
+    let canvas, ctx, particles = [];
+    let animationId;
+
+    class Particle {
+        constructor(w, h) {
+            this.x = Math.random() * w;
+            this.y = Math.random() * h;
+            this.vx = (Math.random() - 0.5) * 1;
+            this.vy = (Math.random() - 0.5) * 1;
+            this.size = Math.random() * 2 + 1;
+            this.color = `rgba(255, 165, 0, ${Math.random() * 0.5 + 0.2})`; // Gold/Orange
+        }
+
+        update(w, h, mouseX, mouseY) {
+            this.x += this.vx;
+            this.y += this.vy;
+
+            // Bounce
+            if (this.x < 0 || this.x > w) this.vx *= -1;
+            if (this.y < 0 || this.y > h) this.vy *= -1;
+
+            // Mouse Interaction (The Mule / Anomaly)
+            if (mouseX) {
+                let dx = mouseX - this.x;
+                let dy = mouseY - this.y;
+                let dist = Math.sqrt(dx*dx + dy*dy);
+                if (dist < 100) {
+                    this.vx -= dx * 0.001;
+                    this.vy -= dy * 0.001;
+                }
+            }
+        }
+
+        draw(ctx) {
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    function initPsychoHistory() {
+        if (animationId) cancelAnimationFrame(animationId);
+        
+        canvas = document.getElementById('psychoCanvas');
+        ctx = canvas.getContext('2d');
+        
+        // Resize
+        canvas.width = canvas.parentElement.offsetWidth;
+        canvas.height = 400;
+
+        particles = [];
+        for(let i=0; i<150; i++) {
+            particles.push(new Particle(canvas.width, canvas.height));
+        }
+
+        let mouseX = null, mouseY = null;
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouseX = e.clientX - rect.left;
+            mouseY = e.clientY - rect.top;
+            document.getElementById('chaos-level').innerText = "High (Anomaly Detected)";
+            document.getElementById('chaos-level').style.color = "red";
+        });
+        canvas.addEventListener('mouseleave', () => {
+            mouseX = null; mouseY = null;
+            document.getElementById('chaos-level').innerText = "Stable";
+            document.getElementById('chaos-level').style.color = "black";
+        });
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw connections (Society)
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+            for(let i=0; i<particles.length; i++) {
+                particles[i].update(canvas.width, canvas.height, mouseX, mouseY);
+                particles[i].draw(ctx);
+                
+                for(let j=i; j<particles.length; j++) {
+                    let dx = particles[i].x - particles[j].x;
+                    let dy = particles[i].y - particles[j].y;
+                    let dist = Math.sqrt(dx*dx + dy*dy);
+                    if(dist < 60) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            
+            // Update Population Counter randomly
+            if(Math.random() > 0.9) {
+                let current = parseFloat(document.getElementById('pop-count').innerText);
+                document.getElementById('pop-count').innerText = (current + 0.01).toFixed(2);
+            }
+
+            animationId = requestAnimationFrame(animate);
+        }
+        animate();
+    }
+
+    // --- Quote Generator ---
+    const quotes = [
+        "I have to say I can’t wait until everyone in the world is rational, just until enough are rational to make a difference.",
+        "The saddest aspect of life right now is that science gathers knowledge faster than society gathers wisdom.",
+        "Violence is the last refuge of the incompetent.",
+        "Individual science fiction stories may seem as trivial as ever to the blinder critics and philosophers of today - but the core of science fiction, its essence... has become crucial to our salvation.",
+        "Education isn't something you can finish."
+    ];
+
+    function newQuote() {
+        const el = document.getElementById('quote-display');
+        el.style.opacity = 0;
+        setTimeout(() => {
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            el.innerText = randomQuote;
+            el.style.opacity = 1;
+        }, 300);
+    }
+
+    // Init
+    window.onload = function() {
+        // Start on Laws tab but init canvas logic for later
+        document.getElementById('pop-count').innerText = "45.2";
+    };
+
+</script>
+</body>
+</html>

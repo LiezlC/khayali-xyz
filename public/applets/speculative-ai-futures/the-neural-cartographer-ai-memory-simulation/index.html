@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Neural Cartographer: AI Memory Simulation</title>
+    <style>
+        :root {
+            --bg-paper: #f4f1ea;
+            --ink-black: #1a1a1a;
+            --gold: #c5a059;
+            --gold-dim: #c5a05944;
+            --highlight: #ff6b6b;
+            --geometric-blue: #1e2a3a;
+            --grid-line: #e0e0e0;
+            --font-serif: 'Georgia', 'Times New Roman', serif;
+            --font-sans: 'Segoe UI', 'Helvetica', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-paper);
+            color: var(--ink-black);
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+            transition: background-color 0.5s ease;
+        }
+
+        /* Mode Switching Styles */
+        body.mode-geometric {
+            background-color: var(--geometric-blue);
+            color: #fff;
+            --grid-line: #ffffff22;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 1rem;
+            border-bottom: 1px solid var(--gold);
+        }
+
+        h1 {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-style: italic;
+            color: var(--gold);
+            font-size: 1.1rem;
+        }
+
+        /* Main Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 800px) {
+            .container { grid-template-columns: 1fr; }
+        }
+
+        /* Controls / Sidebar */
+        .sidebar {
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--gold);
+        }
+
+        .control-group {
+            margin-bottom: 2rem;
+        }
+
+        .control-label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-serif);
+        }
+
+        button {
+            background: var(--ink-black);
+            color: var(--bg-paper);
+            border: 1px solid var(--gold);
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+            margin-bottom: 10px;
+            transition: all 0.2s;
+        }
+
+        body.mode-geometric button {
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+        }
+
+        body.mode-geometric button:hover {
+            background: var(--gold);
+            color: var(--geometric-blue);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* The Visualization Stage */
+        .stage {
+            position: relative;
+            height: 600px;
+            border: 2px solid var(--gold);
+            border-radius: 4px;
+            background: #fff;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.5s;
+        }
+
+        body.mode-geometric .stage {
+            background: #0f1724;
+            box-shadow: inset 0 0 50px #000;
+        }
+
+        /* SVG Elements */
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .node {
+            cursor: pointer;
+            transition: r 0.3s;
+        }
+
+        .node:hover {
+            r: 8;
+        }
+
+        .link {
+            stroke-width: 2;
+            transition: stroke 0.3s, opacity 0.3s;
+        }
+
+        /* Associative Mode Styles (Filing Cabinet) */
+        .filing-cabinet-view {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+        }
+
+        .file-card {
+            background: #fdfbf7;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+            font-size: 0.9rem;
+        }
+
+        .highlight-text {
+            background-color: yellow;
+        }
+
+        /* Geometric Mode Styles */
+        .geometric-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            background: radial-gradient(circle at center, transparent 0%, transparent 60%, rgba(0,0,0,0.5) 100%);
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+
+        .pulse-ring {
+            position: absolute;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        /* Matrix Visualization (Page 5) */
+        .matrix-container {
+            margin-top: 20px;
+            border: 1px solid var(--gold);
+            padding: 10px;
+            background: rgba(0,0,0,0.2);
+        }
+        
+        canvas#matrixCanvas {
+            width: 100%;
+            height: 150px;
+            image-rendering: pixelated;
+        }
+
+        .info-panel {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-left: 4px solid var(--gold);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Guitar String (Spectral Bias) */
+        .spectral-bias {
+            height: 60px;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        path.wave {
+            fill: none;
+            stroke: var(--gold);
+            stroke-width: 2;
+            opacity: 0.7;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>The Neural Cartographer</h1>
+    <div class="subtitle">"AI doesn't memorise facts. It builds maps of reality."</div>
+</header>
+
+<div class="container">
+    <!-- Sidebar Controls -->
+    <div class="sidebar">
+        <div class="control-group">
+            <label class="control-label">Memory Model</label>
+            <button id="btnAssociative" onclick="setMode('associative')">📂 Filing Cabinet (Associative)</button>
+            <button id="btnGeometric" onclick="setMode('geometric')">🌐 GPS Map (Geometric)</button>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">The "Impossible" Test</label>
+            <p style="font-size:0.8rem; margin-bottom:10px;">Find the path from Node A to Node B.</p>
+            <button onclick="runSimulation()">▶ Run Navigation Task</button>
+            <button onclick="resetGraph()">↺ Reset</button>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">Internal Representation</label>
+            <canvas id="matrixCanvas" width="300" height="150"></canvas>
+            <div style="font-size: 0.7rem; margin-top: 5px; color: var(--gold);">
+                Bright diagonal = Geometric Order. Static = Random Association.
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">Spectral Bias (Harmonics)</label>
+            <svg class="spectral-bias" id="spectralSvg">
+                <!-- Waves generated by JS -->
+            </svg>
+        </div>
+    </div>
+
+    <!-- Main Stage -->
+    <div>
+        <div class="stage" id="stage">
+            <!-- SVG Graph Layer -->
+            <svg id="graphSvg" viewBox="-300 -300 600 600">
+                <g id="links"></g>
+                <g id="nodes"></g>
+            </svg>
+            
+            <!-- Filing Cabinet Layer (Hidden by default) -->
+            <div id="filingCabinet" class="filing-cabinet-view">
+                <!-- Generated by JS -->
+            </div>
+
+            <div class="geometric-overlay"></div>
+        </div>
+
+        <div class="info-panel" id="infoText">
+            <strong>Welcome.</strong> Current AI research suggests models like Transformers don't just memorize "A is next to B". They spontaneously organize knowledge into geometric structures. Use the buttons to compare the old "Associative" view with the emergent "Geometric" view.
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- Configuration & State ---
+    const config = {
+        numArms: 8,
+        nodesPerArm: 6,
+        armLength: 250,
+        colors: {
+            nodeDefault: '#888',
+            nodeActive: '#c5a059',
+            linkDefault: '#ccc',
+            linkActive: '#ff6b6b',
+            bgGeometric: '#1e2a3a'
+        }
+    };
+
+    let state = {
+        mode: 'associative', // 'associative' or 'geometric'
+        nodes: [],
+        links: [],
+        path: [],
+        isSimulating: false
+    };
+
+    // --- Initialization ---
+    function init() {
+        generateStarGraph();
+        renderGraph();
+        renderFilingCabinet(); // Pre-render text view
+        drawMatrix('noise'); // Start with noise
+        animateWaves();
+        setMode('associative');
+    }
+
+    // --- Data Generation: Path-Star Graph (Page 3) ---
+    function generateStarGraph() {
+        state.nodes = [];
+        state.links = [];
+        
+        // Center Hub
+        state.nodes.push({ id: 0, x: 0, y: 0, type: 'hub', label: 'HUB' });
+
+        for (let i = 0; i < config.numArms; i++) {
+            const angle = (i / config.numArms) * Math.PI * 2;
+            let prevNodeId = 0; // Start connecting from hub
+
+            for (let j = 1; j <= config.nodesPerArm; j++) {
+                const dist = (j / config.nodesPerArm) * config.armLength;
+                const nodeId = state.nodes.length;
+                
+                // Add some randomness to positions for "Associative" feel, 
+                // but we store true geometric positions
+                state.nodes.push({
+                    id: nodeId,
+                    x: Math.cos(angle) * dist,
+                    y: Math.sin(angle) * dist,
+                    arm: i,
+                    depth: j,
+                    label: `${String.fromCharCode(65+i)}${j}` // A1, B2, etc.
+                });
+
+                state.links.push({ source: prevNodeId, target: nodeId });
+                prevNodeId = nodeId;
+            }
+        }
+    }
+
+    // --- Rendering: SVG Graph ---
+    function renderGraph() {
+        const svgLinks = document.getElementById('links');
+        const svgNodes = document.getElementById('nodes');
+        
+        svgLinks.innerHTML = '';
+        svgNodes.innerHTML = '';
+
+        // Draw Links
+        state.links.forEach(link => {
+            const source = state.nodes[link.source];
+            const target = state.nodes[link.target];
+            
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute('x1', source.x);
+            line.setAttribute('y1', source.y);
+            line.setAttribute('x2', target.x);
+            line.setAttribute('y2', target.y);
+            line.setAttribute('stroke', config.colors.linkDefault);
+            line.setAttribute('stroke-width', 1);
+            line.setAttribute('class', 'link');
+            line.id = `link-${link.source}-${link.target}`;
+            svgLinks.appendChild(line);
+        });
+
+        // Draw Nodes
+        state.nodes.forEach(node => {
+            const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            circle.setAttribute('cx', node.x);
+            circle.setAttribute('cy', node.y);
+            circle.setAttribute('r', node.type === 'hub' ? 10 : 4);
+            circle.setAttribute('fill', node.type === 'hub' ? config.colors.nodeActive : config.colors.nodeDefault);
+            circle.setAttribute('class', 'node');
+            circle.id = `node-${node.id}`;
+            
+            // Tooltip title
+            const title = document.createElementNS("http://www.w3.org/2000/svg", "title");
+            title.textContent = node.label;
+            circle.appendChild(title);
+
+            svgNodes.appendChild(circle);
+        });
+    }
+
+    // --- Rendering: Filing Cabinet (Text View) ---
+    function renderFilingCabinet() {
+        const container = document.getElementById('filingCabinet');
+        container.innerHTML = '';
+        
+        // Create a confusing list of connections
+        state.links.forEach(link => {
+            const source = state.nodes[link.source];
+            const target = state.nodes[link.target];
+            
+            const card = document.createElement('div');
+            card.className = 'file-card';
+            card.id = `card-${link.source}-${link.target}`;
+            // Simulate "Associative" lookup text
+            card.innerHTML = `<strong>FACT RECORD #${Math.floor(Math.random()*9000)+1000}:</strong><br>
+                              Entity [${source.label}] is connected to Entity [${target.label}].<br>
+                              <span style="color:#888; font-size:0.8em;">Strength: ${Math.random().toFixed(2)} | Context: Local</span>`;
+            container.appendChild(card);
+        });
+    }
+
+    // --- Core Logic: Mode Switching ---
+    function setMode(mode) {
+        state.mode = mode;
+        const body = document.body;
+        const svg = document.getElementById('graphSvg');
+        const cabinet = document.getElementById('filingCabinet');
+        const info = document.getElementById('infoText');
+
+        if (mode === 'associative') {
+            body.classList.remove('mode-geometric');
+            svg.style.opacity = '0.1'; // Fade out graph
+            cabinet.style.display = 'flex'; // Show text
+            drawMatrix('noise');
+            info.innerHTML = `<strong>The Filing Cabinet (Associative Memory).</strong> <br>
+            This is the "Old View". The AI stores discrete facts ("A connects to B"). To find a path, it must perform a slow, brute-force lookup of every card. It doesn't "see" the shape of the data.`;
+        } else {
+            body.classList.add('mode-geometric');
+            svg.style.opacity = '1';
+            cabinet.style.display = 'none';
+            drawMatrix('diagonal');
+            info.innerHTML = `<strong>The GPS Map (Geometric Memory).</strong> <br>
+            This is the "Emergent View". The AI has spontaneously built a spatial map. Concepts are points in space. Finding a path isn't a lookup—it's a geometric calculation. It "knows" the direction instantly.`;
+        }
+    }
+
+    // --- Simulation: The "Impossible" Test ---
+    async function runSimulation() {
+        if (state.isSimulating) return;
+        state.isSimulating = true;
+        resetGraph();
+
+        // Pick random start and end on different arms
+        const startArm = 0;
+        const endArm = 4; // Opposite side
+        const startNode = state.nodes.find(n => n.arm === startArm && n.depth === config.nodesPerArm);
+        const endNode = state.nodes.find(n => n.arm === endArm && n.depth === config.nodesPerArm);
+
+        const info = document.getElementById('infoText');
+
+        if (state.mode === 'associative') {
+            info.innerHTML = "<strong>Running Associative Search...</strong><br> The model is blindly checking connections. It has no sense of direction.";
+            await simulateAssociativeSearch(startNode, endNode);
+        } else {
+            info.innerHTML = "<strong>Running Geometric Navigation...</strong><br> The model calculates the vector between Start and End. It solves the maze instantly.";
+            await simulateGeometricPath(startNode, endNode);
+        }
+        state.isSimulating = false;
+    }
+
+    function resetGraph() {
+        // Reset visual styles
+        document.querySelectorAll('.link').forEach(l => {
+            l.setAttribute('stroke', config.colors.linkDefault);
+            l.setAttribute('stroke-width', 1);
+        });
+        document.querySelectorAll('.node').forEach(n => {
+            n.setAttribute('fill', n.id === 'node-0' ? config.colors.nodeActive : config.colors.nodeDefault);
+            n.setAttribute('r', n.id === 'node-0' ? 10 : 4);
+        });
+        document.querySelectorAll('.file-card').forEach(c => c.style.background = '#fdfbf7');
+    }
+
+    // --- Simulation Logic: Associative (Slow, Random) ---
+    async function simulateAssociativeSearch(start, end) {
+        // Highlight start
+        highlightNode(start.id, 'blue');
+        
+        // Random walk / Brute force visual effect
+        const steps = 15;
+        for (let i = 0; i < steps; i++) {
+            // Pick a random link to highlight (simulating reading a file)
+            const randomLinkIdx = Math.floor(Math.random() * state.links.length);
+            const link = state.links[randomLinkIdx];
+            
+            // Highlight text card
+            const card = document.getElementById(`card-${link.source}-${link.target}`);
+            if(card) {
+                card.style.background = '#ffeb3b';
+                card.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+
+            // Highlight graph line faintly
+            const line = document.getElementById(`link-${link.source}-${link.target}`);
+            if(line) {
+                line.setAttribute('stroke', 'red');
+                line.setAttribute('stroke-width', 3);
+            }
+
+            await new Promise(r => setTimeout(r, 300)); // Slow delay
+
+            // Reset specific highlights
+            if(card) card.style.background = '#fdfbf7';
+            if(line) line.setAttribute('stroke', config.colors.linkDefault);
+        }
+
+        document.getElementById('infoText').innerHTML += "<br><span style='color:red'>FAIL. The model got lost in the details.</span>";
+    }
+
+    // --- Simulation Logic: Geometric (Fast, Direct) ---
+    async function simulateGeometricPath(start, end) {
+        // Calculate path (Up the arm to hub, down the other arm)
+        // In this star graph, path is unique.
+        
+        let pathNodes = [];
+        // From start to Hub
+        let curr = start;
+        while(curr.id !== 0) {
+            pathNodes.push(curr);
+            const link = state.links.find(l => l.target === curr.id); // Links are directed outwards in generation logic
+            curr = state.nodes[link.source];
+        }
+        pathNodes.push(state.nodes[0]); // Hub
+
+        // From Hub to End
+        let downPath = [];
+        curr = end;
+        while(curr.id !== 0) {
+            downPath.unshift(curr);
+            const link = state.links.find(l => l.target === curr.id);
+            curr = state.nodes[link.source];
+        }
+        pathNodes = pathNodes.concat(downPath);
+
+        // Animate Path
+        for (let i = 0; i < pathNodes.length - 1; i++) {
+            const n1 = pathNodes[i];
+            const n2 = pathNodes[i+1];
+            
+            highlightNode(n1.id, config.colors.gold);
+            
+            // Find link ID (could be source->target or target->source)
+            let linkId = `link-${n1.id}-${n2.id}`;
+            let line = document.getElementById(linkId);
+            if (!line) {
+                linkId = `link-${n2.id}-${n1.id}`;
+                line = document.getElementById(linkId);
+            }
+
+            if (line) {
+                line.setAttribute('stroke', config.colors.gold);
+                line.setAttribute('stroke-width', 4);
+            }
+
+            await new Promise(r => setTimeout(r, 50)); // Fast delay
+        }
+        highlightNode(end.id, '#fff');
+        document.getElementById('infoText').innerHTML += "<br><span style='color:#4caf50'>SUCCESS. Path found via geometric reasoning.</span>";
+    }
+
+    function highlightNode(id, color) {
+        const node = document.getElementById(`node-${id}`);
+        if(node) {
+            node.setAttribute('fill', color);
+            node.setAttribute('r', 8);
+        }
+    }
+
+    // --- Matrix Visualization (Page 5) ---
+    function drawMatrix(type) {
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+        const w = canvas.width;
+        const h = canvas.height;
+        
+        ctx.clearRect(0, 0, w, h);
+        
+        // Background
+        ctx.fillStyle = '#111';
+        ctx.fillRect(0, 0, w, h);
+
+        const cellSize = 4;
+        const cols = w / cellSize;
+        const rows = h / cellSize;
+
+        for (let y = 0; y < rows; y++) {
+            for (let x = 0; x < cols; x++) {
+                let intensity = 0;
+                
+                if (type === 'noise') {
+                    // Random static (Associative memory looks like this)
+                    if (Math.random() > 0.95) intensity = Math.random() * 0.5;
+                } else {
+                    // Diagonal line (Geometric structure)
+                    // The closer x is to y (scaled), the brighter
+                    const dist = Math.abs(x - (y * (cols/rows)));
+                    if (dist < 2) intensity = 1 - (dist/2);
+                    else if (Math.random() > 0.98) intensity = Math.random() * 0.3; // Some noise
+                }
+
+                if (intensity > 0) {
+                    ctx.fillStyle = `rgba(255, 215, 0, ${intensity})`;
+                    ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+                }
+            }
+        }
+    }
+
+    // --- Spectral Bias Animation (Page 7) ---
+    function animateWaves() {
+        const svg = document.getElementById('spectralSvg');
+        const width = 300;
+        const height = 60;
+        let time = 0;
+
+        // Create paths
+        const path1 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path1.setAttribute("class", "wave");
+        svg.appendChild(path1);
+        
+        const path2 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path2.setAttribute("class", "wave");
+        path2.style.stroke = "white";
+        path2.style.opacity = "0.3";
+        svg.appendChild(path2);
+
+        function draw() {
+            time += 0.05;
+            
+            // Fundamental Wave
+            let d1 = `M 0 ${height/2}`;
+            for(let x=0; x<=width; x+=10) {
+                const y = Math.sin(x * 0.02 + time) * 20;
+                d1 += ` L ${x} ${height/2 + y}`;
+            }
+            path1.setAttribute("d", d1);
+
+            // Harmonic Wave (Higher freq)
+            let d2 = `M 0 ${height/2}`;
+            for(let x=0; x<=width; x+=5) {
+                const y = Math.sin(x * 0.08 - time) * 10;
+                d2 += ` L ${x} ${height/2 + y}`;
+            }
+            path2.setAttribute("d", d2);
+
+            requestAnimationFrame(draw);
+        }
+        draw();
+    }
+
+    // Start
+    init();
+
+</script>
+</body>
+</html>

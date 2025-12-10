@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Africa 2030: The Digital Revolution Simulator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Orbitron:wght@400;700&display=swap');
+
+        :root {
+            --primary: #0ea5e9;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --bg: #0f172a;
+            --panel: #1e293b;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1, h2, h3, .stat-value {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Glassmorphism Panels */
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Network Canvas */
+        #networkCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.6;
+        }
+
+        /* UI Layer */
+        #ui-layer {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            padding: 1rem;
+            gap: 1rem;
+        }
+
+        /* Buttons */
+        .action-btn {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid #334155;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .action-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(14, 165, 233, 0.3);
+        }
+        .action-btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+        .action-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            filter: grayscale(1);
+        }
+        .btn-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.2s;
+        }
+
+        /* Globe Animation Placeholder */
+        .globe-container {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #38bdf8, #0c4a6e);
+            box-shadow: 0 0 30px #0ea5e9;
+            position: relative;
+            animation: pulse 4s infinite ease-in-out;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 20px #0ea5e9; }
+            50% { box-shadow: 0 0 40px #0ea5e9, 0 0 10px #fff; }
+            100% { box-shadow: 0 0 20px #0ea5e9; }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155; 
+            border-radius: 4px;
+        }
+
+        .notification {
+            animation: slideIn 0.3s ease-out forwards;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .metric-bar-bg {
+            background: rgba(255,255,255,0.1);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .metric-bar-fill {
+            height: 100%;
+            transition: width 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Visualization -->
+    <canvas id="networkCanvas"></canvas>
+
+    <!-- Main UI -->
+    <div id="ui-layer">
+        
+        <!-- Header -->
+        <header class="glass-panel p-4 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <div class="globe-container w-12 h-12 flex items-center justify-center text-xl">🌍</div>
+                <div>
+                    <h1 class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">AFRICA 2030</h1>
+                    <p class="text-xs text-slate-400 tracking-widest">SINGLE DIGITAL MARKET INITIATIVE</p>
+                </div>
+            </div>
+            <div class="text-right">
+                <div class="text-3xl font-bold text-white" id="yearDisplay">2024</div>
+                <div class="text-xs text-slate-400">DEADLINE: 2030</div>
+            </div>
+        </header>
+
+        <!-- Main Content Grid -->
+        <main class="grid grid-cols-1 lg:grid-cols-12 gap-4 h-full overflow-hidden">
+            
+            <!-- Left: Stats & Metrics -->
+            <aside class="lg:col-span-3 glass-panel p-4 flex flex-col gap-6 overflow-y-auto">
+                <div>
+                    <h3 class="text-sm font-semibold text-slate-400 mb-2 uppercase">Market Unification</h3>
+                    <div class="text-4xl font-bold text-white mb-1" id="unificationScore">0%</div>
+                    <div class="metric-bar-bg">
+                        <div id="unificationBar" class="metric-bar-fill bg-gradient-to-r from-blue-500 to-cyan-400" style="width: 0%"></div>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-2">Target: 100% Integration</p>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="text-sm font-semibold text-slate-400 uppercase border-b border-slate-700 pb-2">Core Pillars</h3>
+                    
+                    <div>
+                        <div class="flex justify-between text-xs mb-1">
+                            <span>Digital Identity (Security)</span>
+                            <span id="securityVal">0%</span>
+                        </div>
+                        <div class="metric-bar-bg">
+                            <div id="securityBar" class="metric-bar-fill bg-emerald-500" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-xs mb-1">
+                            <span>Cross-Border Payments</span>
+                            <span id="commerceVal">0%</span>
+                        </div>
+                        <div class="metric-bar-bg">
+                            <div id="commerceBar" class="metric-bar-fill bg-yellow-500" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-xs mb-1">
+                            <span>Gov Interoperability</span>
+                            <span id="govVal">0%</span>
+                        </div>
+                        <div class="metric-bar-bg">
+                            <div id="govBar" class="metric-bar-fill bg-purple-500" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-auto bg-slate-800/50 p-3 rounded border border-slate-700">
+                    <h3 class="text-xs text-slate-400 uppercase mb-1">Resources</h3>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl">💰</span>
+                        <span class="text-xl font-bold" id="budgetDisplay">$100M</span>
+                    </div>
+                    <div class="flex justify-between items-center mt-2">
+                        <span class="text-2xl">⚡</span>
+                        <span class="text-xl font-bold" id="bandwidthDisplay">10 TB/s</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Center: Visualizer Overlay -->
+            <section class="lg:col-span-6 relative flex flex-col justify-center items-center pointer-events-none">
+                <div class="text-center space-y-2 bg-slate-900/80 p-4 rounded-xl backdrop-blur-sm pointer-events-auto">
+                    <h2 class="text-2xl font-bold text-white">The Quiet Revolution</h2>
+                    <p class="text-sm text-slate-300 max-w-md">
+                        Connect 54 fragmented markets into one digital bloc. 
+                        Build infrastructure, harmonize policy, and empower entrepreneurs.
+                    </p>
+                </div>
+                
+                <!-- Dynamic Event Log -->
+                <div id="eventLog" class="absolute bottom-0 w-full max-h-48 overflow-y-auto p-4 space-y-2 pointer-events-auto">
+                    <!-- Events appear here -->
+                </div>
+            </section>
+
+            <!-- Right: Actions -->
+            <aside class="lg:col-span-3 glass-panel p-4 flex flex-col gap-4 overflow-y-auto">
+                <h3 class="text-sm font-semibold text-slate-400 uppercase mb-2">Strategic Actions</h3>
+
+                <!-- Action 1: Identity -->
+                <button class="action-btn p-3 rounded-lg text-left group" onclick="game.performAction('identity')">
+                    <div class="flex items-center gap-3">
+                        <div class="bg-emerald-500/20 p-2 rounded text-emerald-400 text-xl">🆔</div>
+                        <div>
+                            <div class="font-bold text-sm">Unified Digital ID</div>
+                            <div class="text-xs text-slate-400">Cost: $20M</div>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-2 group-hover:text-slate-300">Secure recognition for seamless travel & services.</p>
+                </button>
+
+                <!-- Action 2: Payments -->
+                <button class="action-btn p-3 rounded-lg text-left group" onclick="game.performAction('payments')">
+                    <div class="flex items-center gap-3">
+                        <div class="bg-yellow-500/20 p-2 rounded text-yellow-400 text-xl">💸</div>
+                        <div>
+                            <div class="font-bold text-sm">Frictionless Payments</div>
+                            <div class="text-xs text-slate-400">Cost: $35M</div>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-2 group-hover:text-slate-300">Enable easy continental money transfer.</p>
+                </button>
+
+                <!-- Action 3: Gov Services -->
+                <button class="action-btn p-3 rounded-lg text-left group" onclick="game.performAction('gov')">
+                    <div class="flex items-center gap-3">
+                        <div class="bg-purple-500/20 p-2 rounded text-purple-400 text-xl">🏛️</div>
+                        <div>
+                            <div class="font-bold text-sm">Interoperable Gov</div>
+                            <div class="text-xs text-slate-400">Cost: $50M</div>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-2 group-hover:text-slate-300">Share data policies & scale digital solutions.</p>
+                </button>
+
+                <!-- Action 4: Infrastructure -->
+                <button class="action-btn p-3 rounded-lg text-left group" onclick="game.performAction('infra')">
+                    <div class="flex items-center gap-3">
+                        <div class="bg-blue-500/20 p-2 rounded text-blue-400 text-xl">📡</div>
+                        <div>
+                            <div class="font-bold text-sm">Expand Connectivity</div>
+                            <div class="text-xs text-slate-400">Cost: $15M</div>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-2 group-hover:text-slate-300">Build the tangible digital bridge.</p>
+                </button>
+
+                <div class="mt-auto p-2 bg-blue-900/20 rounded border border-blue-500/30">
+                    <h4 class="text-xs font-bold text-blue-300 mb-1">IMPACT TRACKER</h4>
+                    <p class="text-[10px] text-slate-400">"Shift from aspirational talk to practical implementation."</p>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Start/End Overlay -->
+    <div id="overlay" class="fixed inset-0 z-50 bg-slate-900/95 flex items-center justify-center p-4">
+        <div class="max-w-lg w-full bg-slate-800 p-8 rounded-2xl border border-slate-700 shadow-2xl text-center">
+            <div class="text-6xl mb-4">🌍</div>
+            <h1 class="text-3xl font-bold text-white mb-2 font-orbitron">THE QUIET REVOLUTION</h1>
+            <p class="text-slate-400 mb-6">
+                The year is 2024. Africa is fragmented into 54 digital markets. 
+                Your mission: Build the <strong>Single Digital Market</strong> by 2030.
+            </p>
+            <ul class="text-left text-sm text-slate-300 space-y-2 mb-8 bg-slate-900 p-4 rounded border border-slate-700">
+                <li class="flex items-center gap-2">✅ <strong>Unify Identity:</strong> Secure recognition for all citizens.</li>
+                <li class="flex items-center gap-2">✅ <strong>Connect Payments:</strong> Boost local transactions.</li>
+                <li class="flex items-center gap-2">✅ <strong>Harmonize Gov:</strong> Create digital sovereignty.</li>
+            </ul>
+            <button onclick="game.start()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-6 rounded-lg transition-colors">
+                INITIATE TRANSFORMATION
+            </button>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * VISUALIZATION ENGINE (Canvas)
+         * Renders the "54 Fragmented Markets" connecting into one.
+         */
+        const canvas = document.getElementById('networkCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        let nodes = [];
+        const NODE_COUNT = 54; // 54 African nations
+
+        function resize() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Node {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.connected = false;
+                this.type = 'fragmented'; // fragmented, connected, unified
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Bounce off edges
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+
+            draw(connectionDistance) {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.type === 'unified' ? 5 : 3, 0, Math.PI * 2);
+                
+                if (this.type === 'unified') {
+                    ctx.fillStyle = '#10b981'; // Green
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = '#10b981';
+                } else if (this.type === 'connected') {
+                    ctx.fillStyle = '#0ea5e9'; // Blue
+                    ctx.shadowBlur = 5;
+                    ctx.shadowColor = '#0ea5e9';
+                } else {
+                    ctx.fillStyle = '#64748b'; // Grey
+                    ctx.shadowBlur = 0;
+                }
+                
+                ctx.fill();
+                ctx.shadowBlur = 0; // Reset
+            }
+        }
+
+        function initNodes() {
+            nodes = [];
+            for(let i=0; i<NODE_COUNT; i++) {
+                nodes.push(new Node());
+            }
+        }
+
+        function drawNetwork(connectivityLevel) {
+            ctx.clearRect(0, 0, width, height);
+            
+            // Draw connections
+            ctx.lineWidth = 1;
+            const maxDist = 100 + (connectivityLevel * 2); // Connectivity increases reach
+
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x;
+                    const dy = nodes[i].y - nodes[j].y;
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+
+                    if (dist < maxDist) {
+                        const opacity = 1 - (dist / maxDist);
+                        ctx.beginPath();
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        
+                        if (nodes[i].type === 'unified' && nodes[j].type === 'unified') {
+                            ctx.strokeStyle = `rgba(16, 185, 129, ${opacity})`; // Green line
+                        } else {
+                            ctx.strokeStyle = `rgba(56, 189, 248, ${opacity * 0.3})`; // Faint blue
+                        }
+                        ctx.stroke();
+                    }
+                }
+                nodes[i].update();
+                nodes[i].draw();
+            }
+            requestAnimationFrame(() => drawNetwork(game ? game.stats.infra : 0));
+        }
+
+        /**
+         * GAME LOGIC
+         */
+        const game = {
+            active: false,
+            year: 2024,
+            month: 1,
+            budget: 100, // Millions
+            bandwidth: 10,
+            
+            // Core Stats (0-100)
+            stats: {
+                identity: 0,
+                payments: 0,
+                gov: 0,
+                infra: 10 // Starts low
+            },
+
+            timer: null,
+
+            start: function() {
+                document.getElementById('overlay').style.display = 'none';
+                this.active = true;
+                initNodes();
+                drawNetwork(this.stats.infra);
+                this.gameLoop();
+            },
+
+            gameLoop: function() {
+                this.timer = setInterval(() => {
+                    if (!this.active) return;
+
+                    // Advance Time
+                    this.month++;
+                    if (this.month > 12) {
+                        this.month = 1;
+                        this.year++;
+                        this.annualBudget();
+                    }
+
+                    // Passive Resource Gen
+                    this.budget += 0.5; 
+
+                    // Update UI
+                    this.updateUI();
+
+                    // Check Win/Loss
+                    this.checkEndConditions();
+
+                }, 500); // 1 tick = 1 month = 500ms
+            },
+
+            annualBudget: function() {
+                this.log(`📅 Year ${this.year}: Annual budget allocation received.`);
+                this.budget += 50; // Yearly funding
+                
+                // Random Events
+                const events = [
+                    { msg: "Global Tech Companies invest in local startups!", effect: () => { this.budget += 30; this.stats.infra += 5; } },
+                    { msg: "Policy fragmentation slows progress.", effect: () => { this.stats.gov = Math.max(0, this.stats.gov - 5); } },
+                    { msg: "New subsea cable lands! Bandwidth up.", effect: () => { this.bandwidth += 10; this.stats.infra += 10; } },
+                    { msg: "Cybersecurity initiative launched.", effect: () => { this.stats.identity += 5; } }
+                ];
+                
+                if (Math.random() > 0.5) {
+                    const evt = events[Math.floor(Math.random() * events.length)];
+                    this.log(`📢 EVENT: ${evt.msg}`);
+                    evt.effect();
+                }
+            },
+
+            performAction: function(type) {
+                if (!this.active) return;
+
+                let cost = 0;
+                let success = false;
+
+                switch(type) {
+                    case 'identity':
+                        cost = 20;
+                        if (this.budget >= cost) {
+                            this.budget -= cost;
+                            this.stats.identity += 15;
+                            this.log("🆔 Digital ID rolled out to 3 new regions.");
+                            success = true;
+                        }
+                        break;
+                    case 'payments':
+                        cost = 35;
+                        if (this.budget >= cost) {
+                            this.budget -= cost;
+                            this.stats.payments += 20;
+                            this.log("💸 Cross-border payment gateway established.");
+                            success = true;
+                        }
+                        break;
+                    case 'gov':
+                        cost = 50;
+                        if (this.budget >= cost) {
+                            this.budget -= cost;
+                            this.stats.gov += 25;
+                            this.log("🏛️ Government data policies harmonized.");
+                            success = true;
+                        }
+                        break;
+                    case 'infra':
+                        cost = 15;
+                        if (this.budget >= cost) {
+                            this.budget -= cost;
+                            this.stats.infra += 10;
+                            this.bandwidth += 5;
+                            this.log("📡 New fiber optic links connected.");
+                            success = true;
+                        }
+                        break;
+                }
+
+                if (!success) {
+                    this.log("⚠️ Insufficient Funds!");
+                } else {
+                    // Update Node Visuals based on progress
+                    this.updateNodeVisuals();
+                }
+                this.updateUI();
+            },
+
+            updateNodeVisuals: function() {
+                // Determine how many nodes should be "Unified" based on average score
+                const avgScore = (this.stats.identity + this.stats.payments + this.stats.gov) / 3;
+                const unifiedCount = Math.floor((avgScore / 100) * NODE_COUNT);
+                
+                // Determine how many are just "Connected" (Infra)
+                const connectedCount = Math.floor((this.stats.infra / 100) * NODE_COUNT);
+
+                nodes.forEach((node, index) => {
+                    if (index < unifiedCount) {
+                        node.type = 'unified';
+                    } else if (index < connectedCount) {
+                        node.type = 'connected';
+                    } else {
+                        node.type = 'fragmented';
+                    }
+                });
+            },
+
+            updateUI: function() {
+                // Clamp stats
+                this.stats.identity = Math.min(100, this.stats.identity);
+                this.stats.payments = Math.min(100, this.stats.payments);
+                this.stats.gov = Math.min(100, this.stats.gov);
+                this.stats.infra = Math.min(100, this.stats.infra);
+
+                // Calculate Total Unification
+                const unification = Math.floor((this.stats.identity + this.stats.payments + this.stats.gov + this.stats.infra) / 4);
+
+                // DOM Updates
+                document.getElementById('yearDisplay').innerText = this.year;
+                document.getElementById('budgetDisplay').innerText = `$${Math.floor(this.budget)}M`;
+                document.getElementById('bandwidthDisplay').innerText = `${this.bandwidth} TB/s`;
+                
+                document.getElementById('unificationScore').innerText = `${unification}%`;
+                document.getElementById('unificationBar').style.width = `${unification}%`;
+
+                document.getElementById('securityVal').innerText = `${this.stats.identity}%`;
+                document.getElementById('securityBar').style.width = `${this.stats.identity}%`;
+
+                document.getElementById('commerceVal').innerText = `${this.stats.payments}%`;
+                document.getElementById('commerceBar').style.width = `${this.stats.payments}%`;
+
+                document.getElementById('govVal').innerText = `${this.stats.gov}%`;
+                document.getElementById('govBar').style.width = `${this.stats.gov}%`;
+            },
+
+            log: function(msg) {
+                const logEl = document.getElementById('eventLog');
+                const entry = document.createElement('div');
+                entry.className = 'bg-slate-800/80 p-2 rounded text-xs text-slate-200 border-l-2 border-blue-500 notification';
+                entry.innerText = msg;
+                logEl.prepend(entry);
+                // Keep log short
+                if (logEl.children.length > 5) logEl.lastChild.remove();
+            },
+
+            checkEndConditions: function() {
+                const unification = (this.stats.identity + this.stats.payments + this.stats.gov + this.stats.infra) / 4;
+
+                if (unification >= 100) {
+                    this.endGame(true);
+                } else if (this.year >= 2030 && this.month === 12) {
+                    this.endGame(false);
+                }
+            },
+
+            endGame: function(won) {
+                this.active = false;
+                clearInterval(this.timer);
+                
+                const overlay = document.getElementById('overlay');
+                overlay.style.display = 'flex';
+                
+                if (won) {
+                    overlay.innerHTML = `
+                        <div class="max-w-lg w-full bg-slate-800 p-8 rounded-2xl border border-emerald-500 shadow-2xl text-center">
+                            <div class="text-6xl mb-4">🚀</div>
+                            <h1 class="text-3xl font-bold text-emerald-400 mb-2">VISION ACHIEVED!</h1>
+                            <p class="text-slate-300 mb-6">
+                                You have successfully built a Unified Digital Africa before 2030.
+                                <br>Entrepreneurs are empowered, and digital sovereignty is secured.
+                            </p>
+                            <button onclick="location.reload()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-6 rounded-lg">
+                                Play Again
+                            </button>
+                        </div>
+                    `;
+                } else {
+                    overlay.innerHTML = `
+                        <div class="max-w-lg w-full bg-slate-800 p-8 rounded-2xl border border-red-500 shadow-2xl text-center">
+                            <div class="text-6xl mb-4">⏳</div>
+                            <h1 class="text-3xl font-bold text-red-400 mb-2">TIME'S UP</h1>
+                            <p class="text-slate-300 mb-6">
+                                The year is 2030, but the market remains fragmented.
+                                <br>Final Unification Score: ${Math.floor((this.stats.identity + this.stats.payments + this.stats.gov + this.stats.infra) / 4)}%
+                            </p>
+                            <button onclick="location.reload()" class="bg-slate-600 hover:bg-slate-500 text-white font-bold py-3 px-6 rounded-lg">
+                                Try Again
+                            </button>
+                        </div>
+                    `;
+                }
+            }
+        };
+
+        // Initialize Canvas
+        initNodes();
+        drawNetwork(0);
+
+    </script>
+</body>
+</html>

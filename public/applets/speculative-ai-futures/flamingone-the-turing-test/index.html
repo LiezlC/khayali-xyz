@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLAMINGONE: The Turing Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap');
+
+        :root {
+            --flamingo-pink: #ff8da1;
+            --flamingo-dark: #e05a75;
+            --bg-cream: #f9f7f2;
+            --text-dark: #1a1a1a;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* The CSS Flamingo Art */
+        .flamingo-container {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            margin: 0 auto;
+            transition: transform 0.5s ease;
+            cursor: pointer;
+        }
+
+        .flamingo-container:hover {
+            transform: scale(1.02);
+        }
+
+        .flamingo-body {
+            position: absolute;
+            top: 100px;
+            left: 50px;
+            width: 200px;
+            height: 180px;
+            background: radial-gradient(circle at 30% 30%, var(--flamingo-pink), var(--flamingo-dark));
+            border-radius: 50% 50% 45% 45%;
+            box-shadow: 0 10px 30px rgba(224, 90, 117, 0.3);
+            z-index: 2;
+            animation: breathe 4s infinite ease-in-out;
+        }
+
+        /* Feathers texture using shadows and pseudo elements */
+        .flamingo-body::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 160px;
+            height: 140px;
+            border-radius: 50%;
+            background: transparent;
+            box-shadow: 
+                inset 10px 10px 0 rgba(255,255,255,0.1),
+                inset -10px -20px 0 rgba(0,0,0,0.05);
+        }
+
+        .feather {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50% 0 50% 0;
+        }
+
+        .neck-curve {
+            position: absolute;
+            top: 110px;
+            left: 40px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border-left: 25px solid var(--flamingo-dark);
+            border-top: 25px solid var(--flamingo-dark);
+            border-right: 25px solid transparent;
+            border-bottom: 25px solid transparent;
+            transform: rotate(-45deg);
+            z-index: 3;
+        }
+
+        .leg {
+            position: absolute;
+            top: 260px;
+            left: 140px;
+            width: 6px;
+            height: 140px;
+            background-color: #555;
+            z-index: 1;
+        }
+
+        .leg-joint {
+            position: absolute;
+            top: 320px;
+            left: 136px;
+            width: 14px;
+            height: 14px;
+            background-color: #444;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        /* AI Glitch Effect */
+        .glitch-art {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            background: conic-gradient(from 0deg, #ff0000, #00ff00, #0000ff, #ff0000);
+            filter: blur(10px);
+            opacity: 0.8;
+            border-radius: 20px;
+            animation: glitch 0.5s infinite;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0,0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(2px, -2px); }
+            60% { transform: translate(-2px, -2px); }
+            80% { transform: translate(2px, 2px); }
+            100% { transform: translate(0,0); }
+        }
+
+        /* UI Elements */
+        .btn {
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .hidden-section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .quote-card {
+            border-left: 4px solid var(--flamingo-pink);
+            background: white;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        /* Confetti */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--flamingo-pink);
+            animation: fall 3s linear forwards;
+        }
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(720deg); }
+        }
+
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="p-6 flex justify-between items-center border-b border-gray-200 bg-white sticky top-0 z-50">
+        <div class="text-2xl font-bold serif tracking-tighter">FLAMING<span class="text-pink-500">ONE</span></div>
+        <div class="text-sm text-gray-500 hidden md:block">The 1839 Awards &middot; AI Category</div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow flex flex-col items-center justify-center p-4 relative">
+        
+        <!-- PHASE 1: THE JUDGING GAME -->
+        <div id="phase-1" class="text-center max-w-2xl w-full fade-in">
+            <h1 class="text-4xl md:text-6xl mb-4 serif font-bold text-gray-900">Real or AI?</h1>
+            <p class="text-lg text-gray-600 mb-12">You are the Jury. Identify the AI-generated artwork.</p>
+            
+            <div class="flex flex-col md:flex-row gap-8 items-center justify-center mb-12">
+                <!-- Option A: The Geometric Glitch -->
+                <div class="group cursor-pointer" onclick="makeChoice('AI')">
+                    <div class="w-64 h-64 bg-gray-900 rounded-xl overflow-hidden shadow-xl relative flex items-center justify-center transition hover:ring-4 ring-pink-300">
+                        <div class="glitch-art"></div>
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black bg-opacity-50 transition">
+                            <span class="text-white font-bold text-xl">Select Image A</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-2xl font-serif italic text-gray-400">vs</div>
+
+                <!-- Option B: The CSS Flamingo -->
+                <div class="group cursor-pointer" onclick="makeChoice('REAL')">
+                    <div class="w-64 h-64 bg-blue-50 rounded-xl overflow-hidden shadow-xl relative flex items-center justify-center transition hover:ring-4 ring-pink-300">
+                        <!-- CSS Flamingo Mini -->
+                        <div class="relative w-full h-full transform scale-75 translate-y-8">
+                            <div class="flamingo-body" style="top:40px; left:30px; width:140px; height:130px;"></div>
+                            <div class="neck-curve" style="top:50px; left:20px; width:60px; height:60px; border-width: 18px;"></div>
+                            <div class="leg" style="top:160px; left:95px; height:100px;"></div>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black bg-opacity-50 transition">
+                            <span class="text-white font-bold text-xl">Select Image B</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHASE 2: THE REVEAL -->
+        <div id="phase-2" class="hidden-section max-w-3xl w-full">
+            <div class="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100">
+                <div class="p-8 md:p-12 text-center">
+                    <div id="result-badge" class="inline-block px-4 py-1 rounded-full text-sm font-bold tracking-wide mb-6"></div>
+                    
+                    <h2 class="text-3xl md:text-5xl serif font-bold mb-6 text-gray-900">
+                        "The Impossible Happened."
+                    </h2>
+                    
+                    <div class="flex justify-center mb-8">
+                        <!-- Full CSS Flamingo -->
+                        <div class="flamingo-container">
+                            <div class="flamingo-body"></div>
+                            <div class="neck-curve"></div>
+                            <div class="leg"></div>
+                            <div class="leg-joint"></div>
+                            <!-- Interactive Hotspots -->
+                            <div class="absolute top-28 left-16 w-40 h-40 z-10 cursor-help" title="Anatomical Anomaly?" onclick="showHint('Headless?')"></div>
+                        </div>
+                    </div>
+
+                    <p class="text-xl text-gray-700 leading-relaxed mb-8">
+                        You selected the flamingo. It looks surreal, headless, almost <em>too</em> perfect in its weirdness. 
+                        It won the <strong>AI Art Category</strong> at the 1839 Awards.
+                    </p>
+                    
+                    <div class="quote-card text-left mb-8">
+                        <p class="text-lg serif italic text-gray-800 mb-4">
+                            "I deliberately chose a picture that is so surreal... it could easily be attributed to AI being at play."
+                        </p>
+                        <p class="text-sm font-bold text-pink-600 uppercase tracking-widest">— Miles Astray</p>
+                    </div>
+
+                    <button onclick="revealTruth()" class="btn bg-black text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-gray-800">
+                        Reveal The Truth
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHASE 3: THE STORY -->
+        <div id="phase-3" class="hidden-section max-w-4xl w-full py-12">
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-24">
+                <div class="order-2 md:order-1">
+                    <h3 class="text-4xl serif font-bold mb-4">It's a Real Photo.</h3>
+                    <p class="text-gray-600 text-lg mb-6">
+                        Photographer <strong>Miles Astray</strong> took this photo in Aruba in 2022. A flamingo scratching its belly, hiding its head.
+                    </p>
+                    <p class="text-gray-600 text-lg mb-6">
+                        He entered it into a major AI art competition to prove a point: <span class="text-pink-600 font-bold">Nature can still beat the machine.</span>
+                    </p>
+                    <div class="flex gap-4 mt-8">
+                        <div class="text-center">
+                            <div class="text-3xl mb-2">🥉</div>
+                            <div class="text-xs font-bold uppercase tracking-wide text-gray-500">Jury Award</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl mb-2">🏆</div>
+                            <div class="text-xs font-bold uppercase tracking-wide text-gray-500">People's Vote</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2 flex justify-center">
+                    <!-- Abstract representation of Miles Astray -->
+                    <div class="w-64 h-80 bg-gray-200 rounded-lg relative overflow-hidden">
+                        <div class="absolute bottom-0 left-0 right-0 h-1/3 bg-gray-800"></div> <!-- Jacket -->
+                        <div class="absolute top-12 left-1/2 transform -translate-x-1/2 w-32 h-40 bg-gray-300 rounded-full"></div> <!-- Face shape -->
+                        <div class="absolute top-10 left-1/2 transform -translate-x-1/2 w-36 h-12 bg-gray-700 rounded-t-full"></div> <!-- Hair -->
+                        <div class="absolute top-28 left-1/2 transform -translate-x-1/2 flex gap-4">
+                            <div class="w-2 h-2 bg-gray-800 rounded-full"></div>
+                            <div class="w-2 h-2 bg-gray-800 rounded-full"></div>
+                        </div> <!-- Eyes -->
+                        <div class="absolute bottom-4 right-4 text-6xl opacity-20">📸</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-900 text-white rounded-3xl p-8 md:p-16 text-center relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500"></div>
+                
+                <h3 class="text-3xl md:text-5xl serif font-bold mb-8">"Human-made content has not lost its relevance."</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left mt-12">
+                    <div class="bg-gray-800 p-6 rounded-xl">
+                        <div class="text-pink-400 text-4xl mb-4 font-serif">1.</div>
+                        <p class="text-gray-300">The art world was in an AI cold war. Artists feared their skills were being devalued by code.</p>
+                    </div>
+                    <div class="bg-gray-800 p-6 rounded-xl">
+                        <div class="text-pink-400 text-4xl mb-4 font-serif">2.</div>
+                        <p class="text-gray-300">Miles submitted "FLAMINGONE" as a Trojan Horse. It fooled experts from The New York Times and Christie's.</p>
+                    </div>
+                    <div class="bg-gray-800 p-6 rounded-xl">
+                        <div class="text-pink-400 text-4xl mb-4 font-serif">3.</div>
+                        <p class="text-gray-300">He revealed the truth. He was disqualified, but the message went viral globally.</p>
+                    </div>
+                </div>
+
+                <div class="mt-12 pt-12 border-t border-gray-800">
+                    <p class="text-xl serif italic">"This made my day more than any of the press articles." — Miles Astray</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-24 pb-12">
+                <h2 class="text-2xl font-bold mb-4">Join the Conversation</h2>
+                <p class="mb-8 text-gray-600">Does reality still have a place in an artificial world?</p>
+                <button onclick="location.reload()" class="text-pink-600 font-bold hover:underline">Replay the Experience</button>
+            </div>
+
+        </div>
+
+    </main>
+
+    <script>
+        function makeChoice(choice) {
+            const phase1 = document.getElementById('phase-1');
+            const phase2 = document.getElementById('phase-2');
+            const badge = document.getElementById('result-badge');
+
+            // Fade out phase 1
+            phase1.style.opacity = '0';
+            
+            setTimeout(() => {
+                phase1.style.display = 'none';
+                phase2.style.display = 'block';
+                
+                // Trigger reflow
+                void phase2.offsetWidth;
+                
+                phase2.style.opacity = '1';
+                phase2.classList.add('fade-in');
+
+                if (choice === 'REAL') {
+                    badge.textContent = "YOU GUESSED: AI (INCORRECT)";
+                    badge.className = "inline-block px-4 py-1 rounded-full text-sm font-bold tracking-wide mb-6 bg-red-100 text-red-600";
+                } else {
+                    badge.textContent = "YOU GUESSED: AI (CORRECT)";
+                    badge.className = "inline-block px-4 py-1 rounded-full text-sm font-bold tracking-wide mb-6 bg-green-100 text-green-600";
+                }
+            }, 500);
+        }
+
+        function showHint(text) {
+            alert(text + " - It's just a flamingo scratching its belly!");
+        }
+
+        function revealTruth() {
+            const phase2 = document.getElementById('phase-2');
+            const phase3 = document.getElementById('phase-3');
+
+            // Scroll to phase 3 smoothly
+            phase3.style.display = 'block';
+            setTimeout(() => {
+                phase3.style.opacity = '1';
+                phase3.classList.add('fade-in');
+                phase3.scrollIntoView({ behavior: 'smooth' });
+                createConfetti();
+            }, 100);
+        }
+
+        function createConfetti() {
+            for(let i=0; i<50; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                confetti.style.backgroundColor = ['#ff8da1', '#e05a75', '#000', '#fff'][Math.floor(Math.random()*4)];
+                document.body.appendChild(confetti);
+                
+                // Cleanup
+                setTimeout(() => confetti.remove(), 5000);
+            }
+        }
+    </script>
+</body>
+</html>

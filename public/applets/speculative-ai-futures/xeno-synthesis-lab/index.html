@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xeno-Synthesis Lab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+        :root {
+            --neon-cyan: #00f3ff;
+            --neon-pink: #ff00ff;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --panel-bg: rgba(10, 20, 30, 0.6);
+        }
+
+        body {
+            background: radial-gradient(circle at center, #e0f7fa 0%, #cfd8dc 100%);
+            font-family: 'Share Tech Mono', monospace;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            color: #333;
+        }
+
+        /* Lab Environment Background Elements */
+        .lab-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: 
+                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            perspective: 1000px;
+        }
+
+        .ceiling-light {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 20px;
+            background: #fff;
+            box-shadow: 0 0 50px var(--neon-cyan);
+            border-radius: 0 0 20px 20px;
+        }
+
+        /* Main Console Container */
+        .console-container {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr 1fr;
+            gap: 20px;
+            padding: 40px;
+            height: 85vh;
+            max-width: 1600px;
+            margin: auto;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Panels */
+        .panel {
+            background: var(--panel-bg);
+            border: 2px solid var(--neon-cyan);
+            border-radius: 10px;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.2), inset 0 0 20px rgba(0, 243, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        .panel-header {
+            background: rgba(0, 243, 255, 0.1);
+            padding: 10px;
+            text-align: center;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            color: var(--neon-cyan);
+            border-bottom: 1px solid var(--neon-cyan);
+            text-transform: uppercase;
+        }
+
+        /* Left Panel: Specimen */
+        #specimen-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle, #ddd 0%, #aaa 100%);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .specimen-egg {
+            width: 200px;
+            height: 280px;
+            background: radial-gradient(circle at 30% 30%, #555, #000);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: relative;
+            box-shadow: 0 20px 30px rgba(0,0,0,0.5);
+            transition: transform 0.5s ease;
+            overflow: hidden;
+        }
+        
+        .specimen-egg::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.05) 10px, rgba(255,255,255,0.05) 11px);
+            opacity: 0.5;
+        }
+
+        .specimen-egg:hover {
+            transform: scale(1.05);
+        }
+
+        .specimen-cube {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #333, #000);
+            border: 1px solid #555;
+            box-shadow: 0 20px 30px rgba(0,0,0,0.5);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .specimen-pyramid {
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 200px solid #222;
+            position: relative;
+            filter: drop-shadow(0 20px 10px rgba(0,0,0,0.5));
+        }
+
+        /* Center Panel: Controls */
+        #controls-ui {
+            padding: 20px;
+            color: var(--neon-cyan);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            height: 100%;
+        }
+
+        .data-stream {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            height: 60px;
+            overflow: hidden;
+            margin-bottom: 10px;
+            border-left: 2px solid var(--neon-cyan);
+            padding-left: 10px;
+        }
+
+        .slider-group {
+            margin-bottom: 15px;
+        }
+        
+        .slider-group label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 4px;
+            background: rgba(0, 243, 255, 0.3);
+            outline: none;
+            border-radius: 2px;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 15px;
+            height: 15px;
+            background: var(--neon-cyan);
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--neon-cyan);
+        }
+
+        #waveform-canvas {
+            width: 100%;
+            height: 120px;
+            background: rgba(0, 20, 40, 0.5);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            margin-top: auto;
+        }
+
+        .synthesize-btn {
+            background: transparent;
+            border: 2px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            padding: 15px;
+            font-family: inherit;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transition: all 0.2s;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .synthesize-btn:hover {
+            background: var(--neon-cyan);
+            color: #000;
+            box-shadow: 0 0 20px var(--neon-cyan);
+        }
+
+        .synthesize-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Right Panel: Output */
+        #output-container {
+            flex: 1;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        #art-canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Overlay UI */
+        .overlay-text {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.8);
+            text-shadow: 0 0 10px var(--neon-cyan);
+            font-size: 0.8rem;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .console-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: 300px auto 300px;
+                height: auto;
+                overflow-y: auto;
+            }
+            body {
+                overflow-y: auto;
+            }
+        }
+        
+        /* Floating particles for lab effect */
+        .particle {
+            position: absolute;
+            background: var(--neon-cyan);
+            border-radius: 50%;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lab-bg"></div>
+    <div class="ceiling-light"></div>
+
+    <div class="console-container">
+        
+        <!-- PANEL 1: INPUT -->
+        <div class="panel" id="panel-left">
+            <div class="panel-header">01 // Specimen</div>
+            <div id="specimen-container" onclick="app.cycleSpecimen()">
+                <div id="specimen-visual" class="specimen-egg"></div>
+            </div>
+            <div style="padding: 10px; background: rgba(0,0,0,0.5); color: #fff; text-align: center; font-size: 0.8rem;">
+                CLICK TO MUTATE SOURCE
+            </div>
+        </div>
+
+        <!-- PANEL 2: CONTROLS -->
+        <div class="panel" id="panel-center">
+            <div class="panel-header">02 // Analysis</div>
+            <div id="controls-ui">
+                <div class="data-stream" id="data-stream">
+                    INITIALIZING SYSTEM...<br>
+                    BIO-SIGNATURE DETECTED...<br>
+                    AWAITING INPUT...
+                </div>
+
+                <div class="slider-group">
+                    <label>FREQUENCY <span>[<span id="val-freq">50</span>]</span></label>
+                    <input type="range" id="input-freq" min="1" max="100" value="50">
+                </div>
+
+                <div class="slider-group">
+                    <label>RESONANCE <span>[<span id="val-res">50</span>]</span></label>
+                    <input type="range" id="input-res" min="1" max="100" value="50">
+                </div>
+
+                <div class="slider-group">
+                    <label>CHROMATIC SHIFT <span>[<span id="val-chroma">50</span>]</span></label>
+                    <input type="range" id="input-chroma" min="0" max="360" value="180">
+                </div>
+
+                <div class="slider-group">
+                    <label>ENTROPY <span>[<span id="val-entropy">10</span>]</span></label>
+                    <input type="range" id="input-entropy" min="1" max="50" value="10">
+                </div>
+
+                <canvas id="waveform-canvas"></canvas>
+
+                <button class="synthesize-btn" onclick="app.synthesize()">
+                    INITIATE SYNTHESIS
+                </button>
+            </div>
+        </div>
+
+        <!-- PANEL 3: OUTPUT -->
+        <div class="panel" id="panel-right">
+            <div class="panel-header">03 // Manifestation</div>
+            <div id="output-container">
+                <canvas id="art-canvas"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="overlay-text">
+        SYSTEM READY // PRESS CTRL+Z TO UNDO // CTRL+Y TO REDO
+    </div>
+
+    <script>
+        class LabApp {
+            constructor() {
+                // State
+                this.state = {
+                    specimenType: 'egg', // egg, cube, pyramid
+                    frequency: 50,
+                    resonance: 50,
+                    chroma: 180,
+                    entropy: 10,
+                    seed: Math.random()
+                };
+
+                this.history = [];
+                this.historyIndex = -1;
+                this.isProcessing = false;
+
+                // DOM Elements
+                this.specimenVisual = document.getElementById('specimen-visual');
+                this.waveCanvas = document.getElementById('waveform-canvas');
+                this.artCanvas = document.getElementById('art-canvas');
+                this.dataStream = document.getElementById('data-stream');
+                
+                // Contexts
+                this.waveCtx = this.waveCanvas.getContext('2d');
+                this.artCtx = this.artCanvas.getContext('2d');
+
+                // Resize Canvases
+                this.resizeCanvases();
+                window.addEventListener('resize', () => this.resizeCanvases());
+
+                // Bind Inputs
+                this.bindInputs();
+
+                // Initial Draw
+                this.saveState(true); // Save initial state
+                this.renderAll();
+                this.startDataStream();
+                this.animateWaveform();
+            }
+
+            resizeCanvases() {
+                // Waveform
+                const waveRect = this.waveCanvas.parentElement.getBoundingClientRect();
+                this.waveCanvas.width = waveRect.width - 40; // padding
+                this.waveCanvas.height = 120;
+
+                // Art
+                const artRect = document.getElementById('output-container').getBoundingClientRect();
+                this.artCanvas.width = artRect.width;
+                this.artCanvas.height = artRect.height;
+                
+                this.renderAll();
+            }
+
+            bindInputs() {
+                const inputs = ['freq', 'res', 'chroma', 'entropy'];
+                inputs.forEach(key => {
+                    const el = document.getElementById(`input-${key}`);
+                    el.addEventListener('input', (e) => {
+                        this.state[key === 'freq' ? 'frequency' : key === 'res' ? 'resonance' : key] = parseInt(e.target.value);
+                        document.getElementById(`val-${key}`).innerText = e.target.value;
+                    });
+                    // Save state on change end
+                    el.addEventListener('change', () => {
+                        this.saveState();
+                    });
+                });
+
+                // Keyboard Shortcuts
+                window.addEventListener('keydown', (e) => {
+                    if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
+                        e.preventDefault();
+                        this.undo();
+                    }
+                    if ((e.ctrlKey || e.metaKey) && (e.key === 'y' || (e.shiftKey && e.key === 'Z'))) {
+                        e.preventDefault();
+                        this.redo();
+                    }
+                });
+
+                // Message Listener
+                window.addEventListener('message', (e) => {
+                    if (e.data.type === 'undo') this.undo();
+                    if (e.data.type === 'redo') this.redo();
+                });
+            }
+
+            cycleSpecimen() {
+                const types = ['egg', 'cube', 'pyramid'];
+                const currentIdx = types.indexOf(this.state.specimenType);
+                this.state.specimenType = types[(currentIdx + 1) % types.length];
+                this.updateSpecimenVisual();
+                this.saveState();
+            }
+
+            updateSpecimenVisual() {
+                this.specimenVisual.className = '';
+                this.specimenVisual.classList.add(`specimen-${this.state.specimenType}`);
+                
+                // Add flash effect
+                const container = document.getElementById('specimen-container');
+                container.style.filter = 'brightness(1.5)';
+                setTimeout(() => container.style.filter = 'brightness(1)', 200);
+            }
+
+            renderAll() {
+                this.updateSpecimenVisual();
+                
+                // Update Inputs UI
+                document.getElementById('input-freq').value = this.state.frequency;
+                document.getElementById('val-freq').innerText = this.state.frequency;
+                
+                document.getElementById('input-res').value = this.state.resonance;
+                document.getElementById('val-res').innerText = this.state.resonance;
+
+                document.getElementById('input-chroma').value = this.state.chroma;
+                document.getElementById('val-chroma').innerText = this.state.chroma;
+
+                document.getElementById('input-entropy').value = this.state.entropy;
+                document.getElementById('val-entropy').innerText = this.state.entropy;
+
+                // Re-render Art based on current state
+                this.generateArt();
+            }
+
+            animateWaveform() {
+                const ctx = this.waveCtx;
+                const w = this.waveCanvas.width;
+                const h = this.waveCanvas.height;
+                let offset = 0;
+
+                const loop = () => {
+                    ctx.clearRect(0, 0, w, h);
+                    ctx.beginPath();
+                    ctx.strokeStyle = '#00f3ff';
+                    ctx.lineWidth = 2;
+
+                    const freq = this.state.frequency / 10;
+                    const amp = (this.state.resonance / 100) * (h / 2.5);
+
+                    for (let x = 0; x < w; x++) {
+                        const y = h / 2 + Math.sin((x + offset) * 0.05 * freq) * amp * Math.sin(x * 0.01);
+                        if (x === 0) ctx.moveTo(x, y);
+                        else ctx.lineTo(x, y);
+                    }
+                    ctx.stroke();
+                    
+                    // Add grid lines
+                    ctx.fillStyle = 'rgba(0, 243, 255, 0.1)';
+                    ctx.fillRect(0, 0, w, h);
+                    
+                    offset += 2;
+                    requestAnimationFrame(loop);
+                };
+                loop();
+            }
+
+            synthesize() {
+                // Visual feedback
+                const btn = document.querySelector('.synthesize-btn');
+                btn.innerText = "PROCESSING...";
+                this.isProcessing = true;
+                
+                // Log
+                this.logStream(`SYNTHESIS INITIATED: F${this.state.frequency}|R${this.state.resonance}`);
+
+                // Generate new seed for randomness
+                this.state.seed = Math.random();
+                
+                // "Process" time
+                setTimeout(() => {
+                    this.generateArt();
+                    btn.innerText = "INITIATE SYNTHESIS";
+                    this.isProcessing = false;
+                    this.logStream("MANIFESTATION COMPLETE.");
+                    this.saveState(); // Save the result
+                }, 500);
+            }
+
+            generateArt() {
+                const ctx = this.artCtx;
+                const w = this.artCanvas.width;
+                const h = this.artCanvas.height;
+                const cx = w / 2;
+                const cy = h / 2;
+
+                // Clear
+                ctx.fillStyle = '#000';
+                ctx.fillRect(0, 0, w, h);
+
+                // Setup based on state
+                const freq = this.state.frequency;
+                const res = this.state.resonance;
+                const chroma = this.state.chroma;
+                const entropy = this.state.entropy;
+                const type = this.state.specimenType;
+
+                // Math seed
+                let seed = this.state.seed * 1000;
+
+                ctx.save();
+                ctx.translate(cx, cy);
+
+                // Draw Logic
+                const particles = 500 + (res * 10);
+                const radiusBase = Math.min(w, h) * 0.35;
+
+                for (let i = 0; i < particles; i++) {
+                    const angle = (i / particles) * Math.PI * 2 * (freq / 10);
+                    
+                    // Shape modification
+                    let r = radiusBase;
+                    if (type === 'cube') {
+                        // Square-ish distribution
+                        r = radiusBase / Math.max(Math.abs(Math.cos(angle)), Math.abs(Math.sin(angle)));
+                        r *= 0.6;
+                    } else if (type === 'pyramid') {
+                        // Triangle-ish
+                        r = radiusBase + Math.sin(angle * 3) * 50;
+                    } else {
+                        // Egg/Circle
+                        r = radiusBase + Math.sin(angle * 5) * 20;
+                    }
+
+                    // Noise/Entropy
+                    const noise = Math.sin(i * seed) * entropy * 5;
+                    r += noise;
+
+                    // Coordinates
+                    const x = Math.cos(angle) * r;
+                    const y = Math.sin(angle) * r;
+
+                    // Color
+                    const hue = (chroma + (i / particles) * 360 + (noise * 2)) % 360;
+                    ctx.fillStyle = `hsla(${hue}, 80%, 60%, 0.8)`;
+                    
+                    // Draw Particle
+                    ctx.beginPath();
+                    const pSize = (res / 20) * Math.random();
+                    ctx.arc(x, y, pSize, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Connect lines for "Web" look
+                    if (i % 10 === 0) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `hsla(${hue}, 50%, 50%, 0.1)`;
+                        ctx.moveTo(0, 0);
+                        ctx.lineTo(x, y);
+                        ctx.stroke();
+                    }
+                }
+                
+                // Center Glow
+                const gradient = ctx.createRadialGradient(0, 0, 10, 0, 0, radiusBase * 0.5);
+                gradient.addColorStop(0, '#fff');
+                gradient.addColorStop(0.2, `hsla(${chroma}, 100%, 50%, 0.5)`);
+                gradient.addColorStop(1, 'transparent');
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(0, 0, radiusBase, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.restore();
+            }
+
+            logStream(msg) {
+                const line = document.createElement('div');
+                line.innerText = `> ${msg}`;
+                this.dataStream.prepend(line);
+                if (this.dataStream.children.length > 5) {
+                    this.dataStream.lastChild.remove();
+                }
+            }
+
+            startDataStream() {
+                setInterval(() => {
+                    if (Math.random() > 0.7) {
+                        const codes = ['X-99', 'A-42', 'Z-01', 'B-12'];
+                        const code = codes[Math.floor(Math.random() * codes.length)];
+                        const val = Math.floor(Math.random() * 9999);
+                        this.logStream(`SYS_CHECK: ${code} // ${val}`);
+                    }
+                }, 2000);
+            }
+
+            // --- History System ---
+
+            saveState(isInitial = false) {
+                // Deep copy state
+                const stateSnapshot = JSON.parse(JSON.stringify(this.state));
+                
+                // If we are not at the end of history, slice it
+                if (this.historyIndex < this.history.length - 1) {
+                    this.history = this.history.slice(0, this.historyIndex + 1);
+                }
+
+                // Avoid duplicates if nothing changed
+                if (!isInitial && this.history.length > 0) {
+                    const lastState = JSON.stringify(this.history[this.history.length - 1]);
+                    if (lastState === JSON.stringify(stateSnapshot)) return;
+                }
+
+                this.history.push(stateSnapshot);
+                this.historyIndex++;
+            }
+
+            undo() {
+                if (this.historyIndex > 0) {
+                    this.historyIndex--;
+                    this.state = JSON.parse(JSON.stringify(this.history[this.historyIndex]));
+                    this.renderAll();
+                    this.logStream("ACTION UNDONE");
+                }
+            }
+
+            redo() {
+                if (this.historyIndex < this.history.length - 1) {
+                    this.historyIndex++;
+                    this.state = JSON.parse(JSON.stringify(this.history[this.historyIndex]));
+                    this.renderAll();
+                    this.logStream("ACTION REDONE");
+                }
+            }
+        }
+
+        // Initialize
+        const app = new LabApp();
+
+    </script>
+</body>
+</html>

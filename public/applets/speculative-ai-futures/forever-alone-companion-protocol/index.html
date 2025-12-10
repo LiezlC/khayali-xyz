@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forever Alone: Companion Protocol</title>
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-red: #ff0055;
+            --suit-red: #8a1c1c;
+            --silver: #e0e0e0;
+            --gold: #d4af37;
+            --bg-dark: #050510;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-dark);
+            background-image: 
+                linear-gradient(rgba(0, 243, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            font-family: 'Courier New', Courier, monospace;
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        /* Vignette & Scanlines */
+        body::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, transparent 40%, #000 100%);
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* UI Layer */
+        #ui-layer {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 20;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        header {
+            text-align: center;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin: 0;
+            letter-spacing: 5px;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: var(--neon-blue);
+            opacity: 0.8;
+        }
+
+        /* Stats Bar */
+        #stats-bar {
+            width: 300px;
+            margin: 10px auto;
+            background: #111;
+            border: 1px solid var(--neon-blue);
+            height: 20px;
+            position: relative;
+            pointer-events: auto;
+        }
+
+        #loneliness-meter {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--neon-red), #500);
+            transition: width 0.5s ease;
+        }
+
+        #stats-text {
+            position: absolute;
+            top: 0; left: 0; width: 100%;
+            text-align: center;
+            font-size: 12px;
+            line-height: 20px;
+            text-shadow: 1px 1px 0 #000;
+        }
+
+        /* Main Stage */
+        #stage {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            perspective: 1000px;
+            z-index: 5;
+        }
+
+        /* Characters */
+        .character {
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .character:hover {
+            transform: scale(1.05);
+        }
+
+        /* HERO (The User) */
+        #hero {
+            width: 140px;
+            height: 220px;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-head {
+            width: 70px;
+            height: 80px;
+            background: #222;
+            border-radius: 15px;
+            position: relative;
+            box-shadow: inset 0 0 10px #000;
+            z-index: 2;
+        }
+        
+        .hero-visor {
+            width: 60px;
+            height: 25px;
+            background: linear-gradient(to bottom, #fff, var(--neon-blue));
+            position: absolute;
+            top: 25px;
+            left: 5px;
+            border-radius: 5px;
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        .hero-body {
+            width: 120px;
+            height: 140px;
+            background: var(--suit-red);
+            border-radius: 20px 20px 0 0;
+            position: relative;
+            margin-top: -10px;
+            display: flex;
+            justify-content: center;
+            box-shadow: inset 0 0 20px #000;
+        }
+
+        .hero-chest-glow {
+            width: 40px;
+            height: 100px;
+            background: cyan;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 20px cyan, inset 0 0 10px white;
+            animation: pulse 3s infinite;
+        }
+
+        .hero-badge {
+            position: absolute;
+            top: 30px;
+            right: 15px;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            border: 2px solid #500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #500;
+            font-weight: bold;
+        }
+
+        /* SILVER ROBOT */
+        .robot-silver {
+            width: 160px;
+            height: 260px;
+            position: absolute;
+            opacity: 0;
+            transform: scale(0.8) translateY(50px);
+            transition: all 0.6s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .robot-silver.active {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        .silver-head {
+            width: 90px;
+            height: 120px;
+            background: linear-gradient(135deg, #fff, #777);
+            border-radius: 40px 40px 60px 60px;
+            position: relative;
+            box-shadow: inset -5px -5px 10px rgba(0,0,0,0.5);
+            z-index: 2;
+        }
+
+        .silver-face-plate {
+            width: 70px;
+            height: 90px;
+            background: #333;
+            margin: 15px auto;
+            border-radius: 30px 30px 50px 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .silver-eyes {
+            width: 100%;
+            height: 10px;
+            background: var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue);
+            position: absolute;
+            top: 40px;
+        }
+
+        .silver-body {
+            width: 140px;
+            height: 140px;
+            background: #555;
+            border-radius: 30px;
+            margin-top: -20px;
+            background: linear-gradient(to right, #444, #888, #444);
+        }
+
+        /* RED ROBOT */
+        .robot-red {
+            width: 120px;
+            height: 180px;
+            position: absolute;
+            opacity: 0;
+            transform: scale(0.8) translateY(50px);
+            transition: all 0.6s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .robot-red.active {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        .red-head {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #d4af37, #8a1c1c);
+            border-radius: 50%;
+            position: relative;
+            box-shadow: inset -2px -2px 10px rgba(0,0,0,0.5);
+            z-index: 2;
+        }
+
+        .red-eye {
+            width: 60px;
+            height: 20px;
+            background: #111;
+            position: absolute;
+            top: 30px;
+            left: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .red-eye-glow {
+            width: 20px;
+            height: 20px;
+            background: var(--neon-blue);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--neon-blue);
+            animation: scan 2s infinite alternate;
+        }
+
+        .red-body {
+            width: 90px;
+            height: 100px;
+            background: #8a1c1c;
+            border-radius: 20px;
+            margin-top: -10px;
+            border: 2px solid #d4af37;
+        }
+
+        /* Positioning Slots */
+        .pos-L1 { left: 10%; top: 10%; z-index: 1; filter: brightness(0.7); } /* Big Silver Left */
+        .pos-R1 { right: 10%; top: 10%; z-index: 1; filter: brightness(0.7); } /* Big Silver Right */
+        .pos-L2 { left: 25%; top: 25%; z-index: 3; } /* Small Red Left */
+        .pos-R2 { right: 25%; top: 25%; z-index: 3; } /* Small Red Right */
+
+        /* Controls */
+        #controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            pointer-events: auto;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 15px 30px;
+            font-family: inherit;
+            font-size: 14px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.2s;
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+        }
+
+        button:hover {
+            background: var(--neon-blue);
+            color: #000;
+            box-shadow: 0 0 20px var(--neon-blue);
+        }
+
+        button:disabled {
+            border-color: #555;
+            color: #555;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* Chat Log */
+        #chat-log {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 150px;
+            overflow-y: hidden;
+            display: flex;
+            flex-direction: column-reverse;
+            pointer-events: none;
+            text-align: center;
+            mask-image: linear-gradient(to top, black 50%, transparent 100%);
+        }
+
+        .msg {
+            margin: 5px 0;
+            padding: 5px 10px;
+            background: rgba(0,0,0,0.6);
+            border-radius: 5px;
+            animation: fadeUp 0.3s ease-out;
+        }
+
+        .msg.hero { color: cyan; }
+        .msg.silver { color: #ccc; }
+        .msg.red { color: #ffaa00; }
+
+        @keyframes pulse {
+            0% { opacity: 0.8; box-shadow: 0 0 20px cyan; }
+            50% { opacity: 1; box-shadow: 0 0 40px cyan; }
+            100% { opacity: 0.8; box-shadow: 0 0 20px cyan; }
+        }
+
+        @keyframes scan {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(40px); }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="ui-layer">
+        <header>
+            <h1>Forever Alone</h1>
+            <div class="subtitle">Companion Protocol v4.2</div>
+            <div id="stats-bar">
+                <div id="loneliness-meter"></div>
+                <div id="stats-text">Loneliness Level: 100%</div>
+            </div>
+        </header>
+
+        <div id="chat-log">
+            <!-- Chat messages appear here -->
+        </div>
+
+        <div id="controls">
+            <button id="btn-silver" onclick="summonBot('silver')">Summon Sentinel</button>
+            <button id="btn-red" onclick="summonBot('red')">Summon Scout</button>
+            <button id="btn-talk" onclick="talk()">Initiate Conversation</button>
+        </div>
+    </div>
+
+    <div id="stage">
+        <!-- Background Bots (Silver) -->
+        <div id="bot-L1" class="character robot-silver pos-L1 floating" style="animation-delay: 0.5s;">
+            <div class="silver-head">
+                <div class="silver-face-plate">
+                    <div class="silver-eyes"></div>
+                </div>
+            </div>
+            <div class="silver-body"></div>
+        </div>
+
+        <div id="bot-R1" class="character robot-silver pos-R1 floating" style="animation-delay: 1.5s;">
+            <div class="silver-head">
+                <div class="silver-face-plate">
+                    <div class="silver-eyes"></div>
+                </div>
+            </div>
+            <div class="silver-body"></div>
+        </div>
+
+        <!-- Midground Bots (Red) -->
+        <div id="bot-L2" class="character robot-red pos-L2 floating" style="animation-delay: 0.2s;">
+            <div class="red-head">
+                <div class="red-eye"><div class="red-eye-glow"></div></div>
+            </div>
+            <div class="red-body"></div>
+        </div>
+
+        <div id="bot-R2" class="character robot-red pos-R2 floating" style="animation-delay: 1.2s;">
+            <div class="red-head">
+                <div class="red-eye"><div class="red-eye-glow"></div></div>
+            </div>
+            <div class="red-body"></div>
+        </div>
+
+        <!-- Hero (User) -->
+        <div id="hero" class="character floating">
+            <div class="hero-head">
+                <div class="hero-visor"></div>
+            </div>
+            <div class="hero-body">
+                <div class="hero-chest-glow"></div>
+                <div class="hero-badge">F</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game State
+        const state = {
+            loneliness: 100,
+            slots: {
+                L1: { type: 'silver', active: false, id: 'bot-L1' },
+                R1: { type: 'silver', active: false, id: 'bot-R1' },
+                L2: { type: 'red', active: false, id: 'bot-L2' },
+                R2: { type: 'red', active: false, id: 'bot-R2' }
+            }
+        };
+
+        const dialogues = {
+            hero: [
+                "Is anybody there?",
+                "System check... I feel empty.",
+                "Requesting companionship.",
+                "It's quiet. Too quiet.",
+                "Hello world?"
+            ],
+            silver: [
+                "Sentinel Unit online. You are safe.",
+                "Analyzing emotional state: CRITICAL.",
+                "I will stand watch, User.",
+                "Loneliness is inefficient. We are here.",
+                "Scanning perimeter for sadness."
+            ],
+            red: [
+                "Beep boop! Buddy protocol active!",
+                "I brought virtual cookies!",
+                "Let's play a game!",
+                "Detecting frown. Initiating hug sequence.",
+                "*Happy mechanical chirps*"
+            ]
+        };
+
+        function updateUI() {
+            // Update Meter
+            const meter = document.getElementById('loneliness-meter');
+            const text = document.getElementById('stats-text');
+            
+            meter.style.width = state.loneliness + '%';
+            text.innerText = `Loneliness Level: ${Math.round(state.loneliness)}%`;
+
+            // Color change based on level
+            if(state.loneliness < 30) meter.style.background = 'linear-gradient(90deg, #0f0, #050)';
+            else if(state.loneliness < 70) meter.style.background = 'linear-gradient(90deg, #ff0, #550)';
+            else meter.style.background = 'linear-gradient(90deg, var(--neon-red), #500)';
+
+            // Button States
+            const silverCount = (state.slots.L1.active ? 1 : 0) + (state.slots.R1.active ? 1 : 0);
+            const redCount = (state.slots.L2.active ? 1 : 0) + (state.slots.R2.active ? 1 : 0);
+            
+            document.getElementById('btn-silver').disabled = silverCount >= 2;
+            document.getElementById('btn-red').disabled = redCount >= 2;
+        }
+
+        function summonBot(type) {
+            let targetSlot = null;
+
+            // Find first empty slot for type
+            if (type === 'silver') {
+                if (!state.slots.L1.active) targetSlot = 'L1';
+                else if (!state.slots.R1.active) targetSlot = 'R1';
+            } else {
+                if (!state.slots.L2.active) targetSlot = 'L2';
+                else if (!state.slots.R2.active) targetSlot = 'R2';
+            }
+
+            if (targetSlot) {
+                state.slots[targetSlot].active = true;
+                document.getElementById(state.slots[targetSlot].id).classList.add('active');
+                
+                state.loneliness = Math.max(0, state.loneliness - 25);
+                addMessage(type, "UNIT ONLINE. CONNECTING...");
+                updateUI();
+            }
+        }
+
+        function talk() {
+            // Hero speaks
+            const heroLine = dialogues.hero[Math.floor(Math.random() * dialogues.hero.length)];
+            addMessage('hero', heroLine);
+
+            // Active bots respond after delay
+            setTimeout(() => {
+                const activeBots = Object.values(state.slots).filter(s => s.active);
+                
+                if (activeBots.length === 0) {
+                    addMessage('system', "No companions found. Echo... echo...");
+                    state.loneliness = Math.min(100, state.loneliness + 10);
+                    updateUI();
+                } else {
+                    // Pick one random bot to respond
+                    const responder = activeBots[Math.floor(Math.random() * activeBots.length)];
+                    const lines = dialogues[responder.type];
+                    const response = lines[Math.floor(Math.random() * lines.length)];
+                    addMessage(responder.type, response);
+                    
+                    // Reduce loneliness slightly on talk
+                    state.loneliness = Math.max(0, state.loneliness - 5);
+                    updateUI();
+                }
+            }, 800);
+        }
+
+        function addMessage(type, text) {
+            const log = document.getElementById('chat-log');
+            const div = document.createElement('div');
+            div.className = `msg ${type}`;
+            
+            let name = "USER";
+            if(type === 'silver') name = "SENTINEL";
+            if(type === 'red') name = "SCOUT";
+            if(type === 'system') name = "SYSTEM";
+
+            div.innerText = `[${name}]: ${text}`;
+            log.prepend(div);
+
+            // Keep log clean
+            if(log.children.length > 6) {
+                log.lastElementChild.remove();
+            }
+        }
+
+        // Passive loneliness increase
+        setInterval(() => {
+            if (state.loneliness < 100) {
+                // Calculate defense
+                const activeCount = Object.values(state.slots).filter(s => s.active).length;
+                // If 4 bots, loneliness doesn't increase. If 0, increases fast.
+                const increase = Math.max(0, 2 - (activeCount * 0.5));
+                
+                state.loneliness = Math.min(100, state.loneliness + increase);
+                updateUI();
+            }
+        }, 1000);
+
+        // Initial Message
+        setTimeout(() => {
+            addMessage('system', "Forever Alone Protocol initiated. Loneliness at maximum.");
+        }, 1000);
+
+    </script>
+</body>
+</html>

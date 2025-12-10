@@ -98,16 +98,16 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* GrieVoice Chamber */}
+            {/* Applied Research Chamber */}
             <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-teal-500 transition-all duration-300 float-animation overflow-hidden" style={{ animationDelay: '2s' }}>
               <div className="relative z-10">
-                <div className="text-4xl mb-4">🎙️</div>
-                <h3 className="text-xl font-bold mb-3 text-teal-400">GrieVoice</h3>
+                <div className="text-4xl mb-4">🔬</div>
+                <h3 className="text-xl font-bold mb-3 text-teal-400">Applied Research</h3>
                 <p className="text-gray-400 mb-4">
-                  AI-powered grievance systems for worker voice with multilingual voice agents.
+                  AI applications in ESG, development rights, and worker voice systems.
                 </p>
-                <a href="/grievoice" className="text-teal-400 hover:text-teal-300 font-semibold">
-                  Explore System →
+                <a href="/research" className="text-teal-400 hover:text-teal-300 font-semibold">
+                  View Projects →
                 </a>
               </div>
             </div>
@@ -168,6 +168,20 @@ export default function HomePage() {
               </div>
             </div>
 
+            {/* Playspace Chamber */}
+            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-pink-500 transition-all duration-300 float-animation overflow-hidden" style={{ animationDelay: '10s' }}>
+              <div className="relative z-10">
+                <div className="text-4xl mb-4">🎮</div>
+                <h3 className="text-xl font-bold mb-3 text-pink-400">Playspace</h3>
+                <p className="text-gray-400 mb-4">
+                  Interactive experiences: art & mindfulness, farming simulators, and AI futures.
+                </p>
+                <a href="/playspace" className="text-pink-400 hover:text-pink-300 font-semibold">
+                  Enter Playspace →
+                </a>
+              </div>
+            </div>
+
             {/* Blogs & Essays Chamber */}
             <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-amber-500 transition-all duration-300 float-animation overflow-hidden" style={{ animationDelay: '9s' }}>
               <div className="relative z-10">
@@ -196,16 +210,16 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* ESG & AI Research Section */}
-            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-orange-500 transition-all duration-300 float-animation overflow-hidden col-span-full md:col-span-2 lg:col-span-4" style={{ animationDelay: '0.5s' }}>
+            {/* Applied Research Featured Section */}
+            <div className="group relative strange-loop p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-teal-500 transition-all duration-300 float-animation overflow-hidden col-span-full md:col-span-2 lg:col-span-4" style={{ animationDelay: '0.5s' }}>
               <div className="relative z-10 text-center">
-                <div className="text-4xl mb-4">⚡</div>
-                <h3 className="text-2xl font-bold mb-3 text-orange-400">ESG & AI Research</h3>
+                <div className="text-4xl mb-4">🔬</div>
+                <h3 className="text-2xl font-bold mb-3 text-teal-400">Applied Research Projects</h3>
                 <p className="text-gray-400 mb-4 text-lg">
-                  AI applications and ESG frameworks in extractive industries
+                  Exploring AI applications in ESG frameworks, development rights, and worker voice technology
                 </p>
-                <a href="/avatar" className="px-8 py-4 bg-orange-600 hover:bg-orange-700 rounded-lg font-semibold transition-colors text-white">
-                  View Research →
+                <a href="/research" className="px-8 py-4 bg-teal-600 hover:bg-teal-700 rounded-lg font-semibold transition-colors text-white">
+                  View All Projects →
                 </a>
               </div>
             </div>

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Africa's Single Digital Market 2030 Simulator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
+            color: #1e293b;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* UI Elements */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border-radius: 1rem;
+        }
+
+        .stat-card {
+            transition: all 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .action-btn {
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        .action-btn:active {
+            transform: scale(0.95);
+        }
+        .action-btn::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.2);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .action-btn:hover::after {
+            opacity: 1;
+        }
+
+        /* Canvas Container */
+        #viz-container {
+            flex-grow: 1;
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        canvas {
+            display: block;
+        }
+
+        /* Floating Info */
+        .floating-badge {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Progress Bar */
+        .progress-track {
+            background: #e2e8f0;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="px-6 py-4 flex justify-between items-center bg-white/60 backdrop-blur-md border-b border-white/50 z-10">
+        <div>
+            <h1 class="text-2xl font-bold text-slate-800 tracking-tight">The Quiet Revolution</h1>
+            <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Africa's Single Digital Market Simulator</p>
+        </div>
+        <div class="flex gap-6 text-sm font-medium">
+            <div class="text-center">
+                <div class="text-slate-400 text-xs">YEAR</div>
+                <div id="year-display" class="text-xl font-bold text-blue-600">2024</div>
+            </div>
+            <div class="text-center">
+                <div class="text-slate-400 text-xs">UNIFICATION</div>
+                <div id="unification-display" class="text-xl font-bold text-teal-600">0%</div>
+            </div>
+            <div class="text-center">
+                <div class="text-slate-400 text-xs">GDP IMPACT</div>
+                <div id="gdp-display" class="text-xl font-bold text-indigo-600">$0B</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Visualization Area -->
+    <div id="viz-container">
+        <!-- Overlay Messages -->
+        <div id="message-overlay" class="absolute top-10 left-1/2 transform -translate-x-1/2 pointer-events-none transition-opacity duration-500 opacity-0">
+            <div class="glass-panel px-6 py-3 text-center">
+                <span id="message-text" class="text-lg font-bold text-slate-700">System Initialized</span>
+            </div>
+        </div>
+        <canvas id="networkCanvas"></canvas>
+    </div>
+
+    <!-- Control Deck -->
+    <div class="p-6 z-10 bg-gradient-to-t from-slate-50 to-transparent">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
+            
+            <!-- Building Block 1: Identity -->
+            <div class="glass-panel p-4 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-lg">👤</div>
+                        <h3 class="font-bold text-slate-700">Unified Digital Identity</h3>
+                    </div>
+                    <p class="text-xs text-slate-500 mb-3">Secure recognition for seamless travel & services.</p>
+                    <div class="progress-track h-2 w-full mb-2">
+                        <div id="prog-identity" class="progress-fill h-full w-0"></div>
+                    </div>
+                </div>
+                <button onclick="game.upgrade('identity')" class="action-btn w-full py-2 bg-blue-600 text-white rounded-lg font-semibold text-sm shadow-lg shadow-blue-200 hover:bg-blue-700">
+                    Implement ID Systems
+                </button>
+            </div>
+
+            <!-- Building Block 2: Infrastructure & Payments -->
+            <div class="glass-panel p-4 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-lg">⚡</div>
+                        <h3 class="font-bold text-slate-700">Frictionless Payments</h3>
+                    </div>
+                    <p class="text-xs text-slate-500 mb-3">Interoperable cross-border money transfer.</p>
+                    <div class="progress-track h-2 w-full mb-2">
+                        <div id="prog-payments" class="progress-fill h-full w-0 bg-orange-500" style="background: linear-gradient(90deg, #f59e0b, #ea580c);"></div>
+                    </div>
+                </div>
+                <button onclick="game.upgrade('payments')" class="action-btn w-full py-2 bg-orange-500 text-white rounded-lg font-semibold text-sm shadow-lg shadow-orange-200 hover:bg-orange-600">
+                    Build Payment Rails
+                </button>
+            </div>
+
+            <!-- Building Block 3: Sovereignty & Governance -->
+            <div class="glass-panel p-4 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-8 h-8 rounded-full bg-teal-100 flex items-center justify-center text-lg">🛡️</div>
+                        <h3 class="font-bold text-slate-700">Digital Sovereignty</h3>
+                    </div>
+                    <p class="text-xs text-slate-500 mb-3">Control data, policy, and infrastructure locally.</p>
+                    <div class="progress-track h-2 w-full mb-2">
+                        <div id="prog-sovereignty" class="progress-fill h-full w-0" style="background: linear-gradient(90deg, #10b981, #059669);"></div>
+                    </div>
+                </div>
+                <button onclick="game.upgrade('sovereignty')" class="action-btn w-full py-2 bg-teal-600 text-white rounded-lg font-semibold text-sm shadow-lg shadow-teal-200 hover:bg-teal-700">
+                    Enforce Data Policy
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // --- Game Logic & State ---
+        const game = {
+            year: 2024,
+            maxYear: 2030,
+            stats: {
+                identity: 0,
+                payments: 0,
+                sovereignty: 0
+            },
+            unification: 0,
+            gdp: 0,
+            nodes: [],
+            connections: [],
+            
+            // Configuration
+            nodeCount: 54, // 54 African nations
+            canvas: null,
+            ctx: null,
+            width: 0,
+            height: 0,
+            animationId: null,
+
+            init() {
+                this.canvas = document.getElementById('networkCanvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.resize();
+                window.addEventListener('resize', () => this.resize());
+
+                // Create Nodes (representing fragmented markets)
+                for (let i = 0; i < this.nodeCount; i++) {
+                    this.nodes.push({
+                        x: Math.random() * this.width,
+                        y: Math.random() * this.height,
+                        vx: (Math.random() - 0.5) * 2, // High chaos initially
+                        vy: (Math.random() - 0.5) * 2,
+                        radius: Math.random() * 3 + 2,
+                        color: this.getRandomColor(),
+                        connected: false,
+                        id: i
+                    });
+                }
+
+                this.loop();
+                this.startTimer();
+            },
+
+            resize() {
+                this.width = document.getElementById('viz-container').offsetWidth;
+                this.height = document.getElementById('viz-container').offsetHeight;
+                this.canvas.width = this.width;
+                this.canvas.height = this.height;
+            },
+
+            getRandomColor() {
+                const colors = ['#3b82f6', '#f59e0b', '#10b981', '#6366f1', '#ec4899'];
+                return colors[Math.floor(Math.random() * colors.length)];
+            },
+
+            upgrade(type) {
+                if (this.stats[type] >= 100) return;
+                
+                // Increment stat
+                this.stats[type] += 10;
+                if (this.stats[type] > 100) this.stats[type] = 100;
+
+                // Update UI Bars
+                document.getElementById(`prog-${type}`).style.width = `${this.stats[type]}%`;
+
+                // Trigger Visual Effects
+                this.applyEffects(type);
+                
+                // Calculate Global Progress
+                this.calculateProgress();
+                
+                // Show Message
+                this.showMessage(this.getFlavorText(type));
+            },
+
+            getFlavorText(type) {
+                const texts = {
+                    identity: ["Biometric ID Deployed", "Passport Systems Unified", "Single Sign-On Achieved"],
+                    payments: ["Cross-Border Fees Reduced", "Instant Settlement Live", "Currency Exchange Automated"],
+                    sovereignty: ["Data Centers Built", "Local Cloud Established", "Cyber Defense Active"]
+                };
+                const idx = Math.floor((this.stats[type] / 100) * texts[type].length) || 0;
+                return texts[type][Math.min(idx, texts[type].length - 1)];
+            },
+
+            showMessage(text) {
+                const el = document.getElementById('message-overlay');
+                const txt = document.getElementById('message-text');
+                txt.innerText = text;
+                el.style.opacity = 1;
+                el.style.transform = "translate(-50%, 0)";
+                setTimeout(() => {
+                    el.style.opacity = 0;
+                    el.style.transform = "translate(-50%, -10px)";
+                }, 2000);
+            },
+
+            applyEffects(type) {
+                // Modify physics based on upgrades
+                if (type === 'identity') {
+                    // Identity stabilizes the chaos (velocity reduces, nodes move to center)
+                    this.nodes.forEach(node => {
+                        node.vx *= 0.8;
+                        node.vy *= 0.8;
+                    });
+                }
+                if (type === 'payments') {
+                    // Payments create connections
+                    const connectionCount = Math.floor(this.stats.payments / 5);
+                    // Logic handled in draw loop to draw lines
+                }
+                if (type === 'sovereignty') {
+                    // Sovereignty unifies color and creates a shield effect
+                    if (this.stats.sovereignty > 50) {
+                        this.nodes.forEach(node => node.color = '#0ea5e9'); // Unified Blue
+                    }
+                }
+            },
+
+            calculateProgress() {
+                const total = this.stats.identity + this.stats.payments + this.stats.sovereignty;
+                this.unification = Math.floor(total / 3);
+                
+                // GDP Calculation (Gamified)
+                this.gdp = Math.floor(this.unification * 8.5); // Arbitrary scaling
+
+                document.getElementById('unification-display').innerText = `${this.unification}%`;
+                document.getElementById('gdp-display').innerText = `$${this.gdp}B`;
+
+                if (this.unification >= 100) {
+                    this.showMessage("🎉 AFRICA 2030 VISION ACHIEVED! 🎉");
+                }
+            },
+
+            startTimer() {
+                setInterval(() => {
+                    if (this.year < this.maxYear && this.unification < 100) {
+                        // Slowly increment year based on progress, or just time?
+                        // Let's make year progress slowly, but stop at 2030
+                    }
+                }, 5000);
+            },
+
+            // Physics & Draw Loop
+            loop() {
+                this.ctx.clearRect(0, 0, this.width, this.height);
+
+                // Draw World Map "Hint" (Abstract Background)
+                // Just a subtle circle to represent the continent/globe
+                this.ctx.beginPath();
+                this.ctx.arc(this.width/2, this.height/2, this.height/2.5, 0, Math.PI * 2);
+                this.ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+                this.ctx.fill();
+
+                // Draw Connections (Based on Payments Stat)
+                const connectDistance = 50 + (this.stats.payments * 2); // Range increases with payments
+                const opacity = this.stats.payments / 100;
+
+                if (this.stats.payments > 0) {
+                    this.ctx.strokeStyle = `rgba(245, 158, 11, ${opacity * 0.5})`; // Orange tint
+                    this.ctx.lineWidth = 1;
+                    
+                    for (let i = 0; i < this.nodes.length; i++) {
+                        for (let j = i + 1; j < this.nodes.length; j++) {
+                            const dx = this.nodes[i].x - this.nodes[j].x;
+                            const dy = this.nodes[i].y - this.nodes[j].y;
+                            const dist = Math.sqrt(dx*dx + dy*dy);
+
+                            if (dist < connectDistance) {
+                                this.ctx.beginPath();
+                                this.ctx.moveTo(this.nodes[i].x, this.nodes[i].y);
+                                this.ctx.lineTo(this.nodes[j].x, this.nodes[j].y);
+                                this.ctx.stroke();
+                            }
+                        }
+                    }
+                }
+
+                // Sovereignty Shield (Outer Glow)
+                if (this.stats.sovereignty > 20) {
+                    const shieldRadius = (this.height/2.5) * (this.stats.sovereignty / 100);
+                    // Only draw if nodes are clustered enough? 
+                    // Let's just draw a ring that gets stronger
+                    this.ctx.beginPath();
+                    this.ctx.arc(this.width/2, this.height/2, this.height/2.5 + 20, 0, Math.PI * 2);
+                    this.ctx.strokeStyle = `rgba(16, 185, 129, ${this.stats.sovereignty/200})`;
+                    this.ctx.lineWidth = 2 + (this.stats.sovereignty/20);
+                    this.ctx.stroke();
+                }
+
+                // Update & Draw Nodes
+                const centerX = this.width / 2;
+                const centerY = this.height / 2;
+
+                // Attraction force to center (increases with Identity)
+                const attractionStrength = 0.0001 + (this.stats.identity * 0.0005);
+
+                this.nodes.forEach(node => {
+                    // Physics
+                    node.x += node.vx;
+                    node.y += node.vy;
+
+                    // Attraction to center (Formation of the "Bloc")
+                    const dx = centerX - node.x;
+                    const dy = centerY - node.y;
+                    node.vx += dx * attractionStrength;
+                    node.vy += dy * attractionStrength;
+
+                    // Friction
+                    node.vx *= 0.98;
+                    node.vy *= 0.98;
+
+                    // Bounce off walls
+                    if (node.x < 0 || node.x > this.width) node.vx *= -1;
+                    if (node.y < 0 || node.y > this.height) node.vy *= -1;
+
+                    // Draw Node
+                    this.ctx.beginPath();
+                    this.ctx.arc(node.x, node.y, node.radius + (this.stats.identity/20), 0, Math.PI * 2);
+                    this.ctx.fillStyle = node.color;
+                    this.ctx.fill();
+                    
+                    // Draw "Data" packets (small dots moving between nodes) if active
+                    // Simplified: Just glow
+                    if (this.stats.sovereignty > 80) {
+                        this.ctx.shadowBlur = 10;
+                        this.ctx.shadowColor = node.color;
+                    } else {
+                        this.ctx.shadowBlur = 0;
+                    }
+                });
+                
+                this.ctx.shadowBlur = 0; // Reset
+
+                requestAnimationFrame(() => this.loop());
+            }
+        };
+
+        // Year Progress Logic
+        setInterval(() => {
+            if (game.unification > 0 && game.year < 2030) {
+                // Year advances faster if unification is higher
+                if (Math.random() < (game.unification / 200)) {
+                    game.year++;
+                    document.getElementById('year-display').innerText = game.year;
+                }
+            }
+        }, 1000);
+
+        // Start Game
+        game.init();
+
+    </script>
+</body>
+</html>

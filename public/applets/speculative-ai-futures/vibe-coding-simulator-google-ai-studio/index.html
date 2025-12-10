@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Coding Simulator - Google AI Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f1115; /* Deep dark bg */
+            color: #e2e8f0;
+            overflow: hidden;
+        }
+
+        /* The Gemini/AI Gradient Animation */
+        .ai-gradient-text {
+            background: linear-gradient(to right, #4285f4, #9b72cb, #d96570);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        .glass-panel {
+            background: rgba(30, 31, 36, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .preview-container {
+            background-image: radial-gradient(circle at 50% 50%, #1a1d26 0%, #0f1115 100%);
+            transition: all 0.5s ease;
+        }
+
+        /* Annotation Mode Highlight */
+        .annotation-target {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .annotation-target:hover {
+            outline: 2px dashed #4285f4;
+            outline-offset: 4px;
+        }
+        .annotation-target:hover::after {
+            content: "✨ Click to Vibe Edit";
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #4285f4;
+            color: white;
+            font-size: 10px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            white-space: nowrap;
+            z-index: 50;
+            pointer-events: none;
+        }
+
+        /* Loading Shimmer */
+        .shimmer {
+            background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Floating Elements Animation */
+        .float-anim {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f1115; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333; 
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="h-screen flex flex-col">
+
+    <!-- Top Navigation -->
+    <nav class="h-14 border-b border-white/10 flex items-center px-6 justify-between bg-[#13161b]">
+        <div class="flex items-center gap-3">
+            <div class="w-6 h-6 rounded bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-xs font-bold">AI</div>
+            <span class="font-medium text-gray-200">Google AI Studio</span>
+            <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded-full ml-2">Vibe Coding Demo</span>
+        </div>
+        <div class="flex items-center gap-4 text-sm text-gray-400">
+            <span class="hover:text-white cursor-pointer">App Gallery</span>
+            <span class="hover:text-white cursor-pointer">My Library</span>
+            <div class="w-8 h-8 rounded-full bg-purple-900/50 border border-purple-500/30 flex items-center justify-center text-purple-300 font-bold">U</div>
+        </div>
+    </nav>
+
+    <!-- Main Workspace -->
+    <div class="flex-1 flex overflow-hidden">
+        
+        <!-- Left Panel: Prompt & Chat -->
+        <div class="w-[400px] border-r border-white/10 flex flex-col bg-[#13161b] z-10">
+            
+            <!-- Chat History / Context -->
+            <div class="flex-1 p-6 overflow-y-auto space-y-6" id="chat-history">
+                <div class="flex gap-3">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex-shrink-0 flex items-center justify-center text-xs">AI</div>
+                    <div class="space-y-2">
+                        <p class="text-sm text-gray-300 leading-relaxed">
+                            Welcome to <span class="ai-gradient-text font-bold">Vibe Coding</span>. 
+                            I can help you build an app from a single prompt. What are we building today?
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            <button onclick="setPrompt('A retro music player with neon buttons')" class="text-xs bg-white/5 hover:bg-white/10 border border-white/10 px-3 py-1.5 rounded-full transition">🎵 Retro Player</button>
+                            <button onclick="setPrompt('A clean productivity dashboard with charts')" class="text-xs bg-white/5 hover:bg-white/10 border border-white/10 px-3 py-1.5 rounded-full transition">📊 Dashboard</button>
+                            <button onclick="setPrompt('A nature photography gallery')" class="text-xs bg-white/5 hover:bg-white/10 border border-white/10 px-3 py-1.5 rounded-full transition">🌿 Photo Gallery</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="p-4 border-t border-white/10 bg-[#13161b]">
+                <div class="relative">
+                    <textarea id="prompt-input" class="w-full bg-[#1e2025] border border-white/10 rounded-xl p-4 pr-12 text-sm focus:outline-none focus:border-blue-500/50 text-gray-200 resize-none h-24 transition-all" placeholder="Describe your app vision here..."></textarea>
+                    <button onclick="generateApp()" class="absolute bottom-3 right-3 w-8 h-8 bg-white text-black rounded-full flex items-center justify-center hover:scale-110 transition shadow-lg shadow-blue-500/20">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="flex justify-between items-center mt-3 px-1">
+                    <div class="text-xs text-gray-500 flex items-center gap-1">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path></svg>
+                        Attach assets
+                    </div>
+                    <div class="text-xs text-gray-500">Gemini 2.5 Flash</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel: The Canvas -->
+        <div class="flex-1 relative bg-[#0f1115] flex flex-col">
+            
+            <!-- Toolbar -->
+            <div class="h-12 border-b border-white/10 flex items-center justify-between px-4 bg-[#0f1115]">
+                <div class="flex items-center gap-2">
+                    <div class="text-xs text-gray-400">Preview Mode</div>
+                    <div class="h-4 w-[1px] bg-white/10 mx-2"></div>
+                    <button class="text-xs text-blue-400 flex items-center gap-1 hover:bg-blue-500/10 px-2 py-1 rounded transition">
+                        <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
+                        Annotation Mode Active
+                    </button>
+                </div>
+                <div class="flex gap-2">
+                    <button class="w-20 h-1.5 rounded-full bg-white/10"></button>
+                    <button class="w-1.5 h-1.5 rounded-full bg-white/10"></button>
+                    <button class="w-1.5 h-1.5 rounded-full bg-white/10"></button>
+                </div>
+            </div>
+
+            <!-- App Preview Area -->
+            <div class="flex-1 flex items-center justify-center p-10 relative overflow-hidden">
+                
+                <!-- Loading Overlay -->
+                <div id="loading-overlay" class="absolute inset-0 bg-[#0f1115]/90 z-50 flex flex-col items-center justify-center hidden backdrop-blur-sm">
+                    <div class="w-16 h-16 relative mb-6">
+                        <div class="absolute inset-0 rounded-full border-t-2 border-blue-500 animate-spin"></div>
+                        <div class="absolute inset-2 rounded-full border-r-2 border-purple-500 animate-spin reverse"></div>
+                        <div class="absolute inset-1 flex items-center justify-center text-2xl">✨</div>
+                    </div>
+                    <h2 class="text-xl font-medium text-white mb-2" id="loading-title">Generating App...</h2>
+                    <p class="text-sm text-gray-400 animate-pulse" id="loading-subtitle">Wiring up components...</p>
+                </div>
+
+                <!-- The Generated App Container -->
+                <div id="app-frame" class="w-[375px] h-[667px] bg-white rounded-[40px] shadow-2xl overflow-hidden relative border-8 border-[#1a1d26] transition-all duration-500 transform hover:scale-[1.01]">
+                    
+                    <!-- Dynamic Content Injected Here -->
+                    <div id="app-content" class="w-full h-full bg-gray-50 flex flex-col relative">
+                        <!-- Default Empty State -->
+                        <div class="flex-1 flex flex-col items-center justify-center p-8 text-center">
+                            <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mb-4 text-4xl grayscale opacity-50">
+                                📱
+                            </div>
+                            <h3 class="text-gray-400 font-medium">Ready to Vibe</h3>
+                            <p class="text-gray-300 text-sm mt-2">Enter a prompt on the left to generate your app.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Annotation Tooltip (Hidden by default) -->
+                <div id="annotation-tooltip" class="absolute hidden bg-[#1e2025] border border-white/10 rounded-lg shadow-xl p-3 z-50 w-64 animate-fade-in-up">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-xs font-bold text-blue-400">Gemini Edit</span>
+                        <button onclick="closeAnnotation()" class="text-gray-500 hover:text-white">&times;</button>
+                    </div>
+                    <input type="text" id="annotation-input" class="w-full bg-black/30 border border-white/10 rounded px-2 py-1 text-xs text-white mb-2 focus:outline-none focus:border-blue-500" placeholder="e.g., Make it blue, rounder...">
+                    <button onclick="applyAnnotation()" class="w-full bg-blue-600 hover:bg-blue-500 text-white text-xs py-1 rounded transition">Update</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State
+        let currentTheme = 'default';
+        let selectedElement = null;
+        const appContent = document.getElementById('app-content');
+        const loadingOverlay = document.getElementById('loading-overlay');
+        const loadingTitle = document.getElementById('loading-title');
+        const loadingSubtitle = document.getElementById('loading-subtitle');
+        const chatHistory = document.getElementById('chat-history');
+        const annotationTooltip = document.getElementById('annotation-tooltip');
+        const annotationInput = document.getElementById('annotation-input');
+
+        // Brainstorming phrases from the PDF
+        const loadingPhrases = [
+            "Consulting the App Gallery...",
+            "Wiring up APIs...",
+            "Applying Vibe Coding...",
+            "Generating layout...",
+            "Polishing pixels...",
+            "Checking sources with Google Search..."
+        ];
+
+        function setPrompt(text) {
+            document.getElementById('prompt-input').value = text;
+        }
+
+        function addToChat(text, isUser = false) {
+            const div = document.createElement('div');
+            div.className = "flex gap-3 animate-fade-in";
+            
+            if (isUser) {
+                div.innerHTML = `
+                    <div class="w-8 h-8 rounded-full bg-gray-700 flex-shrink-0 flex items-center justify-center text-xs font-bold">ME</div>
+                    <div class="bg-[#1e2025] p-3 rounded-lg rounded-tl-none text-sm text-gray-200 border border-white/5">${text}</div>
+                `;
+            } else {
+                div.innerHTML = `
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex-shrink-0 flex items-center justify-center text-xs">AI</div>
+                    <div class="space-y-2 w-full">
+                        <p class="text-sm text-gray-300">${text}</p>
+                    </div>
+                `;
+            }
+            chatHistory.appendChild(div);
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+        }
+
+        async function generateApp() {
+            const prompt = document.getElementById('prompt-input').value;
+            if (!prompt) return;
+
+            // 1. User Message
+            addToChat(prompt, true);
+            document.getElementById('prompt-input').value = '';
+
+            // 2. Show Loading
+            loadingOverlay.classList.remove('hidden');
+            
+            // Cycle phrases
+            let phraseIndex = 0;
+            const interval = setInterval(() => {
+                loadingSubtitle.innerText = loadingPhrases[phraseIndex % loadingPhrases.length];
+                phraseIndex++;
+            }, 600);
+
+            // 3. Simulate AI Delay
+            await new Promise(r => setTimeout(r, 2500));
+            clearInterval(interval);
+            loadingOverlay.classList.add('hidden');
+
+            // 4. Determine "Vibe" based on keywords
+            const p = prompt.toLowerCase();
+            let html = '';
+            
+            if (p.includes('retro') || p.includes('music')) {
+                html = renderRetroPlayer();
+                addToChat("I've created a retro-styled music player. You can click elements to tweak the vibe.");
+            } else if (p.includes('dashboard') || p.includes('chart')) {
+                html = renderDashboard();
+                addToChat("Here is a productivity dashboard with some sample data visualizations.");
+            } else if (p.includes('photo') || p.includes('nature')) {
+                html = renderPhotoApp();
+                addToChat("I've set up a clean photography portfolio layout.");
+            } else {
+                // Generic fallback
+                html = renderGenericApp();
+                addToChat("I've built a basic layout based on your request. Try using Annotation Mode to refine specific parts.");
+            }
+
+            appContent.innerHTML = html;
+            attachAnnotationListeners();
+        }
+
+        // --- RENDERERS (The "Vibe" Generators) ---
+
+        function renderRetroPlayer() {
+            return `
+                <div class="h-full bg-gray-900 text-white p-6 flex flex-col font-mono annotation-target" data-type="bg">
+                    <div class="flex justify-between items-center mb-8">
+                        <div class="text-xs text-neon-pink annotation-target">CASSETTE_OS_v1</div>
+                        <div class="w-4 h-4 rounded-full bg-red-500 animate-pulse annotation-target"></div>
+                    </div>
+                    <div class="w-full aspect-square bg-gray-800 border-4 border-gray-700 rounded-xl mb-8 flex items-center justify-center relative overflow-hidden annotation-target" data-type="image">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-purple-900 to-blue-900 opacity-50"></div>
+                        <div class="text-6xl animate-bounce">👾</div>
+                    </div>
+                    <div class="mb-8 text-center">
+                        <h2 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-yellow-500 mb-2 annotation-target">Synthwave Dreams</h2>
+                        <p class="text-xs text-gray-400 annotation-target">The Midnight Runner</p>
+                    </div>
+                    <div class="flex justify-between items-center px-4 mb-8">
+                        <button class="text-2xl hover:text-pink-500 transition annotation-target">⏮</button>
+                        <button class="w-16 h-16 rounded-full bg-gradient-to-r from-pink-600 to-purple-600 flex items-center justify-center text-2xl shadow-lg shadow-purple-500/50 hover:scale-105 transition annotation-target">▶</button>
+                        <button class="text-2xl hover:text-pink-500 transition annotation-target">⏭</button>
+                    </div>
+                    <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden annotation-target">
+                        <div class="w-2/3 h-full bg-pink-500"></div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderDashboard() {
+            return `
+                <div class="h-full bg-slate-50 text-slate-800 p-6 flex flex-col annotation-target" data-type="bg">
+                    <div class="flex justify-between items-center mb-6">
+                        <h1 class="text-xl font-bold text-slate-900 annotation-target">Overview</h1>
+                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-xs font-bold annotation-target">JD</div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 annotation-target">
+                            <div class="text-xs text-slate-400 mb-1">Revenue</div>
+                            <div class="text-lg font-bold text-emerald-600">$12.4k</div>
+                        </div>
+                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 annotation-target">
+                            <div class="text-xs text-slate-400 mb-1">Users</div>
+                            <div class="text-lg font-bold text-blue-600">842</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex-1 mb-4 annotation-target">
+                        <div class="text-sm font-semibold mb-4">Weekly Activity</div>
+                        <div class="flex items-end justify-between h-32 gap-2">
+                            <div class="w-full bg-blue-100 rounded-t h-[40%] hover:bg-blue-200 transition"></div>
+                            <div class="w-full bg-blue-100 rounded-t h-[70%] hover:bg-blue-200 transition"></div>
+                            <div class="w-full bg-blue-500 rounded-t h-[50%] shadow-lg shadow-blue-500/30"></div>
+                            <div class="w-full bg-blue-100 rounded-t h-[80%] hover:bg-blue-200 transition"></div>
+                            <div class="w-full bg-blue-100 rounded-t h-[60%] hover:bg-blue-200 transition"></div>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full bg-slate-900 text-white py-3 rounded-xl font-medium hover:bg-slate-800 transition annotation-target">Download Report</button>
+                </div>
+            `;
+        }
+
+        function renderPhotoApp() {
+            return `
+                <div class="h-full bg-stone-100 text-stone-800 overflow-y-auto annotation-target" data-type="bg">
+                    <div class="sticky top-0 bg-stone-100/90 backdrop-blur-md p-6 z-10 border-b border-stone-200">
+                        <h1 class="font-serif text-2xl italic annotation-target">Lumina.</h1>
+                    </div>
+                    <div class="p-4 space-y-4">
+                        <div class="aspect-[4/5] bg-stone-300 rounded-lg relative overflow-hidden group annotation-target">
+                            <div class="absolute inset-0 flex items-center justify-center text-4xl bg-gradient-to-b from-transparent to-black/20">🌿</div>
+                            <div class="absolute bottom-4 left-4 text-white font-medium opacity-0 group-hover:opacity-100 transition">Forest Morning</div>
+                        </div>
+                        <div class="aspect-[4/5] bg-stone-800 rounded-lg relative overflow-hidden group annotation-target">
+                            <div class="absolute inset-0 flex items-center justify-center text-4xl">🏔</div>
+                            <div class="absolute bottom-4 left-4 text-white font-medium opacity-0 group-hover:opacity-100 transition">Alpine Peaks</div>
+                        </div>
+                        <div class="aspect-[4/5] bg-orange-100 rounded-lg relative overflow-hidden group annotation-target">
+                            <div class="absolute inset-0 flex items-center justify-center text-4xl">🌅</div>
+                             <div class="absolute bottom-4 left-4 text-stone-800 font-medium opacity-0 group-hover:opacity-100 transition">Golden Hour</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderGenericApp() {
+            return `
+                <div class="h-full bg-white p-6 flex flex-col annotation-target" data-type="bg">
+                    <div class="w-full h-48 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-2xl mb-6 flex items-center justify-center text-white text-4xl shadow-lg annotation-target">
+                        ✨
+                    </div>
+                    <h1 class="text-3xl font-bold text-gray-800 mb-2 annotation-target">New Project</h1>
+                    <p class="text-gray-500 mb-6 leading-relaxed annotation-target">This is a generated layout based on your idea. Use the Annotation Mode (click elements) to refine styles, colors, and content.</p>
+                    <div class="space-y-3 mt-auto">
+                        <button class="w-full bg-indigo-600 text-white py-3 rounded-lg font-medium hover:bg-indigo-700 transition annotation-target">Get Started</button>
+                        <button class="w-full bg-white border border-gray-200 text-gray-700 py-3 rounded-lg font-medium hover:bg-gray-50 transition annotation-target">Learn More</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- ANNOTATION MODE LOGIC ---
+
+        function attachAnnotationListeners() {
+            const targets = document.querySelectorAll('.annotation-target');
+            targets.forEach(el => {
+                el.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent bubbling
+                    openAnnotation(el, e);
+                });
+            });
+        }
+
+        function openAnnotation(element, event) {
+            selectedElement = element;
+            
+            // Position tooltip near the click
+            const rect = appContent.getBoundingClientRect();
+            const clickX = event.clientX;
+            const clickY = event.clientY;
+
+            annotationTooltip.style.left = (clickX - rect.left + 20) + 'px';
+            annotationTooltip.style.top = (clickY - rect.top) + 'px';
+            annotationTooltip.classList.remove('hidden');
+            annotationInput.value = '';
+            annotationInput.focus();
+        }
+
+        function closeAnnotation() {
+            annotationTooltip.classList.add('hidden');
+            selectedElement = null;
+        }
+
+        function applyAnnotation() {
+            const input = annotationInput.value.toLowerCase();
+            if (!selectedElement || !input) return;
+
+            // Simulate "Gemini" understanding the edit
+            // Simple keyword matching for the demo
+            
+            // Colors
+            if (input.includes('blue')) {
+                selectedElement.classList.add('bg-blue-500', 'text-white');
+                selectedElement.classList.remove('bg-white', 'bg-gray-900', 'bg-slate-900');
+            } else if (input.includes('red')) {
+                selectedElement.classList.add('bg-red-500', 'text-white');
+            } else if (input.includes('dark')) {
+                selectedElement.classList.add('bg-gray-900', 'text-white');
+                selectedElement.classList.remove('bg-white', 'text-gray-800');
+            } else if (input.includes('light')) {
+                selectedElement.classList.add('bg-white', 'text-gray-900');
+                selectedElement.classList.remove('bg-gray-900', 'text-white');
+            }
+
+            // Shapes
+            if (input.includes('round')) {
+                selectedElement.classList.add('rounded-full');
+                selectedElement.classList.remove('rounded-lg', 'rounded-xl');
+            } else if (input.includes('square')) {
+                selectedElement.classList.remove('rounded-full', 'rounded-lg', 'rounded-xl', 'rounded-2xl');
+            }
+
+            // Text
+            if (input.includes('text') || input.includes('change')) {
+                 // Very basic text replacement heuristic
+                 if(selectedElement.innerText.length < 50) {
+                     selectedElement.innerText = "Updated by AI";
+                 }
+            }
+
+            // Borders
+            if (input.includes('border')) {
+                selectedElement.classList.add('border-2', 'border-white');
+            }
+
+            // Close and notify
+            closeAnnotation();
+            
+            // Add a small "toast" notification in the chat
+            const updateMsg = document.createElement('div');
+            updateMsg.className = "text-xs text-gray-500 italic mt-2 ml-10";
+            updateMsg.innerText = `Updated element style based on "${input}"`;
+            chatHistory.appendChild(updateMsg);
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+        }
+
+        // Allow Enter key in annotation input
+        annotationInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                applyAnnotation();
+            }
+        });
+
+        // Initial message
+        setTimeout(() => {
+            // Just a small visual cue on load
+        }, 1000);
+
+    </script>
+</body>
+</html>

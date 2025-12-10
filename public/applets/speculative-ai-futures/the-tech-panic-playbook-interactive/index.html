@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Tech Panic Playbook: Interactive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@300;400;700&family=Rye&display=swap');
+
+        :root {
+            --bg-color: #fdf6e3;
+            --text-color: #2c1810;
+            --accent-color: #d97706;
+            --secondary-bg: #eee8d5;
+            --card-bg: #fffbf0;
+            --font-heading: 'Rye', serif;
+            --font-body: 'Courier Prime', monospace;
+            --shadow: 4px 4px 0px #2c1810;
+        }
+
+        body.era-ai {
+            --bg-color: #0f172a;
+            --text-color: #e2e8f0;
+            --accent-color: #06b6d4;
+            --secondary-bg: #1e293b;
+            --card-bg: #1e293b;
+            --font-heading: 'Inter', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --shadow: 0px 0px 15px rgba(6, 182, 212, 0.5);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: all 0.5s ease;
+            font-family: var(--font-body);
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 2px solid var(--text-color);
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Toggle Switch */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #06b6d4;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #06b6d4;
+        }
+        
+        /* Animations */
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+
+        .panic-mode {
+            animation: shake 0.5s;
+            animation-iteration-count: infinite;
+        }
+
+        .pulse-glow {
+            animation: pulse-blue 2s infinite;
+        }
+
+        @keyframes pulse-blue {
+            0% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(6, 182, 212, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0); }
+        }
+
+        /* SVG Styles */
+        .wire-path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: dash 5s linear infinite;
+        }
+        @keyframes dash {
+            to { stroke-dashoffset: 0; }
+        }
+
+        .node {
+            transition: fill 0.3s;
+            cursor: pointer;
+        }
+        .node:hover {
+            fill: var(--accent-color);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color); 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-color); 
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-4 md:p-8">
+
+    <!-- Header & Controls -->
+    <header class="w-full max-w-5xl flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
+        <div class="text-center md:text-left">
+            <h1 class="text-3xl md:text-5xl font-bold mb-2">The Tech Panic Playbook</h1>
+            <p class="opacity-80 text-lg" id="subtitle">From Electricity to AI</p>
+        </div>
+
+        <!-- Timeline Toggle -->
+        <div class="flex items-center gap-4 bg-[var(--secondary-bg)] p-2 rounded-full border-2 border-[var(--text-color)]">
+            <span class="font-bold text-sm md:text-base px-2">1890: Electricity</span>
+            <div class="relative inline-block w-16 mr-2 align-middle select-none transition duration-200 ease-in">
+                <input type="checkbox" name="toggle" id="era-toggle" class="toggle-checkbox absolute block w-8 h-8 rounded-full bg-white border-4 border-[var(--text-color)] appearance-none cursor-pointer transition-all duration-300 left-0"/>
+                <label for="era-toggle" class="toggle-label block overflow-hidden h-8 rounded-full bg-gray-400 cursor-pointer"></label>
+            </div>
+            <span class="font-bold text-sm md:text-base px-2">2024: AI</span>
+        </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-12 gap-8">
+        
+        <!-- Left Column: The Threat Visualization -->
+        <div class="md:col-span-5 flex flex-col gap-6">
+            <div class="card p-6 rounded-xl relative overflow-hidden min-h-[400px] flex flex-col items-center justify-center text-center">
+                <h2 class="text-2xl font-bold mb-4 z-10" id="visual-title">The Unrestrained Demon</h2>
+                
+                <!-- Interactive Canvas Area -->
+                <div id="canvas-container" class="w-full h-64 relative z-10 flex items-center justify-center cursor-pointer">
+                    <!-- Content injected by JS -->
+                </div>
+
+                <p class="mt-4 text-sm opacity-75 z-10" id="visual-instruction">Click the sparks to tame the demon!</p>
+                
+                <!-- Panic Meter -->
+                <div class="w-full mt-6 z-10">
+                    <div class="flex justify-between text-xs font-bold uppercase mb-1">
+                        <span>Public Panic Level</span>
+                        <span id="panic-percent">100%</span>
+                    </div>
+                    <div class="w-full h-4 bg-gray-300 rounded-full overflow-hidden border border-[var(--text-color)]">
+                        <div id="panic-bar" class="h-full bg-red-600 transition-all duration-500" style="width: 100%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Job Market Simulator -->
+            <div class="card p-6 rounded-xl">
+                <h3 class="text-xl font-bold mb-3">Job Market Oracle</h3>
+                <p class="text-sm mb-4 opacity-80">Enter a job title to see its fate.</p>
+                <div class="flex gap-2">
+                    <input type="text" id="job-input" placeholder="e.g. Lamplighter" class="flex-1 p-2 bg-transparent border-b-2 border-[var(--text-color)] focus:outline-none placeholder-opacity-50 placeholder-[var(--text-color)]">
+                    <button onclick="predictJob()" class="px-4 py-2 bg-[var(--accent-color)] text-white font-bold rounded hover:opacity-90 transition">Predict</button>
+                </div>
+                <div id="job-result" class="mt-4 p-3 bg-[var(--bg-color)] border border-[var(--text-color)] rounded hidden">
+                    <!-- Result -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Center Column: The Bridge (Desktop Only) -->
+        <div class="hidden md:flex md:col-span-2 flex-col items-center justify-center text-center opacity-60">
+            <div class="h-full w-1 bg-gradient-to-b from-transparent via-[var(--text-color)] to-transparent"></div>
+            <div class="py-4 bg-[var(--bg-color)] z-10 px-2">
+                <span class="text-3xl">VS</span>
+            </div>
+            <div class="h-full w-1 bg-gradient-to-b from-transparent via-[var(--text-color)] to-transparent"></div>
+        </div>
+
+        <!-- Right Column: The Fears -->
+        <div class="md:col-span-5 flex flex-col gap-6">
+            
+            <!-- Fear 1: Safety -->
+            <div class="card p-6 rounded-xl cursor-pointer group" onclick="resolveFear(this, 0)">
+                <div class="flex items-start gap-4">
+                    <div class="text-4xl p-2 bg-[var(--bg-color)] rounded-lg border border-[var(--text-color)]" id="icon-1">⚡</div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-1" id="title-1">Fear of Safety</h3>
+                        <p class="text-sm opacity-90" id="desc-1">"Electricity is an unrestrained demon! Wires bring death from above!"</p>
+                        <div class="mt-3 text-[var(--accent-color)] font-bold text-xs uppercase tracking-widest hidden group-hover:block">Click to see reality</div>
+                        <div class="reality-check hidden mt-3 pt-3 border-t border-[var(--text-color)]">
+                            <p class="text-sm font-bold" id="reality-1">Reality: Safe, regulated power became the backbone of modern life.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fear 2: Necessity -->
+            <div class="card p-6 rounded-xl cursor-pointer group" onclick="resolveFear(this, 1)">
+                <div class="flex items-start gap-4">
+                    <div class="text-4xl p-2 bg-[var(--bg-color)] rounded-lg border border-[var(--text-color)]" id="icon-2">🕯️</div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-1" id="title-2">Fear of Necessity</h3>
+                        <p class="text-sm opacity-90" id="desc-2">"It's a gimmick for the rich. Gaslight works just fine."</p>
+                        <div class="mt-3 text-[var(--accent-color)] font-bold text-xs uppercase tracking-widest hidden group-hover:block">Click to see reality</div>
+                        <div class="reality-check hidden mt-3 pt-3 border-t border-[var(--text-color)]">
+                            <p class="text-sm font-bold" id="reality-2">Reality: It wasn't just light; it powered appliances, factories, and the future.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fear 3: Unemployment -->
+            <div class="card p-6 rounded-xl cursor-pointer group" onclick="resolveFear(this, 2)">
+                <div class="flex items-start gap-4">
+                    <div class="text-4xl p-2 bg-[var(--bg-color)] rounded-lg border border-[var(--text-color)]" id="icon-3">🔨</div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-1" id="title-3">Fear of Unemployment</h3>
+                        <p class="text-sm opacity-90" id="desc-3">"One machine does the job of 41 skilled glassblowers!"</p>
+                        <div class="mt-3 text-[var(--accent-color)] font-bold text-xs uppercase tracking-widest hidden group-hover:block">Click to see reality</div>
+                        <div class="reality-check hidden mt-3 pt-3 border-t border-[var(--text-color)]">
+                            <p class="text-sm font-bold" id="reality-3">Reality: New industries emerged. Electrical engineers, pilots, technicians.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="mt-12 text-center opacity-60 text-sm max-w-2xl">
+        <p>"We see the jobs that are threatened with perfect clarity. We don't see the jobs that don't exist yet."</p>
+        <p class="mt-2 text-xs">Based on "The Tech Panic Playbook"</p>
+    </footer>
+
+    <script>
+        // --- Data ---
+        const data = {
+            electricity: {
+                title: "The Panic of the Past",
+                visualTitle: "The Unrestrained Demon",
+                visualInstruction: "Click the chaotic sparks to insulate the wires!",
+                fears: [
+                    {
+                        icon: "⚡",
+                        title: "Fear of Safety",
+                        desc: "Electricity was seen as an 'unrestrained demon' whose wires could bring death from above.",
+                        reality: "Reality: Standards were created. Electricity became the safest, cleanest energy source."
+                    },
+                    {
+                        icon: "🕯️",
+                        title: "Fear of Necessity",
+                        desc: "Seen as a gimmick for the rich. 'Gaslight and steam power work fine!'",
+                        reality: "Reality: It redefined 'necessity'. Try imagining a day without power now."
+                    },
+                    {
+                        icon: "🏭",
+                        title: "Fear of Unemployment",
+                        desc: "New machinery allowed one worker to do the job of 41 skilled glassblowers.",
+                        reality: "Reality: Employment boomed. Entirely new sectors (Electronics, Appliances) were born."
+                    }
+                ],
+                jobs: {
+                    "lamplighter": "OBSOLETE. But you can become an Electrician!",
+                    "glassblower": "IMPACTED. Mass production takes over, but art remains.",
+                    "clerk": "AT RISK. Typewriters and calculators are coming.",
+                    "driver": "Horse carriage? Time to learn to drive a motor car."
+                },
+                defaultJob: "Your job might change, but human ingenuity remains."
+            },
+            ai: {
+                title: "The Modern Echo",
+                visualTitle: "The Inscrutable Mind",
+                visualInstruction: "Click the red nodes to align the algorithm!",
+                fears: [
+                    {
+                        icon: "👁️",
+                        title: "Fear of Safety & Ethics",
+                        desc: "We fear a web of inscrutable algorithms, bias, and mass surveillance.",
+                        reality: "Potential: With proper guardrails, AI solves complex problems like protein folding and climate modeling."
+                    },
+                    {
+                        icon: "🎨",
+                        title: "Fear of Necessity",
+                        desc: "Critics argue it leads to a loss of human creativity and autonomy.",
+                        reality: "Potential: AI becomes a 'bicycle for the mind', amplifying creativity rather than replacing it."
+                    },
+                    {
+                        icon: "🤖",
+                        title: "Fear of Unemployment",
+                        desc: "Predictions suggest up to 300 million full-time jobs could be affected.",
+                        reality: "Potential: History suggests we will adapt. Prompt Engineers, AI Ethicists, and Data Curators will rise."
+                    }
+                ],
+                jobs: {
+                    "writer": "AUGMENTED. AI drafts, you edit and curate.",
+                    "programmer": "ACCELERATED. AI writes boilerplate, you architect systems.",
+                    "artist": "EVOLVING. New tools create new forms of expression.",
+                    "driver": "AUTOMATED. Autonomous fleets are on the horizon."
+                },
+                defaultJob: "AI will likely change how you work, not just if you work."
+            }
+        };
+
+        // --- State ---
+        let currentEra = 'electricity';
+        let panicLevel = 100;
+        let resolvedCount = 0;
+
+        // --- DOM Elements ---
+        const body = document.body;
+        const toggle = document.getElementById('era-toggle');
+        const canvasContainer = document.getElementById('canvas-container');
+        const panicBar = document.getElementById('panic-bar');
+        const panicPercent = document.getElementById('panic-percent');
+        const jobInput = document.getElementById('job-input');
+
+        // --- Initialization ---
+        function init() {
+            renderContent();
+            renderVisual();
+        }
+
+        // --- Toggle Logic ---
+        toggle.addEventListener('change', () => {
+            currentEra = toggle.checked ? 'ai' : 'electricity';
+            
+            // Theme Switch
+            if (currentEra === 'ai') {
+                body.classList.add('era-ai');
+            } else {
+                body.classList.remove('era-ai');
+            }
+
+            // Reset State
+            panicLevel = 100;
+            resolvedCount = 0;
+            updatePanicMeter();
+            
+            // Reset Cards
+            document.querySelectorAll('.reality-check').forEach(el => el.classList.add('hidden'));
+            
+            // Re-render
+            renderContent();
+            renderVisual();
+        });
+
+        // --- Render Content ---
+        function renderContent() {
+            const eraData = data[currentEra];
+            
+            // Headers
+            document.getElementById('subtitle').innerText = eraData.title;
+            document.getElementById('visual-title').innerText = eraData.visualTitle;
+            document.getElementById('visual-instruction').innerText = eraData.visualInstruction;
+
+            // Cards
+            eraData.fears.forEach((fear, index) => {
+                document.getElementById(`icon-${index+1}`).innerText = fear.icon;
+                document.getElementById(`title-${index+1}`).innerText = fear.title;
+                document.getElementById(`desc-${index+1}`).innerText = fear.desc;
+                document.getElementById(`reality-${index+1}`).innerText = fear.reality;
+            });
+
+            // Job Input Placeholder
+            jobInput.placeholder = currentEra === 'electricity' ? "e.g. Lamplighter" : "e.g. Copywriter";
+            document.getElementById('job-result').classList.add('hidden');
+        }
+
+        // --- Visuals (SVG Generation) ---
+        function renderVisual() {
+            canvasContainer.innerHTML = '';
+            
+            if (currentEra === 'electricity') {
+                // Render Wire Demon
+                const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                svg.setAttribute("viewBox", "0 0 200 200");
+                svg.setAttribute("class", "w-full h-full panic-mode");
+                svg.id = "demon-svg";
+
+                // Create chaotic lines
+                for(let i=0; i<8; i++) {
+                    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                    const d = `M100,100 Q${Math.random()*200},${Math.random()*200} ${Math.random()*200},${Math.random()*200}`;
+                    path.setAttribute("d", d);
+                    path.setAttribute("stroke", "#d97706");
+                    path.setAttribute("stroke-width", "3");
+                    path.setAttribute("fill", "none");
+                    path.setAttribute("class", "wire-path");
+                    svg.appendChild(path);
+                }
+
+                // Central Core
+                const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                circle.setAttribute("cx", "100");
+                circle.setAttribute("cy", "100");
+                circle.setAttribute("r", "20");
+                circle.setAttribute("fill", "#2c1810");
+                svg.appendChild(circle);
+
+                // Interaction
+                svg.addEventListener('click', () => {
+                    svg.classList.remove('panic-mode');
+                    svg.querySelectorAll('path').forEach(p => {
+                        p.setAttribute("stroke", "#10b981"); // Green
+                        p.style.animation = "none";
+                        // Straighten lines
+                        const endX = Math.random() * 200;
+                        const endY = Math.random() * 200;
+                        p.setAttribute("d", `M100,100 L${endX},${endY}`);
+                    });
+                    reducePanic(30);
+                    document.getElementById('visual-instruction').innerText = "System Stabilized. Power is flowing safely.";
+                });
+
+                canvasContainer.appendChild(svg);
+
+            } else {
+                // Render AI Brain
+                const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                svg.setAttribute("viewBox", "0 0 200 200");
+                svg.setAttribute("class", "w-full h-full");
+
+                // Generate Nodes
+                const nodes = [];
+                for(let i=0; i<15; i++) {
+                    const cx = 40 + Math.random() * 120;
+                    const cy = 40 + Math.random() * 120;
+                    nodes.push({cx, cy});
+                    
+                    // Connections
+                    nodes.forEach(n => {
+                        if (Math.random() > 0.7) {
+                            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                            line.setAttribute("x1", cx);
+                            line.setAttribute("y1", cy);
+                            line.setAttribute("x2", n.cx);
+                            line.setAttribute("y2", n.cy);
+                            line.setAttribute("stroke", "#334155");
+                            line.setAttribute("stroke-width", "1");
+                            svg.appendChild(line);
+                        }
+                    });
+
+                    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                    circle.setAttribute("cx", cx);
+                    circle.setAttribute("cy", cy);
+                    circle.setAttribute("r", "6");
+                    circle.setAttribute("fill", "#ef4444"); // Red (Danger)
+                    circle.setAttribute("class", "node pulse-glow");
+                    
+                    // Interaction
+                    circle.addEventListener('click', (e) => {
+                        e.target.setAttribute("fill", "#06b6d4"); // Cyan (Safe)
+                        e.target.classList.remove("pulse-glow");
+                        reducePanic(10);
+                    });
+
+                    svg.appendChild(circle);
+                }
+                canvasContainer.appendChild(svg);
+            }
+        }
+
+        // --- Logic Functions ---
+
+        function resolveFear(card, index) {
+            const reality = card.querySelector('.reality-check');
+            if (reality.classList.contains('hidden')) {
+                reality.classList.remove('hidden');
+                reducePanic(20);
+            }
+        }
+
+        function reducePanic(amount) {
+            panicLevel = Math.max(0, panicLevel - amount);
+            updatePanicMeter();
+        }
+
+        function updatePanicMeter() {
+            panicBar.style.width = `${panicLevel}%`;
+            panicPercent.innerText = `${panicLevel}%`;
+            
+            if (panicLevel > 60) {
+                panicBar.className = "h-full bg-red-600 transition-all duration-500";
+            } else if (panicLevel > 20) {
+                panicBar.className = "h-full bg-yellow-500 transition-all duration-500";
+            } else {
+                panicBar.className = "h-full bg-green-500 transition-all duration-500";
+                if(panicLevel === 0) {
+                    document.getElementById('visual-instruction').innerText = "Panic subsided. Progress achieved.";
+                }
+            }
+        }
+
+        function predictJob() {
+            const input = jobInput.value.toLowerCase().trim();
+            const resultBox = document.getElementById('job-result');
+            const eraData = data[currentEra];
+            
+            let resultText = eraData.defaultJob;
+            
+            // Simple keyword matching
+            for (const [key, value] of Object.entries(eraData.jobs)) {
+                if (input.includes(key)) {
+                    resultText = value;
+                    break;
+                }
+            }
+
+            resultBox.innerHTML = `<span class="font-bold text-[var(--accent-color)]">${input.toUpperCase() || "JOB"}:</span> ${resultText}`;
+            resultBox.classList.remove('hidden');
+        }
+
+        // Run Init
+        init();
+
+    </script>
+</body>
+</html>

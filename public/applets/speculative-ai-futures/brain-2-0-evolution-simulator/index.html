@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain 2.0: Evolution Simulator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap');
+
+        body {
+            background-color: #050510;
+            color: #e0e0ff;
+            font-family: 'Rajdhani', sans-serif;
+            overflow: hidden;
+        }
+
+        .font-tech {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Neon Glow Effects */
+        .glow-text {
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+        }
+        .glow-border {
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3), inset 0 0 10px rgba(0, 255, 255, 0.1);
+        }
+        .danger-glow {
+            box-shadow: 0 0 15px rgba(255, 0, 80, 0.5), inset 0 0 10px rgba(255, 0, 80, 0.2);
+            border-color: #ff0050 !important;
+        }
+        .organic-glow {
+            box-shadow: 0 0 15px rgba(200, 100, 255, 0.5), inset 0 0 10px rgba(200, 100, 255, 0.2);
+            border-color: #c864ff !important;
+        }
+
+        /* Animations */
+        @keyframes pulse-brain {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.02); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+        
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+
+        .glitching {
+            animation: glitch 0.2s infinite;
+            color: #ff0050;
+            text-shadow: 2px 0 #fff;
+        }
+
+        .brain-node {
+            transition: all 0.5s ease;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a1a; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3b82f6; 
+            border-radius: 4px;
+        }
+
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: rgba(0, 255, 255, 0.3);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            animation: scan 3s linear infinite;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        @keyframes scan {
+            0% { top: 0%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        .meter-fill {
+            transition: width 0.5s ease-out, background-color 0.5s;
+        }
+    </style>
+</head>
+<body class="h-screen w-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="h-16 border-b border-blue-900/50 flex items-center justify-between px-6 bg-black/40 backdrop-blur-md z-20">
+        <div class="flex items-center gap-3">
+            <div class="text-3xl">🧠</div>
+            <div>
+                <h1 class="font-tech text-xl text-blue-400 tracking-widest glow-text">BRAIN 2.0</h1>
+                <p class="text-xs text-blue-200/60 uppercase tracking-widest">Human-AI Merge Simulator</p>
+            </div>
+        </div>
+        <div class="flex gap-6 text-sm font-bold tracking-wider">
+            <div class="flex flex-col items-end">
+                <span class="text-gray-400 text-xs">SYNC RATE</span>
+                <span id="sync-rate" class="text-green-400">0%</span>
+            </div>
+            <div class="flex flex-col items-end">
+                <span class="text-gray-400 text-xs">HUMANITY</span>
+                <span id="humanity-score" class="text-blue-300">100%</span>
+            </div>
+            <div class="flex flex-col items-end">
+                <span class="text-gray-400 text-xs">THREAT LEVEL</span>
+                <span id="threat-level" class="text-red-400">LOW</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex overflow-hidden relative">
+        <div class="scan-line"></div>
+
+        <!-- Left Panel: The Context (Inputs) -->
+        <section class="w-1/4 border-r border-blue-900/30 bg-black/20 p-6 flex flex-col gap-6 overflow-y-auto backdrop-blur-sm z-10">
+            <h2 class="font-tech text-lg text-purple-300 border-b border-purple-900/50 pb-2 mb-2">The Context: Inputs</h2>
+            
+            <!-- BCI Path -->
+            <div class="p-4 border border-blue-500/30 rounded-lg bg-blue-900/10 hover:bg-blue-900/20 transition cursor-pointer group" onclick="upgrade('bci')">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="font-bold text-blue-300">BCI Interface</span>
+                    <span class="text-xs bg-blue-900 px-2 py-1 rounded text-blue-200">Mech</span>
+                </div>
+                <p class="text-xs text-gray-400 mb-3">Wire brain directly to machines. High speed, moderate risk.</p>
+                <div class="h-1 w-full bg-gray-800 rounded overflow-hidden">
+                    <div id="bci-progress" class="h-full bg-blue-500 w-0 transition-all duration-300"></div>
+                </div>
+                <button class="mt-3 w-full py-1 text-xs border border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white transition uppercase font-bold">Install Wiring</button>
+            </div>
+
+            <!-- Organoid Path -->
+            <div class="p-4 border border-purple-500/30 rounded-lg bg-purple-900/10 hover:bg-purple-900/20 transition cursor-pointer group" onclick="upgrade('oi')">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="font-bold text-purple-300">Organoid Intel</span>
+                    <span class="text-xs bg-purple-900 px-2 py-1 rounded text-purple-200">Bio</span>
+                </div>
+                <p class="text-xs text-gray-400 mb-3">Teach biological neurons to compute. Unpredictable evolution.</p>
+                <div class="h-1 w-full bg-gray-800 rounded overflow-hidden">
+                    <div id="oi-progress" class="h-full bg-purple-500 w-0 transition-all duration-300"></div>
+                </div>
+                <button class="mt-3 w-full py-1 text-xs border border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white transition uppercase font-bold">Cultivate Neurons</button>
+            </div>
+
+            <div class="mt-auto">
+                <div class="text-xs text-gray-500 uppercase mb-1">System Log</div>
+                <div id="console-log" class="h-32 bg-black/50 border border-gray-800 rounded p-2 text-xs font-mono text-green-500/80 overflow-y-auto flex flex-col-reverse">
+                    <div>> System Initialized...</div>
+                    <div>> Waiting for input...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Center Panel: The Visualization -->
+        <section class="flex-1 relative flex items-center justify-center bg-gradient-to-b from-[#050510] to-[#0a0a20]">
+            <!-- Background Grid -->
+            <div class="absolute inset-0" style="background-image: radial-gradient(rgba(30, 64, 175, 0.1) 1px, transparent 1px); background-size: 30px 30px;"></div>
+            
+            <!-- Brain Canvas Container -->
+            <div class="relative w-[500px] h-[500px] z-10">
+                <!-- SVG Brain Profile -->
+                <svg viewBox="0 0 400 400" class="w-full h-full drop-shadow-2xl">
+                    <defs>
+                        <linearGradient id="brainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                        </linearGradient>
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    
+                    <!-- Head Silhouette -->
+                    <path d="M120,380 C80,380 60,350 60,300 C60,250 40,240 40,200 C40,120 100,50 200,50 C300,50 360,120 360,200 C360,280 340,380 280,380" 
+                          fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2" />
+                    
+                    <!-- Brain Area (Dynamic Content will go here) -->
+                    <g id="brain-network" filter="url(#glow)">
+                        <!-- Nodes and connections generated by JS -->
+                    </g>
+
+                    <!-- Connection Cables (Left) -->
+                    <path id="cable-bci" d="M40,180 C80,180 100,150 140,150" stroke="#3b82f6" stroke-width="0" fill="none" class="transition-all duration-1000" />
+                    <path id="cable-oi" d="M40,220 C80,220 100,250 140,250" stroke="#c084fc" stroke-width="0" fill="none" class="transition-all duration-1000" />
+
+                    <!-- Output Rays (Right) -->
+                    <path id="ray-promise" d="M260,150 C300,150 340,100 380,100" stroke="#4ade80" stroke-width="0" fill="none" stroke-dasharray="5,5" />
+                    <path id="ray-peril" d="M260,250 C300,250 340,300 380,300" stroke="#f43f5e" stroke-width="0" fill="none" stroke-dasharray="5,5" />
+                </svg>
+
+                <!-- Status Overlay on Brain -->
+                <div id="status-overlay" class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <h2 class="text-4xl font-tech font-bold text-white/10 tracking-widest uppercase">Baseline</h2>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Panel: The Promise & Peril (Outputs) -->
+        <section class="w-1/4 border-l border-blue-900/30 bg-black/20 p-6 flex flex-col gap-4 overflow-y-auto backdrop-blur-sm z-10">
+            
+            <!-- The Promise -->
+            <div class="mb-4">
+                <h2 class="font-tech text-lg text-green-400 border-b border-green-900/50 pb-2 mb-4">The Promise</h2>
+                
+                <div id="upgrade-limbs" class="opacity-30 pointer-events-none mb-3 p-3 border border-green-500/30 rounded bg-green-900/10 flex items-center gap-3 transition-all">
+                    <div class="text-2xl">🦾</div>
+                    <div>
+                        <h4 class="font-bold text-green-200 text-sm">Restore Abilities</h4>
+                        <p class="text-[10px] text-gray-400">Control robotics via thought.</p>
+                    </div>
+                </div>
+
+                <div id="upgrade-senses" class="opacity-30 pointer-events-none mb-3 p-3 border border-cyan-500/30 rounded bg-cyan-900/10 flex items-center gap-3 transition-all">
+                    <div class="text-2xl">👁️</div>
+                    <div>
+                        <h4 class="font-bold text-cyan-200 text-sm">Beyond Senses</h4>
+                        <p class="text-[10px] text-gray-400">See spectrums beyond human.</p>
+                    </div>
+                </div>
+
+                <div id="upgrade-cognition" class="opacity-30 pointer-events-none p-3 border border-yellow-500/30 rounded bg-yellow-900/10 flex items-center gap-3 transition-all">
+                    <div class="text-2xl">🌐</div>
+                    <div>
+                        <h4 class="font-bold text-yellow-200 text-sm">Superhuman Cognition</h4>
+                        <p class="text-[10px] text-gray-400">Direct mind-to-mind link.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Peril -->
+            <div>
+                <h2 class="font-tech text-lg text-red-400 border-b border-red-900/50 pb-2 mb-4">The Peril</h2>
+                
+                <div id="peril-identity" class="hidden p-3 border border-red-500/50 rounded bg-red-900/20 mb-3 animate-pulse">
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="text-xl">🎭</span>
+                        <h4 class="font-bold text-red-200 text-sm">Identity Crisis</h4>
+                    </div>
+                    <p class="text-[10px] text-red-300">Where do you end and the machine begin?</p>
+                </div>
+
+                <div id="peril-security" class="hidden p-3 border border-red-500/50 rounded bg-red-900/20 mb-3">
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="text-xl">🔒</span>
+                        <h4 class="font-bold text-red-200 text-sm">Security Breach</h4>
+                    </div>
+                    <p class="text-[10px] text-red-300">Thoughts stolen. Emotions manipulated.</p>
+                    <button onclick="fixSecurity()" class="mt-2 w-full bg-red-600 text-white text-xs py-1 rounded hover:bg-red-500">PATCH FIREWALL</button>
+                </div>
+
+                <div id="peril-caste" class="hidden p-3 border border-orange-500/50 rounded bg-orange-900/20">
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="text-xl">🧱</span>
+                        <h4 class="font-bold text-orange-200 text-sm">Caste System</h4>
+                    </div>
+                    <p class="text-[10px] text-orange-300">You have left humanity behind.</p>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Modal for Endgame -->
+    <div id="modal" class="hidden fixed inset-0 bg-black/90 z-50 flex items-center justify-center backdrop-blur-lg">
+        <div class="max-w-md w-full bg-gray-900 border border-blue-500 p-8 rounded-lg shadow-2xl text-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-purple-900/20 pointer-events-none"></div>
+            <div id="modal-icon" class="text-6xl mb-4">🧠</div>
+            <h2 id="modal-title" class="text-3xl font-tech text-white mb-2">Simulation Complete</h2>
+            <p id="modal-desc" class="text-gray-300 mb-6">Your evolution path has concluded.</p>
+            <button onclick="location.reload()" class="px-6 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded transition">REBOOT SYSTEM</button>
+        </div>
+    </div>
+
+    <script>
+        // Game State
+        const state = {
+            bciLevel: 0,
+            oiLevel: 0,
+            syncRate: 0, // 0 to 100
+            humanity: 100, // 100 to 0
+            threat: 0, // 0 to 100
+            upgrades: {
+                limbs: false,
+                senses: false,
+                cognition: false
+            },
+            perils: {
+                identity: false,
+                security: false,
+                caste: false
+            },
+            nodes: []
+        };
+
+        const config = {
+            maxLevel: 10,
+            threatThreshold: 70,
+            humanityThreshold: 30
+        };
+
+        // DOM Elements
+        const ui = {
+            syncRate: document.getElementById('sync-rate'),
+            humanity: document.getElementById('humanity-score'),
+            threat: document.getElementById('threat-level'),
+            log: document.getElementById('console-log'),
+            brainNetwork: document.getElementById('brain-network'),
+            bciBar: document.getElementById('bci-progress'),
+            oiBar: document.getElementById('oi-progress'),
+            statusText: document.querySelector('#status-overlay h2'),
+            cables: {
+                bci: document.getElementById('cable-bci'),
+                oi: document.getElementById('cable-oi')
+            },
+            rays: {
+                promise: document.getElementById('ray-promise'),
+                peril: document.getElementById('ray-peril')
+            }
+        };
+
+        // Initialize Brain Visualization
+        function initBrain() {
+            // Create initial biological nodes
+            for(let i=0; i<15; i++) {
+                createNode('bio');
+            }
+        }
+
+        function createNode(type) {
+            const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            // Random position within brain area roughly
+            const angle = Math.random() * Math.PI * 2;
+            const r = Math.random() * 80; // radius from center
+            const cx = 200 + r * Math.cos(angle);
+            const cy = 200 + r * Math.sin(angle) * 0.8; // Flatten slightly
+
+            circle.setAttribute("cx", cx);
+            circle.setAttribute("cy", cy);
+            circle.setAttribute("r", Math.random() * 3 + 2);
+            
+            if (type === 'bio') {
+                circle.setAttribute("fill", "#f472b6"); // Pink
+                circle.setAttribute("class", "brain-node opacity-60");
+            } else if (type === 'tech') {
+                circle.setAttribute("fill", "#60a5fa"); // Blue
+                circle.setAttribute("class", "brain-node glow-text");
+            } else if (type === 'organoid') {
+                circle.setAttribute("fill", "#c084fc"); // Purple
+                circle.setAttribute("class", "brain-node");
+            }
+
+            // Animation
+            const animate = document.createElementNS("http://www.w3.org/2000/svg", "animate");
+            animate.setAttribute("attributeName", "opacity");
+            animate.setAttribute("values", "0.4;1;0.4");
+            animate.setAttribute("dur", (Math.random() * 2 + 1) + "s");
+            animate.setAttribute("repeatCount", "indefinite");
+            circle.appendChild(animate);
+
+            ui.brainNetwork.appendChild(circle);
+            state.nodes.push({ el: circle, x: cx, y: cy, type: type });
+
+            // Draw connections to nearby nodes
+            connectNode(cx, cy, type);
+        }
+
+        function connectNode(x, y, type) {
+            // Find nearest neighbors
+            state.nodes.forEach(node => {
+                const dist = Math.hypot(node.x - x, node.y - y);
+                if (dist < 50 && dist > 5) {
+                    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                    line.setAttribute("x1", x);
+                    line.setAttribute("y1", y);
+                    line.setAttribute("x2", node.x);
+                    line.setAttribute("y2", node.y);
+                    
+                    let color = "#f472b6";
+                    if (type === 'tech' || node.type === 'tech') color = "#3b82f6";
+                    if (type === 'organoid' || node.type === 'organoid') color = "#c084fc";
+
+                    line.setAttribute("stroke", color);
+                    line.setAttribute("stroke-width", "0.5");
+                    line.setAttribute("opacity", "0.3");
+                    ui.brainNetwork.prepend(line);
+                }
+            });
+        }
+
+        // Core Game Logic
+        function upgrade(type) {
+            // Check game over conditions
+            if (state.perils.security) {
+                log("SYSTEM LOCKED: Resolve Security Breach first!", "error");
+                return;
+            }
+
+            if (type === 'bci') {
+                if (state.bciLevel >= config.maxLevel) return;
+                state.bciLevel++;
+                state.humanity -= 5;
+                state.threat += 8;
+                state.syncRate += 5;
+                
+                ui.cables.bci.setAttribute("stroke-width", state.bciLevel);
+                createNode('tech');
+                createNode('tech');
+                log("BCI Interface upgraded. Processing speed increased.", "info");
+            } 
+            else if (type === 'oi') {
+                if (state.oiLevel >= config.maxLevel) return;
+                state.oiLevel++;
+                state.humanity -= 3; // Less humanity loss
+                state.threat += 4;
+                state.syncRate += 4; // Slower sync
+                
+                ui.cables.oi.setAttribute("stroke-width", state.oiLevel);
+                createNode('organoid');
+                createNode('organoid');
+                log("Organoid cluster grown. Biological computing enhanced.", "info");
+            }
+
+            updateUI();
+            checkMilestones();
+            checkPerils();
+        }
+
+        function updateUI() {
+            // Bars
+            ui.bciBar.style.width = (state.bciLevel / config.maxLevel * 100) + "%";
+            ui.oiBar.style.width = (state.oiLevel / config.maxLevel * 100) + "%";
+
+            // Stats
+            ui.syncRate.innerText = state.syncRate + "%";
+            ui.humanity.innerText = state.humanity + "%";
+            
+            // Threat Color
+            ui.threat.innerText = state.threat + "%";
+            if (state.threat > 50) ui.threat.className = "text-orange-400 font-bold glitching";
+            if (state.threat > 80) ui.threat.className = "text-red-500 font-bold glitching";
+            else if (state.threat <= 50) ui.threat.className = "text-green-400";
+
+            // Humanity Color
+            if (state.humanity < 50) ui.humanity.className = "text-purple-400";
+            if (state.humanity < 20) ui.humanity.className = "text-red-500";
+
+            // Status Text
+            if (state.syncRate < 30) ui.statusText.innerText = "Augmented";
+            else if (state.syncRate < 60) ui.statusText.innerText = "Hybrid";
+            else if (state.syncRate < 90) ui.statusText.innerText = "Integrated";
+            else ui.statusText.innerText = "Transhuman";
+        }
+
+        function checkMilestones() {
+            // Unlock Promise Upgrades
+            if (state.syncRate >= 30 && !state.upgrades.limbs) {
+                unlockUpgrade('limbs', 'upgrade-limbs');
+                log("ACHIEVEMENT: Motor Cortex Override enabled. Robotic Limbs available.", "success");
+            }
+            if (state.syncRate >= 60 && !state.upgrades.senses) {
+                unlockUpgrade('senses', 'upgrade-senses');
+                log("ACHIEVEMENT: Visual Cortex replaced. Multispectral vision online.", "success");
+            }
+            if (state.syncRate >= 90 && !state.upgrades.cognition) {
+                unlockUpgrade('cognition', 'upgrade-cognition');
+                ui.rays.promise.setAttribute("stroke-width", "2");
+                log("ACHIEVEMENT: Hive Mind connection established.", "success");
+            }
+        }
+
+        function unlockUpgrade(key, id) {
+            state.upgrades[key] = true;
+            const el = document.getElementById(id);
+            el.classList.remove('opacity-30', 'pointer-events-none');
+            el.classList.add('glow-border', 'cursor-pointer');
+            el.onclick = () => {
+                log(`Activating ${key} module...`, 'success');
+                el.style.background = "rgba(255,255,255,0.1)";
+            };
+        }
+
+        function checkPerils() {
+            // Identity Crisis (Low Humanity)
+            if (state.humanity < 40 && !state.perils.identity) {
+                state.perils.identity = true;
+                document.getElementById('peril-identity').classList.remove('hidden');
+                document.body.classList.add('glitching');
+                log("WARNING: Ego dissolution detected. Who are you?", "danger");
+                ui.rays.peril.setAttribute("stroke-width", "1");
+            }
+
+            // Security Threat (High Threat)
+            if (state.threat > 75 && Math.random() > 0.7 && !state.perils.security) {
+                triggerSecurityBreach();
+            }
+
+            // Caste System (Endgame State)
+            if (state.syncRate >= 95 && state.humanity < 20) {
+                endGame("Biological Caste Separation", "You have evolved beyond humanity, leaving the unenhanced behind. You are now a god, but you are alone.", "🧱");
+            }
+        }
+
+        function triggerSecurityBreach() {
+            state.perils.security = true;
+            document.getElementById('peril-security').classList.remove('hidden');
+            document.getElementById('brain-network').children[0].setAttribute("fill", "red"); // Turn a node red
+            ui.rays.peril.setAttribute("stroke-width", "3");
+            log("CRITICAL ALERT: EXTERNAL INTRUSION DETECTED.", "danger");
+        }
+
+        function fixSecurity() {
+            state.perils.security = false;
+            state.threat -= 20;
+            document.getElementById('peril-security').classList.add('hidden');
+            log("Firewall patched. Threat reduced.", "success");
+            updateUI();
+        }
+
+        function log(msg, type) {
+            const div = document.createElement('div');
+            div.innerText = `> ${msg}`;
+            if (type === 'danger') div.className = "text-red-500 font-bold";
+            if (type === 'success') div.className = "text-green-400";
+            if (type === 'info') div.className = "text-blue-300";
+            
+            ui.log.prepend(div);
+        }
+
+        function endGame(title, desc, icon) {
+            document.getElementById('modal').classList.remove('hidden');
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-desc').innerText = desc;
+            document.getElementById('modal-icon').innerText = icon;
+        }
+
+        // Start
+        initBrain();
+
+    </script>
+</body>
+</html>
