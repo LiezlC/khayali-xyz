@@ -30,7 +30,7 @@ export default function RootLayout({
                     <a href="/research" className="block px-4 py-2 hover:bg-gray-700 rounded-t-lg">All Projects</a>
                     <a href="/research/esg-agents" className="block px-4 py-2 hover:bg-gray-700">ESG & AI</a>
                     <a href="/research/justdev" className="block px-4 py-2 hover:bg-gray-700">JustDev</a>
-                    <a href="/research/grievoice" className="block px-4 py-2 hover:bg-gray-700 rounded-b-lg">GrieVoice</a>
+                    <a href="/grievoice" className="block px-4 py-2 hover:bg-gray-700 rounded-b-lg">GrieVoice</a>
                   </div>
                 </div>
                 <a href="/observatory" className="hover:text-blue-400 transition-colors">Observatory</a>

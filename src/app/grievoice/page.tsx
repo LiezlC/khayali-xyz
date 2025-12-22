@@ -54,6 +54,33 @@ export default function GrievoicePage() {
         </div>
       </section>
 
+      {/* Live App Section */}
+      <section className="pb-8 px-4">
+        <div className="container mx-auto max-w-4xl">
+          <div className="bg-gradient-to-r from-purple-800/50 to-pink-800/50 rounded-2xl p-8 border border-purple-500/30">
+            <div className="flex items-center gap-4 mb-6">
+              <span className="text-5xl">🎙️</span>
+              <div>
+                <h2 className="text-3xl font-bold text-purple-300">Try the Live Voice Agent</h2>
+                <p className="text-gray-400">Experience the actual Humevoice interface</p>
+              </div>
+            </div>
+            <p className="text-gray-300 mb-6">
+              Interact with the fully functional GrieVoice system powered by Hume AI. Test multilingual
+              voice grievance submission in English, Portuguese, or Swahili with emotion-aware responses.
+            </p>
+            <a
+              href="https://humevoice-virid.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-lg font-semibold transition-colors text-white"
+            >
+              🎙️ Launch Live Voice Agent →
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* YouTube Video Section */}
       <section className="pb-16 px-4">
         <div className="container mx-auto max-w-4xl">

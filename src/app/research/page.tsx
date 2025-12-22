@@ -171,7 +171,7 @@ export default function ResearchPage() {
 
                 <div className="space-y-3">
                   <a
-                    href="/research/grievoice"
+                    href="/grievoice"
                     className="block w-full px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg font-semibold transition-colors text-center"
                   >
                     Explore System →
