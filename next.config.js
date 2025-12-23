@@ -20,12 +20,6 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      // Legacy /grievoice redirect now points to research
-      {
-        source: '/grievoice',
-        destination: '/research/grievoice',
-        permanent: true, // 301 permanent redirect
-      },
       // Avatar section redirects to research
       {
         source: '/avatar',
@@ -34,13 +28,18 @@ const nextConfig = {
       },
       {
         source: '/avatar/grievoice',
-        destination: '/research/grievoice',
-        permanent: true,
+        destination: '/grievoice',
+        permanent: false, // Non-permanent to allow changes
       },
       {
         source: '/avatar/justdev',
         destination: '/research/justdev',
         permanent: true,
+      },
+      {
+        source: '/research/grievoice',
+        destination: '/grievoice',
+        permanent: false, // Non-permanent to allow changes
       },
     ];
   },
