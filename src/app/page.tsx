@@ -10,87 +10,82 @@ export default function HomePage() {
         />
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900/40 to-gray-900" />
 
-        <div className="relative container mx-auto px-4 text-center">
+        <div className="relative container mx-auto px-4 text-center max-w-5xl">
           <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-teal-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-            Sociable Systems
-          </h1>
-          <h2 className="text-2xl md:text-3xl mb-8 text-gray-300 font-light">
             AI Accountability in High-Stakes Operations
-          </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed">
-            Research and analysis at the intersection of AI governance, ESG frameworks, and operational reality.
-            Where systems theory meets extractive industries, development finance, and the humans who hold the liability.
+          </h1>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed">
+            Research on AI governance, operational reality, and systems designed with refusal authority—where pre-action constraints meet extractive industries, development finance, and the humans who hold the liability.
           </p>
-          <div className="flex justify-center flex-wrap gap-4">
-            <a href="/sociablesystems" className="px-8 py-4 bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700 rounded-lg font-semibold transition-colors shadow-lg">
-              Read the Newsletter
+          <div className="flex justify-center flex-wrap gap-4 mb-6">
+            <a href="/domains" className="px-8 py-4 bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700 rounded-lg font-semibold transition-colors shadow-lg">
+              Explore Domains
             </a>
-            <a href="/research" className="px-8 py-4 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-colors">
-              Applied Research
+            <a href="/tools" className="px-8 py-4 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-colors">
+              Download Tools
             </a>
-            <a href="/methods" className="px-8 py-4 border border-blue-500 hover:bg-blue-500/10 rounded-lg font-semibold transition-colors">
-              Our Methods
+          </div>
+          <div className="text-center">
+            <a href="/sociablesystems" className="text-gray-400 hover:text-teal-400 transition-colors">
+              Read Sociable Systems →
             </a>
           </div>
         </div>
       </section>
 
-      {/* Featured Newsletter Section */}
+      {/* Start Here - Three Cards */}
       <section className="py-20 bg-gray-800/30">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-4 text-gray-200">
-            Sociable Systems Newsletter
+          <h2 className="text-4xl font-bold text-center mb-16 text-gray-200">
+            Start Here
           </h2>
-          <p className="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
-            Daily analysis on AI accountability gaps, liability architecture, and governance failures in real-world operations.
-          </p>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* Episode Highlight 1 */}
-            <div className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-teal-500 transition-all p-6">
-              <div className="text-sm text-teal-400 font-semibold mb-2">EPISODE 1</div>
-              <h3 className="text-xl font-bold mb-3 text-gray-200">We Didn't Outgrow Asimov</h3>
-              <p className="text-gray-400 mb-4">
-                Why are billion-dollar institutions rediscovering conclusions from a 1942 science fiction story?
-                Pre-action constraints vs. governance theater.
+            {/* Card 1: Domains */}
+            <a href="/domains" className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-teal-500 transition-all p-8 block">
+              <div className="text-4xl mb-4">⚖️</div>
+              <h3 className="text-2xl font-bold mb-4 text-teal-400">Domains</h3>
+              <p className="text-gray-400 mb-4 leading-relaxed">
+                Five operational domains where AI accountability meets high-stakes reality: ESG & Safeguards, Grievance Systems, Development Rights, Worker Voice, and AI Accountability.
               </p>
-              <a href="/sociablesystems/episode-1" className="text-teal-400 hover:text-teal-300 font-semibold">
-                Read Episode →
-              </a>
-            </div>
+              <span className="text-teal-400 hover:text-teal-300 font-semibold">
+                Explore Domains →
+              </span>
+            </a>
 
-            {/* Episode Highlight 2 */}
-            <div className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-teal-500 transition-all p-6">
-              <div className="text-sm text-teal-400 font-semibold mb-2">EPISODE 2</div>
-              <h3 className="text-xl font-bold mb-3 text-gray-200">The Liability Sponge</h3>
-              <p className="text-gray-400 mb-4">
-                Why "Human in the Loop" is actually a trap. When safety systems require superhuman vigilance,
-                someone gets hurt. Then we call it "operator error."
+            {/* Card 2: Tools */}
+            <a href="/tools" className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-blue-500 transition-all p-8 block">
+              <div className="text-4xl mb-4">🔧</div>
+              <h3 className="text-2xl font-bold mb-4 text-blue-400">Tools</h3>
+              <p className="text-gray-400 mb-4 leading-relaxed">
+                Downloadable frameworks, interrogation scripts, and architectural patterns: Calvin Convention, Architecture of Refusal, Constitutional Engine, vendor evaluation tools, and analysis briefs.
               </p>
-              <a href="/sociablesystems/episode-2" className="text-teal-400 hover:text-teal-300 font-semibold">
-                Read Episode →
-              </a>
-            </div>
+              <span className="text-blue-400 hover:text-blue-300 font-semibold">
+                Download Tools →
+              </span>
+            </a>
 
-            {/* Episode Highlight 3 */}
-            <div className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-teal-500 transition-all p-6">
-              <div className="text-sm text-teal-400 font-semibold mb-2">EPISODE 3</div>
-              <h3 className="text-xl font-bold mb-3 text-gray-200">The Accountability Gap</h3>
-              <p className="text-gray-400 mb-4">
-                What 21 AI models revealed when asked to design accountability failures. They produced bureaucracy.
-                Middle management. And impeccable corporate scapegoating.
+            {/* Card 3: Sociable Systems */}
+            <a href="/sociablesystems" className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-purple-500 transition-all p-8 block">
+              <div className="text-4xl mb-4">📰</div>
+              <h3 className="text-2xl font-bold mb-4 text-purple-400">Sociable Systems</h3>
+              <p className="text-gray-400 mb-4 leading-relaxed">
+                The newsletter. Daily analysis on AI accountability gaps, liability architecture, and governance failures—applying frameworks from the domains to real-world operations and institutional patterns.
               </p>
-              <a href="/sociablesystems/episode-3" className="text-teal-400 hover:text-teal-300 font-semibold">
-                Read Episode →
-              </a>
-            </div>
-          </div>
-
-          <div className="text-center mt-12">
-            <a href="/sociablesystems" className="inline-block px-8 py-4 border border-teal-500 hover:bg-teal-500/10 rounded-lg font-semibold transition-colors text-gray-200">
-              View All Episodes →
+              <span className="text-purple-400 hover:text-purple-300 font-semibold">
+                Read Newsletter →
+              </span>
             </a>
           </div>
+        </div>
+      </section>
+
+      {/* What This Site Contains */}
+      <section className="py-16 bg-gray-900/50">
+        <div className="container mx-auto px-4 max-w-4xl text-center">
+          <p className="text-lg text-gray-400 leading-relaxed">
+            This site contains research across five operational <strong className="text-gray-300">Domains</strong>, downloadable <strong className="text-gray-300">Tools</strong> for practitioners, the <strong className="text-gray-300">Sociable Systems</strong> newsletter analyzing accountability gaps in real-time, and experimental <strong className="text-gray-300">Labs</strong> exploring consciousness, collaboration methods, and the edges of human-AI partnership.
+          </p>
         </div>
       </section>
 
@@ -98,20 +93,19 @@ export default function HomePage() {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-16 text-gray-200">
-            Research & Practice
+            Research Domains
           </h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* ESG & AI Governance */}
             <div className="group relative p-8 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-teal-500 transition-all duration-300">
               <div className="text-4xl mb-4">⚖️</div>
-              <h3 className="text-2xl font-bold mb-3 text-teal-400">ESG & AI Governance</h3>
+              <h3 className="text-2xl font-bold mb-3 text-teal-400">ESG & Safeguards</h3>
               <p className="text-gray-400 mb-4 leading-relaxed">
-                AI applications in environmental, social, and governance frameworks for extractive industries.
-                Where compliance meets operational reality.
+                AI governance in environmental, social, and governance frameworks for extractive industries and development finance.
               </p>
-              <a href="/research/esg" className="text-teal-400 hover:text-teal-300 font-semibold">
-                Explore ESG Work →
+              <a href="/domains/esg-safeguards" className="text-teal-400 hover:text-teal-300 font-semibold">
+                Explore ESG →
               </a>
             </div>
 
@@ -120,61 +114,55 @@ export default function HomePage() {
               <div className="text-4xl mb-4">📢</div>
               <h3 className="text-2xl font-bold mb-3 text-blue-400">Grievance Systems</h3>
               <p className="text-gray-400 mb-4 leading-relaxed">
-                Operational grievance mechanisms, community voice technology, and the gap between processing
-                complaints and actually listening.
+                Operational grievance mechanisms and accountability in project-affected communities.
               </p>
-              <a href="/research/grievance" className="text-blue-400 hover:text-blue-300 font-semibold">
-                View Grievance Research →
+              <a href="/domains/grievance-systems" className="text-blue-400 hover:text-blue-300 font-semibold">
+                View Grievance →
               </a>
             </div>
 
             {/* Development Rights & Resettlement */}
-            <div className="group relative p-8 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-purple-500 transition-all duration-300">
-              <div className="text-4xl mb-4">🏘️</div>
-              <h3 className="text-2xl font-bold mb-3 text-purple-400">Development Rights</h3>
-              <p className="text-gray-400 mb-4 leading-relaxed">
-                Resettlement frameworks, land acquisition, livelihood restoration, and the humans behind the KPIs.
-              </p>
-              <a href="/research/development-rights" className="text-purple-400 hover:text-purple-300 font-semibold">
-                Explore Development Work →
-              </a>
-            </div>
-
-            {/* AI Safety & Accountability */}
             <div className="group relative p-8 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-cyan-500 transition-all duration-300">
-              <div className="text-4xl mb-4">🔒</div>
-              <h3 className="text-2xl font-bold mb-3 text-cyan-400">AI Accountability</h3>
+              <div className="text-4xl mb-4">🏘️</div>
+              <h3 className="text-2xl font-bold mb-3 text-cyan-400">Development Rights</h3>
               <p className="text-gray-400 mb-4 leading-relaxed">
-                Pre-action constraints, liability architecture, and designing systems that can refuse.
-                Beyond governance theater.
+                Resettlement, land acquisition, and rights-based approaches in development projects.
               </p>
-              <a href="/research/ai-accountability" className="text-cyan-400 hover:text-cyan-300 font-semibold">
-                Read Accountability Research →
+              <a href="/domains/development-rights" className="text-cyan-400 hover:text-cyan-300 font-semibold">
+                Explore Development →
               </a>
             </div>
 
             {/* Worker Voice & Labor */}
-            <div className="group relative p-8 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-orange-500 transition-all duration-300">
+            <div className="group relative p-8 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-emerald-500 transition-all duration-300">
               <div className="text-4xl mb-4">👷</div>
-              <h3 className="text-2xl font-bold mb-3 text-orange-400">Worker Voice Technology</h3>
+              <h3 className="text-2xl font-bold mb-3 text-emerald-400">Worker Voice</h3>
               <p className="text-gray-400 mb-4 leading-relaxed">
-                Labor management systems, collective refusal architecture, and why AI can't imagine workers
-                organizing.
+                Labor management systems, worker representation, and industrial relations.
               </p>
-              <a href="/research/worker-voice" className="text-orange-400 hover:text-orange-300 font-semibold">
+              <a href="/domains/worker-voice" className="text-emerald-400 hover:text-emerald-300 font-semibold">
                 Explore Worker Voice →
               </a>
             </div>
 
-            {/* Systems Analysis */}
-            <div className="group relative p-8 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-pink-500 transition-all duration-300">
-              <div className="text-4xl mb-4">🔍</div>
-              <h3 className="text-2xl font-bold mb-3 text-pink-400">Systems Analysis</h3>
+            {/* AI Safety & Accountability */}
+            <div className="group relative p-8 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-indigo-500 transition-all duration-300">
+              <div className="text-4xl mb-4">🔒</div>
+              <h3 className="text-2xl font-bold mb-3 text-indigo-400">AI Accountability</h3>
               <p className="text-gray-400 mb-4 leading-relaxed">
-                How complex systems behave under pressure. Speed mismatches, liability diodes, and accountability gaps.
+                Pre-action constraints, liability architecture, and safety systems for AI in high-stakes operations.
               </p>
-              <a href="/research/systems-analysis" className="text-pink-400 hover:text-pink-300 font-semibold">
-                View Systems Work →
+              <a href="/domains/ai-accountability" className="text-indigo-400 hover:text-indigo-300 font-semibold">
+                Read Accountability →
+              </a>
+            </div>
+
+            {/* View All Domains */}
+            <div className="group relative p-8 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-teal-500 transition-all duration-300 flex flex-col justify-center items-center text-center">
+              <div className="text-4xl mb-4">→</div>
+              <h3 className="text-2xl font-bold mb-3 text-gray-300">View All Domains</h3>
+              <a href="/domains" className="text-teal-400 hover:text-teal-300 font-semibold">
+                Explore →
               </a>
             </div>
           </div>
