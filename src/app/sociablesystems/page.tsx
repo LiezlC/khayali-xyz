@@ -217,7 +217,7 @@ export default function SociableSystemsPage() {
               Subscribe on LinkedIn to receive daily episodes and join the conversation.
             </p>
             <a
-              href="https://www.linkedin.com/newsletters/sociablesystems"
+              href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7414854188477837312"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block px-8 py-4 bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700 rounded-lg font-semibold transition-colors shadow-lg"
