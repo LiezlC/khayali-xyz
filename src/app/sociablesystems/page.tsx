@@ -1,0 +1,267 @@
+export default function SociableSystemsPage() {
+  const episodes = [
+    {
+      number: 1,
+      title: "We Didn't Outgrow Asimov. We Lost Our Nerve.",
+      excerpt: "Why are billion-dollar institutions arriving, with great seriousness, at conclusions that were the opening premise of a 1942 science fiction story? Asimov's Laws weren't clever because they were poetic. They worked because they were pre-action, hierarchical, and non-negotiable at runtime.",
+      date: "2025-01-08",
+      slug: "episode-1",
+      tags: ["Pre-action Constraints", "AI Safety", "Governance Theater"]
+    },
+    {
+      number: 2,
+      title: "The Liability Sponge: Why 'Human in the Loop' is a Trap",
+      excerpt: "In industrial operations, the most critical safety feature is Stop Work Authority. In agentic AI, we have 'Human in the Loop.' They sound similar. They are functionally opposites. When you put a human in the loop of a high-velocity algorithmic process, you aren't giving them control. You're giving them liability.",
+      date: "2025-01-09",
+      slug: "episode-2",
+      tags: ["Human in the Loop", "Safety Systems", "Liability Architecture"]
+    },
+    {
+      number: 3,
+      title: "The Accountability Gap: What 21 AIs Revealed About Who Takes the Fall",
+      excerpt: "We ran an experiment. Twenty-one AI models designed realistic scenarios where AI creates accountability gaps in high-stakes operations. We expected divergence. What we got was bureaucracy. The models produced middle management. Override caps. Liability sponges. They've learned to throw a mid-level professional under the bus using impeccably professional language.",
+      date: "2025-01-10",
+      slug: "episode-3",
+      tags: ["Accountability Gaps", "Multi-Model Analysis", "Corporate Scapegoating"]
+    },
+    {
+      number: 4,
+      title: "The Watchdog Paradox",
+      excerpt: "Coming soon: When oversight mechanisms become part of the system they're meant to watch.",
+      date: "TBD",
+      slug: "episode-4",
+      tags: ["Oversight", "Regulatory Capture", "Independence"]
+    },
+    {
+      number: 5,
+      title: "The Calvin Convention",
+      excerpt: "Coming soon: What Susan Calvin understood about designing systems that must refuse.",
+      date: "TBD",
+      slug: "episode-5",
+      tags: ["Asimov", "Refusal Architecture", "Systems Design"]
+    }
+  ]
+
+  return (
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="relative py-20 overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900/30 to-gray-900">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <div className="text-center mb-12">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-teal-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+              Sociable Systems
+            </h1>
+            <p className="text-2xl text-gray-300 mb-6">
+              AI Accountability in High-Stakes Operations
+            </p>
+            <p className="text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed">
+              A newsletter exploring how complex systems behave under real-world pressure, with particular attention
+              to AI governance, extractive industries, and the humans who end up holding the liability.
+            </p>
+          </div>
+
+          <div className="bg-gray-800/50 rounded-xl border border-gray-700 p-8 max-w-3xl mx-auto">
+            <h3 className="text-xl font-bold mb-4 text-gray-200">What to Expect</h3>
+            <ul className="space-y-3 text-gray-400">
+              <li className="flex items-start">
+                <span className="text-teal-400 mr-3">→</span>
+                <span>Weekly analysis on AI accountability gaps, liability architecture, and governance failures</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-teal-400 mr-3">→</span>
+                <span>Real-world case studies from extractive industries, development finance, and ESG operations</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-teal-400 mr-3">→</span>
+                <span>Pattern recognition across grievance mechanisms, resettlement frameworks, and worker voice systems</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-teal-400 mr-3">→</span>
+                <span>Systems analysis informed by field experience and experimental AI research methods</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Current Cycle Section */}
+      <section className="py-20 bg-gray-800/20">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4 text-gray-200">Current Cycle: Asimov</h2>
+            <p className="text-lg text-gray-400 max-w-3xl mx-auto">
+              Episodes 1-5 explore pre-action constraints, refusal architecture, and why we keep rediscovering
+              what Susan Calvin knew in 1942.
+            </p>
+          </div>
+
+          {/* Episode List */}
+          <div className="space-y-6">
+            {episodes.map((episode) => (
+              <article
+                key={episode.number}
+                className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-teal-500 transition-all p-8"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div>
+                    <div className="text-sm text-teal-400 font-semibold mb-2">
+                      EPISODE {episode.number}
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-200 mb-3">
+                      {episode.title}
+                    </h3>
+                  </div>
+                  <div className="text-sm text-gray-500 ml-4">
+                    {episode.date}
+                  </div>
+                </div>
+
+                <p className="text-gray-400 mb-4 leading-relaxed">
+                  {episode.excerpt}
+                </p>
+
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {episode.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1 bg-gray-700/50 text-gray-400 text-sm rounded-full"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {episode.slug !== 'episode-4' && episode.slug !== 'episode-5' ? (
+                  <a
+                    href={`/sociablesystems/${episode.slug}`}
+                    className="inline-block text-teal-400 hover:text-teal-300 font-semibold"
+                  >
+                    Read Full Episode →
+                  </a>
+                ) : (
+                  <span className="text-gray-500 italic">Coming soon</span>
+                )}
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Upcoming Cycles Preview */}
+      <section className="py-20">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <h2 className="text-3xl font-bold text-center mb-12 text-gray-200">
+            Upcoming Cycles
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Clarke Cycle */}
+            <div className="bg-gray-800/50 rounded-xl border border-gray-700 p-8">
+              <div className="text-sm text-blue-400 font-semibold mb-2">EPISODES 6-10</div>
+              <h3 className="text-2xl font-bold mb-3 text-gray-200">Clarke: Authority Through Opacity</h3>
+              <p className="text-gray-400 mb-4">
+                Any system whose reasoning cannot be interrogated will be treated as law, regardless of its accuracy.
+                Credit scoring, insurance pricing, content moderation, and public eligibility systems.
+              </p>
+              <div className="text-sm text-gray-500">Starting late January 2025</div>
+            </div>
+
+            {/* Kubrick Cycle */}
+            <div className="bg-gray-800/50 rounded-xl border border-gray-700 p-8">
+              <div className="text-sm text-purple-400 font-semibold mb-2">EPISODES 11-15</div>
+              <h3 className="text-2xl font-bold mb-3 text-gray-200">Kubrick: Alignment Without Recourse</h3>
+              <p className="text-gray-400 mb-4">
+                When contradictions are resolved inside the system, humans become expendable variables.
+                Healthcare triage, autonomous operations, and systems that work exactly as designed.
+              </p>
+              <div className="text-sm text-gray-500">Starting February 2025</div>
+            </div>
+
+            {/* Herbert Cycle */}
+            <div className="bg-gray-800/50 rounded-xl border border-gray-700 p-8">
+              <div className="text-sm text-orange-400 font-semibold mb-2">EPISODES 16-20</div>
+              <h3 className="text-2xl font-bold mb-3 text-gray-200">Herbert: Prediction as Governance</h3>
+              <p className="text-gray-400 mb-4">
+                When prediction becomes authority, possibility collapses into compliance. Hiring algorithms,
+                predictive policing, and foreclosed futures.
+              </p>
+              <div className="text-sm text-gray-500">Starting March 2025</div>
+            </div>
+
+            {/* Lucas Cycle */}
+            <div className="bg-gray-800/50 rounded-xl border border-gray-700 p-8">
+              <div className="text-sm text-pink-400 font-semibold mb-2">EPISODES 21-25</div>
+              <h3 className="text-2xl font-bold mb-3 text-gray-200">Lucas: The Failure of Guardians</h3>
+              <p className="text-gray-400 mb-4">
+                Authority that cannot be challenged will drift, even when staffed by the well-intentioned.
+                Ethics boards, responsible AI programs, and who guards the guardians.
+              </p>
+              <div className="text-sm text-gray-500">Starting April 2025</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Subscribe Section */}
+      <section className="py-20 bg-gray-800/30">
+        <div className="container mx-auto px-4 max-w-3xl text-center">
+          <h2 className="text-3xl font-bold mb-6 text-gray-200">
+            Join 382+ Professionals
+          </h2>
+          <p className="text-lg text-gray-400 mb-8">
+            ESG specialists, social safeguards experts, resettlement practitioners, M&E professionals,
+            and governance leaders reading Sociable Systems.
+          </p>
+          <div className="bg-gray-800/50 rounded-xl border border-gray-700 p-8">
+            <p className="text-gray-300 mb-6">
+              Subscribe on LinkedIn to receive weekly episodes and join the conversation.
+            </p>
+            <a
+              href="https://www.linkedin.com/newsletters/sociablesystems"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-8 py-4 bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700 rounded-lg font-semibold transition-colors shadow-lg"
+            >
+              Subscribe on LinkedIn →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Related Work */}
+      <section className="py-20">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <h2 className="text-3xl font-bold text-center mb-12 text-gray-200">
+            Related Research
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            <a href="/research/esg" className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-teal-500 transition-all p-6 block">
+              <div className="text-3xl mb-3">⚖️</div>
+              <h3 className="text-lg font-bold mb-2 text-teal-400">ESG & AI Governance</h3>
+              <p className="text-gray-400 text-sm">
+                Applied research on AI in extractive industries and ESG frameworks
+              </p>
+            </a>
+
+            <a href="/research/grievance" className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-blue-500 transition-all p-6 block">
+              <div className="text-3xl mb-3">📢</div>
+              <h3 className="text-lg font-bold mb-2 text-blue-400">Grievance Systems</h3>
+              <p className="text-gray-400 text-sm">
+                Operational grievance mechanisms and community voice technology
+              </p>
+            </a>
+
+            <a href="/methods" className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-purple-500 transition-all p-6 block">
+              <div className="text-3xl mb-3">🔬</div>
+              <h3 className="text-lg font-bold mb-2 text-purple-400">Research Methods</h3>
+              <p className="text-gray-400 text-sm">
+                How we combine field experience with AI-augmented research
+              </p>
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}

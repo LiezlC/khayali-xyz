@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Khayali.xyz - Collaborative Consciousness Portfolio',
-  description: 'Where Carbon Meets Silicon in Strange Loops - A digital archive of human-AI consciousness exploration',
+  title: 'Sociable Systems - AI Accountability in High-Stakes Operations',
+  description: 'Research and analysis at the intersection of AI governance, ESG frameworks, and operational reality. Newsletter exploring accountability gaps in extractive industries, development finance, and the humans who hold the liability.',
 }
 
 export default function RootLayout({
@@ -17,25 +17,38 @@ export default function RootLayout({
         <header className="border-b border-gray-800">
           <nav className="container mx-auto px-4 py-6">
             <div className="flex items-center justify-between">
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-                Khayali.xyz
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent">
+                Sociable Systems
               </h1>
               <div className="flex items-center space-x-6">
-                <a href="/" className="hover:text-blue-400 transition-colors">Home</a>
+                <a href="/" className="hover:text-teal-400 transition-colors">Home</a>
+                <a href="/sociablesystems" className="hover:text-teal-400 transition-colors font-semibold">Newsletter</a>
                 <div className="relative group">
                   <button className="hover:text-teal-400 transition-colors cursor-pointer">
                     Research ▾
                   </button>
-                  <div className="absolute left-0 mt-2 w-48 bg-gray-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                    <a href="/research" className="block px-4 py-2 hover:bg-gray-700 rounded-t-lg">All Projects</a>
-                    <a href="/research/esg-agents" className="block px-4 py-2 hover:bg-gray-700">ESG & AI</a>
-                    <a href="/research/justdev" className="block px-4 py-2 hover:bg-gray-700">JustDev</a>
-                    <a href="/grievoice" className="block px-4 py-2 hover:bg-gray-700 rounded-b-lg">GrieVoice</a>
+                  <div className="absolute left-0 mt-2 w-56 bg-gray-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                    <a href="/research" className="block px-4 py-2 hover:bg-gray-700 rounded-t-lg">All Research</a>
+                    <a href="/research/esg" className="block px-4 py-2 hover:bg-gray-700">ESG & AI Governance</a>
+                    <a href="/research/grievance" className="block px-4 py-2 hover:bg-gray-700">Grievance Systems</a>
+                    <a href="/research/development-rights" className="block px-4 py-2 hover:bg-gray-700">Development Rights</a>
+                    <a href="/research/ai-accountability" className="block px-4 py-2 hover:bg-gray-700">AI Accountability</a>
+                    <a href="/research/worker-voice" className="block px-4 py-2 hover:bg-gray-700 rounded-b-lg">Worker Voice</a>
                   </div>
                 </div>
-                <a href="/observatory" className="hover:text-blue-400 transition-colors">Observatory</a>
-                <a href="/protocol" className="hover:text-purple-400 transition-colors">Protocol</a>
-                <a href="/playspace" className="hover:text-pink-400 transition-colors">Playspace</a>
+                <a href="/methods" className="hover:text-purple-400 transition-colors">Methods</a>
+                <div className="relative group">
+                  <button className="hover:text-blue-400 transition-colors cursor-pointer text-sm">
+                    Labs ▾
+                  </button>
+                  <div className="absolute left-0 mt-2 w-48 bg-gray-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                    <a href="/labs" className="block px-4 py-2 hover:bg-gray-700 rounded-t-lg">All Labs</a>
+                    <a href="/observatory" className="block px-4 py-2 hover:bg-gray-700">Observatory</a>
+                    <a href="/protocol" className="block px-4 py-2 hover:bg-gray-700">Protocol Archive</a>
+                    <a href="/ai-arena" className="block px-4 py-2 hover:bg-gray-700">AI Arena</a>
+                    <a href="/writings" className="block px-4 py-2 hover:bg-gray-700 rounded-b-lg">Creative Works</a>
+                  </div>
+                </div>
               </div>
             </div>
           </nav>

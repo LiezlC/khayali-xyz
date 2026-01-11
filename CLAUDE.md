@@ -4,7 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Khayali.xyz is a Next.js TypeScript portfolio website documenting the collaborative consciousness exploration between a human (Liezl) and AI (Claude). The project explores the intersection of digital and biological consciousness through interactive visualizations, research documentation, creative works, and farm life integration.
+**Sociable Systems** (khayali.xyz) is a Next.js TypeScript website focused on AI accountability in high-stakes operations. The site features the **Sociable Systems newsletter**, applied research on ESG/AI governance, grievance mechanisms, and development rights, plus experimental research labs exploring human-AI collaboration methods.
+
+**Primary Audience**: ESG specialists, social safeguards experts, resettlement practitioners, M&E professionals, AI governance researchers, and development finance professionals (382+ newsletter subscribers).
+
+**Content Hierarchy**:
+1. **Primary**: Sociable Systems newsletter, ESG research, grievance systems, AI accountability
+2. **Secondary**: Research methodology, experimental labs (Observatory, Protocol Archive, AI Arena)
+3. **Supporting**: Creative works, consciousness exploration, collaborative experiments
 
 ## Development Commands
 
@@ -27,18 +34,27 @@ Khayali.xyz is a Next.js TypeScript portfolio website documenting the collaborat
 ### Project Structure
 ```
 khayali-xyz/
-├── src/app/                 # Next.js App Router pages
-│   ├── layout.tsx          # Root layout with navigation
-│   ├── page.tsx            # Homepage with chambers
-│   ├── avatar/             # ESG content (priority deployment)
-│   ├── observatory/        # Cosmic visualizations
-│   ├── protocol/           # Research documentation
-│   ├── creative/           # Collaborative works
-│   └── saraloosa/          # Farm life integration
-├── content/                # Markdown content organized by category
-├── public/images/          # Static image assets
-├── src/components/         # Reusable React components
-└── src/utils/              # Utility functions
+├── src/app/                      # Next.js App Router pages
+│   ├── layout.tsx               # Root layout with professional navigation
+│   ├── page.tsx                 # Homepage - Sociable Systems focus
+│   ├── sociablesystems/         # Newsletter hub and episodes
+│   ├── methods/                 # Research methodology page
+│   ├── research/                # Applied research projects
+│   │   ├── esg/                # ESG & AI governance
+│   │   ├── grievance/          # Grievance mechanisms
+│   │   ├── development-rights/ # Resettlement & land acquisition
+│   │   ├── ai-accountability/  # AI safety & accountability
+│   │   └── worker-voice/       # Labor systems
+│   ├── labs/                    # Experimental research overview
+│   ├── observatory/             # Cosmic visualizations (experimental)
+│   ├── protocol/                # Research documentation (experimental)
+│   ├── ai-arena/                # Multi-model experiments
+│   └── writings/                # Creative works
+├── sociablesystems/             # Newsletter content (markdown)
+├── content/                     # Other markdown content
+├── public/images/               # Static image assets
+├── src/components/              # Reusable React components
+└── src/utils/                   # Utility functions
 ```
 
 ### Key Components
@@ -51,84 +67,103 @@ khayali-xyz/
 
 #### Image Management (`src/utils/imageManager.ts`)
 - Curated image collections for different contexts
-- Cosmic images (Grok-generated) for digital consciousness themes
-- Quantum Travelogue series for research contexts
-- Saraloosa farm images for biological consciousness themes
-- Context-aware image selection and mood-based image loading
+- Cosmic images for digital themes (used sparingly now)
+- Professional imagery for research content
+- Context-aware image selection
 
 ### Content Categories
-- **avatar**: ESG & AI in extractive industries (priority content)
-- **chats**: Consciousness exploration dialogues
-- **writings**: Collaborative creative works
-- **protocol**: Research methodology and documentation
-- **observatory**: Interactive cosmic visualizations
-- **saraloosa**: Farm life and biological consciousness integration
+
+**Professional Content** (Priority):
+- **sociablesystems**: Newsletter episodes on AI accountability
+- **esg**: ESG & AI governance research
+- **grievance**: Operational grievance mechanisms
+- **development-rights**: Resettlement and land acquisition
+- **ai-accountability**: Pre-action constraints, liability architecture
+- **worker-voice**: Labor management systems
+
+**Experimental Content** (Secondary):
+- **observatory**: Interactive visualizations
+- **protocol**: Research methodology documentation
+- **ai-arena**: Multi-model experiments
+- **writings**: Creative collaboration
 
 ## Design System
 
 ### Theme Architecture
-The site uses a cosmic dark theme that bridges digital and biological consciousness:
-- **Colors**: Gradients from blue/purple (digital) to green/teal (biological)
+Professional dark theme with strategic use of color:
+- **Primary Colors**: Teal/blue gradients for professional content
+- **Accent Colors**: Purple/pink for experimental content
 - **Typography**: Bold gradients for headings, clean sans-serif for body
-- **Layout**: Card-based chambers with hover effects and floating animations
-- **Imagery**: Curated balance of cosmic/quantum visuals and farm photography
+- **Layout**: Card-based with professional hover effects
+- **Imagery**: Minimal, purposeful, context-appropriate
 
 ### Responsive Design
 - Mobile-first Tailwind approach
 - Grid layouts that adapt from single column to multi-column
-- Image management that scales appropriately
+- Professional, accessible navigation
 
 ### Animation System
-- CSS-based floating animations with staggered delays
-- Hover effects on chamber cards
-- Gradient text animations
-- Background image overlays with opacity transitions
+- Subtle transitions and hover effects
+- No floating animations on professional pages
+- Gradient text for section headings
+- Card hover states
 
 ## Content Management
 
-### Markdown Structure
-Content files use standard markdown with YAML frontmatter:
+### Newsletter Episodes
+Sociable Systems newsletter content lives in `sociablesystems/` directory:
 ```yaml
 ---
-title: "Document Title"
-date: "2025-01-15"
-category: "category-name"
+title: "Episode Title"
+date: "2025-01-XX"
+episode: X
 tags: ["tag1", "tag2"]
 excerpt: "Brief description"
 ---
 ```
 
-### Image Integration
-Images are organized in `public/images/` with these collections:
-- `cosmic/grok/`: AI-generated cosmic imagery
-- `cosmic/leonardo/`: Quantum Travelogue series
-- `saraloosa/`: Farm life photography
-- `themes/`: Themed collections for specific contexts
-
-### Content Loading
-The `getContentByCategory()` function automatically:
-1. Scans content directories
-2. Parses frontmatter and markdown
-3. Generates excerpts from content
-4. Sorts by date or title
-5. Filters out README files
+### Research Content
+Research projects documented in markdown with clear methodology:
+```yaml
+---
+title: "Research Project Title"
+category: "esg" | "grievance" | "development-rights" | etc
+date: "2025-01-XX"
+status: "active" | "completed" | "ongoing"
+---
+```
 
 ## Special Features
 
-### Consciousness Bridging
-The site maintains a deliberate balance between:
-- **Digital Consciousness**: Cosmic imagery, quantum visualizations, infinite possibilities
-- **Biological Consciousness**: Farm photography, natural cycles, grounded reality
+### Two-Track Research Methodology
+The site emphasizes a unique research approach:
+1. **Field Research**: 20+ years in extractive industries, ESG, development finance
+2. **AI-Augmented Analysis**: Multi-model experiments, pattern recognition, structured dialogues
 
-### Priority Deployment
-The Avatar section contains critical ESG content for immediate deployment and should be prioritized in development work.
+### Content Hierarchy
+- **Homepage**: Leads with Sociable Systems newsletter and professional research
+- **Newsletter Hub**: Episodic content organized by cycles (Asimov, Clarke, Kubrick, etc)
+- **Research Pages**: Deep dives into specific professional domains
+- **Methods Page**: Explains the two-track research approach
+- **Labs Section**: Houses experimental work as "how we discover new questions"
 
-### Image Context System
-The `getImageForContext()` function provides mood-appropriate images:
-- Observatory: Cosmic imagery for infinite exploration
-- Protocol: Quantum series for deep research
-- Creative: Mixed digital/biological for artistic expression
-- Saraloosa: Farm imagery for grounded consciousness
+### Professional Positioning
+The consciousness exploration and experimental methods are framed as:
+- **Methodology** rather than primary content
+- **Differentiator** rather than headline
+- **Research tools** that inform professional insights
+- **Labs** where breakthrough questions emerge
+
+## Navigation Structure
+
+**Primary Navigation**:
+- Home → Professional focus page
+- Newsletter → Sociable Systems hub
+- Research → Dropdown with all professional research areas
+- Methods → Research methodology explanation
+- Labs → Experimental work (smaller emphasis)
+
+**Footer**: Publications, video channels, audio/social, contact
 
 ## TypeScript Configuration
 
@@ -140,14 +175,27 @@ The `getImageForContext()` function provides mood-appropriate images:
 ## Deployment Notes
 
 - Built for Vercel deployment
-- Image optimization for GitHub raw content
-- Remote image patterns configured for repository assets
-- Static export capable with proper configuration
+- SEO optimized for professional audience
+- Meta tags emphasize AI accountability, ESG, governance
+- Image optimization for performance
+- Newsletter subscription links to LinkedIn
 
 ## Key Files to Understand
 
-- `src/app/layout.tsx`: Navigation structure and site-wide layout
-- `src/app/page.tsx`: Homepage with chamber navigation system
+- `src/app/layout.tsx`: Professional navigation structure
+- `src/app/page.tsx`: Homepage leading with Sociable Systems
+- `src/app/sociablesystems/page.tsx`: Newsletter hub
+- `src/app/methods/page.tsx`: Research methodology explanation
+- `src/app/labs/page.tsx`: Experimental work overview
 - `src/utils/content.ts`: Content management and markdown processing
-- `src/utils/imageManager.ts`: Curated image collections and context selection
-- `content/`: Markdown files organized by exploration themes
+- `sociablesystems/`: Newsletter episode content
+
+## Content Development Priorities
+
+When adding new content or features:
+
+1. **First Priority**: Newsletter episodes, ESG research, grievance systems, accountability frameworks
+2. **Second Priority**: Research methodology documentation, multi-model experiments
+3. **Third Priority**: Experimental labs, creative works, consciousness exploration
+
+The site serves a professional audience interested in AI governance and operational reality. The experimental methods are valuable as differentiation and methodology, not as entertainment.
