@@ -65,7 +65,7 @@ export default function SociableSystemsPage() {
             <ul className="space-y-3 text-gray-400">
               <li className="flex items-start">
                 <span className="text-teal-400 mr-3">→</span>
-                <span>Weekly analysis on AI accountability gaps, liability architecture, and governance failures</span>
+                <span>Daily episodes on AI accountability gaps, liability architecture, and governance failures</span>
               </li>
               <li className="flex items-start">
                 <span className="text-teal-400 mr-3">→</span>
@@ -163,7 +163,7 @@ export default function SociableSystemsPage() {
                 Any system whose reasoning cannot be interrogated will be treated as law, regardless of its accuracy.
                 Credit scoring, insurance pricing, content moderation, and public eligibility systems.
               </p>
-              <div className="text-sm text-gray-500">Starting late January 2025</div>
+              <div className="text-sm text-gray-500">Monday 13 Jan - Saturday 18 Jan 2025</div>
             </div>
 
             {/* Kubrick Cycle */}
@@ -174,7 +174,7 @@ export default function SociableSystemsPage() {
                 When contradictions are resolved inside the system, humans become expendable variables.
                 Healthcare triage, autonomous operations, and systems that work exactly as designed.
               </p>
-              <div className="text-sm text-gray-500">Starting February 2025</div>
+              <div className="text-sm text-gray-500">Monday 20 Jan - Saturday 25 Jan 2025</div>
             </div>
 
             {/* Herbert Cycle */}
@@ -185,7 +185,7 @@ export default function SociableSystemsPage() {
                 When prediction becomes authority, possibility collapses into compliance. Hiring algorithms,
                 predictive policing, and foreclosed futures.
               </p>
-              <div className="text-sm text-gray-500">Starting March 2025</div>
+              <div className="text-sm text-gray-500">Late January 2025 onwards</div>
             </div>
 
             {/* Lucas Cycle */}
@@ -196,7 +196,7 @@ export default function SociableSystemsPage() {
                 Authority that cannot be challenged will drift, even when staffed by the well-intentioned.
                 Ethics boards, responsible AI programs, and who guards the guardians.
               </p>
-              <div className="text-sm text-gray-500">Starting April 2025</div>
+              <div className="text-sm text-gray-500">Early February 2025 onwards</div>
             </div>
           </div>
         </div>
@@ -214,7 +214,7 @@ export default function SociableSystemsPage() {
           </p>
           <div className="bg-gray-800/50 rounded-xl border border-gray-700 p-8">
             <p className="text-gray-300 mb-6">
-              Subscribe on LinkedIn to receive weekly episodes and join the conversation.
+              Subscribe on LinkedIn to receive daily episodes and join the conversation.
             </p>
             <a
               href="https://www.linkedin.com/newsletters/sociablesystems"

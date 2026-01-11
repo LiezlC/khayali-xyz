@@ -42,7 +42,7 @@ export default function HomePage() {
             Sociable Systems Newsletter
           </h2>
           <p className="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
-            Weekly analysis on AI accountability gaps, liability architecture, and governance failures in real-world operations.
+            Daily analysis on AI accountability gaps, liability architecture, and governance failures in real-world operations.
           </p>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
