@@ -14,6 +14,9 @@ export default function LabsPage() {
           <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
             Research Labs & Experiments
           </h1>
+          <p className="text-xl text-gray-400 leading-relaxed max-w-3xl mx-auto mb-4">
+            This section contains exploratory work and experimental methods.
+          </p>
           <p className="text-xl text-gray-400 leading-relaxed max-w-3xl mx-auto">
             Exploring consciousness, collaboration, and creative methods at the edge of what's possible
             with human-AI partnership. Not all experiments succeed. All contribute to understanding.

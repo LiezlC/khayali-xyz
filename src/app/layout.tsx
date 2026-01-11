@@ -22,33 +22,10 @@ export default function RootLayout({
               </h1>
               <div className="flex items-center space-x-6">
                 <a href="/" className="hover:text-teal-400 transition-colors">Home</a>
-                <a href="/sociablesystems" className="hover:text-teal-400 transition-colors font-semibold">Newsletter</a>
-                <div className="relative group">
-                  <button className="hover:text-teal-400 transition-colors cursor-pointer">
-                    Research ▾
-                  </button>
-                  <div className="absolute left-0 mt-2 w-56 bg-gray-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                    <a href="/research" className="block px-4 py-2 hover:bg-gray-700 rounded-t-lg">All Research</a>
-                    <a href="/research/esg" className="block px-4 py-2 hover:bg-gray-700">ESG & AI Governance</a>
-                    <a href="/research/grievance" className="block px-4 py-2 hover:bg-gray-700">Grievance Systems</a>
-                    <a href="/research/development-rights" className="block px-4 py-2 hover:bg-gray-700">Development Rights</a>
-                    <a href="/research/ai-accountability" className="block px-4 py-2 hover:bg-gray-700">AI Accountability</a>
-                    <a href="/research/worker-voice" className="block px-4 py-2 hover:bg-gray-700 rounded-b-lg">Worker Voice</a>
-                  </div>
-                </div>
-                <a href="/methods" className="hover:text-purple-400 transition-colors">Methods</a>
-                <div className="relative group">
-                  <button className="hover:text-blue-400 transition-colors cursor-pointer text-sm">
-                    Labs ▾
-                  </button>
-                  <div className="absolute left-0 mt-2 w-48 bg-gray-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                    <a href="/labs" className="block px-4 py-2 hover:bg-gray-700 rounded-t-lg">All Labs</a>
-                    <a href="/observatory" className="block px-4 py-2 hover:bg-gray-700">Observatory</a>
-                    <a href="/protocol" className="block px-4 py-2 hover:bg-gray-700">Protocol Archive</a>
-                    <a href="/ai-arena" className="block px-4 py-2 hover:bg-gray-700">AI Arena</a>
-                    <a href="/writings" className="block px-4 py-2 hover:bg-gray-700 rounded-b-lg">Creative Works</a>
-                  </div>
-                </div>
+                <a href="/domains" className="hover:text-teal-400 transition-colors">Domains</a>
+                <a href="/tools" className="hover:text-teal-400 transition-colors">Tools</a>
+                <a href="/sociablesystems" className="hover:text-teal-400 transition-colors font-semibold">Sociable Systems</a>
+                <a href="/labs" className="hover:text-blue-400 transition-colors text-sm">Labs</a>
               </div>
             </div>
           </nav>

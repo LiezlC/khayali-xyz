@@ -20,16 +20,47 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // Research redirects to domains
+      {
+        source: '/research',
+        destination: '/domains',
+        permanent: true,
+      },
+      {
+        source: '/research/esg',
+        destination: '/domains/esg-safeguards',
+        permanent: true,
+      },
+      {
+        source: '/research/grievance',
+        destination: '/domains/grievance-systems',
+        permanent: true,
+      },
+      {
+        source: '/research/development-rights',
+        destination: '/domains/development-rights',
+        permanent: true,
+      },
+      {
+        source: '/research/worker-voice',
+        destination: '/domains/worker-voice',
+        permanent: true,
+      },
+      {
+        source: '/research/ai-accountability',
+        destination: '/domains/ai-accountability',
+        permanent: true,
+      },
       // Avatar section redirects to research
       {
         source: '/avatar',
-        destination: '/research',
+        destination: '/domains',
         permanent: true,
       },
       {
         source: '/avatar/grievoice',
         destination: '/grievoice',
-        permanent: false, // Non-permanent to allow changes
+        permanent: false,
       },
       {
         source: '/avatar/justdev',
@@ -39,7 +70,7 @@ const nextConfig = {
       {
         source: '/research/grievoice',
         destination: '/grievoice',
-        permanent: false, // Non-permanent to allow changes
+        permanent: false,
       },
     ];
   },

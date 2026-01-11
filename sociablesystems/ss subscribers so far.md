@@ -1,4 +1,34 @@
-382 Subscribers
+386 Subscribers
+
+
+Jeanine Mawazo
+Jeanine Mawazo  1st degree connection1st
+
+Research Associate /Qualitative Research Consultant/ Translator Consultant
+
+
+Message
+Misrak Molla
+Misrak Molla  1st degree connection1st
+
+CEO & Chairman at Ethiopian Telecom Professionals Association and www hulunfechi.com founder & CEO
+
+
+Message
+SOLOMON keffa
+SOLOMON keffa  1st degree connection1st
+
+Senior Resettlement, Land Access, Urban Development, and Livelihood Senior Expert, Allied Gold Social Performance Manager
+
+
+Message
+Mohammed Awal Pascal Naatinmbah
+Mohammed Awal Pascal Naatinmbah  1st degree connection1st
+
+People Servant | Safety, Security & Sports Enthusiast | Advocate of Peace, Justice & Compassion for Humanity |
+
+
+Message
 
 
 Nyundo Armitage
