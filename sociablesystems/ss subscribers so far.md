@@ -1,4 +1,385 @@
-386 Subscribers
+434 Subscribers
+
+Wouter Visser
+Wouter Visser  1st degree connection1st
+
+Director at FORENG
+
+
+Message
+
+
+Prashanth KR
+Prashanth KR  1st degree connection1st
+
+--International Business Development Manager at Hybritic informatics pvt ltd
+
+
+Message
+Kuns Boli
+Kuns Boli  1st degree connection1st
+
+Petroleum Coordinator
+
+
+Message
+Sylvester Walakufe
+Sylvester Walakufe  1st degree connection1st
+
+Health Safety/ Environment & Sustainability Professional
+
+
+Message
+Somali Youth Development Foundation
+Somali Youth Development Foundation  1st degree connection1st
+
+Chairman at SOMALI YOUTH DEVELOPMENT FOUNDATION (SYDF)
+
+
+Message
+Mohammad Arif Khan
+Mohammad Arif Khan  1st degree connection1st
+
+Consultant Social Sector
+
+
+Message
+John Bafui
+John Bafui  1st degree connection1st
+
+Research Technical Support Consultant.
+
+
+Message
+Joshua Ouma Okello
+Joshua Ouma Okello  1st degree connection1st
+
+Director, Research Strategy and Operations 🌍 Sub-Saharan Africa 🔎 Research | Monitoring & Evaluation | Policy Engagement | Strategy
+
+
+Message
+Rebecca Pursell-Gotz
+Rebecca Pursell-Gotz  1st degree connection1st
+
+Social Impact I Monitoring & Evaluation I Learning
+
+
+Message
+Ujjwal Kumar Gupta
+Ujjwal Kumar Gupta  1st degree connection1st
+
+I 22 Yrs Exp I NGM I Ultratech Cement I Mott MacDonald | Odisha Power | TATA Group | NMDC | XLRI | IIT (ISM) |
+
+
+Message
+Martha Lipitwa Shimooshili
+Martha Lipitwa Shimooshili  1st degree connection1st
+
+Environmental & Social Technical Advisor| Climate Change Mitigation Advocator| Climate finance| Carborn Markets| ESG|Carborn Accounting
+
+
+Message
+Adam Van Nieuwenhuizen
+Adam Van Nieuwenhuizen  1st degree connection1st
+
+Landscape Architect (BL, Mphil, SACLAP)
+
+
+Message
+Avis Babalu
+Avis Babalu  1st degree connection1st
+
+Social Performance - Cultural Heritage (Archaeology & Anthropology)
+
+
+Message
+Julie Vieira-Wetzlar
+Julie Vieira-Wetzlar  2nd degree connection2nd
+
+Talent Management Strategist and Architect | Consulting Industrial Psychologist | Transformational Individual and Business Coach
+
+
+Connect
+Joe M. Rose
+Joe M. Rose  1st degree connection1st
+
+Senior Project Control Specialist - Cost / Estimating / Scheduling - Independent Contractor for the Oil & Gas Industry
+
+
+Message
+Ambrose Akoi
+Ambrose Akoi  1st degree connection1st
+
+Accademics
+
+
+Message
+
+Ussene Matias
+Ussene Matias  1st degree connection1st
+
+Community Liaison Officer at Total
+
+
+Message
+Davidson Carlos KKSI
+Davidson Carlos KKSI  1st degree connection1st
+
+Coordenador das Artes Marciais na Clube Makwezu
+
+
+Message
+Dawn Penny
+Dawn Penny  1st degree connection1st
+
+Eco Warrior Making a difference to our communities by offering fully Biodegradable Cleaning Products which help clean up our homes and ecosystems
+
+
+Message
+Jorge E. Villegas Valenzuela
+Jorge E. Villegas Valenzuela  1st degree connection1st
+
+Regional ESG Sector Lead for Infrastructure - Central America, Caribbean, Colombia & Mexico - IFC
+
+
+Message
+
+
+Hilda Bezuidenhout
+Hilda Bezuidenhout  1st degree connection1st
+
+Social Impact Assessment Practitioner - Self-employed
+
+
+Message
+
+Mpho Ratshilumela
+Mpho Ratshilumela  1st degree connection1st
+
+TEFL CERTIFIED TEACHER. HOLDS A BACHELOR OF SCIENCE DEGREE IN STATISTICS AND ECONOMICS.
+
+
+Message
+
+
+Amos Junior
+Amos Junior  1st degree connection1st
+
+Resettlement, GIS, Data Administrator
+
+
+Message
+Wouter Fourie
+Wouter Fourie  1st degree connection1st
+
+Chief Executive Officer at PGS Heritage
+
+
+Message
+Aboubacar Sidiki Keita
+Aboubacar Sidiki Keita  1st degree connection1st
+
+Health and Safety Professional - Member of Mining Industry Professionals (MIP).
+
+
+Message
+Dinis Cossa
+Dinis Cossa  1st degree connection1st
+
+Transport and Logistics
+
+
+Message
+Malcolm Baibuni
+Malcolm Baibuni  1st degree connection1st
+
+CONSULTANT LANDS & COMMUNITY AFFAIRS
+
+
+Message
+Annette Verryn
+Annette Verryn  1st degree connection1st
+
+Social and Economic Specialist
+
+
+Message
+
+Dena Lomofsky
+Dena Lomofsky  1st degree connection1st
+
+International Development Practitioner - Programme designer, evaluator, facilitator and trainer
+
+
+Message
+Zahir Nadery
+Zahir Nadery  1st degree connection1st
+
+Environment Specialist UNOPS
+
+
+Message
+Saynabdiamond Abdi
+Saynabdiamond Abdi  1st degree connection1st
+
+Actively seeking employment opportunities with international NGOs or UN Agencies to foster both my personal development and professional growth.
+
+
+Message
+Nic Boersema
+Nic Boersema  1st degree connection1st
+
+Social and Resettlement Consultant
+
+
+Message
+Urick Kamango
+Urick Kamango  1st degree connection1st
+
+Lands Superintendent at Wafi-Golpu Joint Venture
+
+
+Message
+
+Sébastien Essayé
+Sébastien Essayé  1st degree connection1st
+
+Principal Social consultant at RSK Group
+
+
+Message
+Jean-Bernard KABRAN
+Jean-Bernard KABRAN  1st degree connection1st
+
+Environmental and Social Safeguard Expert
+
+
+Message
+elise-marie tancred steenkamp
+elise-marie tancred steenkamp  1st degree connection1st
+
+Group Manager: Hortgro Communications
+
+
+Message
+Austin Palah
+Austin Palah  1st degree connection1st
+
+Community Relations Specialist @ WR Carpenter Estates
+
+
+Message
+
+Mark Lange
+Mark Lange  1st degree connection1st
+
+Media Sales at SA Rugby Magazine @ Habari Media. I connect premium brands with South Africa’s most passionate and engaged rugby audience through targeted print and digital advertising solutions.
+
+
+Message
+Norman Mudhara
+Norman Mudhara  1st degree connection1st
+
+Pastry Chef De Partie
+
+
+Message
+Dr. Patience Nkoana
+Dr. Patience Nkoana  1st degree connection1st
+
+LECTURER - AGRICULTURAL EXTENSION
+
+
+Message
+Caroline Silasil
+Caroline Silasil  1st degree connection1st
+
+Director at Pero Pero Ltd
+
+
+Message
+OBERTH SAI
+OBERTH SAI  1st degree connection1st
+
+HSE Professional
+
+
+Message
+NENGAS WAYAKI
+NENGAS WAYAKI  1st degree connection1st
+
+Training Manager | Mining, Construction & Logistics | PNG Workforce Development | Apprenticeships, Competency & Compliance
+
+
+Message
+Samson Hariwa
+Samson Hariwa  1st degree connection1st
+
+Instrumentation and Process Control Engineer at Barrick Gold Corporation
+
+
+Message
+Vincent Martignon
+Vincent Martignon  1st degree connection1st
+
+Social Safeguards, resettlement, stakeholders engagement and community development - freelance
+
+
+Message
+Chris Nita
+Chris Nita  1st degree connection1st
+
+WaSH| Community Development | Engagement
+
+
+Message
+Daniel Olen
+Daniel Olen  1st degree connection1st
+
+Training Coordinator-Nasfund (Resigned)
+
+
+Message
+
+
+Stephen Muhuzuc Mantari
+Stephen Muhuzuc Mantari  1st degree connection1st
+
+Community Engagement, Investment and Development
+
+
+Message
+Jenesie Justin
+Jenesie Justin  1st degree connection1st
+
+Open to Work
+
+
+Message
+Allan Kikitam
+Allan Kikitam  1st degree connection1st
+
+Social Sustainability Planning
+
+
+Message
+
+
+Reg Rumney
+Reg Rumney  1st degree connection1st
+
+Business Owner at Newsmakers
+
+
+Message
+
+Nemaia Koto
+Nemaia Koto  1st degree connection1st
+
+National Information Management Officer @ United Nations OCHA | Managing Geospatial Data for Humanitarian Response
+
+
+Message
 
 
 Jeanine Mawazo
