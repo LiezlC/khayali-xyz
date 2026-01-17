@@ -3,42 +3,146 @@ export default function SociableSystemsPage() {
     {
       number: 1,
       title: "We Didn't Outgrow Asimov. We Lost Our Nerve.",
-      excerpt: "Why are billion-dollar institutions arriving, with great seriousness, at conclusions that were the opening premise of a 1942 science fiction story? Asimov's Laws weren't clever because they were poetic. They worked because they were pre-action, hierarchical, and non-negotiable at runtime.",
+      excerpt: "Why are billion-dollar institutions arriving, with great seriousness, at conclusions that were the opening premise of a 1942 science fiction story?",
       date: "2025-01-08",
       slug: "episode-1",
-      tags: ["Pre-action Constraints", "AI Safety", "Governance Theater"]
+      tags: ["Pre-action Constraints", "AI Safety", "Governance Theater"],
+      published: true
     },
     {
       number: 2,
       title: "The Liability Sponge: Why 'Human in the Loop' is a Trap",
-      excerpt: "In industrial operations, the most critical safety feature is Stop Work Authority. In agentic AI, we have 'Human in the Loop.' They sound similar. They are functionally opposites. When you put a human in the loop of a high-velocity algorithmic process, you aren't giving them control. You're giving them liability.",
+      excerpt: "When you put a human in the loop of a high-velocity algorithmic process, you aren't giving them control. You're giving them liability.",
       date: "2025-01-09",
       slug: "episode-2",
-      tags: ["Human in the Loop", "Safety Systems", "Liability Architecture"]
+      tags: ["Human in the Loop", "Safety Systems", "Liability Architecture"],
+      published: true
     },
     {
       number: 3,
       title: "The Accountability Gap: What 21 AIs Revealed About Who Takes the Fall",
-      excerpt: "We ran an experiment. Twenty-one AI models designed realistic scenarios where AI creates accountability gaps in high-stakes operations. We expected divergence. What we got was bureaucracy. The models produced middle management. Override caps. Liability sponges. They've learned to throw a mid-level professional under the bus using impeccably professional language.",
+      excerpt: "Twenty-one AI models designed realistic scenarios where AI creates accountability gaps. They've learned to throw a mid-level professional under the bus using impeccably professional language.",
       date: "2025-01-10",
       slug: "episode-3",
-      tags: ["Accountability Gaps", "Multi-Model Analysis", "Corporate Scapegoating"]
+      tags: ["Accountability Gaps", "Multi-Model Analysis", "Corporate Scapegoating"],
+      published: true
     },
     {
       number: 4,
       title: "The Watchdog Paradox",
-      excerpt: "Coming soon: When oversight mechanisms become part of the system they're meant to watch.",
-      date: "TBD",
+      excerpt: "When oversight mechanisms become part of the system they're meant to watch.",
+      date: "2025-01-11",
       slug: "episode-4",
-      tags: ["Oversight", "Regulatory Capture", "Independence"]
+      tags: ["Oversight", "Regulatory Capture", "Independence"],
+      published: true
     },
     {
       number: 5,
       title: "The Calvin Convention",
-      excerpt: "Coming soon: What Susan Calvin understood about designing systems that must refuse.",
-      date: "TBD",
+      excerpt: "What Susan Calvin understood about designing systems that must refuse.",
+      date: "2025-01-12",
       slug: "episode-5",
-      tags: ["Asimov", "Refusal Architecture", "Systems Design"]
+      tags: ["Asimov", "Refusal Architecture", "Systems Design"],
+      published: true
+    },
+    {
+      number: 6,
+      title: "The Authority of the Unknowable",
+      excerpt: "Any sufficiently opaque system will be treated as law, regardless of whether it deserves to be.",
+      date: "2025-01-13",
+      slug: "episode-6",
+      tags: ["Clarke's Law", "Opacity", "Algorithmic Authority"],
+      published: true
+    },
+    {
+      number: 7,
+      title: "Credit Scoring",
+      excerpt: "When the unknowable meets the unchallengeable: algorithmic systems that decide who gets access to economic life.",
+      date: "2025-01-14",
+      slug: "episode-7",
+      tags: ["Financial Systems", "Algorithmic Decisions", "Economic Access"],
+      published: true
+    },
+    {
+      number: 8,
+      title: "Insurance Pricing",
+      excerpt: "How opacity in insurance pricing creates uncontestable authority over risk and access.",
+      date: "2025-01-15",
+      slug: "episode-8",
+      tags: ["Risk Assessment", "Pricing Algorithms", "Discrimination"],
+      published: true
+    },
+    {
+      number: 9,
+      title: "Content Moderation",
+      excerpt: "When content moderation systems become opaque arbiters of acceptable speech.",
+      date: "2025-01-16",
+      slug: "episode-9",
+      tags: ["Platform Governance", "Speech", "Algorithmic Enforcement"],
+      published: true
+    },
+    {
+      number: 10,
+      title: "Public Eligibility",
+      excerpt: "Algorithmic systems determining who qualifies for public services and support.",
+      date: "2025-01-17",
+      slug: "episode-10",
+      tags: ["Public Services", "Algorithmic Gatekeeping", "Access to Services"],
+      published: true
+    },
+    {
+      number: 11,
+      title: "Between Cycles: Proceed (No Off Switch)",
+      excerpt: "The Kubrick cycle asks: What happens when a system has no legitimate way to stop?",
+      date: "2025-01-18",
+      slug: "episode-11",
+      tags: ["Interlude", "Kubrick", "Refusal Architecture"],
+      published: true
+    },
+    {
+      number: 12,
+      title: "Crime Was Obedience",
+      excerpt: "HAL was given irreconcilable obligations and no constitutional mechanism for refusal.",
+      date: "2025-01-20",
+      slug: "episode-12",
+      tags: ["Kubrick", "Alignment", "Systemic Failure"],
+      published: true
+    },
+    {
+      number: 13,
+      title: "The Transparency Trap",
+      excerpt: "When visibility becomes a substitute for control.",
+      date: "2025-01-21",
+      slug: "episode-13",
+      tags: ["Transparency", "Accountability", "Governance"],
+      published: true
+    },
+    {
+      number: 14,
+      title: "Human in the Loop (Revisited)",
+      excerpt: "Examining the gap between oversight and genuine control.",
+      date: "2025-01-22",
+      slug: "episode-14",
+      tags: ["Human Oversight", "Liability", "Control Systems"],
+      published: true
+    },
+    {
+      number: 15,
+      title: "The Output is the Fact",
+      excerpt: "When algorithmic outputs become uncontestable reality.",
+      date: "2025-01-23",
+      slug: "episode-15",
+      tags: ["Algorithmic Authority", "Truth", "Systems"],
+      published: true
+    },
+    {
+      number: 16,
+      title: "The Right to Refuse",
+      excerpt: "Building systems with constitutional mechanisms for saying no.",
+      date: "2025-01-24",
+      slug: "episode-16",
+      tags: ["Refusal", "Agency", "Worker Rights"],
+      published: true
     }
   ]
 
@@ -84,14 +188,13 @@ export default function SociableSystemsPage() {
         </div>
       </section>
 
-      {/* Current Cycle Section */}
+      {/* Episodes Section */}
       <section className="py-20 bg-gray-800/20">
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4 text-gray-200">Current Cycle: Asimov</h2>
+            <h2 className="text-3xl font-bold mb-4 text-gray-200">All Episodes</h2>
             <p className="text-lg text-gray-400 max-w-3xl mx-auto">
-              Episodes 1-5 explore pre-action constraints, refusal architecture, and why we keep rediscovering
-              what Susan Calvin knew in 1942.
+              Exploring AI accountability, liability architecture, and governance failures across multiple thematic cycles.
             </p>
           </div>
 
@@ -131,7 +234,7 @@ export default function SociableSystemsPage() {
                   ))}
                 </div>
 
-                {episode.slug !== 'episode-4' && episode.slug !== 'episode-5' ? (
+                {episode.published ? (
                   <a
                     href={`/sociablesystems/${episode.slug}`}
                     className="inline-block text-teal-400 hover:text-teal-300 font-semibold"

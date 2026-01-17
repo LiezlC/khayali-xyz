@@ -20,7 +20,8 @@
       "Bash(done)",
       "Bash(mv:*)",
       "Bash(cat:*)",
-      "Bash(fi)"
+      "Bash(fi)",
+      "Bash(timeout 10 npm run dev:*)"
     ],
     "deny": [],
     "ask": []
