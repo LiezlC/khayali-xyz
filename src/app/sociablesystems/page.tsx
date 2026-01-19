@@ -164,6 +164,25 @@ export default function SociableSystemsPage() {
             </p>
           </div>
 
+          {/* Featured: Tracking Framework */}
+          <div className="bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl border border-teal-900/50 p-8 max-w-3xl mx-auto mb-12 shadow-2xl relative overflow-hidden group hover:border-teal-500/50 transition-colors">
+            <div className="absolute top-0 right-0 p-4 opacity-10 text-9xl leading-none select-none pointer-events-none">📊</div>
+            <div className="relative z-10">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="bg-teal-500/20 text-teal-300 text-xs font-bold px-2 py-1 rounded-full border border-teal-500/30 uppercase tracking-wide">Featured Analysis</span>
+                <span className="text-gray-400 text-xs">interactive dashboard</span>
+              </div>
+              <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-teal-400 transition-colors">The Experiment Nobody Authorized</h3>
+              <p className="text-gray-300 mb-6 leading-relaxed">
+                A contrarian data analysis of youth suicide rates during the generative AI explosion.
+                Investigating the "suppressor variable" problem and the 988 Lifeline impact.
+              </p>
+              <a href="/sociablesystems/tracking-framework" className="inline-flex items-center gap-2 text-teal-400 font-semibold hover:text-teal-300 transition-colors">
+                Explore the Tracking Framework <span>→</span>
+              </a>
+            </div>
+          </div>
+
           <div className="bg-gray-800/50 rounded-xl border border-gray-700 p-8 max-w-3xl mx-auto">
             <h3 className="text-xl font-bold mb-4 text-gray-200">What to Expect</h3>
             <ul className="space-y-3 text-gray-400">

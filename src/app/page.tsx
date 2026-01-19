@@ -25,9 +25,12 @@ export default function HomePage() {
               Download Tools
             </a>
           </div>
-          <div className="text-center">
+          <div className="flex flex-col items-center gap-3">
             <a href="/sociablesystems" className="text-gray-400 hover:text-teal-400 transition-colors">
               Read Sociable Systems →
+            </a>
+            <a href="/sociablesystems/tracking-framework" className="text-sm text-gray-500 hover:text-teal-300 transition-colors">
+              View the "Experiment Nobody Authorized" Dashboard →
             </a>
           </div>
         </div>
