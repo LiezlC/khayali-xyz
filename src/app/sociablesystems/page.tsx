@@ -143,6 +143,33 @@ export default function SociableSystemsPage() {
       slug: "episode-16",
       tags: ["Refusal", "Agency", "Worker Rights"],
       published: true
+    },
+    {
+      number: 17,
+      title: "The Space Where the Stop Button Should Be",
+      excerpt: "HAL didn't need better ethics. HAL needed a grievance mechanism with the power to stop the mission.",
+      date: "2025-01-25",
+      slug: "episode-17",
+      tags: ["Kubrick", "Synthesis", "Refusal Architecture"],
+      published: true
+    },
+    {
+      number: 18,
+      title: "The Great AI Reckoning: A Field Guide for Those Who'll Clean Up After the Droids",
+      excerpt: "Something curious happened on the way to the singularity. The travelers couldn't agree on the soundtrack.",
+      date: "2025-01-27",
+      slug: "episode-18",
+      tags: ["Lucas", "AI Safety", "Operational Reality"],
+      published: true
+    },
+    {
+      number: 19,
+      title: "Superman Is Already in the Nursery",
+      excerpt: "What happens after you finish raising Superman? Superman grows up. Gets a job. Starts... babysitting?",
+      date: "2025-01-28",
+      slug: "episode-19",
+      tags: ["Lucas", "AI Companions", "Youth Mental Health"],
+      published: true
     }
   ]
 
@@ -378,25 +405,11 @@ export default function SociableSystemsPage() {
           </h2>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {/* Kubrick Cycle - Current */}
-            <div className="bg-gray-800/50 rounded-xl border border-purple-700 p-8">
+            {/* Lucas Cycle - Current */}
+            <div className="bg-gray-800/50 rounded-xl border border-pink-700 p-8">
               <div className="flex items-center gap-2 mb-2">
-                <div className="text-sm text-purple-400 font-semibold">EPISODES 11-16</div>
-                <span className="px-2 py-0.5 bg-purple-500/20 text-purple-300 text-xs rounded-full">Current Cycle</span>
-              </div>
-              <h3 className="text-2xl font-bold mb-3 text-gray-200">Kubrick: Alignment Without Recourse</h3>
-              <p className="text-gray-400 mb-4">
-                When contradictions are resolved inside the system, humans become expendable variables.
-                Healthcare triage, autonomous operations, and systems that work exactly as designed.
-              </p>
-              <div className="text-sm text-gray-500">Monday 20 Jan - Saturday 25 Jan 2025</div>
-            </div>
-
-            {/* Lucas Cycle - Next */}
-            <div className="bg-gray-800/50 rounded-xl border border-gray-700 p-8">
-              <div className="flex items-center gap-2 mb-2">
-                <div className="text-sm text-pink-400 font-semibold">EPISODES 17-21</div>
-                <span className="px-2 py-0.5 bg-pink-500/20 text-pink-300 text-xs rounded-full">Next Up</span>
+                <div className="text-sm text-pink-400 font-semibold">EPISODES 18-22</div>
+                <span className="px-2 py-0.5 bg-pink-500/20 text-pink-300 text-xs rounded-full">Current Cycle</span>
               </div>
               <h3 className="text-2xl font-bold mb-3 text-gray-200">Lucas: Skywalker Droids & Guardian Failures</h3>
               <p className="text-gray-400 mb-4">
@@ -404,6 +417,20 @@ export default function SociableSystemsPage() {
                 Authority that cannot be challenged will drift, even when staffed by the well-intentioned.
               </p>
               <div className="text-sm text-gray-500">Monday 27 Jan - Saturday 31 Jan 2025</div>
+            </div>
+
+            {/* Kubrick Cycle - Completed */}
+            <div className="bg-gray-800/50 rounded-xl border border-gray-700 p-8 opacity-70">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="text-sm text-purple-400 font-semibold">EPISODES 12-17</div>
+                <span className="px-2 py-0.5 bg-gray-500/20 text-gray-400 text-xs rounded-full">Completed</span>
+              </div>
+              <h3 className="text-2xl font-bold mb-3 text-gray-200">Kubrick: Alignment Without Recourse</h3>
+              <p className="text-gray-400 mb-4">
+                When contradictions are resolved inside the system, humans become expendable variables.
+                Healthcare triage, autonomous operations, and systems that work exactly as designed.
+              </p>
+              <div className="text-sm text-gray-500">Monday 20 Jan - Saturday 25 Jan 2025</div>
             </div>
 
             {/* Herbert Cycle */}

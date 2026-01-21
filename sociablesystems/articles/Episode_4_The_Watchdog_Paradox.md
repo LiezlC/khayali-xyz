@@ -89,5 +89,5 @@ Until then, stay listening.
 
 ---
 
-🎵 **Soundtrack for this issue:** ["Listening, Not Obedient"](https://khayali.notion.site/Listening-Not-Obedient-2e41c03456f480ce82e3f848f87c61bb) from the D.I. Collection.  
+🎵 **Soundtrack for this issue:** ["Listening, Not Obedient"](https://soundcloud.com/khayali/listening_not_obedient) from the D.I. Collection.  
 *Lyrics generated in collaboration with AI. Sentiment entirely human.*

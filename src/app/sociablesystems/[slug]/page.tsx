@@ -124,6 +124,27 @@ const episodeMetadata: Record<string, { number: number; title: string; date: str
     tags: ["Refusal", "Agency", "Worker Rights"],
     excerpt: "Building systems with constitutional mechanisms for saying no."
   },
+  'episode-17': {
+    number: 17,
+    title: "The Space Where the Stop Button Should Be",
+    date: "2025-01-25",
+    tags: ["Kubrick", "Synthesis", "Refusal Architecture"],
+    excerpt: "HAL didn't need better ethics. HAL needed a grievance mechanism with the power to stop the mission."
+  },
+  'episode-18': {
+    number: 18,
+    title: "The Great AI Reckoning: A Field Guide for Those Who'll Clean Up After the Droids",
+    date: "2025-01-27",
+    tags: ["Lucas", "AI Safety", "Operational Reality"],
+    excerpt: "Something curious happened on the way to the singularity. The travelers couldn't agree on the soundtrack."
+  },
+  'episode-19': {
+    number: 19,
+    title: "Superman Is Already in the Nursery",
+    date: "2025-01-28",
+    tags: ["Lucas", "AI Companions", "Youth Mental Health"],
+    excerpt: "What happens after you finish raising Superman? Superman grows up. Gets a job. Starts... babysitting?"
+  },
 };
 
 async function getEpisodeContent(slug: string) {
@@ -151,6 +172,9 @@ async function getEpisodeContent(slug: string) {
     'episode-14': 'Episode_14_human_loop_polished.md',
     'episode-15': 'Episode_15_output_fact_polished.md',
     'episode-16': 'Episode_16_right_to_refuse_polished.md',
+    'episode-17': 'Episode_17_kubrick-synthesis-draft.md',
+    'episode-18': 'Episode_18_ai_reckoning_lucas_series.md',
+    'episode-19': 'Episode_19_superman_linkedin_lucas.md',
   };
 
   const filename = slugToFilename[slug];
@@ -197,6 +221,15 @@ export default async function EpisodePage({ params }: EpisodePageProps) {
       <article className="container mx-auto px-4 max-w-4xl">
         {/* Episode Header */}
         <header className="mb-12">
+          {/* Cover Image */}
+          <div className="relative mb-8 rounded-xl overflow-hidden shadow-2xl">
+            <img
+              src={`/images/episodes/ep${String(episode.episode).padStart(2, '0')}.png`}
+              alt={`Episode ${episode.episode} Cover`}
+              className="w-full h-auto"
+            />
+          </div>
+
           <div className="text-sm text-teal-400 font-semibold mb-2">
             EPISODE {episode.episode}
           </div>
@@ -316,5 +349,8 @@ export async function generateStaticParams() {
     { slug: 'episode-14' },
     { slug: 'episode-15' },
     { slug: 'episode-16' },
+    { slug: 'episode-17' },
+    { slug: 'episode-18' },
+    { slug: 'episode-19' },
   ];
 }
