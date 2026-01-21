@@ -164,22 +164,47 @@ export default function SociableSystemsPage() {
             </p>
           </div>
 
-          {/* Featured: Tracking Framework */}
-          <div className="bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl border border-teal-900/50 p-8 max-w-3xl mx-auto mb-12 shadow-2xl relative overflow-hidden group hover:border-teal-500/50 transition-colors">
-            <div className="absolute top-0 right-0 p-4 opacity-10 text-9xl leading-none select-none pointer-events-none">📊</div>
-            <div className="relative z-10">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="bg-teal-500/20 text-teal-300 text-xs font-bold px-2 py-1 rounded-full border border-teal-500/30 uppercase tracking-wide">Featured Analysis</span>
-                <span className="text-gray-400 text-xs">interactive dashboard</span>
+          {/* Featured Dashboards Grid */}
+          <div className="grid md:grid-cols-2 gap-6 mb-12 max-w-5xl mx-auto">
+            {/* AI Safety Counter-Narrative Dashboard */}
+            <div className="bg-gradient-to-br from-purple-900/50 to-pink-900/50 rounded-xl border border-purple-500/30 p-8 shadow-2xl relative overflow-hidden group hover:border-purple-400 transition-all">
+              <div className="absolute top-0 right-0 p-4 opacity-10 text-8xl leading-none select-none pointer-events-none">🎯</div>
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="bg-purple-500/20 text-purple-300 text-xs font-bold px-2 py-1 rounded-full border border-purple-500/30 uppercase tracking-wide">New Dashboard</span>
+                  <span className="text-gray-400 text-xs">interactive analysis</span>
+                </div>
+                <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-purple-300 transition-colors">AI Safety Counter-Narrative</h3>
+                <p className="text-gray-300 mb-6 leading-relaxed">
+                  Tracking AI companion safety interventions against population-level outcomes. 11 frameworks examining the gap between safety theater and reality.
+                </p>
+                <a
+                  href="/sociablesystems/sociable_systems_dashboard.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-purple-400 font-semibold hover:text-purple-300 transition-colors">
+                  Launch Dashboard <span>→</span>
+                </a>
               </div>
-              <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-teal-400 transition-colors">The Experiment Nobody Authorized</h3>
-              <p className="text-gray-300 mb-6 leading-relaxed">
-                A contrarian data analysis of youth suicide rates during the generative AI explosion.
-                Investigating the "suppressor variable" problem and the 988 Lifeline impact.
-              </p>
-              <a href="/sociablesystems/tracking-framework" className="inline-flex items-center gap-2 text-teal-400 font-semibold hover:text-teal-300 transition-colors">
-                Explore the Tracking Framework <span>→</span>
-              </a>
+            </div>
+
+            {/* Tracking Framework */}
+            <div className="bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl border border-teal-900/50 p-8 shadow-2xl relative overflow-hidden group hover:border-teal-500/50 transition-colors">
+              <div className="absolute top-0 right-0 p-4 opacity-10 text-8xl leading-none select-none pointer-events-none">📊</div>
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="bg-teal-500/20 text-teal-300 text-xs font-bold px-2 py-1 rounded-full border border-teal-500/30 uppercase tracking-wide">Featured Analysis</span>
+                  <span className="text-gray-400 text-xs">interactive dashboard</span>
+                </div>
+                <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-teal-400 transition-colors">The Experiment Nobody Authorized</h3>
+                <p className="text-gray-300 mb-6 leading-relaxed">
+                  A contrarian data analysis of youth suicide rates during the generative AI explosion.
+                  Investigating the "suppressor variable" problem and the 988 Lifeline impact.
+                </p>
+                <a href="/sociablesystems/tracking-framework" className="inline-flex items-center gap-2 text-teal-400 font-semibold hover:text-teal-300 transition-colors">
+                  Explore the Tracking Framework <span>→</span>
+                </a>
+              </div>
             </div>
           </div>
 

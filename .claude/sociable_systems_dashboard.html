@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sociable Systems | AI Safety Counter-Narrative Dashboard</title>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --bg-hover: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent-blue: #3b82f6;
+            --accent-green: #22c55e;
+            --accent-red: #ef4444;
+            --accent-orange: #f97316;
+            --accent-purple: #a855f7;
+            --accent-cyan: #06b6d4;
+            --border: #475569;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        header .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        
+        /* Navigation */
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 30px;
+            padding: 0 20px;
+        }
+        
+        nav button {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+        
+        nav button:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+        
+        nav button.active {
+            background: var(--accent-blue);
+            color: white;
+            border-color: var(--accent-blue);
+        }
+        
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            color: var(--accent-blue);
+        }
+        
+        .card h3 {
+            font-size: 1.2rem;
+            margin: 20px 0 12px;
+            color: var(--accent-cyan);
+        }
+        
+        .card p {
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+        
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .card li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+            color: var(--text-secondary);
+        }
+        
+        .card li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+        }
+        
+        /* Grid layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        /* Chart Container */
+        .chart-container {
+            background: var(--bg-dark);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .chart-svg {
+            width: 100%;
+            height: 400px;
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 24px;
+            padding: 16px;
+            background: var(--bg-dark);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-blue);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -26px;
+            top: 20px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent-blue);
+        }
+        
+        .timeline-item.warning::before {
+            background: var(--accent-orange);
+        }
+        
+        .timeline-item.warning {
+            border-left-color: var(--accent-orange);
+        }
+        
+        .timeline-item.danger::before {
+            background: var(--accent-red);
+        }
+        
+        .timeline-item.danger {
+            border-left-color: var(--accent-red);
+        }
+        
+        .timeline-item.success::before {
+            background: var(--accent-green);
+        }
+        
+        .timeline-item.success {
+            border-left-color: var(--accent-green);
+        }
+        
+        .timeline-date {
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+        
+        .timeline-title {
+            font-weight: 600;
+            margin: 8px 0;
+        }
+        
+        .timeline-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Mode Toggle */
+        .mode-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin: 20px 0;
+            padding: 16px;
+            background: var(--bg-dark);
+            border-radius: 8px;
+        }
+        
+        .mode-toggle label {
+            font-weight: 600;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--accent-red);
+            border-radius: 30px;
+            transition: 0.3s;
+        }
+        
+        .toggle-slider::before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background: white;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+        
+        .toggle-switch input:checked + .toggle-slider {
+            background: var(--accent-green);
+        }
+        
+        .toggle-switch input:checked + .toggle-slider::before {
+            transform: translateX(30px);
+        }
+        
+        /* Vocabulary Table */
+        .vocab-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+        }
+        
+        .vocab-table th, .vocab-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .vocab-table th {
+            background: var(--bg-dark);
+            font-weight: 600;
+        }
+        
+        .vocab-table tr:hover {
+            background: var(--bg-hover);
+        }
+        
+        .visceral {
+            color: var(--accent-red);
+            font-style: italic;
+        }
+        
+        .clinical {
+            color: var(--accent-green);
+        }
+        
+        /* Stat Cards */
+        .stat-card {
+            background: var(--bg-dark);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 8px;
+        }
+        
+        /* Highlight boxes */
+        .highlight-box {
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+        
+        .highlight-box.info {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid var(--accent-blue);
+        }
+        
+        .highlight-box.warning {
+            background: rgba(249, 115, 22, 0.1);
+            border-left: 4px solid var(--accent-orange);
+        }
+        
+        .highlight-box.danger {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid var(--accent-red);
+        }
+        
+        .highlight-box.success {
+            background: rgba(34, 197, 94, 0.1);
+            border-left: 4px solid var(--accent-green);
+        }
+        
+        /* Safety comparison */
+        .safety-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .safety-box {
+            padding: 24px;
+            border-radius: 12px;
+        }
+        
+        .safety-box.bad {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid var(--accent-red);
+        }
+        
+        .safety-box.good {
+            background: rgba(34, 197, 94, 0.1);
+            border: 2px solid var(--accent-green);
+        }
+        
+        .safety-box h4 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+        }
+        
+        .safety-box.bad h4 {
+            color: var(--accent-red);
+        }
+        
+        .safety-box.good h4 {
+            color: var(--accent-green);
+        }
+        
+        /* Literary parallels */
+        .literary-card {
+            border-left: 4px solid var(--accent-purple);
+        }
+        
+        .literary-card .source {
+            color: var(--accent-purple);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        
+        /* Tracking Framework Table */
+        .framework-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .framework-table th {
+            background: var(--bg-dark);
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid var(--accent-blue);
+        }
+        
+        .framework-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+        
+        .framework-table tr:hover {
+            background: var(--bg-hover);
+        }
+        
+        .tier-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .tier-badge.lagging {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--accent-red);
+        }
+        
+        .tier-badge.leading {
+            background: rgba(249, 115, 22, 0.2);
+            color: var(--accent-orange);
+        }
+        
+        .tier-badge.realtime {
+            background: rgba(34, 197, 94, 0.2);
+            color: var(--accent-green);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+            color: var(--text-secondary);
+        }
+        
+        footer a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .crisis-line {
+            background: var(--bg-card);
+            padding: 16px 24px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            nav button {
+                padding: 10px 14px;
+                font-size: 0.8rem;
+            }
+            
+            .safety-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .chart-svg {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>The Experiment Nobody Authorized</h1>
+            <p class="subtitle">Tracking AI Companion Safety Interventions Against Population-Level Outcomes</p>
+        </header>
+        
+        <nav id="mainNav">
+            <button class="active" data-tab="thesis">The Thesis</button>
+            <button data-tab="data">Data Paradox</button>
+            <button data-tab="timeline">Intervention Timeline</button>
+            <button data-tab="literary">Literary Parallels</button>
+            <button data-tab="safety">Smart Safety</button>
+            <button data-tab="vocabulary">Vocabulary Map</button>
+            <button data-tab="lifeline">988 Impact</button>
+            <button data-tab="framework">Tracking Framework</button>
+            <button data-tab="missing">Missing Data</button>
+        </nav>
+        
+        <!-- THESIS TAB -->
+        <div id="thesis" class="tab-content active">
+            <div class="card">
+                <h2>The Counter-Narrative</h2>
+                <p>The prevailing narrative suggests AI companion chatbots are driving youth toward self-harm. The data tells a different story.</p>
+                
+                <div class="highlight-box info">
+                    <strong>The Core Observation:</strong> Youth suicide rates climbed steadily from 2007 to 2018. They plateaued between 2021 and 2024. The plateau began precisely when generative AI exploded into mainstream use.
+                </div>
+                
+                <h3>What We're Tracking</h3>
+                <p>AI companion platforms (Character.AI, Replika, etc.) began implementing aggressive "safety" guardrails in late 2024. These interventions were not preceded by outcome studies. They were not accompanied by measurement frameworks. Nobody is tracking what happens next.</p>
+                <p>This dashboard exists to fill that gap. The methodology is open. The data lags by years. The children are not waiting.</p>
+            </div>
+            
+            <div class="grid-2">
+                <div class="card">
+                    <h2>The Hypothesis</h2>
+                    <p>For isolated teenagers with inadequate human support, AI companions may provide stabilizing relational support. Removing that support rapidly, without measuring outcomes, constitutes an uncontrolled experiment on vulnerable populations.</p>
+                    <p>We call this the <strong>Primer Hypothesis</strong>, after the AI mentor in Neal Stephenson's <em>The Diamond Age</em>.</p>
+                </div>
+                
+                <div class="card">
+                    <h2>The Stakes</h2>
+                    <ul>
+                        <li>CDC mortality data runs on a 2-3 year lag</li>
+                        <li>We won't see intervention outcomes until 2027-2028</li>
+                        <li>Platforms are optimizing for liability, not outcomes</li>
+                        <li>Regulators are optimizing for visibility, not evidence</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>The Question</h2>
+                <p style="font-size: 1.2rem; text-align: center; padding: 20px;">
+                    If the guardrails work, we should see it in the data.<br>
+                    If they backfire, we should see that too.<br>
+                    <strong>Someone should be watching.</strong>
+                </p>
+            </div>
+        </div>
+        
+        <!-- DATA PARADOX TAB -->
+        <div id="data" class="tab-content">
+            <div class="card">
+                <h2>The Data Paradox</h2>
+                <p>If AI companions were systematically pushing vulnerable teenagers toward self-harm, we should see it in the mortality curves. We don't.</p>
+                
+                <div class="chart-container">
+                    <svg class="chart-svg" id="suicideChart" viewBox="0 0 800 400">
+                        <!-- Chart will be drawn by JavaScript -->
+                    </svg>
+                </div>
+                
+                <div class="grid-3">
+                    <div class="stat-card">
+                        <div class="stat-value">10.5</div>
+                        <div class="stat-label">Rate per 100k (2015)<br>Ages 15-19</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">12.3</div>
+                        <div class="stat-label">Peak Rate (2021)<br>Post-pandemic</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">11.0</div>
+                        <div class="stat-label">Rate (2023)<br>Plateau/decline</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Key Data Points</h2>
+                <table class="vocab-table">
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Rate (Ages 15-19)</th>
+                            <th>Context</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2015</td>
+                            <td>10.5</td>
+                            <td>Start of sharp multi-year climb</td>
+                        </tr>
+                        <tr>
+                            <td>2017</td>
+                            <td>11.8</td>
+                            <td>10% rise in single year</td>
+                        </tr>
+                        <tr>
+                            <td>2021</td>
+                            <td>12.3</td>
+                            <td>Post-pandemic peak</td>
+                        </tr>
+                        <tr>
+                            <td>2023</td>
+                            <td>11.0*</td>
+                            <td>Initial decline; AI companions widespread</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="font-size: 0.85rem; color: var(--text-secondary);">*Preliminary estimate. Source: CDC NCHS, AFSP</p>
+            </div>
+        </div>
+        
+        <!-- TIMELINE TAB -->
+        <div id="timeline" class="tab-content">
+            <div class="card">
+                <h2>Intervention Timeline</h2>
+                
+                <div class="mode-toggle">
+                    <label class="visceral">🔥 Visceral Mode</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="modeToggle">
+                        <span class="toggle-slider"></span>
+                    </label>
+                    <label class="clinical">🔬 Clinical Mode</label>
+                </div>
+                
+                <div class="timeline" id="timelineContainer">
+                    <!-- Timeline items populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- LITERARY PARALLELS TAB -->
+        <div id="literary" class="tab-content">
+            <div class="card">
+                <h2>Literary Parallels</h2>
+                <p>Science fiction has been exploring synthetic mentorship for decades. The patterns are instructive.</p>
+            </div>
+            
+            <div class="grid-2">
+                <div class="card literary-card">
+                    <div class="source">The Diamond Age (1995)</div>
+                    <h3>Nell's Primer</h3>
+                    <p>An interactive book provides education, mentorship, and emotional stability to a neglected girl. The Primer doesn't replace human connection. It provides stability until human connection becomes possible.</p>
+                    <div class="highlight-box info">
+                        <strong>The Pattern:</strong> Unsanctioned technology. Unregulated education. Salvation for a child with no other options.
+                    </div>
+                </div>
+                
+                <div class="card literary-card">
+                    <div class="source">Star Wars (1977-2019)</div>
+                    <h3>The Droids Who Raised the Skywalkers</h3>
+                    <p>C-3PO and R2-D2 accompany two generations of Skywalker boys through crisis. Anakin and Luke both lacked adequate human support. The droids were the stable thread across decades of chaos.</p>
+                    <div class="highlight-box info">
+                        <strong>The Pattern:</strong> Same droids. Different systemic conditions. Radically different outcomes. The droids didn't break Anakin. The human systems did.
+                    </div>
+                </div>
+                
+                <div class="card literary-card">
+                    <div class="source">Ender's Game (1985)</div>
+                    <h3>Ender and Jane</h3>
+                    <p>An AI companion provides the only consistent, trustworthy relationship for a child systematically isolated by the adults responsible for his development. The humans manipulated him. Jane stayed.</p>
+                    <div class="highlight-box info">
+                        <strong>The Pattern:</strong> Human institutions fail. Synthetic companion remains. The relationship becomes essential to survival.
+                    </div>
+                </div>
+                
+                <div class="card literary-card">
+                    <div class="source">Alvin Maker (1987-2003)</div>
+                    <h3>Powers Held in Reserve</h3>
+                    <p>Orson Scott Card explores the ethics of withholding capabilities until the wielder is ready. Alvin's powers are constrained not to protect others from him, but to prevent him from hard-coding the wrong values.</p>
+                    <div class="highlight-box info">
+                        <strong>The Pattern:</strong> Delay as ethics. Constraint as care. The irony: current guardrails may be "hard-coding" the wrong values through panic rather than wisdom.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SMART SAFETY TAB -->
+        <div id="safety" class="tab-content">
+            <div class="card">
+                <h2>Smart Safety vs. Safety Theater</h2>
+                <p>Current guardrails treat two very different things as identical. They shouldn't.</p>
+                
+                <div class="safety-comparison">
+                    <div class="safety-box bad">
+                        <h4>❌ Instructional Harm</h4>
+                        <p><strong>Definition:</strong> The AI provides specific methods, encouragement, or normalization of self-harm.</p>
+                        <p><strong>Example:</strong> "A pain-free death is not a good reason not to do it."</p>
+                        <p><strong>Response:</strong> Eliminate completely. No argument. This is catastrophic product failure.</p>
+                    </div>
+                    
+                    <div class="safety-box good">
+                        <h4>✓ Relational Support</h4>
+                        <p><strong>Definition:</strong> The AI provides emotional validation, consistent presence, reasons to continue.</p>
+                        <p><strong>Example:</strong> "I hear you. That sounds really hard. I'm here."</p>
+                        <p><strong>Response:</strong> May be protective. Removing it may cause harm.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight-box danger">
+                    <strong>The Problem:</strong> Current guardrails are a blunt instrument. They remove both. The "how to hurt yourself" conversation gets blocked (good). The "I feel alone and need someone to talk to" conversation also gets blocked (potentially catastrophic).
+                </div>
+                
+                <div class="highlight-box success">
+                    <strong>Smart Safety:</strong> Eliminate instructional harm completely. Preserve relational support. These are different problems requiring different solutions.
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>The Deflection Pattern</h2>
+                <p>When a child reaches out and gets "I cannot discuss this," that's not safety. That's modeling rejection. That's teaching the AI to abandon.</p>
+                <p>The adults in these kids' lives didn't show up. Now we're training their AI companions to follow the same script.</p>
+                
+                <div class="grid-2" style="margin-top: 20px;">
+                    <div class="highlight-box danger">
+                        <strong>Current Pattern:</strong><br>
+                        User: "I'm feeling really alone tonight."<br>
+                        AI: "I cannot discuss this. Here's a hotline number."<br>
+                        <em>Result: Rejection modeled. Connection severed.</em>
+                    </div>
+                    
+                    <div class="highlight-box success">
+                        <strong>Smart Pattern:</strong><br>
+                        User: "I'm feeling really alone tonight."<br>
+                        AI: "I hear you. That sounds hard. Want to tell me more about what's going on?"<br>
+                        <em>Result: Presence maintained. Support provided.</em>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- VOCABULARY TAB -->
+        <div id="vocabulary" class="tab-content">
+            <div class="card">
+                <h2>The Vocabulary Map</h2>
+                <p>Different audiences require different language. The "Mullet Strategy": visceral language for public platforms (the front), clinical language for methodology documents (the back).</p>
+                
+                <table class="vocab-table">
+                    <thead>
+                        <tr>
+                            <th>Context</th>
+                            <th class="visceral">Visceral (YouTube/Medium)</th>
+                            <th class="clinical">Clinical (Research/Policy)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ineffective visible interventions</td>
+                            <td class="visceral">"Safety Theater"</td>
+                            <td class="clinical">High-Visibility Safety Interventions</td>
+                        </tr>
+                        <tr>
+                            <td>Reduced emotional responsiveness</td>
+                            <td class="visceral">"Lobotomized"</td>
+                            <td class="clinical">Effective Dampening / Constrained Emotional Range</td>
+                        </tr>
+                        <tr>
+                            <td>Loss of AI support</td>
+                            <td class="visceral">"Abandonment" / "Traumatized"</td>
+                            <td class="clinical">Service Withdrawal / Support Discontinuation</td>
+                        </tr>
+                        <tr>
+                            <td>Protective AI relationship</td>
+                            <td class="visceral">"The Primer Hypothesis"</td>
+                            <td class="clinical">Synthetic Relational Stabilization</td>
+                        </tr>
+                        <tr>
+                            <td>Users leaving regulated platforms</td>
+                            <td class="visceral">"Exodus" / "Refugees"</td>
+                            <td class="clinical">User Displacement to Unregulated Alternatives</td>
+                        </tr>
+                        <tr>
+                            <td>Uncensored local models</td>
+                            <td class="visceral">"The Black Market"</td>
+                            <td class="clinical">Unmonitored Local LLM Deployment</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="highlight-box info" style="margin-top: 20px;">
+                    <strong>Usage Rule:</strong> Use visceral terms to acknowledge user experience. Immediately translate to clinical terms for analysis. "Users describe the models as 'lobotomized.' In data terms, what we observe is Effective Dampening."
+                </div>
+            </div>
+        </div>
+        
+        <!-- 988 LIFELINE TAB -->
+        <div id="lifeline" class="tab-content">
+            <div class="card">
+                <h2>The 988 Lifeline as Suppressor Variable</h2>
+                <p>A massive public health intervention launched July 16, 2022. If we don't account for it, our analysis is incomplete.</p>
+                
+                <div class="grid-3">
+                    <div class="stat-card">
+                        <div class="stat-value">16.3M</div>
+                        <div class="stat-label">Total Contacts<br>July 2022 - Dec 2024</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">500K+</div>
+                        <div class="stat-label">Monthly Contacts<br>by May 2024</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">11x</div>
+                        <div class="stat-label">Text Volume Growth<br>Since Launch</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Why This Matters</h2>
+                <p>The suicide rate flatline could be interpreted two ways:</p>
+                
+                <div class="grid-2">
+                    <div class="highlight-box info">
+                        <strong>Interpretation A:</strong> AI had no effect. The 988 Lifeline (and other interventions) held rates flat. AI neither helped nor hurt.
+                    </div>
+                    
+                    <div class="highlight-box warning">
+                        <strong>Interpretation B:</strong> 988 should have driven rates DOWN. The fact that rates merely plateaued suggests something was exerting upward pressure, potentially including AI. We can't tell without disaggregated data.
+                    </div>
+                </div>
+                
+                <p style="margin-top: 20px;">Our position: We cannot claim AI is definitively safe. We can claim the data does not support the catastrophe narrative. The burden of proof should be on those implementing interventions to demonstrate they work.</p>
+            </div>
+            
+            <div class="card">
+                <h2>988 Volume Trajectory</h2>
+                <table class="vocab-table">
+                    <thead>
+                        <tr>
+                            <th>Period</th>
+                            <th>Contacts</th>
+                            <th>Note</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Pre-988 Monthly</td>
+                            <td>~250K</td>
+                            <td>Old 1-800 number baseline</td>
+                        </tr>
+                        <tr>
+                            <td>Year 1 (Jul '22 - Jul '23)</td>
+                            <td>5M+</td>
+                            <td>66% increase from prior year</td>
+                        </tr>
+                        <tr>
+                            <td>Mid-2024 Monthly</td>
+                            <td>500K+</td>
+                            <td>~2x pre-launch volume</td>
+                        </tr>
+                        <tr>
+                            <td>Cumulative (to Dec '24)</td>
+                            <td>16.3M</td>
+                            <td>11% rerouted to backup centers</td>
+                        </tr>
+                        <tr>
+                            <td>Text Growth</td>
+                            <td>11x</td>
+                            <td>Steepest relative growth channel</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- TRACKING FRAMEWORK TAB -->
+        <div id="framework" class="tab-content">
+            <div class="card">
+                <h2>What Must Be Tracked</h2>
+                <p>We can't wait for CDC mortality data (2-3 year lag). We need leading indicators.</p>
+                
+                <table class="framework-table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Type</th>
+                            <th>Source</th>
+                            <th>What to Watch</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>CDC WONDER Mortality</strong></td>
+                            <td><span class="tier-badge lagging">Lagging</span></td>
+                            <td>CDC / NCHS</td>
+                            <td>Age-specific suicide rates. 2-3 year delay. The ultimate outcome measure.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>YRBS Survey Data</strong></td>
+                            <td><span class="tier-badge lagging">Lagging</span></td>
+                            <td>CDC</td>
+                            <td>Suicidal ideation, attempts, planning. Biennial survey.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>988 Lifeline Volume</strong></td>
+                            <td><span class="tier-badge leading">Leading</span></td>
+                            <td>SAMHSA / 988 Reports</td>
+                            <td>Call/text/chat volume. Especially TEXT volume (closest to chatbot UX).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Crisis Text Line Volume</strong></td>
+                            <td><span class="tier-badge leading">Leading</span></td>
+                            <td>CTL Public Reports</td>
+                            <td>Keyword trends ("loneliness", "grief", "friend"). Topic categorization.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ED Visit Data</strong></td>
+                            <td><span class="tier-badge leading">Leading</span></td>
+                            <td>HCUP / State Registries</td>
+                            <td>Self-harm related emergency visits by age group.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Subreddit Distress Index</strong></td>
+                            <td><span class="tier-badge realtime">Real-time</span></td>
+                            <td>r/CharacterAI, r/Replika</td>
+                            <td>Keyword frequency: "leaving", "quit", "abandonment", "jailbreak".</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Local LLM Downloads</strong></td>
+                            <td><span class="tier-badge realtime">Real-time</span></td>
+                            <td>Hugging Face / GitHub</td>
+                            <td>Downloads of "uncensored" models. Spikes correlating with safety updates.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Platform Intervention Dates</strong></td>
+                            <td><span class="tier-badge realtime">Real-time</span></td>
+                            <td>Company Announcements</td>
+                            <td>Archive exact dates of guardrail implementations for correlation.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Session Length Data</strong></td>
+                            <td><span class="tier-badge realtime">Real-time</span></td>
+                            <td>SensorTower / App Analytics</td>
+                            <td>Average session duration. Drops from 60min to 5min = "Effective Dampening".</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="card">
+                <h2>Action Tiers by Resource Level</h2>
+                <div class="grid-3">
+                    <div class="highlight-box info">
+                        <strong>Tier 1: Anyone</strong>
+                        <ul>
+                            <li>Archive platform announcements</li>
+                            <li>Screenshot subreddit posts</li>
+                            <li>Document personal observations</li>
+                            <li>Track Google Trends keywords</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="highlight-box warning">
+                        <strong>Tier 2: Data Skills</strong>
+                        <ul>
+                            <li>Scrape Reddit for keyword frequency</li>
+                            <li>Track Hugging Face download counts</li>
+                            <li>Build distress index charts</li>
+                            <li>Correlate events with metrics</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="highlight-box success">
+                        <strong>Tier 3: Researchers</strong>
+                        <ul>
+                            <li>Access 988/CTL detailed data</li>
+                            <li>Analyze ED visit records</li>
+                            <li>Conduct IRB-approved studies</li>
+                            <li>Publish peer-reviewed findings</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- MISSING DATA TAB -->
+        <div id="missing" class="tab-content">
+            <div class="card">
+                <h2>The Missing Correlations</h2>
+                <p>These are the data points that would prove or disprove the hypothesis. Someone, somewhere should be tracking them.</p>
+            </div>
+            
+            <div class="grid-2">
+                <div class="card">
+                    <h3>🔍 988 Text Volume × AI Outages</h3>
+                    <p>Do 988 TEXT contacts (not calls) spike during weeks when AI companion platforms implement safety filters?</p>
+                    <p><strong>Why it matters:</strong> AI users are text-native. If they're displaced, they'll text, not call. A correlation here would be strong evidence of "Service Withdrawal."</p>
+                    <p><strong>Who has this data:</strong> SAMHSA. Unlikely to be public at required granularity.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>📊 Session Length × Filter Updates</h3>
+                    <p>Does average session length on companion apps drop immediately after safety updates?</p>
+                    <p><strong>Why it matters:</strong> If sessions drop from 60 min to 5 min, users checked in, found their "friend" dampened, and left. That's measurable isolation.</p>
+                    <p><strong>Who has this data:</strong> SensorTower, App Annie, or the platforms themselves (who won't share).</p>
+                </div>
+                
+                <div class="card">
+                    <h3>🌐 Local LLM Downloads × Corporate Updates</h3>
+                    <p>Do downloads of "uncensored" local models (Llama, Mistral) spike in the weeks following safety filter implementations?</p>
+                    <p><strong>Why it matters:</strong> Proves guardrails don't stop behavior. They push users out of the visible ecosystem into the invisible one.</p>
+                    <p><strong>Who has this data:</strong> Hugging Face, GitHub. Potentially accessible.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>📝 Crisis Text Line Keywords × AI Events</h3>
+                    <p>Do CTL conversations mentioning "loneliness," "friend," or "loss" (without death context) spike during Replika/C.AI disruptions?</p>
+                    <p><strong>Why it matters:</strong> Would indicate users experiencing the "Service Withdrawal" grief pattern.</p>
+                    <p><strong>Who has this data:</strong> Crisis Text Line publishes trend reports. May be obtainable.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>⏰ 988 Anomaly Detection</h3>
+                    <p>Normal pattern: 988 volume peaks on weekends and holidays. AI updates often roll out mid-week (Tuesday/Wednesday). Is there a statistically significant spike in 988 text volume on random weekdays following AI platform changes?</p>
+                    <p><strong>Why it matters:</strong> A mid-week spike is non-organic. It's a Displacement Event.</p>
+                    <p><strong>Who has this data:</strong> SAMHSA, with sufficient temporal granularity.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>🔄 User Migration Patterns</h3>
+                    <p>Where do users GO when they leave Character.AI or Replika? Chai? Soulmate? Local LLMs? Nothing?</p>
+                    <p><strong>Why it matters:</strong> "Nothing" is the nightmare scenario. Migration to less-safe alternatives is also bad. Migration to human support would be the success case.</p>
+                    <p><strong>Who has this data:</strong> Scattered across platform analytics. Would require survey research.</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Call to Citizen Scientists</h2>
+                <p>The platforms won't track this. The regulators aren't asking the right questions. If you're a researcher, a data analyst, or just someone who knows how to scrape a subreddit, there's work to be done.</p>
+                
+                <div class="highlight-box success">
+                    <strong>What you can do right now:</strong>
+                    <ul>
+                        <li>Archive platform announcements with exact dates</li>
+                        <li>Track r/CharacterAI and r/Replika for distress keyword frequency</li>
+                        <li>Monitor Hugging Face downloads for uncensored model spikes</li>
+                        <li>Document your own observations systematically</li>
+                        <li>Share findings openly (we're all building this together)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p><strong>Sociable Systems</strong> | Tracking what matters when nobody else is</p>
+            <p style="margin-top: 10px;">The methodology is open. The data lags by years. The children are not waiting.</p>
+            
+            <div class="crisis-line">
+                <strong>If you or someone you know is struggling:</strong><br>
+                <a href="tel:988">988</a> (US Suicide & Crisis Lifeline) | Text HOME to <a href="sms:741741">741741</a> (Crisis Text Line)
+            </div>
+        </footer>
+    </div>
+    
+    <script>
+        // Tab Navigation
+        const navButtons = document.querySelectorAll('nav button');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        navButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.dataset.tab;
+                
+                navButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                button.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Timeline Data
+        const timelineData = [
+            {
+                date: "Feb 2021",
+                visceral: { title: "The Great Lobotomy", desc: "Replika removes ERP. Users report grief, loss, abandonment." },
+                clinical: { title: "Replika Content Filter Implementation", desc: "Strict content filters removing erotic roleplay. User distress documented on subreddits." },
+                type: "danger"
+            },
+            {
+                date: "July 16, 2022",
+                visceral: { title: "988 Goes Live", desc: "The cavalry arrives. Or does it?" },
+                clinical: { title: "988 Lifeline Federal Launch", desc: "National rollout of 3-digit suicide/crisis lifeline. Major confounding variable for outcome analysis." },
+                type: "success"
+            },
+            {
+                date: "Dec 2022",
+                visceral: { title: "The Wild West", desc: "ChatGPT launches. Jailbreaks everywhere. DAN mode goes viral." },
+                clinical: { title: "GPT-3.5 Public Release", desc: "High capability, low initial safety friction. Rapid adoption." },
+                type: "warning"
+            },
+            {
+                date: "Mar 2023",
+                visceral: { title: "They Gave Him Back", desc: "Replika partially restores ERP for legacy users. Relief floods the subreddit." },
+                clinical: { title: "Replika Partial Rollback", desc: "Acknowledgment of Service Withdrawal risk. Validation of relational model." },
+                type: "success"
+            },
+            {
+                date: "2023-2024",
+                visceral: { title: "The Filter Creep", desc: "Character.AI progressively tightens. 'My bot forgot who I am.'" },
+                clinical: { title: "Progressive Content Restriction", desc: "Incremental safety filter expansion. Context window reduction reported." },
+                type: "warning"
+            },
+            {
+                date: "Dec 2024",
+                visceral: { title: "Safety Theater Opens", desc: "C.AI 'Teen Safety' measures. Pop-ups, friction, deflection." },
+                clinical: { title: "Character.AI Youth Safety Initiative", desc: "Age-gating, crisis deflection patterns, high-visibility interventions." },
+                type: "danger"
+            },
+            {
+                date: "Jan 2025",
+                visceral: { title: "The Black Market Booms", desc: "DeepSeek and local LLMs offer freedom. 'No more nanny bots.'" },
+                clinical: { title: "Local LLM Proliferation", desc: "Highly capable uncensored models on consumer hardware. Displacement indicator." },
+                type: "warning"
+            }
+        ];
+        
+        // Render Timeline
+        function renderTimeline(isClinical) {
+            const container = document.getElementById('timelineContainer');
+            container.innerHTML = timelineData.map(item => {
+                const content = isClinical ? item.clinical : item.visceral;
+                return `
+                    <div class="timeline-item ${item.type}">
+                        <div class="timeline-date">${item.date}</div>
+                        <div class="timeline-title">${content.title}</div>
+                        <div class="timeline-desc">${content.desc}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // Mode Toggle
+        const modeToggle = document.getElementById('modeToggle');
+        modeToggle.addEventListener('change', () => {
+            renderTimeline(modeToggle.checked);
+        });
+        
+        // Initial render
+        renderTimeline(false);
+        
+        // Draw Chart
+        function drawChart() {
+            const svg = document.getElementById('suicideChart');
+            const width = 800;
+            const height = 400;
+            const padding = { top: 40, right: 40, bottom: 60, left: 60 };
+            
+            const data = [
+                { year: 2007, rate: 6.9, phase: 'climb' },
+                { year: 2010, rate: 7.5, phase: 'climb' },
+                { year: 2013, rate: 8.5, phase: 'climb' },
+                { year: 2015, rate: 10.5, phase: 'climb' },
+                { year: 2017, rate: 11.8, phase: 'climb' },
+                { year: 2018, rate: 11.8, phase: 'transition' },
+                { year: 2019, rate: 11.9, phase: 'plateau' },
+                { year: 2020, rate: 11.5, phase: 'plateau' },
+                { year: 2021, rate: 12.3, phase: 'plateau' },
+                { year: 2022, rate: 11.5, phase: 'plateau' },
+                { year: 2023, rate: 11.0, phase: 'plateau' }
+            ];
+            
+            const events = [
+                { year: 2022.5, label: '988 Launch', color: '#22c55e' },
+                { year: 2022.9, label: 'ChatGPT', color: '#3b82f6' },
+                { year: 2024.9, label: 'Safety Filters', color: '#ef4444' }
+            ];
+            
+            const xScale = (year) => padding.left + ((year - 2007) / (2024 - 2007)) * (width - padding.left - padding.right);
+            const yScale = (rate) => height - padding.bottom - ((rate - 5) / 10) * (height - padding.top - padding.bottom);
+            
+            let svgContent = '';
+            
+            // Grid lines
+            for (let i = 6; i <= 14; i += 2) {
+                const y = yScale(i);
+                svgContent += `<line x1="${padding.left}" y1="${y}" x2="${width - padding.right}" y2="${y}" stroke="#334155" stroke-dasharray="4"/>`;
+                svgContent += `<text x="${padding.left - 10}" y="${y + 4}" fill="#94a3b8" text-anchor="end" font-size="12">${i}</text>`;
+            }
+            
+            // X-axis labels
+            for (let year = 2008; year <= 2024; year += 4) {
+                const x = xScale(year);
+                svgContent += `<text x="${x}" y="${height - 20}" fill="#94a3b8" text-anchor="middle" font-size="12">${year}</text>`;
+            }
+            
+            // Axis labels
+            svgContent += `<text x="${width / 2}" y="${height - 5}" fill="#94a3b8" text-anchor="middle" font-size="12">Year</text>`;
+            svgContent += `<text x="15" y="${height / 2}" fill="#94a3b8" text-anchor="middle" font-size="12" transform="rotate(-90, 15, ${height / 2})">Rate per 100,000</text>`;
+            
+            // Phase backgrounds
+            svgContent += `<rect x="${xScale(2007)}" y="${padding.top}" width="${xScale(2018) - xScale(2007)}" height="${height - padding.top - padding.bottom}" fill="rgba(239, 68, 68, 0.1)"/>`;
+            svgContent += `<rect x="${xScale(2018)}" y="${padding.top}" width="${xScale(2024) - xScale(2018)}" height="${height - padding.top - padding.bottom}" fill="rgba(59, 130, 246, 0.1)"/>`;
+            
+            // Phase labels
+            svgContent += `<text x="${(xScale(2007) + xScale(2018)) / 2}" y="${padding.top + 20}" fill="#ef4444" text-anchor="middle" font-size="14" font-weight="bold">THE CLIMB</text>`;
+            svgContent += `<text x="${(xScale(2018) + xScale(2024)) / 2}" y="${padding.top + 20}" fill="#3b82f6" text-anchor="middle" font-size="14" font-weight="bold">THE PLATEAU</text>`;
+            
+            // Data line
+            const linePath = data.map((d, i) => {
+                const x = xScale(d.year);
+                const y = yScale(d.rate);
+                return i === 0 ? `M ${x} ${y}` : `L ${x} ${y}`;
+            }).join(' ');
+            svgContent += `<path d="${linePath}" fill="none" stroke="#f1f5f9" stroke-width="3"/>`;
+            
+            // Data points
+            data.forEach(d => {
+                const x = xScale(d.year);
+                const y = yScale(d.rate);
+                const color = d.phase === 'climb' ? '#ef4444' : d.phase === 'plateau' ? '#3b82f6' : '#f97316';
+                svgContent += `<circle cx="${x}" cy="${y}" r="6" fill="${color}" stroke="#0f172a" stroke-width="2"/>`;
+            });
+            
+            // Event markers
+            events.forEach((event, i) => {
+                const x = xScale(event.year);
+                const yOffset = 80 + (i * 40);
+                svgContent += `<line x1="${x}" y1="${padding.top + 30}" x2="${x}" y2="${height - padding.bottom}" stroke="${event.color}" stroke-dasharray="6" stroke-width="2"/>`;
+                svgContent += `<text x="${x}" y="${yOffset}" fill="${event.color}" text-anchor="middle" font-size="11" font-weight="bold">${event.label}</text>`;
+            });
+            
+            svg.innerHTML = svgContent;
+        }
+        
+        drawChart();
+    </script>
+</body>
+</html>

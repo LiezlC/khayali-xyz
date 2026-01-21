@@ -36,6 +36,57 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Featured: Sociable Systems Dashboard */}
+      <section className="py-16 bg-gradient-to-br from-indigo-900/40 to-purple-900/40 border-y border-purple-500/30">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <div className="text-center mb-8">
+            <div className="inline-block px-4 py-1 bg-purple-500/20 border border-purple-500/50 rounded-full text-purple-300 text-sm font-semibold mb-4">
+              Featured Research
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              AI Safety Counter-Narrative Dashboard
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed">
+              Tracking AI companion safety interventions against population-level outcomes. A comprehensive analysis framework examining the gap between AI safety theater and operational reality.
+            </p>
+          </div>
+
+          <div className="bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-purple-500/30 p-8 shadow-2xl hover:shadow-purple-500/20 transition-all duration-300">
+            <div className="grid md:grid-cols-3 gap-6 mb-8">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-purple-400 mb-2">11 Frameworks</div>
+                <div className="text-gray-400 text-sm">Comprehensive tracking categories</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-blue-400 mb-2">Interactive</div>
+                <div className="text-gray-400 text-sm">Navigate by framework or timeline</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-pink-400 mb-2">Evidence-Based</div>
+                <div className="text-gray-400 text-sm">Real interventions, real outcomes</div>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="/sociablesystems/sociable_systems_dashboard.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-lg font-semibold transition-all text-center shadow-lg hover:shadow-purple-500/50 text-white"
+              >
+                🎯 Launch Dashboard
+              </a>
+              <a
+                href="/sociablesystems"
+                className="px-8 py-4 bg-gray-700/50 hover:bg-gray-700 rounded-lg font-semibold transition-colors text-center border border-gray-600 hover:border-purple-500 text-gray-300"
+              >
+                Read Newsletter Context
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Start Here - Three Cards */}
       <section className="py-20 bg-gray-800/30">
         <div className="container mx-auto px-4">
