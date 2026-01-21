@@ -3,9 +3,9 @@ export default function HomePage() {
     <div className="min-h-screen">
       {/* Hero Section - Professional Focus */}
       <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-cover bg-center bg-no-repeat"
+        <div className="absolute inset-0 opacity-20 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: 'url(/images/cosmic/grok/00e09f3f-a612-4214-915b-45b23c05c2f9.jpg)'
+            backgroundImage: 'url(/images/homepage/hero-ai-accountability.webp)'
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900/40 to-gray-900" />
@@ -37,8 +37,14 @@ export default function HomePage() {
       </section>
 
       {/* Featured: Sociable Systems Dashboard */}
-      <section className="py-16 bg-gradient-to-br from-indigo-900/40 to-purple-900/40 border-y border-purple-500/30">
-        <div className="container mx-auto px-4 max-w-5xl">
+      <section className="relative py-16 overflow-hidden border-y border-purple-500/30">
+        <div className="absolute inset-0 opacity-10 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: 'url(/images/homepage/dashboard-hero.webp)'
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/40 to-purple-900/40" />
+        <div className="relative container mx-auto px-4 max-w-5xl">
           <div className="text-center mb-8">
             <div className="inline-block px-4 py-1 bg-purple-500/20 border border-purple-500/50 rounded-full text-purple-300 text-sm font-semibold mb-4">
               Featured Research

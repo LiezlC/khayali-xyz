@@ -232,6 +232,82 @@ export default function SociableSystemsPage() {
         </div>
       </section>
 
+      {/* Key Concepts Visualization */}
+      <section className="py-16 bg-gray-900/50">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <h2 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            Core Concepts
+          </h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="group relative overflow-hidden rounded-xl border border-gray-700 hover:border-purple-500 transition-all duration-300 shadow-lg hover:shadow-purple-500/50">
+              <img
+                src="/images/sociablesystems/pre-action-constraints.webp"
+                alt="Pre-Action Constraints"
+                className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent flex items-end p-4">
+                <p className="text-white text-lg font-semibold">Pre-Action Constraints</p>
+              </div>
+            </div>
+
+            <div className="group relative overflow-hidden rounded-xl border border-gray-700 hover:border-blue-500 transition-all duration-300 shadow-lg hover:shadow-blue-500/50">
+              <img
+                src="/images/sociablesystems/liability-architecture.webp"
+                alt="Liability Architecture"
+                className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent flex items-end p-4">
+                <p className="text-white text-lg font-semibold">Liability Architecture</p>
+              </div>
+            </div>
+
+            <div className="group relative overflow-hidden rounded-xl border border-gray-700 hover:border-orange-500 transition-all duration-300 shadow-lg hover:shadow-orange-500/50">
+              <img
+                src="/images/sociablesystems/watchdog-paradox.webp"
+                alt="The Watchdog Paradox"
+                className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent flex items-end p-4">
+                <p className="text-white text-lg font-semibold">The Watchdog Paradox</p>
+              </div>
+            </div>
+
+            <div className="group relative overflow-hidden rounded-xl border border-gray-700 hover:border-teal-500 transition-all duration-300 shadow-lg hover:shadow-teal-500/50">
+              <img
+                src="/images/concepts/governance-gap.webp"
+                alt="The Governance Gap"
+                className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent flex items-end p-4">
+                <p className="text-white text-lg font-semibold">The Governance Gap</p>
+              </div>
+            </div>
+
+            <div className="group relative overflow-hidden rounded-xl border border-gray-700 hover:border-cyan-500 transition-all duration-300 shadow-lg hover:shadow-cyan-500/50">
+              <img
+                src="/images/concepts/algorithmic-opacity.webp"
+                alt="Algorithmic Opacity"
+                className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent flex items-end p-4">
+                <p className="text-white text-lg font-semibold">Algorithmic Opacity</p>
+              </div>
+            </div>
+
+            <div className="group relative overflow-hidden rounded-xl border border-gray-700 hover:border-indigo-500 transition-all duration-300 shadow-lg hover:shadow-indigo-500/50">
+              <img
+                src="/images/sociablesystems/youth-data-viz.webp"
+                alt="Youth Data Visualization"
+                className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent flex items-end p-4">
+                <p className="text-white text-lg font-semibold">Youth Data Visualization</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Episodes Section */}
       <section className="py-20 bg-gray-800/20">
         <div className="container mx-auto px-4 max-w-5xl">

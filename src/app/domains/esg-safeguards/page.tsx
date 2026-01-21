@@ -1,16 +1,29 @@
 export default function ESGSafeguardsPage() {
   return (
-    <div className="container mx-auto px-4 py-12">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent">
-          ESG & Safeguards
-        </h1>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-teal-900/20 to-slate-900">
+      {/* Hero Section with Header Image */}
+      <div className="relative overflow-hidden mb-12">
+        <div className="absolute inset-0 opacity-30 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: 'url(/images/domains/esg-header.webp)'
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-teal-900/40 to-slate-900" />
 
-        <div className="prose prose-invert max-w-none mb-12">
-          <p className="text-xl text-gray-300 leading-relaxed">
-            Environmental, social, and governance frameworks meet AI systems in extractive industries and development finance. Research explores how ESG standards translate into operational accountability when AI makes decisions that affect communities, ecosystems, and long-term project viability.
-          </p>
+        <div className="relative container mx-auto px-4 py-16">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent">
+              ESG & Safeguards
+            </h1>
+            <p className="text-xl text-gray-300 leading-relaxed">
+              Environmental, social, and governance frameworks meet AI systems in extractive industries and development finance. Research explores how ESG standards translate into operational accountability when AI makes decisions that affect communities, ecosystems, and long-term project viability.
+            </p>
+          </div>
         </div>
+      </div>
+
+      <div className="container mx-auto px-4 pb-12">
+        <div className="max-w-4xl mx-auto">
 
         <div className="mb-12">
           <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent">
