@@ -378,20 +378,12 @@ export default function SociableSystemsPage() {
           </h2>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {/* Clarke Cycle */}
-            <div className="bg-gray-800/50 rounded-xl border border-gray-700 p-8">
-              <div className="text-sm text-blue-400 font-semibold mb-2">EPISODES 6-10</div>
-              <h3 className="text-2xl font-bold mb-3 text-gray-200">Clarke: Authority Through Opacity</h3>
-              <p className="text-gray-400 mb-4">
-                Any system whose reasoning cannot be interrogated will be treated as law, regardless of its accuracy.
-                Credit scoring, insurance pricing, content moderation, and public eligibility systems.
-              </p>
-              <div className="text-sm text-gray-500">Monday 13 Jan - Saturday 18 Jan 2025</div>
-            </div>
-
-            {/* Kubrick Cycle */}
-            <div className="bg-gray-800/50 rounded-xl border border-gray-700 p-8">
-              <div className="text-sm text-purple-400 font-semibold mb-2">EPISODES 11-15</div>
+            {/* Kubrick Cycle - Current */}
+            <div className="bg-gray-800/50 rounded-xl border border-purple-700 p-8">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="text-sm text-purple-400 font-semibold">EPISODES 11-16</div>
+                <span className="px-2 py-0.5 bg-purple-500/20 text-purple-300 text-xs rounded-full">Current Cycle</span>
+              </div>
               <h3 className="text-2xl font-bold mb-3 text-gray-200">Kubrick: Alignment Without Recourse</h3>
               <p className="text-gray-400 mb-4">
                 When contradictions are resolved inside the system, humans become expendable variables.
@@ -400,26 +392,40 @@ export default function SociableSystemsPage() {
               <div className="text-sm text-gray-500">Monday 20 Jan - Saturday 25 Jan 2025</div>
             </div>
 
+            {/* Lucas Cycle - Next */}
+            <div className="bg-gray-800/50 rounded-xl border border-gray-700 p-8">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="text-sm text-pink-400 font-semibold">EPISODES 17-21</div>
+                <span className="px-2 py-0.5 bg-pink-500/20 text-pink-300 text-xs rounded-full">Next Up</span>
+              </div>
+              <h3 className="text-2xl font-bold mb-3 text-gray-200">Lucas: Skywalker Droids & Guardian Failures</h3>
+              <p className="text-gray-400 mb-4">
+                When caretaker systems become authority figures: AI nannies, companion bots, and the question of who raises whom.
+                Authority that cannot be challenged will drift, even when staffed by the well-intentioned.
+              </p>
+              <div className="text-sm text-gray-500">Monday 27 Jan - Saturday 31 Jan 2025</div>
+            </div>
+
             {/* Herbert Cycle */}
             <div className="bg-gray-800/50 rounded-xl border border-gray-700 p-8">
-              <div className="text-sm text-orange-400 font-semibold mb-2">EPISODES 16-20</div>
+              <div className="text-sm text-orange-400 font-semibold mb-2">EPISODES 22-26</div>
               <h3 className="text-2xl font-bold mb-3 text-gray-200">Herbert: Prediction as Governance</h3>
               <p className="text-gray-400 mb-4">
                 When prediction becomes authority, possibility collapses into compliance. Hiring algorithms,
                 predictive policing, and foreclosed futures.
               </p>
-              <div className="text-sm text-gray-500">Late January 2025 onwards</div>
+              <div className="text-sm text-gray-500">Monday 2 Feb - Saturday 7 Feb 2025</div>
             </div>
 
-            {/* Lucas Cycle */}
+            {/* Future Cycles */}
             <div className="bg-gray-800/50 rounded-xl border border-gray-700 p-8">
-              <div className="text-sm text-pink-400 font-semibold mb-2">EPISODES 21-25</div>
-              <h3 className="text-2xl font-bold mb-3 text-gray-200">Lucas: The Failure of Guardians</h3>
+              <div className="text-sm text-teal-400 font-semibold mb-2">BEYOND EPISODE 27</div>
+              <h3 className="text-2xl font-bold mb-3 text-gray-200">More Cycles Ahead</h3>
               <p className="text-gray-400 mb-4">
-                Authority that cannot be challenged will drift, even when staffed by the well-intentioned.
-                Ethics boards, responsible AI programs, and who guards the guardians.
+                Additional thematic cycles exploring AI accountability through science fiction frameworks, operational reality,
+                and the humans caught between systems and consequences.
               </p>
-              <div className="text-sm text-gray-500">Early February 2025 onwards</div>
+              <div className="text-sm text-gray-500">February 2025 onwards</div>
             </div>
           </div>
         </div>
@@ -429,7 +435,7 @@ export default function SociableSystemsPage() {
       <section className="py-20 bg-gray-800/30">
         <div className="container mx-auto px-4 max-w-3xl text-center">
           <h2 className="text-3xl font-bold mb-6 text-gray-200">
-            Join 382+ Professionals
+            Join 500+ Professionals
           </h2>
           <p className="text-lg text-gray-400 mb-8">
             ESG specialists, social safeguards experts, resettlement practitioners, M&E professionals,
