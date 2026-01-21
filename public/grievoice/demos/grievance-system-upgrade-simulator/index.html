@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grievance System Upgrade Simulator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --bg-color: #F5F2EB;
+            --text-primary: #1A5653;
+            --accent-orange: #D97757;
+            --accent-teal: #2A7B76;
+            --paper-white: #ffffff;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            touch-action: none;
+        }
+
+        /* Animations for the chaos phase */
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(10px, -15px) rotate(5deg); }
+            50% { transform: translate(-5px, 10px) rotate(-5deg); }
+            75% { transform: translate(-15px, -5px) rotate(3deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        @keyframes flyToDatabase {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0.1); opacity: 0; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .chaos-item {
+            position: absolute;
+            cursor: pointer;
+            font-size: 2rem;
+            user-select: none;
+            transition: transform 0.1s;
+            animation: float 3s infinite ease-in-out;
+            z-index: 10;
+        }
+
+        .chaos-item:active {
+            transform: scale(0.9);
+        }
+
+        .digitizing {
+            animation: flyToDatabase 0.6s forwards ease-in !important;
+        }
+
+        /* Dashboard specific styles */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .bar-fill {
+            transition: width 1s ease-out;
+        }
+        
+        .check-anim {
+            stroke-dasharray: 20;
+            stroke-dashoffset: 20;
+            animation: drawCheck 0.5s forwards;
+        }
+
+        @keyframes drawCheck {
+            to { stroke-dashoffset: 0; }
+        }
+
+        /* The Operator Illustration (CSS Art) */
+        .operator-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+        }
+        .operator-head {
+            width: 60px;
+            height: 70px;
+            background: #F3C5A3;
+            border-radius: 30px;
+            position: absolute;
+            top: 20px;
+            left: 45px;
+            z-index: 2;
+        }
+        .operator-hair {
+            width: 70px;
+            height: 80px;
+            background: #1a1a1a;
+            border-radius: 50% 50% 10px 10px;
+            position: absolute;
+            top: 10px;
+            left: 40px;
+            z-index: 3;
+        }
+        .operator-body {
+            width: 100px;
+            height: 60px;
+            background: var(--accent-teal);
+            border-radius: 40px 40px 0 0;
+            position: absolute;
+            bottom: 0;
+            left: 25px;
+            z-index: 1;
+        }
+        .phone-hand {
+            font-size: 40px;
+            position: absolute;
+            top: 30px;
+            left: 80px;
+            z-index: 4;
+            transform: rotate(-10deg);
+        }
+        .mobile-hand {
+            font-size: 30px;
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            z-index: 4;
+        }
+
+    </style>
+</head>
+<body class="h-screen w-screen flex flex-col">
+
+    <!-- HEADER -->
+    <header class="p-6 flex justify-between items-center z-50 relative">
+        <div>
+            <h1 class="text-3xl md:text-4xl font-bold text-[#1A5653]">Upgrade Grievance Systems</h1>
+            <p class="text-sm md:text-base text-gray-600">Addressing gaps in current processes</p>
+        </div>
+        <div id="progress-container" class="hidden w-1/3 max-w-xs">
+            <div class="text-xs font-bold mb-1 flex justify-between">
+                <span>DIGITIZATION PROGRESS</span>
+                <span id="progress-text">0%</span>
+            </div>
+            <div class="w-full bg-gray-300 rounded-full h-4 border border-gray-400">
+                <div id="progress-bar" class="bg-[#D97757] h-full rounded-full w-0 transition-all duration-200"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-grow relative w-full h-full overflow-hidden">
+        
+        <!-- SCENE 1: THE CHAOS (Game Layer) -->
+        <div id="chaos-layer" class="absolute inset-0 flex flex-col items-center justify-center">
+            
+            <!-- Central Figure (The Overwhelmed Operator) -->
+            <div class="relative z-20 flex flex-col items-center">
+                <div class="operator-container mb-4">
+                    <div class="operator-hair"></div>
+                    <div class="operator-head"></div>
+                    <div class="operator-body"></div>
+                    <div class="phone-hand">📞</div>
+                    <div class="mobile-hand">📱</div>
+                </div>
+                <div class="bg-white/80 px-4 py-2 rounded-full shadow-sm text-sm font-bold text-[#1A5653] animate-pulse">
+                    Status: OVERWHELMED
+                </div>
+            </div>
+
+            <!-- Instructions -->
+            <div id="start-overlay" class="absolute inset-0 bg-[#F5F2EB]/90 z-50 flex flex-col items-center justify-center text-center p-8">
+                <h2 class="text-2xl font-bold mb-4 text-[#1A5653]">Current System Status: CRITICAL</h2>
+                <ul class="text-left mb-8 space-y-2 text-gray-700 max-w-md">
+                    <li class="flex items-center"><span class="mr-2">⚠️</span> Many voices go unheard</li>
+                    <li class="flex items-center"><span class="mr-2">⚠️</span> Reliance on paper creates backlogs</li>
+                    <li class="flex items-center"><span class="mr-2">⚠️</span> Lack of real-time insights</li>
+                </ul>
+                <button onclick="startGame()" class="bg-[#1A5653] text-white px-8 py-3 rounded-lg text-lg font-bold shadow-lg hover:bg-[#13403e] transition transform hover:scale-105">
+                    Initiate System Upgrade
+                </button>
+                <p class="mt-4 text-sm text-gray-500">Mission: Click the flying paperwork to digitize it!</p>
+            </div>
+
+            <!-- Database Target (Where items fly to) -->
+            <div id="database-target" class="absolute bottom-4 right-4 w-16 h-16 bg-[#1A5653] rounded-lg flex items-center justify-center text-3xl shadow-inner border-4 border-[#2A7B76] z-10 opacity-0 transition-opacity duration-500">
+                💾
+            </div>
+
+        </div>
+
+        <!-- SCENE 2: THE DASHBOARD (Solution Layer) -->
+        <div id="dashboard-layer" class="absolute inset-0 bg-[#F5F2EB] p-4 md:p-8 flex flex-col gap-6 opacity-0 pointer-events-none transition-opacity duration-1000 z-40 overflow-y-auto">
+            
+            <!-- Dashboard Header -->
+            <div class="flex justify-between items-end border-b-2 border-[#1A5653] pb-2">
+                <div>
+                    <h2 class="text-2xl font-bold text-[#1A5653]">System 2.0: Live Insights</h2>
+                    <p class="text-green-700 flex items-center gap-2"><span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> System Operational</p>
+                </div>
+                <button onclick="resetGame()" class="text-sm underline text-gray-500 hover:text-[#1A5653]">Reboot Simulation</button>
+            </div>
+
+            <!-- Metrics Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Card 1 -->
+                <div class="glass-panel p-4 rounded-xl">
+                    <h3 class="text-gray-500 text-sm font-bold uppercase">Voices Heard</h3>
+                    <div class="flex items-end gap-2 mt-2">
+                        <span class="text-4xl font-bold text-[#1A5653]" id="metric-voices">0</span>
+                        <span class="text-green-600 text-sm mb-1">▲ 100%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 h-1 mt-2 rounded-full overflow-hidden">
+                        <div class="bg-[#1A5653] h-full w-full animate-pulse"></div>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="glass-panel p-4 rounded-xl">
+                    <h3 class="text-gray-500 text-sm font-bold uppercase">Backlog Status</h3>
+                    <div class="flex items-end gap-2 mt-2">
+                        <span class="text-4xl font-bold text-[#D97757]">0</span>
+                        <span class="text-gray-400 text-sm mb-1">Pending Items</span>
+                    </div>
+                    <div class="text-xs text-gray-500 mt-2">Paper reliance eliminated.</div>
+                </div>
+                <!-- Card 3 -->
+                <div class="glass-panel p-4 rounded-xl">
+                    <h3 class="text-gray-500 text-sm font-bold uppercase">Resolution Time</h3>
+                    <div class="flex items-end gap-2 mt-2">
+                        <span class="text-4xl font-bold text-[#1A5653]">Real-time</span>
+                    </div>
+                    <div class="flex gap-1 mt-3 h-8 items-end">
+                        <div class="w-1/5 bg-[#2A7B76] h-1/3 rounded-t"></div>
+                        <div class="w-1/5 bg-[#2A7B76] h-2/3 rounded-t"></div>
+                        <div class="w-1/5 bg-[#2A7B76] h-1/2 rounded-t"></div>
+                        <div class="w-1/5 bg-[#2A7B76] h-full rounded-t"></div>
+                        <div class="w-1/5 bg-[#2A7B76] h-3/4 rounded-t"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Problem/Solution Checklist -->
+            <div class="glass-panel p-6 rounded-xl flex-grow">
+                <h3 class="text-lg font-bold text-[#1A5653] mb-4">Upgrade Impact Report</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between border-b border-gray-200 pb-2">
+                        <span class="text-gray-400 line-through">Many voices go unheard</span>
+                        <span class="text-green-700 font-bold flex items-center">
+                            <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            Omnichannel Capture Active
+                        </span>
+                    </div>
+                    <div class="flex items-center justify-between border-b border-gray-200 pb-2">
+                        <span class="text-gray-400 line-through">Reliance on paper creates backlogs</span>
+                        <span class="text-green-700 font-bold flex items-center">
+                            <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            100% Digital Workflow
+                        </span>
+                    </div>
+                    <div class="flex items-center justify-between border-b border-gray-200 pb-2">
+                        <span class="text-gray-400 line-through">Fear silences serious issues</span>
+                        <span class="text-green-700 font-bold flex items-center">
+                            <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            Anonymous Reporting Enabled
+                        </span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-400 line-through">Lack of real-time insights</span>
+                        <span class="text-green-700 font-bold flex items-center">
+                            <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            Live Analytics Dashboard
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // Game State
+        let score = 0;
+        const targetScore = 20; // Items to clear
+        let gameActive = false;
+        const chaosLayer = document.getElementById('chaos-layer');
+        const items = ['📄', '📨', '🗯️', '📢', '📝', '☎️', '📫', '📉'];
+        let spawnInterval;
+
+        function startGame() {
+            document.getElementById('start-overlay').style.display = 'none';
+            document.getElementById('progress-container').classList.remove('hidden');
+            document.getElementById('database-target').style.opacity = '1';
+            gameActive = true;
+            score = 0;
+            updateProgress();
+
+            // Initial burst
+            for(let i=0; i<10; i++) spawnItem();
+
+            // Continuous spawning
+            spawnInterval = setInterval(() => {
+                if(gameActive && document.querySelectorAll('.chaos-item').length < 25) {
+                    spawnItem();
+                }
+            }, 800);
+        }
+
+        function spawnItem() {
+            const el = document.createElement('div');
+            el.classList.add('chaos-item');
+            el.innerText = items[Math.floor(Math.random() * items.length)];
+            
+            // Random Position
+            const x = Math.random() * (window.innerWidth - 50);
+            const y = Math.random() * (window.innerHeight - 150) + 50; // Avoid header
+            
+            el.style.left = `${x}px`;
+            el.style.top = `${y}px`;
+            
+            // Random rotation
+            el.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+            // Click Handler
+            el.addEventListener('mousedown', (e) => processItem(e, el));
+            el.addEventListener('touchstart', (e) => processItem(e, el)); // Mobile support
+
+            chaosLayer.appendChild(el);
+        }
+
+        function processItem(e, el) {
+            e.preventDefault(); // prevent double firing on touch devices
+            if (!gameActive || el.classList.contains('digitizing')) return;
+
+            // Calculate trajectory to database icon (bottom right)
+            const rect = el.getBoundingClientRect();
+            const targetRect = document.getElementById('database-target').getBoundingClientRect();
+            
+            // Center to Center
+            const tx = targetRect.left + targetRect.width/2 - (rect.left + rect.width/2);
+            const ty = targetRect.top + targetRect.height/2 - (rect.top + rect.height/2);
+
+            el.style.setProperty('--tx', `${tx}px`);
+            el.style.setProperty('--ty', `${ty}px`);
+            el.classList.add('digitizing');
+            el.innerText = '0101'; // Change to binary
+            el.style.color = '#1A5653';
+            el.style.fontSize = '1rem';
+            el.style.fontFamily = 'monospace';
+
+            // Remove after animation
+            setTimeout(() => {
+                if(el.parentNode) el.parentNode.removeChild(el);
+            }, 600);
+
+            score++;
+            updateProgress();
+
+            if (score >= targetScore) {
+                completeLevel();
+            }
+        }
+
+        function updateProgress() {
+            const pct = Math.min(100, Math.round((score / targetScore) * 100));
+            document.getElementById('progress-bar').style.width = `${pct}%`;
+            document.getElementById('progress-text').innerText = `${pct}%`;
+        }
+
+        function completeLevel() {
+            gameActive = false;
+            clearInterval(spawnInterval);
+            
+            // Clear remaining items
+            const remaining = document.querySelectorAll('.chaos-item');
+            remaining.forEach((el, idx) => {
+                setTimeout(() => {
+                    el.style.transition = 'all 0.5s';
+                    el.style.opacity = '0';
+                    el.style.transform = 'scale(0)';
+                }, idx * 50);
+            });
+
+            // Show Dashboard
+            setTimeout(() => {
+                const dashboard = document.getElementById('dashboard-layer');
+                dashboard.classList.remove('pointer-events-none');
+                dashboard.style.opacity = '1';
+                
+                // Start simulated live numbers
+                animateNumbers();
+            }, 1000);
+        }
+
+        function animateNumbers() {
+            let voices = 0;
+            const voiceEl = document.getElementById('metric-voices');
+            const interval = setInterval(() => {
+                voices += Math.floor(Math.random() * 15);
+                voiceEl.innerText = voices.toLocaleString();
+                if (voices > 1250) clearInterval(interval);
+            }, 50);
+        }
+
+        function resetGame() {
+            // Reset UI
+            document.getElementById('dashboard-layer').style.opacity = '0';
+            document.getElementById('dashboard-layer').classList.add('pointer-events-none');
+            document.getElementById('start-overlay').style.display = 'flex';
+            document.getElementById('progress-container').classList.add('hidden');
+            document.getElementById('database-target').style.opacity = '0';
+            
+            // Clear any stray items
+            document.querySelectorAll('.chaos-item').forEach(e => e.remove());
+        }
+
+    </script>
+</body>
+</html>

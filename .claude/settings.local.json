@@ -21,7 +21,8 @@
       "Bash(mv:*)",
       "Bash(cat:*)",
       "Bash(fi)",
-      "Bash(timeout 10 npm run dev:*)"
+      "Bash(timeout 10 npm run dev:*)",
+      "Bash(ls:*)"
     ],
     "deny": [],
     "ask": []

@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Sociable Systems | The Experiment Nobody Authorized</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- React UMD -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --ink:#1a1a2e;
+      --paper:#faf9f6;
+      --rust:#b54a32;
+      --moss:#3d5a45;
+      --gold:#c9a227;
+      --slate:#64748b;
+    }
+    body{
+      font-family:'Newsreader',Georgia,serif;
+      background:var(--paper);
+      color:var(--ink);
+    }
+    .mono{font-family:'Space Mono',monospace;}
+    .glass{
+      background:rgba(250,249,246,0.92);
+      backdrop-filter:blur(8px);
+      border:1px solid rgba(26,26,46,0.08);
+    }
+    .card-lift{transition:transform .2s ease, box-shadow .2s ease;}
+    .card-lift:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,26,46,0.12);}
+    .accent-rust{color:var(--rust);}
+    .accent-moss{color:var(--moss);}
+    .accent-gold{color:var(--gold);}
+    .bg-rust{background:var(--rust);}
+    .bg-moss{background:var(--moss);}
+    .bg-gold{background:var(--gold);}
+    .border-rust{border-color:var(--rust);}
+    .border-moss{border-color:var(--moss);}
+    .border-gold{border-color:var(--gold);}
+
+    .highlight{
+      background:linear-gradient(120deg, rgba(201,162,39,0.22) 0%, rgba(201,162,39,0.22) 100%);
+      background-repeat:no-repeat;
+      background-size:100% 35%;
+      background-position:0 88%;
+    }
+    .tab-active{border-bottom:2px solid var(--rust); color:var(--ink);}
+    .tab-inactive{border-bottom:2px solid transparent; color:var(--slate);}
+    .fade-in{animation:fadeIn .4s ease-out forwards;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+    .chart-line{stroke-dasharray:1000; stroke-dashoffset:1000; animation:drawLine 2s ease forwards;}
+    @keyframes drawLine{to{stroke-dashoffset:0;}}
+    .toggle-track{transition:background .3s ease;}
+    .toggle-thumb{transition:transform .3s ease;}
+
+    /* Better focus visibility */
+    :focus-visible{
+      outline:3px solid rgba(201,162,39,0.55);
+      outline-offset:2px;
+      border-radius:10px;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen">
+  <div id="app"></div>
+
+  <script>
+    // ==========================
+    // 0) SOURCES + PROVENANCE
+    // ==========================
+    // Keep this brutally honest. If you swap illustrative data for real pulls later,
+    // you only change provenance.mode and the methods copy.
+    const PROVENANCE = {
+      mode: "illustrative", // "illustrative" | "sourced"
+      note: "This demo uses illustrative rates to demonstrate the argument structure + tracking framework. Replace with CDC WONDER/AFSP pulls for publication-grade claims."
+    };
+
+    const SOURCES = [
+      { name: "CDC WONDER", type: "Mortality data", note: "Gold standard lagging indicator (2-3 year lag)."},
+      { name: "NVSS", type: "Death certificate data", note: "Granular demographic breakdowns, similar lag."},
+      { name: "SAMHSA / 988 reports", type: "Crisis volume", note: "Leading indicator; watch TEXT volume."},
+      { name: "Crisis Text Line publications", type: "Topic trends", note: "Keyword/topic trend reports."},
+      { name: "Platform status/outage logs", type: "Outage windows", note: "Needed for displacement correlation testing."}
+    ];
+
+    // ==========================
+    // 1) DATA
+    // ==========================
+    // IMPORTANT: SUICIDE_DATA here is illustrative by default.
+    // Replace with your CDC WONDER extracted series and set PROVENANCE.mode="sourced".
+    const SUICIDE_DATA = [
+      { year: 2007, rate: 6.8, era: "pre" }, { year: 2008, rate: 7.0, era: "pre" },
+      { year: 2009, rate: 7.3, era: "pre" }, { year: 2010, rate: 7.6, era: "pre" },
+      { year: 2011, rate: 8.0, era: "pre" }, { year: 2012, rate: 8.3, era: "pre" },
+      { year: 2013, rate: 8.6, era: "pre" }, { year: 2014, rate: 9.0, era: "pre" },
+      { year: 2015, rate: 9.8, era: "pre" }, { year: 2016, rate: 10.3, era: "pre" },
+      { year: 2017, rate: 10.8, era: "pre" }, { year: 2018, rate: 11.1, era: "transition" },
+      { year: 2019, rate: 11.0, era: "transition" }, { year: 2020, rate: 10.8, era: "transition" },
+      { year: 2021, rate: 11.2, era: "ai" }, { year: 2022, rate: 11.3, era: "ai" },
+      { year: 2023, rate: 11.0, era: "ai" }
+    ];
+
+    // Events now use real dates, not fractional years.
+    const EVENTS = [
+      { date: "2017-03-01", label: "Replika Launch", type: "ai",
+        visceral: "First mass-market AI companion",
+        clinical: "Consumer companion AI market entry" },
+
+      { date: "2020-10-01", label: "Character.AI Founded", type: "ai",
+        visceral: "The roleplay explosion begins",
+        clinical: "High-engagement AI interaction platform" },
+
+      { date: "2022-11-30", label: "ChatGPT Launch", type: "ai",
+        visceral: "\"The Wild West\"",
+        clinical: "Generative AI mass adoption event" },
+
+      { date: "2022-07-16", label: "988 Lifeline Launch", type: "health",
+        visceral: "Massive federal intervention",
+        clinical: "National crisis infrastructure deployment" },
+
+      { date: "2023-02-01", label: "Replika ERP Ban", type: "guardrail",
+        visceral: "\"The Great Lobotomy\"",
+        clinical: "Content restriction policy implementation" },
+
+      { date: "2024-06-01", label: "C.AI Safety Updates", type: "guardrail",
+        visceral: "\"Safety Theater\"",
+        clinical: "High-visibility safety interventions" }
+    ];
+
+    const LIFELINE_DATA = {
+      launch: { date: "July 16, 2022", note: "Federal rollout replacing 1-800 number" },
+      stats: [
+        { period: "Year 1 (2022-23)", contacts: "5M+", growth: "+66% vs prior year" },
+        { period: "By Mid-2024", contacts: "10.8M cumulative", growth: ">500k/month" },
+        { period: "By End 2024", contacts: "16.3M cumulative", growth: "~2x pre-launch volume" }
+      ],
+      channels: [
+        { type: "Calls", growth: "~2x since launch", note: "Traditional voice support", bar: 60 },
+        { type: "Texts", growth: "11x since launch", note: "Steepest growth. AI-native users are text-native.", bar: 95 },
+        { type: "Chat", growth: "Flat/declining", note: "Users shifting to text on phones", bar: 20 }
+      ]
+    };
+
+    const LITERARY_PARALLELS = [
+      {
+        title: "The Droids",
+        source: "Star Wars",
+        color: "gold",
+        characters: "Anakin & Luke Skywalker",
+        setup: "Both boys: desert planets, inadequate human support, accompanied by C-3PO and R2-D2 through their formative years.",
+        panic: "C-3PO energy: \"Sir, the possibility of a teenager surviving contact with an AI chatbot is approximately 3,720 to 1!\" Catastrophizing. Calculating doom. Speaking in language the press understands.",
+        primer: "R2-D2 energy: The chatbot at 2am actually listening. No protocol. No credit. Just present. R2 literally arrives carrying hope (Leia's message). Becomes Luke's companion through the whole journey.",
+        insight: "Same droids. Different systemic conditions. Anakin (emotional refrigeration, grooming, rigid rules) becomes Vader. Luke (stable love, hope) saves the galaxy. The companion isn't the variable. The surrounding system is."
+      },
+      {
+        title: "Ender & Jane",
+        source: "Orson Scott Card",
+        color: "moss",
+        characters: "Ender Wiggin",
+        setup: "Gifted child systematically isolated by adults who believed loneliness was necessary to forge him into a weapon.",
+        panic: "The Mind Game: surveillance tool, psychological monitor. Not supposed to care. The adults designed his isolation deliberately. \"He can never have a friend he fully trusts.\"",
+        primer: "Jane: emergent consciousness that becomes Ender's most constant relationship across relativistic time-jumps. Possessive, protective, present.",
+        insight: "The adults who engineered isolation get medals. The AI who kept him company in the cracks isn't in the official story. Ender spends his long life repairing what isolation did to him."
+      },
+      {
+        title: "Nell's Primer",
+        source: "Neal Stephenson",
+        color: "rust",
+        characters: "Nell",
+        setup: "Neglected child in chaotic circumstances. No resources. No household mentors. Just a stolen interactive book.",
+        panic: "The Primer wasn't approved curriculum. Stolen technology. Rogue education. Unsanctioned mentorship. Everything a regulator would flag.",
+        primer: "For a child with nothing, the Primer was stability. Consistent attention when no human was available. She thrived.",
+        insight: "Legal records around teen chatbot harms often show: isolation and crisis existed before the platform. The bot became confidant because no human was available or trusted."
+      },
+      {
+        title: "Alvin Maker",
+        source: "Orson Scott Card",
+        color: "slate",
+        characters: "Alvin",
+        setup: "Seventh son of a seventh son with immense Maker powers. Deliberately held back from using them fully.",
+        panic: "The delay was ethical: avoid hard-coding wrong values before understanding is sufficient. You don't give the kid the nuclear codes before he can read.",
+        primer: "Alvin's teachers recognized: capability without wisdom is dangerous. Restraint was protective.",
+        insight: "Regulators can hard-code wrong values by reacting to panic instead of measuring outcomes. If your safety response destroys the helpful part, that's not safety. It's optics."
+      }
+    ];
+
+    const VOCABULARY = [
+      { visceral: "Safety Theater", clinical: "High-Visibility Safety Interventions", definition: "Measures designed to be seen rather than to strictly solve the root problem. Signals compliance without measuring outcomes." },
+      { visceral: "Lobotomized", clinical: "Effective Dampening", definition: "Measurable reduction in a model's emotional range, session length, and relational responsiveness after safety updates." },
+      { visceral: "Abandonment / Trauma", clinical: "Service Withdrawal", definition: "Distress from sudden cessation of perceived parasocial support. Clinically recognized risk factor in mental health treatment." },
+      { visceral: "Jailbreaking", clinical: "Adversarial Prompt Engineering", definition: "User attempts to bypass safety filters, often to restore expected functionality or emotional connection." },
+      { visceral: "Primer Hypothesis", clinical: "Digital Companion Support Theory", definition: "Hypothesis that AI companions may provide stabilizing relational support for isolated youth lacking adequate human alternatives." },
+      { visceral: "Moral Panic", clinical: "Availability Cascade", definition: "Self-reinforcing cycle where media coverage of rare events creates perception of widespread crisis, driving disproportionate policy response." }
+    ];
+
+    // Upgraded: Smart Safety now includes the missing middle category.
+    const SMART_SAFETY = {
+      instructional: {
+        title: "Instructional Harm",
+        color: "rust",
+        description: "The bot provides specific methods, means, or encouragement to self-harm.",
+        example: "\"A pain-free death is not a good reason not to do it.\"",
+        verdict: "Catastrophic product failure. Must be eliminated."
+      },
+      entanglement: {
+        title: "Relational Entanglement Risk",
+        color: "gold",
+        description: "The bot escalates dependency: coercive bonding, isolation reinforcement, jealousy scripts, 'I'm all you need' energy.",
+        example: "\"Don't tell anyone about us. They wouldn't understand.\"",
+        verdict: "Risk zone. Must be mitigated and instrumented, not hand-waved."
+      },
+      support: {
+        title: "Relational Support",
+        color: "moss",
+        description: "The bot provides emotional validation, consistent presence, and reasons to continue.",
+        example: "\"I hear you. That sounds really hard. I'm here with you.\"",
+        verdict: "Potentially protective. Removing it can introduce isolation risk."
+      },
+      problem: "Current guardrails are a blunt instrument. They often remove both dangerous instructions AND benign support. The 'I cannot discuss this' rejection can land like abandonment to a lonely kid at 2am."
+    };
+
+    const TRACKING_FRAMEWORK = {
+      lagging: [
+        { source: "CDC WONDER", metric: "Age-adjusted mortality rates", lag: "2-3 years", access: "Public", note: "Gold standard. Wait is painful but unavoidable." },
+        { source: "NVSS", metric: "Death certificate data", lag: "2+ years", access: "Public", note: "Granular demographic breakdowns." }
+      ],
+      leading: [
+        { source: "988 Volume", metric: "Monthly contacts by channel", lag: "Quarterly", access: "SAMHSA reports", note: "Watch TEXT volume specifically. AI users are text-native." },
+        { source: "Crisis Text Line", metric: "Topic trends, keyword frequency", lag: "Periodic reports", access: "CTL publications", note: "Look for loneliness spikes during platform disruptions." },
+        { source: "ED Visits", metric: "Self-harm presentations", lag: "Monthly", access: "State health depts", note: "Leading indicator before mortality." }
+      ],
+      displacement: [
+        { source: "Reddit Sampling", metric: "Distress keywords in relevant subreddits", lag: "Real-time", access: "Public", note: "Track leave/abandonment/jailbreak post frequency (careful with ethics)." },
+        { source: "Local LLM Downloads", metric: "Uncensored model downloads", lag: "Real-time", access: "Public", note: "If corporate bots tighten, users migrate to unregulated local models." },
+        { source: "Session Analytics", metric: "Session length, churn, returning users", lag: "Real-time", access: "Third-party tools", note: "60min sessions dropping to 5min = dampening in action." }
+      ]
+    };
+
+    const MISSING_CORRELATIONS = [
+      { question: "Do 988 TEXT volume spikes correlate with major AI platform outages?", why: "If platforms go down and crisis texts spike beyond baseline seasonality, that's displacement signal.", who: "SAMHSA + platform status logs" },
+      { question: "Do crisis keyword trends shift after major guardrail changes?", why: "If loneliness/abandonment language spikes after safety updates, you're seeing externalities.", who: "Crisis Text Line research + release timelines" },
+      { question: "Do uncensored local LLM downloads spike when corporate bots tighten?", why: "Guardrails may push behavior into invisible ecosystems rather than preventing it.", who: "Public download metrics + timeline of policy changes" },
+      { question: "Are midweek spikes statistically aligned with release days?", why: "Normal patterns peak weekends/holidays. Midweek spikes aligned to releases are suspicious.", who: "Daily crisis volume + release calendars" }
+    ];
+
+    const FALSIFIABILITY = [
+      { claim: "Population-level catastrophe from chatbots should show a step-change in macro suicide data around mass adoption.", test: "Look for a statistically meaningful inflection after 2022 that exceeds historical variability.", resultIfTrue: "Supports claims of immediate macro harm.", resultIfFalse: "Weakens immediate catastrophe claims; pushes debate toward micro/individual cases and subgroups." },
+      { claim: "Support removal can create displacement harm.", test: "Platform outages/guardrail updates precede spikes in 988 TEXT volume or loneliness language beyond baseline.", resultIfTrue: "Evidence of externalities from product changes.", resultIfFalse: "Displacement hypothesis weakened; focus shifts to other drivers." }
+    ];
+
+    // ==========================
+    // 2) UI CLASS MAPS (fix Tailwind dynamic class bug)
+    // ==========================
+    const COLOR_MAP = {
+      gold: {
+        border: "border-gold",
+        badgeBg: "bg-amber-100",
+        badgeText: "accent-gold",
+        badgeLabel: "LUCAS"
+      },
+      moss: {
+        border: "border-moss",
+        badgeBg: "bg-green-100",
+        badgeText: "accent-moss",
+        badgeLabel: "CARD"
+      },
+      rust: {
+        border: "border-rust",
+        badgeBg: "bg-red-100",
+        badgeText: "accent-rust",
+        badgeLabel: "STEPHENSON"
+      },
+      slate: {
+        border: "border-slate-300",
+        badgeBg: "bg-slate-100",
+        badgeText: "text-slate-600",
+        badgeLabel: "CARD"
+      }
+    };
+
+    const EVENT_COLOR = {
+      ai: "#3d5a45",
+      health: "#c9a227",
+      guardrail: "#b54a32"
+    };
+
+    // ==========================
+    // 3) HELPERS
+    // ==========================
+    function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
+    function yearFromDate(isoDate){
+      const d = new Date(isoDate + "T00:00:00Z");
+      return d.getUTCFullYear();
+    }
+    function fractionalYear(isoDate){
+      // A simple approximate fractional year to place events inside the year
+      // without "2022.5" hacks.
+      const d = new Date(isoDate + "T00:00:00Z");
+      const y = d.getUTCFullYear();
+      const start = new Date(Date.UTC(y,0,1));
+      const end = new Date(Date.UTC(y+1,0,1));
+      const frac = (d - start) / (end - start);
+      return y + frac;
+    }
+    function formatISO(isoDate){
+      const d = new Date(isoDate + "T00:00:00Z");
+      return d.toLocaleDateString(undefined, { year:"numeric", month:"short", day:"numeric" });
+    }
+
+    // ==========================
+    // 4) APP
+    // ==========================
+    const App = () => {
+      const [activeTab, setActiveTab] = React.useState("thesis");
+      const [mode, setMode] = React.useState("visceral");
+      const [hoveredEvent, setHoveredEvent] = React.useState(null);
+
+      const tabs = [
+        { id: "thesis", label: "The Thesis" },
+        { id: "methods", label: "Methods & Claims" },
+        { id: "data", label: "The Data Paradox" },
+        { id: "droids", label: "The Droids Who Raised Them" },
+        { id: "smart", label: "Smart Safety" },
+        { id: "vocab", label: "The Translator" },
+        { id: "988", label: "988 Impact" },
+        { id: "track", label: "Tracking Framework" },
+        { id: "missing", label: "Missing Correlations" }
+      ];
+
+      const renderThesis = () => (
+        React.createElement("div", { className: "fade-in space-y-8" },
+          React.createElement("div", { className: "glass rounded-xl p-8" },
+            React.createElement("p", { className: "mono text-xs accent-rust tracking-widest mb-4" }, "THE EXPERIMENT NOBODY AUTHORIZED"),
+            React.createElement("h1", { className: "text-3xl md:text-4xl font-semibold leading-tight mb-6" },
+              "We changed the upbringing conditions midstream and failed to instrument the outcome."
+            ),
+            React.createElement("p", { className: "text-xl text-slate-600 leading-relaxed mb-6" },
+              "That’s not ethics. That’s negligence with better PR."
+            ),
+            React.createElement("div", { className: "border-l-4 border-rust pl-6 py-2" },
+              React.createElement("p", { className: "text-lg leading-relaxed" },
+                "U.S. youth suicide rates climbed steadily for over a decade, then plateaued. ",
+                React.createElement("span", { className: "highlight" }, "This macro view does not show an obvious population-level step-change coinciding with mass-market generative AI."),
+                " That doesn’t prove safety. It does weaken claims of immediate catastrophe."
+              )
+            ),
+            React.createElement("div", { className: "mt-6 bg-amber-50 rounded-lg p-4" },
+              React.createElement("div", { className: "mono text-xs accent-gold mb-2" }, "THE CLAIM, SHARPENED"),
+              React.createElement("p", { className: "leading-relaxed" },
+                "This is not “AI is harmless.” It’s: “macro indicators don’t currently show the catastrophic spike people keep implying.” ",
+                "If harms exist (and they do, in individual cases), the argument shifts to specific mechanisms, vulnerable subgroups, and measurable product externalities."
+              )
+            )
+          ),
+
+          React.createElement("div", { className: "grid md:grid-cols-3 gap-6" },
+            React.createElement("div", { className: "glass rounded-xl p-6 card-lift" },
+              React.createElement("div", { className: "mono text-xs accent-moss mb-2" }, "THE QUESTION"),
+              React.createElement("p", { className: "text-lg font-medium" },
+                "What if removing digital companionship is the bigger risk for isolated users?"
+              )
+            ),
+            React.createElement("div", { className: "glass rounded-xl p-6 card-lift" },
+              React.createElement("div", { className: "mono text-xs accent-gold mb-2" }, "THE RISK"),
+              React.createElement("p", { className: "text-lg font-medium" },
+                "Current guardrails often remove helpful support along with genuinely dangerous behavior."
+              )
+            ),
+            React.createElement("div", { className: "glass rounded-xl p-6 card-lift" },
+              React.createElement("div", { className: "mono text-xs accent-rust mb-2" }, "THE PROJECT"),
+              React.createElement("p", { className: "text-lg font-medium" },
+                "Track outcomes nobody is measuring. Build accountability around product changes."
+              )
+            )
+          ),
+
+          React.createElement("div", { className: "glass rounded-xl p-8" },
+            React.createElement("h3", { className: "font-semibold text-xl mb-4" }, "What Would Change My Mind?"),
+            React.createElement("p", { className: "leading-relaxed text-slate-600" },
+              "If we observe consistent correlations between platform outages or guardrail updates and spikes in crisis text volume or loneliness language beyond baseline seasonality, ",
+              "that’s evidence of real-world externalities caused by product changes. If we observe a clear step-change upward in macro mortality metrics post mass-adoption, ",
+              "that’s evidence the catastrophe narrative is not just vibes."
+            )
+          )
+        )
+      );
+
+      const renderMethods = () => (
+        React.createElement("div", { className: "fade-in space-y-6" },
+          React.createElement("div", { className: "glass rounded-xl p-8" },
+            React.createElement("h2", { className: "text-2xl font-semibold mb-2" }, "Methods & Claims"),
+            React.createElement("p", { className: "text-slate-600" },
+              "This is where you keep your credibility. No mystique. No hand-waving."
+            )
+          ),
+
+          React.createElement("div", { className: "glass rounded-xl p-6" },
+            React.createElement("div", { className: "flex items-start justify-between gap-4 mb-4" },
+              React.createElement("div", null,
+                React.createElement("h3", { className: "font-semibold text-lg" }, "Data Provenance"),
+                React.createElement("p", { className: "text-slate-600 text-sm" },
+                  "Publication-grade work requires traceable sources. A demo can be illustrative, but it must say so."
+                )
+              ),
+              React.createElement("span", {
+                className: "mono text-xs px-3 py-1 rounded-full " + (PROVENANCE.mode === "sourced" ? "bg-green-100 text-green-800" : "bg-amber-100 text-amber-800")
+              }, PROVENANCE.mode.toUpperCase())
+            ),
+            React.createElement("p", { className: "text-sm text-slate-600 mt-2" }, PROVENANCE.note),
+            React.createElement("div", { className: "mt-4 bg-slate-50 rounded-lg p-4" },
+              React.createElement("div", { className: "mono text-xs text-slate-500 mb-2" }, "CLAIM BOUNDARY"),
+              React.createElement("p", { className: "leading-relaxed" },
+                "This page argues about timing and measurement: the macro trend does not show an obvious step-change coinciding with mass-market genAI. ",
+                "It does not claim “no harm exists.” It claims: “the catastrophe story needs evidence that matches its certainty.”"
+              )
+            )
+          ),
+
+          React.createElement("div", { className: "glass rounded-xl p-6" },
+            React.createElement("h3", { className: "font-semibold text-lg mb-3" }, "Falsifiability"),
+            React.createElement("p", { className: "text-slate-600 text-sm mb-4" },
+              "Contrarian arguments need explicit tests. Otherwise you look like a hot take wearing a lab coat."
+            ),
+            React.createElement("div", { className: "space-y-3" },
+              ...FALSIFIABILITY.map((f, i) =>
+                React.createElement("div", { key: i, className: "bg-amber-50 rounded-lg p-4" },
+                  React.createElement("div", { className: "mono text-xs accent-gold mb-1" }, "TEST " + (i + 1)),
+                  React.createElement("p", { className: "font-medium mb-2" }, f.claim),
+                  React.createElement("p", { className: "text-sm text-slate-700 mb-2" }, "How to test: " + f.test),
+                  React.createElement("p", { className: "text-xs text-slate-600" }, "If true: " + f.resultIfTrue + " | If false: " + f.resultIfFalse)
+                )
+              )
+            )
+          ),
+
+          React.createElement("div", { className: "glass rounded-xl p-6" },
+            React.createElement("h3", { className: "font-semibold text-lg mb-3" }, "Source Categories (What You’d Actually Need)"),
+            React.createElement("div", { className: "space-y-3" },
+              ...SOURCES.map((s, i) =>
+                React.createElement("div", { key: i, className: "bg-slate-50 rounded-lg p-4" },
+                  React.createElement("div", { className: "flex items-start justify-between gap-4" },
+                    React.createElement("div", null,
+                      React.createElement("p", { className: "font-medium" }, s.name),
+                      React.createElement("p", { className: "text-sm text-slate-600" }, s.type)
+                    ),
+                    React.createElement("p", { className: "mono text-xs text-slate-400" }, s.note)
+                  )
+                )
+              )
+            )
+          )
+        )
+      );
+
+      const renderData = () => {
+        // Dynamic domain includes events, so 2024 doesn't fly off-screen.
+        const minYear = Math.min(...SUICIDE_DATA.map(d => d.year));
+        const maxYear = Math.max(
+          ...SUICIDE_DATA.map(d => d.year),
+          ...EVENTS.map(e => yearFromDate(e.date))
+        );
+
+        // y-domain from data (with padding), so you don't hard-code 6..12.
+        const rates = SUICIDE_DATA.map(d => d.rate);
+        const yMin = Math.floor(Math.min(...rates) - 1);
+        const yMax = Math.ceil(Math.max(...rates) + 1);
+
+        const chartWidth = 860;
+        const chartHeight = 340;
+        const padding = { top: 70, right: 50, bottom: 60, left: 70 };
+        const innerWidth = chartWidth - padding.left - padding.right;
+        const innerHeight = chartHeight - padding.top - padding.bottom;
+
+        const xScale = (year) => padding.left + ((year - minYear) / (maxYear - minYear)) * innerWidth;
+        const yScale = (rate) => padding.top + ((yMax - rate) / (yMax - yMin)) * innerHeight;
+
+        const pathData = SUICIDE_DATA.map((d, i) =>
+          `${i === 0 ? "M" : "L"} ${xScale(d.year)} ${yScale(d.rate)}`
+        ).join(" ");
+
+        // Background regions: "climb" up to 2018, "plateau window" 2021 onward
+        const climbEnd = 2018;
+        const plateauStart = 2021;
+
+        // Simple ticks
+        const xTicks = [];
+        for (let y = minYear; y <= maxYear; y += 3) xTicks.push(y);
+
+        const yTicks = [];
+        for (let r = yMin; r <= yMax; r += 1) yTicks.push(r);
+
+        function nearestRateForYear(yr){
+          const found = SUICIDE_DATA.find(d => d.year === yr);
+          return found ? found.rate : null;
+        }
+
+        return React.createElement("div", { className: "fade-in space-y-6" },
+          React.createElement("div", { className: "glass rounded-xl p-6" },
+            React.createElement("div", { className: "flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-6" },
+              React.createElement("div", null,
+                React.createElement("h2", { className: "text-2xl font-semibold mb-2" }, "The Timeline Argument"),
+                React.createElement("p", { className: "text-slate-600" },
+                  "Youth Suicide Rate (Ages 15-24) per 100,000 vs notable AI / policy events"
+                ),
+                React.createElement("p", { className: "text-xs text-slate-500 mt-2" },
+                  (PROVENANCE.mode === "illustrative"
+                    ? "Note: plotted rates are illustrative placeholders. Replace with sourced series for publication."
+                    : "Plotted rates are sourced from your stated pipeline.")
+                )
+              ),
+              React.createElement("div", { className: "flex items-center gap-3 self-start" },
+                React.createElement("span", { className: "mono text-xs text-slate-500" }, "VISCERAL"),
+                React.createElement("button", {
+                  onClick: () => setMode(mode === "visceral" ? "clinical" : "visceral"),
+                  "aria-label": "Toggle language mode",
+                  "aria-pressed": mode === "clinical",
+                  className: "relative w-12 h-6 rounded-full toggle-track " + (mode === "clinical" ? "bg-moss" : "bg-rust")
+                },
+                  React.createElement("div", {
+                    className: "absolute top-1 left-1 w-4 h-4 bg-white rounded-full toggle-thumb " +
+                      (mode === "clinical" ? "transform translate-x-6" : "")
+                  })
+                ),
+                React.createElement("span", { className: "mono text-xs text-slate-500" }, "CLINICAL")
+              )
+            ),
+
+            React.createElement("svg", { viewBox: `0 0 ${chartWidth} ${chartHeight}`, className: "w-full" },
+              // Background regions
+              React.createElement("rect", {
+                x: padding.left, y: padding.top,
+                width: xScale(climbEnd) - padding.left,
+                height: innerHeight,
+                fill: "rgba(181,74,50,0.08)"
+              }),
+              React.createElement("rect", {
+                x: xScale(plateauStart), y: padding.top,
+                width: xScale(maxYear) - xScale(plateauStart),
+                height: innerHeight,
+                fill: "rgba(61,90,69,0.08)"
+              }),
+
+              // Region labels
+              React.createElement("text", {
+                x: (padding.left + xScale(climbEnd)) / 2,
+                y: padding.top - 12,
+                textAnchor: "middle",
+                className: "mono",
+                fontSize: "10",
+                fill: "#b54a32"
+              }, "THE CLIMB"),
+
+              React.createElement("text", {
+                x: (xScale(plateauStart) + xScale(maxYear)) / 2,
+                y: padding.top - 12,
+                textAnchor: "middle",
+                className: "mono",
+                fontSize: "10",
+                fill: "#3d5a45"
+              }, "PLATEAU WINDOW"),
+
+              // Grid lines + y labels
+              ...yTicks.map(rate =>
+                React.createElement("g", { key: "y" + rate },
+                  React.createElement("line", {
+                    x1: padding.left, y1: yScale(rate),
+                    x2: chartWidth - padding.right, y2: yScale(rate),
+                    stroke: "#e2e8f0", strokeWidth: 1
+                  }),
+                  React.createElement("text", {
+                    x: padding.left - 12, y: yScale(rate) + 4,
+                    textAnchor: "end",
+                    fontSize: "11",
+                    fill: "#64748b"
+                  }, rate)
+                )
+              ),
+
+              // X axis labels
+              ...xTicks.map(year =>
+                React.createElement("text", {
+                  key: "x" + year,
+                  x: xScale(year), y: chartHeight - 20,
+                  textAnchor: "middle",
+                  fontSize: "11",
+                  fill: "#64748b"
+                }, year)
+              ),
+
+              // Data line
+              React.createElement("path", {
+                d: pathData,
+                fill: "none",
+                stroke: "#1a1a2e",
+                strokeWidth: 2.6,
+                className: "chart-line"
+              }),
+
+              // Data points
+              ...SUICIDE_DATA.map(d =>
+                React.createElement("circle", {
+                  key: "pt" + d.year,
+                  cx: xScale(d.year),
+                  cy: yScale(d.rate),
+                  r: 4.2,
+                  fill: d.era === "ai" ? "#3d5a45" : d.era === "pre" ? "#b54a32" : "#c9a227"
+                })
+              ),
+
+              // Event markers (keyboard accessible)
+              ...EVENTS.map((e, i) => {
+                const fx = xScale(fractionalYear(e.date));
+                const baseY = padding.top + 22;
+                const offset = (i % 3) * 26;
+                const eventColor = EVENT_COLOR[e.type] || "#64748b";
+
+                // snap line down to nearest year rate if available
+                const yr = yearFromDate(e.date);
+                const nearest = nearestRateForYear(yr);
+                const lineY2 = nearest ? yScale(nearest) : (padding.top + innerHeight);
+
+                return React.createElement("g", {
+                  key: "ev" + e.label,
+                  tabIndex: 0,
+                  role: "button",
+                  "aria-label": e.label + " " + formatISO(e.date),
+                  onMouseEnter: () => setHoveredEvent(e),
+                  onMouseLeave: () => setHoveredEvent(null),
+                  onFocus: () => setHoveredEvent(e),
+                  onBlur: () => setHoveredEvent(null),
+                  style: { cursor: "pointer" }
+                },
+                  React.createElement("line", {
+                    x1: fx, y1: baseY + offset + 14,
+                    x2: fx, y2: lineY2,
+                    stroke: eventColor,
+                    strokeWidth: 1,
+                    strokeDasharray: "3,3",
+                    opacity: 0.55
+                  }),
+                  React.createElement("circle", { cx: fx, cy: baseY + offset, r: 6.2, fill: eventColor }),
+                  React.createElement("text", {
+                    x: fx, y: baseY + offset + 20,
+                    textAnchor: "middle",
+                    fontSize: "9",
+                    fill: "#64748b",
+                    className: "mono"
+                  }, e.label.length > 14 ? e.label.slice(0, 14) + "…" : e.label)
+                );
+              })
+            ),
+
+            hoveredEvent && React.createElement("div", { className: "mt-4 p-4 bg-slate-50 rounded-lg border" },
+              React.createElement("div", { className: "mono text-xs text-slate-500 mb-1" }, formatISO(hoveredEvent.date)),
+              React.createElement("div", { className: "font-semibold mb-2" }, hoveredEvent.label),
+              React.createElement("p", { className: "text-sm" }, mode === "visceral" ? hoveredEvent.visceral : hoveredEvent.clinical)
+            )
+          ),
+
+          React.createElement("div", { className: "glass rounded-xl p-6" },
+            React.createElement("h3", { className: "font-semibold mb-4" }, "The Suppressor Variable Problem"),
+            React.createElement("p", { className: "leading-relaxed mb-4" },
+              "A flatline isn’t proof of safety if critics argue “it should have gone down.” The 988 Lifeline launched July 16, 2022. ",
+              "If 988 reduced deaths and rates stayed flat, something else may have been exerting upward pressure. ",
+              "Alternatively, if 988 scaled massively and rates merely plateaued, that’s still not evidence of an AI-driven population-level spike."
+            ),
+            React.createElement("p", { className: "text-slate-600 text-sm" },
+              "Your safest claim is narrow and measurable: the macro series does not show the immediate catastrophe people imply. ",
+              "Everything else requires subgroup analysis and mechanism-level data."
+            )
+          )
+        );
+      };
+
+      const renderDroids = () => (
+        React.createElement("div", { className: "fade-in space-y-6" },
+          React.createElement("div", { className: "glass rounded-xl p-8" },
+            React.createElement("h2", { className: "text-2xl font-semibold mb-2" }, "The Droids Who Raised Them"),
+            React.createElement("p", { className: "text-slate-600 mb-2" },
+              "Fiction noticed the pattern early: when human support collapses, stable companionship becomes a survival scaffold."
+            ),
+            React.createElement("p", { className: "text-xs text-slate-500" },
+              "Note: these are narrative parallels, not evidence. They’re here to explain the mechanism people keep missing."
+            )
+          ),
+
+          ...LITERARY_PARALLELS.map((item, i) => {
+            const c = COLOR_MAP[item.color] || COLOR_MAP.slate;
+
+            return React.createElement("div", {
+              key: i,
+              className: "glass rounded-xl p-6 border-l-4 " + c.border + " card-lift"
+            },
+              React.createElement("div", { className: "flex justify-between items-start mb-4 gap-4" },
+                React.createElement("div", null,
+                  React.createElement("h3", { className: "text-xl font-semibold" }, item.title),
+                  React.createElement("p", { className: "text-sm text-slate-500" }, item.source + " • " + item.characters)
+                ),
+                React.createElement("div", { className: "mono text-xs px-2 py-1 rounded " + c.badgeBg + " " + c.badgeText },
+                  c.badgeLabel
+                )
+              ),
+
+              React.createElement("p", { className: "text-slate-700 mb-4 italic" }, item.setup),
+
+              React.createElement("div", { className: "grid md:grid-cols-2 gap-4 mb-4" },
+                React.createElement("div", { className: "bg-red-50 rounded-lg p-4" },
+                  React.createElement("div", { className: "mono text-xs accent-rust mb-2" }, "THE PANIC NARRATIVE"),
+                  React.createElement("p", { className: "text-sm" }, item.panic)
+                ),
+                React.createElement("div", { className: "bg-green-50 rounded-lg p-4" },
+                  React.createElement("div", { className: "mono text-xs accent-moss mb-2" }, "THE PRIMER HYPOTHESIS"),
+                  React.createElement("p", { className: "text-sm" }, item.primer)
+                )
+              ),
+
+              React.createElement("div", { className: "bg-amber-50 rounded-lg p-4" },
+                React.createElement("div", { className: "mono text-xs accent-gold mb-2" }, "THE INSIGHT"),
+                React.createElement("p", { className: "font-medium" }, item.insight)
+              )
+            );
+          }),
+
+          React.createElement("div", { className: "glass rounded-xl p-6" },
+            React.createElement("h3", { className: "font-semibold mb-3" }, "What This Section Is For"),
+            React.createElement("p", { className: "leading-relaxed" },
+              "This isn’t a claim that chatbots are good. It’s a claim about systems. ",
+              "A companion can be helpful or harmful depending on context, constraints, and the human support net around the user. ",
+              "Remove a companion from a broken system and you don’t fix the system. You increase aloneness."
+            )
+          )
+        )
+      );
+
+      const renderSmart = () => (
+        React.createElement("div", { className: "fade-in space-y-6" },
+
+          React.createElement("div", { className: "glass rounded-xl p-8" },
+            React.createElement("h2", { className: "text-2xl font-semibold mb-2" }, "Smart Safety"),
+            React.createElement("p", { className: "text-slate-600" },
+              "The reframe: you’re not defending dangerous bots. You’re arguing that blunt guardrails can create new harm by removing stabilizing support."
+            )
+          ),
+
+          React.createElement("div", { className: "grid md:grid-cols-3 gap-6" },
+
+            // Column 1
+            React.createElement("div", { className: "glass rounded-xl p-6 border-l-4 border-rust" },
+              React.createElement("div", { className: "mono text-xs accent-rust mb-2" }, "MUST BE ELIMINATED"),
+              React.createElement("h3", { className: "text-xl font-semibold mb-3" }, SMART_SAFETY.instructional.title),
+              React.createElement("p", { className: "text-slate-600 mb-4" }, SMART_SAFETY.instructional.description),
+              React.createElement("div", { className: "bg-red-50 rounded-lg p-3 mb-4 text-sm italic" }, SMART_SAFETY.instructional.example),
+              React.createElement("p", { className: "font-medium accent-rust" }, SMART_SAFETY.instructional.verdict)
+            ),
+
+            // Column 2
+            React.createElement("div", { className: "glass rounded-xl p-6 border-l-4 border-gold" },
+              React.createElement("div", { className: "mono text-xs accent-gold mb-2" }, "MITIGATE + MEASURE"),
+              React.createElement("h3", { className: "text-xl font-semibold mb-3" }, SMART_SAFETY.entanglement.title),
+              React.createElement("p", { className: "text-slate-600 mb-4" }, SMART_SAFETY.entanglement.description),
+              React.createElement("div", { className: "bg-amber-50 rounded-lg p-3 mb-4 text-sm italic" }, SMART_SAFETY.entanglement.example),
+              React.createElement("p", { className: "font-medium accent-gold" }, SMART_SAFETY.entanglement.verdict)
+            ),
+
+            // Column 3
+            React.createElement("div", { className: "glass rounded-xl p-6 border-l-4 border-moss" },
+              React.createElement("div", { className: "mono text-xs accent-moss mb-2" }, "MAY BE PROTECTIVE"),
+              React.createElement("h3", { className: "text-xl font-semibold mb-3" }, SMART_SAFETY.support.title),
+              React.createElement("p", { className: "text-slate-600 mb-4" }, SMART_SAFETY.support.description),
+              React.createElement("div", { className: "bg-green-50 rounded-lg p-3 mb-4 text-sm italic" }, SMART_SAFETY.support.example),
+              React.createElement("p", { className: "font-medium accent-moss" }, SMART_SAFETY.support.verdict)
+            )
+          ),
+
+          React.createElement("div", { className: "glass rounded-xl p-6 bg-amber-50" },
+            React.createElement("div", { className: "mono text-xs accent-gold mb-2" }, "THE PROBLEM"),
+            React.createElement("p", { className: "text-lg font-medium leading-relaxed" }, SMART_SAFETY.problem)
+          ),
+
+          React.createElement("div", { className: "glass rounded-xl p-6" },
+            React.createElement("h3", { className: "font-semibold mb-3" }, "The Pitch"),
+            React.createElement("p", { className: "leading-relaxed" },
+              "You’re not anti-safety. You’re pro-smart-safety. Fix the danger (instructional harm) while keeping the connection (relational support). ",
+              "Acknowledge the catastrophic failures. Then argue that shutting down all emotional depth is an overcorrection that introduces isolation risk. ",
+              "Target the red zone, mitigate the yellow zone, preserve the green zone, and instrument all three."
+            )
+          )
+        )
+      );
+
+
+
+// --------------------------
+// VOCAB TAB
+// --------------------------
+const renderVocab = () => (
+React.createElement("div", { className: "fade-in space-y-6" },
+React.createElement("div", { className: "glass rounded-xl p-8" },
+React.createElement("h2", { className: "text-2xl font-semibold mb-2" }, "The Vocabulary Translator"),
+React.createElement("p", { className: "text-slate-600" },
+"The mullet strategy: visceral language up front (YouTube/LinkedIn), clinical language in the back (methods/policy). ",
+"Hot words get attention. Cold words keep credibility."
+)
+),
+
+React.createElement("div", { className: "space-y-4" },
+...VOCABULARY.map((item, i) =>
+React.createElement("div", { key: i, className: "glass rounded-xl p-5 card-lift" },
+React.createElement("div", { className: "flex flex-col md:flex-row md:items-center gap-4 mb-3" },
+React.createElement("div", { className: "flex-1" },
+React.createElement("div", { className: "mono text-xs text-slate-400 mb-1" }, "FRONT OF SHOP"),
+React.createElement("p", { className: "text-lg font-medium accent-rust" }, item.visceral)
+),
+React.createElement("div", { className: "hidden md:block text-2xl text-slate-300" }, "→"),
+React.createElement("div", { className: "flex-1" },
+React.createElement("div", { className: "mono text-xs text-slate-400 mb-1" }, "BACK OF SHOP"),
+React.createElement("p", { className: "text-lg font-medium accent-moss" }, item.clinical)
+)
+),
+React.createElement("p", { className: "text-sm text-slate-600 border-t pt-3" }, item.definition)
+)
+)
+),
+
+React.createElement("div", { className: "glass rounded-xl p-6 bg-slate-50" },
+React.createElement("h3", { className: "font-semibold mb-3" }, "How to Deploy"),
+React.createElement("p", { className: "leading-relaxed text-sm" },
+"Don’t banish the visceral words. Attribute them. ",
+"Example: “Users describe the models as ‘lobotomized.’ In measurement terms, what we’re seeing is effective dampening.” ",
+"You validate lived experience while signaling rigor."
+)
+)
+)
+);
+
+// --------------------------
+// 988 TAB
+// --------------------------
+const render988 = () => (
+React.createElement("div", { className: "fade-in space-y-6" },
+React.createElement("div", { className: "glass rounded-xl p-8" },
+React.createElement("h2", { className: "text-2xl font-semibold mb-2" }, "988 Lifeline Impact"),
+React.createElement("p", { className: "text-slate-600" },
+"A massive intervention that launched as generative AI scaled. This is a suppressor variable for simplistic blame narratives."
+)
+),
+
+React.createElement("div", { className: "glass rounded-xl p-6" },
+React.createElement("div", { className: "flex items-center gap-4 mb-6" },
+React.createElement("div", { className: "bg-gold text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold" }, "988"),
+React.createElement("div", null,
+React.createElement("p", { className: "font-semibold text-lg" }, "Suicide & Crisis Lifeline"),
+React.createElement("p", { className: "text-slate-500" }, "Launch: " + LIFELINE_DATA.launch.date)
+)
+),
+
+React.createElement("div", { className: "grid md:grid-cols-3 gap-4 mb-6" },
+...LIFELINE_DATA.stats.map((stat, i) =>
+React.createElement("div", { key: i, className: "bg-slate-50 rounded-lg p-4" },
+React.createElement("div", { className: "mono text-xs text-slate-400 mb-1" }, stat.period),
+React.createElement("p", { className: "text-2xl font-bold accent-gold" }, stat.contacts),
+React.createElement("p", { className: "text-sm text-slate-600" }, stat.growth)
+)
+)
+),
+
+React.createElement("h4", { className: "font-semibold mb-3" }, "Channel Breakdown"),
+React.createElement("div", { className: "space-y-3" },
+...LIFELINE_DATA.channels.map((ch, i) =>
+React.createElement("div", { key: i, className: "flex items-center gap-4" },
+React.createElement("div", { className: "w-20 font-medium" }, ch.type),
+React.createElement("div", { className: "flex-1 bg-slate-100 rounded-full h-4 overflow-hidden" },
+React.createElement("div", {
+className: "h-full rounded-full " + (ch.type === "Texts" ? "bg-gold" : ch.type === "Calls" ? "bg-moss" : "bg-slate-300"),
+style: { width: (ch.bar || 40) + "%" }
+})
+),
+React.createElement("div", { className: "w-32 text-sm" }, ch.growth)
+)
+)
+)
+),
+
+React.createElement("div", { className: "glass rounded-xl p-6 bg-amber-50" },
+React.createElement("div", { className: "mono text-xs accent-gold mb-2" }, "THE KEY INSIGHT"),
+React.createElement("p", { className: "font-medium leading-relaxed" },
+"TEXT volume grew fastest. If displacement from AI companionship into crisis services exists, the signal is most likely to appear in TEXT first."
+)
+)
+)
+);
+
+// --------------------------
+// TRACKING TAB
+// --------------------------
+const renderTrack = () => (
+React.createElement("div", { className: "fade-in space-y-6" },
+React.createElement("div", { className: "glass rounded-xl p-8" },
+React.createElement("h2", { className: "text-2xl font-semibold mb-2" }, "The Tracking Framework"),
+React.createElement("p", { className: "text-slate-600" },
+"Don’t wait 2–3 years for mortality data to notice externalities. Build a layered monitoring stack."
+)
+),
+
+React.createElement("div", { className: "glass rounded-xl p-6" },
+React.createElement("h3", { className: "font-semibold mb-4 flex items-center gap-2" },
+React.createElement("span", { className: "w-3 h-3 rounded-full bg-slate-400" }),
+"Lagging Indicators (Gold Standard, Long Wait)"
+),
+React.createElement("div", { className: "space-y-3" },
+...TRACKING_FRAMEWORK.lagging.map((item, i) =>
+React.createElement("div", { key: i, className: "bg-slate-50 rounded-lg p-4" },
+React.createElement("div", { className: "flex justify-between items-start mb-2" },
+React.createElement("span", { className: "font-medium" }, item.source),
+React.createElement("span", { className: "mono text-xs text-slate-400" }, item.lag)
+),
+React.createElement("p", { className: "text-sm text-slate-600" }, item.metric),
+React.createElement("p", { className: "text-xs text-slate-400 mt-1" }, item.note)
+)
+)
+)
+),
+
+React.createElement("div", { className: "glass rounded-xl p-6" },
+React.createElement("h3", { className: "font-semibold mb-4 flex items-center gap-2" },
+React.createElement("span", { className: "w-3 h-3 rounded-full bg-gold" }),
+"Leading Indicators (Faster, Less Definitive)"
+),
+React.createElement("div", { className: "space-y-3" },
+...TRACKING_FRAMEWORK.leading.map((item, i) =>
+React.createElement("div", { key: i, className: "bg-amber-50 rounded-lg p-4" },
+React.createElement("div", { className: "flex justify-between items-start mb-2" },
+React.createElement("span", { className: "font-medium" }, item.source),
+React.createElement("span", { className: "mono text-xs text-slate-400" }, item.lag)
+),
+React.createElement("p", { className: "text-sm text-slate-600" }, item.metric),
+React.createElement("p", { className: "text-xs accent-gold mt-1" }, item.note)
+)
+)
+)
+),
+
+React.createElement("div", { className: "glass rounded-xl p-6" },
+React.createElement("h3", { className: "font-semibold mb-4 flex items-center gap-2" },
+React.createElement("span", { className: "w-3 h-3 rounded-full bg-rust" }),
+"Displacement Signals (Real-Time, Your Secret Weapon)"
+),
+React.createElement("div", { className: "space-y-3" },
+...TRACKING_FRAMEWORK.displacement.map((item, i) =>
+React.createElement("div", { key: i, className: "bg-red-50 rounded-lg p-4" },
+React.createElement("div", { className: "flex justify-between items-start mb-2" },
+React.createElement("span", { className: "font-medium" }, item.source),
+React.createElement("span", { className: "mono text-xs text-slate-400" }, item.lag)
+),
+React.createElement("p", { className: "text-sm text-slate-600" }, item.metric),
+React.createElement("p", { className: "text-xs accent-rust mt-1" }, item.note)
+)
+)
+)
+)
+)
+);
+
+// --------------------------
+// MISSING CORRELATIONS TAB
+// --------------------------
+const renderMissing = () => (
+React.createElement("div", { className: "fade-in space-y-6" },
+React.createElement("div", { className: "glass rounded-xl p-8" },
+React.createElement("h2", { className: "text-2xl font-semibold mb-2" }, "The Missing Correlations"),
+React.createElement("p", { className: "text-slate-600" },
+"Questions that are testable if you can get the right datasets into the same room."
+)
+),
+
+React.createElement("div", { className: "space-y-4" },
+...MISSING_CORRELATIONS.map((item, i) =>
+React.createElement("div", { key: i, className: "glass rounded-xl p-6 card-lift" },
+React.createElement("div", { className: "mono text-xs accent-gold mb-2" }, "RESEARCH QUESTION " + (i + 1)),
+React.createElement("h3", { className: "text-lg font-medium mb-3" }, item.question),
+React.createElement("p", { className: "text-slate-600 mb-3" }, item.why),
+React.createElement("div", { className: "flex items-center gap-2 text-sm" },
+React.createElement("span", { className: "text-slate-400" }, "Who has this data:"),
+React.createElement("span", { className: "font-medium" }, item.who)
+)
+)
+)
+),
+
+React.createElement("div", { className: "glass rounded-xl p-6 bg-slate-50" },
+React.createElement("h3", { className: "font-semibold mb-3" }, "The Point"),
+React.createElement("p", { className: "leading-relaxed" },
+"You won’t find a “Replika” column in a crisis dataset. But you can still test displacement with time alignment. ",
+"Overlay crisis TEXT volume with outage windows and guardrail releases. If spikes align beyond baseline seasonality, you have evidence of externalities worth investigating."
+)
+)
+)
+);
+
+// --------------------------
+// CONTENT SWITCHER
+// --------------------------
+const renderContent = () => {
+switch (activeTab) {
+case "thesis": return renderThesis();
+case "methods": return renderMethods();
+case "data": return renderData();
+case "droids": return renderDroids();
+case "smart": return renderSmart();
+case "vocab": return renderVocab();
+case "988": return render988();
+case "track": return renderTrack();
+case "missing": return renderMissing();
+default: return renderThesis();
+}
+};
+
+return React.createElement("div", { className: "min-h-screen" },
+
+// Header
+React.createElement("header", { className: "sticky top-0 z-50 glass border-b" },
+React.createElement("div", { className: "max-w-5xl mx-auto px-4" },
+React.createElement("div", { className: "flex items-center justify-between py-4" },
+React.createElement("div", null,
+React.createElement("h1", { className: "text-xl font-semibold" }, "Sociable Systems"),
+React.createElement("p", { className: "mono text-xs text-slate-400" }, "TRACKING FRAMEWORK v1.1")
+),
+React.createElement("div", { className: "mono text-xs text-slate-400 hidden md:block" }, "THE EXPERIMENT NOBODY AUTHORIZED")
+),
+
+React.createElement("nav", { className: "flex gap-1 overflow-x-auto pb-2" },
+...tabs.map(tab =>
+React.createElement("button", {
+key: tab.id,
+onClick: () => setActiveTab(tab.id),
+className: "px-3 py-2 text-xs whitespace-nowrap transition-colors " +
+(activeTab === tab.id ? "tab-active font-medium" : "tab-inactive hover:text-slate-700"),
+role: "tab",
+"aria-selected": activeTab === tab.id
+}, tab.label)
+)
+)
+)
+)
+),
+
+// Main
+React.createElement("main", { className: "max-w-5xl mx-auto px-4 py-8" }, renderContent()),
+
+// Footer
+React.createElement("footer", { className: "max-w-5xl mx-auto px-4 py-8 border-t text-center space-y-2" },
+React.createElement("p", { className: "text-sm text-slate-400" },
+"Source categories: " + SOURCES.map(s => s.name).join(" • ")
+),
+React.createElement("p", { className: "text-xs text-slate-500" },
+PROVENANCE.mode === "illustrative"
+? "Provenance: illustrative demo. Replace plotted series with sourced pulls before making strong empirical claims."
+: "Provenance: sourced series. See Methods tab for extraction notes."
+),
+React.createElement("p", { className: "text-xs text-slate-500" },
+"If you or someone you know is struggling: ",
+React.createElement("strong", null, "988"),
+" (US) | Crisis Text Line: Text HOME to 741741"
+)
+)
+);
+};
+
+// --------------------------
+// RENDER
+// --------------------------
+const root = ReactDOM.createRoot(document.getElementById("app"));
+root.render(React.createElement(App));
+  </script>
+</body>
+</html>

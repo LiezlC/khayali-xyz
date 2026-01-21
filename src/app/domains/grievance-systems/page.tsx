@@ -39,9 +39,9 @@ export default function GrievanceSystemsPage() {
               <h3 className="text-xl font-bold text-white mb-2">Grievance Systems Research</h3>
               <p className="text-gray-400">Deep research on grievance mechanisms and accountability</p>
             </a>
-            <a href="/research/grievoice" className="bg-gray-800 border border-gray-700 rounded-lg p-6 hover:border-blue-500 transition-all">
-              <h3 className="text-xl font-bold text-white mb-2">GrievoVoice</h3>
-              <p className="text-gray-400">Exploring voice-based grievance intake systems</p>
+            <a href="/grievoice" className="bg-gray-800 border border-gray-700 rounded-lg p-6 hover:border-blue-500 transition-all">
+              <h3 className="text-xl font-bold text-white mb-2">GrieVoice</h3>
+              <p className="text-gray-400">AI-powered voice-based grievance system with multilingual support</p>
             </a>
           </div>
         </div>

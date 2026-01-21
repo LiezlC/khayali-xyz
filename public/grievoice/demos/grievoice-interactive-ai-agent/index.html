@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrieVoice - Interactive AI Agent</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #2A5050; /* Dark Teal from image */
+            --text-color: #F2F5E8; /* Cream/White */
+            --accent-color: #8FB3B3; /* Lighter Teal */
+            --wave-color: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Lato', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Main Container */
+        .container {
+            display: flex;
+            width: 90%;
+            max-width: 1200px;
+            height: 85vh;
+            background: linear-gradient(135deg, #264848 0%, #2F5C5C 100%);
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Left Side - Text Content */
+        .left-panel {
+            flex: 1;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .brand-small {
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.8;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+        }
+
+        .asterisks {
+            font-size: 2rem;
+            margin: 20px 0;
+            letter-spacing: 10px;
+            color: var(--accent-color);
+        }
+
+        .presenter {
+            margin-top: auto;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            opacity: 0.7;
+            text-transform: uppercase;
+        }
+
+        /* Right Side - The Interactive Agent */
+        .right-panel {
+            flex: 1;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom, #D8E6D8 0%, #2A5050 100%);
+            overflow: hidden;
+        }
+
+        /* Cityscape Background (CSS Shapes) */
+        .cityscape {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            opacity: 0.3;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 5px;
+            z-index: 0;
+        }
+        .building {
+            background: #1a3838;
+            width: 40px;
+            border-radius: 2px 2px 0 0;
+        }
+
+        /* The Silhouette (SVG) */
+        .silhouette-container {
+            position: relative;
+            z-index: 2;
+            width: 400px;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .silhouette-svg {
+            height: 100%;
+            fill: #0F2B2B;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+        }
+
+        /* Interactive Elements */
+        .interaction-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            padding-bottom: 40px;
+        }
+
+        /* Voice Waves Animation */
+        .voice-waves {
+            position: absolute;
+            top: 40%;
+            right: 20%;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            height: 60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .wave-bar {
+            width: 6px;
+            background-color: white;
+            border-radius: 10px;
+            height: 10px;
+            animation: none;
+        }
+
+        .voice-waves.active {
+            opacity: 1;
+        }
+        
+        .voice-waves.active .wave-bar {
+            animation: wave 1s infinite ease-in-out;
+        }
+
+        @keyframes wave {
+            0%, 100% { height: 10px; }
+            50% { height: 50px; }
+        }
+
+        .wave-bar:nth-child(1) { animation-delay: 0.0s; }
+        .wave-bar:nth-child(2) { animation-delay: 0.1s; }
+        .wave-bar:nth-child(3) { animation-delay: 0.2s; }
+        .wave-bar:nth-child(4) { animation-delay: 0.3s; }
+        .wave-bar:nth-child(5) { animation-delay: 0.4s; }
+
+        /* Chat Interface Overlay */
+        .chat-interface {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            width: 80%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .status-text {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #fff;
+            text-align: center;
+            height: 20px;
+        }
+
+        .transcript {
+            min-height: 40px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            text-align: center;
+            color: #fff;
+            font-style: italic;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            background: white;
+            color: var(--bg-color);
+        }
+
+        .btn.recording {
+            background: #ff6b6b;
+            border-color: #ff6b6b;
+            color: white;
+            animation: pulse-red 1.5s infinite;
+        }
+
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 107, 107, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0); }
+        }
+
+        /* Decorative Curves */
+        .curve {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            z-index: 1;
+            opacity: 0.8;
+        }
+        .curve path {
+            fill: var(--bg-color);
+        }
+        .curve-light {
+            bottom: 20px;
+            z-index: 0;
+            opacity: 0.4;
+        }
+        .curve-light path {
+            fill: #F2F5E8;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+                height: 95vh;
+                overflow-y: auto;
+            }
+            .left-panel {
+                padding: 30px;
+                flex: 0 0 auto;
+            }
+            h1 { font-size: 3rem; }
+            .right-panel {
+                min-height: 400px;
+            }
+            .silhouette-container {
+                width: 250px;
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Left Panel -->
+        <div class="left-panel">
+            <div class="brand-small">GRIEVOICE</div>
+            <h1>Interactive<br>AI Voice<br>Agents</h1>
+            <div class="asterisks">❋ ❋ ❋</div>
+            <p style="font-size: 1.1rem; line-height: 1.6; max-width: 400px; margin-bottom: 20px;">
+                Experience the future of customer support. Speak naturally, and let our neural voice engine handle the rest.
+            </p>
+            <div class="presenter">Presented by Liezl Coetzee</div>
+        </div>
+
+        <!-- Right Panel -->
+        <div class="right-panel">
+            <!-- City Background -->
+            <div class="cityscape" id="cityscape">
+                <!-- Buildings generated by JS -->
+            </div>
+
+            <!-- Silhouette SVG -->
+            <div class="silhouette-container">
+                <svg class="silhouette-svg" viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100,50 C130,50 150,80 150,110 C150,130 160,135 170,140 C175,142 175,150 170,155 C160,165 150,160 150,180 C150,220 180,250 190,300 L10,300 C20,250 50,250 50,200 C50,150 70,50 100,50 Z" />
+                </svg>
+                
+                <!-- Voice Waves Visualizer -->
+                <div class="voice-waves" id="visualizer">
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                </div>
+            </div>
+
+            <!-- Decorative Curves -->
+            <svg class="curve curve-light" viewBox="0 0 1440 320" preserveAspectRatio="none">
+                <path fill-opacity="1" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+            <svg class="curve" viewBox="0 0 1440 320" preserveAspectRatio="none">
+                <path fill-opacity="1" d="M0,256L48,245.3C96,235,192,213,288,192C384,171,480,149,576,165.3C672,181,768,235,864,240C960,245,1056,203,1152,186.7C1248,171,1344,181,1392,186.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+
+            <!-- Interaction Layer -->
+            <div class="interaction-layer">
+                <div class="chat-interface">
+                    <div class="status-text" id="status">Ready to Connect</div>
+                    <div class="transcript" id="transcript">"Hello, how can I help you today?"</div>
+                    <div class="controls">
+                        <button class="btn" id="micBtn" onclick="toggleListening()">
+                            <span id="micIcon">🎤</span> <span id="micText">Speak</span>
+                        </button>
+                        <button class="btn" onclick="resetConversation()">
+                            <span>↺</span> Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Setup Cityscape ---
+        const cityContainer = document.getElementById('cityscape');
+        for(let i=0; i<20; i++) {
+            let div = document.createElement('div');
+            div.className = 'building';
+            div.style.height = Math.floor(Math.random() * 100 + 20) + 'px';
+            div.style.width = Math.floor(Math.random() * 30 + 20) + 'px';
+            div.style.opacity = Math.random() * 0.5 + 0.2;
+            cityContainer.appendChild(div);
+        }
+
+        // --- Logic ---
+        const statusEl = document.getElementById('status');
+        const transcriptEl = document.getElementById('transcript');
+        const visualizer = document.getElementById('visualizer');
+        const micBtn = document.getElementById('micBtn');
+        const micText = document.getElementById('micText');
+
+        let isListening = false;
+        let synth = window.speechSynthesis;
+        let recognition;
+
+        // Initialize Speech Recognition if available
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.lang = 'en-US';
+
+            recognition.onstart = function() {
+                isListening = true;
+                updateUIState('listening');
+            };
+
+            recognition.onresult = function(event) {
+                const text = event.results[0][0].transcript;
+                handleUserInput(text);
+            };
+
+            recognition.onerror = function(event) {
+                console.error("Speech error", event.error);
+                updateUIState('idle');
+                transcriptEl.innerText = "Microphone access error. Try clicking again.";
+            };
+
+            recognition.onend = function() {
+                if(isListening) { // If it stopped but we didn't handle a result yet (e.g. silence)
+                    isListening = false;
+                    updateUIState('idle');
+                }
+            };
+        } else {
+            // Fallback for browsers without speech recognition
+            transcriptEl.innerText = "Speech API not supported in this browser. (Simulated Mode)";
+        }
+
+        function toggleListening() {
+            if (!isListening) {
+                if (recognition) {
+                    try {
+                        recognition.start();
+                    } catch(e) {
+                        // Reset if already started
+                        recognition.stop();
+                        setTimeout(()=> recognition.start(), 100);
+                    }
+                } else {
+                    // Simulation mode
+                    simulateListening();
+                }
+            } else {
+                if (recognition) recognition.stop();
+                isListening = false;
+                updateUIState('idle');
+            }
+        }
+
+        function simulateListening() {
+            updateUIState('listening');
+            isListening = true;
+            transcriptEl.innerText = "...";
+            
+            setTimeout(() => {
+                const simulatedPhrases = [
+                    "I need help with my account.",
+                    "What are your operating hours?",
+                    "Connect me to a human agent.",
+                    "I want to upgrade my plan."
+                ];
+                const randomPhrase = simulatedPhrases[Math.floor(Math.random() * simulatedPhrases.length)];
+                handleUserInput(randomPhrase);
+            }, 2000);
+        }
+
+        function updateUIState(state) {
+            if (state === 'listening') {
+                statusEl.innerText = "Listening...";
+                micBtn.classList.add('recording');
+                micText.innerText = "Stop";
+                visualizer.classList.remove('active'); // User speaking, not AI
+                transcriptEl.style.opacity = 0.5;
+            } else if (state === 'processing') {
+                statusEl.innerText = "Processing...";
+                micBtn.classList.remove('recording');
+                micText.innerText = "Speak";
+                isListening = false;
+                transcriptEl.style.opacity = 1;
+            } else if (state === 'speaking') {
+                statusEl.innerText = "GrieVoice Speaking...";
+                visualizer.classList.add('active');
+            } else {
+                statusEl.innerText = "Ready";
+                micBtn.classList.remove('recording');
+                micText.innerText = "Speak";
+                visualizer.classList.remove('active');
+                isListening = false;
+            }
+        }
+
+        function handleUserInput(text) {
+            updateUIState('processing');
+            transcriptEl.innerText = `"${text}"`;
+
+            // Simple AI Logic
+            setTimeout(() => {
+                let response = "I'm not sure I understand. Could you rephrase that?";
+                
+                const lowerText = text.toLowerCase();
+                if (lowerText.includes("hello") || lowerText.includes("hi")) {
+                    response = "Hello! I am GrieVoice. How can I assist you today?";
+                } else if (lowerText.includes("account") || lowerText.includes("login")) {
+                    response = "I can help with account issues. Please verify your email address.";
+                } else if (lowerText.includes("help") || lowerText.includes("support")) {
+                    response = "Our support team is available 24/7. I can guide you through common solutions.";
+                } else if (lowerText.includes("human") || lowerText.includes("agent")) {
+                    response = "I am connecting you to a live agent now. Please hold.";
+                } else if (lowerText.includes("upgrade") || lowerText.includes("plan")) {
+                    response = "We have several premium plans available. Would you like to hear the pricing?";
+                }
+
+                speakResponse(response);
+            }, 1000);
+        }
+
+        function speakResponse(text) {
+            updateUIState('speaking');
+            transcriptEl.innerText = text;
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.pitch = 1;
+            utterance.rate = 1;
+            
+            // Try to find a female voice
+            const voices = synth.getVoices();
+            const femaleVoice = voices.find(v => v.name.includes('Female') || v.name.includes('Samantha') || v.name.includes('Google US English'));
+            if (femaleVoice) utterance.voice = femaleVoice;
+
+            utterance.onend = function() {
+                updateUIState('idle');
+            };
+
+            synth.speak(utterance);
+        }
+
+        function resetConversation() {
+            synth.cancel();
+            updateUIState('idle');
+            transcriptEl.innerText = '"Hello, how can I help you today?"';
+            speakResponse("Hello, how can I help you today?");
+        }
+
+        // Initial greeting
+        window.addEventListener('load', () => {
+            // Wait for voices to load
+            if (speechSynthesis.onvoiceschanged !== undefined) {
+                speechSynthesis.onvoiceschanged = () => { /* voices loaded */ };
+            }
+        });
+
+    </script>
+</body>
+</html>
