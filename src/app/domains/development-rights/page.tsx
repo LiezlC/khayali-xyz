@@ -24,8 +24,7 @@ export default function DevelopmentRightsPage() {
 
       <div className="container mx-auto px-4 pb-12">
         <div className="max-w-4xl mx-auto">
-
-        <div className="mb-12">
+          <div className="mb-12">
           <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-teal-500 bg-clip-text text-transparent">
             Related Tools
           </h2>
@@ -41,9 +40,9 @@ export default function DevelopmentRightsPage() {
               <span className="text-cyan-400 hover:text-cyan-300">View in Tools →</span>
             </a>
           </div>
-        </div>
+          </div>
 
-        <div>
+          <div>
           <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-teal-500 bg-clip-text text-transparent">
             Related Content
           </h2>
@@ -56,6 +55,7 @@ export default function DevelopmentRightsPage() {
               <h3 className="text-xl font-bold text-white mb-2">JustDev</h3>
               <p className="text-gray-400">Justice-centered development practice exploration</p>
             </a>
+          </div>
           </div>
         </div>
       </div>

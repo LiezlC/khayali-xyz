@@ -24,8 +24,7 @@ export default function ESGSafeguardsPage() {
 
       <div className="container mx-auto px-4 pb-12">
         <div className="max-w-4xl mx-auto">
-
-        <div className="mb-12">
+          <div className="mb-12">
           <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent">
             Related Tools
           </h2>
@@ -46,9 +45,9 @@ export default function ESGSafeguardsPage() {
               <span className="text-teal-400 hover:text-teal-300">View in Tools →</span>
             </a>
           </div>
-        </div>
+          </div>
 
-        <div>
+          <div>
           <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent">
             Related Content
           </h2>
@@ -61,6 +60,7 @@ export default function ESGSafeguardsPage() {
               <h3 className="text-xl font-bold text-white mb-2">ESG Agents</h3>
               <p className="text-gray-400">Exploring AI agent architectures for ESG compliance</p>
             </a>
+          </div>
           </div>
         </div>
       </div>
