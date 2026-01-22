@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -31,6 +32,7 @@ export default function RootLayout({
           </nav>
         </header>
         <main>{children}</main>
+        <Analytics />
         <footer className="border-t border-gray-800 mt-20">
           <div className="container mx-auto px-4 py-12">
             {/* Footer Links Grid */}
