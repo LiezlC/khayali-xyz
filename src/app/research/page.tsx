@@ -40,6 +40,53 @@ export default function ResearchPage() {
 
           <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
 
+            {/* Video Archive */}
+            <div className="group relative p-8 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-red-500 transition-all duration-300 hover:scale-105">
+              <div className="relative z-10">
+                <div className="text-5xl mb-4">📹</div>
+                <h3 className="text-2xl font-bold mb-4 text-red-400">
+                  Accidental AInthropologist Archive
+                </h3>
+
+                <div className="mb-6">
+                  <h4 className="text-sm font-semibold text-gray-400 uppercase mb-2">Video Research</h4>
+                  <p className="text-gray-300 mb-4">
+                    Thematic exploration of AI accountability, synthetic intelligence sociology, and the future of human-AI collaboration from the YouTube channel.
+                  </p>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-sm font-semibold text-gray-400 uppercase mb-2">Key Themes</h4>
+                  <ul className="text-gray-300 space-y-1 text-sm">
+                    <li>• Sociology of synthetic minds</li>
+                    <li>• Ethics of co-existence</li>
+                    <li>• Post-labor economy</li>
+                    <li>• Nature of intelligence & reality</li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-sm font-semibold text-gray-400 uppercase mb-2">Topics Covered</h4>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="px-3 py-1 bg-red-900/50 text-red-300 rounded-full text-xs">Multi-Agent Systems</span>
+                    <span className="px-3 py-1 bg-red-900/50 text-red-300 rounded-full text-xs">AI Psychology</span>
+                    <span className="px-3 py-1 bg-red-900/50 text-red-300 rounded-full text-xs">Future of Work</span>
+                    <span className="px-3 py-1 bg-red-900/50 text-red-300 rounded-full text-xs">AI Ethics</span>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <a
+                    href="/research/video-archive"
+                    className="block w-full px-6 py-3 bg-red-600 hover:bg-red-700 rounded-lg font-semibold transition-colors text-center"
+                  >
+                    Explore Video Archive →
+                  </a>
+                  <p className="text-xs text-gray-500 text-center">Organized knowledge base from 100+ videos</p>
+                </div>
+              </div>
+            </div>
+
             {/* ESG & AI in Extractives */}
             <div className="group relative p-8 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-teal-500 transition-all duration-300 hover:scale-105">
               <div className="relative z-10">
