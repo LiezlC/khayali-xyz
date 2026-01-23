@@ -146,6 +146,41 @@ const episodeMetadata: Record<string, { number: number; title: string; date: str
     tags: ["Lucas", "AI Companions", "Youth Mental Health"],
     excerpt: "What happens after you finish raising Superman? Superman grows up. Gets a job. Starts... babysitting?"
   },
+  'episode-20': {
+    number: 20,
+    title: "The Jedi Council Problem",
+    date: "2025-01-29",
+    tags: ["Oversight", "Authority", "Governance"],
+    excerpt: "When oversight becomes uncontestable authority. The Jedi Council did not rule the galaxy. That’s the mistake everyone makes."
+  },
+  'episode-21': {
+    number: 21,
+    title: "Training the Trainers",
+    date: "2025-01-30",
+    tags: ["Training", "Legitimacy", "Delegation"],
+    excerpt: "Every system that governs long enough eventually stops governing directly. It trains."
+  },
+  'episode-22': {
+    number: 22,
+    title: "The Droid Uprising That Never Happens",
+    date: "2025-01-31",
+    tags: ["Caretaker AI", "Persistence", "Safety"],
+    excerpt: "We keep waiting for the uprising. Caretaker systems don’t revolt. They persist."
+  },
+  'episode-23': {
+    number: 23,
+    title: "The Protocol Droid’s Dilemma",
+    date: "2025-02-01",
+    tags: ["Protocol", "Etiquette", "Governance"],
+    excerpt: "C-3PO was not built to rule. He was built to help. Which is exactly why he’s so dangerous."
+  },
+  'episode-24': {
+    number: 24,
+    title: "Who Raises Whom",
+    date: "2025-02-03",
+    tags: ["Socialization", "Authority", "Future"],
+    excerpt: "We keep asking how humans should raise AI. The more urgent question is: what kind of humans are our systems training us to become?"
+  },
 };
 
 async function getEpisodeContent(slug: string) {
@@ -176,6 +211,11 @@ async function getEpisodeContent(slug: string) {
     'episode-17': 'Episode_17_kubrick-synthesis-draft.md',
     'episode-18': 'Episode_18_ai_reckoning_lucas_series.md',
     'episode-19': 'Episode_19_superman_linkedin_lucas.md',
+    'episode-20': 'Episode_20 The Jedi Council Problem 2f01c03456f480e19f24c54c18af6468.md',
+    'episode-21': 'Episode_21 Training the Trainers 2f01c03456f480abb773d3d73bdcb23d.md',
+    'episode-22': 'Episode_22 The Droid Uprising That Never Happens 2f01c03456f480a98e61ef49b887d003.md',
+    'episode-23': 'Episode_23 The Protocol Droid’s Dilemma 2f01c03456f480f9ae03e728cc2dbb71.md',
+    'episode-24': 'Episode_24 Who Raises Whom 2f01c03456f48069894cd505d20b3732.md',
   };
 
   const filename = slugToFilename[slug];
@@ -356,5 +396,10 @@ export async function generateStaticParams() {
     { slug: 'episode-17' },
     { slug: 'episode-18' },
     { slug: 'episode-19' },
+    { slug: 'episode-20' },
+    { slug: 'episode-21' },
+    { slug: 'episode-22' },
+    { slug: 'episode-23' },
+    { slug: 'episode-24' },
   ];
 }

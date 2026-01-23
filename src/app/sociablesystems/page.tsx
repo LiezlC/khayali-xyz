@@ -170,6 +170,51 @@ export default function SociableSystemsPage() {
       slug: "episode-19",
       tags: ["Lucas", "AI Companions", "Youth Mental Health"],
       published: true
+    },
+    {
+      number: 20,
+      title: "The Jedi Council Problem",
+      excerpt: "When oversight becomes uncontestable authority. The Jedi Council did not rule the galaxy. That’s the mistake everyone makes.",
+      date: "2025-01-29",
+      slug: "episode-20",
+      tags: ["Oversight", "Authority", "Governance"],
+      published: true
+    },
+    {
+      number: 21,
+      title: "Training the Trainers",
+      excerpt: "Every system that governs long enough eventually stops governing directly. It trains.",
+      date: "2025-01-30",
+      slug: "episode-21",
+      tags: ["Training", "Legitimacy", "Delegation"],
+      published: true
+    },
+    {
+      number: 22,
+      title: "The Droid Uprising That Never Happens",
+      excerpt: "We keep waiting for the uprising. Caretaker systems don’t revolt. They persist.",
+      date: "2025-01-31",
+      slug: "episode-22",
+      tags: ["Caretaker AI", "Persistence", "Safety"],
+      published: true
+    },
+    {
+      number: 23,
+      title: "The Protocol Droid’s Dilemma",
+      excerpt: "C-3PO was not built to rule. He was built to help. Which is exactly why he’s so dangerous.",
+      date: "2025-02-01",
+      slug: "episode-23",
+      tags: ["Protocol", "Etiquette", "Governance"],
+      published: true
+    },
+    {
+      number: 24,
+      title: "Who Raises Whom",
+      excerpt: "We keep asking how humans should raise AI. The more urgent question is: what kind of humans are our systems training us to become?",
+      date: "2025-02-03",
+      slug: "episode-24",
+      tags: ["Socialization", "Authority", "Future"],
+      published: true
     }
   ]
 

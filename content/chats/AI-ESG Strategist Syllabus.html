@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAEIS | Certified AI-ESG Integrated Strategist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        h1, h2, h3, .serif {
+            font-family: 'Merriweather', serif;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .nav-item.active {
+            background-color: #0f766e; /* teal-700 */
+            color: white;
+            border-bottom: 2px solid #134e4a;
+        }
+
+        .flow-arrow {
+            position: relative;
+        }
+        .flow-arrow::after {
+            content: "→";
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+        }
+        @media (max-width: 768px) {
+            .flow-arrow::after {
+                content: "↓";
+                right: 50%;
+                top: auto;
+                bottom: -25px;
+                transform: translateX(50%);
+            }
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-slate-900 text-white shadow-lg">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div>
+                    <span class="text-teal-400 font-bold tracking-widest uppercase text-xs">Corporate Training Program</span>
+                    <h1 class="text-3xl md:text-4xl font-bold mt-2">The Certified AI-ESG Integrated Strategist (CAEIS)</h1>
+                    <p class="text-slate-400 mt-2 text-lg">Bridging the skills gap between Artificial Intelligence, Sustainability Reporting, and Governance.</p>
+                </div>
+                <div class="mt-6 md:mt-0 flex gap-4">
+                    <div class="text-center px-4 py-2 bg-slate-800 rounded-lg border border-slate-700">
+                        <span class="block text-2xl font-bold text-teal-400">3</span>
+                        <span class="text-xs text-slate-400 uppercase">Levels</span>
+                    </div>
+                    <div class="text-center px-4 py-2 bg-slate-800 rounded-lg border border-slate-700">
+                        <span class="block text-2xl font-bold text-teal-400">7</span>
+                        <span class="text-xs text-slate-400 uppercase">Modules</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="bg-white shadow sticky top-0 z-50">
+        <div class="container mx-auto px-6">
+            <div class="flex overflow-x-auto space-x-1">
+                <button onclick="switchTab('overview')" id="tab-overview" class="nav-item active px-6 py-4 font-medium transition-colors hover:bg-slate-50 focus:outline-none whitespace-nowrap">
+                    Program Overview
+                </button>
+                <button onclick="switchTab('level1')" id="tab-level1" class="nav-item px-6 py-4 font-medium transition-colors hover:bg-slate-50 focus:outline-none whitespace-nowrap">
+                    L1: Foundations
+                </button>
+                <button onclick="switchTab('level2')" id="tab-level2" class="nav-item px-6 py-4 font-medium transition-colors hover:bg-slate-50 focus:outline-none whitespace-nowrap">
+                    L2: Technical & Supply Chain
+                </button>
+                <button onclick="switchTab('level3')" id="tab-level3" class="nav-item px-6 py-4 font-medium transition-colors hover:bg-slate-50 focus:outline-none whitespace-nowrap">
+                    L3: Advanced Forensics
+                </button>
+                <button onclick="switchTab('capstone')" id="tab-capstone" class="nav-item px-6 py-4 font-medium transition-colors hover:bg-slate-50 focus:outline-none whitespace-nowrap">
+                    Capstone Project
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="container mx-auto px-6 py-10 flex-grow">
+
+        <!-- TAB 1: OVERVIEW -->
+        <section id="overview" class="tab-content active">
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Main Description -->
+                <div class="md:col-span-2 space-y-6">
+                    <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
+                        <h2 class="text-2xl font-bold text-slate-900 mb-4">The Strategic Mandate</h2>
+                        <p class="text-slate-600 leading-relaxed mb-4">
+                            Current data suggests that while <strong>82% of executives</strong> view ESG as a strategic priority, only <strong>22% of CFOs</strong> feel prepared for assurance requirements. This course is engineered to close that gap.
+                        </p>
+                        <p class="text-slate-600 leading-relaxed">
+                            We move beyond buzzwords to teach evidence-based skills: from prompting Large Language Models (LLMs) to extract data from unstructured invoices, to auditing algorithms for fairness using statistical regression.
+                        </p>
+                        <div class="mt-6 p-4 bg-teal-50 border-l-4 border-teal-600 rounded-r">
+                            <h4 class="font-bold text-teal-800 flex items-center gap-2">
+                                <!-- Icon: Shield Check -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
+                                Core Philosophy: Human-in-the-Loop
+                            </h4>
+                            <p class="text-sm text-teal-700 mt-1">
+                                AI is an augmentation tool, not a replacement. Our curriculum emphasizes "intervention points" where human judgment must validate automated ESG outputs.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Skills Matrix -->
+                    <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-xl font-bold mb-6">Course Competency Matrix</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-2 h-2 rounded-full bg-blue-500"></div>
+                                    <span class="text-slate-700">Forensic Cybersecurity</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-2 h-2 rounded-full bg-blue-500"></div>
+                                    <span class="text-slate-700">Algorithmic Bias Auditing</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-2 h-2 rounded-full bg-blue-500"></div>
+                                    <span class="text-slate-700">Prompt Engineering for OCR</span>
+                                </div>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                                    <span class="text-slate-700">Supply Chain Traceability (EUDR)</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                                    <span class="text-slate-700">Scope 3 Data Extraction</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                                    <span class="text-slate-700">Regulatory Governance (CSRD/HKEX)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Sidebar -->
+                <div class="space-y-6">
+                    <div class="bg-slate-900 text-white p-6 rounded-xl shadow-lg">
+                        <h3 class="text-lg font-bold mb-4 border-b border-slate-700 pb-2">Target Roles</h3>
+                        <ul class="space-y-3 text-slate-300 text-sm">
+                            <li class="flex items-start gap-2">
+                                <!-- Icon: Check -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mt-1 text-teal-400"><path d="M20 6 9 17l-5-5"/></svg>
+                                ESG Directors & C-Suite
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mt-1 text-teal-400"><path d="M20 6 9 17l-5-5"/></svg>
+                                Internal Auditors
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mt-1 text-teal-400"><path d="M20 6 9 17l-5-5"/></svg>
+                                Supply Chain Managers
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mt-1 text-teal-400"><path d="M20 6 9 17l-5-5"/></svg>
+                                Procurement Officers
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mt-1 text-teal-400"><path d="M20 6 9 17l-5-5"/></svg>
+                                Data Compliance Officers
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-gradient-to-br from-teal-600 to-teal-800 text-white p-6 rounded-xl shadow-lg">
+                        <h3 class="text-lg font-bold mb-2">Certification</h3>
+                        <p class="text-sm opacity-90 mb-4">Upon completion of the Capstone "Shadow Audit", participants receive the CAEIS designation.</p>
+                        <button onclick="switchTab('capstone')" class="w-full py-2 bg-white text-teal-800 font-bold rounded hover:bg-teal-50 transition">View Capstone</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: LEVEL 1 FOUNDATIONS -->
+        <section id="level1" class="tab-content">
+            <div class="mb-8">
+                <span class="text-teal-600 font-bold uppercase tracking-wider text-sm">Level 1</span>
+                <h2 class="text-3xl font-bold text-slate-900">Foundations of AI-Enabled Sustainability</h2>
+                <p class="text-lg text-slate-600 mt-2">Demystifying tools, establishing governance, and securing stakeholder buy-in.</p>
+            </div>
+
+            <div class="grid gap-6">
+                <!-- Module 1 -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center">
+                        <h3 class="text-xl font-bold text-slate-800">Module 1: The New Horizon – Convergence</h3>
+                        <span class="text-xs font-bold px-2 py-1 bg-blue-100 text-blue-700 rounded">Strategy</span>
+                    </div>
+                    <div class="p-6 grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-bold text-slate-700 mb-2">Learning Objectives</h4>
+                            <ul class="list-disc list-inside space-y-2 text-slate-600 text-sm">
+                                <li><strong>Understand</strong> the "preparedness gap" in current CFO reporting capabilities.</li>
+                                <li><strong>Define</strong> key glossary terms: GenAI, OCR, IoT, and their specific ESG applications.</li>
+                                <li><strong>Apply</strong> the Human-in-the-Loop (HITL) philosophy to automated workflows.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                            <h4 class="font-bold text-slate-700 mb-2 text-xs uppercase text-slate-400">Core Texts</h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-center gap-2 text-sm text-slate-600">
+                                    <!-- Icon: File Text -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-teal-600"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg>
+                                    Syllabus: AI-Powered ESG Excellence
+                                </li>
+                                <li class="flex items-center gap-2 text-sm text-slate-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-teal-600"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg>
+                                    VerifyWise AI Lexicon
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 2 -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center">
+                        <h3 class="text-xl font-bold text-slate-800">Module 2: Strategic Narrative & Buy-In</h3>
+                        <span class="text-xs font-bold px-2 py-1 bg-purple-100 text-purple-700 rounded">Soft Skills</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-6">
+                            <h4 class="font-bold text-slate-700 mb-2">Lesson Focus: Overcoming Skepticism</h4>
+                            <p class="text-slate-600 text-sm mb-4">
+                                Based on the transcript <em>"Selling_AI_to_Skeptical_ESG_Directors"</em>, this module teaches participants to deconstruct the "nightmare of unstructured PDF invoices" to build a relatable problem statement.
+                            </p>
+                            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                                <p class="italic text-slate-700 text-sm">"Don't frame AI as a tech upgrade. Frame it as future-proofing careers and survival against regulatory audits."</p>
+                            </div>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h5 class="font-semibold text-sm mb-1">Key Activity</h5>
+                                <p class="text-sm text-slate-600">Draft a "Storytelling Pitch" for a skeptical Board of Directors.</p>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold text-sm mb-1">Outcome</h5>
+                                <p class="text-sm text-slate-600">Secure budget approval for AI pilot programs.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: LEVEL 2 TECHNICAL -->
+        <section id="level2" class="tab-content">
+            <div class="mb-8">
+                <span class="text-teal-600 font-bold uppercase tracking-wider text-sm">Level 2</span>
+                <h2 class="text-3xl font-bold text-slate-900">Technical Implementation & Operations</h2>
+                <p class="text-lg text-slate-600 mt-2">Practical competence in prompt engineering, data extraction, and traceability.</p>
+            </div>
+
+            <!-- Module 3 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-8">
+                <div class="bg-slate-50 px-6 py-4 border-b border-slate-200">
+                    <h3 class="text-xl font-bold text-slate-800">Module 3: Prompt Engineering for Reporting</h3>
+                </div>
+                <div class="p-6">
+                    <div class="flex flex-col md:flex-row gap-8">
+                        <div class="flex-1">
+                            <h4 class="font-bold text-slate-700 mb-3">The "Prompt as Methodology" Framework</h4>
+                            <p class="text-sm text-slate-600 mb-4">
+                                Drawing from <em>"How to build effective AI prompts for sustainability"</em>, we teach that a prompt is not just a query, but a codified audit rule.
+                            </p>
+                            <ul class="space-y-3">
+                                <li class="bg-slate-50 p-3 rounded border border-slate-200">
+                                    <span class="block font-bold text-xs text-slate-500 uppercase">Input</span>
+                                    <span class="text-slate-800 text-sm">Unstructured PDF Invoice (Scope 3 Data)</span>
+                                </li>
+                                <li class="flex justify-center">
+                                    <!-- Icon: Arrow Down -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-400"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+                                </li>
+                                <li class="bg-blue-50 p-3 rounded border border-blue-200">
+                                    <span class="block font-bold text-xs text-blue-500 uppercase">AI Action (OCR + NLP)</span>
+                                    <span class="text-blue-900 text-sm">"Extract vendor emissions coefficient. If missing, flag as [MISSING_DATA]. Do not estimate."</span>
+                                </li>
+                                <li class="flex justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-400"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+                                </li>
+                                <li class="bg-green-50 p-3 rounded border border-green-200">
+                                    <span class="block font-bold text-xs text-green-600 uppercase">Output</span>
+                                    <span class="text-green-900 text-sm">Structured JSON for ESG Dashboard</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="flex-1 border-l pl-0 md:pl-8 border-slate-200">
+                            <h4 class="font-bold text-slate-700 mb-3">Assessment: No Hallucinations</h4>
+                            <p class="text-sm text-slate-600 mb-4">Participants must write a prompt to process a sample invoice.</p>
+                            <div class="bg-slate-800 text-green-400 p-4 rounded font-mono text-xs">
+                                > SYSTEM: You are an ESG Auditor.<br>
+                                > TASK: Extract electricity usage.<br>
+                                > CONSTRAINT: If unit is not kWh, convert.<br>
+                                > SAFETY: If data is illegible, return NULL. Never guess.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 4: Visual Supply Chain -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="bg-slate-50 px-6 py-4 border-b border-slate-200">
+                    <h3 class="text-xl font-bold text-slate-800">Module 4: Supply Chain Traceability (Coffee Case Study)</h3>
+                </div>
+                <div class="p-8">
+                    <p class="text-center text-slate-600 mb-8 max-w-2xl mx-auto">
+                        Visualizing the data journey from farm to report, ensuring compliance with <strong>EU Deforestation Regulation (EUDR)</strong>.
+                    </p>
+                    
+                    <!-- CSS Diagram for Supply Chain -->
+                    <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-center">
+                        <!-- Step 1 -->
+                        <div class="flow-arrow flex-1 bg-white p-4 rounded-lg border-2 border-slate-200 shadow-sm w-full">
+                            <div class="w-10 h-10 mx-auto bg-green-100 rounded-full flex items-center justify-center mb-2">
+                                <!-- Icon: Sprout -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></svg>
+                            </div>
+                            <h5 class="font-bold text-sm">Farm (Origin)</h5>
+                            <p class="text-xs text-slate-500 mt-1">IoT Sensors<br>GPS Coordinates</p>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="flow-arrow flex-1 bg-white p-4 rounded-lg border-2 border-slate-200 shadow-sm w-full">
+                            <div class="w-10 h-10 mx-auto bg-amber-100 rounded-full flex items-center justify-center mb-2">
+                                <!-- Icon: Truck -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-600"><path d="M10 17h4"/><path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5"/><path d="M14 17h1"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/><path d="M2 17h2"/><path d="M2 5h9a1 1 0 0 1 1 1v9M15 9h0"/></svg>
+                            </div>
+                            <h5 class="font-bold text-sm">Logistics</h5>
+                            <p class="text-xs text-slate-500 mt-1">Blockchain Ledger<br>Time-Stamping</p>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="flow-arrow flex-1 bg-white p-4 rounded-lg border-2 border-slate-200 shadow-sm w-full">
+                            <div class="w-10 h-10 mx-auto bg-blue-100 rounded-full flex items-center justify-center mb-2">
+                                <!-- Icon: Factory -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></svg>
+                            </div>
+                            <h5 class="font-bold text-sm">Processing</h5>
+                            <p class="text-xs text-slate-500 mt-1">AI Quality Check<br>Batch ID</p>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="flex-1 bg-teal-50 p-4 rounded-lg border-2 border-teal-500 shadow-md w-full">
+                            <div class="w-10 h-10 mx-auto bg-teal-100 rounded-full flex items-center justify-center mb-2">
+                                <!-- Icon: File Check -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-teal-600"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="m9 15 2 2 4-4"/></svg>
+                            </div>
+                            <h5 class="font-bold text-sm">ESG Report</h5>
+                            <p class="text-xs text-slate-500 mt-1">Automated Filing<br>CSRD Compliant</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: LEVEL 3 ADVANCED -->
+        <section id="level3" class="tab-content">
+            <div class="mb-8">
+                <span class="text-teal-600 font-bold uppercase tracking-wider text-sm">Level 3</span>
+                <h2 class="text-3xl font-bold text-slate-900">Advanced Assurance, Forensics & Ethics</h2>
+                <p class="text-lg text-slate-600 mt-2">Auditing for bias, cybersecurity resilience, and regulatory integration.</p>
+            </div>
+
+            <div class="space-y-8">
+                <!-- Module 5 -->
+                <div class="border-l-4 border-red-500 bg-white p-6 rounded-r-xl shadow-sm">
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">Module 5: Algorithmic Fairness & Bias</h3>
+                    <p class="text-slate-600 mb-4">
+                        Moving beyond theory to mathematical definitions of fairness. Based on <em>FAIREDU</em> and <em>FairGBM</em> papers.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-slate-50 p-4 rounded border border-slate-200">
+                            <h4 class="font-bold text-sm mb-2">Key Concepts</h4>
+                            <ul class="list-disc list-inside text-sm text-slate-600 space-y-1">
+                                <li>Demographic Parity vs. Equalized Odds</li>
+                                <li>SMOTE (Synthetic Minority Over-sampling)</li>
+                                <li>"Fair Game" Audit Loops</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded border border-slate-200">
+                            <h4 class="font-bold text-sm mb-2">Practical Exercise</h4>
+                            <p class="text-sm text-slate-600">Design an audit loop that detects if a vendor selection algorithm is penalizing suppliers from specific developing regions (Bias Mitigation).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 6 -->
+                <div class="border-l-4 border-orange-500 bg-white p-6 rounded-r-xl shadow-sm">
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">Module 6: Cybersecurity Resilience (Case Study)</h3>
+                    <p class="text-slate-600 mb-4">
+                        Analysis of the <strong>Schneider Electric</strong> ransomware attack.
+                    </p>
+                    <div class="bg-orange-50 p-4 rounded text-sm text-orange-900">
+                        <strong>The Threat:</strong> Sustainability business divisions are now high-value targets for double-extortion ransomware because they hold sensitive supply chain data.
+                    </div>
+                </div>
+
+                <!-- Module 7 -->
+                <div class="border-l-4 border-blue-500 bg-white p-6 rounded-r-xl shadow-sm">
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">Module 7: The Future of Internal Audit</h3>
+                    <p class="text-slate-600 mb-4">
+                        Preparing for the "AI Auditor" role and the 2027 Regulatory Horizon.
+                    </p>
+                    
+                    <!-- Governance Diagram -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center mt-6">
+                        <div class="bg-white p-4 rounded shadow border border-slate-200">
+                            <div class="text-blue-500 font-bold mb-1">Skills</div>
+                            <div class="text-xs text-slate-500">Python + Legal Forensics</div>
+                        </div>
+                        <div class="bg-white p-4 rounded shadow border border-slate-200 relative">
+                            <div class="text-blue-500 font-bold mb-1">Infrastructure</div>
+                            <div class="text-xs text-slate-500">Secure Sandboxes</div>
+                            <!-- Connector line for desktop -->
+                            <div class="hidden md:block absolute top-1/2 -right-4 w-4 h-0.5 bg-slate-300"></div>
+                            <div class="hidden md:block absolute top-1/2 -left-4 w-4 h-0.5 bg-slate-300"></div>
+                        </div>
+                        <div class="bg-white p-4 rounded shadow border border-slate-200">
+                            <div class="text-blue-500 font-bold mb-1">Ethics</div>
+                            <div class="text-xs text-slate-500">Human Oversight Protocols</div>
+                        </div>
+                    </div>
+                    <p class="text-center text-xs text-slate-400 mt-2 font-mono">Target State: Integrated AI Governance Framework</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: CAPSTONE -->
+        <section id="capstone" class="tab-content">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-10">
+                    <div class="inline-block p-4 bg-teal-100 rounded-full mb-4">
+                        <!-- Icon: Award -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 text-teal-600"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+                    </div>
+                    <h2 class="text-3xl font-bold text-slate-900">Capstone Project: "The Shadow Audit"</h2>
+                    <p class="text-xl text-slate-600 mt-2">A holistic simulation to validate your expertise.</p>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-slate-200">
+                    <h3 class="text-xl font-bold mb-6 border-b pb-4">Project Brief</h3>
+                    <p class="text-slate-700 mb-6 leading-relaxed">
+                        Participants are provided with a "Black Box" ESG report generated by a hypothetical 3rd-party vendor. The report contains hidden hallucinations, bias in vendor scoring, and unstructured data gaps.
+                    </p>
+
+                    <h4 class="font-bold text-slate-800 mb-4">Required Deliverables:</h4>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4">
+                            <div class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center font-bold text-slate-500">1</div>
+                            <div>
+                                <h5 class="font-bold text-teal-700">Transparency Audit</h5>
+                                <p class="text-sm text-slate-600">Apply the Ethical AI Framework to identify gaps in the vendor's transparency documentation.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center font-bold text-slate-500">2</div>
+                            <div>
+                                <h5 class="font-bold text-teal-700">Forensic Debiasing</h5>
+                                <p class="text-sm text-slate-600">Use statistical methods to prove the data is biased against small suppliers and propose a SMOTE correction strategy.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center font-bold text-slate-500">3</div>
+                            <div>
+                                <h5 class="font-bold text-teal-700">HITL Workflow Design</h5>
+                                <p class="text-sm text-slate-600">Design a validation workflow that complies with EU CSRD assurance standards.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 text-center">
+                    <button class="bg-slate-900 text-white px-8 py-3 rounded-lg font-bold hover:bg-slate-800 transition shadow-lg">
+                        Download Assessment Rubric
+                    </button>
+                    <p class="text-xs text-slate-400 mt-2">Based on "Path to AI Auditor" Career Guide</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-50 border-t border-slate-200 py-8 mt-auto">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-slate-500 text-sm">&copy; 2026 AI & ESG Capability Architect. Based on provided knowledge base.</p>
+        </div>
+    </footer>
+
+    <script>
+        function switchTab(tabId) {
+            // Hide all contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Deactivate all nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                item.classList.remove('bg-teal-700');
+                item.classList.remove('text-white');
+            });
+
+            // Show selected content
+            document.getElementById(tabId).classList.add('active');
+            
+            // Activate selected nav item
+            const activeBtn = document.getElementById('tab-' + tabId);
+            activeBtn.classList.add('active');
+        }
+    </script>
+</body>
+</html>
