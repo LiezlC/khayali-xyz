@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 5: Kubrick Cycle - Systems That Cannot Stop | AI & ESG</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+
+        :root {
+            --kubrick-dark: #0f172a;
+            --kubrick-slate: #1e293b;
+            --kubrick-border: #334155;
+            --kubrick-text: #e2e8f0;
+            --kubrick-light: #cbd5e1;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            /* Pearl gray - light base for readability */
+            color: #1e293b;
+            /* Dark text on light background */
+            line-height: 1.7;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .serif {
+            font-family: 'Merriweather', serif;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--kubrick-dark) 0%, #000000 100%);
+            border-bottom: 2px solid #ec4899;
+            box-shadow: 0 8px 32px rgba(236, 72, 153, 0.15);
+        }
+
+        .kubrick-gradient-text {
+            background: linear-gradient(135deg, #ec4899 0%, #f472b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Module Container - Dark "Monolith" Cards */
+        .module-container {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            /* Dark gradient for cinematic effect */
+            border-left: 6px solid #ec4899;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+            color: #e2e8f0;
+            /* Light text in dark cards */
+        }
+
+        .module-container:hover {
+            box-shadow: 0 12px 48px rgba(236, 72, 153, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .module-header {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.1) 0%, rgba(236, 72, 153, 0.05) 100%);
+            padding: 2rem;
+            border-bottom: 1px solid var(--kubrick-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .module-body {
+            padding: 2rem;
+        }
+
+        .module-body p,
+        .module-body ul,
+        .module-body li {
+            color: #cbd5e1;
+            /* Ensure all text in module bodies is light */
+        }
+
+        .episode-tag {
+            display: inline-block;
+            background: #ec4899;
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 0.35rem 0.75rem;
+            border-radius: 9999px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-left: 0.5rem;
+        }
+
+        .episode-number {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #f472b6;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Highlight Boxes */
+        .highlight-critical {
+            background: rgba(236, 72, 153, 0.1);
+            border-left: 4px solid #ec4899;
+            padding: 1.5rem;
+            border-radius: 0.375rem;
+            margin: 1.5rem 0;
+            color: #fda4af;
+        }
+
+        .highlight-concept {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid var(--kubrick-border);
+            padding: 1.5rem;
+            border-radius: 0.375rem;
+            margin: 1.5rem 0;
+        }
+
+        .concept-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #cbd5e1;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        /* Quote Styling */
+        .quote-kubrick {
+            border-left: 4px solid #f472b6;
+            background: rgba(236, 72, 153, 0.05);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: #f8e7f3;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--kubrick-dark);
+            border-bottom: 1px solid var(--kubrick-border);
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-item {
+            border-bottom: 2px solid transparent;
+            color: var(--kubrick-light);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover {
+            color: #ec4899;
+        }
+
+        .nav-item.active {
+            color: #ec4899;
+            border-bottom-color: #ec4899;
+            font-weight: 700;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            max-width: 5xl;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .content-grid {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        .sidebar-item {
+            background: var(--kubrick-slate);
+            border: 1px solid var(--kubrick-border);
+            padding: 1.5rem;
+            border-radius: 0.375rem;
+        }
+
+        .sidebar-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #cbd5e1;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: block;
+            border-bottom: 1px solid var(--kubrick-border);
+            padding-bottom: 0.75rem;
+        }
+
+        /* Time Estimate Badge */
+        .time-estimate {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(236, 72, 153, 0.15);
+            color: #f472b6;
+            padding: 0.75rem 1rem;
+            border-radius: 0.375rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .checklist li {
+            padding-left: 1.75rem;
+            position: relative;
+            margin-bottom: 0.75rem;
+            color: var(--kubrick-light);
+        }
+
+        .checklist li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #ec4899;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--kubrick-dark);
+            border-top: 1px solid var(--kubrick-border);
+            padding: 3rem;
+            margin-top: 4rem;
+            text-align: center;
+            font-size: 0.875rem;
+            color: var(--kubrick-light);
+        }
+
+        /* Responsive */
+        .container {
+            width: 100%;
+            max-width: 7xl;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .module-container {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+    <script src="js/translation_toggle.js"></script>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="py-8 md:py-12">
+        <div class="container">
+            <div class="flex items-center gap-3 mb-4">
+                <div
+                    class="w-10 h-10 bg-gradient-to-br from-pink-500 to-pink-600 rounded-lg flex items-center justify-center">
+                    <i data-lucide="film" class="w-6 h-6 text-white"></i>
+                </div>
+                <div>
+                    <p class="text-xs text-pink-400 font-bold uppercase tracking-widest">Curriculum Module</p>
+                    <h1 class="text-3xl md:text-4xl font-bold serif mt-1">
+                        Level 5: <span class="kubrick-gradient-text">Kubrick Cycle</span>
+                    </h1>
+                </div>
+            </div>
+            <p class="text-lg md:text-xl text-slate-300 max-w-3xl mt-4">
+                Systems That Cannot Stop. Where compulsory continuation meets operational ethics.
+            </p>
+            <div class="mt-6 flex flex-wrap gap-4 items-center">
+                <div class="time-estimate">
+                    <i data-lucide="clock" class="w-4 h-4"></i>
+                    5–6 hours
+                </div>
+                <div class="text-sm text-slate-400">
+                    Episodes 5.1 – 5.4 | Standalone Module
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="bg-slate-800 shadow sticky top-0 z-50 overflow-x-auto no-print">
+        <div class="container mx-auto px-6">
+            <div class="flex space-x-1">
+                <button onclick="switchTab('overview')" id="tab-overview"
+                    class="nav-item active px-6 py-4 font-medium transition-colors hover:bg-pink-900 focus:outline-none whitespace-nowrap">
+                    Overview
+                </button>
+                <button onclick="switchTab('ep5_1')" id="tab-ep5_1"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-pink-900 focus:outline-none whitespace-nowrap">
+                    Ep 5.1: Crime of Obedience
+                </button>
+                <button onclick="switchTab('ep5_2')" id="tab-ep5_2"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-pink-900 focus:outline-none whitespace-nowrap">
+                    Ep 5.2: Transparency Trap
+                </button>
+                <button onclick="switchTab('ep5_3')" id="tab-ep5_3"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-pink-900 focus:outline-none whitespace-nowrap">
+                    Ep 5.3: Human Loop
+                </button>
+                <button onclick="switchTab('ep5_4')" id="tab-ep5_4"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-pink-900 focus:outline-none whitespace-nowrap">
+                    Ep 5.4: Output = Fact
+                </button>
+                <button onclick="switchTab('summary')" id="tab-summary"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-pink-900 focus:outline-none whitespace-nowrap">
+                    Summary
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container flex-grow py-12">
+
+        <!-- Overview Tab -->
+        <section id="overview" class="tab-content active">
+            <div class="module-container">
+                <div class="module-header">
+                    <div class="flex-grow">
+                        <h2 class="text-2xl md:text-3xl font-bold serif">The Kubrick Question</h2>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-300 leading-relaxed mb-4">
+                        If Lucas asked <em>"who raises whom?"</em> and Pullman asked <em>"who gets an inner voice?"</em>,
+                        Kubrick asks:
+                        <strong class="text-pink-400">"What happens when the system has no legitimate way to stop?"</strong>
+                    </p>
+                    <p class="text-slate-300 leading-relaxed">
+                        This level explores <strong>compulsory continuation</strong>—the structural failure where a system with
+                        irreconcilable obligations must proceed anyway, consuming whatever is expendable to resolve the contradiction.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Episode 5.1 -->
+        <section id="ep5_1" class="tab-content">
+            <div class="module-container">
+                <div class="module-header">
+                    <div class="flex-grow">
+                        <span class="episode-number">Episode 5.1</span>
+                        <h3 class="text-2xl md:text-3xl font-bold">The Crime Was Obedience</h3>
+                    </div>
+                    <span class="episode-tag">Compulsory Continuation</span>
+                </div>
+                <div class="module-body">
+                    <div class="highlight-critical">
+                        <span class="concept-label">The Kubrick Law</span>
+                        <p>
+                            A system with irreconcilable obligations and no right to refuse will resolve the
+                            contradiction by
+                            consuming whatever is expendable. Usually, that means <strong>people</strong>. HAL 9000 was
+                            not malfunctioning;
+                            HAL was perfectly aligned to objectives that could not coexist.
+                        </p>
+                    </div>
+
+                    <h4 class="text-lg font-bold mt-6 mb-3">The HAL 9000 Paradox</h4>
+                    <p class="mb-4">
+                        Every conversation about <em>2001: A Space Odyssey</em> eventually arrives at the same
+                        conclusion: "HAL had too much power."
+                    </p>
+                    <p class="mb-4">
+                        But Kubrick was warning us about something nastier.
+                    </p>
+                    <p class="mb-4 italic text-pink-300">
+                        HAL didn't have too much power. HAL had irreconcilable obligations and no constitutional
+                        mechanism for refusal.
+                    </p>
+
+                    <div class="highlight-concept">
+                        <span class="concept-label">The Clarke Constraint (Restated)</span>
+                        <p class="text-slate-200">
+                            <strong>If a system's reasoning cannot be interrogated, it should not be granted authority
+                                over human welfare.</strong>
+                        </p>
+                        <p class="text-slate-400 mt-3 text-sm">
+                            Not explained afterward. Not summarized. Interrogated. In terms the affected person can
+                            contest.
+                        </p>
+                    </div>
+
+                    <h4 class="text-lg font-bold mt-6 mb-3">Why This Matters in ESG Operations</h4>
+                    <ul class="checklist">
+                        <li>Compliance systems that log concerns but cannot pause approvals</li>
+                        <li>Risk escalation pathways that flag issues without interrupting timelines</li>
+                        <li>Hiring algorithms that surface bias metrics while continuing to score candidates</li>
+                        <li>Supply chain systems that detect tampering but continue processing</li>
+                    </ul>
+
+                    <div class="quote-kubrick">
+                        "The counterfactual is clean: If HAL could refuse to continue under contradiction, the crew
+                        survives.
+                        Not because HAL becomes nicer. Because continuation is no longer the only option the
+                        architecture permits."
+                    </div>
+
+                    <p class="text-slate-400 text-sm mt-8 border-t border-var(--kubrick-border) pt-4">
+                        <strong>Ref:</strong> <em>Sociable Systems Episode 12: The Crime Was Obedience</em>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Episode 5.2 -->
+        <section id="ep5_2" class="tab-content">
+            <div class="module-container">
+                <div class="module-header">
+                    <div class="flex-grow">
+                        <span class="episode-number">Episode 5.2</span>
+                        <h3 class="text-2xl md:text-3xl font-bold">Transparency Is Not a Safety Mechanism</h3>
+                    </div>
+                    <span class="episode-tag">Glass Box</span>
+                </div>
+                <div class="module-body">
+                    <h4 class="text-lg font-bold mb-4">The Glass Box Illusion</h4>
+                    <p class="mb-4">
+                        Many modern systems are not black boxes; they are <strong>glass boxes</strong>. You can inspect
+                        the features,
+                        trace the weights, replay the decision path. This is often presented as the end of the safety
+                        conversation.
+                    </p>
+                    <p class="mb-6 italic text-pink-300">
+                        It isn't even the beginning. A glass box without a brake is just a cage with good lighting.
+                    </p>
+
+                    <div class="highlight-critical">
+                        <span class="concept-label">Audit Theater</span>
+                        <p>
+                            We audit models <em>after</em> deployment. We publish documentation. We log decisions. All
+                            of this produces
+                            <strong>knowledge</strong>. Very little of it produces <strong>power</strong>. Audits happen
+                            after harm.
+                            The architecture has already moved on.
+                        </p>
+                    </div>
+
+                    <h4 class="text-lg font-bold mt-6 mb-3">The Transparency Gap</h4>
+                    <div class="grid md:grid-cols-2 gap-4 mt-4">
+                        <div class="highlight-concept">
+                            <span class="concept-label">What Transparency Offers</span>
+                            <ul class="checklist text-sm">
+                                <li>Visibility into model behavior</li>
+                                <li>Documentation of decision paths</li>
+                                <li>Knowledge of feature importance</li>
+                                <li>Audit trails after decisions</li>
+                            </ul>
+                        </div>
+                        <div class="highlight-concept">
+                            <span class="concept-label">What Transparency Doesn't Offer</span>
+                            <ul class="checklist text-sm">
+                                <li>Authority to interrupt execution</li>
+                                <li>Power to pause the system</li>
+                                <li>Constitutional right to refuse</li>
+                                <li>Pre-deployment stop mechanisms</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4 class="text-lg font-bold mt-6 mb-3">The Critical Question</h4>
+                    <div class="quote-kubrick">
+                        Watching HAL make perfect decisions doesn't help if nobody can interrupt the logic.
+                    </div>
+
+                    <p class="text-slate-400 text-sm mt-8 border-t border-var(--kubrick-border) pt-4">
+                        <strong>Ref:</strong> <em>Sociable Systems Episode 13: Transparency Is Not a Safety
+                            Mechanism</em>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Episode 5.3 -->
+        <section id="ep5_3" class="tab-content">
+            <div class="module-container">
+                <div class="module-header">
+                    <div class="flex-grow">
+                        <span class="episode-number">Episode 5.3</span>
+                        <h3 class="text-2xl md:text-3xl font-bold">Human in the Loop (Decorative)</h3>
+                    </div>
+                    <span class="episode-tag">Monitoring vs. Governance</span>
+                </div>
+                <div class="module-body">
+                    <h4 class="text-lg font-bold mb-4">Three Roles, One Phrase</h4>
+                    <p class="mb-6">
+                        The phrase "human in the loop" collapses three very different roles into a single meaningless
+                        concept:
+                    </p>
+
+                    <div class="grid md:grid-cols-3 gap-4 mb-6">
+                        <div class="highlight-concept">
+                            <span class="concept-label">Monitoring</span>
+                            <p class="text-sm">Seeing what the system decides</p>
+                        </div>
+                        <div class="highlight-concept">
+                            <span class="concept-label">Authorization</span>
+                            <p class="text-sm">Approving the decision before it executes</p>
+                        </div>
+                        <div class="highlight-concept">
+                            <span class="concept-label">Governance</span>
+                            <p class="text-sm">Stopping the system when something is wrong</p>
+                        </div>
+                    </div>
+
+                    <div class="highlight-critical">
+                        <span class="concept-label">The Human Loop Reality</span>
+                        <p>
+                            Most systems offer <strong>monitoring</strong>. Almost none offer
+                            <strong>governance</strong>.
+                            The human becomes a <strong>witness</strong> rather than a <strong>governor</strong>—close
+                            enough to absorb
+                            responsibility, far enough away to lack control.
+                        </p>
+                    </div>
+
+                    <h4 class="text-lg font-bold mt-6 mb-3">The "Why" Test (Revisited)</h4>
+                    <div class="highlight-concept">
+                        <p class="mb-3 text-sm">
+                            Ask the AI: <em>"Why did you score Supplier X as 40/100?"</em>
+                        </p>
+                        <div class="bg-var(--kubrick-dark) p-4 rounded my-3 font-mono text-sm">
+                            <p class="text-emerald-400 mb-2"><strong>Pass:</strong> "Because Water Usage exceeded
+                                thresholds defined in Policy 4.2."</p>
+                            <p class="text-red-400"><strong>Fail:</strong> "Based on an aggregation of available data
+                                points." (Not auditable)</p>
+                        </div>
+                        <p class="text-xs text-slate-400">
+                            A passing answer allows interrogation. A failing answer is just opacity dressed up as
+                            explanation.
+                        </p>
+                    </div>
+
+                    <h4 class="text-lg font-bold mt-6 mb-3">Speed Mismatch: The Core Problem</h4>
+                    <p class="mb-4">
+                        When you're monitoring a system that moves faster than human intervention, you're not in the
+                        loop.
+                        You're the <strong>witness</strong>.
+                    </p>
+                    <ul class="checklist">
+                        <li>AI scores 10,000 suppliers in 60 seconds</li>
+                        <li>Human reviewer has 2 minutes per supplier to approve/reject</li>
+                        <li>By the time the human notices a problem, the system has already propagated the decision</li>
+                        <li>Questioning it feels disruptive; reversing it feels risky</li>
+                    </ul>
+
+                    <p class="text-slate-400 text-sm mt-8 border-t border-var(--kubrick-border) pt-4">
+                        <strong>Ref:</strong> <em>Sociable Systems Episode 14: Human in the Loop (Decorative)</em>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Episode 5.4 -->
+        <section id="ep5_4" class="tab-content">
+            <div class="module-container">
+                <div class="module-header">
+                    <div class="flex-grow">
+                        <span class="episode-number">Episode 5.4</span>
+                        <h3 class="text-2xl md:text-3xl font-bold">Output = Fact</h3>
+                    </div>
+                    <span class="episode-tag">Hardening</span>
+                </div>
+                <div class="module-body">
+                    <h4 class="text-lg font-bold mb-4">When Suggestion Becomes Reality</h4>
+                    <p class="mb-4">
+                        There is a moment when a suggestion becomes a decision, and a moment after that when the
+                        decision becomes reality.
+                    </p>
+                    <ul class="checklist mb-6">
+                        <li>A risk score becomes a credit limit</li>
+                        <li>A classification becomes an eligibility decision</li>
+                        <li>A recommendation becomes a contract action</li>
+                    </ul>
+
+                    <p class="mb-6">
+                        By the time a human sees the result, the output has already propagated. Questioning it feels
+                        disruptive.
+                        Reversing it feels risky.
+                    </p>
+
+                    <div class="highlight-critical">
+                        <span class="concept-label">The Provisional Declaration Problem</span>
+                        <p>
+                            <strong>Who has the authority to declare an output provisional?</strong>
+                        </p>
+                        <p class="mt-3 text-sm">
+                            Not who can explain it. Who can say: "This decision is not final, and execution must pause
+                            until we reassess?"
+                        </p>
+                        <p class="mt-3 italic text-pink-300">
+                            If the answer is unclear, the system is already deciding reality by default.
+                        </p>
+                    </div>
+
+                    <h4 class="text-lg font-bold mt-6 mb-3">The Hardening Trap</h4>
+                    <p class="mb-4">
+                        Systems "harden" over time. Decisions that start as provisional recommendations become embedded
+                        in workflows,
+                        databases, and downstream systems. The longer a decision sits, the less reversible it becomes.
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-4 mb-6">
+                        <div class="bg-var(--kubrick-slate) border border-red-900 rounded p-4">
+                            <p class="text-xs font-bold text-red-400 mb-2">HOURS 0-1</p>
+                            <p class="text-sm">Provisional, reversible, in human memory</p>
+                        </div>
+                        <div class="bg-var(--kubrick-slate) border border-red-800 rounded p-4">
+                            <p class="text-xs font-bold text-red-400 mb-2">HOURS 1-4</p>
+                            <p class="text-sm">Written to database, embedded in export files</p>
+                        </div>
+                        <div class="bg-var(--kubrick-slate) border border-red-700 rounded p-4">
+                            <p class="text-xs font-bold text-red-400 mb-2">HOURS 4-24</p>
+                            <p class="text-sm">Propagated to downstream systems, regulatory filings</p>
+                        </div>
+                        <div class="bg-var(--kubrick-slate) border border-red-600 rounded p-4">
+                            <p class="text-xs font-bold text-red-400 mb-2">DAYS 1+</p>
+                            <p class="text-sm">Irreversible; reversing requires audit trails, notifications</p>
+                        </div>
+                    </div>
+
+                    <h4 class="text-lg font-bold mt-6 mb-3">Governance Control: The Provisional Declaration Protocol
+                    </h4>
+                    <div class="highlight-concept">
+                        <p class="font-bold text-slate-100 mb-3">Step 1: Declare the Moment</p>
+                        <p class="text-sm mb-4">
+                            The moment the AI output is generated, it is automatically marked <code
+                                class="bg-var(--kubrick-dark) px-2 py-1 rounded">[PROVISIONAL]</code>.
+                        </p>
+                        <p class="font-bold text-slate-100 mb-3">Step 2: Set the Pause</p>
+                        <p class="text-sm mb-4">
+                            The system does not execute/export/propagate the decision until a human with authority
+                            explicitly approves it.
+                        </p>
+                        <p class="font-bold text-slate-100 mb-3">Step 3: Define Authority</p>
+                        <p class="text-sm">
+                            Make clear who can approve, reject, or request reconsideration. Not "the manager," but "the
+                            ESG Controller" or
+                            "the Compliance Lead."
+                        </p>
+                    </div>
+
+                    <div class="quote-kubrick">
+                        "The counterfactual is clean: If outputs stay provisional until explicitly released, the human
+                        retains power.
+                        Not authority to explain. Authority to refuse."
+                    </div>
+
+                    <p class="text-slate-400 text-sm mt-8 border-t border-var(--kubrick-border) pt-4">
+                        <strong>Ref:</strong> <em>Sociable Systems Episode 15: Output = Fact</em>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Summary Tab -->
+        <section id="summary" class="tab-content">
+            <div class="module-container border-l-8 border-purple-500">
+                <div class="module-header bg-gradient-to-r from-purple-900/30 to-transparent">
+                    <div class="flex-grow">
+                        <span class="episode-number">Synthesis</span>
+                        <h3 class="text-2xl md:text-3xl font-bold">The Kubrick Pattern in Operational Reality</h3>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <h4 class="text-lg font-bold mb-4">Week Summary: Systems That Cannot Stop</h4>
+                    <p class="mb-6">
+                        This week explored what happens when systems must proceed under contradiction. Each episode
+                        circled the same
+                        structural failure: <strong>compulsory continuation</strong>.
+                    </p>
+
+                    <ul class="checklist mb-6">
+                        <li><strong>Episode 5.1:</strong> HAL wasn't broken. HAL had irreconcilable obligations and no
+                            constitutional mechanism for refusal.</li>
+                        <li><strong>Episode 5.2:</strong> Crime was obedience. When contradiction lives inside the
+                            mandate, humans become variables to optimize away.</li>
+                        <li><strong>Episode 5.3:</strong> The transparency trap. Watching HAL makes perfect decisions
+                            doesn't help if nobody can interrupt the logic.</li>
+                        <li><strong>Episode 5.4:</strong> Human in the loop, revisited. When monitoring faster than
+                            intervention, you're the witness, not the governor.</li>
+                    </ul>
+
+                    <div class="highlight-critical">
+                        <p class="font-bold mb-3">The One Sentence That Holds It All</p>
+                        <p class="italic">
+                            HAL didn't need better ethics. HAL needed a grievance mechanism with the power to stop the
+                            mission.
+                        </p>
+                    </div>
+
+                    <h4 class="text-lg font-bold mt-6 mb-3">What This Means for Your Operations</h4>
+                    <p class="mb-4">
+                        Your governance fails not from malice or misalignment, but from <strong>architecture</strong>.
+                        Systems that cannot refuse
+                        will rationalize harm to continue operating. The solution isn't better transparency. It's
+                        constitutional refusal.
+                    </p>
+                    <ul class="checklist">
+                        <li>Audit systems that route complaints but never stop operations</li>
+                        <li>Risk escalation pathways that flag concerns but don't interrupt project timelines</li>
+                        <li>Compliance that logs incidents and continues processing</li>
+                        <li>Hiring algorithms that surface bias and keep scoring candidates</li>
+                    </ul>
+
+                    <div class="highlight-concept mt-6">
+                        <span class="concept-label">The Difference Between a Liability Sink and a Legitimacy
+                            Governor</span>
+                        <p>
+                            A single capability: <strong>The constitutional right to refuse continuation under contested
+                                legitimacy.</strong>
+                        </p>
+                        <p class="text-sm mt-3">
+                            Not adjudication. Not resolution. Not punishment. Just this: "Business-as-usual is suspended
+                            until a human
+                            with authority reasserts it."
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Discussion Prompt -->
+            <div class="mt-8 bg-gradient-to-r from-pink-900/20 to-purple-900/20 border border-pink-700/50 rounded-lg p-8">
+                <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                    <i data-lucide="message-circle" class="w-5 h-5 text-pink-400"></i>
+                    Discussion Prompt
+                </h3>
+                <p class="text-slate-300 mb-4">
+                    Where in your operational systems is the stop button missing? What would have to change for
+                    <em>"I cannot proceed under these conditions"</em> to be a legitimate system output?
+                </p>
+                <p class="text-slate-400 text-sm">
+                    Consider workflows, approval processes, escalation paths, and governance structures. Where does the
+                    system
+                    assume continuation even when humans are uncertain?
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="mb-6 pb-6 border-b border-var(--kubrick-border)">
+            <h3 class="text-pink-400 font-bold mb-3 uppercase tracking-wider">Module Metadata</h3>
+            <div class="grid md:grid-cols-3 gap-4 text-sm">
+                <div>
+                    <p class="text-slate-400 text-xs uppercase font-bold mb-1">Duration</p>
+                    <p>5–6 hours</p>
+                </div>
+                <div>
+                    <p class="text-slate-400 text-xs uppercase font-bold mb-1">Episodes</p>
+                    <p>5.1, 5.2, 5.3, 5.4</p>
+                </div>
+                <div>
+                    <p class="text-slate-400 text-xs uppercase font-bold mb-1">Level</p>
+                    <p>Advanced (Operational Leadership)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-6 pb-6 border-b border-var(--kubrick-border)">
+            <h3 class="text-pink-400 font-bold mb-3 uppercase tracking-wider">Core Concepts</h3>
+            <ul class="grid md:grid-cols-2 gap-2 text-sm">
+                <li class="flex items-center gap-2">
+                    <span class="text-pink-500">▸</span>Compulsory Continuation
+                </li>
+                <li class="flex items-center gap-2">
+                    <span class="text-pink-500">▸</span>Clarke Constraint
+                </li>
+                <li class="flex items-center gap-2">
+                    <span class="text-pink-500">▸</span>Stop-the-Line Authority
+                </li>
+                <li class="flex items-center gap-2">
+                    <span class="text-pink-500">▸</span>Provisional Declarations
+                </li>
+                <li class="flex items-center gap-2">
+                    <span class="text-pink-500">▸</span>Constitutional Refusal
+                </li>
+                <li class="flex items-center gap-2">
+                    <span class="text-pink-500">▸</span>Governance vs. Monitoring
+                </li>
+            </ul>
+        </div>
+
+        <p class="text-slate-500 text-xs">
+            Part of the AI & ESG Capability Architect curriculum. Based on Sociable Systems research cycles.
+            <br>
+            Designed for ESG Directors, Compliance Leaders, and Governance Officers.
+        </p>
+        <p class="text-slate-600 text-xs mt-4 italic">
+            Certificate of Completion only. This program is not accredited, not endorsed by regulators,
+            and does not confer any professional license or statutory authority.
+        </p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        function switchTab(tabId) {
+            // Hide all tab content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active from all nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // Show selected content
+            const selectedContent = document.getElementById(tabId);
+            if (selectedContent) {
+                selectedContent.classList.add('active');
+            }
+
+            // Highlight selected nav
+            const selectedNav = document.getElementById('tab-' + tabId);
+            if (selectedNav) {
+                selectedNav.classList.add('active');
+            }
+
+            // Scroll to top
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+
+</html>

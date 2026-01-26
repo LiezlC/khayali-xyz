@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AEIS | Facilitator's Deployment Matrix (Z47)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+
+        h1, h2, h3, h4, .serif {
+            font-family: 'Merriweather', serif;
+        }
+
+        .sidebar-link {
+            transition: all 0.2s ease-in-out;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-link:hover {
+            background-color: #f1f5f9;
+        }
+
+        .sidebar-link.active {
+            background-color: #e2e8f0;
+            border-left-color: #0f172a;
+            font-weight: 600;
+        }
+
+        .phase-badge {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .script-box {
+            background-color: #f8fafc;
+            border-left: 4px solid #64748b;
+            padding: 1.5rem;
+            font-family: 'Inter', sans-serif;
+            margin-top: 1rem;
+        }
+
+        .objection-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body class="h-screen flex flex-col md:flex-row overflow-hidden">
+
+    <!-- Sidebar -->
+    <aside class="w-full md:w-72 bg-white border-r border-slate-200 flex flex-col z-20 shadow-lg md:shadow-none">
+        <div class="p-6 border-b border-slate-200">
+            <div class="flex items-center gap-3 mb-2">
+                <div class="bg-slate-900 p-2 rounded text-white">
+                    <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-slate-900 leading-tight">Deployment Matrix</h1>
+                    <p class="text-xs text-slate-500 font-mono">VER. Z47 // FACILITATOR</p>
+                </div>
+            </div>
+        </div>
+
+        <nav class="flex-grow overflow-y-auto py-4 space-y-1">
+            <button onclick="openTab('home')" class="sidebar-link active w-full text-left px-6 py-3 text-sm text-slate-700 flex items-center gap-3">
+                <i data-lucide="home" class="w-4 h-4"></i>
+                Mission Control
+            </button>
+
+            <div class="px-6 py-2 mt-4 text-xs font-bold text-slate-400 uppercase tracking-widest">Phase 1: The Shield</div>
+            <button onclick="openTab('legal')" class="sidebar-link w-full text-left px-6 py-3 text-sm text-slate-700 flex items-center gap-3">
+                <i data-lucide="shield" class="w-4 h-4 text-red-600"></i>
+                Legal & Executive
+            </button>
+
+            <div class="px-6 py-2 mt-2 text-xs font-bold text-slate-400 uppercase tracking-widest">Phase 2: The Mechanics</div>
+            <button onclick="openTab('tech')" class="sidebar-link w-full text-left px-6 py-3 text-sm text-slate-700 flex items-center gap-3">
+                <i data-lucide="cpu" class="w-4 h-4 text-indigo-600"></i>
+                IT & Security
+            </button>
+
+            <div class="px-6 py-2 mt-2 text-xs font-bold text-slate-400 uppercase tracking-widest">Phase 3: The Soul</div>
+            <button onclick="openTab('culture')" class="sidebar-link w-full text-left px-6 py-3 text-sm text-slate-700 flex items-center gap-3">
+                <i data-lucide="heart-pulse" class="w-4 h-4 text-pink-600"></i>
+                HR & Sustainability
+            </button>
+
+            <div class="px-6 py-2 mt-2 text-xs font-bold text-slate-400 uppercase tracking-widest">Phase 4: The Exam</div>
+            <button onclick="openTab('audit')" class="sidebar-link w-full text-left px-6 py-3 text-sm text-slate-700 flex items-center gap-3">
+                <i data-lucide="scale" class="w-4 h-4 text-teal-600"></i>
+                Audit Defense
+            </button>
+            
+            <div class="mt-8 px-6 pb-6">
+                <div class="bg-slate-100 p-4 rounded text-xs text-slate-600 border border-slate-200">
+                    <strong>Facilitator Note:</strong><br>
+                    Do not distribute the full "Grand Opus" to Level 1 stakeholders. Use the sub-modules to avoid "Sci-Fi Rejection."
+                </div>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto bg-slate-50 p-6 md:p-12 relative">
+        
+        <!-- HOME / MISSION CONTROL -->
+        <div id="home" class="tab-content active max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-slate-900 mb-4 serif">Mission Control</h2>
+            <p class="text-lg text-slate-600 mb-8">
+                This matrix is designed to help you deploy the <strong>AI-ESG Integrated Strategist (AEIS)</strong> curriculum. The "Grand Opus" is dense and philosophical. To succeed, you must de-bundle it and sell specific value propositions to specific departments.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-10">
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                    <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-2">
+                        <i data-lucide="crosshair" class="w-5 h-5 text-slate-500"></i> Strategy
+                    </h3>
+                    <p class="text-sm text-slate-600">
+                        Infiltrate the organization by solving immediate pain points (Liability, Security, Audit Fatigue) before introducing the deeper philosophical cycles (Pullman/Kubrick).
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                    <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-2">
+                        <i data-lucide="alert-triangle" class="w-5 h-5 text-amber-500"></i> Warning
+                    </h3>
+                    <p class="text-sm text-slate-600">
+                        <strong>Avoid "Sci-Fi Shock."</strong> Do not lead with Asimov or Philip Pullman when talking to the General Counsel. Use the "Translation Layers" provided in this tool.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="text-xl font-bold text-slate-900 mb-6 border-b border-slate-200 pb-2">Deployment Sequence</h3>
+            <div class="space-y-4">
+                <div class="flex items-start gap-4 p-4 bg-white rounded border border-slate-200">
+                    <div class="bg-red-100 text-red-700 font-bold px-3 py-1 rounded text-sm">Phase 1</div>
+                    <div>
+                        <h4 class="font-bold text-slate-800">The Shield (Legal)</h4>
+                        <p class="text-sm text-slate-600">Establish the "Liability Sponge" argument. Stop humans from signing things they can't verify.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 p-4 bg-white rounded border border-slate-200">
+                    <div class="bg-indigo-100 text-indigo-700 font-bold px-3 py-1 rounded text-sm">Phase 2</div>
+                    <div>
+                        <h4 class="font-bold text-slate-800">The Mechanics (IT)</h4>
+                        <p class="text-sm text-slate-600">Connect ESG to Accounts Payable. Secure the "Breach Protocol."</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 p-4 bg-white rounded border border-slate-200">
+                    <div class="bg-pink-100 text-pink-700 font-bold px-3 py-1 rounded text-sm">Phase 3</div>
+                    <div>
+                        <h4 class="font-bold text-slate-800">The Soul (Culture)</h4>
+                        <p class="text-sm text-slate-600">Address "Daemon Health" and "Protocol Droids." Fix the internal culture of silence.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHASE 1: LEGAL -->
+        <div id="legal" class="tab-content max-w-4xl mx-auto">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <span class="phase-badge bg-red-100 text-red-800">Phase 1: The Shield</span>
+                    <h2 class="text-3xl font-bold text-slate-900 serif mt-2">Legal & Executive</h2>
+                </div>
+                <i data-lucide="shield" class="w-10 h-10 text-slate-200"></i>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-red-500 mb-8">
+                <h3 class="font-bold text-slate-800 mb-2">The Hook: "The Liability Sponge"</h3>
+                <p class="text-slate-600">
+                    Do not talk about "ethics." Talk about <strong>indemnification</strong>. Argue that the current "Human-in-the-Loop" structure is a legal trap that sets the company up for negligence claims because humans cannot verify AI speed.
+                </p>
+                <div class="mt-4 flex gap-2">
+                    <span class="text-xs bg-slate-100 px-2 py-1 rounded border">Ref: Level 0 (Constitution)</span>
+                    <span class="text-xs bg-slate-100 px-2 py-1 rounded border">Ref: Level 1 (Epistemics)</span>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-slate-900 mb-4">Antibody Defense (Handling Objections)</h3>
+                
+                <div class="objection-card">
+                    <div class="flex gap-3 mb-2">
+                        <i data-lucide="message-square" class="w-5 h-5 text-red-500"></i>
+                        <strong class="text-slate-800">Objection: "Why are we talking about sci-fi laws? This is serious business."</strong>
+                    </div>
+                    <p class="text-sm text-slate-600 italic mb-2">"We use 'Liability Sponge' because 'Human Oversight' implies safety where there is none. We use 'Asimov' as shorthand for 'Pre-Action Refusal'—the ability of the system to stop itself before we get sued."</p>
+                </div>
+
+                <div class="objection-card">
+                    <div class="flex gap-3 mb-2">
+                        <i data-lucide="message-square" class="w-5 h-5 text-red-500"></i>
+                        <strong class="text-slate-800">Objection: "We can't slow down deployment."</strong>
+                    </div>
+                    <p class="text-sm text-slate-600 italic mb-2">"We aren't slowing deployment. We are slowing the *signature*. The system runs at full speed, but we don't sign the audit until the verification loop is closed. That protects *your* license."</p>
+                </div>
+            </div>
+
+            <div class="script-box">
+                <h4 class="font-bold text-slate-700 text-sm uppercase tracking-wide mb-3">Asset: Email Template for General Counsel</h4>
+                <p class="text-sm text-slate-600 mb-4"><strong>Subject:</strong> Risk Advisory: The "Human-in-the-Loop" Liability Gap in ESG Reporting</p>
+                <p class="text-sm text-slate-600">
+                    Counsel,<br><br>
+                    Our upcoming audit of the ESG AI pipeline has identified a structural risk we term the "Liability Sponge." Currently, our review protocols assume human operators can verify AI outputs at a rate of [X] claims per hour. Our data shows this is biologically impossible, meaning the human "sign-off" is performing a legal function (absorbing liability) rather than a technical function (verifying truth).<br><br>
+                    Attached is <strong>"Level 0: Constitutional Foundations"</strong>, a brief on transitioning to "Pre-Action Refusal" architectures to protect the firm from negligence claims under the new CSRD mandates.<br><br>
+                    Regards,<br>
+                    [Your Name]
+                </p>
+            </div>
+        </div>
+
+        <!-- PHASE 2: TECH -->
+        <div id="tech" class="tab-content max-w-4xl mx-auto">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <span class="phase-badge bg-indigo-100 text-indigo-800">Phase 2: The Mechanics</span>
+                    <h2 class="text-3xl font-bold text-slate-900 serif mt-2">IT, Data & Security</h2>
+                </div>
+                <i data-lucide="cpu" class="w-10 h-10 text-slate-200"></i>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-indigo-500 mb-8">
+                <h3 class="font-bold text-slate-800 mb-2">The Hook: "The AP Nexus" & "Breach Protocols"</h3>
+                <p class="text-slate-600">
+                    <strong>For the CFO/CTO:</strong> "ESG data is financial data." Move the conversation to Accounts Payable (Level 2).<br>
+                    <strong>For the CISO:</strong> "Sustainability portals are unsecured backdoors." Treat ESG data as a ransomware vector (Level 6).
+                </p>
+                <div class="mt-4 flex gap-2">
+                    <span class="text-xs bg-slate-100 px-2 py-1 rounded border">Ref: Level 2 (Architecture)</span>
+                    <span class="text-xs bg-slate-100 px-2 py-1 rounded border">Ref: Level 6 (Forensics)</span>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-slate-900 mb-4">Antibody Defense</h3>
+                
+                <div class="objection-card">
+                    <div class="flex gap-3 mb-2">
+                        <i data-lucide="message-square" class="w-5 h-5 text-indigo-500"></i>
+                        <strong class="text-slate-800">Objection: "ESG is not my domain. Talk to Sustainability."</strong>
+                    </div>
+                    <p class="text-sm text-slate-600 italic mb-2">"The 'Data Lake Fallacy' (Level 1.4) shows that dirty data in your invoices causes AI hallucinations downstream. This isn't an ESG problem; it's a Data Engineering problem. If the Schema is wrong, the Report is wrong."</p>
+                </div>
+
+                <div class="objection-card">
+                    <div class="flex gap-3 mb-2">
+                        <i data-lucide="message-square" class="w-5 h-5 text-indigo-500"></i>
+                        <strong class="text-slate-800">Objection: "We don't have budget for new tools."</strong>
+                    </div>
+                    <p class="text-sm text-slate-600 italic mb-2">"We don't need new tools. Level 2.5 argues for connecting the *existing* SAP/Oracle AP module to the emissions factors. We want to use the 2-Way Match logic you already paid for."</p>
+                </div>
+            </div>
+
+            <div class="script-box">
+                <h4 class="font-bold text-slate-700 text-sm uppercase tracking-wide mb-3">Asset: CISO Meeting Agenda</h4>
+                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                    <li><strong>Item 1:</strong> Review of "Shadow AI" usage in sustainability teams (uploading proprietary supplier maps to public LLMs).</li>
+                    <li><strong>Item 2:</strong> The "Schneider Electric" Ransomware Scenario: Vulnerability assessment of the Supplier Upload Portal.</li>
+                    <li><strong>Item 3:</strong> Establishing a "Sandboxed Ingestion" protocol for all Scope 3 PDF data.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- PHASE 3: CULTURE -->
+        <div id="culture" class="tab-content max-w-4xl mx-auto">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <span class="phase-badge bg-pink-100 text-pink-800">Phase 3: The Soul</span>
+                    <h2 class="text-3xl font-bold text-slate-900 serif mt-2">HR, Sustainability & Ops</h2>
+                </div>
+                <i data-lucide="heart-pulse" class="w-10 h-10 text-slate-200"></i>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-pink-500 mb-8">
+                <h3 class="font-bold text-slate-800 mb-2">The Hook: "Daemon Health"</h3>
+                <p class="text-slate-600">
+                    Shift the metric from "Compliance" to "Continuity." Are our suppliers lying to us to survive? Use the "Protocol Droid" metaphor (Level 3) to discuss how bureaucratic systems silence real feedback.
+                </p>
+                <div class="mt-4 flex gap-2">
+                    <span class="text-xs bg-slate-100 px-2 py-1 rounded border">Ref: Level 3 (Lucas)</span>
+                    <span class="text-xs bg-slate-100 px-2 py-1 rounded border">Ref: Level 4 (Pullman)</span>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-slate-900 mb-4">Antibody Defense</h3>
+                
+                <div class="objection-card">
+                    <div class="flex gap-3 mb-2">
+                        <i data-lucide="message-square" class="w-5 h-5 text-pink-500"></i>
+                        <strong class="text-slate-800">Objection: "Daemon? Soul? This is too esoteric."</strong>
+                    </div>
+                    <p class="text-sm text-slate-600 italic mb-2">"Translate immediately: 'Daemon Health' = 'Supplier Trust Index.' If the supplier doesn't trust the system, they will feed it garbage data. We are measuring the *integrity of the relationship*, which is a leading indicator of data quality."</p>
+                </div>
+
+                <div class="objection-card">
+                    <div class="flex gap-3 mb-2">
+                        <i data-lucide="message-square" class="w-5 h-5 text-pink-500"></i>
+                        <strong class="text-slate-800">Objection: "We can't be lenient with non-compliance."</strong>
+                    </div>
+                    <p class="text-sm text-slate-600 italic mb-2">"We aren't being lenient. We are choosing 'Seil' (Persistence) over 'Bolvangar' (Severance). If we cut them off, we lose the data visibility. Keeping them in the system allows us to fix them."</p>
+                </div>
+            </div>
+
+            <div class="script-box">
+                <h4 class="font-bold text-slate-700 text-sm uppercase tracking-wide mb-3">Asset: Workshop Prompt (The Protocol Droid)</h4>
+                <p class="text-sm text-slate-600 italic">
+                    "Identify three places in our Grievance Mechanism where the system requires a user to be 'polite' or 'structured' in a way that might discourage a farmer in distress from filing a complaint. Where are we prioritizing 'Protocol' over 'Truth'?"
+                </p>
+            </div>
+        </div>
+
+        <!-- PHASE 4: AUDIT -->
+        <div id="audit" class="tab-content max-w-4xl mx-auto">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <span class="phase-badge bg-teal-100 text-teal-800">Phase 4: The Exam</span>
+                    <h2 class="text-3xl font-bold text-slate-900 serif mt-2">Audit Defense (Capstone)</h2>
+                </div>
+                <i data-lucide="scale" class="w-10 h-10 text-slate-200"></i>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-teal-500 mb-8">
+                <h3 class="font-bold text-slate-800 mb-2">The Hook: "The Red Team Simulation"</h3>
+                <p class="text-slate-600">
+                    Gamify the fear. Don't call it a test; call it a "Regulatory War Game." The Capstone module is designed to prepare the Board for the 4 hardest questions a regulator will ask.
+                </p>
+                <div class="mt-4 flex gap-2">
+                    <span class="text-xs bg-slate-100 px-2 py-1 rounded border">Ref: Capstone (Audit Defense)</span>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-slate-900 mb-4">Antibody Defense</h3>
+                
+                <div class="objection-card">
+                    <div class="flex gap-3 mb-2">
+                        <i data-lucide="message-square" class="w-5 h-5 text-teal-500"></i>
+                        <strong class="text-slate-800">Objection: "The Board doesn't have time for this."</strong>
+                    </div>
+                    <p class="text-sm text-slate-600 italic mb-2">"This isn't a training; it's a 30-minute 'Defense Prep.' We will only cover the 4 questions that determine personal liability for Directors under CSRD."</p>
+                </div>
+            </div>
+
+            <div class="script-box">
+                <h4 class="font-bold text-slate-700 text-sm uppercase tracking-wide mb-3">The 4 Killer Questions (Preparation)</h4>
+                <ol class="list-decimal list-inside text-sm text-slate-600 space-y-3">
+                    <li><strong>Hallucination:</strong> "How do we know this number is real?" (Answer: The Evidence Ladder / Invoice ID).</li>
+                    <li><strong>Bias:</strong> "Who gets fired if the algo is racist?" (Answer: The Accountability RACI).</li>
+                    <li><strong>Security:</strong> "Is our data training their model?" (Answer: The Vendor Interrogation Clause).</li>
+                    <li><strong>Continuity:</strong> "Did we just fire 5,000 farmers by accident?" (Answer: The Daemon Health Index).</li>
+                </ol>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        function openTab(tabId) {
+            // Hide all contents
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Remove active style from all links
+            document.querySelectorAll('.sidebar-link').forEach(el => {
+                el.classList.remove('active');
+            });
+
+            // Show target content
+            document.getElementById(tabId).classList.add('active');
+            
+            // Highlight target link (find button with onclick matching tabId)
+            const activeBtn = document.querySelector(`button[onclick="openTab('${tabId}')"]`);
+            if(activeBtn) activeBtn.classList.add('active');
+        }
+    </script>
+</body>
+</html>

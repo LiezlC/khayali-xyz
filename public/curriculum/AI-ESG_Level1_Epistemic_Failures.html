@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 1: Epistemic Failures | AI-ESG Training</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #faf5ff;
+            /* Purple-50ish */
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        .serif {
+            font-family: 'Merriweather', serif;
+        }
+
+        /* TAB STYLES */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-item {
+            border-bottom: 2px solid transparent;
+            color: #64748b;
+        }
+
+        .nav-item:hover {
+            color: #7e22ce;
+            /* Purple-700 */
+        }
+
+        .nav-item.active {
+            border-bottom: 2px solid #7e22ce;
+            color: #7e22ce;
+            font-weight: 700;
+        }
+
+        /* EXISTING STYLES */
+        .gradient-text {
+            background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .module-container {
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.5rem;
+            margin-bottom: 3rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .module-header {
+            background-color: #f8fafc;
+            padding: 2rem 2.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .module-body {
+            padding: 3rem 2.5rem;
+        }
+
+        .checklist-box {
+            background-color: #f8fafc;
+            border: 1px solid #94a3b8;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .workshop-box {
+            background-color: #f0f9ff;
+            border: 1px dashed #0284c7;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .espresso-thread {
+            background-color: #fffbeb;
+            border-left: 4px solid #d97706;
+            padding: 2rem;
+            margin: 2.5rem 0;
+        }
+
+        .tech-tag {
+            display: inline-block;
+            background-color: #e0f2fe;
+            color: #0369a1;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-left: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .audit-red-line {
+            color: #991b1b;
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            display: block;
+            border-bottom: 2px solid #fecaca;
+            padding-bottom: 0.5rem;
+        }
+
+        .reading-list {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .cycle-badge-clarke {
+            background: #7c3aed;
+            color: white;
+        }
+
+        .sidebar-note {
+            background-color: #f0fdf4;
+            border-left: 4px solid #15803d;
+        }
+
+        .pre-work-box {
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+            border: 2px solid #7c3aed;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+
+        .assessment-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #d97706;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+
+        @media print {
+            .no-print {
+                display: none;
+            }
+
+            body {
+                background: white;
+            }
+
+            .tab-content {
+                display: block !important;
+            }
+
+            .nav-item {
+                display: none;
+            }
+        }
+    </style>
+    <script src="js/translation_toggle.js"></script>
+</head>
+
+<body class="flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-purple-700 to-indigo-800 text-white shadow-lg no-print">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex justify-between items-start">
+                <div>
+                    <span class="text-purple-200 font-bold tracking-widest uppercase text-xs">Level 1 Module</span>
+                    <h1 class="text-4xl md:text-5xl font-bold mt-2 serif">Epistemic Failures</h1>
+                    <p class="text-purple-100 mt-2 text-lg">Clarke's Law & The Watchdog Paradox</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur rounded-lg px-4 py-2 border border-white/20">
+                    <div class="flex items-center gap-2 text-purple-100 text-sm font-bold">
+                        <i data-lucide="clock" class="w-4 h-4"></i>
+                        <span>5-7 Hours</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="bg-white shadow sticky top-0 z-50 overflow-x-auto no-print">
+        <div class="container mx-auto px-6">
+            <div class="flex space-x-1">
+                <button onclick="switchTab('overview')" id="tab-overview"
+                    class="nav-item active px-6 py-4 font-medium transition-colors hover:bg-purple-50 focus:outline-none whitespace-nowrap">
+                    Overview
+                </button>
+                <button onclick="switchTab('ep1_1')" id="tab-ep1_1"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-purple-50 focus:outline-none whitespace-nowrap">
+                    Ep 1.1: Regulatory Mandate
+                </button>
+                <button onclick="switchTab('ep1_2')" id="tab-ep1_2"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-purple-50 focus:outline-none whitespace-nowrap">
+                    Ep 1.2: Clarke's Law
+                </button>
+                <button onclick="switchTab('ep1_3')" id="tab-ep1_3"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-purple-50 focus:outline-none whitespace-nowrap">
+                    Ep 1.3: Watchdog Paradox
+                </button>
+                <button onclick="switchTab('ep1_4')" id="tab-ep1_4"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-purple-50 focus:outline-none whitespace-nowrap">
+                    Ep 1.4: Data Lake Fallacy
+                </button>
+                <button onclick="switchTab('ep1_5')" id="tab-ep1_5"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-purple-50 focus:outline-none whitespace-nowrap">
+                    Ep 1.5: Calvin Convention
+                </button>
+                <button onclick="switchTab('summary')" id="tab-summary"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-purple-50 focus:outline-none whitespace-nowrap">
+                    Summary
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-6 py-12 flex-grow max-w-5xl">
+
+        <!-- OVERVIEW -->
+        <section id="overview" class="tab-content active">
+            <div class="mb-16">
+                <div class="bg-white p-8 rounded-xl border border-purple-200 shadow-sm">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6 serif leading-tight">
+                        When Knowledge Becomes Indistinguishable from Magic
+                    </h2>
+                    <p class="text-xl text-slate-600 leading-relaxed mb-8">
+                        When systems become too opaque to question (Clarke), or when they become too aligned to refuse
+                        (Kubrick), governance dies. This level maps the transition from "Voluntary" (Marketing) to
+                        "Mandatory" (Finance).
+                    </p>
+
+                    <div class="sidebar-note p-6 rounded-lg text-sm text-slate-700">
+                        <p class="font-bold text-green-800 mb-2 text-base flex items-center gap-2">
+                            <i data-lucide="info" class="w-4 h-4"></i>
+                            Learning Objectives
+                        </p>
+                        <ul class="space-y-2 list-disc list-inside">
+                            <li>Map the regulatory shift from <strong>voluntary ESG</strong> to <strong>mandatory
+                                    financial
+                                    reporting</strong> (CSRD, ISSB)</li>
+                            <li>Identify when "black box" AI systems transform operators into <strong>oracles
+                                    translating
+                                    magic</strong></li>
+                            <li>Detect and prevent <strong>recursive audit loops</strong> where AI audits AI</li>
+                            <li>Implement validation layers that prevent unstructured data from contaminating reports
+                            </li>
+                            <li>Design regulatory version control systems that prevent obsolete AI models from
+                                generating
+                                audit findings</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Pre-Work Assessment -->
+                <div class="pre-work-box mt-12 bg-purple-50 border-purple-200">
+                    <h4 class="font-bold text-lg text-purple-900 mb-4 flex items-center gap-2">
+                        <i data-lucide="clipboard-list" class="w-5 h-5"></i>
+                        Pre-Work Assessment
+                    </h4>
+                    <p class="text-purple-900 mb-4">
+                        Complete this self-assessment to identify your starting knowledge baseline.
+                    </p>
+                    <div class="bg-white p-6 rounded-lg border border-purple-300">
+                        <h5 class="font-bold text-sm text-slate-700 mb-3 uppercase tracking-wide">Knowledge Check
+                            Questions</h5>
+                        <ol class="space-y-4 text-sm text-slate-700">
+                            <li>
+                                <strong>1. Does your organization currently fall under mandatory ESG reporting
+                                    requirements
+                                    (CSRD, ISSB, or similar)?</strong>
+                                <div class="ml-6 mt-2 space-y-1 text-slate-600">
+                                    <p>☐ Yes, already complying (reporting since 2024 or earlier)</p>
+                                    <p>☐ Yes, transition period (first report due 2025-2027)</p>
+                                    <p>☐ Preparing for future mandate (anticipated within 3 years)</p>
+                                    <p>☐ Voluntary reporting only (GRI, SASB, CDP)</p>
+                                    <p>☐ Not sure of regulatory status</p>
+                                </div>
+                            </li>
+                            <li>
+                                <strong>2. When your AI system generates a risk score, can you explain the specific data
+                                    points and logic that produced that score?</strong>
+                                <div class="ml-6 mt-2 space-y-1 text-slate-600">
+                                    <p>☐ Yes, full transparency (open-source model or documented logic)</p>
+                                    <p>☐ Partial transparency (some explainability features)</p>
+                                    <p>☐ Black box system (vendor-proprietary, no visibility)</p>
+                                    <p>☐ Don't know—haven't tried to interrogate it</p>
+                                    <p>☐ Not applicable—we don't use AI for risk scoring</p>
+                                </div>
+                            </li>
+                            <li>
+                                <strong>3. How does your organization validate that unstructured data (PDFs, emails,
+                                    invoices) is accurate before it enters ESG reports?</strong>
+                                <div class="ml-6 mt-2 space-y-1 text-slate-600">
+                                    <p>☐ Automated validation layer (confidence scores, range checks, schema
+                                        verification)
+                                    </p>
+                                    <p>☐ Manual spot-checking (sample review by analysts)</p>
+                                    <p>☐ Rely on AI OCR without validation</p>
+                                    <p>☐ Don't use unstructured data in ESG reports</p>
+                                    <p>☐ Not sure—not my area of responsibility</p>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Episode 1.1 -->
+        <section id="ep1_1" class="tab-content">
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Episode
+                            1.1</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Regulatory Mandate & AI Intersection</h4>
+                    </div>
+                    <div class="text-right">
+                        <span class="tech-tag">CSRD</span>
+                        <span class="tech-tag">ISSB</span>
+                        <span class="tech-tag">Taxonomy</span>
+                        <div class="text-slate-400 text-sm mt-2">
+                            <p class="font-mono">75 min</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>The Premise:</strong> We map the transition from "Voluntary" (Marketing) to "Mandatory"
+                        (Finance). We identify specific clauses in the EU Corporate Sustainability Reporting Directive
+                        (CSRD) and IFRS S1/S2 where AI is implicitly encouraged but creates new liability.
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <div>
+                            <h5
+                                class="font-bold text-slate-900 mb-4 uppercase tracking-wide border-b border-slate-200 pb-2">
+                                Core Concepts</h5>
+                            <ul class="space-y-4 text-slate-600 list-disc list-inside">
+                                <li><strong>The "Double Materiality" Matrix:</strong> How to use AI to scan 10,000+
+                                    stakeholder documents (NGO reports, news feeds, internal emails) to automate the
+                                    "Impact" assessment.</li>
+                                <li><strong>XBRL Tagging:</strong> The machine-readable future. Why your AI must output
+                                    JSON/XBRL, not just PDF text.</li>
+                                <li><strong>Assurance Levels:</strong> The expected timeline for moving from "Limited
+                                    Assurance" (typical transition 2024/25) to "Reasonable Assurance" (expected target
+                                    2028).</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="checklist-box mt-0">
+                                <span class="audit-red-line">Authority Boundary</span>
+                                <p class="text-slate-800 font-medium mb-4">
+                                    <strong>Stop Condition:</strong> Do not proceed with AI implementation if the "Legal
+                                    Entity Structure" in the AI model does not match the Consolidated Financial
+                                    Statements (CFS).
+                                </p>
+                                <h5 class="font-bold text-xs text-slate-500 uppercase mb-2">Acceptance Criteria</h5>
+                                <ul class="space-y-2 text-sm text-slate-800">
+                                    <li><i data-lucide="check" class="inline w-4 h-4 mr-2 text-teal-600"></i>Mapped 12
+                                        ESRS standards to specific data owners.</li>
+                                    <li><i data-lucide="check" class="inline w-4 h-4 mr-2 text-teal-600"></i>Verified
+                                        that AI training data covers all operating jurisdictions.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="workshop-box">
+                        <h5 class="font-bold text-sm text-sky-800 uppercase mb-2 flex items-center gap-2">
+                            <i data-lucide="wrench" class="w-4 h-4"></i>
+                            Workshop Activity: The Materiality Scan
+                        </h5>
+                        <p class="text-sky-900">
+                            <strong>Task:</strong> Upload 50 "Stakeholder Engagement" PDFs to a private LLM instance.
+                            <br><strong>Prompt:</strong> "Extract every mention of 'Water Usage' and sentiment
+                            (Positive/Negative). Output as CSV."
+                            <br><strong>Objective:</strong> Compare the AI's "Materiality" ranking against last year's
+                            manual Board assessment.
+                        </p>
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Required Reading:</strong> <em>"Forensic and Regulatory Integration: A Comprehensive
+                            Analysis"</em> (Section 2: The CSRD Mandate).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Episode 1.2 -->
+        <section id="ep1_2" class="tab-content">
+            <div class="module-container border-l-8 border-purple-600">
+                <div class="module-header bg-purple-50">
+                    <div>
+                        <span class="text-xs font-bold text-purple-700 uppercase tracking-widest block mb-2">Episode
+                            1.2</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Authority of the Unknowable</h4>
+                        <span class="tech-tag cycle-badge-clarke">Clarke's Law</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="tech-tag">Black Box</span>
+                        <div class="text-slate-400 text-sm mt-2">
+                            <p class="font-mono">60 min</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>Clarke's Third Law:</strong> "Any sufficiently advanced technology is indistinguishable
+                        from magic." When understanding collapses, something else takes its place. We stop arguing with
+                        the system and start complying with it. That shift is where governance dies.
+                    </p>
+
+                    <div class="checklist-box bg-purple-50 border-purple-200">
+                        <span class="audit-red-line text-purple-900">The Oracle Problem</span>
+                        <p class="text-slate-800 mb-4">
+                            When a risk score appears on screen (Amber), and the operator does not know *why* it's amber
+                            (proprietary model), the operator becomes a <strong>priest</strong> translating the oracle's
+                            output into institutional legitimacy.
+                        </p>
+                        <p class="text-slate-600 text-sm">
+                            The system does not need to be "in charge." It simply needs to act first. Whoever moves
+                            first defines the baseline.
+                        </p>
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Newsletter Ref:</strong> <em>Episode 6: The Authority of the Unknowable</em>.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Episode 1.3 -->
+        <section id="ep1_3" class="tab-content">
+            <div class="module-container border-l-8 border-teal-600">
+                <div class="module-header bg-teal-50">
+                    <div>
+                        <span class="text-xs font-bold text-teal-700 uppercase tracking-widest block mb-2">Episode
+                            1.3</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Watchdog Paradox</h4>
+                    </div>
+                    <div class="text-right">
+                        <span class="tech-tag bg-white text-teal-800">Sentinel vs. Sensor</span>
+                        <div class="text-slate-400 text-sm mt-2">
+                            <p class="font-mono">80 min</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>The Concept:</strong> We rely on AI to audit the data because the volume is too high for
+                        humans. But who audits the AI? If the AI checks the AI, we enter a "Recursive Audit Loop" where
+                        systematic errors become invisible.
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <div>
+                            <h5
+                                class="font-bold text-slate-900 mb-4 uppercase tracking-wide border-b border-slate-200 pb-2">
+                                Key Learnings</h5>
+                            <ul class="space-y-4 text-slate-600 list-disc list-inside">
+                                <li>The difference between <strong>Speed</strong> (Processing) and
+                                    <strong>Accuracy</strong> (Truth).
+                                </li>
+                                <li>Spotting "Confidence Inflation": When models claim 99% certainty on vague data.</li>
+                                <li>The "Human-in-the-Loop" necessity for statistical outliers.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="checklist-box mt-0 bg-teal-50 border-teal-200">
+                                <span class="audit-red-line text-teal-900">Assurance Control</span>
+                                <p class="text-slate-800 mb-4">
+                                    <strong>The Sampling Protocol (ISO 2859-1):</strong>
+                                </p>
+                                <ul class="space-y-2 text-sm text-slate-800">
+                                    <li>For every 1,000 AI-processed records, a human MUST manually verify a random
+                                        sample.</li>
+                                    <li>If error rate > <span class="font-bold text-red-700">4%</span> <span
+                                            class="text-xs text-slate-400 italic">(Example Threshold)</span> in sample,
+                                        REJECT the entire batch.</li>
+                                    <li>Do not let the AI select the sample (it will pick the easy ones).</li>
+                                </ul>
+                                <p class="text-xs text-slate-500 mt-4">Ref: <em>Auditing AI in 2025</em> (IIA Standards)
+                                    [SOURCE TBD].</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="workshop-box">
+                        <h5 class="font-bold text-sm text-sky-800 uppercase mb-2 flex items-center gap-2">
+                            <i data-lucide="search" class="w-4 h-4"></i>
+                            Scenario: The 99.9% Claim
+                        </h5>
+                        <p class="text-sky-900">
+                            <strong>Action:</strong> Review a vendor RFP claiming <span
+                                class="font-bold text-sky-800">99.9%</span> <span
+                                class="text-xs text-slate-400 italic">(Illustrative Math)</span> accuracy on Scope 3.
+                            <br><strong>Challenge Question:</strong> "Show me the confusion matrix. What is the False
+                            Negative rate for high-risk suppliers? I don't care about the average; I care about the
+                            misses."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Episode 1.4 -->
+        <section id="ep1_4" class="tab-content">
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Episode
+                            1.4</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Data Lake Fallacy</h4>
+                    </div>
+                    <div class="text-right">
+                        <span class="tech-tag">Data Engineering</span>
+                        <span class="tech-tag">OCR</span>
+                        <span class="tech-tag">ETL Pipelines</span>
+                        <div class="text-slate-400 text-sm mt-2">
+                            <p class="font-mono">70 min</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>The Premise:</strong> Dumping data into a "Lake" does not create insight; it creates a
+                        swamp. We distinguish between <strong>Structured Data</strong> (ERP, General Ledger) and the
+                        chaos of <strong>Unstructured Data</strong> (PDF invoices, email declarations) which comprises
+                        80% of Scope 3.
+                    </p>
+
+                    <div class="espresso-thread">
+                        <h5 class="text-lg font-bold text-amber-900 uppercase mb-4 flex items-center gap-2">
+                            <span class="text-2xl">☕</span> Case Study: Project Espresso (Chapter 1)
+                        </h5>
+                        <div class="text-slate-800 space-y-3">
+                            <p><strong>Setup:</strong> Your company sources coffee from 5,000 small-holder farms in
+                                Vietnam. You receive 10,000 JPEG images of handwritten receipts.</p>
+                            <p><strong>Failure Mode:</strong> You ingest this into a Data Lake without a schema. The AI
+                                OCR reads "50kg" as "500kg" due to a coffee stain on the receipt.</p>
+                            <p><strong>Consequence:</strong> Your Scope 3 emissions for that farm increase by 1000%,
+                                triggering a false "Deforestation Alert."</p>
+                            <p><strong>Control:</strong> Implement "Logical Range Checks" before data enters the lake
+                                (e.g., flag if fertilizer purchase > 10x plot size).</p>
+                            <p><strong>Evidence Artifact:</strong> Rejected batch log with attached thumbnail of the
+                                "stained" receipt.</p>
+                        </div>
+                    </div>
+
+                    <div class="checklist-box">
+                        <span class="audit-red-line">Operational Control</span>
+                        <p class="text-slate-800 mb-4">
+                            <strong>The "Validation Layer" Requirement:</strong> Unstructured data cannot touch the
+                            reporting engine until it passes a validation gate.
+                        </p>
+                        <ul class="space-y-2 text-sm text-slate-800">
+                            <li><i data-lucide="shield" class="inline w-4 h-4 mr-2 text-teal-600"></i>Confidence Score
+                                Check (Is OCR > 95% confident?)</li>
+                            <li><i data-lucide="shield" class="inline w-4 h-4 mr-2 text-teal-600"></i>Logical Range
+                                Check (Did a 1-acre farm buy 500 tons of fertilizer?)</li>
+                            <li><i data-lucide="shield" class="inline w-4 h-4 mr-2 text-teal-600"></i>Currency Check (Is
+                                it VND or USD?)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Episode 1.5 -->
+        <section id="ep1_5" class="tab-content">
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Episode
+                            1.5</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Calvin Convention</h4>
+                    </div>
+                    <div class="text-right">
+                        <span class="tech-tag">Governance</span>
+                        <div class="text-slate-400 text-sm mt-2">
+                            <p class="font-mono">55 min</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6">
+                        Named after "Calvinball" (where rules change mid-game). ESG regulations are fluid. An AI model
+                        trained on 2024 rules may be non-compliant in 2025.
+                    </p>
+                    <p class="text-slate-600 mb-6 italic border-l-4 border-slate-300 pl-4">
+                        "If the definition of 'Scope 3' expands to include employee commuting (telework), your legacy
+                        model is now generating audit findings."
+                    </p>
+
+                    <div class="checklist-box">
+                        <span class="audit-red-line">Deliverable: Version Control Log</span>
+                        <p class="text-sm font-bold text-slate-800 mb-2">Required Fields for the "Regulatory Version
+                            Control" Log:</p>
+                        <ul class="list-disc list-inside text-sm text-slate-700">
+                            <li>Model ID (e.g., ESG-BERT-v2.1)</li>
+                            <li>Training Data Cutoff Date</li>
+                            <li>Regulation Set (e.g., CSRD 2024 Delegated Act)</li>
+                            <li>Last Audit Date</li>
+                            <li><strong>Sunset Date:</strong> When does this model become illegal to use?</li>
+                        </ul>
+                    </div>
+
+                    <div class="espresso-thread">
+                        <h5 class="text-lg font-bold text-amber-900 uppercase mb-2">☕ Case Study: Project Espresso
+                            (Chapter 1.5)</h5>
+                        <div class="text-slate-800 space-y-2">
+                            <p><strong>Setup:</strong> Definition of "Deforestation-Free" changes in the EU
+                                Deforestation Regulation (EUDR).</p>
+                            <p><strong>Failure Mode:</strong> Your AI model was trained on the old definition (primary
+                                forest only). The new definition includes "secondary forest degradation."</p>
+                            <p><strong>Control:</strong> Automated Regulatory Delta checking. When the official gazette
+                                updates, trigger a model review task.</p>
+                            <p><strong>Evidence Artifact:</strong> Model Retraining Ticket generated by the Regulatory
+                                Scraper bot.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Summary -->
+        <section id="summary" class="tab-content">
+            <h3 class="text-3xl font-bold text-slate-900 mb-6 serif">Module Summary</h3>
+
+            <div class="bg-white p-8 rounded-lg border-2 border-purple-600 mb-8">
+                <h4 class="font-bold text-xl text-slate-900 mb-4 flex items-center gap-2">
+                    <i data-lucide="check-circle" class="w-6 h-6 text-purple-600"></i>
+                    Key Takeaways
+                </h4>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h5 class="font-bold text-sm text-slate-700 mb-2 uppercase tracking-wide">Conceptual Framework
+                        </h5>
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li>• Mandatory ESG reporting transforms AI from "nice to have" to liability generator</li>
+                            <li>• Clarke's Law: sufficiently opaque systems become oracles, not tools</li>
+                            <li>• Recursive audit loops hide systematic errors</li>
+                            <li>• Unstructured data requires validation layers before entering reports</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="font-bold text-sm text-slate-700 mb-2 uppercase tracking-wide">Practical Tools
+                            Acquired</h5>
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li>• CSRD/ISSB double materiality assessment protocols</li>
+                            <li>• Vendor interrogation for black box transparency</li>
+                            <li>• ISO 2859-1 sampling protocols for AI validation</li>
+                            <li>• Regulatory version control with sunset dates</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="assessment-box">
+                <h4 class="font-bold text-lg text-amber-900 mb-4 flex items-center gap-2">
+                    <i data-lucide="clipboard-check" class="w-5 h-5"></i>
+                    Post-Module Assessment
+                </h4>
+                <p class="text-amber-900 mb-4">
+                    Revisit your pre-work assessment. Has your understanding shifted?
+                </p>
+                <div class="bg-white p-6 rounded-lg border border-amber-300">
+                    <h5 class="font-bold text-sm text-slate-700 mb-3 uppercase tracking-wide">Reflection Questions</h5>
+                    <ol class="space-y-4 text-sm text-slate-700">
+                        <li>
+                            <strong>1. Based on Episode 1.2, identify one AI system in your organization that functions
+                                as an "oracle" (black box that staff comply with rather than question).</strong>
+                            <div class="ml-6 mt-2">
+                                <p class="text-slate-600 text-xs mb-1">Consider: risk scoring, compliance flagging,
+                                    vendor screening</p>
+                                <textarea class="w-full border border-slate-300 rounded px-3 py-2 text-xs mt-2" rows="2"
+                                    placeholder="System name and how staff interact with it..."></textarea>
+                            </div>
+                        </li>
+                        <li>
+                            <strong>2. Does your organization have a validation layer for unstructured data (Episode
+                                1.4)?</strong>
+                            <div class="ml-6 mt-2">
+                                <p class="text-slate-600 text-xs mb-1">If yes, describe it. If no, identify the
+                                    highest-risk unstructured data source.</p>
+                                <textarea class="w-full border border-slate-300 rounded px-3 py-2 text-xs mt-2" rows="3"
+                                    placeholder="Current validation status and risk assessment..."></textarea>
+                            </div>
+                        </li>
+                        <li>
+                            <strong>3. If you implemented ONE control from this module, which would prevent the most
+                                significant regulatory risk?</strong>
+                            <div class="ml-6 mt-2">
+                                <p class="text-slate-600 text-xs mb-1">Options: XBRL tagging, sampling protocols,
+                                    regulatory version control, data lake validation</p>
+                                <textarea class="w-full border border-slate-300 rounded px-3 py-2 text-xs mt-2" rows="2"
+                                    placeholder="Your priority control and implementation approach..."></textarea>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Next Steps -->
+            <div class="bg-gradient-to-br from-slate-800 to-slate-900 text-white p-10 rounded-lg mt-8">
+                <h3 class="text-2xl font-bold mb-4 serif flex items-center gap-2">
+                    <i data-lucide="arrow-right-circle" class="w-6 h-6 text-purple-400"></i>
+                    Next Module
+                </h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-purple-400 font-bold mb-2">Level 2: Architecture of Compliance</h4>
+                        <p class="text-slate-300 text-sm mb-4">
+                            Building the systems that survive the audit. We focus on Vocabulary, Lineage, Taxonomy, and
+                            the
+                            financial nexus where ESG data originates (Accounts Payable).
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-center">
+                        <button
+                            class="bg-purple-600 hover:bg-purple-500 text-white font-bold py-4 px-8 rounded-lg transition flex items-center gap-3 text-lg">
+                            Begin Level 2
+                            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-8 mt-auto no-print">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-sm mb-2">
+                AI & ESG Capability Architect | Level 1: Epistemic Failures
+            </p>
+            <p class="text-xs opacity-50 italic">
+                Based on Sociable Systems research methodology
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                item.classList.remove('bg-purple-50');
+                item.classList.remove('text-purple-700');
+            });
+            document.getElementById(tabId).classList.add('active');
+            const activeBtn = document.getElementById('tab-' + tabId);
+            activeBtn.classList.add('active');
+            // Re-apply specific color hacks not handled by CSS class alone if needed, 
+            // but here we used specific classes in CSS.
+        }
+    </script>
+
+</body>
+
+</html>

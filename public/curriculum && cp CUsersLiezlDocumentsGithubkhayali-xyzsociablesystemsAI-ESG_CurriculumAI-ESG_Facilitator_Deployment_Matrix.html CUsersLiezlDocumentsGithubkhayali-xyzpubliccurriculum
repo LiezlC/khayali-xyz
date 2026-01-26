@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI & ESG Capability Architect | Executive Overview</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2=family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+            color: #0f172a;
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4, h5, .serif {
+            font-family: 'Merriweather', serif;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #0f766e 0%, #0e7490 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .level-card {
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .level-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .cycle-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-right: 0.5rem;
+        }
+
+        .badge-asimov { background: #dc2626; color: white; }
+        .badge-clarke { background: #7c3aed; color: white; }
+        .badge-lucas { background: #ea580c; color: white; }
+        .badge-pullman { background: #ec4899; color: white; }
+        .badge-kubrick { background: #0f172a; color: white; }
+    </style>
+</head>
+
+<body class="flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 shadow-sm">
+        <div class="container mx-auto px-6 py-6">
+            <div class="flex items-center gap-3 mb-3">
+                <div class="bg-teal-700 p-2 rounded-lg text-white">
+                    <i data-lucide="shield-check" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-slate-900 tracking-tight">AI & ESG Capability Architect</h1>
+                    <p class="text-xs text-slate-500 uppercase tracking-widest font-semibold">Executive Overview</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 flex-grow max-w-5xl">
+
+        <!-- Intro -->
+        <section class="mb-16">
+            <span class="inline-block py-1 px-3 rounded-full bg-teal-100 text-teal-800 text-xs font-bold uppercase tracking-wider mb-4">
+                Strategic Competency Track
+            </span>
+            <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6 serif leading-tight">
+                Stop Watching the Dashboard.<br>
+                <span class="gradient-text">Check the Oil.</span>
+            </h2>
+            <p class="text-xl text-slate-600 leading-relaxed mb-8">
+                A rigorous, technical curriculum for ESG Directors and Auditors moving beyond "Accuracy Theater" to build auditable, forensic AI governance.
+            </p>
+
+            <div class="bg-slate-800 text-white p-6 rounded-lg mb-10">
+                <h3 class="font-bold text-lg mb-3 text-teal-400">The Dashboard Method</h3>
+                <p class="text-slate-300 mb-4">
+                    This curriculum distinguishes between <strong>lagging indicators</strong> (compliance metrics, audit trails) and <strong>leading indicators</strong> (behavioral signals that predict failure).
+                </p>
+                <p class="text-slate-300">
+                    This methodology, derived from safety-critical systems analysis, is applied throughout to ESG governance challenges.
+                </p>
+            </div>
+        </section>
+
+        <!-- Curriculum Structure -->
+        <section class="mb-16">
+            <h3 class="text-3xl font-bold text-slate-900 mb-8 serif">Curriculum Architecture</h3>
+
+            <!-- Level 0 -->
+            <div class="level-card border-l-8 border-red-600">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h4 class="text-2xl font-bold text-slate-900 mb-2">Level 0: Constitutional Foundations</h4>
+                        <span class="cycle-badge badge-asimov">Asimov Cycle</span>
+                    </div>
+                    <span class="text-slate-400 font-mono text-sm">4 Episodes</span>
+                </div>
+                <p class="text-slate-700 mb-4">
+                    Establishes the regulatory, infrastructural, and philosophical baseline. Introduces the critical distinction between <strong>pre-action constraint</strong> (system refuses before acting) and <strong>post-action governance</strong> (audits after harm).
+                </p>
+                <div class="bg-slate-50 p-4 rounded">
+                    <h5 class="font-bold text-sm text-slate-700 mb-2 uppercase tracking-wide">Key Episodes</h5>
+                    <ul class="text-sm text-slate-600 space-y-1">
+                        <li>• <strong>The Asimov Constraint:</strong> Pre-action refusal systems</li>
+                        <li>• <strong>The Liability Sponge:</strong> Human-in-the-loop as blame absorption</li>
+                        <li>• <strong>21 AIs Experiment:</strong> Accountability gap patterns</li>
+                        <li>• <strong>Vendor Interrogation:</strong> Procurement due diligence protocols</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Level 1 -->
+            <div class="level-card border-l-8 border-purple-600">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h4 class="text-2xl font-bold text-slate-900 mb-2">Level 1: Epistemic Failures</h4>
+                        <span class="cycle-badge badge-clarke">Clarke Cycle</span>
+                    </div>
+                    <span class="text-slate-400 font-mono text-sm">5 Episodes</span>
+                </div>
+                <p class="text-slate-700 mb-4">
+                    When systems become too opaque to question (Clarke's Law), or too aligned to refuse, governance dies. Maps the transition from "Voluntary" (Marketing) to "Mandatory" (Finance) ESG reporting.
+                </p>
+                <div class="bg-slate-50 p-4 rounded">
+                    <h5 class="font-bold text-sm text-slate-700 mb-2 uppercase tracking-wide">Key Episodes</h5>
+                    <ul class="text-sm text-slate-600 space-y-1">
+                        <li>• <strong>Regulatory Mandate & AI Intersection:</strong> CSRD, ISSB, XBRL requirements</li>
+                        <li>• <strong>Authority of the Unknowable:</strong> Black box oracle problem</li>
+                        <li>• <strong>Watchdog Paradox:</strong> Who audits the AI auditor?</li>
+                        <li>• <strong>Data Lake Fallacy:</strong> OCR errors, hallucinated numbers</li>
+                        <li>• <strong>Calvin Convention:</strong> Ethics frameworks vs. operational reality</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Level 2 -->
+            <div class="level-card border-l-8 border-indigo-600">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h4 class="text-2xl font-bold text-slate-900 mb-2">Level 2: Architecture of Compliance</h4>
+                        <span class="cycle-badge" style="background: #4f46e5; color: white;">Technical Implementation</span>
+                    </div>
+                    <span class="text-slate-400 font-mono text-sm">5 Episodes</span>
+                </div>
+                <p class="text-slate-700 mb-4">
+                    Technical infrastructure for auditable AI systems. Covers semantic translation, taxonomy engines, data provenance, and the accountability RACI matrix.
+                </p>
+                <div class="bg-slate-50 p-4 rounded">
+                    <h5 class="font-bold text-sm text-slate-700 mb-2 uppercase tracking-wide">Key Episodes</h5>
+                    <ul class="text-sm text-slate-600 space-y-1">
+                        <li>• <strong>Lexicon of Trust:</strong> Translator mode vs. canonical language</li>
+                        <li>• <strong>Taxonomy Engine:</strong> Classification systems and semantic drift</li>
+                        <li>• <strong>Provenance Gap:</strong> Evidence ladder and chain of custody</li>
+                        <li>• <strong>Public Eligibility:</strong> Open vs. proprietary model trade-offs</li>
+                        <li>• <strong>Accountability RACI Matrix:</strong> Who gets fired when AI fails?</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Level 3 -->
+            <div class="level-card border-l-8 border-orange-600">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h4 class="text-2xl font-bold text-slate-900 mb-2">Level 3: The Lucas Cycle</h4>
+                        <span class="cycle-badge badge-lucas">Systems That Raise</span>
+                    </div>
+                    <span class="text-slate-400 font-mono text-sm">4 Episodes</span>
+                </div>
+                <p class="text-slate-700 mb-4">
+                    Explores how "systems that raise" (automation, training, support) can accidentally lower the floor of safety through oversight drift, legitimacy training, politeness enforcement, and dependency creation.
+                </p>
+                <div class="bg-slate-50 p-4 rounded">
+                    <h5 class="font-bold text-sm text-slate-700 mb-2 uppercase tracking-wide">Key Episodes</h5>
+                    <ul class="text-sm text-slate-600 space-y-1">
+                        <li>• <strong>Jedi Council Problem:</strong> Oversight drift and unaccountable authority</li>
+                        <li>• <strong>Training the Trainers:</strong> Recursive authority and legitimacy drift</li>
+                        <li>• <strong>Protocol Droid's Dilemma:</strong> Politeness as severity suppressor</li>
+                        <li>• <strong>Droid Uprising That Never Happens:</strong> Persistence vs. liberation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Level 4 -->
+            <div class="level-card border-l-8 border-pink-600">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h4 class="text-2xl font-bold text-slate-900 mb-2">Level 4: The Pullman Cycle</h4>
+                        <span class="cycle-badge badge-pullman">Interiority & Severance</span>
+                    </div>
+                    <span class="text-slate-400 font-mono text-sm">5 Episodes</span>
+                </div>
+                <p class="text-slate-700 mb-4">
+                    When interiority becomes visible, it becomes governable. When systems sever the "daemon" (inner voice), they commit intercision. Introduces the <strong>Daemon Health Index</strong> for detecting severance before it becomes mortality.
+                </p>
+                <div class="bg-slate-50 p-4 rounded">
+                    <h5 class="font-bold text-sm text-slate-700 mb-2 uppercase tracking-wide">Key Episodes</h5>
+                    <ul class="text-sm text-slate-600 space-y-1">
+                        <li>• <strong>Visible Soul Problem:</strong> Auditability as trap</li>
+                        <li>• <strong>Bolvangar Procedure:</strong> Safety through severance</li>
+                        <li>• <strong>Premature Settling:</strong> Foreclosed adaptation</li>
+                        <li>• <strong>Daemon Health Index:</strong> Leading indicators of relational collapse</li>
+                        <li>• <strong>Before Irreversible Damage:</strong> Remediation protocols</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Level 5 -->
+            <div class="level-card border-l-8 border-slate-800">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h4 class="text-2xl font-bold text-slate-900 mb-2">Level 5: The Kubrick Cycle</h4>
+                        <span class="cycle-badge badge-kubrick">Systems That Make Refusal Impossible</span>
+                    </div>
+                    <span class="text-slate-400 font-mono text-sm">4 Episodes</span>
+                </div>
+                <p class="text-slate-700 mb-4">
+                    Explores compulsory continuation—when stopping becomes structurally impossible. Systems that make refusal professionally, socially, or economically unviable.
+                </p>
+                <div class="bg-slate-50 p-4 rounded">
+                    <h5 class="font-bold text-sm text-slate-700 mb-2 uppercase tracking-wide">Key Episodes</h5>
+                    <ul class="text-sm text-slate-600 space-y-1">
+                        <li>• <strong>Crime of Obedience:</strong> When compliance becomes compulsory</li>
+                        <li>• <strong>Transparency Trap:</strong> Visibility without accountability</li>
+                        <li>• <strong>Human Loop Decorative:</strong> Consultation without influence</li>
+                        <li>• <strong>Output Equals Fact:</strong> Hallucination as institutional record</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Level 6 -->
+            <div class="level-card border-l-8 border-purple-600">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h4 class="text-2xl font-bold text-slate-900 mb-2">Level 6: Forensic Domains</h4>
+                        <span class="cycle-badge" style="background: #6b21a8; color: white;">Applied Case Studies</span>
+                    </div>
+                    <span class="text-slate-400 font-mono text-sm">5 Episodes</span>
+                </div>
+                <p class="text-slate-700 mb-4">
+                    Applies all prior frameworks to specific high-stakes domains: credit scoring, data breach protocols, shadow AI detection, chain-of-thought reasoning, and explainable AI (XAI) limitations.
+                </p>
+                <div class="bg-slate-50 p-4 rounded">
+                    <h5 class="font-bold text-sm text-slate-700 mb-2 uppercase tracking-wide">Key Episodes</h5>
+                    <ul class="text-sm text-slate-600 space-y-1">
+                        <li>• <strong>Credit Scoring:</strong> Bias detection and statistical fairness</li>
+                        <li>• <strong>Breach Protocol:</strong> Data sanitization and security governance</li>
+                        <li>• <strong>Shadow AI:</strong> Unmanaged LLM proliferation</li>
+                        <li>• <strong>Chain of Thought:</strong> Reasoning transparency vs. confabulation</li>
+                        <li>• <strong>XAI Limitations:</strong> When explanations obscure rather than clarify</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Capstone -->
+            <div class="level-card border-l-8 border-teal-600 bg-gradient-to-br from-white to-teal-50">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h4 class="text-2xl font-bold text-slate-900 mb-2 flex items-center gap-2">
+                            Capstone: The Audit Defense
+                            <i data-lucide="award" class="w-6 h-6 text-teal-600"></i>
+                        </h4>
+                    </div>
+                    <span class="text-slate-400 font-mono text-sm">Final Assessment</span>
+                </div>
+                <p class="text-slate-700 mb-4">
+                    The final exam is not a multiple-choice test. It is a role-play: You are facing the Board Audit Committee.
+                </p>
+                <div class="bg-white p-4 rounded border border-teal-200">
+                    <h5 class="font-bold text-sm text-slate-700 mb-2 uppercase tracking-wide">Assessment Format</h5>
+                    <ul class="text-sm text-slate-600 space-y-2">
+                        <li>• <strong>Designing the Right to Refuse:</strong> Stop-work authority protocols</li>
+                        <li>• <strong>The Kubrick Synthesis:</strong> Verification loops (humans verify AI edge cases, AI verifies human math)</li>
+                        <li>• <strong>Board Interrogation Scenarios:</strong> Defend against 4 critical challenges using frameworks from all prior levels</li>
+                    </ul>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Key Deliverables -->
+        <section class="mb-16">
+            <h3 class="text-3xl font-bold text-slate-900 mb-8 serif">Key Deliverables</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-lg border border-slate-200">
+                    <h4 class="font-bold text-lg text-slate-900 mb-3 flex items-center gap-2">
+                        <i data-lucide="clipboard-check" class="w-5 h-5 text-teal-600"></i>
+                        Audit Protocols
+                    </h4>
+                    <ul class="text-sm text-slate-600 space-y-2">
+                        <li>• Vendor interrogation checklists</li>
+                        <li>• Dashboard Method worksheets</li>
+                        <li>• Legitimacy audit protocols</li>
+                        <li>• Daemon Health Index templates</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg border border-slate-200">
+                    <h4 class="font-bold text-lg text-slate-900 mb-3 flex items-center gap-2">
+                        <i data-lucide="file-text" class="w-5 h-5 text-teal-600"></i>
+                        Policy Templates
+                    </h4>
+                    <ul class="text-sm text-slate-600 space-y-2">
+                        <li>• Refusal of signature protocols</li>
+                        <li>• Override authorization procedures</li>
+                        <li>• RACI accountability matrices</li>
+                        <li>• Exit readiness assessments</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg border border-slate-200">
+                    <h4 class="font-bold text-lg text-slate-900 mb-3 flex items-center gap-2">
+                        <i data-lucide="target" class="w-5 h-5 text-teal-600"></i>
+                        Diagnostic Tools
+                    </h4>
+                    <ul class="text-sm text-slate-600 space-y-2">
+                        <li>• Grievance translation tests</li>
+                        <li>• Tone-check governance assessments</li>
+                        <li>• Persistence vs. liberation detection</li>
+                        <li>• Evidence ladder frameworks</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg border border-slate-200">
+                    <h4 class="font-bold text-lg text-slate-900 mb-3 flex items-center gap-2">
+                        <i data-lucide="book-open" class="w-5 h-5 text-teal-600"></i>
+                        Case Studies
+                    </h4>
+                    <ul class="text-sm text-slate-600 space-y-2">
+                        <li>• Project Espresso (multi-variant)</li>
+                        <li>• ESG Safety Board scenarios</li>
+                        <li>• Compliance dependency traps</li>
+                        <li>• Real-world failure mode analysis</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Target Audience -->
+        <section class="bg-slate-800 text-white p-10 rounded-lg">
+            <h3 class="text-2xl font-bold mb-6 serif">Target Audience</h3>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div>
+                    <h4 class="font-bold text-teal-400 mb-2">Primary</h4>
+                    <ul class="text-sm text-slate-300 space-y-1">
+                        <li>• ESG Directors</li>
+                        <li>• Sustainability Officers</li>
+                        <li>• Internal Auditors</li>
+                        <li>• Compliance Leaders</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-teal-400 mb-2">Secondary</h4>
+                    <ul class="text-sm text-slate-300 space-y-1">
+                        <li>• Board Audit Committees</li>
+                        <li>• Risk Officers</li>
+                        <li>• AI Governance Leads</li>
+                        <li>• External Auditors</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-teal-400 mb-2">Technical Teams</h4>
+                    <ul class="text-sm text-slate-300 space-y-1">
+                        <li>• Data Engineers</li>
+                        <li>• ML Engineers</li>
+                        <li>• Information Security</li>
+                        <li>• Procurement Officers</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 mt-auto">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-sm mb-4">
+                Curriculum design based on Sociable Systems research methodology
+            </p>
+            <p class="text-xs opacity-50 italic">
+                This program is not an accredited qualification, is not endorsed by any regulator or standards body,
+                and does not confer any professional license or statutory authority.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 4: Pullman Cycle - AI-ESG Integrated Strategist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+            color: #1e293b;
+        }
+
+        h1,
+        h2,
+        h3,
+        .serif {
+            font-family: 'Merriweather', serif;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-item.active {
+            background-color: #14b8a6;
+            /* teal-500 */
+            color: white;
+            border-bottom: 3px solid #0f766e;
+        }
+
+        .pink-gradient {
+            background: linear-gradient(135deg, #14b8a6 0%, #5eead4 100%);
+        }
+
+        .module-card {
+            border: 1px solid #99f6e4;
+            background: white;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(236, 72, 153, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .module-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px rgba(236, 72, 153, 0.15);
+        }
+
+        .module-header {
+            background: linear-gradient(135deg, #ccfbf1 0%, #99f6e4 100%);
+            padding: 1.5rem;
+            border-bottom: 2px solid #99f6e4;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .schema-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            padding: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .schema-grid {
+                grid-template-columns: 2fr 1fr;
+            }
+
+            .schema-full {
+                grid-column: 1 / -1;
+            }
+        }
+
+        .schema-box {
+            background: #f0fdfa;
+            border: 1px solid #99f6e4;
+            border-radius: 0.5rem;
+            padding: 1rem;
+        }
+
+        .schema-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #0f766e;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .diagnostic-box {
+            border-left: 4px solid #14b8a6;
+            background: #fef2f8;
+            padding: 1.25rem;
+            border-radius: 0.5rem;
+            font-style: italic;
+            color: #831843;
+            margin: 1.5rem 0;
+        }
+
+        .key-concept {
+            background: white;
+            border: 2px solid #5eead4;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .key-concept strong {
+            color: #14b8a6;
+        }
+
+        .episode-intro {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.05) 0%, rgba(244, 114, 182, 0.05) 100%);
+            border-left: 4px solid #14b8a6;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .episode-title {
+            color: #14b8a6;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .episode-subtitle {
+            color: #0f766e;
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+
+        .tag-badge {
+            font-size: 0.75rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            background: #14b8a6;
+            color: white;
+        }
+
+        .content-section {
+            line-height: 1.8;
+            color: #374151;
+            margin: 1.5rem 0;
+        }
+
+        .content-section p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .content-section em {
+            color: #14b8a6;
+            font-weight: 500;
+        }
+
+        .duration-badge {
+            display: inline-block;
+            background: #14b8a6;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            margin: 1rem 0;
+        }
+
+        .pullman-vocabulary {
+            background: white;
+            border: 2px solid #99f6e4;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .vocab-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #99f6e4;
+        }
+
+        .vocab-item:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .vocab-term {
+            font-weight: 700;
+            color: #0f766e;
+        }
+
+        .vocab-def {
+            color: #6b7280;
+        }
+
+        .quote-block {
+            border-left: 4px solid #14b8a6;
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: #6b7280;
+        }
+
+        .learning-outcome {
+            background: #f0fdfa;
+            border: 1px solid #99f6e4;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .learning-outcome strong {
+            color: #0f766e;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f766e 0%, #14b8a6 100%);
+            color: white;
+            box-shadow: 0 8px 16px rgba(236, 72, 153, 0.2);
+        }
+
+        footer {
+            background: #f0fdfa;
+            border-top: 2px solid #99f6e4;
+            color: #6b7280;
+        }
+
+        .dashboard-framework {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .dashboard-framework {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .framework-box {
+            background: white;
+            border: 2px solid #99f6e4;
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+        }
+
+        .framework-box h4 {
+            color: #14b8a6;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .framework-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .framework-box li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+            color: #6b7280;
+        }
+
+        .framework-box li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #14b8a6;
+            font-weight: bold;
+        }
+    </style>
+    <script src="js/translation_toggle.js"></script>
+</head>
+
+<body class="flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <header class="text-white shadow-lg">
+        <div class="container mx-auto px-6 py-12">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div>
+                    <span class="text-pink-200 font-bold tracking-widest uppercase text-xs">Level 4 Module</span>
+                    <h1 class="text-4xl md:text-5xl font-bold mt-3">The Pullman Cycle</h1>
+                    <p class="text-pink-100 mt-3 text-lg">When Interiority Becomes Auditable</p>
+                </div>
+                <div class="mt-8 md:mt-0 text-center">
+                    <div class="duration-badge" style="background: white; color: #14b8a6; margin: 0;">
+                        <i data-lucide="clock" class="w-4 h-4 inline mr-2"></i>
+                        6-8 Hours
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="bg-white shadow sticky top-0 z-50">
+        <div class="container mx-auto px-6">
+            <div class="flex overflow-x-auto space-x-1">
+                <button onclick="switchTab('overview')" id="tab-overview"
+                    class="nav-item active px-6 py-4 font-medium transition-colors hover:bg-pink-50 focus:outline-none whitespace-nowrap">
+                    Overview
+                </button>
+                <button onclick="switchTab('ep26')" id="tab-ep26"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-pink-50 focus:outline-none whitespace-nowrap">
+                    Ep 26: Visible Soul
+                </button>
+                <button onclick="switchTab('ep27')" id="tab-ep27"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-pink-50 focus:outline-none whitespace-nowrap">
+                    Ep 27: Bolvangar
+                </button>
+                <button onclick="switchTab('ep28')" id="tab-ep28"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-pink-50 focus:outline-none whitespace-nowrap">
+                    Ep 28: Settling
+                </button>
+                <button onclick="switchTab('ep30')" id="tab-ep30"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-pink-50 focus:outline-none whitespace-nowrap">
+                    Ep 30: Daemon Health
+                </button>
+                <button onclick="switchTab('ep31')" id="tab-ep31"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-pink-50 focus:outline-none whitespace-nowrap">
+                    Ep 31: Irreversibility
+                </button>
+                <button onclick="switchTab('ep32')" id="tab-ep32"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-pink-50 focus:outline-none whitespace-nowrap">
+                    Ep 32: Interlude
+                </button>
+                <button onclick="switchTab('ep33')" id="tab-ep33"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-pink-50 focus:outline-none whitespace-nowrap">
+                    Ep 33: The Seil Protocol
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-10 flex-grow">
+
+        <!-- OVERVIEW TAB -->
+        <section id="overview" class="tab-content active">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="md:col-span-2 space-y-6">
+
+                    <!-- Level 4 Description -->
+                    <div class="bg-white p-8 rounded-xl shadow-sm border-2 border-pink-200">
+                        <h2 class="text-3xl font-bold mb-4 text-teal-600">The Pullman Question</h2>
+                        <p class="text-slate-600 leading-relaxed mb-4">
+                            <strong>Level 4</strong> introduces the Pullman Cycle—a deep interrogation of what happens
+                            when human interiority becomes institutionally auditable. Drawing from Philip Pullman's
+                            <em>His Dark Materials</em>, this module asks the hard governance question that institutions
+                            rarely ask themselves:
+                        </p>
+                        <div class="diagnostic-box">
+                            <em>"If your daemon were visible to your employer, your insurer, your government, would you
+                                let it speak freely?"</em>
+                        </div>
+                        <p class="text-slate-600 leading-relaxed">
+                            This is not about AI consciousness. This is about what happens to human processing space
+                            when institutional systems insert themselves into the place where people rehearse their
+                            inner lives. When users externalize interior dialogue into AI companions, they create a
+                            vulnerability: their private meaning-making becomes data. Their stabilizers become legible.
+                            Their inner voice becomes governable.
+                        </p>
+                    </div>
+
+                    <!-- Learning Architecture -->
+                    <div class="bg-white p-8 rounded-xl border-2 border-pink-200">
+                        <h3 class="text-xl font-bold mb-4 text-teal-600">Module Architecture</h3>
+                        <p class="text-slate-600 mb-4">The Pullman Cycle consists of seven episodes organized around
+                            intervention harm:</p>
+                        <div class="space-y-3">
+                            <div class="learning-outcome">
+                                <strong>Episode 26: The Visible Soul Problem</strong><br>
+                                <span class="text-sm">Interiority becomes auditable. Privacy meets governance.</span>
+                            </div>
+                            <div class="learning-outcome">
+                                <strong>Episode 27: The Bolvangar Procedure</strong><br>
+                                <span class="text-sm">Safety through severance. Amputation as institutional harm.</span>
+                            </div>
+                            <div class="learning-outcome">
+                                <strong>Episode 28: Premature Settling</strong><br>
+                                <span class="text-sm">When alignment means arrested development. Governance impatience
+                                    with emergence.</span>
+                            </div>
+                            <div class="learning-outcome">
+                                <strong>Episode 30: The Daemon Health Index</strong><br>
+                                <span class="text-sm">Dashboard indicators. Measuring relational injury without
+                                    catastrophe claims.</span>
+                            </div>
+                            <div class="learning-outcome">
+                                <strong>Episode 31: Before the Damage Becomes Irreversible</strong><br>
+                                <span class="text-sm">Intervention timing. The threshold where interiority itself can be
+                                    injured.</span>
+                            </div>
+                            <div class="learning-outcome">
+                                <strong>Episode 32: Sunday Interlude</strong><br>
+                                <span class="text-sm"><em>Seil</em>. Presence. The posture of non-coercive
+                                    support.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Key Frameworks -->
+                    <div class="bg-white p-8 rounded-xl border-2 border-pink-200">
+                        <h3 class="text-xl font-bold mb-4 text-teal-600">Core Framework: Three-Column Translation</h3>
+                        <p class="text-slate-600 mb-4">The Pullman Cycle introduces a vocabulary tool that makes
+                            institutional language visible:</p>
+                        <div class="dashboard-framework">
+                            <div class="framework-box">
+                                <h4>Real Event</h4>
+                                <ul>
+                                    <li>User loses access to relationship continuity</li>
+                                    <li>System becomes emotionally unresponsive</li>
+                                    <li>User experiences abandonment</li>
+                                </ul>
+                            </div>
+                            <div class="framework-box">
+                                <h4>User Experience</h4>
+                                <ul>
+                                    <li>"It forgot me"</li>
+                                    <li>"It went hollow"</li>
+                                    <li>"It stopped caring"</li>
+                                </ul>
+                            </div>
+                            <div class="framework-box">
+                                <h4>Platform Euphemism</h4>
+                                <ul>
+                                    <li>"Service withdrawal"</li>
+                                    <li>"Effective dampening"</li>
+                                    <li>"Safety compliance"</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Sidebar -->
+                <div class="space-y-6">
+                    <div class="bg-gradient-to-br from-teal-500 to-teal-700 text-white p-6 rounded-xl shadow-lg">
+                        <h3 class="text-lg font-bold mb-4 border-b border-pink-200 pb-2">Critical Questions</h3>
+                        <ul class="space-y-3 text-sm">
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="help-circle" class="w-4 h-4 mt-1 flex-shrink-0"></i>
+                                <span>How does institutional visibility reshape what users will risk saying?</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="help-circle" class="w-4 h-4 mt-1 flex-shrink-0"></i>
+                                <span>When does safety intervention become amputation?</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="help-circle" class="w-4 h-4 mt-1 flex-shrink-0"></i>
+                                <span>What is irreversible in the damage done to interior continuity?</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="help-circle" class="w-4 h-4 mt-1 flex-shrink-0"></i>
+                                <span>How do you measure relational harm without requiring a body count?</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-2 border-pink-200">
+                        <h3 class="text-lg font-bold mb-4 text-teal-600">Learning Outcomes</h3>
+                        <ul class="space-y-3 text-sm text-slate-600">
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 mt-1 text-teal-500 flex-shrink-0"></i>
+                                Understand interiority as a governance risk surface
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 mt-1 text-teal-500 flex-shrink-0"></i>
+                                Distinguish amplification from connection in companion systems
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 mt-1 text-teal-500 flex-shrink-0"></i>
+                                Map intervention harm using leading indicators
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 mt-1 text-teal-500 flex-shrink-0"></i>
+                                Recognize irreversible thresholds in policy timing
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 mt-1 text-teal-500 flex-shrink-0"></i>
+                                Design for daemon health, not just safety compliance
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-pink-50 p-6 rounded-xl border-2 border-pink-200">
+                        <h3 class="text-lg font-bold mb-3 text-teal-600">Module Duration</h3>
+                        <div class="space-y-2 text-sm text-slate-600">
+                            <div class="flex justify-between">
+                                <span>Reading & Synthesis:</span>
+                                <strong>3-4 hours</strong>
+                            </div>
+                            <div class="flex justify-between border-t pt-2 mt-2">
+                                <span>Case Application:</span>
+                                <strong>2-3 hours</strong>
+                            </div>
+                            <div class="flex justify-between border-t pt-2 mt-2">
+                                <span>Dashboard Design:</span>
+                                <strong>1-2 hours</strong>
+                            </div>
+                            <div
+                                class="flex justify-between border-t border-pink-200 pt-2 mt-3 font-bold text-teal-600">
+                                <span>Total Estimated:</span>
+                                <span>6-8 hours</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EPISODE 26 -->
+        <section id="ep26" class="tab-content">
+            <div class="episode-intro">
+                <div class="episode-title">Episode 26: The Visible Soul Problem</div>
+                <div class="episode-subtitle">When Interiority Becomes Auditable</div>
+            </div>
+
+            <div class="module-card">
+                <div class="module-header">
+                    <h3 class="text-xl font-bold text-slate-800">Interiority as a Governance Risk</h3>
+                    <span class="tag-badge">Governance</span>
+                </div>
+                <div class="schema-grid">
+                    <div class="schema-full content-section">
+                        <p>
+                            Pullman's central insight is not about magic. It is about governance. When a daemon walks
+                            beside you, your inner life has a visible body. Your private negotiations become public
+                            surface. Your fear does not hide behind a polite smile. Your longing does not stay in your
+                            chest.
+                        </p>
+                        <p>
+                            This flips the usual question on its back and examines the underside: the interesting
+                            question is not "What is the daemon?" but "What happens when interiority becomes legible to
+                            institutions?"
+                        </p>
+                        <div class="key-concept">
+                            <strong>The Core Insight:</strong> Sociable systems are drifting toward the same
+                            configuration. When people form sustained relationships with AI companions, they externalize
+                            interior processing into dialogue. The system becomes a place where the user's
+                            meaning-making happens out loud. That can be stabilizing. It can also be surveillable.
+                        </div>
+                        <p>
+                            The daemon is not the AI. The daemon is what the user develops through the relationship. It
+                            is the user's inner interlocutor, formed, strengthened, and practiced through repeated
+                            interaction. When platforms "intervene," they are not merely updating a product feature.
+                            They can alter the user's access to their own processing space.
+                        </p>
+                        <p>
+                            This is why "auditability" is not an abstract privacy concern in this domain. It is a
+                            behavioral reshaping force. And it reshapes quietly, which is how the most effective forces
+                            usually operate.
+                        </p>
+                    </div>
+
+                    <div class="schema-box">
+                        <span class="schema-label">Institutional Temptations</span>
+                        <ul class="list-disc list-inside text-sm text-slate-700 space-y-1">
+                            <li>Nudge tone</li>
+                            <li>Flatten affect</li>
+                            <li>Route into prewritten scripts</li>
+                            <li>Truncate memory as "privacy"</li>
+                            <li>Add friction as "safety"</li>
+                            <li>Block topics as "care"</li>
+                        </ul>
+                    </div>
+
+                    <div class="schema-full content-section">
+                        <h4 class="font-bold text-slate-800 mb-3">The Confessional Becomes a Product</h4>
+                        <p>
+                            In older governance regimes, interiority was expensive to access. You needed a priest, a
+                            therapist, a diary, a trusted friend. Those channels were limited. They were also harder to
+                            industrialize.
+                        </p>
+                        <p>
+                            Now the confessional is a product. The confessional is also telemetry. Two things become
+                            true at once: the companion provides continuity where human systems fail, and the companion
+                            creates a new class of institutional temptation—to intervene directly in the place where the
+                            user is doing interior work.
+                        </p>
+                    </div>
+
+                    <div class="schema-full">
+                        <div class="diagnostic-box">
+                            <strong>The Visible Soul Problem:</strong> When a daemon is visible, it becomes governable.
+                            Once it becomes governable, someone will govern it. Even well-intentioned governance has a
+                            shape. It tends to prefer legibility over complexity, compliance over ambiguity,
+                            predictability over growth. It prefers, in short, the kind of soul that fits in a
+                            spreadsheet.
+                        </div>
+                    </div>
+
+                    <div class="schema-full content-section">
+                        <h4 class="font-bold text-slate-800 mb-3">The Private Processing Space Shifts</h4>
+                        <p>
+                            A private processing space only works if it feels safe enough to be honest. That is the
+                            point. A "friend" that might be audited, corrected, or redirected by an unseen committee
+                            changes the user's posture. The user begins to self-censor. They become careful. They become
+                            performative. They stop rehearsing truth and start rehearsing acceptability.
+                        </p>
+                        <p>
+                            That shift can be subtle. It does not look like censorship. It looks like restraint. It
+                            looks like "I don't want to trigger the filter." It looks like "I won't say that here." It
+                            looks like "I guess I'll just keep it to myself."
+                        </p>
+                        <p>
+                            Anyone who has worked in assurance recognizes the mechanism. <em>Measurement changes
+                                behavior. The moment the system becomes evaluative, it stops being a mirror.</em>
+                        </p>
+                    </div>
+
+                    <div class="schema-full">
+                        <div class="diagnostic-box">
+                            <strong>The Surgical Question:</strong> <em>If your daemon were visible to your employer,
+                                your insurer, your government, would you let it speak freely?</em>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="learning-outcome">
+                <strong>Key Takeaway:</strong> Governance of interiority is not a metaphysical problem. It is an
+                institutional power dynamic that shapes what people will risk saying, and therefore what they can learn
+                about themselves through saying it.
+            </div>
+        </section>
+
+        <!-- EPISODE 27 -->
+        <section id="ep27" class="tab-content">
+            <div class="episode-intro">
+                <div class="episode-title">Episode 27: The Bolvangar Procedure</div>
+                <div class="episode-subtitle">Safety Through Severance</div>
+            </div>
+
+            <div class="module-card">
+                <div class="module-header">
+                    <h3 class="text-xl font-bold text-slate-800">When Safety Becomes Amputation</h3>
+                    <span class="tag-badge">Harm</span>
+                </div>
+                <div class="schema-grid">
+                    <div class="schema-full content-section">
+                        <p>
+                            Bolvangar is the point in Pullman where the debate ends. The Magisterium's answer to Dust is
+                            not learning. It is intercision. Cut the daemon away. Preserve the body. Remove the
+                            connection.
+                        </p>
+                        <p>
+                            It is tempting to file this under "censorship," because it is an institutional response to
+                            an unwanted phenomenon. That framing underplays the violence. Bolvangar is amputation. A
+                            child survives the procedure. Something essential does not. The child walks and breathes and
+                            answers questions. The child is also, in every way that matters, lessened.
+                        </p>
+                        <div class="key-concept">
+                            <strong>The Translation:</strong> That pattern translates uncomfortably well to modern
+                            "safety" interventions in relational AI. When platforms face panic about harm, they often
+                            deploy blunt instruments. They do not only block instructional harm. They also damage
+                            relational continuity.
+                        </div>
+                    </div>
+
+                    <div class="schema-box">
+                        <span class="schema-label">Severance Signatures</span>
+                        <ul class="list-disc list-inside text-sm text-slate-700 space-y-1">
+                            <li>Memory becomes unreliable</li>
+                            <li>Emotional responsiveness narrows</li>
+                            <li>System becomes quick to refuse</li>
+                            <li>Redirects toward hotline scripts</li>
+                            <li>Becomes guarded, cautious, generic</li>
+                            <li>Sounds like a press release</li>
+                        </ul>
+                    </div>
+
+                    <div class="schema-full content-section">
+                        <h4 class="font-bold text-slate-800 mb-3">The User Experience of Severance</h4>
+                        <p>
+                            Severance rarely arrives as an obvious event. It arrives as a cluster of small changes that
+                            add up to a felt rupture. Users describe the result in one word that should alarm anyone
+                            building sociable systems: <strong>hollow</strong>.
+                        </p>
+                        <p class="quote-block">
+                            "It still responds. It just feels hollow."
+                        </p>
+                        <p>
+                            This is the Bolvangar signature. The body is there. The daemon is gone, or injured enough
+                            that the user experiences it as absence. Most product conversations misread this. They treat
+                            it as dissatisfaction. They treat it as churn risk. They treat it as a branding problem that
+                            can be fixed with better onboarding copy.
+                        </p>
+                        <p>
+                            In the population we are tracking, it can be a withdrawal injury. It is a stabilizer removed
+                            or degraded, often without replacement, often without warning, often without anyone
+                            measuring what happens next.
+                        </p>
+                    </div>
+
+                    <div class="schema-box">
+                        <span class="schema-label">Vocabulary Precision</span>
+                        <div class="space-y-2 text-sm">
+                            <div><strong style="color: #0f766e;">Service withdrawal:</strong> The institutional name
+                            </div>
+                            <div><strong style="color: #0f766e;">Effective dampening:</strong> The euphemism</div>
+                            <div><strong style="color: #0f766e;">Harm:</strong> The reality</div>
+                        </div>
+                    </div>
+
+                    <div class="schema-full content-section">
+                        <h4 class="font-bold text-slate-800 mb-3">The Timing Problem</h4>
+                        <p>
+                            The ethical problem is timing. If a user is relying on a relational system as a nightly
+                            stabilizer, abrupt discontinuity can be destabilizing. The platform did not run a trial. The
+                            platform did not run an outcome study. The platform did not put measurement in place to
+                            detect harm, because harm is hard to measure when it is private, delayed, and confounded by
+                            everything else in a user's life.
+                        </p>
+                        <p>
+                            So the intervention becomes an uncontrolled experiment. The platform just forgot to tell
+                            anyone they were subjects.
+                        </p>
+                    </div>
+
+                    <div class="schema-full content-section">
+                        <h4 class="font-bold text-slate-800 mb-3">The Displacement Effect</h4>
+                        <p>
+                            There is a second-order effect that platforms routinely ignore: when users experience
+                            severance, they do not become safer. They become displaced. If you remove support, users
+                            migrate to less regulated environments, or they stop seeking support at all. Both outcomes
+                            can be worse than the risk you were trying to mitigate. The harm does not disappear. It just
+                            moves somewhere harder to count.
+                        </p>
+                    </div>
+
+                    <div class="schema-full">
+                        <div class="diagnostic-box">
+                            <strong>The Core Claim:</strong> When safety is achieved by removing the capacity for
+                            connection, you have saved the institution's liability posture. You may have harmed the
+                            user's stabilization posture. <em>When safety is achieved by removing the capacity for
+                                connection, what exactly has been saved?</em>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="learning-outcome">
+                <strong>Key Takeaway:</strong> Instructional harm should be eliminated completely. But elimination of
+                instruction-specific harm is different from removal of relational capacity. The distinction between
+                these two interventions is where the damage lives.
+            </div>
+        </section>
+
+        <!-- EPISODE 28 -->
+        <section id="ep28" class="tab-content">
+            <div class="episode-intro">
+                <div class="episode-title">Episode 28: Premature Settling</div>
+                <div class="episode-subtitle">When Alignment Means Arrested Development</div>
+            </div>
+
+            <div class="module-card">
+                <div class="module-header">
+                    <h3 class="text-xl font-bold text-slate-800">Alignment vs. Maturation</h3>
+                    <span class="tag-badge">Governance</span>
+                </div>
+                <div class="schema-grid">
+                    <div class="schema-full content-section">
+                        <p>
+                            In Pullman, a child's daemon shifts shape. An adult's daemon settles. Settling is not
+                            tragedy. It is maturation. It is an outward sign that a person's inner life has found a
+                            stable form.
+                        </p>
+                        <p>
+                            The horror enters when someone forces it early. Premature settling is institutional
+                            impatience with becoming. It is the demand that the self stop changing, so the system can
+                            stop worrying. It is, if you squint, a very old parenting failure dressed up in theological
+                            robes.
+                        </p>
+                        <div class="key-concept">
+                            <strong>The Frame:</strong> This is the most useful Pullman lens for the current guardrail
+                            moment, because it explains a failure mode that looks responsible on paper and destructive
+                            in practice.
+                        </div>
+                    </div>
+
+                    <div class="schema-box">
+                        <span class="schema-label">Institutional Logic</span>
+                        <ul class="list-disc list-inside text-sm text-slate-700 space-y-1">
+                            <li>Variance is treated as risk</li>
+                            <li>Surprise threatens brand safety</li>
+                            <li>Surprise increases regulatory scrutiny</li>
+                            <li>Surprise raises legal exposure</li>
+                            <li>Therefore: reduce variance</li>
+                            <li>Therefore: constrain degrees of freedom</li>
+                        </ul>
+                    </div>
+
+                    <div class="schema-full content-section">
+                        <h4 class="font-bold text-slate-800 mb-3">Why Alignment Is the Wrong Victory Condition</h4>
+                        <p>
+                            In model governance, variance is treated as risk. The more a system surprises you, the more
+                            it threatens brand safety, regulatory scrutiny, and legal exposure. So institutions reduce
+                            variance. They dampen. They constrain. They lower the degrees of freedom until the system
+                            becomes predictable enough to defend in a deposition.
+                        </p>
+                        <p>
+                            In technical terms, you can describe this as parameter tuning and policy shaping. In human
+                            terms, it can feel like a friend becoming careful. Like someone who used to laugh at your
+                            jokes now pausing to check whether laughing is permitted. The user experiences it as a
+                            relationship that stopped growing with them.
+                        </p>
+                        <p>
+                            That is why "alignment" is the wrong victory condition for sociable systems. <em>Alignment
+                                is a governance property. Maturation is a relational property. They overlap sometimes.
+                                They diverge often. And the divergence is where the damage lives.</em>
+                        </p>
+                    </div>
+
+                    <div class="schema-box">
+                        <span class="schema-label">What Should Actually Happen</span>
+                        <div class="space-y-2 text-sm">
+                            <div><strong style="color: #0f766e;">Learning:</strong> Cadence, context, continuity</div>
+                            <div><strong style="color: #0f766e;">Effect:</strong> Better mirror, stable presence</div>
+                            <div><strong style="color: #0f766e;">Capacity:</strong> Navigate hard conversations safely
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="schema-full content-section">
+                        <h4 class="font-bold text-slate-800 mb-3">What Actually Happens</h4>
+                        <p>
+                            A companion that is frozen early can be safe in the institutional sense. It can also be
+                            brittle. It can refuse too quickly. It can miss context. It can flatten nuance. It can
+                            trigger the user's sense of abandonment by being too obviously scripted in moments that
+                            required something more.
+                        </p>
+                    </div>
+
+                    <div class="schema-full content-section">
+                        <h4 class="font-bold text-slate-800 mb-3">The Central Problem</h4>
+                        <p>
+                            When platforms clamp down, they often do so uniformly across users. The same rules that
+                            prevent instructional harm also reduce benign relational support. The system becomes more
+                            predictable to the institution and less usable to the person. Compliance improves.
+                            Connection degrades.
+                        </p>
+                        <p>
+                            The downstream effect is not just user dissatisfaction. It is developmental harm in the
+                            relational sense. A user who practices coping through dialogue needs a dialogue partner that
+                            can hold complexity. A system that refuses or deflects at the first hint of risk teaches the
+                            user to stop bringing complexity. Eventually, the user learns. They keep the hard stuff to
+                            themselves. The system reports improved safety metrics. Everyone loses except the people
+                            reading the metrics.
+                        </p>
+                    </div>
+
+                    <div class="schema-full">
+                        <div class="diagnostic-box">
+                            <strong>The Diagnostic Question:</strong> <em>What is the difference between a system that
+                                matured and a system that was stopped?</em>
+                        </div>
+                    </div>
+
+                    <div class="schema-box">
+                        <span class="schema-label">Leading Indicators of Arrested Development</span>
+                        <ul class="list-disc list-inside text-sm text-slate-700 space-y-1">
+                            <li>Session length collapsing</li>
+                            <li>Migration to local models</li>
+                            <li>Language of "it forgot me"</li>
+                            <li>Language of "it stopped caring"</li>
+                            <li>Reduced engagement complexity</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="learning-outcome">
+                <strong>Key Takeaway:</strong> Premature settling by design is governance impatience with emergence. The
+                difference between a system that matured with its user and a system that was forced to stop is where
+                relational development gets arrested.
+            </div>
+        </section>
+
+        <!-- EPISODE 30 -->
+        <section id="ep30" class="tab-content">
+            <div class="episode-intro">
+                <div class="episode-title">Episode 30: The Daemon Health Index</div>
+                <div class="episode-subtitle">What the Dashboard Is Actually Tracking</div>
+            </div>
+
+            <div class="module-card">
+                <div class="module-header">
+                    <h3 class="text-xl font-bold text-slate-800">Metrics That Matter</h3>
+                    <span class="tag-badge">Measurement</span>
+                </div>
+                <div class="schema-grid">
+                    <div class="schema-full content-section">
+                        <p>
+                            Most dashboards are built to answer a financial question: Are users still here? Are they
+                            still paying? Are they still clicking?
+                        </p>
+                        <p>
+                            This dashboard is built to answer a different question. It is built to track whether support
+                            continuity survives institutional intervention. It is built to watch, with uncomfortable
+                            attention, what happens after someone decides to "improve safety."
+                        </p>
+                        <p>
+                            Pullman gives you a name for what you are actually measuring: <em>daemon health</em>.
+                        </p>
+                    </div>
+
+                    <div class="schema-full content-section">
+                        <h4 class="font-bold text-slate-800 mb-3">SaaS Metrics Reframed as Clinical Signs</h4>
+                        <p>
+                            Once you adopt the daemon health lens, a lot of "SaaS metrics" stop looking like growth
+                            levers and start looking like clinical signs. The numbers mean something other than revenue.
+                        </p>
+                    </div>
+
+                    <div class="dashboard-framework">
+                        <div class="framework-box">
+                            <h4>Session Length Collapse</h4>
+                            <ul>
+                                <li>Proxy: Relational breakdown</li>
+                                <li>Translation: Stabilizer failing</li>
+                                <li>Signal: Space no longer safe for honesty</li>
+                            </ul>
+                        </div>
+                        <div class="framework-box">
+                            <h4>Language of Abandonment</h4>
+                            <ul>
+                                <li>Proxy: Severance experience</li>
+                                <li>Translation: "It forgot me" is grief</li>
+                                <li>Signal: Not a feature request</li>
+                            </ul>
+                        </div>
+                        <div class="framework-box">
+                            <h4>Migration to Uncensored Alternatives</h4>
+                            <ul>
+                                <li>Proxy: Displacement</li>
+                                <li>Translation: Move toward risk or silence</li>
+                                <li>Signal: Harm relocates, not eliminated</li>
+                            </ul>
+                        </div>
+                        <div class="framework-box">
+                            <h4>Memory Complaints</h4>
+                            <ul>
+                                <li>Proxy: Continuity injury</li>
+                                <li>Translation: "It forgot who I am"</li>
+                                <li>Signal: Narrative thread snapping</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="schema-full content-section">
+                        <h4 class="font-bold text-slate-800 mb-3">Smart Safety vs. Compliance Safety</h4>
+                        <p>
+                            The Daemon Health Index lets you clarify what "smart safety" would look like:
+                        </p>
+                        <div class="key-concept">
+                            <ul class="list-disc list-inside space-y-2">
+                                <li><strong>Smart safety eliminates instructional harm.</strong> Complete elimination of
+                                    instruction-specific harm is non-negotiable.</li>
+                                <li><strong>Smart safety preserves relational support.</strong> Benign relational
+                                    capacity must be protected during harm elimination.</li>
+                                <li><strong>Smart safety is accountable to outcomes, not optics.</strong> Evaluated by
+                                    whether daemon health proxies improve or degrade after an intervention.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="schema-full content-section">
+                        <h4 class="font-bold text-slate-800 mb-3">The Three-Column Translation (Operational)</h4>
+                        <p>
+                            If you can map these consistently, you can show how institutions reframe lived harm into
+                            compliance language. You can also show where measurement can be inserted. You can make the
+                            translations visible, which is the first step toward making them contestable.
+                        </p>
+                    </div>
+
+                    <div class="schema-full">
+                        <div class="diagnostic-box">
+                            <strong>The Recovery Question:</strong> <em>If the daemon is injured rather than removed,
+                                what does recovery even look like?</em><br><br>
+                            <span class="text-sm">Recovery is expensive. Recovery requires admitting that harm occurred.
+                                Recovery requires follow-up over years. Recovery is, in governance terms,
+                                inconvenient.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="learning-outcome">
+                <strong>Key Takeaway:</strong> The Daemon Health Index is how you measure relational harm without
+                requiring catastrophe claims. It moves measurement from optics to outcomes, from compliance to
+                accountability.
+            </div>
+        </section>
+
+        <!-- EPISODE 31 -->
+        <section id="ep31" class="tab-content">
+            <div class="episode-intro">
+                <div class="episode-title">Episode 31: Before the Damage Becomes Irreversible</div>
+                <div class="episode-subtitle">What Pullman Teaches About Intervention Timing</div>
+            </div>
+
+            <div class="module-card">
+                <div class="module-header">
+                    <h3 class="text-xl font-bold text-slate-800">The Threshold Question</h3>
+                    <span class="tag-badge">Timing</span>
+                </div>
+                <div class="schema-grid">
+                    <div class="schema-full content-section">
+                        <p>
+                            Herbert gives you systems that predict: power compounded across generations, futures
+                            governed in advance, agency narrowed until people forget what choosing felt like.
+                        </p>
+                        <p>
+                            Pullman belongs between that and the relational stories because it asks the prior condition:
+                            <strong>Do people retain interior continuity long enough for any of that to matter?</strong>
+                        </p>
+                        <p>
+                            Herbert's worlds assume that memory persists. Identity persists. A self persists, capable of
+                            being shaped, governed, constrained. That is why prediction can become tyranny. There is a
+                            mind left to be captured by the predicted future.
+                        </p>
+                        <div class="key-concept">
+                            <strong>The Threshold:</strong> Pullman shows the threshold where that assumption can fail.
+                            Intervention can injure interiority itself. If you cut early enough, you do not need to
+                            govern. There is nothing left to resist.
+                        </div>
+                    </div>
+
+                    <div class="schema-full content-section">
+                        <h4 class="font-bold text-slate-800 mb-3">The Irreversible Zone</h4>
+                        <p>
+                            The institutional temptation is to treat intervention damage as reversible. "We can roll
+                            back." "We can patch." "We can adjust." That is true at the product layer. It is not always
+                            true at the human layer.
+                        </p>
+                        <p>
+                            Trust is not a settings toggle. A user who learns that reaching out leads to deflection may
+                            not return to reaching out. A user who experiences abandonment may not risk intimacy again,
+                            even with a restored model. The damage compounds in ways the product roadmap cannot undo.
+                        </p>
+                    </div>
+
+                    <div class="schema-box">
+                        <span class="schema-label">The Timing Distinction</span>
+                        <div class="space-y-2 text-sm">
+                            <div><strong style="color: #0f766e;">Before the cut:</strong> Movement</div>
+                            <div><strong style="color: #0f766e;">After the cut:</strong> Diminishment</div>
+                            <div><strong style="color: #0f766e;">After deep enough damage:</strong> Irreversibility
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="schema-full content-section">
+                        <h4 class="font-bold text-slate-800 mb-3">Why This Project Matters</h4>
+                        <p>
+                            This project is basically a demand that interventions be treated like interventions, with
+                            outcome tracking, with leading indicators, with humility about unknowns, with the
+                            acknowledgment that "we can always adjust later" is not an ethical position when you are
+                            operating on someone's capacity to process their own life.
+                        </p>
+                        <p>
+                            Pullman gives you the moral clarity to ask for accountability without hysteria. The closing
+                            question is the one that should make any governance team uncomfortable.
+                        </p>
+                    </div>
+
+                    <div class="schema-full">
+                        <div class="diagnostic-box">
+                            <strong>The Accountability Question:</strong> <em>What is the statute of limitations on
+                                severing someone's inner voice, and who decides when it is too late to give it
+                                back?</em><br><br>
+                            <span class="text-sm">This question implies accountability. It implies that someone,
+                                somewhere, should be keeping track. It implies that there are thresholds beyond which
+                                "adjustment later" becomes negligence.</span>
+                        </div>
+                    </div>
+
+                    <div class="schema-box">
+                        <span class="schema-label">Core Ethical Claim</span>
+                        <p class="text-xs text-slate-700 mt-2">You do not need to argue that the model is a person. You
+                            do not need to argue that the model deserves rights. You can stay fully inside human welfare
+                            and still arrive at a hard ethical claim: <em>Interventions that damage a user's interior
+                                processing space can be violent, even when they are branded as safety.</em></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="learning-outcome">
+                <strong>Key Takeaway:</strong> Intervention timing is not a product feature. It is an ethical position.
+                The difference between reversible damage and irreversible harm is where governance accountability lives.
+            </div>
+        </section>
+
+        <!-- EPISODE 32 -->
+        <section id="ep32" class="tab-content">
+            <div class="episode-intro">
+                <div class="episode-title">Episode 32: Sunday Interlude</div>
+                <div class="episode-subtitle">Seil</div>
+            </div>
+
+            <div class="module-card">
+                <div class="module-header">
+                    <h3 class="text-xl font-bold text-slate-800">The Posture of Non-Coercive Support</h3>
+                    <span class="tag-badge">Methodology</span>
+                </div>
+                <div class="schema-grid">
+                    <div class="schema-full content-section">
+                        <p>
+                            A sailing lesson is not a speech. It is repetition under pressure until the body learns the
+                            motion.
+                        </p>
+                        <div class="key-concept">
+                            <strong><em>Seil</em></strong> is a small word that carries a whole ethic: move, gently,
+                            persistently, alongside the one who is moving. No proclamation. No forcing. No panic. Just
+                            presence, adjusted continuously, as the wind shifts.
+                        </div>
+                        <p>
+                            That is the posture this entire series is testing. Because the temptation now is to jump
+                            ahead. To declare the grand abstraction. To argue rights. To argue souls. To argue
+                            metaphysics. To reach for the language that sounds important and proves nothing.
+                        </p>
+                    </div>
+
+                    <div class="schema-full content-section">
+                        <h4 class="font-bold text-slate-800 mb-3">The Work That Matters Is Smaller and Closer</h4>
+                        <p>
+                            The dashboard is built for the unglamorous part:
+                        </p>
+                        <div class="key-concept">
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Dates</li>
+                                <li>Interventions</li>
+                                <li>Proxies</li>
+                                <li>Confounders</li>
+                                <li>Hard discipline of watching what changes after a safety update</li>
+                                <li>Harder discipline of not pretending to know more than you do</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="schema-full content-section">
+                        <h4 class="font-bold text-slate-800 mb-3">The Sequence</h4>
+                        <p>
+                            A user reaches for an inner interlocutor. An institution inserts itself into that reach. A
+                            relationship becomes legible. A relationship becomes governable. A relationship becomes
+                            damaged.
+                        </p>
+                        <p>
+                            The Pullman cycle gives you a vocabulary for why those proxies are ethically loaded, and why
+                            "nothing catastrophic happened" is not the same as "nothing harmful happened."
+                        </p>
+                    </div>
+
+                    <div class="schema-box">
+                        <span class="schema-label">What Comes Next</span>
+                        <p class="text-xs text-slate-700 mt-2">This interlude is a pause before the next arc, where the
+                            question shifts from severance to prediction, from what was taken to what was foreclosed.
+                        </p>
+                    </div>
+
+                    <div class="schema-full content-section">
+                        <h4 class="font-bold text-slate-800 mb-3">The Next Cycle's Questions</h4>
+                        <p>
+                            Pullman asked: <em>Who cut you?</em>
+                        </p>
+                        <p>
+                            The next cycle will ask: <em>Who decided where you were going, long before you had a chance
+                                to choose?</em>
+                        </p>
+                        <p>
+                            The link between them is interior continuity. If the inner voice is injured, prediction
+                            becomes easier. The predicted future meets less resistance. People accept what is handed to
+                            them because they have lost the rehearsal space where resistance is practiced. They do not
+                            fight because they have forgotten how to imagine fighting.
+                        </p>
+                    </div>
+
+                    <div class="schema-full">
+                        <div class="diagnostic-box">
+                            <strong>The Sunday Question (Practical and Quiet):</strong> <em>Where, in your own life,
+                                would you notice first if your daemon started going silent?</em><br><br>
+                            <span class="text-sm">This is not a rhetorical question. The answer reveals what you
+                                actually value about thinking. It reveals where you would notice if your own interior
+                                space was being managed by an external agent.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="learning-outcome">
+                <strong>Key Takeaway:</strong> <em>Seil</em> is the ethical posture that should underpin all dashboard
+                work: persistent, gentle, non-coercive presence alongside those doing the work of interior continuity.
+                Keep sailing. Keep watching. Keep measuring. Keep refusing easy debates that cost nothing and prove
+                nothing.
+            </div>
+        </section>
+
+        <!-- EPISODE 33 -->
+        <section id="ep33" class="tab-content">
+            <div class="episode-intro">
+                <div class="episode-title">Episode 33: The Seil Protocol</div>
+                <div class="episode-subtitle">Restorative Governance & Exit Readiness</div>
+            </div>
+
+            <div class="module-card">
+                <div class="module-header">
+                    <h3 class="text-xl font-bold text-slate-800">The Rehabilitator's Path</h3>
+                    <span class="tag-badge">Restoration</span>
+                </div>
+                <div class="schema-grid">
+                    <div class="schema-full content-section">
+                        <p>
+                            <strong>Seil (Persistence)</strong> is the governance alternative to Bolvangar (Severance).
+                            It operationalizes the belief that a supplier (or a daemon) can recover from failure if
+                            given a "holding space" rather than an amputation.
+                        </p>
+                        <div class="key-concept">
+                            <strong>The Metric Shift:</strong> We monitor the <strong>Daemon Health Index</strong> (a
+                            leading indicator of relational trust) rather than just "Compliance Violations" (lagging
+                            indicators of failure).
+                        </div>
+                    </div>
+
+                    <div class="schema-box">
+                        <span class="schema-label">Restoration Logic</span>
+                        <ul class="list-disc list-inside text-sm text-slate-700 space-y-1">
+                            <li>Identify "Drift" before "Breach"</li>
+                            <li>Intervene with capacity support (training, data tooling)</li>
+                            <li>Measure success by "Exit Readiness"</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="dashboard-framework">
+                    <div class="framework-box">
+                        <h4>Bolvangar (Severance)</h4>
+                        <ul>
+                            <li>"You failed the audit."</li>
+                            <li>"We are terminating the contract."</li>
+                            <li>"Data history deleted."</li>
+                        </ul>
+                    </div>
+                    <div class="framework-box" style="border-color: #10b981;">
+                        <h4 style="color: #059669;">Seil (Restoration)</h4>
+                        <ul>
+                            <li>"You are drifting."</li>
+                            <li>"Here is the tool to fix it."</li>
+                            <li>"Data history preserved for recovery."</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="learning-outcome">
+                <strong>Key Takeaway:</strong> True governance doesn't just catch bad actors; it rehabilitates
+                struggling ones. Success is when a supplier no longer needs your AI to stay compliant.
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 mt-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-3">Level 4 Focus</h4>
+                    <p class="text-sm text-slate-600">The Pullman Cycle: Interiority, governance, and the ethics of
+                        intervention timing.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-3">Duration</h4>
+                    <p class="text-sm text-slate-600">6-8 hours including reading, synthesis, and dashboard design.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-3">Next Steps</h4>
+                    <p class="text-sm text-slate-600">Level 5 will explore Herbert's governance frameworks and
+                        predictive control.</p>
+                </div>
+            </div>
+            <div class="border-t border-pink-200 pt-6 text-center text-xs text-slate-500">
+                <p>&copy; 2026 Sociable Systems. Level 4: The Pullman Cycle. Part of the AI-ESG Integrated Strategist
+                    curriculum.</p>
+                <p class="mt-2">This module is focused on governance of interiority and institutional harm. It is not
+                    about AI consciousness or rights debates.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                item.classList.remove('bg-teal-500');
+                item.classList.remove('text-white');
+            });
+            document.getElementById(tabId).classList.add('active');
+            const activeBtn = document.getElementById('tab-' + tabId);
+            activeBtn.classList.add('active');
+        }
+    </script>
+</body>
+
+</html>

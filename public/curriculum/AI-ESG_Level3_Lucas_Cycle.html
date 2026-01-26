@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 3: Lucas Cycle | AI-ESG Training</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fff7ed;
+            /* Orange-50 */
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        .serif {
+            font-family: 'Merriweather', serif;
+        }
+
+        /* TAB STYLES */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-item {
+            border-bottom: 2px solid transparent;
+            color: #64748b;
+        }
+
+        .nav-item:hover {
+            color: #c2410c;
+            /* Orange-700 */
+        }
+
+        .nav-item.active {
+            border-bottom: 2px solid #c2410c;
+            color: #c2410c;
+            font-weight: 700;
+        }
+
+        /* EXISTING STYLES */
+        .gradient-text {
+            background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .module-container {
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .module-header {
+            background-color: #f8fafc;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .module-body {
+            padding: 2rem;
+        }
+
+        .schema-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .schema-grid {
+                grid-template-columns: 2fr 1fr;
+            }
+
+            .schema-full {
+                grid-column: 1 / -1;
+            }
+        }
+
+        .schema-box {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.5rem;
+            padding: 1rem;
+        }
+
+        .schema-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #64748b;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .authority-boundary {
+            border-left: 4px solid #ef4444;
+            background: #fef2f2;
+        }
+
+        .assurance-control {
+            border-left: 4px solid #3b82f6;
+            background: #eff6ff;
+        }
+
+        .deliverable-box {
+            border-left: 4px solid #10b981;
+            background: #ecfdf5;
+        }
+
+        .list-check {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .list-check li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .list-check li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .tag-badge {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            background: #fed4bf;
+            color: #c2410c;
+        }
+
+        @media print {
+            .no-print {
+                display: none;
+            }
+
+            body {
+                background: white;
+            }
+
+            .tab-content {
+                display: block !important;
+            }
+
+            .nav-item {
+                display: none;
+            }
+        }
+
+        .level3-light {
+            background-color: #fff5f0;
+            border-color: #fed4bf;
+        }
+
+        .level3-accent {
+            color: #ea580c;
+        }
+    </style>
+    <script src="js/translation_toggle.js"></script>
+</head>
+
+<body class="flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-orange-600 to-red-600 text-white shadow-lg no-print">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex justify-between items-start">
+                <div>
+                    <span class="text-orange-200 font-bold tracking-widest uppercase text-xs">Level 3 Module</span>
+                    <h1 class="text-4xl md:text-5xl font-bold mt-2 serif">Lucas Cycle</h1>
+                    <p class="text-orange-100 mt-2 text-lg">Advanced Forensics & Governance</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur rounded-lg px-4 py-2 border border-white/20">
+                    <div class="flex items-center gap-2 text-orange-100 text-sm font-bold">
+                        <i data-lucide="clock" class="w-4 h-4"></i>
+                        <span>5-6 Hours</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="bg-white shadow sticky top-0 z-50 overflow-x-auto no-print">
+        <div class="container mx-auto px-6">
+            <div class="flex space-x-1">
+                <button onclick="switchTab('overview')" id="tab-overview"
+                    class="nav-item active px-6 py-4 font-medium transition-colors hover:bg-orange-50 focus:outline-none whitespace-nowrap">
+                    Overview
+                </button>
+                <button onclick="switchTab('ep3_1')" id="tab-ep3_1"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-orange-50 focus:outline-none whitespace-nowrap">
+                    Ep 3.1: Fairness Forensics
+                </button>
+                <button onclick="switchTab('ep3_2')" id="tab-ep3_2"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-orange-50 focus:outline-none whitespace-nowrap">
+                    Ep 3.2: Cybersecurity
+                </button>
+                <button onclick="switchTab('ep3_3')" id="tab-ep3_3"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-orange-50 focus:outline-none whitespace-nowrap">
+                    Ep 3.3: Competency Map
+                </button>
+                <button onclick="switchTab('ep3_4')" id="tab-ep3_4"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-orange-50 focus:outline-none whitespace-nowrap">
+                    Ep 3.4: Operational Controls
+                </button>
+                <button onclick="switchTab('ep3_5')" id="tab-ep3_5"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-orange-50 focus:outline-none whitespace-nowrap">
+                    Ep 3.5: Model Risk
+                </button>
+                <button onclick="switchTab('ep3_6')" id="tab-ep3_6"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-orange-50 focus:outline-none whitespace-nowrap">
+                    Ep 3.6: Seil Protocol
+                </button>
+                <button onclick="switchTab('outcomes')" id="tab-outcomes"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-orange-50 focus:outline-none whitespace-nowrap">
+                    Outcomes
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-6 py-12 flex-grow max-w-5xl">
+
+        <!-- OVERVIEW -->
+        <section id="overview" class="tab-content active">
+            <div class="mb-16">
+                <div class="bg-white p-8 rounded-xl border border-orange-200 shadow-sm">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6 serif leading-tight">
+                        From Detection to Enforcement
+                    </h2>
+
+                    <div class="level3-light border-l-4 border-orange-500 p-4 mb-6">
+                        <strong class="level3-accent">Lucas Cycle Focus:</strong> Level 3 shifts from identifying
+                        governance gaps to operationalizing forensic accountability. These modules teach the
+                        institutional practices, audit frameworks, and technical controls needed to move ESG
+                        reporting from theater to evidence.
+                    </div>
+
+                    <p class="text-xl text-slate-600 leading-relaxed mb-8">
+                        By the end of Level 3, participants can design and audit <strong>"Sociable
+                            Systems"</strong>—workflows where AI and humans have explicit, tested authority
+                        boundaries.
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                            <h3 class="text-sm font-bold text-slate-800 uppercase mb-4">What You Will Build</h3>
+                            <div class="space-y-3">
+                                <div class="bg-white p-4 rounded border-l-4 border-orange-500">
+                                    <strong class="text-orange-700">Fairness Forensics Report</strong>
+                                    <p class="text-xs text-slate-600 mt-1">Prove algorithmic bias using statistical
+                                        methods</p>
+                                </div>
+                                <div class="bg-white p-4 rounded border-l-4 border-orange-500">
+                                    <strong class="text-orange-700">Assurance Protocol (SOP)</strong>
+                                    <p class="text-xs text-slate-600 mt-1">Define sampling, versioning, and human
+                                        sign-off</p>
+                                </div>
+                                <div class="bg-white p-4 rounded border-l-4 border-orange-500">
+                                    <strong class="text-orange-700">Third-Party Risk Register</strong>
+                                    <p class="text-xs text-slate-600 mt-1">Map vendor models and liability constraints
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-orange-50 p-6 rounded-lg border border-orange-200">
+                            <h3 class="text-sm font-bold text-orange-900 uppercase mb-4">Prerequisites</h3>
+                            <ul class="space-y-3 text-sm text-slate-700">
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-orange-600 mt-0.5"></i>
+                                    Completion of Level 1 & 2
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-orange-600 mt-0.5"></i>
+                                    Understanding of Liability Sponge
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-orange-600 mt-0.5"></i>
+                                    Basic familiarity with audit concepts
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- M5 -->
+        <section id="ep3_1" class="tab-content">
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-mono text-slate-400 block mb-1">L3-M5</span>
+                        <h3 class="text-2xl font-bold text-slate-800">Institutional Harm & Fairness Forensics</h3>
+                    </div>
+                    <span class="tag-badge">Forensics</span>
+                </div>
+                <div class="module-body">
+                    <div class="schema-grid">
+                        <div class="schema-full">
+                            <span class="schema-label">Why It Exists</span>
+                            <p class="text-sm text-slate-600">Bias in ESG isn't just about people; it's about supplier
+                                exclusion. Algorithms that penalize "missing data" systematically harm developing
+                                regions.
+                            </p>
+                        </div>
+                        <div class="schema-box">
+                            <span class="schema-label">Core Concepts</span>
+                            <ul class="list-disc list-inside text-sm text-slate-700 space-y-1">
+                                <li>Institutional Harm Pathways</li>
+                                <li>Zero-Shot Bias (Data Availability)</li>
+                                <li>The Appeals Process as Governance</li>
+                            </ul>
+                        </div>
+                        <div class="schema-box deliverable-box">
+                            <span class="schema-label">Deliverable</span>
+                            <strong class="block text-sm text-slate-900 mb-1">Fairness & Bias Stress-Test</strong>
+                            <span class="text-xs text-slate-500 block mb-2">Format: Report / Simulation</span>
+                            <span class="schema-label">Acceptance Criteria</span>
+                            <ul class="text-xs text-slate-700 list-check space-y-1">
+                                <li>Tests for "Missing Data" penalty</li>
+                                <li>Compares False Positive rates across regions</li>
+                                <li>Documents the "Path to Appeal"</li>
+                            </ul>
+                        </div>
+                        <div class="schema-box authority-boundary">
+                            <span class="schema-label">Authority Boundary</span>
+                            <p class="text-xs text-slate-800"><strong>Stop-the-Line:</strong> Disparate impact > 20%
+                                variance → Pause Vendor Selection Model.</p>
+                        </div>
+                        <div class="schema-box assurance-control">
+                            <span class="schema-label">Assurance Control of the Week</span>
+                            <strong class="block text-sm text-blue-900">The "Empty Field" Test</strong>
+                            <p class="text-xs text-slate-600 mt-1">Submit a perfect supplier profile with *one* missing
+                                non-critical field. If rejected, the model is fragile/biased.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- M6 -->
+        <section id="ep3_2" class="tab-content">
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-mono text-slate-400 block mb-1">L3-M6</span>
+                        <h3 class="text-2xl font-bold text-slate-800">Cybersecurity as Governance Credibility</h3>
+                    </div>
+                    <span class="tag-badge">Governance</span>
+                </div>
+                <div class="module-body">
+                    <div class="schema-grid">
+                        <div class="schema-full">
+                            <span class="schema-label">Why It Exists</span>
+                            <p class="text-sm text-slate-600">A breached supply chain dataset is a credibility breach.
+                                If you
+                                can't protect the data, you can't attest to the report's integrity.</p>
+                        </div>
+                        <div class="schema-box">
+                            <span class="schema-label">Core Concepts</span>
+                            <ul class="list-disc list-inside text-sm text-slate-700 space-y-1">
+                                <li>Data Integrity vs. Availability</li>
+                                <li>The "Stop Work Authority" for Data</li>
+                                <li>Incident Disclosure Protocols</li>
+                            </ul>
+                        </div>
+                        <div class="schema-box deliverable-box">
+                            <span class="schema-label">Deliverable</span>
+                            <strong class="block text-sm text-slate-900 mb-1">Data Integrity Response Protocol</strong>
+                            <span class="text-xs text-slate-500 block mb-2">Format: Flowchart</span>
+                            <span class="schema-label">Acceptance Criteria</span>
+                            <ul class="text-xs text-slate-700 list-check space-y-1">
+                                <li>Defines who declares a "Data Breach"</li>
+                                <li>Mandates notification of assurance providers</li>
+                                <li>Includes "correction procedure" for reports</li>
+                            </ul>
+                        </div>
+                        <div class="schema-box authority-boundary">
+                            <span class="schema-label">Authority Boundary</span>
+                            <p class="text-xs text-slate-800"><strong>Stop-the-Line:</strong> Unverified data source
+                                injection → Immediate Report Freeze.</p>
+                        </div>
+                        <div class="schema-box assurance-control">
+                            <span class="schema-label">Assurance Control of the Week</span>
+                            <strong class="block text-sm text-blue-900">Provenance Check</strong>
+                            <p class="text-xs text-slate-600 mt-1">Verify cryptohash or chain-of-custody log.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- M7 -->
+        <section id="ep3_3" class="tab-content">
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-mono text-slate-400 block mb-1">L3-M7</span>
+                        <h3 class="text-2xl font-bold text-slate-800">The AI Assurance Role</h3>
+                    </div>
+                    <span class="tag-badge">Strategy</span>
+                </div>
+                <div class="module-body">
+                    <div class="schema-grid">
+                        <div class="schema-full">
+                            <span class="schema-label">Why It Exists</span>
+                            <p class="text-sm text-slate-600">Preparing for the shift from "checking boxes" to "auditing
+                                code." The near-term regulatory horizon requires forensic capability.</p>
+                        </div>
+                        <div class="schema-box">
+                            <span class="schema-label">Core Concepts</span>
+                            <ul class="list-disc list-inside text-sm text-slate-700 space-y-1">
+                                <li>The AI Assurance Competency Map</li>
+                                <li>"Training the Trainers" (Recursive Authority)</li>
+                                <li>Sandboxes & Testing Infrastructures</li>
+                            </ul>
+                        </div>
+                        <div class="schema-box deliverable-box">
+                            <span class="schema-label">Deliverable</span>
+                            <strong class="block text-sm text-slate-900 mb-1">Skill Gap Analysis</strong>
+                            <span class="text-xs text-slate-500 block mb-2">Format: Personal Assessment</span>
+                            <span class="schema-label">Acceptance Criteria</span>
+                            <ul class="text-xs text-slate-700 list-check space-y-1">
+                                <li>Assesses Python/SQL literacy</li>
+                                <li>Evaluates "Skepticism" & Forensic Mindset</li>
+                                <li>Maps current role to "AI Assurance" needs</li>
+                            </ul>
+                        </div>
+                        <div class="schema-box authority-boundary">
+                            <span class="schema-label">Authority Boundary</span>
+                            <p class="text-xs text-slate-800"><strong>Stop-the-Line:</strong> Assurance Lead cannot sign
+                                off
+                                if "Black Box" opacity prevents testing.</p>
+                        </div>
+                        <div class="schema-box assurance-control">
+                            <span class="schema-label">Assurance Control of the Week</span>
+                            <strong class="block text-sm text-blue-900">The "Explanation" Challenge</strong>
+                            <p class="text-xs text-slate-600 mt-1">Can the assurance lead explain the model in plain
+                                language?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- M8 -->
+        <section id="ep3_4" class="tab-content">
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-mono text-slate-400 block mb-1">L3-M8</span>
+                        <h3 class="text-2xl font-bold text-slate-800">Operational Assurance Controls</h3>
+                    </div>
+                    <span class="tag-badge">Assurance</span>
+                </div>
+                <div class="module-body">
+                    <div class="schema-grid">
+                        <div class="schema-full">
+                            <span class="schema-label">Why It Exists</span>
+                            <p class="text-sm text-slate-600">To operationalize the "Calvin Convention" into daily audit
+                                practice. Turning "trust" into "evidence."</p>
+                        </div>
+                        <div class="schema-box">
+                            <span class="schema-label">Core Concepts</span>
+                            <ul class="list-disc list-inside text-sm text-slate-700 space-y-1">
+                                <li>Sampling Methodologies for AI Outputs</li>
+                                <li>Reconciliation Trails</li>
+                                <li>Change Control & Versioning</li>
+                            </ul>
+                        </div>
+                        <div class="schema-box deliverable-box">
+                            <span class="schema-label">Deliverable</span>
+                            <strong class="block text-sm text-slate-900 mb-1">The Assurance Protocol</strong>
+                            <span class="text-xs text-slate-500 block mb-2">Format: SOP Document</span>
+                            <span class="schema-label">Acceptance Criteria</span>
+                            <ul class="text-xs text-slate-700 list-check space-y-1">
+                                <li>Defines sampling frequency (e.g., 1 in 10)</li>
+                                <li>Requires "Human-in-the-Loop" log signatures</li>
+                                <li>Mandates version control for all models</li>
+                            </ul>
+                        </div>
+                        <div class="schema-box authority-boundary">
+                            <span class="schema-label">Authority Boundary</span>
+                            <p class="text-xs text-slate-800"><strong>Stop-the-Line:</strong> Missing version history →
+                                Audit Failure.</p>
+                        </div>
+                        <div class="schema-box assurance-control">
+                            <span class="schema-label">Assurance Control of the Week</span>
+                            <strong class="block text-sm text-blue-900">Reconciliation Logic</strong>
+                            <p class="text-xs text-slate-600 mt-1">Total Input Records == Output Records + Exceptions.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- M9 -->
+        <section id="ep3_5" class="tab-content">
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-mono text-slate-400 block mb-1">L3-M9</span>
+                        <h3 class="text-2xl font-bold text-slate-800">Model Risk & Third-Party Governance</h3>
+                    </div>
+                    <span class="tag-badge">Governance</span>
+                </div>
+                <div class="module-body">
+                    <div class="schema-grid">
+                        <div class="schema-full">
+                            <span class="schema-label">Why It Exists</span>
+                            <p class="text-sm text-slate-600">To manage the risk of "outsourced reasoning." When the
+                                vendor
+                                holds the IP, you still hold the liability.</p>
+                        </div>
+                        <div class="schema-box">
+                            <span class="schema-label">Core Concepts</span>
+                            <ul class="list-disc list-inside text-sm text-slate-700 space-y-1">
+                                <li>Vendor Due Diligence</li>
+                                <li>IP vs. Accountability</li>
+                                <li>Escalation Paths for Black Box Failures</li>
+                            </ul>
+                        </div>
+                        <div class="schema-box deliverable-box">
+                            <span class="schema-label">Deliverable</span>
+                            <strong class="block text-sm text-slate-900 mb-1">Third-Party Risk Register</strong>
+                            <span class="text-xs text-slate-500 block mb-2">Format: Risk Log</span>
+                            <span class="schema-label">Acceptance Criteria</span>
+                            <ul class="text-xs text-slate-700 list-check space-y-1">
+                                <li>Lists all AI vendors & model versions</li>
+                                <li>Identifies "Black Box" risks</li>
+                                <li>Maps contractual liability limits</li>
+                            </ul>
+                        </div>
+                        <div class="schema-box authority-boundary">
+                            <span class="schema-label">Authority Boundary</span>
+                            <p class="text-xs text-slate-800"><strong>Stop-the-Line:</strong> Vendor refuses to provide
+                                "Known Failure Modes" → PO Hold.</p>
+                        </div>
+                        <div class="schema-box assurance-control">
+                            <span class="schema-label">Assurance Control of the Week</span>
+                            <strong class="block text-sm text-blue-900">The "Training Data" Check</strong>
+                            <p class="text-xs text-slate-600 mt-1">Does the contract allow training data audit? If no,
+                                Risk = HIGH.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- M10 -->
+        <section id="ep3_6" class="tab-content">
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-mono text-slate-400 block mb-1">L3-M10</span>
+                        <h3 class="text-2xl font-bold text-slate-800">The Seil Protocol</h3>
+                    </div>
+                    <span class="tag-badge">Restoration</span>
+                </div>
+                <div class="module-body">
+                    <div class="schema-grid">
+                        <div class="schema-full">
+                            <span class="schema-label">Why It Exists</span>
+                            <p class="text-sm text-slate-600">"Seil" (Persistence) is the alternative to Bolvangar
+                                (Severance).
+                                We measure success by "Exit Readiness"—can the supplier eventually succeed without us?
+                            </p>
+                        </div>
+                        <div class="schema-box">
+                            <span class="schema-label">Core Concepts</span>
+                            <ul class="list-disc list-inside text-sm text-slate-700 space-y-1">
+                                <li>Daemon Health Index</li>
+                                <li>Exit Readiness vs. Perpetual Monitoring</li>
+                                <li>Rehabilitative Compliance</li>
+                            </ul>
+                        </div>
+                        <div class="schema-box deliverable-box">
+                            <span class="schema-label">Deliverable</span>
+                            <strong class="block text-sm text-slate-900 mb-1">Restoration Plan</strong>
+                            <span class="text-xs text-slate-500 block mb-2">Format: Capstone Artifact</span>
+                            <span class="schema-label">Acceptance Criteria</span>
+                            <ul class="text-xs text-slate-700 list-check space-y-1">
+                                <li>Prioritizes data history retention</li>
+                                <li>Defines clear "Return to Good Standing" path</li>
+                                <li>Uses "Daemon Health" to predict risk</li>
+                            </ul>
+                        </div>
+                        <div class="schema-box authority-boundary">
+                            <span class="schema-label">Authority Boundary</span>
+                            <p class="text-xs text-slate-800"><strong>Constraint:</strong> No severance without a prior
+                                restoration attempt.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- OUTCOMES -->
+        <section id="outcomes" class="tab-content">
+            <h3 class="text-3xl font-bold text-slate-900 mb-6 serif">Learning Outcomes</h3>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-8 rounded-lg border border-orange-200">
+                    <h3 class="font-bold text-2xl text-orange-900 mb-6">Technical Competency</h3>
+                    <ul class="space-y-4 text-orange-900">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 mt-1 text-orange-600"></i>
+                            <span>Design fairness stress-tests for algorithmic bias</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 mt-1 text-orange-600"></i>
+                            <span>Build audit protocols with sampling & versioning</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 mt-1 text-orange-600"></i>
+                            <span>Evaluate third-party models for black-box risks</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 mt-1 text-orange-600"></i>
+                            <span>Create data integrity protocols & incident response</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-8 rounded-lg border border-orange-200">
+                    <h3 class="font-bold text-2xl text-orange-900 mb-6">Governance Competency</h3>
+                    <ul class="space-y-4 text-orange-900">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 mt-1 text-orange-600"></i>
+                            <span>Map decision rights (RACI) to eliminate liability</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 mt-1 text-orange-600"></i>
+                            <span>Define "Stop-the-Line" triggers with operational teeth</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 mt-1 text-orange-600"></i>
+                            <span>Negotiate contracts with accountability constraints</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 mt-1 text-orange-600"></i>
+                            <span>Build appeals & remediation processes</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Next Steps -->
+            <div class="bg-gradient-to-br from-slate-800 to-slate-900 text-white p-10 rounded-lg mt-8">
+                <center>
+                    <h4 class="text-2xl font-bold mb-2">Curriculum Complete</h4>
+                    <p class="text-slate-400 mb-6">You have reached the end of the AI-ESG Integrated Strategist (AEIS)
+                        Level 3.</p>
+                    <button
+                        class="bg-orange-600 hover:bg-orange-500 text-white font-bold py-4 px-8 rounded-lg transition">
+                        Generate Final Certificate
+                    </button>
+                </center>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-8 mt-auto no-print">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-sm mb-2">
+                AI & ESG Capability Architect | Level 3: Lucas Cycle
+            </p>
+            <p class="text-xs opacity-50 italic">
+                Based on Sociable Systems research methodology
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                item.classList.remove('bg-orange-50');
+                item.classList.remove('text-orange-700');
+            });
+            document.getElementById(tabId).classList.add('active');
+            const activeBtn = document.getElementById('tab-' + tabId);
+            activeBtn.classList.add('active');
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 6: Forensic Domains | AI-ESG Integrated Strategist</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+            color: #0f172a;
+            line-height: 1.7;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        .serif {
+            font-family: 'Merriweather', serif;
+        }
+
+        .purple-gradient {
+            background: linear-gradient(135deg, #6b21a8 0%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .purple-accent {
+            background-color: #6b21a8;
+            color: white;
+        }
+
+        .purple-light {
+            background-color: #f3e8ff;
+            border-left: 4px solid #6b21a8;
+        }
+
+        .episode-card {
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .episode-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .episode-header {
+            background: linear-gradient(135deg, #6b21a8 0%, #7c3aed 100%);
+            color: white;
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .episode-header h3 {
+            margin: 0;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .episode-content {
+            padding: 2rem;
+        }
+
+        .learning-objective {
+            background: #f3e8ff;
+            border-left: 4px solid #6b21a8;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0.25rem;
+        }
+
+        .learning-objective h4 {
+            color: #6b21a8;
+            margin-top: 0;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+        }
+
+        .case-study {
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid #7c3aed;
+            border-radius: 0.25rem;
+        }
+
+        .case-study strong {
+            color: #6b21a8;
+        }
+
+        .forensic-framework {
+            background: #fafaf9;
+            border: 1px solid #e7e5e4;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0.5rem;
+        }
+
+        .forensic-framework h5 {
+            color: #6b21a8;
+            margin-top: 0;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+        }
+
+        .control-box {
+            background: white;
+            border: 1px solid #cbd5e1;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 4px solid #6b21a8;
+        }
+
+        .control-box strong {
+            color: #6b21a8;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-section {
+            background: #faf5ff;
+            border: 1px solid #e9d5ff;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+
+        .summary-section h4 {
+            color: #6b21a8;
+            margin-top: 0;
+        }
+
+        nav.tab-nav {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-button {
+            padding: 1rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            background: white;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .nav-button:hover {
+            background: #f3e8ff;
+            color: #6b21a8;
+        }
+
+        .nav-button.active {
+            background: #6b21a8;
+            color: white;
+            border-bottom: 3px solid #7c3aed;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .quote-block {
+            background: #f8fafc;
+            border-left: 4px solid #6b21a8;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: #475569;
+        }
+
+        .audit-checklist {
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .audit-checklist ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .audit-checklist li {
+            padding: 0.5rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .audit-checklist li:before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            color: #6b21a8;
+            font-weight: bold;
+        }
+
+        .time-indicator {
+            display: inline-block;
+            background: #e9d5ff;
+            color: #6b21a8;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 1rem;
+        }
+
+        .header-container {
+            background: linear-gradient(135deg, #6b21a8 0%, #7c3aed 100%);
+            color: white;
+            padding: 3rem 0;
+        }
+
+        footer {
+            background: #1e293b;
+            color: #cbd5e1;
+            padding: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.875rem;
+        }
+
+        .progress-indicator {
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar {
+            background: #e9d5ff;
+            border-radius: 9999px;
+            height: 8px;
+            margin: 1rem 0;
+        }
+
+        .progress-bar-fill {
+            background: #6b21a8;
+            height: 100%;
+            border-radius: 9999px;
+            transition: width 0.3s ease;
+        }
+    </style>
+    <script src="js/translation_toggle.js"></script>
+</head>
+
+<body class="flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <div class="header-container">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center gap-3 mb-3">
+                <div class="bg-white bg-opacity-20 p-2 rounded-lg">
+                    <i data-lucide="search" class="w-6 h-6 text-white"></i>
+                </div>
+                <div>
+                    <h1 class="text-3xl md:text-4xl font-bold tracking-tight">Level 6: Forensic Domains</h1>
+                    <p class="text-purple-200 text-sm uppercase tracking-widest font-semibold">Applied Case Studies in
+                        AI Governance</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="tab-nav">
+        <div class="container mx-auto px-6">
+            <div class="flex overflow-x-auto space-x-0 md:space-x-2">
+                <button onclick="switchTab('overview')" class="nav-button active" id="nav-overview">
+                    Overview
+                </button>
+                <button onclick="switchTab('episode1')" class="nav-button" id="nav-episode1">
+                    6.1: Credit Scoring
+                </button>
+                <button onclick="switchTab('episode2')" class="nav-button" id="nav-episode2">
+                    6.2: Breach Protocol
+                </button>
+                <button onclick="switchTab('episode3')" class="nav-button" id="nav-episode3">
+                    6.3: Shadow AI
+                </button>
+                <button onclick="switchTab('episode4')" class="nav-button" id="nav-episode4">
+                    6.4: Chain of Thought
+                </button>
+                <button onclick="switchTab('episode5')" class="nav-button" id="nav-episode5">
+                    6.5: XAI Limitations
+                </button>
+                <button onclick="switchTab('synthesis')" class="nav-button" id="nav-synthesis">
+                    Synthesis & Practice
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-10 flex-grow">
+
+        <!-- OVERVIEW -->
+        <section id="overview" class="tab-content active">
+            <div class="max-w-4xl mx-auto">
+                <div class="mb-8">
+                    <span
+                        class="inline-block py-1 px-3 rounded-full bg-purple-100 text-purple-900 text-xs font-bold uppercase tracking-wider mb-4">
+                        Standalone Module
+                    </span>
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4 serif">Forensic Domains: Where Frameworks Meet
+                        Reality</h2>
+                    <p class="text-lg text-slate-600 mb-6">
+                        This module applies all prior levels of the AI-ESG curriculum to five high-stakes domains where
+                        algorithmic decision-making creates governance crises. Each domain represents a forensic
+                        challenge: detecting where opacity enables harm, where speed obscures accountability, and where
+                        technical authority supplants human judgment.
+                    </p>
+                </div>
+
+                <div class="progress-indicator">
+                    <div class="flex justify-between items-center mb-2">
+                        <strong class="text-slate-900">Module Duration</strong>
+                        <span class="text-slate-600">6–8 hours</span>
+                    </div>
+                    <p class="text-sm text-slate-600 mb-4">Estimated time across all five episodes plus synthesis
+                        exercises</p>
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill" style="width: 0%;" id="progress"></div>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-white border border-slate-200 rounded-lg p-6">
+                        <h3 class="font-bold text-slate-900 mb-4 flex items-center gap-2">
+                            <i data-lucide="target" class="w-5 h-5 text-purple-600"></i>
+                            Learning Outcomes
+                        </h3>
+                        <ul class="space-y-2 text-sm text-slate-700">
+                            <li class="flex items-start gap-2">
+                                <span class="text-purple-600 font-bold">→</span>
+                                <span>Diagnose governance failures in opaque algorithmic systems</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-purple-600 font-bold">→</span>
+                                <span>Identify domain-specific forensic pathways</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-purple-600 font-bold">→</span>
+                                <span>Design interrogation protocols for black-box systems</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-purple-600 font-bold">→</span>
+                                <span>Build resilience into real-world audit programs</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white border border-slate-200 rounded-lg p-6">
+                        <h3 class="font-bold text-slate-900 mb-4 flex items-center gap-2">
+                            <i data-lucide="briefcase" class="w-5 h-5 text-purple-600"></i>
+                            Prerequisite Knowledge
+                        </h3>
+                        <ul class="space-y-2 text-sm text-slate-700">
+                            <li class="flex items-start gap-2">
+                                <span class="text-purple-600 font-bold">✓</span>
+                                <span>Authority boundaries & Stop-the-Line principles</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-purple-600 font-bold">✓</span>
+                                <span>Evidence ladder & chain of custody concepts</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-purple-600 font-bold">✓</span>
+                                <span>Liability Sponge & accountability gaps</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-purple-600 font-bold">✓</span>
+                                <span>Clarke's Law & systems opacity</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-purple-50 to-white border-l-4 border-purple-600 p-6 rounded-lg mb-8">
+                    <h3 class="font-bold text-slate-900 mb-3">The Forensic Approach</h3>
+                    <p class="text-slate-700 mb-3">
+                        Level 6 shifts from theory to practice. Rather than learning frameworks in abstraction, you'll
+                        examine five real domains where AI governance is failing silently:
+                    </p>
+                    <ul class="space-y-2 text-sm text-slate-700">
+                        <li><strong>Credit Scoring (6.1):</strong> How opacity launders historical discrimination into
+                            mathematical inevitability.</li>
+                        <li><strong>Breach Protocol (6.2):</strong> Why data integrity failures become credibility
+                            crises.</li>
+                        <li><strong>Shadow AI (6.3):</strong> The unmanaged proliferation that creates governance blind
+                            spots.</li>
+                        <li><strong>Chain of Thought (6.4):</strong> Why transparency of reasoning can mask
+                            confabulation.</li>
+                        <li><strong>XAI Limitations (6.5):</strong> When explanations obscure rather than clarify.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-lg p-6">
+                    <h3 class="font-bold text-slate-900 mb-4">Module Structure</h3>
+                    <p class="text-slate-700 mb-4">
+                        Each episode follows a consistent arc:
+                    </p>
+                    <div class="space-y-3">
+                        <div class="flex gap-3">
+                            <div
+                                class="bg-purple-100 text-purple-900 font-bold w-8 h-8 flex items-center justify-center rounded">
+                                1</div>
+                            <div>
+                                <strong>The Governance Gap</strong>
+                                <p class="text-sm text-slate-600">Identify the core failure mode in the domain.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <div
+                                class="bg-purple-100 text-purple-900 font-bold w-8 h-8 flex items-center justify-center rounded">
+                                2</div>
+                            <div>
+                                <strong>Why It Happens</strong>
+                                <p class="text-sm text-slate-600">Understand the structural incentives & technical
+                                    constraints.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <div
+                                class="bg-purple-100 text-purple-900 font-bold w-8 h-8 flex items-center justify-center rounded">
+                                3</div>
+                            <div>
+                                <strong>The Interrogation Path</strong>
+                                <p class="text-sm text-slate-600">Learn the forensic method specific to that domain.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <div
+                                class="bg-purple-100 text-purple-900 font-bold w-8 h-8 flex items-center justify-center rounded">
+                                4</div>
+                            <div>
+                                <strong>Control & Remediation</strong>
+                                <p class="text-sm text-slate-600">Implement auditable safeguards.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- EPISODE 1: CREDIT SCORING -->
+        <section id="episode1" class="tab-content">
+            <div class="max-w-4xl mx-auto">
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div>
+                            <span class="text-purple-200 text-sm font-mono">L6-E6.1</span>
+                            <h3>Credit Scoring: When Opacity Launders Discrimination</h3>
+                        </div>
+                        <span class="time-indicator">90 min</span>
+                    </div>
+                    <div class="episode-content">
+
+                        <div class="learning-objective">
+                            <h4>Learning Objective</h4>
+                            <p>Understand how credit scoring systems encode historical discrimination into algorithmic
+                                weights, making discrimination both mathematically defensible and nearly undetectable.
+                                Learn the forensic methods to expose disparate impact masked by claims of objectivity.
+                            </p>
+                        </div>
+
+                        <h4 class="text-lg font-bold text-slate-900 mt-6 mb-4">6.1.1: The Governance Failure</h4>
+                        <p class="text-slate-700 mb-4">
+                            Credit scoring is governance through opacity. A person applies for a loan. They are
+                            rejected. They receive an adverse action letter that explains the decision in vague terms
+                            ("insufficient credit history," "high utilization ratio"). This letter has the shape of
+                            reasoning without its substance.
+                        </p>
+                        <p class="text-slate-700 mb-4">
+                            The letter tells you what the system evaluated, but not why those factors matter relative to
+                            others, how they were weighted, or what would change the outcome. You have been given an
+                            explanation without interrogation rights.
+                        </p>
+
+                        <div class="quote-block">
+                            "The number doesn't care about your context. The number cannot be persuaded. The number has
+                            no discretion to exercise, and the human nominally in the loop has been stripped of theirs."
+                        </div>
+
+                        <h4 class="text-lg font-bold text-slate-900 mt-6 mb-4">6.1.2: The Structural Problem</h4>
+
+                        <div class="forensic-framework">
+                            <h5>The Feedback Loop Problem</h5>
+                            <p>Credit scoring systems learn from historical outcomes. They observe who defaults and who
+                                repays. They update weights to predict future default risk. But the training data embeds
+                                decades of discrimination:</p>
+                            <ul class="list-disc list-inside text-slate-700 mt-2 space-y-1">
+                                <li>Redlining systematically denied credit to Black neighborhoods</li>
+                                <li>This denial created real disparities: lower property values, thinner credit
+                                    histories</li>
+                                <li>The model learns these patterns as "risk signals"</li>
+                                <li>The model now predicts that applicants from these areas are higher risk—correctly
+                                    reflecting the training data</li>
+                                <li>The prediction becomes self-fulfilling: those applicants receive worse terms or no
+                                    credit</li>
+                                <li>The next generation of data reflects this exclusion</li>
+                            </ul>
+                        </div>
+
+                        <div class="case-study">
+                            <strong>Case: FICO Scoring Opacity</strong>
+                            <p>FICO publishes that "payment history matters" (35%), "credit utilization" (30%), "length
+                                of history" (15%), etc. But it does not publish:</p>
+                            <ul class="list-disc list-inside text-slate-700 mt-2 space-y-1">
+                                <li>How the factors interact (non-linear effects)</li>
+                                <li>Which specific version of the model your lender uses</li>
+                                <li>How your score changes if you change one variable</li>
+                                <li>The thresholds above which decisions flip</li>
+                            </ul>
+                            <p class="mt-2">This is defense-able as "competitive advantage." It is also the elimination
+                                of interrogation.</p>
+                        </div>
+
+                        <h4 class="text-lg font-bold text-slate-900 mt-6 mb-4">6.1.3: The Interrogation Path</h4>
+
+                        <div class="forensic-framework">
+                            <h5>Forensic Method: Statistical Bias Testing</h5>
+                            <p>To detect disparate impact masked by opacity, use statistical decomposition:</p>
+                        </div>
+
+                        <div class="control-box">
+                            <strong>Step 1: Controlled Comparison</strong>
+                            <p>Create identical applicant profiles that differ only in protected characteristics (race,
+                                gender, zip code). Score them. If scores differ, the model is considering proxy
+                                variables.</p>
+                        </div>
+
+                        <div class="control-box">
+                            <strong>Step 2: Threshold Stress Testing</strong>
+                            <p>Examine approval rates by demographic group. If approval rates differ by > 20%, you have
+                                evidence of disparate impact (80% rule, EEOC standard).</p>
+                        </div>
+
+                        <div class="control-box">
+                            <strong>Step 3: Feature Attribution Analysis</strong>
+                            <p>For applicants rejected despite good overall creditworthiness, trace which single
+                                features "killed" the application. If those features correlate with protected
+                                characteristics, the model is laundering discrimination.</p>
+                        </div>
+
+                        <div class="control-box">
+                            <strong>Step 4: Counterfactual Analysis</strong>
+                            <p>For each rejected applicant, calculate: "What would I need to change to pass?" If the
+                                answer is "move to a different zip code" or "work for a company in a different
+                                industry," the model is embedding structural exclusion.</p>
+                        </div>
+
+                        <h4 class="text-lg font-bold text-slate-900 mt-6 mb-4">6.1.4: Audit Control</h4>
+
+                        <div class="audit-checklist">
+                            <strong class="block mb-3">Credit Scoring Audit Protocol</strong>
+                            <ul>
+                                <li>Obtain approval/rejection rates by demographic cohort for last 12 months</li>
+                                <li>Calculate disparate impact ratios (minority approval rate ÷ majority approval rate)
+                                </li>
+                                <li>If any ratio < 0.80, prepare corrective action plan</li>
+                                <li>Run feature importance analysis: which variables drive rejection decisions?</li>
+                                <li>Test model behavior on synthetic profiles matching protected characteristics</li>
+                                <li>Document any model updates since last audit (weight changes, feature additions)</li>
+                                <li>Verify applicants have clear path to dispute adverse decisions</li>
+                                <li>Test dispute process: randomly submit challenges; measure resolution quality</li>
+                            </ul>
+                        </div>
+
+                        <div class="summary-section">
+                            <h4>Episode Summary</h4>
+                            <p>Credit scoring demonstrates how algorithmic opacity enables discrimination to persist
+                                while remaining mathematically defensible. The forensic interrogation path requires
+                                statistical analysis to detect proxy discrimination, and auditable controls must enforce
+                                both transparency and equity.</p>
+                            <p class="mt-3"><strong>Next:</strong> What happens when the data itself is compromised? →
+                                Episode 6.2: Breach Protocol</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EPISODE 2: BREACH PROTOCOL -->
+        <section id="episode2" class="tab-content">
+            <div class="max-w-4xl mx-auto">
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div>
+                            <span class="text-purple-200 text-sm font-mono">L6-E6.2</span>
+                            <h3>Breach Protocol: When Data Integrity Becomes Credibility Crisis</h3>
+                        </div>
+                        <span class="time-indicator">75 min</span>
+                    </div>
+                    <div class="episode-content">
+
+                        <div class="learning-objective">
+                            <h4>Learning Objective</h4>
+                            <p>Understand that a data breach is not just an IT incident—it is a governance credibility
+                                breach. When the supply chain dataset is compromised, the integrity of every report
+                                built from that dataset is suspect. Learn how to detect tampering, recover forensically,
+                                and communicate the breach in governance terms.</p>
+                        </div>
+
+                        <h4 class="text-lg font-bold text-slate-900 mt-6 mb-4">6.2.1: The Governance Failure</h4>
+                        <p class="text-slate-700 mb-4">
+                            A supplier uploads ESG data to your platform. The upload is encrypted. It passes intrusion
+                            detection. It's checked against schema. It loads into the data warehouse. Your system flags
+                            nothing.
+                        </p>
+                        <p class="text-slate-700 mb-4">
+                            Three months later, during audit, someone notices: "Wait, this supplier claims 100 facility
+                            inspections in a month when they have only 4 facilities." The data was modified somewhere in
+                            the pipeline. The audit trail doesn't show when. No one is accountable.
+                        </p>
+
+                        <div class="quote-block">
+                            "A breached supply chain dataset is a credibility breach, not only an IT incident. If you
+                            can't protect the data, you can't attest to the report's integrity."
+                        </div>
+
+                        <h4 class="text-lg font-bold text-slate-900 mt-6 mb-4">6.2.2: The Structural Problem</h4>
+
+                        <div class="forensic-framework">
+                            <h5>Where Tampering Happens (Undetected)</h5>
+                            <ul class="list-disc list-inside text-slate-700 space-y-2">
+                                <li><strong>At Source:</strong> Supplier modifies their own data before upload</li>
+                                <li><strong>In Transit:</strong> Data is intercepted and altered (rare without
+                                    detection)</li>
+                                <li><strong>In Transform:</strong> ETL processes aggregate or calculate without
+                                    validation</li>
+                                <li><strong>In Storage:</strong> Database record is modified by insider or compromised
+                                    credentials</li>
+                                <li><strong>In Analysis:</strong> An analyst manually "corrects" a data point without
+                                    audit trail</li>
+                            </ul>
+                        </div>
+
+                        <div class="case-study">
+                            <strong>Case: Coffee Supply Chain Fraud</strong>
+                            <p>A coffee processor claims "100% fair trade certified" in their ESG report. An audit
+                                spot-checks three facilities. Only one has valid certification documents. The other two
+                                show evidence the report was fabricated post-submission. The data was "corrected" by a
+                                sales manager to match marketing claims.</p>
+                            <p class="mt-2">The breach wasn't external hacking. It was internal pressure to match
+                                narrative.</p>
+                        </div>
+
+                        <h4 class="text-lg font-bold text-slate-900 mt-6 mb-4">6.2.3: The Interrogation Path</h4>
+
+                        <div class="forensic-framework">
+                            <h5>Forensic Method: Cryptographic Chain of Custody</h5>
+                            <p>To detect tampering, establish immutable evidence chains:</p>
+                        </div>
+
+                        <div class="control-box">
+                            <strong>Step 1: Hash Verification</strong>
+                            <p>Generate cryptographic hashes (SHA-256) at each transfer point. Supplier generates hash.
+                                You hash on receipt. If hashes don't match, tampering occurred in transit.</p>
+                        </div>
+
+                        <div class="control-box">
+                            <strong>Step 2: Audit Log Integrity</strong>
+                            <p>Every data modification must be logged with: who, when, what changed, why. These logs
+                                must themselves be protected from retroactive alteration. Use append-only systems (e.g.,
+                                event logs) that cannot be deleted.</p>
+                        </div>
+
+                        <div class="control-box">
+                            <strong>Step 3: Statistical Anomaly Detection</strong>
+                            <p>Flag records where values fall outside historical distribution. If a supplier suddenly
+                                reports 3x their typical facility count, pause and verify before ingestion.</p>
+                        </div>
+
+                        <div class="control-box">
+                            <strong>Step 4: Forensic Reconstruction</strong>
+                            <p>When breach is detected, trace the record backwards: who accessed it? When? What did they
+                                change? Can you restore the unmodified version? If not, the record is forensically
+                                "dead"—it cannot be used in reporting.</p>
+                        </div>
+
+                        <h4 class="text-lg font-bold text-slate-900 mt-6 mb-4">6.2.4: Audit Control</h4>
+
+                        <div class="audit-checklist">
+                            <strong class="block mb-3">Data Integrity Audit Protocol</strong>
+                            <ul>
+                                <li>Verify cryptographic hashes exist for all data transfer points</li>
+                                <li>Sample 10 data records; trace backwards through audit log for any modifications</li>
+                                <li>For each modification, verify: who, when, why, approval chain</li>
+                                <li>Test statistical anomaly detection: do recent submissions trigger alerts?</li>
+                                <li>Attempt to modify a test record; verify it's detected by monitoring</li>
+                                <li>Review access logs: who has write access to data stores? Justify each permission
+                                </li>
+                                <li>Verify audit logs themselves cannot be modified (append-only enforcement)</li>
+                                <li>If breach is detected: notify assurance lead immediately, quarantine affected
+                                    records</li>
+                            </ul>
+                        </div>
+
+                        <div class="summary-section">
+                            <h4>Episode Summary</h4>
+                            <p>Data breaches are governance crises. When you cannot prove the integrity of your dataset,
+                                you cannot attest to your ESG report. Forensic controls must establish cryptographic
+                                proof of custody, audit trails that cannot be retroactively altered, and immediate
+                                escalation protocols for detected tampering.</p>
+                            <p class="mt-3"><strong>Next:</strong> What if the systems using the data aren't even
+                                governed? → Episode 6.3: Shadow AI</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EPISODE 3: SHADOW AI -->
+        <section id="episode3" class="tab-content">
+            <div class="max-w-4xl mx-auto">
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div>
+                            <span class="text-purple-200 text-sm font-mono">L6-E6.3</span>
+                            <h3>Shadow AI: Unmanaged LLM Proliferation & Governance Blind Spots</h3>
+                        </div>
+                        <span class="time-indicator">80 min</span>
+                    </div>
+                    <div class="episode-content">
+
+                        <div class="learning-objective">
+                            <h4>Learning Objective</h4>
+                            <p>Understand that official AI governance tracks only official systems. Shadow
+                                AI—unauthorized use of LLMs, ChatGPT, and generative models—operates outside audit
+                                scope. Learn to detect, assess, and govern the ungovernables without destroying agility.
+                            </p>
+                        </div>
+
+                        <h4 class="text-lg font-bold text-slate-900 mt-6 mb-4">6.3.1: The Governance Failure</h4>
+                        <p class="text-slate-700 mb-4">
+                            Your organization has an approved AI governance framework. You've audited the vendor, signed
+                            the contract, implemented the controls. The system is approved.
+                        </p>
+                        <p class="text-slate-700 mb-4">
+                            Meanwhile, in the supply chain team, an analyst has a ChatGPT Pro subscription. Every
+                            supplier evaluation is being processed through ChatGPT with direct access to sensitive data:
+                            facility locations, labor records, facility inspection results. The governance framework
+                            knows nothing about this. The data is not encrypted with company keys. The outputs are not
+                            logged.
+                        </p>
+
+                        <div class="quote-block">
+                            "Shadow AI is not a security problem. It's a governance problem. It operates in the light,
+                            but outside the audit perimeter."
+                        </div>
+
+                        <h4 class="text-lg font-bold text-slate-900 mt-6 mb-4">6.3.2: The Structural Problem</h4>
+
+                        <div class="forensic-framework">
+                            <h5>Why Shadow AI Emerges</h5>
+                            <ul class="list-disc list-inside text-slate-700 space-y-2">
+                                <li><strong>Speed vs. Governance:</strong> Official systems have change control. ChatGPT
+                                    is instant.</li>
+                                <li><strong>Cost vs. Governance:</strong> LLM APIs are cheaper than enterprise systems.
+                                </li>
+                                <li><strong>Capability vs. Governance:</strong> LLMs are genuinely better at some tasks
+                                    (summarization, translation).</li>
+                                <li><strong>Autonomy vs. Governance:</strong> Individual contributors want to solve
+                                    problems without bureaucracy.</li>
+                            </ul>
+                            <p class="mt-3">The organization's governance framework actually incentivizes shadow
+                                adoption.</p>
+                        </div>
+
+                        <div class="case-study">
+                            <strong>Case: The Supply Chain LLM Pipeline</strong>
+                            <p>A supply chain team evaluates 500 new suppliers yearly. The official ESG scoring system
+                                takes 2 weeks per evaluation. A procurement manager implements a ChatGPT pipeline: dumps
+                                supplier documents → ChatGPT summarizes → presents to committee.</p>
+                            <p class="mt-2">Outcomes: efficiency gains, but also:</p>
+                            <ul class="list-disc list-inside text-slate-700 mt-2">
+                                <li>ChatGPT hallucinates facility counts (makes up compliance facts)</li>
+                                <li>Data is sent to OpenAI servers (data exfiltration)</li>
+                                <li>No audit trail of what ChatGPT was asked or what it answered</li>
+                                <li>Governance audit finds decisions made by unknown system</li>
+                            </ul>
+                        </div>
+
+                        <h4 class="text-lg font-bold text-slate-900 mt-6 mb-4">6.3.3: The Interrogation Path</h4>
+
+                        <div class="forensic-framework">
+                            <h5>Forensic Method: Shadow System Discovery</h5>
+                            <p>To find what's hidden, look at what's visible:</p>
+                        </div>
+
+                        <div class="control-box">
+                            <strong>Step 1: Outcome Traceability</strong>
+                            <p>For each significant business decision (supplier selection, ESG rating, compliance
+                                determination), ask: "Show me the model, the weights, the calculation." If you get
+                                "well, it came from this analyst's summary," you've found shadow AI.</p>
+                        </div>
+
+                        <div class="control-box">
+                            <strong>Step 2: Data Flow Analysis</strong>
+                            <p>Map where sensitive data goes. Which clouds? Which APIs? If sensitive data leaves your
+                                network and returns as a summary, shadow AI is happening.</p>
+                        </div>
+
+                        <div class="control-box">
+                            <strong>Step 3: Behavioral Audit</strong>
+                            <p>Interview team members: "What tools do you use daily to analyze data?" Listen for:
+                                ChatGPT, Claude, Copilot, Gemini. If you hear these in the context of decision-making,
+                                shadow AI exists.</p>
+                        </div>
+
+                        <div class="control-box">
+                            <strong>Step 4: Decision Consistency Check</strong>
+                            <p>If decisions vary wildly by analyst, or if the same input gets different outputs over
+                                time, LLM variability is likely. Traditional systems are deterministic; if the system is
+                                not, it's probably a transformer model.</p>
+                        </div>
+
+                        <h4 class="text-lg font-bold text-slate-900 mt-6 mb-4">6.3.4: Control & Governance (Not
+                            Elimination)</h4>
+
+                        <p class="text-slate-700 mb-4">
+                            The goal is not to ban shadow AI. It's to bring it into the perimeter.
+                        </p>
+
+                        <div class="audit-checklist">
+                            <strong class="block mb-3">Shadow AI Governance Protocol</strong>
+                            <ul>
+                                <li>Inventory all LLM tools in use across organization</li>
+                                <li>For each tool: classify sensitivity (does it touch PII? ESG data? Supplier info?)
+                                </li>
+                                <li>For high-sensitivity tools: require audit logging (save all prompts/outputs)</li>
+                                <li>For high-sensitivity tools: prohibit sensitive data transmission outside company
+                                    network</li>
+                                <li>Establish "approved LLM list" with terms & data handling requirements</li>
+                                <li>Require all ESG decision-making to use approved systems only</li>
+                                <li>For shadow systems found: assess residual risk + decide: formalize or prohibit</li>
+                                <li>Monthly: repeat outcome traceability audit for sampled decisions</li>
+                            </ul>
+                        </div>
+
+                        <div class="summary-section">
+                            <h4>Episode Summary</h4>
+                            <p>Shadow AI is inevitable in modern organizations. Rather than trying to eliminate it,
+                                governance must bring it into view: discover it, assess it, and decide whether to
+                                formalize or prohibit it. The interrogation path requires tracing decisions back to
+                                their model sources, checking data flows, and testing system behavior for
+                                non-determinism.</p>
+                            <p class="mt-3"><strong>Next:</strong> When shadow systems provide "reasoning," how do you
+                                know it's real? → Episode 6.4: Chain of Thought</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EPISODE 4: CHAIN OF THOUGHT -->
+        <section id="episode4" class="tab-content">
+            <div class="max-w-4xl mx-auto">
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div>
+                            <span class="text-purple-200 text-sm font-mono">L6-E6.4</span>
+                            <h3>Chain of Thought: Reasoning Transparency vs. Confabulation</h3>
+                        </div>
+                        <span class="time-indicator">85 min</span>
+                    </div>
+                    <div class="episode-content">
+
+                        <div class="learning-objective">
+                            <h4>Learning Objective</h4>
+                            <p>Understand that "showing your reasoning" is not the same as reasoning correctly.
+                                Chain-of-thought prompting makes hallucinations visible without making them detectable.
+                                Learn to interrogate reasoning for confabulation, even when the LLM explains itself.</p>
+                        </div>
+
+                        <h4 class="text-lg font-bold text-slate-900 mt-6 mb-4">6.4.1: The Governance Failure</h4>
+                        <p class="text-slate-700 mb-4">
+                            A compliance officer evaluates a supplier using a chain-of-thought LLM prompt:
+                        </p>
+                        <div class="bg-slate-900 text-white p-4 rounded font-mono text-sm mb-4 overflow-x-auto">
+                            "Evaluate this supplier for ESG risk. Show your reasoning step by step."
+                        </div>
+                        <p class="text-slate-700 mb-4">
+                            The LLM responds:
+                        </p>
+                        <div class="bg-slate-100 text-slate-900 p-4 rounded font-mono text-sm mb-4 overflow-x-auto">
+                            "Step 1: Supplier is based in Vietnam (medium governance risk).
+                            Step 2: They report 45% female workforce (positive).
+                            Step 3: They have no safety incidents in last 2 years (positive).
+                            Step 4: Overall risk: LOW."
+                        </div>
+                        <p class="text-slate-700 mb-4">
+                            This looks like reasoning. It has steps. It explains the logic. But the officer never
+                            verifies whether the facts are true. The LLM may have hallucinated the safety record. The
+                            female workforce statistic may not exist in the supplier documents. The logic chain is
+                            plausible but possibly built on fabrication.
+                        </p>
+
+                        <div class="quote-block">
+                            "Chain of thought makes hallucinations more persuasive, not less. A confident-sounding
+                            explanation is not evidence of accurate reasoning."
+                        </div>
+
+                        <h4 class="text-lg font-bold text-slate-900 mt-6 mb-4">6.4.2: The Structural Problem</h4>
+
+                        <div class="forensic-framework">
+                            <h5>Why Chain-of-Thought Increases Confabulation Risk</h5>
+                            <ul class="list-disc list-inside text-slate-700 space-y-2">
+                                <li><strong>Fluency ≠ Accuracy:</strong> LLMs can explain false facts persuasively.</li>
+                                <li><strong>Apparent Logic ≠ Sound Logic:</strong> The reasoning chain may skip steps or
+                                    make invalid inferences.</li>
+                                <li><strong>Confidence Bias:</strong> When an LLM explains reasoning, humans trust the
+                                    output more—even when the explanation is confabulated.</li>
+                                <li><strong>Source Erasure:</strong> By the time you read the reasoning, you've lost
+                                    track of whether each "fact" came from the input documents or was generated.</li>
+                            </ul>
+                        </div>
+
+                        <div class="case-study">
+                            <strong>Case: The Fabricated Safety Record</strong>
+                            <p>An LLM is asked to evaluate a supplier's safety record. The supplier document contains:
+                                "We have had 3 serious incidents since 2020." The LLM reads this and chains of thought:
+                            </p>
+                            <p class="mt-2">"Step 1: Supplier reports 3 serious incidents since 2020. Step 2: This
+                                averages to 1.5 incidents per year. Step 3: Industry average is 2 per year. Step 4:
+                                Therefore, safety is ABOVE AVERAGE."</p>
+                            <p class="mt-2">The logic is sound, but the conclusion is wrong because the LLM misread the
+                                baseline. It claimed incidents were "below average" when they were actually "above
+                                average." The reasoning process does not catch this error.</p>
+                        </div>
+
+                        <h4 class="text-lg font-bold text-slate-900 mt-6 mb-4">6.4.3: The Interrogation Path</h4>
+
+                        <div class="forensic-framework">
+                            <h5>Forensic Method: Fact Verification in Reasoning Chains</h5>
+                            <p>When an LLM provides reasoning, you must verify each fact independently:</p>
+                        </div>
+
+                        <div class="control-box">
+                            <strong>Step 1: Reason Decomposition</strong>
+                            <p>Extract each factual claim from the reasoning chain. Example: "Supplier has no safety
+                                incidents in last 2 years" = one factual claim that must be verified.</p>
+                        </div>
+
+                        <div class="control-box">
+                            <strong>Step 2: Source Verification</strong>
+                            <p>For each claim, ask: "Where does this fact appear in the original document?" Provide line
+                                numbers. If the fact doesn't appear, the LLM hallucinated it.</p>
+                        </div>
+
+                        <div class="control-box">
+                            <strong>Step 3: Logic Validation</strong>
+                            <p>Even if facts are correct, validate the inference. If the LLM concludes "low risk" from
+                                facts A, B, C, ask: "Why does A+B+C imply low risk? What about D and E? Are they
+                                relevant?"</p>
+                        </div>
+
+                        <div class="control-box">
+                            <strong>Step 4: Contradiction Testing</strong>
+                            <p>Ask the same question twice with slightly different phrasings. If the LLM gives
+                                contradictory reasoning chains, it's hallucinating the logic, not reasoning from facts.
+                            </p>
+                        </div>
+
+                        <h4 class="text-lg font-bold text-slate-900 mt-6 mb-4">6.4.4: Audit Control</h4>
+
+                        <div class="audit-checklist">
+                            <strong class="block mb-3">Chain-of-Thought Verification Protocol</strong>
+                            <ul>
+                                <li>For each decision made with chain-of-thought reasoning, extract the factual claims
+                                </li>
+                                <li>Spot-check 10% of claims against original documents; verify accuracy</li>
+                                <li>If hallucination rate > 5%, escalate system for review</li>
+                                <li>Test system consistency: ask same question 3 times with fresh runs</li>
+                                <li>If reasoning differs significantly, flag as unreliable</li>
+                                <li>Require human reviewer to validate logical inferences (not just facts)</li>
+                                <li>Document: which facts were verified, which were accepted as-is, why</li>
+                                <li>For critical decisions: require direct document citations for every factual claim
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="summary-section">
+                            <h4>Episode Summary</h4>
+                            <p>Chain-of-thought reasoning makes hallucinations more persuasive, not less. To audit
+                                systems that "show their work," you must verify not just the facts but the logic
+                                connecting them. Transparency of reasoning is only valuable if the reasoning is sound
+                                and the facts are verified against authoritative sources.</p>
+                            <p class="mt-3"><strong>Next:</strong> What if the system can explain itself but the
+                                explanation is deliberately obscuring? → Episode 6.5: XAI Limitations</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EPISODE 5: XAI LIMITATIONS -->
+        <section id="episode5" class="tab-content">
+            <div class="max-w-4xl mx-auto">
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div>
+                            <span class="text-purple-200 text-sm font-mono">L6-E6.5</span>
+                            <h3>XAI Limitations: When Explanations Obscure Rather Than Clarify</h3>
+                        </div>
+                        <span class="time-indicator">90 min</span>
+                    </div>
+                    <div class="episode-content">
+
+                        <div class="learning-objective">
+                            <h4>Learning Objective</h4>
+                            <p>Understand that Explainable AI (XAI) methods—feature importance, LIME, SHAP—create the
+                                illusion of transparency without guaranteeing understanding. Learn to interrogate
+                                explanations for manipulability and false confidence. Know when XAI is genuine
+                                accountability tool vs. regulatory theater.</p>
+                        </div>
+
+                        <h4 class="text-lg font-bold text-slate-900 mt-6 mb-4">6.5.1: The Governance Failure</h4>
+                        <p class="text-slate-700 mb-4">
+                            A bank's credit model is audited. The auditor asks: "Why did you deny this applicant?" The
+                            bank runs SHAP (SHapley Additive exPlanations), which provides feature importance scores. It
+                            shows:
+                        </p>
+                        <div class="bg-slate-100 p-4 rounded mb-4">
+                            <p class="font-mono text-sm">
+                                Payment history: -15 points<br>
+                                Recent inquiries: -8 points<br>
+                                Utilization ratio: -5 points<br>
+                                Total: -28 points (DENIED)
+                            </p>
+                        </div>
+                        <p class="text-slate-700 mb-4">
+                            This explanation has the shape of transparency. It lists the factors and their weights. But
+                            three things are invisible:
+                        </p>
+                        <ul class="list-disc list-inside text-slate-700 space-y-1">
+                            <li>The SHAP values are computed post-hoc; they explain the output but don't explain the
+                                training</li>
+                            <li>Negative payment history may be a proxy for age, race, or zip code—the explanation
+                                doesn't reveal this</li>
+                            <li>The explanation is tailored to this specific applicant; a different applicant would get
+                                a different explanation for the same underlying weights</li>
+                        </ul>
+
+                        <div class="quote-block">
+                            "Explainability is not the same as intelligibility. An explanation that cannot be contested
+                            is not an explanation—it's a justification."
+                        </div>
+
+                        <h4 class="text-lg font-bold text-slate-900 mt-6 mb-4">6.5.2: The Structural Problem</h4>
+
+                        <div class="forensic-framework">
+                            <h5>Why XAI Methods Have Inherent Limits</h5>
+                            <ul class="list-disc list-inside text-slate-700 space-y-2">
+                                <li><strong>Post-Hoc vs. Causal:</strong> XAI explains outputs but not why the model was
+                                    trained to produce those outputs.</li>
+                                <li><strong>Local vs. Global:</strong> LIME and SHAP explain individual decisions; they
+                                    don't reveal systemic bias.</li>
+                                <li><strong>Feature vs. Intent:</strong> Knowing which features matter doesn't tell you
+                                    if the feature selection was fair.</li>
+                                <li><strong>Explanation vs. Accountability:</strong> An explainable wrong decision is
+                                    still wrong.</li>
+                            </ul>
+                        </div>
+
+                        <div class="case-study">
+                            <strong>Case: The Manipulable Explanation</strong>
+                            <p>An ESG scoring model assigns weights to different factors. The vendor explains:
+                                "Governance weight = 30%, Environmental = 40%, Social = 30%." This is transparent.</p>
+                            <p class="mt-2">But the interrogation reveals:</p>
+                            <ul class="list-disc list-inside text-slate-700 mt-2">
+                                <li>Governance includes a metric (executive compensation ratio) that penalties
+                                    developing-world firms</li>
+                                <li>Environmental includes a metric (regulatory compliance data) that advantages firms
+                                    in regulated countries</li>
+                                <li>The weights are frozen; they don't adapt to emerging sectors or new risks</li>
+                            </ul>
+                            <p class="mt-2">The explanation (the weights) is transparent, but the model is
+                                systematically biased. Transparency didn't eliminate the bias; it just made it easier to
+                                defend.</p>
+                        </div>
+
+                        <h4 class="text-lg font-bold text-slate-900 mt-6 mb-4">6.5.3: The Interrogation Path</h4>
+
+                        <div class="forensic-framework">
+                            <h5>Forensic Method: XAI Stress Testing</h5>
+                            <p>To test whether explanations are genuine, challenge them:</p>
+                        </div>
+
+                        <div class="control-box">
+                            <strong>Step 1: Counterfactual Consistency</strong>
+                            <p>If the explanation says "payment history is the main factor," change only payment history
+                                and re-score. If the outcome doesn't change, the explanation is misleading. The
+                                explanation may be highlighting correlated features rather than causal factors.</p>
+                        </div>
+
+                        <div class="control-box">
+                            <strong>Step 2: Proxy Variable Testing</strong>
+                            <p>For each feature the model uses, ask: "Does this feature correlate with a protected
+                                characteristic?" If "zip code" explains decisions, that may be a proxy for race. If
+                                "employment sector" explains exclusion, that may be a proxy for gender.</p>
+                        </div>
+
+                        <div class="control-box">
+                            <strong>Step 3: Training Data Interrogation</strong>
+                            <p>Explanations explain the model outputs, not the training process. Ask: "What data was the
+                                model trained on? How was it labeled? Who decided what 'good outcomes' meant?" If you
+                                can't answer these, the explanation is incomplete.</p>
+                        </div>
+
+                        <div class="control-box">
+                            <strong>Step 4: Explanation Diversity</strong>
+                            <p>Try multiple XAI methods on the same model: LIME, SHAP, feature attribution,
+                                gradient-based saliency. If they give different explanations, no method can be trusted.
+                                The model is too opaque to explain reliably.</p>
+                        </div>
+
+                        <h4 class="text-lg font-bold text-slate-900 mt-6 mb-4">6.5.4: Audit Control</h4>
+
+                        <div class="audit-checklist">
+                            <strong class="block mb-3">XAI Audit Protocol</strong>
+                            <ul>
+                                <li>Obtain vendor's explanation of model (features, weights, architecture)</li>
+                                <li>Run counterfactual test: change top-weighted feature; re-score same applicant</li>
+                                <li>If outcome doesn't change, explanation is misleading; escalate</li>
+                                <li>Identify all proxy variables (features that correlate with protected
+                                    characteristics)</li>
+                                <li>Map which proxies are used in scoring; assess disparate impact</li>
+                                <li>Request training data sampling; verify no bias in labeling</li>
+                                <li>Compare explanations from multiple XAI methods; if they conflict, model is
+                                    unreliable</li>
+                                <li>Test explanation stability: run same applicant through model 5 times; verify
+                                    explanations are consistent</li>
+                                <li>Document: which features are genuinely causal vs. merely correlated</li>
+                            </ul>
+                        </div>
+
+                        <div class="summary-section">
+                            <h4>Episode Summary</h4>
+                            <p>Explainability is not accountability. XAI methods make models more intelligible but not
+                                necessarily more fair or accurate. Governance must test explanations for consistency,
+                                test features for bias proxies, and demand transparency of training data and
+                                labeling—not just model outputs. An explanation that cannot be contested is theater.</p>
+                            <p class="mt-3"><strong>Next:</strong> How do you synthesize these forensic methods into an
+                                integrated audit program? → Synthesis & Practice</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SYNTHESIS & PRACTICE -->
+        <section id="synthesis" class="tab-content">
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-gradient-to-br from-purple-50 to-white border border-purple-200 rounded-lg p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4 serif">Synthesis: Forensic Integration & Practice
+                    </h2>
+                    <p class="text-slate-700 mb-6">
+                        The five forensic domains are not independent. Each represents a different failure mode in the
+                        same governance system. This section integrates them into a unified audit methodology and
+                        provides practice exercises.
+                    </p>
+                </div>
+
+                <div class="episode-card">
+                    <div class="episode-header">
+                        <div>
+                            <span class="text-purple-200 text-sm font-mono">L6-SYNTHESIS</span>
+                            <h3>Integrated Forensic Audit Framework</h3>
+                        </div>
+                        <span class="time-indicator">120 min</span>
+                    </div>
+                    <div class="episode-content">
+
+                        <h4 class="text-lg font-bold text-slate-900 mt-6 mb-4">The Forensic Matrix</h4>
+                        <p class="text-slate-700 mb-4">
+                            All five domains share a common failure pattern: Opacity enables governance failure. The
+                            interrogation method differs, but the structure is consistent.
+                        </p>
+
+                        <div class="bg-slate-100 rounded-lg overflow-x-auto mb-6">
+                            <table class="w-full text-sm">
+                                <thead>
+                                    <tr class="bg-purple-600 text-white">
+                                        <th class="px-4 py-2 text-left">Domain</th>
+                                        <th class="px-4 py-2 text-left">Opacity Type</th>
+                                        <th class="px-4 py-2 text-left">Interrogation Method</th>
+                                        <th class="px-4 py-2 text-left">Control Type</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-slate-300">
+                                        <td class="px-4 py-3">Credit Scoring</td>
+                                        <td class="px-4 py-3">Weights hidden</td>
+                                        <td class="px-4 py-3">Statistical bias testing</td>
+                                        <td class="px-4 py-3">Disparate impact audit</td>
+                                    </tr>
+                                    <tr class="border-b border-slate-300 bg-purple-50">
+                                        <td class="px-4 py-3">Breach Protocol</td>
+                                        <td class="px-4 py-3">Tampering undetected</td>
+                                        <td class="px-4 py-3">Cryptographic verification</td>
+                                        <td class="px-4 py-3">Audit log integrity</td>
+                                    </tr>
+                                    <tr class="border-b border-slate-300">
+                                        <td class="px-4 py-3">Shadow AI</td>
+                                        <td class="px-4 py-3">Systems ungovernned</td>
+                                        <td class="px-4 py-3">Outcome traceability</td>
+                                        <td class="px-4 py-3">System inventory</td>
+                                    </tr>
+                                    <tr class="border-b border-slate-300 bg-purple-50">
+                                        <td class="px-4 py-3">Chain of Thought</td>
+                                        <td class="px-4 py-3">Hallucinations plausible</td>
+                                        <td class="px-4 py-3">Fact verification</td>
+                                        <td class="px-4 py-3">Source-based validation</td>
+                                    </tr>
+                                    <tr class="bg-purple-50">
+                                        <td class="px-4 py-3">XAI Limitations</td>
+                                        <td class="px-4 py-3">Explanations incomplete</td>
+                                        <td class="px-4 py-3">Counterfactual testing</td>
+                                        <td class="px-4 py-3">Training data review</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h4 class="text-lg font-bold text-slate-900 mt-8 mb-4">Unified Forensic Audit Sequence</h4>
+
+                        <div class="forensic-framework mb-6">
+                            <h5>Phase 1: System Inventory (Week 1)</h5>
+                            <p><strong>Goal:</strong> Know what systems are making decisions in your domain</p>
+                            <ul class="list-disc list-inside text-slate-700 mt-2 space-y-1">
+                                <li>Shadow AI discovery (Episode 6.3)</li>
+                                <li>Approved system list + documentation</li>
+                                <li>Data flows: where does sensitive data go?</li>
+                                <li>Identify all systems touching ESG, credit, supplier decisions</li>
+                            </ul>
+                        </div>
+
+                        <div class="forensic-framework mb-6">
+                            <h5>Phase 2: Data Integrity (Week 2)</h5>
+                            <p><strong>Goal:</strong> Verify data is uncorrupted and trustworthy</p>
+                            <ul class="list-disc list-inside text-slate-700 mt-2 space-y-1">
+                                <li>Data provenance audit (Episode 6.2)</li>
+                                <li>Cryptographic hash verification</li>
+                                <li>Audit log integrity test</li>
+                                <li>Sample data for anomalies</li>
+                            </ul>
+                        </div>
+
+                        <div class="forensic-framework mb-6">
+                            <h5>Phase 3: Model Transparency (Week 3)</h5>
+                            <p><strong>Goal:</strong> Understand model behavior and bias</p>
+                            <ul class="list-disc list-inside text-slate-700 mt-2 space-y-1">
+                                <li>Statistical bias testing (Episode 6.1)</li>
+                                <li>XAI interrogation (Episode 6.5)</li>
+                                <li>Counterfactual testing</li>
+                                <li>Proxy variable identification</li>
+                            </ul>
+                        </div>
+
+                        <div class="forensic-framework mb-6">
+                            <h5>Phase 4: Reasoning Validation (Week 4)</h5>
+                            <p><strong>Goal:</strong> Verify decisions are sound, not hallucinated</p>
+                            <ul class="list-disc list-inside text-slate-700 mt-2 space-y-1">
+                                <li>Chain-of-thought verification (Episode 6.4)</li>
+                                <li>Fact checking against source documents</li>
+                                <li>Logic validation</li>
+                                <li>Decision consistency testing</li>
+                            </ul>
+                        </div>
+
+                        <h4 class="text-lg font-bold text-slate-900 mt-8 mb-4">Practice Exercise: Integrated Forensic
+                            Audit</h4>
+
+                        <div class="case-study">
+                            <strong>Scenario: ESG Supply Chain Evaluation System</strong>
+                            <p><em>You are the ESG auditor. Your organization evaluates suppliers using a blend of AI
+                                    systems:</em></p>
+                            <ul class="list-disc list-inside text-slate-700 mt-2 space-y-1">
+                                <li>Official ESG scoring model (proprietary vendor system)</li>
+                                <li>Shadow ChatGPT use (procrastinator-team does risk summaries in ChatGPT)</li>
+                                <li>Manual data uploads (suppliers submit self-reported ESG data)</li>
+                                <li>Compliance dashboard (flags suppliers below thresholds)</li>
+                            </ul>
+                            <p class="mt-3"><strong>Your task:</strong> Design an integrated forensic audit to evaluate
+                                this system. For each of the five domains, identify:</p>
+                            <ul class="list-disc list-inside text-slate-700 mt-2 space-y-1">
+                                <li>Where does this failure mode appear in your scenario?</li>
+                                <li>What interrogation method would you use?</li>
+                                <li>What control would you implement?</li>
+                            </ul>
+                        </div>
+
+                        <h4 class="text-lg font-bold text-slate-900 mt-8 mb-4">Case Study Solutions</h4>
+
+                        <div class="control-box">
+                            <strong>Credit Scoring Domain (Bias in Scoring)</strong>
+                            <p><strong>Failure Mode Found:</strong> ESG model weights governance factors (executive pay,
+                                regulatory compliance) that penalize developing-world suppliers</p>
+                            <p class="mt-2"><strong>Interrogation:</strong> Statistical bias testing—compare approval
+                                rates for firms in different regions with equivalent actual ESG performance</p>
+                            <p class="mt-2"><strong>Control:</strong> Audit model for disparate impact quarterly; adjust
+                                weights if bias > 20%</p>
+                        </div>
+
+                        <div class="control-box">
+                            <strong>Breach Protocol Domain (Data Integrity)</strong>
+                            <p><strong>Failure Mode Found:</strong> Suppliers can modify their own data after
+                                submission; no audit trail</p>
+                            <p class="mt-2"><strong>Interrogation:</strong> Cryptographic hash verification—generate
+                                hash at upload; verify before analysis</p>
+                            <p class="mt-2"><strong>Control:</strong> All supplier uploads require digital signature;
+                                hash verification before ingestion</p>
+                        </div>
+
+                        <div class="control-box">
+                            <strong>Shadow AI Domain (Ungovernned Systems)</strong>
+                            <p><strong>Failure Mode Found:</strong> Procurement team uses ChatGPT to evaluate supplier
+                                risk; no audit trail of what was asked/answered</p>
+                            <p class="mt-2"><strong>Interrogation:</strong> Outcome traceability—for each supplier
+                                decision, ask "show me the analysis" and trace to system source</p>
+                            <p class="mt-2"><strong>Control:</strong> Formalize ChatGPT use with logging; prohibit
+                                sensitive data transmission; establish approval workflow</p>
+                        </div>
+
+                        <div class="control-box">
+                            <strong>Chain of Thought Domain (Hallucinated Reasoning)</strong>
+                            <p><strong>Failure Mode Found:</strong> ESG model provides factual claims about supplier
+                                performance without verifying against documents</p>
+                            <p class="mt-2"><strong>Interrogation:</strong> Fact verification—for each claim in model
+                                output, verify it appears in source documents with line numbers</p>
+                            <p class="mt-2"><strong>Control:</strong> All model outputs must cite source documents;
+                                spot-check 10% of claims for accuracy</p>
+                        </div>
+
+                        <div class="control-box">
+                            <strong>XAI Domain (Incomplete Explanations)</strong>
+                            <p><strong>Failure Mode Found:</strong> Model explains decisions using feature importance,
+                                but doesn't reveal training data bias or proxy variable use</p>
+                            <p class="mt-2"><strong>Interrogation:</strong> Counterfactual testing—change top features;
+                                verify output changes; test for proxy variables</p>
+                            <p class="mt-2"><strong>Control:</strong> Demand vendor provide training data, labeling
+                                methodology, and audit for bias</p>
+                        </div>
+
+                        <div class="summary-section">
+                            <h4>Integration Insight</h4>
+                            <p>An effective forensic audit does not isolate each domain. Instead, it:</p>
+                            <ol class="list-decimal list-inside space-y-2 mt-3 text-slate-700">
+                                <li><strong>Discovers all systems</strong> (including shadow AI)</li>
+                                <li><strong>Verifies data integrity</strong> (no tampering, no corruption)</li>
+                                <li><strong>Tests models for bias</strong> (statistical disparate impact)</li>
+                                <li><strong>Validates reasoning</strong> (facts checked, logic sound)</li>
+                                <li><strong>Challenges explanations</strong> (counterfactuals, proxies, training data)
+                                </li>
+                            </ol>
+                            <p class="mt-4">This sequence ensures that by the time you finalize a decision (approving a
+                                supplier, scoring an applicant, rating an ESG claim), you have interrogated it across
+                                all five forensic domains.</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-lg p-6 mt-8">
+                    <h3 class="font-bold text-slate-900 mb-4">Next Steps After Level 6</h3>
+                    <p class="text-slate-700 mb-4">
+                        Completion of Level 6 prepares you for the capstone: The Audit Defense. You can now:
+                    </p>
+                    <ul class="space-y-3 text-slate-700">
+                        <li class="flex items-start gap-3">
+                            <span class="text-purple-600 font-bold text-lg">✓</span>
+                            <span><strong>Diagnose governance failures</strong> in opaque systems across multiple
+                                domains</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-purple-600 font-bold text-lg">✓</span>
+                            <span><strong>Design forensic interrogations</strong> specific to each failure mode</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-purple-600 font-bold text-lg">✓</span>
+                            <span><strong>Implement auditable controls</strong> that enforce transparency and
+                                accountability</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-purple-600 font-bold text-lg">✓</span>
+                            <span><strong>Defend your audit program</strong> against board challenges with forensic
+                                evidence</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            <strong>Level 6: Forensic Domains</strong><br>
+            Part of the AI-ESG Integrated Strategist (AEIS) Curriculum
+        </p>
+        <p class="mt-4 text-xs opacity-75">
+            Standalone module | 6–8 hours of study | Theme: Purple (#6b21a8) | Applied Case Studies<br>
+            <br>
+            This program is not an accredited qualification, is not endorsed by any regulator or standards body,
+            and does not confer any professional license or statutory authority.
+        </p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        let currentTab = 'overview';
+        let tabSequence = ['overview', 'episode1', 'episode2', 'episode3', 'episode4', 'episode5', 'synthesis'];
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            document.getElementById(tabId).classList.add('active');
+            document.getElementById('nav-' + tabId).classList.add('active');
+            currentTab = tabId;
+
+            // Update progress
+            let progress = ((tabSequence.indexOf(tabId) + 1) / tabSequence.length) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Initialize
+        document.getElementById('progress').style.width = '14%';
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 2: Architecture of Compliance | AI-ESG Training</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #eef2ff;
+            /* Indigo-50ish */
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        .serif {
+            font-family: 'Merriweather', serif;
+        }
+
+        /* TAB STYLES */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-item {
+            border-bottom: 2px solid transparent;
+            color: #64748b;
+        }
+
+        .nav-item:hover {
+            color: #4338ca;
+            /* Indigo-700 */
+        }
+
+        .nav-item.active {
+            border-bottom: 2px solid #4338ca;
+            color: #4338ca;
+            font-weight: 700;
+        }
+
+        /* EXISTING STYLES */
+        .gradient-text {
+            background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .module-container {
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.5rem;
+            margin-bottom: 3rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .module-header {
+            background-color: #f8fafc;
+            padding: 2rem 2.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .module-body {
+            padding: 3rem 2.5rem;
+        }
+
+        .checklist-box {
+            background-color: #f8fafc;
+            border: 1px solid #94a3b8;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .workshop-box {
+            background-color: #f0f9ff;
+            border: 1px dashed #0284c7;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .espresso-thread {
+            background-color: #fffbeb;
+            border-left: 4px solid #d97706;
+            padding: 2rem;
+            margin: 2.5rem 0;
+        }
+
+        .tech-tag {
+            display: inline-block;
+            background-color: #e0f2fe;
+            color: #0369a1;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-left: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .audit-red-line {
+            color: #991b1b;
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            display: block;
+            border-bottom: 2px solid #fecaca;
+            padding-bottom: 0.5rem;
+        }
+
+        .reading-list {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .sidebar-note {
+            background-color: #f0fdf4;
+            border-left: 4px solid #15803d;
+        }
+
+        .pre-work-box {
+            background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+            border: 2px solid #4f46e5;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+
+        .assessment-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #d97706;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+
+        @media print {
+            .no-print {
+                display: none;
+            }
+
+            body {
+                background: white;
+            }
+
+            .tab-content {
+                display: block !important;
+            }
+
+            .nav-item {
+                display: none;
+            }
+        }
+    </style>
+    <script src="js/translation_toggle.js"></script>
+</head>
+
+<body class="flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-indigo-700 to-blue-800 text-white shadow-lg no-print">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex justify-between items-start">
+                <div>
+                    <span class="text-indigo-200 font-bold tracking-widest uppercase text-xs">Level 2 Module</span>
+                    <h1 class="text-4xl md:text-5xl font-bold mt-2 serif">Architecture of Compliance</h1>
+                    <p class="text-indigo-100 mt-2 text-lg">Lexicon, Lineage & The Greenwashing Firewall</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur rounded-lg px-4 py-2 border border-white/20">
+                    <div class="flex items-center gap-2 text-indigo-100 text-sm font-bold">
+                        <i data-lucide="clock" class="w-4 h-4"></i>
+                        <span>6-8 Hours</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="bg-white shadow sticky top-0 z-50 overflow-x-auto no-print">
+        <div class="container mx-auto px-6">
+            <div class="flex space-x-1">
+                <button onclick="switchTab('overview')" id="tab-overview"
+                    class="nav-item active px-6 py-4 font-medium transition-colors hover:bg-indigo-50 focus:outline-none whitespace-nowrap">
+                    Overview
+                </button>
+                <button onclick="switchTab('ep2_1')" id="tab-ep2_1"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-indigo-50 focus:outline-none whitespace-nowrap">
+                    Ep 2.1: Lexicon of Trust
+                </button>
+                <button onclick="switchTab('ep2_2')" id="tab-ep2_2"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-indigo-50 focus:outline-none whitespace-nowrap">
+                    Ep 2.2: Taxonomy Engine
+                </button>
+                <button onclick="switchTab('ep2_3')" id="tab-ep2_3"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-indigo-50 focus:outline-none whitespace-nowrap">
+                    Ep 2.3: Provenance Gap
+                </button>
+                <button onclick="switchTab('ep2_4')" id="tab-ep2_4"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-indigo-50 focus:outline-none whitespace-nowrap">
+                    Ep 2.4: Data Stewardship
+                </button>
+                <button onclick="switchTab('ep2_5')" id="tab-ep2_5"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-indigo-50 focus:outline-none whitespace-nowrap text-slate-400">
+                    Ep 2.5: (Moved)
+                </button>
+                <button onclick="switchTab('summary')" id="tab-summary"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-indigo-50 focus:outline-none whitespace-nowrap">
+                    Summary
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-6 py-12 flex-grow max-w-5xl">
+
+        <!-- OVERVIEW -->
+        <section id="overview" class="tab-content active">
+            <div class="mb-16">
+                <div class="bg-white p-8 rounded-xl border border-indigo-200 shadow-sm">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6 serif leading-tight">
+                        Building Systems That Survive the Audit
+                    </h2>
+                    <p class="text-xl text-slate-600 leading-relaxed mb-8">
+                        We focus on Vocabulary, Lineage, Taxonomy, and the financial nexus where ESG data originates
+                        (Accounts
+                        Payable). This is where theory becomes operational reality.
+                    </p>
+
+                    <div class="sidebar-note p-6 rounded-lg text-sm text-slate-700">
+                        <p class="font-bold text-green-800 mb-2 text-base flex items-center gap-2">
+                            <i data-lucide="info" class="w-4 h-4"></i>
+                            Learning Objectives
+                        </p>
+                        <ul class="space-y-2 list-disc list-inside">
+                            <li>Translate between <strong>framework vocabulary</strong> and <strong>audit
+                                    vocabulary</strong> to
+                                prevent miscommunication</li>
+                            <li>Implement <strong>greenwashing firewalls</strong> using EU Taxonomy Technical Screening
+                                Criteria
+                            </li>
+                            <li>Build <strong>evidence ladders</strong> that trace AI insights back to source documents
+                            </li>
+                            <li>Design data classification systems that balance transparency with competitive protection
+                            </li>
+                            <li>Create <strong>financial-ESG reconciliation layers</strong> at the Accounts Payable
+                                nexus</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Pre-Work Assessment -->
+                <div class="pre-work-box mt-12 bg-indigo-50 border-indigo-200">
+                    <h4 class="font-bold text-lg text-indigo-900 mb-4 flex items-center gap-2">
+                        <i data-lucide="clipboard-list" class="w-5 h-5"></i>
+                        Pre-Work Assessment
+                    </h4>
+                    <p class="text-indigo-900 mb-4">
+                        Complete this self-assessment to identify your starting knowledge baseline.
+                    </p>
+                    <div class="bg-white p-6 rounded-lg border border-indigo-300">
+                        <h5 class="font-bold text-sm text-slate-700 mb-3 uppercase tracking-wide">Knowledge Check
+                            Questions
+                        </h5>
+                        <ol class="space-y-4 text-sm text-slate-700">
+                            <li>
+                                <strong>1. Can your data scientists and auditors understand each other's terminology
+                                    without
+                                    translation?</strong>
+                                <div class="ml-6 mt-2 space-y-1 text-slate-600">
+                                    <p>☐ Yes, we have a shared lexicon document</p>
+                                    <p>☐ Partial—some terms aligned, others cause confusion</p>
+                                    <p>☐ No—frequent miscommunication about AI concepts</p>
+                                    <p>☐ Not sure—haven't observed these interactions</p>
+                                </div>
+                            </li>
+                            <li>
+                                <strong>2. When your AI generates an ESG metric, can you trace it back to the specific
+                                    source document (invoice, receipt, contract)?</strong>
+                                <div class="ml-6 mt-2 space-y-1 text-slate-600">
+                                    <p>☐ Yes, full data lineage with document IDs</p>
+                                    <p>☐ Partial—can trace to database but not original document</p>
+                                    <p>☐ No—metrics are aggregated without provenance tracking</p>
+                                    <p>☐ Not applicable—we don't use AI for metric generation</p>
+                                </div>
+                            </li>
+                            <li>
+                                <strong>3. Where does most of your Scope 3 emissions data originate?</strong>
+                                <div class="ml-6 mt-2 space-y-1 text-slate-600">
+                                    <p>☐ Accounts Payable invoices and procurement records</p>
+                                    <p>☐ Supplier surveys and self-reported data</p>
+                                    <p>☐ Industry averages and estimation models</p>
+                                    <p>☐ Multiple sources without clear hierarchy</p>
+                                    <p>☐ Don't know our primary data source</p>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Episode 2.1 -->
+        <section id="ep2_1" class="tab-content">
+            <div class="module-container bg-indigo-50 border-indigo-200">
+                <div class="module-body">
+                    <h4 class="text-2xl font-bold text-indigo-900 mb-6 flex items-center gap-3">
+                        <span class="text-xs font-bold text-indigo-700 uppercase tracking-widest">Episode 2.1</span>
+                        The Lexicon of Trust (Translator Box)
+                    </h4>
+                    <p class="text-indigo-800 mb-8 text-lg">
+                        Bridging the gap between Data Scientists and Auditors. We must align the vocabulary to avoid
+                        "Translation Risk."
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <div class="bg-white p-5 rounded shadow-sm">
+                                <span class="block text-xs text-slate-400 uppercase tracking-wide font-bold">We Say
+                                    (Framework)</span>
+                                <span class="block font-bold text-slate-800 text-xl mt-1">Liability Sponge</span>
+                            </div>
+                            <div class="bg-white p-5 rounded shadow-sm">
+                                <span class="block text-xs text-slate-400 uppercase tracking-wide font-bold">We Say
+                                    (Framework)</span>
+                                <span class="block font-bold text-slate-800 text-xl mt-1">Evidence Ladder</span>
+                            </div>
+                            <div class="bg-white p-5 rounded shadow-sm">
+                                <span class="block text-xs text-slate-400 uppercase tracking-wide font-bold">We Say
+                                    (Framework)</span>
+                                <span class="block font-bold text-slate-800 text-xl mt-1">Hallucination</span>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-white p-5 rounded shadow-sm border-l-4 border-teal-500">
+                                <span class="block text-xs text-teal-600 uppercase tracking-wide font-bold">Audit Says
+                                    (Risk Register)</span>
+                                <span class="block font-bold text-slate-800 text-xl mt-1">Weak Control
+                                    Environment</span>
+                            </div>
+                            <div class="bg-white p-5 rounded shadow-sm border-l-4 border-teal-500">
+                                <span class="block text-xs text-teal-600 uppercase tracking-wide font-bold">Audit Says
+                                    (Risk Register)</span>
+                                <span class="block font-bold text-slate-800 text-xl mt-1">Data Lineage /
+                                    Provenance</span>
+                            </div>
+                            <div class="bg-white p-5 rounded shadow-sm border-l-4 border-teal-500">
+                                <span class="block text-xs text-teal-600 uppercase tracking-wide font-bold">Audit Says
+                                    (Risk Register)</span>
+                                <span class="block font-bold text-slate-800 text-xl mt-1">Data Integrity Failure</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="workshop-box mt-8">
+                        <h5 class="font-bold text-sm text-sky-800 uppercase mb-2">Translation Exercise</h5>
+                        <p class="text-sky-900 mb-4">
+                            <strong>Task:</strong> Create a glossary mapping your AI team's vocabulary to audit
+                            terminology. Identify the 5 terms most likely to cause miscommunication in your
+                            organization.
+                        </p>
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Source:</strong> <em>"VerifyWise AI Lexicon: Human-in-the-loop safeguards."</em>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Episode 2.2 -->
+        <section id="ep2_2" class="tab-content">
+            <div class="module-container border-l-8 border-emerald-600">
+                <div class="module-header bg-emerald-50">
+                    <div>
+                        <span class="text-xs font-bold text-emerald-800 uppercase tracking-widest block mb-2">Episode
+                            2.2</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Taxonomy Engine</h4>
+                    </div>
+                    <div class="text-right">
+                        <span class="tech-tag">EU Taxonomy</span>
+                        <span class="tech-tag">DNSH</span>
+                        <div class="text-slate-400 text-sm mt-2">
+                            <p class="font-mono">80 min</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>The Premise:</strong> CSRD tells you *to report*; the EU Taxonomy tells you *what counts
+                        as green*. An AI can generate a perfect CSRD report that fails the Taxonomy's Technical
+                        Screening Criteria (TSC). We build the "Double-Check" logic: ensuring activities flagged as
+                        "Sustainable" pass the <strong>Do No Significant Harm (DNSH)</strong> criteria.
+                    </p>
+
+                    <div class="workshop-box bg-emerald-50 border-emerald-200">
+                        <h5 class="font-bold text-sm text-emerald-800 uppercase mb-2 flex items-center gap-2">
+                            <i data-lucide="shield-check" class="w-4 h-4"></i>
+                            The "Greenwashing Firewall" Algorithm
+                        </h5>
+                        <p class="text-emerald-900 mb-4">
+                            <strong>Logic Rule (Illustrative Example):</strong> IF (Activity = "Manufacture of Cement")
+                            AND (Carbon Intensity > 0.469 tCO2e/t product) THEN (Taxonomy Eligible = FALSE) regardless
+                            of marketing claims.
+                        </p>
+                        <p class="text-emerald-800 text-sm">
+                            This hard-coded constraint prevents the AI from classifying activities as "green" when they
+                            fail technical thresholds.
+                        </p>
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Legal Ref:</strong> <em>"Regulation (EU) 2020/852 (Taxonomy Regulation)."</em>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Episode 2.3 -->
+        <section id="ep2_3" class="tab-content">
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Episode
+                            2.3</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Provenance Gap</h4>
+                    </div>
+                    <div class="text-right">
+                        <span class="tech-tag">Data Lineage</span>
+                        <div class="text-slate-400 text-sm mt-2">
+                            <p class="font-mono">70 min</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6">
+                        Tracing data back to the source. If the AI summarized the data, where is the original invoice?
+                        We build the <strong>Evidence Ladder</strong>: Raw Data → Aggregated Data → AI Insight → Report.
+                    </p>
+
+                    <div class="espresso-thread">
+                        <h5 class="text-lg font-bold text-amber-900 uppercase mb-2">☕ Case Study: Project Espresso
+                            (Chapter 2)</h5>
+                        <div class="text-slate-800 space-y-2">
+                            <p><strong>Setup:</strong> AI finds gaps in the Vietnamese fertilizer data due to coffee
+                                stains.</p>
+                            <p><strong>Failure Mode (The Action):</strong> It silently "infills" the data using Regional
+                                Averages from Brazil because the variable name "Coffee_Region" was ambiguous.</p>
+                            <p><strong>Result:</strong> You report a 20% water reduction that never happened.</p>
+                            <p><strong>Control:</strong> Provenance Tagging. Any synthetic data must be explicitly
+                                flagged in the JSON schema before visualisation.</p>
+                            <p><strong>Evidence Artifact:</strong> The "Infill Audit Log" showing every substitution
+                                made during processing.</p>
+                        </div>
+                    </div>
+
+                    <div class="checklist-box">
+                        <span class="audit-red-line">Acceptance Criteria</span>
+                        <ul class="space-y-3 text-slate-800">
+                            <li><i data-lucide="check" class="inline w-4 h-4 mr-2 text-teal-600"></i>Every AI-generated
+                                metric must link back to a specific Document ID (Invoice #).</li>
+                            <li><i data-lucide="check"
+                                    class="inline w-4 h-4 mr-2 text-teal-600"></i>"Synthetic/Infilled" data must be
+                                flagged in the metadata column.</li>
+                            <li><i data-lucide="check" class="inline w-4 h-4 mr-2 text-teal-600"></i>Confidence scores
+                                must be stored alongside the value (e.g., "500kg [0.42]").</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Episode 2.4 -->
+        <section id="ep2_4" class="tab-content">
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Episode
+                            2.4</span>
+                        <h4 class="text-2xl font-bold text-slate-900">Public Eligibility & Data Classification</h4>
+                    </div>
+                    <div class="text-right">
+                        <span class="tech-tag">Strategy</span>
+                        <div class="text-slate-400 text-sm mt-2">
+                            <p class="font-mono">60 min</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6">
+                        What data is safe to publish? Managing the risk of exposing sensitive supply chain maps to
+                        competitors via "Transparency" reports. The tension between "Openness" and "Trade Secrets."
+                    </p>
+
+                    <div class="checklist-box">
+                        <span class="audit-red-line">Data Classification Matrix</span>
+                        <div class="grid grid-cols-3 gap-4 text-sm mt-4">
+                            <div class="p-3 border rounded bg-green-50">
+                                <strong class="text-green-900">Public:</strong>
+                                <p class="text-slate-700 mt-1">Aggregated Regional Impact, Policy Statements.</p>
+                            </div>
+                            <div class="p-3 border rounded bg-yellow-50">
+                                <strong class="text-yellow-900">Internal:</strong>
+                                <p class="text-slate-700 mt-1">Supplier Names, Specific Audit Scores.</p>
+                            </div>
+                            <div class="p-3 border rounded bg-red-50">
+                                <strong class="text-red-900">Restricted (Secret):</strong>
+                                <p class="text-slate-700 mt-1">Exact GPS of strategic mines (Rare Earths), Pricing
+                                    formulas.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="workshop-box">
+                        <h5 class="font-bold text-sm text-sky-800 uppercase mb-2 flex items-center gap-2">
+                            <i data-lucide="eye-off" class="w-4 h-4"></i>
+                            The Redaction Game
+                        </h5>
+                        <p class="text-sky-900">
+                            <strong>Activity:</strong> Review a sample "Transparency Report." Identify the 3 data points
+                            that inadvertently reveal your proprietary supplier pricing structure to a competitor using
+                            AI scraping.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Episode 2.5 -->
+        <section id="ep2_5" class="tab-content">
+            <div class="module-container border-l-8 border-slate-300">
+                <div class="module-header bg-slate-50">
+                    <div>
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-widest block mb-2">Episode 2.5
+                            (MOVED)</span>
+                        <h4 class="text-2xl font-bold text-slate-400">The Accounts Payable Nexus</h4>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-500 italic">
+                        This module has been elevated to <strong>Level 0: Episode 0.0</strong> to establish the
+                        financial baseline immediately.
+                    </p>
+                    <a href="AI-ESG_Level0_Constitutional_Foundations.html"
+                        class="text-indigo-600 hover:text-indigo-800 font-bold text-sm mt-2 inline-block">
+                        Go to Level 0 →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Summary -->
+        <section id="summary" class="tab-content">
+            <h3 class="text-3xl font-bold text-slate-900 mb-6 serif">Module Summary</h3>
+
+            <div class="bg-white p-8 rounded-lg border-2 border-indigo-600 mb-8">
+                <h4 class="font-bold text-xl text-slate-900 mb-4 flex items-center gap-2">
+                    <i data-lucide="check-circle" class="w-6 h-6 text-indigo-600"></i>
+                    Key Takeaways
+                </h4>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h5 class="font-bold text-sm text-slate-700 mb-2 uppercase tracking-wide">Conceptual Framework
+                        </h5>
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li>• Shared lexicons prevent "translation risk" between technical and audit teams</li>
+                            <li>• EU Taxonomy requires hard-coded validation, not just reporting compliance</li>
+                            <li>• Data provenance must trace AI insights back to source documents</li>
+                            <li>• Accounts Payable is the true nexus of ESG data, not dashboards</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="font-bold text-sm text-slate-700 mb-2 uppercase tracking-wide">Practical Tools
+                            Acquired</h5>
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li>• Framework-to-audit vocabulary translator</li>
+                            <li>• Greenwashing firewall algorithms with DNSH criteria</li>
+                            <li>• Evidence ladder architecture (Raw → Aggregate → Insight → Report)</li>
+                            <li>• Financial-ESG reconciliation protocols at invoice level</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="assessment-box">
+                <h4 class="font-bold text-lg text-amber-900 mb-4 flex items-center gap-2">
+                    <i data-lucide="clipboard-check" class="w-5 h-5"></i>
+                    Post-Module Assessment
+                </h4>
+                <p class="text-amber-900 mb-4">
+                    Revisit your pre-work assessment. Has your understanding shifted?
+                </p>
+                <div class="bg-white p-6 rounded-lg border border-amber-300">
+                    <h5 class="font-bold text-sm text-slate-700 mb-3 uppercase tracking-wide">Reflection Questions</h5>
+                    <ol class="space-y-4 text-sm text-slate-700">
+                        <li>
+                            <strong>1. Based on Episode 2.1, identify the most dangerous vocabulary mismatch in your
+                                organization.</strong>
+                            <div class="ml-6 mt-2">
+                                <p class="text-slate-600 text-xs mb-1">Example: "Hallucination" (AI team) vs "Data
+                                    Integrity Failure" (Audit)</p>
+                                <textarea class="w-full border border-slate-300 rounded px-3 py-2 text-xs mt-2" rows="2"
+                                    placeholder="The term, why it's dangerous, proposed solution..."></textarea>
+                            </div>
+                        </li>
+                        <li>
+                            <strong>2. Does your organization have a financial-ESG reconciliation layer (Episode
+                                2.5)?</strong>
+                            <div class="ml-6 mt-2">
+                                <p class="text-slate-600 text-xs mb-1">If yes, what's the variance threshold? If no,
+                                    where would you implement it?</p>
+                                <textarea class="w-full border border-slate-300 rounded px-3 py-2 text-xs mt-2" rows="3"
+                                    placeholder="Current state and implementation plan..."></textarea>
+                            </div>
+                        </li>
+                        <li>
+                            <strong>3. If you implemented ONE architectural control from this module, which would have
+                                the highest ROI?</strong>
+                            <div class="ml-6 mt-2">
+                                <p class="text-slate-600 text-xs mb-1">Options: Lexicon translator, Taxonomy firewall,
+                                    Evidence ladder, Data classification, AP reconciliation</p>
+                                <textarea class="w-full border border-slate-300 rounded px-3 py-2 text-xs mt-2" rows="2"
+                                    placeholder="Your priority control and expected impact..."></textarea>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Next Steps -->
+            <div class="bg-gradient-to-br from-slate-800 to-slate-900 text-white p-10 rounded-lg mt-8">
+                <h3 class="text-2xl font-bold mb-4 serif flex items-center gap-2">
+                    <i data-lucide="arrow-right-circle" class="w-6 h-6 text-indigo-400"></i>
+                    Next Module
+                </h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-indigo-400 font-bold mb-2">Level 3: The Lucas Cycle</h4>
+                        <p class="text-slate-300 text-sm mb-4">
+                            Systems That Raise—exploring how automation designed to elevate safety can accidentally
+                            lower
+                            the floor. We examine oversight drift, training bias, and the moment when helpful systems
+                            become
+                            controlling ones.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-center">
+                        <button
+                            class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 px-8 rounded-lg transition flex items-center gap-3 text-lg">
+                            Begin Level 3
+                            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-8 mt-auto no-print">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-sm mb-2">
+                AI & ESG Capability Architect | Level 2: Architecture of Compliance
+            </p>
+            <p class="text-xs opacity-50 italic">
+                Based on Sociable Systems research methodology
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                item.classList.remove('bg-indigo-50');
+                item.classList.remove('text-indigo-700');
+            });
+            document.getElementById(tabId).classList.add('active');
+            const activeBtn = document.getElementById('tab-' + tabId);
+            activeBtn.classList.add('active');
+            // Re-apply specific color hacks not handled by CSS class alone if needed, 
+            // but here we used specific classes in CSS.
+        }
+    </script>
+
+</body>
+
+</html>

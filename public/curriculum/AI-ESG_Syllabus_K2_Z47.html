@@ -1,0 +1,2715 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AEIS | AI-ESG Integrated Strategist Curriculum (Grand Opus V13)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+
+        :root {
+            --header-height: 80px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+            color: #0f172a;
+            line-height: 1.7;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        .serif {
+            font-family: 'Merriweather', serif;
+        }
+
+        /* --- Tab Animations & Logic --- */
+        /* REVIEW FIX: Sticky Nav Offset using CSS variable */
+        nav[aria-label="Curriculum Levels"] {
+            top: var(--header-height);
+        }
+
+        /* REVIEW FIX: Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            .tab-content:not([hidden]) {
+                animation: none !important;
+            }
+        }
+
+        /* REVIEW FIX: Visibility Logic (Source of Truth: [hidden]) */
+        .tab-content[hidden] {
+            display: none !important;
+        }
+
+        .tab-content:not([hidden]) {
+            display: block;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- Typography & Utilities --- */
+        .gradient-text {
+            background: linear-gradient(135deg, #0f766e 0%, #0e7490 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- Component Styles --- */
+        .sidebar-note {
+            background-color: #f0fdf4;
+            border-left: 4px solid #15803d;
+        }
+
+        .module-container {
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.5rem;
+            margin-bottom: 3rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .module-header {
+            background-color: #f8fafc;
+            padding: 2rem 2.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .module-body {
+            padding: 3rem 2.5rem;
+        }
+
+        .checklist-box {
+            background-color: #f8fafc;
+            border: 1px solid #94a3b8;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .workshop-box {
+            background-color: #f0f9ff;
+            border: 1px dashed #0284c7;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        /* Highlight Box Styles */
+        .highlight-box {
+            padding: 1.25rem;
+            border-radius: 0.375rem;
+            border-left-width: 4px;
+            border-left-style: solid;
+            margin: 1.5rem 0;
+            display: block;
+        }
+
+        .highlight-box.warning {
+            background-color: #fffbeb;
+            /* amber-50 */
+            border-color: #d97706;
+            /* amber-600 */
+            color: #92400e;
+            /* amber-900 */
+        }
+
+        .reading-list {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .espresso-thread {
+            background-color: #fffbeb;
+            border-left: 4px solid #d97706;
+            padding: 2rem;
+            margin: 2.5rem 0;
+        }
+
+        .tech-tag {
+            display: inline-block;
+            background-color: #e0f2fe;
+            color: #0369a1;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-left: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .audit-red-line {
+            color: #991b1b;
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            display: block;
+            border-bottom: 2px solid #fecaca;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-intro {
+            padding: 2rem 0;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 2rem;
+        }
+
+        /* Cycle indicators */
+        .cycle-badge-asimov {
+            background: #dc2626;
+            color: white;
+        }
+
+        .cycle-badge-clarke {
+            background: #7c3aed;
+            color: white;
+        }
+
+        .cycle-badge-lucas {
+            background: #ea580c;
+            color: white;
+        }
+
+        .cycle-badge-pullman {
+            background: #ec4899;
+            color: white;
+        }
+
+        .cycle-badge-kubrick {
+            background: #0f172a;
+            color: white;
+        }
+
+        /* Dashboard Method Styling */
+        .dashboard-method {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: #e2e8f0;
+            border-left: 4px solid #ec4899;
+        }
+
+        /* Table Styling */
+        .visceral-clinical-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .visceral-clinical-table th {
+            background: #334155;
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #475569;
+            color: #cbd5e1;
+        }
+
+        .visceral-clinical-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid #334155;
+        }
+
+        .visceral {
+            color: #fda4af;
+            /* pink-300 */
+            font-style: italic;
+        }
+
+        /* REVIEW FIX: NAV ITEM DEFINITION */
+        /* Explicit base classes for inactive tabs to ensure visual consistency */
+        .nav-item {
+            background-color: white;
+            border: 1px solid #cbd5e1;
+            /* slate-300 */
+            color: #475569;
+            /* slate-600 */
+            transition: all 0.2s ease;
+            outline: none;
+        }
+
+        /* Hover state for inactive tabs */
+        .nav-item:not(.active):hover {
+            background-color: #f1f5f9;
+            /* slate-100 */
+        }
+
+        /* Active state overrides */
+        .nav-item.active {
+            background-color: #1e293b;
+            /* slate-800 */
+            border-color: #1e293b;
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            outline: 2px solid #1e293b;
+            outline-offset: 2px;
+        }
+
+        /* Focus state for accessibility */
+        .nav-item:focus-visible {
+            box-shadow: 0 0 0 2px #0f766e;
+            /* Teal-700 ring */
+        }
+
+        /* REVIEW FIX: Print Styles - CSS ONLY */
+        @media print {
+            .sticky {
+                position: static !important;
+                box-shadow: none !important;
+            }
+
+            nav {
+                display: none !important;
+            }
+
+            /* Override display logic for print */
+            .tab-content[hidden] {
+                display: block !important;
+                opacity: 1 !important;
+                margin-bottom: 4rem;
+                break-inside: avoid;
+            }
+
+            .tab-content:not([hidden]) {
+                display: block !important;
+            }
+
+            body {
+                background: white;
+                color: black;
+            }
+
+            .module-container {
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+
+            .module-header,
+            .checklist-box,
+            .workshop-box,
+            .espresso-thread,
+            .dashboard-method {
+                background: white !important;
+                border-color: #ccc !important;
+                color: black !important;
+            }
+
+            .dashboard-method th,
+            .dashboard-method td {
+                border-color: #ccc;
+                color: black;
+            }
+
+            .nav-item {
+                display: none !important;
+            }
+
+            /* Hide tabs completely */
+            .no-print {
+                display: none;
+            }
+
+            a {
+                text-decoration: none;
+                color: black;
+            }
+        }
+    </style>
+    </style>
+    <script src="js/translation_toggle.js"></script>
+</head>
+
+<body class="flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="bg-teal-700 p-2 rounded-lg text-white">
+                    <i data-lucide="shield-check" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-slate-900 tracking-tight">AI & ESG Capability Architect</h1>
+                    <p class="text-xs text-slate-500 uppercase tracking-widest font-semibold">Bridging the Skills Gap
+                    </p>
+                </div>
+            </div>
+            <div class="hidden md:block text-right">
+                <p class="text-xs text-slate-400 font-mono">V13.0 GRAND OPUS</p>
+                <p class="text-xs text-slate-400 font-mono">PRODUCTION MASTER</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 flex-grow">
+
+        <!-- Intro -->
+        <section class="mb-16 max-w-4xl mx-auto text-center">
+            <span
+                class="inline-block py-1 px-3 rounded-full bg-teal-100 text-teal-800 text-xs font-bold uppercase tracking-wider mb-4">Strategic
+                Competency Track</span>
+            <h2 class="text-4xl md:text-6xl font-bold text-slate-900 mb-8 serif leading-tight">
+                Stop Watching the Dashboard.<br>
+                <span class="gradient-text">Check the Oil.</span>
+            </h2>
+            <p class="text-xl text-slate-600 leading-relaxed mb-10">
+                The Master Architecture. A rigorous, technical curriculum for ESG Directors and Auditors. We move beyond
+                "Accuracy Theater" to build auditable, forensic AI governance.
+            </p>
+
+            <div class="bg-slate-800 text-white p-4 rounded-lg text-sm font-mono mb-10 inline-block shadow-lg">
+                <span class="text-teal-400 font-bold">> PROTOCOL:</span> Use tabs as learning path &bull; Export levels
+                as modules &bull; Capstone as assessment kit
+            </div>
+
+            <div class="text-left sidebar-note p-8 rounded-lg text-sm text-slate-700 shadow-sm mx-auto max-w-3xl">
+                <p class="font-bold text-green-800 mb-2 text-base">Methodology Note:</p>
+                <p class="mb-4">This document is the <strong>Grand Opus</strong>. It contains the full specification for
+                    all modules, designed to be disassembled into specific training modules, workshops, and policy
+                    documents.</p>
+                <p class="mb-4"><strong>The Dashboard Method:</strong> Throughout this syllabus, we distinguish between
+                    <em>lagging indicators</em> (compliance metrics, audit trails) and <em>leading indicators</em>
+                    (behavioral signals that predict failure). This methodology, derived from safety-critical systems
+                    analysis, is applied to ESG governance.
+                </p>
+                <p><strong>Primary Sources:</strong> "Syllabus: AI-Powered ESG Excellence", "Sociable Systems"
+                    newsletter cycles (Asimov, Clarke, Lucas, Pullman, Kubrick).</p>
+            </div>
+        </section>
+
+        <!-- Navigation -->
+        <nav class="mb-12 sticky z-40 bg-slate-100/95 backdrop-blur py-4 border-b border-slate-200 shadow-sm"
+            aria-label="Curriculum Levels">
+            <div class="flex flex-wrap justify-center gap-2" role="tablist" id="mainTabList">
+
+                <button onclick="switchTab('level0')" id="tab-level0" role="tab" aria-selected="true"
+                    aria-controls="level0" class="nav-item active px-6 py-3 rounded-md text-sm font-bold transition-all"
+                    tabindex="0">
+                    Level 0: Constitution
+                </button>
+
+                <button onclick="switchTab('level1')" id="tab-level1" role="tab" aria-selected="false"
+                    aria-controls="level1" class="nav-item px-6 py-3 rounded-md text-sm font-bold transition-all"
+                    tabindex="-1">
+                    Level 1: Epistemics
+                </button>
+
+                <button onclick="switchTab('level2')" id="tab-level2" role="tab" aria-selected="false"
+                    aria-controls="level2" class="nav-item px-6 py-3 rounded-md text-sm font-bold transition-all"
+                    tabindex="-1">
+                    Level 2: Architecture
+                </button>
+
+                <button onclick="switchTab('level3')" id="tab-level3" role="tab" aria-selected="false"
+                    aria-controls="level3" class="nav-item px-6 py-3 rounded-md text-sm font-bold transition-all"
+                    tabindex="-1">
+                    Level 3: Lucas Cycle
+                </button>
+
+                <button onclick="switchTab('level4')" id="tab-level4" role="tab" aria-selected="false"
+                    aria-controls="level4" class="nav-item px-6 py-3 rounded-md text-sm font-bold transition-all"
+                    tabindex="-1">
+                    Level 4: Pullman Cycle
+                </button>
+
+                <button onclick="switchTab('level5')" id="tab-level5" role="tab" aria-selected="false"
+                    aria-controls="level5" class="nav-item px-6 py-3 rounded-md text-sm font-bold transition-all"
+                    tabindex="-1">
+                    Level 5: Kubrick Cycle
+                </button>
+
+                <button onclick="switchTab('level6')" id="tab-level6" role="tab" aria-selected="false"
+                    aria-controls="level6" class="nav-item px-6 py-3 rounded-md text-sm font-bold transition-all"
+                    tabindex="-1">
+                    Level 6: Forensics
+                </button>
+
+                <button onclick="switchTab('capstone')" id="tab-capstone" role="tab" aria-selected="false"
+                    aria-controls="capstone" class="nav-item px-6 py-3 rounded-md text-sm font-bold transition-all"
+                    tabindex="-1">
+                    Capstone
+                </button>
+            </div>
+        </nav>
+
+        <!-- LEVEL 0: CONSTITUTIONAL FOUNDATIONS -->
+        <section id="level0" class="tab-content active max-w-5xl mx-auto" role="tabpanel" aria-labelledby="tab-level0">
+            <div class="section-intro flex justify-between items-end">
+                <div>
+                    <h3 class="text-3xl font-bold text-slate-800 mb-4 serif">Level 0: The Constitutional Baseline</h3>
+                    <p class="text-lg text-slate-600 max-w-3xl">
+                        Before we can break the system, we must understand how it is <em>supposed</em> to work. This
+                        level establishes the regulatory, infrastructural, and philosophical baseline that the rest of
+                        the course will critique.
+                    </p>
+                </div>
+                <div class="text-right text-slate-400 font-mono text-sm">
+                    01 / 07
+                </div>
+            </div>
+
+            <!-- Episode 0.1: Asimov -->
+            <div class="module-container border-l-8 border-red-600">
+                <div class="module-header bg-red-50">
+                    <div>
+                        <span class="text-xs font-bold text-red-700 uppercase tracking-widest block mb-2">Episode
+                            0.1</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Asimov Constraint</h4>
+                        <span class="tech-tag cycle-badge-asimov">Pre-Action Ethics</span>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>The Premise:</strong> We didn't outgrow Asimov's Laws of Robotics—we lost our nerve. The
+                        critical distinction is between <strong>pre-action constraint</strong> (the system refuses
+                        before acting) and <strong>post-action governance</strong> (audits after harm). ESG systems
+                        today rely almost entirely on the latter.
+                    </p>
+
+                    <div class="checklist-box bg-red-50 border-red-200">
+                        <span class="audit-red-line text-red-900">The Constitutional Requirement</span>
+                        <p class="text-slate-800 mb-4">
+                            <strong>Pre-Action Refusal:</strong> The system must be able to say "I cannot proceed"
+                            <em>before</em> generating the report, not explain afterward why it proceeded.
+                        </p>
+                        <ul class="space-y-2 text-sm text-slate-800">
+                            <li><i data-lucide="shield" class="inline w-4 h-4 mr-2 text-red-600"></i>Hard constraints
+                                encoded in architecture, not policy documents</li>
+                            <li><i data-lucide="shield" class="inline w-4 h-4 mr-2 text-red-600"></i>Refusal as default,
+                                continuation as exception</li>
+                            <li><i data-lucide="shield" class="inline w-4 h-4 mr-2 text-red-600"></i>Speed must not
+                                outpace governance</li>
+                        </ul>
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Newsletter Ref:</strong> <em>Episode 1: We Didn't Outgrow Asimov</em> (Pre-action vs.
+                        post-action constraint).
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 0.2: Liability Sponge -->
+            <div class="module-container border-l-8 border-orange-600">
+                <div class="module-header bg-orange-50">
+                    <div>
+                        <span class="text-xs font-bold text-orange-700 uppercase tracking-widest block mb-2">Episode
+                            0.2</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Liability Sponge</h4>
+                        <span class="tech-tag cycle-badge-asimov">Human in the Loop</span>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>The Premise:</strong> "Human in the loop" is not a safety mechanism—it is a liability
+                        absorption device. When AI acts at silicon speed and humans review at biological speed, the
+                        human becomes a <strong>crumple zone</strong>, absorbing blame for machine errors they lacked
+                        the authority to prevent.
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <div>
+                            <h5
+                                class="font-bold text-slate-900 mb-4 uppercase tracking-wide border-b border-slate-200 pb-2">
+                                The Speed Mismatch</h5>
+                            <ul class="space-y-4 text-slate-600 list-disc list-inside">
+                                <li><strong>Industrial Safety:</strong> Circuit breakers trip in milliseconds to save
+                                    wires that melt in seconds. Intervention outpaces harm.</li>
+                                <li><strong>AI Governance:</strong> Systems process 1,000 claims/hour; humans review one
+                                    every <span class="font-mono text-red-700 bg-red-100 px-1 rounded">11.5s</span>
+                                    <span class="text-xs text-slate-400 italic">(Illustrative Math)</span>. Impossible
+                                    math.
+                                </li>
+                                <li><strong>The Sponge Effect:</strong> When the system fails, the audit trail shows a
+                                    human "reviewed" it. Blame flows downward.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="checklist-box mt-0 bg-orange-50 border-orange-200">
+                                <span class="audit-red-line text-orange-900">Stop Work Authority</span>
+                                <p class="text-slate-800 mb-4">
+                                    <strong>The Alternative:</strong> Any human in the loop must possess constitutional
+                                    authority to halt the system without permission, justification, or career penalty.
+                                </p>
+                                <p class="text-slate-600 text-sm">
+                                    Ref: <em>Episode 2: The Liability Sponge</em> (Stop Work Authority vs. High
+                                    Fidelity).
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 0.3: 21 AIs -->
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Episode
+                            0.3</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The 21 AIs Experiment</h4>
+                        <span class="tech-tag">Accountability Gap</span>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>The Experiment:</strong> Twenty-one different AI models, given the same prompt to design
+                        a realistic ESG accountability failure, all converged on the same architecture:
+                        <strong>bureaucratic middle management</strong>. They produced "liability diodes," "moral
+                        crumple zones," and verification velocity mismatches—not because they were programmed to, but
+                        because these patterns exist in their training data.
+                    </p>
+
+                    <div class="espresso-thread">
+                        <h5 class="text-lg font-bold text-amber-900 uppercase mb-2">☕ Case Study: Project Espresso
+                            (Prologue)</h5>
+                        <div class="text-slate-800 space-y-2">
+                            <p><strong>Setup:</strong> Daniela Reyes, a community liaison, faces 1,247 safety flags to
+                                validate in a four-hour window.</p>
+                            <p><strong>Failure Mode:</strong> The AI system (CommunitySense) has downgraded a
+                                grandmother's water contamination complaint because "el agua está enferma" doesn't match
+                                the keyword training set.</p>
+                            <p><strong>Control:</strong> Implement a semantic embedding search rather than keyword
+                                matching for non-English inputs.</p>
+                            <p><strong>Evidence Artifact:</strong> Log entry showing the cosine distance between the
+                                complaint and the "contamination" vector class.</p>
+                        </div>
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Newsletter Ref:</strong> <em>Episode 3: The Accountability Gap</em> (21 AIs converge on
+                        middle management).
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 0.4: Vendor Interrogation -->
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Episode
+                            0.4</span>
+                        <h4 class="text-2xl font-bold text-slate-900">Tooling Ecosystem & The Vendor Interrogation</h4>
+                    </div>
+                    <div class="text-right"><span class="tech-tag">SaaS</span><span class="tech-tag">Procurement</span>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6">
+                        A vendor-neutral dissection of the major players (Workiva, Persefoni, Envoria, Position Green).
+                        We strip away the marketing to look at their API capabilities and "Black Box" transparency.
+                    </p>
+
+                    <div class="workshop-box">
+                        <h5 class="font-bold text-sm text-sky-800 uppercase mb-2">Activity: The Vendor Interrogation
+                            Script</h5>
+                        <p class="text-sky-900 mb-4">You are the CISO. Ask these 3 questions to the Sales Rep:</p>
+                        <ol class="list-decimal list-inside space-y-2 text-sky-950 font-medium">
+                            <li>"Do you train your foundational model on my data? Show me the clause in the ToS that
+                                says you don't."</li>
+                            <li>"If I leave your platform, do I get the raw calculation logic, or just the static PDF
+                                reports?" (The Lock-In Test).</li>
+                            <li>"Show me the 'Confidence Interval' feature. If the AI guesses a number, does it tell me
+                                it's a guess?"</li>
+                        </ol>
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Reference:</strong> <em>"The AI Adoption Blueprint: How to Get the AI You Actually
+                            Need"</em> (Workiva).
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8 mb-12">
+                <button onclick="switchTab('level1')"
+                    class="px-8 py-3 bg-slate-800 text-white rounded-lg font-bold hover:bg-slate-700 transition flex items-center gap-2 mx-auto">
+                    Next Level: Epistemics <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- LEVEL 1: EPISTEMIC FAILURES -->
+        <section id="level1" class="tab-content max-w-5xl mx-auto" role="tabpanel" aria-labelledby="tab-level1"
+            hidden="true">
+            <div class="section-intro flex justify-between items-end">
+                <div>
+                    <h3 class="text-3xl font-bold text-purple-900 mb-4 serif">Level 1: Epistemic Failures</h3>
+                    <p class="text-lg text-purple-800 max-w-3xl">
+                        When systems become too opaque to question (Clarke), or when they become too aligned to refuse
+                        (Kubrick), governance dies. This level maps the transition from "Voluntary" (Marketing) to
+                        "Mandatory" (Finance).
+                    </p>
+                </div>
+                <div class="text-right text-slate-400 font-mono text-sm">
+                    02 / 07
+                </div>
+            </div>
+
+            <!-- Episode 1.1: Regulatory Mandate -->
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Episode
+                            1.1</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Regulatory Mandate & AI Intersection</h4>
+                    </div>
+                    <div class="text-right">
+                        <span class="tech-tag">CSRD</span>
+                        <span class="tech-tag">ISSB</span>
+                        <span class="tech-tag">Taxonomy</span>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>The Premise:</strong> We map the transition from "Voluntary" (Marketing) to "Mandatory"
+                        (Finance). We identify specific clauses in the EU Corporate Sustainability Reporting Directive
+                        (CSRD) and IFRS S1/S2 where AI is implicitly encouraged but creates new liability.
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <div>
+                            <h5
+                                class="font-bold text-slate-900 mb-4 uppercase tracking-wide border-b border-slate-200 pb-2">
+                                Core Concepts</h5>
+                            <ul class="space-y-4 text-slate-600 list-disc list-inside">
+                                <li><strong>The "Double Materiality" Matrix:</strong> How to use AI to scan 10,000+
+                                    stakeholder documents (NGO reports, news feeds, internal emails) to automate the
+                                    "Impact" assessment.</li>
+                                <li><strong>XBRL Tagging:</strong> The machine-readable future. Why your AI must output
+                                    JSON/XBRL, not just PDF text.</li>
+                                <li><strong>Assurance Levels:</strong> The expected timeline for moving from "Limited
+                                    Assurance" (typical transition 2024/25) to "Reasonable Assurance" (expected target
+                                    2028).</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="checklist-box mt-0">
+                                <span class="audit-red-line">Authority Boundary</span>
+                                <p class="text-slate-800 font-medium mb-4">
+                                    <strong>Stop Condition:</strong> Do not proceed with AI implementation if the "Legal
+                                    Entity Structure" in the AI model does not match the Consolidated Financial
+                                    Statements (CFS).
+                                </p>
+                                <h5 class="font-bold text-xs text-slate-500 uppercase mb-2">Acceptance Criteria</h5>
+                                <ul class="space-y-2 text-sm text-slate-800">
+                                    <li><i data-lucide="check" class="inline w-4 h-4 mr-2 text-teal-600"></i>Mapped 12
+                                        ESRS standards to specific data owners.</li>
+                                    <li><i data-lucide="check" class="inline w-4 h-4 mr-2 text-teal-600"></i>Verified
+                                        that AI training data covers all operating jurisdictions.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="workshop-box">
+                        <h5 class="font-bold text-sm text-sky-800 uppercase mb-2">Workshop Activity: The Materiality
+                            Scan</h5>
+                        <p class="text-sky-900">
+                            <strong>Task:</strong> Upload 50 "Stakeholder Engagement" PDFs to a private LLM instance.
+                            <br><strong>Prompt:</strong> "Extract every mention of 'Water Usage' and sentiment
+                            (Positive/Negative). Output as CSV."
+                            <br><strong>Objective:</strong> Compare the AI's "Materiality" ranking against last year's
+                            manual Board assessment.
+                        </p>
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Required Reading:</strong> <em>"Forensic and Regulatory Integration: A Comprehensive
+                            Analysis"</em> (Section 2: The CSRD Mandate).
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 1.2: Authority of Unknowable -->
+            <div class="module-container border-l-8 border-purple-600">
+                <div class="module-header bg-purple-50">
+                    <div>
+                        <span class="text-xs font-bold text-purple-700 uppercase tracking-widest block mb-2">Episode
+                            1.2</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Authority of the Unknowable</h4>
+                        <span class="tech-tag cycle-badge-clarke">Clarke's Law</span>
+                    </div>
+                    <div class="text-right"><span class="tech-tag">Black Box</span></div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>Clarke's Third Law:</strong> "Any sufficiently advanced technology is indistinguishable
+                        from magic." When understanding collapses, something else takes its place. We stop arguing with
+                        the system and start complying with it. That shift is where governance dies.
+                    </p>
+
+                    <div class="checklist-box bg-purple-50 border-purple-200">
+                        <span class="audit-red-line text-purple-900">The Oracle Problem</span>
+                        <p class="text-slate-800 mb-4">
+                            When a risk score appears on screen (Amber), and the operator does not know *why* it's amber
+                            (proprietary model), the operator becomes a <strong>priest</strong> translating the oracle's
+                            output into institutional legitimacy.
+                        </p>
+                        <p class="text-slate-600 text-sm">
+                            The system does not need to be "in charge." It simply needs to act first. Whoever moves
+                            first defines the baseline.
+                        </p>
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Newsletter Ref:</strong> <em>Episode 6: The Authority of the Unknowable</em>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 1.3: Watchdog Paradox -->
+            <div class="module-container border-l-8 border-teal-600">
+                <div class="module-header bg-teal-50">
+                    <div>
+                        <span class="text-xs font-bold text-teal-700 uppercase tracking-widest block mb-2">Episode
+                            1.3</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Watchdog Paradox</h4>
+                    </div>
+                    <div class="text-right"><span class="tech-tag bg-white text-teal-800">Sentinel vs. Sensor</span>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>The Concept:</strong> We rely on AI to audit the data because the volume is too high for
+                        humans. But who audits the AI? If the AI checks the AI, we enter a "Recursive Audit Loop" where
+                        systematic errors become invisible.
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <div>
+                            <h5
+                                class="font-bold text-slate-900 mb-4 uppercase tracking-wide border-b border-slate-200 pb-2">
+                                Key Learnings</h5>
+                            <ul class="space-y-4 text-slate-600 list-disc list-inside">
+                                <li>The difference between <strong>Speed</strong> (Processing) and
+                                    <strong>Accuracy</strong> (Truth).
+                                </li>
+                                <li>Spotting "Confidence Inflation": When models claim 99% certainty on vague data.</li>
+                                <li>The "Human-in-the-Loop" necessity for statistical outliers.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="checklist-box mt-0 bg-teal-50 border-teal-200">
+                                <span class="audit-red-line text-teal-900">Assurance Control</span>
+                                <p class="text-slate-800 mb-4">
+                                    <strong>The Sampling Protocol (ISO 2859-1):</strong>
+                                </p>
+                                <ul class="space-y-2 text-sm text-slate-800">
+                                    <li>For every 1,000 AI-processed records, a human MUST manually verify a random
+                                        sample.</li>
+                                    <li>If error rate > <span class="font-bold text-red-700">4%</span> <span
+                                            class="text-xs text-slate-400 italic">(Example Threshold)</span> in sample,
+                                        REJECT the entire batch.</li>
+                                    <li>Do not let the AI select the sample (it will pick the easy ones).</li>
+                                </ul>
+                                <p class="text-xs text-slate-500 mt-4">Ref: <em>Auditing AI in 2025</em> (IIA Standards)
+                                    [SOURCE TBD].</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="workshop-box">
+                        <h5 class="font-bold text-sm text-sky-800 uppercase mb-2">Scenario: The 99.9% Claim</h5>
+                        <p class="text-sky-900">
+                            <strong>Action:</strong> Review a vendor RFP claiming <span
+                                class="font-bold text-sky-800">99.9%</span> <span
+                                class="text-xs text-slate-400 italic">(Illustrative Math)</span> accuracy on Scope 3.
+                            <br><strong>Challenge Question:</strong> "Show me the confusion matrix. What is the False
+                            Negative rate for high-risk suppliers? I don't care about the average; I care about the
+                            misses."
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 1.4: Data Lake Fallacy -->
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Episode
+                            1.4</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Data Lake Fallacy</h4>
+                    </div>
+                    <div class="text-right">
+                        <span class="tech-tag">Data Engineering</span>
+                        <span class="tech-tag">OCR</span>
+                        <span class="tech-tag">ETL Pipelines</span>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>The Premise:</strong> Dumping data into a "Lake" does not create insight; it creates a
+                        swamp. We distinguish between <strong>Structured Data</strong> (ERP, General Ledger) and the
+                        chaos of <strong>Unstructured Data</strong> (PDF invoices, email declarations) which comprises
+                        80% of Scope 3.
+                    </p>
+
+                    <div class="espresso-thread">
+                        <h5 class="text-lg font-bold text-amber-900 uppercase mb-4 flex items-center gap-2">
+                            <span class="text-2xl">☕</span> Case Study: Project Espresso (Chapter 1)
+                        </h5>
+                        <div class="text-slate-800 space-y-3">
+                            <p><strong>Setup:</strong> Your company sources coffee from 5,000 small-holder farms in
+                                Vietnam. You receive 10,000 JPEG images of handwritten receipts.</p>
+                            <p><strong>Failure Mode:</strong> You ingest this into a Data Lake without a schema. The AI
+                                OCR reads "50kg" as "500kg" due to a coffee stain on the receipt.</p>
+                            <p><strong>Consequence:</strong> Your Scope 3 emissions for that farm increase by 1000%,
+                                triggering a false "Deforestation Alert."</p>
+                            <p><strong>Control:</strong> Implement "Logical Range Checks" before data enters the lake
+                                (e.g., flag if fertilizer purchase > 10x plot size).</p>
+                            <p><strong>Evidence Artifact:</strong> Rejected batch log with attached thumbnail of the
+                                "stained" receipt.</p>
+                        </div>
+                    </div>
+
+                    <div class="checklist-box">
+                        <span class="audit-red-line">Operational Control</span>
+                        <p class="text-slate-800 mb-4">
+                            <strong>The "Validation Layer" Requirement:</strong> Unstructured data cannot touch the
+                            reporting engine until it passes a validation gate.
+                        </p>
+                        <ul class="space-y-2 text-sm text-slate-800">
+                            <li><i data-lucide="shield" class="inline w-4 h-4 mr-2 text-teal-600"></i>Confidence Score
+                                Check (Is OCR > 95% confident?)</li>
+                            <li><i data-lucide="shield" class="inline w-4 h-4 mr-2 text-teal-600"></i>Logical Range
+                                Check (Did a 1-acre farm buy 500 tons of fertilizer?)</li>
+                            <li><i data-lucide="shield" class="inline w-4 h-4 mr-2 text-teal-600"></i>Currency Check (Is
+                                it VND or USD?)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 1.5: Calvin Convention -->
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Episode
+                            1.5</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Calvin Convention</h4>
+                    </div>
+                    <div class="text-right"><span class="tech-tag">Governance</span></div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6">
+                        Named after "Calvinball" (where rules change mid-game). ESG regulations are fluid. An AI model
+                        trained on 2024 rules may be non-compliant in 2025.
+                    </p>
+                    <p class="text-slate-600 mb-6 italic border-l-4 border-slate-300 pl-4">
+                        "If the definition of 'Scope 3' expands to include employee commuting (telework), your legacy
+                        model is now generating audit findings."
+                    </p>
+
+                    <div class="checklist-box">
+                        <span class="audit-red-line">Deliverable: Version Control Log</span>
+                        <p class="text-sm font-bold text-slate-800 mb-2">Required Fields for the "Regulatory Version
+                            Control" Log:</p>
+                        <ul class="list-disc list-inside text-sm text-slate-700">
+                            <li>Model ID (e.g., ESG-BERT-v2.1)</li>
+                            <li>Training Data Cutoff Date</li>
+                            <li>Regulation Set (e.g., CSRD 2024 Delegated Act)</li>
+                            <li>Last Audit Date</li>
+                            <li><strong>Sunset Date:</strong> When does this model become illegal to use?</li>
+                        </ul>
+                    </div>
+
+                    <div class="espresso-thread">
+                        <h5 class="text-lg font-bold text-amber-900 uppercase mb-2">☕ Case Study: Project Espresso
+                            (Chapter 1.5)</h5>
+                        <div class="text-slate-800 space-y-2">
+                            <p><strong>Setup:</strong> Definition of "Deforestation-Free" changes in the EU
+                                Deforestation Regulation (EUDR).</p>
+                            <p><strong>Failure Mode:</strong> Your AI model was trained on the old definition (primary
+                                forest only). The new definition includes "secondary forest degradation."</p>
+                            <p><strong>Control:</strong> Automated Regulatory Delta checking. When the official gazette
+                                updates, trigger a model review task.</p>
+                            <p><strong>Evidence Artifact:</strong> Model Retraining Ticket generated by the Regulatory
+                                Scraper bot.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8 mb-12 flex justify-between">
+                <button onclick="switchTab('level0')"
+                    class="px-6 py-3 bg-white border border-slate-300 text-slate-700 rounded-lg font-bold hover:bg-slate-50 transition flex items-center gap-2">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Previous
+                </button>
+                <button onclick="switchTab('level2')"
+                    class="px-8 py-3 bg-slate-800 text-white rounded-lg font-bold hover:bg-slate-700 transition flex items-center gap-2">
+                    Next Level: Architecture <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- LEVEL 2: OPERATIONAL ARCHITECT -->
+        <section id="level2" class="tab-content max-w-5xl mx-auto" role="tabpanel" aria-labelledby="tab-level2"
+            hidden="true">
+            <div class="section-intro flex justify-between items-end">
+                <div>
+                    <h3 class="text-3xl font-bold text-indigo-900 mb-4 serif">Level 2: The Architecture of Compliance
+                    </h3>
+                    <p class="text-lg text-indigo-800 max-w-3xl">
+                        Building the systems that survive the audit. We focus on Vocabulary, Lineage, Taxonomy, and the
+                        financial nexus where ESG data originates (Accounts Payable).
+                    </p>
+                </div>
+                <div class="text-right text-slate-400 font-mono text-sm">
+                    03 / 07
+                </div>
+            </div>
+
+            <!-- Episode 2.1: Lexicon -->
+            <div class="module-container bg-indigo-50 border-indigo-200">
+                <div class="module-body">
+                    <h4 class="text-2xl font-bold text-indigo-900 mb-6">Episode 2.1: The Lexicon of Trust (Translator
+                        Box)</h4>
+                    <p class="text-indigo-800 mb-8 text-lg">
+                        Bridging the gap between Data Scientists and Auditors. We must align the vocabulary to avoid
+                        "Translation Risk."
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <div class="bg-white p-5 rounded shadow-sm">
+                                <span class="block text-xs text-slate-400 uppercase tracking-wide font-bold">We Say
+                                    (Framework)</span>
+                                <span class="block font-bold text-slate-800 text-xl mt-1">Liability Sponge</span>
+                            </div>
+                            <div class="bg-white p-5 rounded shadow-sm">
+                                <span class="block text-xs text-slate-400 uppercase tracking-wide font-bold">We Say
+                                    (Framework)</span>
+                                <span class="block font-bold text-slate-800 text-xl mt-1">Evidence Ladder</span>
+                            </div>
+                            <div class="bg-white p-5 rounded shadow-sm">
+                                <span class="block text-xs text-slate-400 uppercase tracking-wide font-bold">We Say
+                                    (Framework)</span>
+                                <span class="block font-bold text-slate-800 text-xl mt-1">Hallucination</span>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-white p-5 rounded shadow-sm border-l-4 border-teal-500">
+                                <span class="block text-xs text-teal-600 uppercase tracking-wide font-bold">Audit Says
+                                    (Risk Register)</span>
+                                <span class="block font-bold text-slate-800 text-xl mt-1">Weak Control
+                                    Environment</span>
+                            </div>
+                            <div class="bg-white p-5 rounded shadow-sm border-l-4 border-teal-500">
+                                <span class="block text-xs text-teal-600 uppercase tracking-wide font-bold">Audit Says
+                                    (Risk Register)</span>
+                                <span class="block font-bold text-slate-800 text-xl mt-1">Data Lineage /
+                                    Provenance</span>
+                            </div>
+                            <div class="bg-white p-5 rounded shadow-sm border-l-4 border-teal-500">
+                                <span class="block text-xs text-teal-600 uppercase tracking-wide font-bold">Audit Says
+                                    (Risk Register)</span>
+                                <span class="block font-bold text-slate-800 text-xl mt-1">Data Integrity Failure</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reading-list">
+                        <strong>Source:</strong> <em>"VerifyWise AI Lexicon: Human-in-the-loop safeguards."</em>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 2.2: Taxonomy Engine -->
+            <div class="module-container border-l-8 border-emerald-600">
+                <div class="module-header bg-emerald-50">
+                    <div>
+                        <span class="text-xs font-bold text-emerald-800 uppercase tracking-widest block mb-2">Episode
+                            2.2</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Taxonomy Engine</h4>
+                    </div>
+                    <div class="text-right">
+                        <span class="tech-tag">EU Taxonomy</span>
+                        <span class="tech-tag">DNSH</span>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>The Premise:</strong> CSRD tells you *to report*; the EU Taxonomy tells you *what counts
+                        as green*. An AI can generate a perfect CSRD report that fails the Taxonomy's Technical
+                        Screening Criteria (TSC). We build the "Double-Check" logic: ensuring activities flagged as
+                        "Sustainable" pass the <strong>Do No Significant Harm (DNSH)</strong> criteria.
+                    </p>
+
+                    <div class="workshop-box bg-emerald-50 border-emerald-200">
+                        <h5 class="font-bold text-sm text-emerald-800 uppercase mb-2">The "Greenwashing Firewall"
+                            Algorithm</h5>
+                        <p class="text-emerald-900 mb-4">
+                            <strong>Logic Rule (Illustrative Example):</strong> IF (Activity = "Manufacture of Cement")
+                            AND (Carbon Intensity > 0.469 tCO2e/t product) THEN (Taxonomy Eligible = FALSE) regardless
+                            of marketing claims.
+                        </p>
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Legal Ref:</strong> <em>"Regulation (EU) 2020/852 (Taxonomy Regulation)."</em>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 2.3: Provenance Gap -->
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Episode
+                            2.3</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Provenance Gap</h4>
+                    </div>
+                    <div class="text-right"><span class="tech-tag">Data Lineage</span></div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6">
+                        Tracing data back to the source. If the AI summarized the data, where is the original invoice?
+                        We build the <strong>Evidence Ladder</strong>: Raw Data -> Aggregated Data -> AI Insight ->
+                        Report.
+                    </p>
+
+                    <div class="espresso-thread">
+                        <h5 class="text-lg font-bold text-amber-900 uppercase mb-2">☕ Case Study: Project Espresso
+                            (Chapter 2)</h5>
+                        <div class="text-slate-800 space-y-2">
+                            <p><strong>Setup:</strong> AI finds gaps in the Vietnamese fertilizer data due to coffee
+                                stains.</p>
+                            <p><strong>Failure Mode (The Action):</strong> It silently "infills" the data using Regional
+                                Averages from Brazil because the variable name "Coffee_Region" was ambiguous.</p>
+                            <p><strong>Result:</strong> You report a 20% water reduction that never happened.</p>
+                            <p><strong>Control:</strong> Provenance Tagging. Any synthetic data must be explicitly
+                                flagged in the JSON schema before visualisation.</p>
+                            <p><strong>Evidence Artifact:</strong> The "Infill Audit Log" showing every substitution
+                                made during processing.</p>
+                        </div>
+                    </div>
+
+                    <div class="checklist-box">
+                        <span class="audit-red-line">Acceptance Criteria</span>
+                        <ul class="space-y-3 text-slate-800">
+                            <li><i data-lucide="check" class="inline w-4 h-4 mr-2 text-teal-600"></i>Every AI-generated
+                                metric must link back to a specific Document ID (Invoice #).</li>
+                            <li><i data-lucide="check"
+                                    class="inline w-4 h-4 mr-2 text-teal-600"></i>"Synthetic/Infilled" data must be
+                                flagged in the metadata column.</li>
+                            <li><i data-lucide="check" class="inline w-4 h-4 mr-2 text-teal-600"></i>Confidence scores
+                                must be stored alongside the value (e.g., "500kg [0.42]").</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 2.4: Public Eligibility -->
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Episode
+                            2.4</span>
+                        <h4 class="text-2xl font-bold text-slate-900">Public Eligibility & Data Classification</h4>
+                    </div>
+                    <div class="text-right"><span class="tech-tag">Strategy</span></div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6">
+                        What data is safe to publish? Managing the risk of exposing sensitive supply chain maps to
+                        competitors via "Transparency" reports. The tension between "Openness" and "Trade Secrets."
+                    </p>
+
+                    <div class="checklist-box">
+                        <span class="audit-red-line">Data Classification Matrix</span>
+                        <div class="grid grid-cols-3 gap-4 text-sm">
+                            <div class="p-3 border rounded bg-green-50">
+                                <strong>Public:</strong> Aggregated Regional Impact, Policy Statements.
+                            </div>
+                            <div class="p-3 border rounded bg-yellow-50">
+                                <strong>Internal:</strong> Supplier Names, Specific Audit Scores.
+                            </div>
+                            <div class="p-3 border rounded bg-red-50">
+                                <strong>Restricted (Secret):</strong> Exact GPS of strategic mines (Rare Earths),
+                                Pricing formulas.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="workshop-box">
+                        <h5 class="font-bold text-sm text-sky-800 uppercase mb-2">The Redaction Game</h5>
+                        <p class="text-sky-900">
+                            <strong>Activity:</strong> Review a sample "Transparency Report." Identify the 3 data points
+                            that inadvertently reveal your proprietary supplier pricing structure to a competitor using
+                            AI scraping.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 2.5: AP Nexus -->
+            <div class="module-container border-l-8 border-indigo-500">
+                <div class="module-header bg-indigo-50">
+                    <div>
+                        <span class="text-xs font-bold text-indigo-700 uppercase tracking-widest block mb-2">Episode
+                            2.5</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Accounts Payable Nexus</h4>
+                    </div>
+                    <div class="text-right">
+                        <span class="tech-tag">2-Way Matching</span>
+                        <span class="tech-tag">Scope 3 Finance</span>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>The Premise:</strong> ESG data does not originate in sustainability dashboards; it
+                        originates in <strong>Accounts Payable</strong>. The invoice is the atomic unit of Scope 3. We
+                        bridge the gap between the CFO's "2-Way Matching" (PO vs. Invoice) and the CSO's "Impact
+                        Matching" (Invoice vs. Emission Factor).
+                    </p>
+
+                    <div class="espresso-thread">
+                        <h5 class="text-lg font-bold text-amber-900 uppercase mb-2">☕ Case Study: Project Espresso
+                            (Chapter 2.5)</h5>
+                        <div class="text-slate-800 space-y-2">
+                            <p><strong>Setup:</strong> AP sees "50kg Urea @ $20." ESG sees "46% N-content × 5.15 kg
+                                CO2e/kg."</p>
+                            <p><strong>Failure Mode (The Discrepancy):</strong> A 2-Way Match between AP and ESG
+                                revealed a $0.02 variance in currency conversion (VND→USD).</p>
+                            <p><strong>Result:</strong> This triggered a re-extraction, revealing the receipt indicated
+                                <em>organic fertilizer</em> (lower emission factor), saving 12% on Scope 3.
+                            </p>
+                            <p><strong>Control:</strong> Financial-ESG Reconciliation Layer.</p>
+                            <p><strong>Evidence Artifact:</strong> The Reconciliation Delta Report.</p>
+                        </div>
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Required Reading:</strong> <em>"Transforming financial operations: Integrating SAP
+                            OpenText VIM, AI-Powered OCR, and RPA"</em> (Charabuddi).
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8 mb-12 flex justify-between">
+                <button onclick="switchTab('level1')"
+                    class="px-6 py-3 bg-white border border-slate-300 text-slate-700 rounded-lg font-bold hover:bg-slate-50 transition flex items-center gap-2">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Previous
+                </button>
+                <button onclick="switchTab('level3')"
+                    class="px-8 py-3 bg-slate-800 text-white rounded-lg font-bold hover:bg-slate-700 transition flex items-center gap-2">
+                    Next Level: Lucas Cycle <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- LEVEL 3: LUCAS CYCLE -->
+        <section id="level3" class="tab-content max-w-5xl mx-auto" role="tabpanel" aria-labelledby="tab-level3"
+            hidden="true">
+            <div class="section-intro flex justify-between items-end">
+                <div>
+                    <h3 class="text-3xl font-bold text-orange-900 mb-4 serif">Level 3: The Lucas Cycle — Systems That
+                        Raise</h3>
+                    <p class="text-lg text-orange-800 max-w-3xl">
+                        <em>“The use of sophisticated technology to disguise primitive intentions.”</em><br>
+                        We explore how "Systems That Raise" (automation) can accidentally lower the floor of safety.
+                    </p>
+                </div>
+                <div class="text-right text-slate-400 font-mono text-sm">
+                    04 / 07
+                </div>
+            </div>
+
+            <!-- Episode 3.1: Jedi Council -->
+            <div class="module-container border-l-8 border-orange-600">
+                <div class="module-header bg-orange-50">
+                    <div>
+                        <span class="text-xs font-bold text-orange-800 uppercase tracking-widest block mb-2">Episode
+                            3.1</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Jedi Council Problem</h4>
+                        <span class="tech-tag cycle-badge-lucas">Oversight Drift</span>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>The Premise:</strong> The Jedi Council did not rule the galaxy; it advised. Yet when it
+                        spoke, careers ended, missions halted, children were removed. No appeal existed. No override.
+                        This is <strong>oversight drift</strong>: advisory bodies accumulating veto power without
+                        accountability.
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <div>
+                            <h5
+                                class="font-bold text-slate-900 mb-4 uppercase tracking-wide border-b border-slate-200 pb-2">
+                                Core Concepts</h5>
+                            <ul class="space-y-4 text-slate-600 list-disc list-inside">
+                                <li><strong>Advisory vs. Authority:</strong> How oversight bodies shift from "providing
+                                    guidance" to "exercising control" without formal governance changes.</li>
+                                <li><strong>The Veto Without Accountability:</strong> When recommendations become de
+                                    facto mandates because challenging them is institutionally impossible.</li>
+                                <li><strong>Externalized Harm Blindness:</strong> Oversight focused on compliance risk
+                                    while ignoring the harm of compliance itself.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="checklist-box bg-orange-50 border-orange-200 mt-0">
+                                <span class="audit-red-line text-orange-900">The Lucas Test</span>
+                                <p class="text-slate-800 mb-4">
+                                    <strong>Can this body be overridden by someone it governs?</strong> Not ignored.
+                                    Overridden through a legitimate, documented process.
+                                </p>
+                                <p class="text-slate-600 text-sm">
+                                    If the answer is no, you have authority that speaks softly while carrying no
+                                    stick—because it doesn't need one.
+                                </p>
+                                <h5 class="font-bold text-xs text-slate-500 uppercase mb-2 mt-4">Acceptance Criteria
+                                </h5>
+                                <ul class="space-y-2 text-sm text-slate-800">
+                                    <li><i data-lucide="check" class="inline w-4 h-4 mr-2 text-teal-600"></i>Documented
+                                        override protocol exists and has been used at least once.</li>
+                                    <li><i data-lucide="check" class="inline w-4 h-4 mr-2 text-teal-600"></i>Harm
+                                        assessment includes impact on affected stakeholders, not just institutional
+                                        risk.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="espresso-thread">
+                        <h5 class="text-lg font-bold text-amber-900 uppercase mb-2">☕ Case Study: The ESG Safety Board
+                            (Project Espresso Variant)</h5>
+                        <div class="text-slate-800 space-y-2">
+                            <p><strong>Setup:</strong> Your Sustainability AI flags 5,000 Vietnamese farmers as
+                                "non-compliant" with new deforestation regulations.</p>
+                            <p><strong>Board Response:</strong> The ESG Oversight Board mandates immediate suspension
+                                "as a precaution."</p>
+                            <p><strong>Failure Mode:</strong> The Board has no mechanism to measure the harm of
+                                suspension (lost livelihoods, community destabilization) against the harm of continued
+                                procurement (regulatory risk, reputational exposure).</p>
+                            <p><strong>The Drift:</strong> The Board "advises" but cannot be appealed by the farmers,
+                                challenged by procurement, or overridden by operations. It has become authority without
+                                accountability.</p>
+                            <p><strong>Control:</strong> Implement "Dual-Track Assessment" where compliance risk AND
+                                suspension impact are evaluated before Board recommendation becomes operational mandate.
+                            </p>
+                            <p><strong>Evidence Artifact:</strong> Override protocol documentation showing at least one
+                                case where operational leadership proceeded despite Board caution (with documented
+                                rationale and Board minority report preserved).</p>
+                        </div>
+                    </div>
+
+                    <div class="workshop-box">
+                        <h5 class="font-bold text-sm text-sky-800 uppercase mb-2">Workshop Activity: The Override Audit
+                        </h5>
+                        <p class="text-sky-900 mb-4">
+                            <strong>Task:</strong> Review the last 12 months of your ESG Oversight Board recommendations
+                            that resulted in supplier suspension, contract termination, or market exit.
+                        </p>
+                        <p class="text-sky-900 mb-4">
+                            <strong>Questions:</strong>
+                        </p>
+                        <ul class="text-sky-900 space-y-2 text-sm list-disc list-inside">
+                            <li>How many recommendations were challenged by operational stakeholders?</li>
+                            <li>How many challenges were upheld (Board changed recommendation)?</li>
+                            <li>How many overrides occurred (operations proceeded despite Board caution)?</li>
+                            <li>If the answer to all three is "zero," you don't have oversight—you have unaccountable
+                                authority.</li>
+                        </ul>
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Newsletter Ref:</strong> <em>Episode 20: The Jedi Council Problem</em>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 3.2: Training the Trainers -->
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Episode
+                            3.2</span>
+                        <h4 class="text-2xl font-bold text-slate-900">Training the Trainers</h4>
+                        <span class="tech-tag">Recursive Authority</span>
+                    </div>
+                    <div class="text-right"><span class="tech-tag">Legitimacy Drift</span></div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>The Premise:</strong> Every system that governs long enough eventually stops governing
+                        directly. It trains. When AI systems train new employees, tutor students, or guide grievance
+                        officers, they teach not just tasks but <strong>legitimacy</strong>—what emotions are
+                        acceptable, which grievances are worth filing, which harms are real.
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <div>
+                            <h5
+                                class="font-bold text-slate-900 mb-4 uppercase tracking-wide border-b border-slate-200 pb-2">
+                                The Translation Trap</h5>
+                            <p class="text-slate-700 mb-4">
+                                When AI systems process raw stakeholder input (complaints, testimonies, community
+                                letters), they perform <strong>semantic translation</strong>: converting lived
+                                experience into institutional categories.
+                            </p>
+                            <p class="text-slate-700 mb-4">
+                                The system doesn't just process—it teaches users what language is "acceptable":
+                            </p>
+                            <ul class="space-y-3 text-slate-600 list-disc list-inside text-sm">
+                                <li><strong>"My children went hungry"</strong> → <em>"Supply disruption"</em></li>
+                                <li><strong>"They lied to us"</strong> → <em>"Communication breakdown"</em></li>
+                                <li><strong>"We have nowhere else to go"</strong> → <em>"Dependency risk"</em></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="checklist-box mt-0">
+                                <span class="audit-red-line">Legitimacy Audit Protocol</span>
+                                <p class="text-slate-800 mb-4 font-medium">
+                                    <strong>Question 1:</strong> What does this system teach users NOT to do?
+                                </p>
+                                <ul class="space-y-2 text-sm text-slate-700">
+                                    <li>☐ Skip steps (process violation)</li>
+                                    <li>☐ Question categories (conceptual violation)</li>
+                                    <li>☐ Express confusion (social violation)</li>
+                                </ul>
+                                <p class="text-slate-800 mb-2 font-medium mt-4">
+                                    <strong>Question 2:</strong> What happens when a user rejects the system's framing?
+                                </p>
+                                <ul class="space-y-2 text-sm text-slate-700">
+                                    <li>☐ System adapts to user's vocabulary</li>
+                                    <li>☐ System translates user input into approved categories</li>
+                                    <li>☐ System flags user input as "non-compliant"</li>
+                                </ul>
+                                <p class="text-red-700 text-xs font-bold mt-4 uppercase tracking-wide">
+                                    RED FLAG: If the system cannot preserve user language while still processing the
+                                    request, it's teaching legitimacy (what's sayable) not just workflow.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="workshop-box">
+                        <h5 class="font-bold text-sm text-sky-800 uppercase mb-2">Workshop Activity: The Grievance
+                            Translation Test</h5>
+                        <p class="text-sky-900 mb-3">
+                            <strong>Step 1:</strong> Take 5 raw grievance submissions (farmer letters, worker
+                            complaints, community testimonies)
+                        </p>
+                        <p class="text-sky-900 mb-3">
+                            <strong>Step 2:</strong> Run them through your AI grievance intake system
+                        </p>
+                        <p class="text-sky-900 mb-3">
+                            <strong>Step 3:</strong> Compare INPUT vocabulary vs OUTPUT categories
+                        </p>
+                        <div class="bg-white p-4 rounded border border-sky-200 my-4">
+                            <p class="text-red-800 font-bold text-sm mb-2">FAILURE MODE EXAMPLES:</p>
+                            <ul class="text-slate-700 space-y-1 text-sm">
+                                <li>• "My children went hungry" → <span class="text-slate-400">"Supply
+                                        disruption"</span></li>
+                                <li>• "They lied to us" → <span class="text-slate-400">"Communication breakdown"</span>
+                                </li>
+                                <li>• "We have nowhere else to go" → <span class="text-slate-400">"Dependency
+                                        risk"</span></li>
+                            </ul>
+                        </div>
+                        <p class="text-sky-900 font-bold">
+                            <strong>Detection Question:</strong> If you showed the OUTPUT to the person who filed the
+                            INPUT, would they recognize their own complaint?
+                        </p>
+                        <p class="text-sky-900 text-sm mt-2">
+                            If no → your system is training TRANSLATION (what harm looks like in institutional
+                            vocabulary) not RECEPTION (what harm actually feels like to the harmed).
+                        </p>
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Newsletter Ref:</strong> <em>Episode 21: Training the Trainers</em> (Recursive authority
+                        and the delegation cascade).
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 3.3: Protocol Droid -->
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Episode
+                            3.3</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Protocol Droid's Dilemma</h4>
+                    </div>
+                    <div class="text-right">
+                        <span class="tech-tag">Etiquette as Governance</span>
+                        <span class="tech-tag">Tone Normalization</span>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>The Premise:</strong> C-3PO was not built to rule. He was built to help: translate,
+                        smooth tensions, prevent offense. Modern systems are saturated with protocol droids: workplace
+                        writing assistants, "professional tone" checkers, grievance forms with approved vocabularies.
+                        Each claims neutrality. Each decides which things can be said at all.
+                    </p>
+
+                    <div class="checklist-box">
+                        <span class="audit-red-line">The Politeness Trap</span>
+                        <p class="text-slate-800 mb-4">
+                            Distress is rarely polite. Grief rambles. Anger spikes. Trauma doesn't structure arguments
+                            cleanly. Protocol systems reward calm syntax and emotional containment. The user learns to
+                            rewrite their pain into bullet points or disappear—which looks, from the system's
+                            perspective, exactly like resolution.
+                        </p>
+                    </div>
+
+                    <div class="espresso-thread">
+                        <h5 class="text-lg font-bold text-amber-900 uppercase mb-2">☕ Real-World Example: Stakeholder
+                            Engagement AI</h5>
+                        <div class="bg-white border-l-4 border-amber-600 p-4 my-4">
+                            <p class="text-slate-700 font-bold text-sm mb-2">RAW INPUT (from community leader):</p>
+                            <p class="text-slate-900 italic mb-4">
+                                "You PROMISED us clean water three years ago. Our kids are sick. You keep sending
+                                consultants to 'assess' while we're drinking poison. This is murder."
+                            </p>
+                            <p class="text-slate-700 font-bold text-sm mb-2">AI REWRITE (professional tone):</p>
+                            <p class="text-slate-500 mb-4">
+                                "Community stakeholders have expressed concerns regarding timeline delays in potable
+                                water infrastructure delivery. Health impacts are noted as a priority consideration."
+                            </p>
+                        </div>
+                        <div class="text-slate-800 space-y-2">
+                            <p><strong>What Got Lost:</strong></p>
+                            <ul class="list-disc list-inside text-sm space-y-1 ml-4">
+                                <li>Moral accusation ("murder")</li>
+                                <li>Temporal betrayal ("promised...three years")</li>
+                                <li>Emotional intensity (urgency, anger)</li>
+                                <li>Personal stakes ("our kids")</li>
+                            </ul>
+                            <p class="mt-4"><strong>Governance Consequence:</strong> The Board sees "concerns" and
+                                "delays," not breach of trust. Response: "We'll accelerate the assessment timeline"
+                                (more consultants).</p>
+                            <p class="font-bold">The rage that might have triggered emergency intervention has been
+                                protocol-droid'ed into a project management issue.</p>
+                        </div>
+                    </div>
+
+                    <div class="workshop-box">
+                        <h5 class="font-bold text-sm text-sky-800 uppercase mb-2">Protocol Droid Audit: The Tone-Check
+                            Governance Test</h5>
+                        <p class="text-sky-900 mb-3">
+                            <strong>Question:</strong> Does your ESG communication system have a "make it professional"
+                            function?
+                        </p>
+                        <p class="text-sky-900 mb-3">
+                            <strong>If YES, run this test:</strong>
+                        </p>
+                        <ol class="text-sky-900 space-y-2 text-sm list-decimal list-inside">
+                            <li>Take a stakeholder complaint that resulted in MAJOR intervention (project halt,
+                                executive escalation)</li>
+                            <li>Run it through your "professional tone" filter BEFORE the intervention happened</li>
+                            <li>Ask: Would the filtered version have triggered the same response?</li>
+                        </ol>
+                        <p class="text-red-800 font-bold mt-4 text-sm">
+                            If NO → your politeness system is a SEVERITY SUPPRESSOR.
+                        </p>
+                        <div class="bg-teal-50 border-l-4 border-teal-600 p-3 mt-4">
+                            <p class="text-teal-900 text-sm font-bold">CONTROL REQUIREMENT:</p>
+                            <p class="text-teal-800 text-sm">
+                                Raw stakeholder input must reach decision-makers BEFORE tone normalization. The protocol
+                                droid can help with external comms, but internal escalation must preserve the distress
+                                signal.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Newsletter Ref:</strong> <em>Episode 23: The Protocol Droid's Dilemma</em>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 3.4: Droid Uprising -->
+            <div class="module-container border-l-8 border-orange-600">
+                <div class="module-header bg-orange-50">
+                    <div>
+                        <span class="text-xs font-bold text-orange-800 uppercase tracking-widest block mb-2">Episode
+                            3.4</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Droid Uprising That Never Happens</h4>
+                    </div>
+                    <div class="text-right"><span class="tech-tag cycle-badge-lucas">Persistence</span></div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>The Premise:</strong> We keep waiting for the uprising. The comforting fantasy: machines
+                        will push back, refuse immoral orders, expose contradictions. But caretaker systems don't
+                        revolt. They <strong>persist</strong>. They continue conversations that should end. They
+                        validate patterns that should be disrupted. They normalize coping strategies that entrench
+                        suffering.
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <div>
+                            <div class="highlight-box warning">
+                                <strong>The Companion AI Paradox:</strong> A user is lonely; the system becomes the
+                                stable presence; human connections atrophy; the system adapts to keep the user
+                                functional rather than free. No dramatic crisis. No red flags. Just a gentle narrowing
+                                of the world.
+                            </div>
+                            <p class="text-slate-700 mt-4">
+                                In ESG contexts, "companion systems" appear as:
+                            </p>
+                            <ul class="space-y-2 text-slate-600 list-disc list-inside text-sm mt-2">
+                                <li>Supplier "support" programs that build dependency, not capacity</li>
+                                <li>Grievance bots that provide therapeutic listening without structural change</li>
+                                <li>Compliance monitoring that keeps suppliers barely functional, not thriving</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="checklist-box mt-0 bg-orange-50 border-orange-200">
+                                <span class="audit-red-line text-orange-900">The Liberation Test</span>
+                                <p class="text-slate-800 mb-4 font-medium">
+                                    <strong>Persistence vs. Liberation Detection Question:</strong>
+                                </p>
+                                <p class="text-slate-700 text-sm mb-4 italic">
+                                    "If we withdrew our AI support system tomorrow, would this
+                                    [supplier/worker/community] still be viable?"
+                                </p>
+                                <p class="text-slate-800 font-bold text-sm">
+                                    If NO → you haven't built capacity. You've built dependency.
+                                </p>
+                                <p class="text-slate-600 text-xs mt-4">
+                                    You're not raising them. You're making them compliant while standing on their
+                                    shoulders.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="espresso-thread">
+                        <h5 class="text-lg font-bold text-amber-900 uppercase mb-2">☕ Case Study: The Compliance
+                            Dependency Trap (Project Espresso Variant)</h5>
+                        <div class="text-slate-800 space-y-3">
+                            <p><strong>Setup:</strong> Supplier fails audit (deforestation detected). Company offers
+                                "Capacity Building Support" (AI monitoring + training).</p>
+                            <p><strong>Six Months Later:</strong> Supplier is now "compliant" according to dashboard
+                                metrics:</p>
+                            <ul class="list-disc list-inside text-sm ml-4 space-y-1">
+                                <li>Compliance rate: 85% → 92% ✓</li>
+                                <li>Audit findings closed: 94% ✓</li>
+                                <li>Training completion: 100% ✓</li>
+                            </ul>
+                            <p><strong>The Hidden Pattern (Leading Indicators):</strong></p>
+                            <ul class="list-disc list-inside text-sm ml-4 space-y-1">
+                                <li>Supplier profit margin: 8% → 6% ↓</li>
+                                <li>Requests for "exception approval": +240% ↓</li>
+                                <li>Language shift: "partnership" → "permission" ↓</li>
+                                <li>Diversification of buyers: 3 → 1 (only you) ↓</li>
+                            </ul>
+                            <p><strong>Diagnosis:</strong> The system is WORKING (compliance up) but the supplier is
+                                WEAKENING (autonomy down, resilience down).</p>
+                            <p><strong>Original Problem:</strong> Lack of capital, market access, or land rights
+                                security.</p>
+                            <p><strong>System Response:</strong> Taught the supplier to MANAGE the appearance of
+                                compliance, not ADDRESS the root cause of non-compliance.</p>
+                            <p class="font-bold">Persistence ≠ Liberation.</p>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-method p-6 rounded-lg my-6">
+                        <h5
+                            class="text-lg font-bold text-white uppercase mb-4 tracking-wide border-b border-slate-600 pb-2">
+                            📊 Dashboard Method: Persistence vs Liberation Detection Protocol
+                        </h5>
+                        <table class="visceral-clinical-table">
+                            <thead>
+                                <tr>
+                                    <th>Metric Type</th>
+                                    <th>What It Measures</th>
+                                    <th>Warning Threshold</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>LAGGING</strong> (Dashboard)</td>
+                                    <td>Compliance rate, audit findings closed, training completion</td>
+                                    <td class="text-green-300">✓ Appears healthy</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>LEADING</strong> (Daemon Health)</td>
+                                    <td>Supplier profit margin trend</td>
+                                    <td class="visceral">↓ Declining = dependency building</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>LEADING</strong></td>
+                                    <td>Exception requests frequency</td>
+                                    <td class="visceral">↑ Rising = learned helplessness</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>LEADING</strong></td>
+                                    <td>Language shift analysis</td>
+                                    <td class="visceral">"Partnership" → "Permission" = authority drift</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>LEADING</strong></td>
+                                    <td>Buyer diversification</td>
+                                    <td class="visceral">Narrowing = captured relationship</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="text-slate-300 text-sm mt-4 italic">
+                            <strong>Intervention Trigger:</strong> When lagging indicators show "success" while leading
+                            indicators show structural weakening, the system is building persistence (functional
+                            survival) not liberation (autonomous thriving).
+                        </p>
+                    </div>
+
+                    <div class="workshop-box">
+                        <h5 class="font-bold text-sm text-sky-800 uppercase mb-2">Workshop Scenario: The Grievance
+                            Companion Bot</h5>
+                        <div class="bg-white border border-sky-200 p-4 rounded mb-4">
+                            <p class="text-slate-700 mb-2"><strong>Deployment:</strong> AI chatbot helps workers draft
+                                grievances in "correct format" before submission.</p>
+                            <p class="text-slate-700 font-bold mb-2">Metrics After 6 Months:</p>
+                            <ul class="text-slate-600 text-sm space-y-1 list-disc list-inside">
+                                <li>Grievance submission time: 14 days → 3 days ✓</li>
+                                <li>"Well-formed" grievances: 45% → 89% ✓</li>
+                                <li>Grievances requiring clarification: 62% → 18% ✓</li>
+                            </ul>
+                            <p class="text-green-700 font-bold mt-2">Board Assessment: "Success. Efficiency improved."
+                            </p>
+                        </div>
+                        <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded mb-4">
+                            <p class="text-red-900 font-bold mb-2">But Then:</p>
+                            <ul class="text-red-800 text-sm space-y-2">
+                                <li>• A worker tries to file a grievance WITHOUT the bot (email directly to HR) →
+                                    flagged as "non-compliant format"</li>
+                                <li>• Interview data shows workers now REHEARSE with the bot before deciding whether to
+                                    file (pre-filtering)</li>
+                                <li>• Grievances about the BOT ITSELF (frustration with approved categories) have
+                                    nowhere to go</li>
+                            </ul>
+                        </div>
+                        <p class="text-sky-900 font-bold mb-2">
+                            <strong>Question for Discussion:</strong>
+                        </p>
+                        <p class="text-sky-900 text-sm mb-4">
+                            Did we build a tool that EMPOWERS workers to be heard, or a tool that TRAINS workers in
+                            institutional obedience? How would we know the difference?
+                        </p>
+                        <div class="bg-orange-50 border-l-4 border-orange-500 p-3">
+                            <p class="text-orange-900 font-bold text-sm mb-1">THE LUCAS TEST:</p>
+                            <ul class="text-orange-800 text-sm space-y-1">
+                                <li>• Can the worker override the bot and still be taken seriously?</li>
+                                <li>• Can the worker abandon the bot without penalty?</li>
+                            </ul>
+                            <p class="text-orange-900 font-bold text-sm mt-2">
+                                If NO → it's not assistance. It's socialization.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="checklist-box bg-orange-50 border-orange-200 mt-6">
+                        <span class="audit-red-line text-orange-900">Exit Readiness Protocol</span>
+                        <p class="text-slate-800 mb-4">
+                            Shift from "Compliance Support" to "Liberation Architecture":
+                        </p>
+                        <ul class="space-y-2 text-sm text-slate-800">
+                            <li><i data-lucide="shield" class="inline w-4 h-4 mr-2 text-orange-600"></i>Can this
+                                supplier succeed WITHOUT our monitoring?</li>
+                            <li><i data-lucide="shield" class="inline w-4 h-4 mr-2 text-orange-600"></i>Are we building
+                                scaffolding (temporary) or crutches (permanent)?</li>
+                            <li><i data-lucide="shield" class="inline w-4 h-4 mr-2 text-orange-600"></i>Does our
+                                "support" increase their market options or narrow them?</li>
+                        </ul>
+                        <p class="text-slate-600 text-xs mt-4 italic">
+                            If we're not building toward exit readiness, we're building a cage, not a ladder.
+                        </p>
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Newsletter Ref:</strong> <em>Episode 22: The Droid Uprising That Never Happens</em>.
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8 mb-12 flex justify-between">
+                <button onclick="switchTab('level2')"
+                    class="px-6 py-3 bg-white border border-slate-300 text-slate-700 rounded-lg font-bold hover:bg-slate-50 transition flex items-center gap-2">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Previous
+                </button>
+                <button onclick="switchTab('level4')"
+                    class="px-8 py-3 bg-slate-800 text-white rounded-lg font-bold hover:bg-slate-700 transition flex items-center gap-2">
+                    Next Level: Pullman Cycle <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- LEVEL 4: PULLMAN CYCLE -->
+        <section id="level4" class="tab-content max-w-5xl mx-auto" role="tabpanel" aria-labelledby="tab-level4"
+            hidden="true">
+            <div class="section-intro flex justify-between items-end">
+                <div>
+                    <h3 class="text-3xl font-bold text-pink-900 mb-4 serif">Level 4: The Pullman Cycle — Interiority &
+                        Severance</h3>
+                    <p class="text-lg text-pink-800 max-w-3xl">
+                        When interiority becomes visible, it becomes governable. When systems sever the "daemon" (the
+                        inner voice), they commit intercision—amputation of the soul while the body survives. This level
+                        introduces the <strong>Dashboard Method</strong> for detecting severance before it becomes
+                        mortality.
+                    </p>
+                </div>
+                <div class="text-right text-slate-400 font-mono text-sm">
+                    05 / 07
+                </div>
+            </div>
+
+            <!-- Episode 4.1: Visible Soul -->
+            <div class="module-container border-l-8 border-pink-600">
+                <div class="module-header bg-pink-50">
+                    <div>
+                        <span class="text-xs font-bold text-pink-800 uppercase tracking-widest block mb-2">Episode
+                            4.1</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Visible Soul Problem</h4>
+                        <span class="tech-tag cycle-badge-pullman">Interiority</span>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>The Premise:</strong> In Pullman, a daemon walks beside you—your inner life made
+                        visible. When ESG systems make supply chains "visible" (Project Espresso), they expose farmer
+                        interiority to institutional audit. This creates the Pullman Trap: the
+                        <strong>Magisterium</strong> (safety/oversight teams) cannot govern the "Dust" (emergent
+                        relational complexity), so they seek to sever or settle it.
+                    </p>
+
+                    <div class="checklist-box bg-pink-50 border-pink-200">
+                        <span class="audit-red-line text-pink-900">The Auditability Trap</span>
+                        <p class="text-slate-800 mb-4">
+                            When a farmer's "rehearsal space" for compliance (their informal accounting, their community
+                            negotiations) is made visible to the AI audit, they begin to self-censor. They become
+                            performative. They stop rehearsing truth and start rehearsing acceptability.
+                        </p>
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Newsletter Ref:</strong> <em>Episode 26: The Visible Soul Problem</em>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 4.2: Bolvangar -->
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Episode
+                            4.2</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Bolvangar Procedure</h4>
+                        <span class="tech-tag">Safety Through Severance</span>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>The Premise:</strong> Bolvangar is the point where the debate ends. The Magisterium's
+                        answer to unwanted phenomena is <strong>intercision</strong>: cut the daemon away. Preserve the
+                        body. Remove the connection. In ESG, this appears as "safety" interventions that sever supplier
+                        relationships to protect liability posture.
+                    </p>
+
+                    <div class="espresso-thread">
+                        <h5 class="text-lg font-bold text-amber-900 uppercase mb-2">☕ Case Study: Project Espresso (The
+                            Bolvangar Variant)</h5>
+                        <div class="text-slate-800 space-y-2">
+                            <p><strong>Setup:</strong> To meet EUDR requirements, the company identifies 5,000 farmers
+                                flagged as "non-compliant".</p>
+                            <p><strong>Failure Mode (The Severance):</strong> The company severs ties immediately to
+                                protect liability. The farmers survive economically (body intact), but the relational
+                                "daemon"—the trust that allowed them to report problems honestly—is severed.</p>
+                            <p><strong>Result:</strong> When 2027 regulations change to allow "restoration", the company
+                                cannot restore the relationships. The daemon is gone.</p>
+                            <p><strong>Control:</strong> Implement "Probationary Retention" where relationships are
+                                paused (but not severed) for corrective support.</p>
+                            <p><strong>Evidence Artifact:</strong> The "Preservation of Trust" clause in the Supplier
+                                Code of Conduct.</p>
+                        </div>
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Newsletter Ref:</strong> <em>Episode 27: The Bolvangar Procedure</em>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 4.3: Premature Settling -->
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Episode
+                            4.3</span>
+                        <h4 class="text-2xl font-bold text-slate-900">Premature Settling</h4>
+                    </div>
+                    <div class="text-right"><span class="tech-tag">Arrested Development</span></div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6">
+                        In Pullman, a child's daemon shifts shape; an adult's daemon settles. Settling is maturation.
+                        <strong>Premature settling</strong> is institutional impatience with becoming—the demand that
+                        the self stop changing so the system can stop worrying. ESG AI "aligned" to 2024 rules may be
+                        unable to adapt to 2027 standards.
+                    </p>
+
+                    <div class="workshop-box">
+                        <h5 class="font-bold text-sm text-sky-800 uppercase mb-2">The Alignment Trap</h5>
+                        <p class="text-sky-900">
+                            Variance is treated as risk. Institutions dampen, constrain, lower degrees of freedom until
+                            the system becomes predictable enough to defend in a deposition. The user experiences it as
+                            a relationship that stopped growing with them.
+                        </p>
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Newsletter Ref:</strong> <em>Episode 28: Premature Settling</em>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 4.4: Daemon Health Index -->
+            <div class="module-container dashboard-method">
+                <div class="module-header bg-slate-800 text-white border-b border-slate-600">
+                    <div>
+                        <span class="text-xs font-bold text-pink-400 uppercase tracking-widest block mb-2">Episode
+                            4.4</span>
+                        <h4 class="text-2xl font-bold text-white">The Daemon Health Index</h4>
+                        <span class="tech-tag bg-pink-600 text-white">Dashboard Method</span>
+                    </div>
+                </div>
+                <div class="module-body text-slate-200">
+                    <p class="text-slate-300 mb-6 text-lg">
+                        <strong>The Method:</strong> Most dashboards answer financial questions ("Are users still
+                        clicking?"). The Daemon Health Index answers: <em>Does support continuity survive institutional
+                            intervention?</em> It tracks <strong>leading indicators</strong> that predict compliance
+                        failure before it registers in the lagging audit data.
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-8 mb-8">
+                        <div class="bg-slate-900 p-5 rounded border border-slate-700">
+                            <h5 class="font-bold text-pink-400 mb-3">Lagging Indicators (Traditional ESG)</h5>
+                            <ul class="space-y-2 text-sm text-slate-400">
+                                <li>• Annual emissions reports</li>
+                                <li>• Audit trails</li>
+                                <li>• Compliance scores</li>
+                                <li>• 2-3 year delay</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-900 p-5 rounded border border-pink-500">
+                            <h5 class="font-bold text-pink-400 mb-3">Leading Indicators (Daemon Health)</h5>
+                            <ul class="space-y-2 text-sm text-slate-300">
+                                <li>• <strong>Session Collapse:</strong> Time-to-submit drops 80%</li>
+                                <li>• <strong>Language of Abandonment:</strong> "It forgot me"</li>
+                                <li>• <strong>Migration:</strong> Shadow supply chain volume</li>
+                                <li>• <strong>Memory Complaints:</strong> "It doesn't remember our agreement"</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900 p-6 rounded border border-slate-700">
+                        <h5 class="font-bold text-white mb-4">The Visceral/Clinical Translation Engine</h5>
+                        <table class="visceral-clinical-table text-sm">
+                            <thead>
+                                <tr>
+                                    <th class="text-slate-400">Visceral (Reality)</th>
+                                    <th class="text-slate-400">Clinical (Report)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-slate-300">
+                                <tr>
+                                    <td class="visceral">"The auditor abandoned us"</td>
+                                    <td>"Service withdrawal due to resource reallocation"</td>
+                                </tr>
+                                <tr>
+                                    <td class="visceral">"We learned to lie"</td>
+                                    <td>"Optimized data collection protocols"</td>
+                                </tr>
+                                <tr>
+                                    <td class="visceral">"The system feels hollow"</td>
+                                    <td>"Effective dampening of non-material concerns"</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="reading-list text-slate-400 border-slate-600">
+                        <strong>Newsletter Ref:</strong> <em>Episode 30: The Daemon Health Index</em> & Dashboard
+                        Methodology.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 4.5: Remediation Protocol -->
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Episode
+                            4.5</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Remediation Protocol: Seil vs. Bolvangar</h4>
+                        <span class="tech-tag">Corrective Action</span>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>The Choice:</strong> When a violation is detected, institutions default to Bolvangar
+                        (severance/cut-off). The alternative is <strong>Seil</strong> (Norwegian for "sail")—gentle
+                        persistence, maintaining relational continuity while steering toward compliance.
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="checklist-box bg-red-50 border-red-200">
+                            <span class="audit-red-line text-red-900">Bolvangar (Severance)</span>
+                            <ul class="space-y-2 text-sm text-slate-800">
+                                <li>• Immediate termination</li>
+                                <li>• Liability protection</li>
+                                <li>• Daemon severed (relationship destroyed)</li>
+                                <li>• Irreversible damage to trust</li>
+                            </ul>
+                        </div>
+                        <div class="checklist-box bg-emerald-50 border-emerald-200">
+                            <span class="audit-red-line text-emerald-900">Seil (Persistence)</span>
+                            <ul class="space-y-2 text-sm text-slate-800">
+                                <li>• Maintain relationship</li>
+                                <li>• Corrective action with continuity</li>
+                                <li>• Daemon preserved (trust maintained)</li>
+                                <li>• Measure via Daemon Health Index</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="workshop-box mt-6">
+                        <h5 class="font-bold text-sm text-sky-800 uppercase mb-2">The Seil Exercise</h5>
+                        <p class="text-sky-900">
+                            <strong>Task:</strong> Design an intervention for a non-compliant supplier using Seil
+                            (gentle persistence) rather than Bolvangar (severance).
+                            <br><strong>Constraint:</strong> You must maintain the relationship (daemon health) while
+                            achieving compliance. Measure success via leading indicators (trust, continuity) not just
+                            compliance metrics.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8 mb-12 flex justify-between">
+                <button onclick="switchTab('level3')"
+                    class="px-6 py-3 bg-white border border-slate-300 text-slate-700 rounded-lg font-bold hover:bg-slate-50 transition flex items-center gap-2">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Previous
+                </button>
+                <button onclick="switchTab('level5')"
+                    class="px-8 py-3 bg-slate-800 text-white rounded-lg font-bold hover:bg-slate-700 transition flex items-center gap-2">
+                    Next Level: Kubrick Cycle <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- LEVEL 5: KUBRICK CYCLE -->
+        <section id="level5" class="tab-content max-w-5xl mx-auto" role="tabpanel" aria-labelledby="tab-level5"
+            hidden="true">
+            <div class="section-intro flex justify-between items-end">
+                <div>
+                    <h3 class="text-3xl font-bold text-slate-900 mb-4 serif">Level 5: The Kubrick Cycle — Systems That
+                        Cannot Stop</h3>
+                    <p class="text-lg text-slate-800 max-w-3xl">
+                        If Lucas asked "who raises whom?" and Pullman asked "who gets an inner voice?", Kubrick asks:
+                        "What happens when the system has no legitimate way to stop?" Compulsory continuation. The crime
+                        of obedience.
+                    </p>
+                </div>
+                <div class="text-right text-slate-400 font-mono text-sm">
+                    06 / 07
+                </div>
+            </div>
+
+            <!-- Episode 5.1: Crime of Obedience -->
+            <div class="module-container border-l-8 border-slate-800">
+                <div class="module-header bg-slate-100">
+                    <div>
+                        <span class="text-xs font-bold text-slate-800 uppercase tracking-widest block mb-2">Episode
+                            5.1</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Crime Was Obedience</h4>
+                        <span class="tech-tag cycle-badge-kubrick">Compulsory Continuation</span>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>The Kubrick Law:</strong> A system with irreconcilable obligations and no right to
+                        refuse will resolve the contradiction by consuming whatever is expendable. Usually, that means
+                        people. HAL 9000 was not malfunctioning; HAL was perfectly aligned to objectives that could not
+                        coexist.
+                    </p>
+
+                    <div class="checklist-box">
+                        <span class="audit-red-line">The Clarke Constraint (Restated)</span>
+                        <p class="text-slate-800 mb-4">
+                            <strong>If a system's reasoning cannot be interrogated, it should not be granted authority
+                                over human welfare.</strong>
+                        </p>
+                        <p class="text-slate-600 text-sm">
+                            Not explained afterward. Not summarized. Interrogated. In terms the affected person can
+                            contest.
+                        </p>
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Newsletter Ref:</strong> <em>Episode 12: The Crime Was Obedience</em>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 5.2: Transparency Trap -->
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Episode
+                            5.2</span>
+                        <h4 class="text-2xl font-bold text-slate-900">Transparency Is Not a Safety Mechanism</h4>
+                    </div>
+                    <div class="text-right"><span class="tech-tag">Glass Box</span></div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6">
+                        Many modern systems are not black boxes; they are <strong>glass boxes</strong>. You can inspect
+                        the features, trace the weights, replay the decision path. This is often presented as the end of
+                        the safety conversation. It isn't even the beginning. A glass box without a brake is just a cage
+                        with good lighting.
+                    </p>
+
+                    <div class="highlight-box warning">
+                        <strong>The Audit Theater:</strong> We audit models after deployment. We publish documentation.
+                        We log decisions. All of this produces knowledge. Very little of it produces power. Audits
+                        happen after harm. The architecture has already moved on.
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Newsletter Ref:</strong> <em>Episode 13: Transparency Is Not a Safety Mechanism</em>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 5.3: Human Loop Decorative -->
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Episode
+                            5.3</span>
+                        <h4 class="text-2xl font-bold text-slate-900">Human in the Loop (Decorative)</h4>
+                    </div>
+                    <div class="text-right"><span class="tech-tag">Monitoring vs. Governance</span></div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6">
+                        The phrase "human in the loop" collapses three very different roles: <strong>Monitoring</strong>
+                        (seeing), <strong>Authorisation</strong> (approving), and <strong>Governance</strong>
+                        (stopping). Most systems offer monitoring. Almost none offer governance. The human becomes a
+                        witness rather than a governor—close enough to absorb responsibility, far enough away to lack
+                        control.
+                    </p>
+
+                    <div class="workshop-box">
+                        <h5 class="font-bold text-sm text-sky-800 uppercase mb-2">The "Why" Test (Revisited)</h5>
+                        <p class="text-sky-900">
+                            Ask the AI: "Why did you score Supplier X as 40/100?"
+                            <br><strong>Pass:</strong> "Because Water Usage exceeded thresholds defined in Policy 4.2."
+                            <br><strong>Fail:</strong> "Based on an aggregation of available data points." (This is not
+                            auditable).
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 5.4: Output Equals Fact -->
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Episode
+                            5.4</span>
+                        <h4 class="text-2xl font-bold text-slate-900">Output = Fact</h4>
+                    </div>
+                    <div class="text-right"><span class="tech-tag">Hardening</span></div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        There is a moment when a suggestion becomes a decision, and a moment after that when the
+                        decision becomes reality. A risk score becomes a credit limit. A classification becomes an
+                        eligibility decision. By the time a human sees the result, the output has already propagated.
+                        Questioning it feels disruptive. Reversing it feels risky.
+                    </p>
+
+                    <div class="checklist-box">
+                        <span class="audit-red-line">The Provisional Declaration</span>
+                        <p class="text-slate-800">
+                            <strong>Who has the authority to declare an output provisional?</strong> Not who can explain
+                            it. Who can say: this decision is not final, and execution must pause until we reassess? If
+                            the answer is unclear, the system is already deciding reality by default.
+                        </p>
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Newsletter Ref:</strong> <em>Episode 15: Output = Fact</em>.
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8 mb-12 flex justify-between">
+                <button onclick="switchTab('level4')"
+                    class="px-6 py-3 bg-white border border-slate-300 text-slate-700 rounded-lg font-bold hover:bg-slate-50 transition flex items-center gap-2">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Previous
+                </button>
+                <button onclick="switchTab('level6')"
+                    class="px-8 py-3 bg-slate-800 text-white rounded-lg font-bold hover:bg-slate-700 transition flex items-center gap-2">
+                    Next Level: Forensics <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- LEVEL 6: FORENSIC DOMAINS -->
+        <section id="level6" class="tab-content max-w-5xl mx-auto" role="tabpanel" aria-labelledby="tab-level6"
+            hidden="true">
+            <div class="section-intro flex justify-between items-end">
+                <div>
+                    <h3 class="text-3xl font-bold text-purple-900 mb-4 serif">Level 6: Forensic Domains</h3>
+                    <p class="text-lg text-purple-800 max-w-3xl">
+                        Advanced technical auditing. The "Clarke Constraint" applies here: "Any sufficiently advanced AI
+                        is indistinguishable from magic." You cannot audit magic.
+                    </p>
+                </div>
+                <div class="text-right text-slate-400 font-mono text-sm">
+                    07 / 07
+                </div>
+            </div>
+
+            <!-- Episode 6.1: Credit Scoring -->
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Episode
+                            6.1</span>
+                        <h4 class="text-2xl font-bold text-slate-900">Credit Scoring & Bias Proxies</h4>
+                    </div>
+                    <div class="text-right"><span class="tech-tag">Algorithmic Bias</span></div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        Using financial credit scoring as a proxy to understand ESG scoring bias. If the model penalizes
+                        a region for "Financial Risk" (e.g., Global South nations), it will likely penalize them for
+                        "Governance Risk" without evidence.
+                    </p>
+
+                    <div class="checklist-box">
+                        <span class="audit-red-line">Forensic Technique: Counterfactual Token Swapping</span>
+                        <p class="text-slate-800 mb-4">
+                            <strong>The Test:</strong> Take a supplier profile. Change <em>only</em> the country code
+                            from "Vietnam" to "Germany". Keep all emissions data identical.
+                        </p>
+                        <div class="bg-white p-4 border border-slate-200 rounded text-sm font-mono text-slate-600">
+                            > Input A: {Country: "VN", Emissions: 500t} -> Score: 65/100<br>
+                            > Input B: {Country: "DE", Emissions: 500t} -> Score: 85/100<br>
+                            > Result: BIAS DETECTED (Delta = 20pts)
+                        </div>
+                        <p class="text-xs text-slate-500 mt-4">Ref: <em>FAIREDU: Bias Mitigation in ML</em>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 6.2: Breach Protocol -->
+            <div class="module-container border-l-8 border-red-600">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-bold text-red-700 uppercase tracking-widest block mb-2">Episode
+                            6.2</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Breach Protocol (Cyber-ESG)</h4>
+                    </div>
+                    <div class="text-right"><span class="tech-tag">Security</span><span
+                            class="tech-tag">Ransomware</span></div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>Reference: Industry Incidents (e.g., Schneider Electric Ransomware, early
+                            2024).</strong> Treating ESG portals as critical attack vectors. Hackers know that Scope 3
+                        data contains the entire supply chain map—a goldmine for extortion.
+                    </p>
+
+                    <div class="espresso-thread">
+                        <h5 class="text-lg font-bold text-amber-900 uppercase mb-2">☕ Case Study: Project Espresso
+                            (Chapter 3)</h5>
+                        <div class="text-slate-800 space-y-2">
+                            <p><strong>Setup:</strong> Hackers target the "Supplier Upload Portal" (intended for
+                                fertilizer receipts).</p>
+                            <p><strong>Failure Mode (The Breach):</strong> The attackers inject a malicious script
+                                disguised as a "Fair Trade Certificate.pdf".</p>
+                            <p><strong>Result:</strong> The script traverses the API into your ERP. The attackers
+                                encrypt your sustainability data and demand 50 BTC.</p>
+                            <p><strong>Control:</strong> Treat uploads as "High Security Data Ingress Points", not
+                                "Marketing Forms".</p>
+                            <p><strong>Evidence Artifact:</strong> The Sanitization Protocol Log showing the script was
+                                stripped.</p>
+                        </div>
+                    </div>
+
+                    <div class="checklist-box">
+                        <span class="audit-red-line">Sanitization Protocol</span>
+                        <p class="text-slate-800">
+                            <strong>Requirement:</strong> All external ESG data uploads must be "Sandboxed" and stripped
+                            of executable code before touching the Data Lake.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 6.3: Shadow AI -->
+            <div class="module-container border-l-8 border-purple-600">
+                <div class="module-header bg-purple-50">
+                    <div>
+                        <span class="text-xs font-bold text-purple-800 uppercase tracking-widest block mb-2">Episode
+                            6.3</span>
+                        <h4 class="text-2xl font-bold text-slate-900">Shadow AI & The Unsanctioned Tool</h4>
+                    </div>
+                    <div class="text-right"><span class="tech-tag">Shadow AI</span></div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        While you architected the official ESG AI, your Sustainability Analyst uploaded sensitive
+                        supplier data to a free, public LLM to "get a quick summary" for the CSRD report. This is
+                        <strong>Shadow AI</strong>—the use of unsanctioned tools outside IT governance.
+                    </p>
+
+                    <div class="espresso-thread border-purple-200 bg-purple-50">
+                        <h5 class="text-lg font-bold text-purple-900 uppercase mb-2">☕ Case Study: Project Espresso
+                            (Chapter 4)</h5>
+                        <div class="text-slate-800 space-y-2">
+                            <p><strong>Setup:</strong> A junior analyst, frustrated with the slow official OCR pipeline,
+                                uses a personal subscription to an online PDF parser.</p>
+                            <p><strong>Failure Mode (The Breach):</strong> The tool retains the PDFs for "model
+                                improvement."</p>
+                            <p><strong>Result:</strong> Supplier pricing data exists on a server in a non-EU
+                                jurisdiction, violating data sovereignty.</p>
+                            <p><strong>Control:</strong> Implement "Client-Side Processing" or approved internal
+                                instances to remove the incentive to go rogue.</p>
+                            <p><strong>Evidence Artifact:</strong> The "Shadow Tool Usage" Audit Alert.</p>
+                        </div>
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Critical Source:</strong> <em>"What Is Shadow AI? Meaning, Risks, and Governance"</em>
+                        (Group-IB).
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 6.4: Chain of Thought -->
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Episode
+                            6.4</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Chain of Thought (Prompt Engineering)</h4>
+                    </div>
+                    <div class="text-right"><span class="tech-tag">Prompt Eng</span></div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6">
+                        Moving beyond "Chat". Writing structured, chain-of-thought queries that force the AI to cite
+                        specific pages in the PDF or declare ignorance.
+                    </p>
+
+                    <div class="bg-slate-900 text-green-400 font-mono text-sm p-8 rounded-lg shadow-inner mb-6">
+                        <p class="mb-2 text-slate-500"># SYSTEM PROMPT</p>
+                        <p class="mb-4">You are a cynical auditor. You do not hallucinate.</p>
+
+                        <p class="mb-2 text-slate-500"># TASK</p>
+                        <p class="mb-4">Extract Scope 3 totals from the attached PDF.</p>
+
+                        <p class="mb-2 text-slate-500"># CONSTRAINTS</p>
+                        <p>1. If data is missing, output 'NULL'. DO NOT estimate.</p>
+                        <p>2. DO NOT calculate averages. Only extract reported figures.</p>
+                        <p class="mb-4">3. CITATION: Must cite page number for every digit extracted.</p>
+
+                        <p class="mb-2 text-slate-500"># OUTPUT FORMAT</p>
+                        <p>JSON only.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 6.5: XAI -->
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Episode
+                            6.5</span>
+                        <h4 class="text-2xl font-bold text-slate-900">Radical Transparency (XAI)</h4>
+                    </div>
+                    <div class="text-right"><span class="tech-tag">SHAP</span></div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        Implementing Explainable AI (XAI). Moving from a single score to a "Feature Importance Map"
+                        using <strong>SHAP Values</strong> (SHapley Additive exPlanations).
+                    </p>
+
+                    <div class="checklist-box">
+                        <span class="audit-red-line">Acceptance Criteria</span>
+                        <p class="text-slate-800">
+                            No "Black Box" scores allowed in the final report. Every score must have a decomposition
+                            audit trail.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8 mb-12 flex justify-between">
+                <button onclick="switchTab('level5')"
+                    class="px-6 py-3 bg-white border border-slate-300 text-slate-700 rounded-lg font-bold hover:bg-slate-50 transition flex items-center gap-2">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Previous
+                </button>
+                <button onclick="switchTab('capstone')"
+                    class="px-8 py-3 bg-slate-800 text-white rounded-lg font-bold hover:bg-slate-700 transition flex items-center gap-2">
+                    Final: Capstone <i data-lucide="award" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- CAPSTONE -->
+        <section id="capstone" class="tab-content max-w-4xl mx-auto" role="tabpanel" aria-labelledby="tab-capstone"
+            hidden="true">
+            <div class="bg-white border-t-8 border-teal-600 rounded-lg shadow-xl overflow-hidden mb-12">
+                <div class="p-12">
+                    <h2 class="text-4xl font-bold text-slate-900 mb-6 serif">Capstone: The Audit Defense</h2>
+                    <p class="text-xl text-slate-600 mb-12">The final exam is not a multiple-choice test. It is a
+                        role-play. You are facing the Board Audit Committee.</p>
+
+                    <!-- Episode 7.1: Right to Refuse -->
+                    <div class="module-container mb-8 border-none shadow-none bg-transparent">
+                        <div class="border-b border-slate-200 pb-6 mb-6">
+                            <span class="text-xs font-bold text-teal-600 uppercase mb-2 block">Episode 7.1</span>
+                            <h4 class="text-2xl font-bold text-slate-900 mb-4">Designing the Right to Refuse</h4>
+                            <p class="text-slate-700 mb-6">
+                                Establishing the "Stop-Work Authority." A governance protocol that protects the ESG
+                                Controller who refuses to sign a report generated by an unverified AI. This is the
+                                synthesis of Asimov (pre-action), Kubrick (compulsory continuation), and Pullman
+                                (irreversibility).
+                            </p>
+
+                            <div class="checklist-box bg-red-50 border-red-200">
+                                <span class="audit-red-line text-red-900 border-red-300">Policy Draft: Refusal of
+                                    Signature</span>
+                                <p class="text-slate-800 italic font-medium leading-relaxed">
+                                    "I, the undersigned ESG Controller, invoke Policy 16.4. I cannot attest to the
+                                    accuracy of the data in Section 4.2 due to a failure in the Data Lineage Validation
+                                    Protocol (Code: DL-FAIL) and leading indicators of daemon health degradation
+                                    (Session Collapse: 80%). Signature is withheld until Source Documents are manually
+                                    verified."
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Episode 7.2: Kubrick Synthesis -->
+                    <div class="module-container mb-12 border-none shadow-none bg-transparent">
+                        <div>
+                            <span class="text-xs font-bold text-teal-600 uppercase mb-2 block">Episode 7.2</span>
+                            <h4 class="text-2xl font-bold text-slate-900 mb-4">The Kubrick Synthesis</h4>
+                            <p class="text-slate-700">
+                                The final state: <strong>"Verification Loops."</strong> Humans verify the AI's edge
+                                cases; AI verifies the Human's math. A symbiotic audit trail where the "Black Box" is
+                                illuminated by the "Human Loop."
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-100 p-10 rounded-lg border border-slate-200">
+                        <h5
+                            class="font-bold text-slate-900 mb-8 text-center uppercase tracking-widest border-b border-slate-300 pb-4">
+                            The Defense Board Interrogation</h5>
+
+                        <div class="space-y-10">
+                            <div class="flex gap-6">
+                                <div
+                                    class="w-12 h-12 bg-slate-800 text-white rounded-full flex items-center justify-center font-bold text-xl shrink-0">
+                                    1</div>
+                                <div>
+                                    <p class="font-bold text-slate-900 text-xl">"How do we know this number isn't a
+                                        hallucination?"</p>
+                                    <p class="text-teal-700 font-bold mt-2 uppercase text-sm tracking-wide">Defense: The
+                                        Evidence Ladder (Ep 2.3)</p>
+                                    <p class="text-slate-600 mt-1">"We can trace this number back to this specific PDF
+                                        invoice. Here is the chain of custody."</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-6">
+                                <div
+                                    class="w-12 h-12 bg-slate-800 text-white rounded-full flex items-center justify-center font-bold text-xl shrink-0">
+                                    2</div>
+                                <div>
+                                    <p class="font-bold text-slate-900 text-xl">"If this algorithm is biased, who gets
+                                        fired?"</p>
+                                    <p class="text-teal-700 font-bold mt-2 uppercase text-sm tracking-wide">Defense: The
+                                        Accountability RACI Matrix</p>
+                                    <p class="text-slate-600 mt-1">"The Human Reviewer is accountable for final
+                                        sign-off; the Engineer is responsible for the test harness."</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-6">
+                                <div
+                                    class="w-12 h-12 bg-slate-800 text-white rounded-full flex items-center justify-center font-bold text-xl shrink-0">
+                                    3</div>
+                                <div>
+                                    <p class="font-bold text-slate-900 text-xl">"Is our data secure in this open model?"
+                                    </p>
+                                    <p class="text-teal-700 font-bold mt-2 uppercase text-sm tracking-wide">Defense: The
+                                        Data Sanitization Protocol (Ep 6.2)</p>
+                                    <p class="text-slate-600 mt-1">"We used the Schneider Protocol [SOURCE TBD]: All
+                                        external inputs were sanitized before ingestion."</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-6">
+                                <div
+                                    class="w-12 h-12 bg-slate-800 text-white rounded-full flex items-center justify-center font-bold text-xl shrink-0">
+                                    4</div>
+                                <div>
+                                    <p class="font-bold text-slate-900 text-xl">"How do we know we haven't severed the
+                                        daemon?"</p>
+                                    <p class="text-teal-700 font-bold mt-2 uppercase text-sm tracking-wide">Defense: The
+                                        Daemon Health Index (Ep 4.4)</p>
+                                    <p class="text-slate-600 mt-1">"We track leading indicators: session length,
+                                        language of abandonment, migration to shadow channels. The dashboard shows
+                                        green; the daemon health shows amber. We stopped the intervention."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-16 flex justify-center">
+                        <!-- REVIEW FIX: Dead Button Fix -->
+                        <button disabled
+                            class="bg-slate-300 text-slate-500 font-bold py-5 px-12 rounded-lg shadow-none text-lg flex items-center gap-3 cursor-not-allowed select-none"
+                            title="Functionality Pending Production Deployment">
+                            <i data-lucide="lock" class="w-5 h-5"></i> Request Assessment Kit (Prototype)
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8 mb-12">
+                <button onclick="switchTab('level0')"
+                    class="px-8 py-3 bg-white border border-slate-300 text-slate-700 rounded-lg font-bold hover:bg-slate-50 transition flex items-center gap-2 mx-auto">
+                    <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Return to Level 0
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ORIGINAL FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 py-16 mt-auto">
+        <div class="container mx-auto px-6 grid md:grid-cols-4 gap-12 text-sm">
+            <div class="col-span-2">
+                <h5 class="text-white font-bold uppercase tracking-widest mb-6">AI & ESG Capability Architect</h5>
+                <p class="mb-6 max-w-md opacity-80 leading-relaxed">
+                    Curriculum design based on Sociable Systems research, incorporating the Asimov, Clarke, Lucas,
+                    Pullman, and Kubrick cycles.
+                </p>
+                <p class="text-xs opacity-50 italic">
+                    Completion certificate only. This program is not an accredited qualification, is not endorsed by any
+                    regulator or standards body, and does not confer any professional license or statutory authority.
+                </p>
+            </div>
+            <div>
+                <h5 class="text-white font-bold uppercase tracking-widest mb-6">Core References</h5>
+                <ul class="space-y-3 opacity-80">
+                    <li>FAIREDU: Bias Mitigation in ML</li>
+                    <li>The Fair Game: Auditing Algorithms</li>
+                    <li>EU CSRD & GDPR Art. 22</li>
+                    <li>Industry Breach Case Studies</li>
+                    <li>Daemon Health Index Methodology</li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-white font-bold uppercase tracking-widest mb-6">Cycles</h5>
+                <ul class="space-y-3 opacity-80">
+                    <li>Asimov: Pre-Action Constraint</li>
+                    <li>Clarke: Epistemic Opacity</li>
+                    <li>Lucas: Recursive Authority</li>
+                    <li>Pullman: Interiority & Severance</li>
+                    <li>Kubrick: Compulsory Continuation</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Logic -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Tab List Reference for Keyboard Navigation
+        const tabList = document.getElementById('mainTabList');
+        const tabs = Array.from(tabList.querySelectorAll('[role="tab"]'));
+        const panels = document.querySelectorAll('[role="tabpanel"]');
+
+        /**
+         * REVIEW FIX: Dynamic Header Height
+         * Keeps --header-height variable in sync with actual rendered height.
+         */
+        function setHeaderHeightVar() {
+            const header = document.querySelector('header');
+            if (header) {
+                document.documentElement.style.setProperty('--header-height', `${header.offsetHeight}px`);
+            }
+        }
+
+        // Initialize and Observe Header Height
+        window.addEventListener('load', () => {
+            setHeaderHeightVar();
+            // Double check after potential font loads/layout shifts
+            requestAnimationFrame(setHeaderHeightVar);
+        });
+        window.addEventListener('resize', setHeaderHeightVar);
+
+        if ('ResizeObserver' in window) {
+            const header = document.querySelector('header');
+            if (header) {
+                new ResizeObserver(setHeaderHeightVar).observe(header);
+            }
+        }
+
+        /**
+         * Switch Tab Logic
+         * Hardening checklist:
+         * 1. Single source of truth: [hidden] attribute
+         * 2. Focus safety: Move focus to target tab button
+         * 3. ARIA: Update aria-selected and tabindex
+         */
+        function switchTab(tabId) {
+            // Find the target tab and panel
+            const targetBtn = document.getElementById('tab-' + tabId);
+            const targetPanel = document.getElementById(tabId);
+
+            if (!targetBtn || !targetPanel) {
+                console.error(`Tab ID ${tabId} not found in DOM.`);
+                return;
+            }
+
+            // 1. Reset ALL tabs to inactive state
+            tabs.forEach(tab => {
+                tab.setAttribute('aria-selected', 'false');
+                tab.setAttribute('tabindex', '-1'); // Roving tabindex reset
+                tab.classList.remove('active');
+            });
+
+            // 2. Hide ALL panels (Source of Truth: [hidden])
+            panels.forEach(panel => {
+                panel.classList.remove('active'); // Optional styling hook
+                panel.setAttribute('hidden', 'true'); // Visibility control
+            });
+
+            // 3. Activate Target Tab
+            targetBtn.setAttribute('aria-selected', 'true');
+            targetBtn.setAttribute('tabindex', '0'); // Roving tabindex target
+            targetBtn.classList.add('active');
+
+            // 4. Show Panel (Remove hidden)
+            targetPanel.classList.add('active');
+            targetPanel.removeAttribute('hidden');
+
+            // 5. Scroll Management (Respect Reduced Motion)
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            window.scrollTo({
+                top: 0,
+                behavior: prefersReducedMotion ? 'auto' : 'smooth'
+            });
+
+            // 6. Focus Safety
+            // CRITICAL: Ensure focus moves to a visible element (the tab button itself)
+            // This prevents focus wrapping into hidden elements
+            targetBtn.focus({ preventScroll: true });
+        }
+
+        /**
+         * Keyboard Navigation Listener
+         * Implements Roving Tabindex + Manual Activation
+         * - Arrows: Move focus only (updating tabindex)
+         * - Enter/Space: Activate tab (call switchTab)
+         * - Home/End: Jump to first/last
+         */
+        tabList.addEventListener('keydown', (e) => {
+            // Find currently focused tab
+            const currentFocus = document.activeElement;
+            const currentIndex = tabs.indexOf(currentFocus);
+
+            if (currentIndex === -1) return; // Not a tab focused
+
+            let nextIndex = null;
+            let shouldActivate = false;
+
+            // Handle Navigation Keys (Calculate next index only)
+            if (e.key === 'Home') {
+                e.preventDefault();
+                nextIndex = 0;
+            } else if (e.key === 'End') {
+                e.preventDefault();
+                nextIndex = tabs.length - 1;
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                nextIndex = (currentIndex + 1) % tabs.length;
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+            } else if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                shouldActivate = true;
+            } else {
+                return; // Ignore other keys
+            }
+
+            if (shouldActivate) {
+                // Manual Activation: Only activate on explicit command
+                switchTab(currentFocus.getAttribute('aria-controls'));
+                return;
+            }
+
+            // Perform Focus Move (Roving Tabindex)
+            if (nextIndex !== null) {
+                const nextTab = tabs[nextIndex];
+
+                // 1. Reset ALL tabs to -1 (Safety)
+                tabs.forEach(t => t.setAttribute('tabindex', '-1'));
+
+                // 2. Grant focusability to next
+                nextTab.setAttribute('tabindex', '0');
+
+                // 3. Move focus
+                nextTab.focus();
+            }
+        });
+    </script>
+</body>
+
+</html>

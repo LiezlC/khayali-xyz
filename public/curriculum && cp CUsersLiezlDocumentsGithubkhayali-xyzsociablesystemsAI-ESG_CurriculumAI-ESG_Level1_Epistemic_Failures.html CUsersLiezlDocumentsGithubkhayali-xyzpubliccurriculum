@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 0: Constitutional Foundations | AI-ESG Training</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fce7f3;
+            /* Pinkish-white background to match Level 4 style if desired, but L0 is Red/Slate. Keeping Slate for now but adding Tab Styles */
+            background-color: #fdf2f8;
+            /* Very light pink/red mix */
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        .serif {
+            font-family: 'Merriweather', serif;
+        }
+
+        /* TAB STYLES */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-item {
+            border-bottom: 2px solid transparent;
+            color: #64748b;
+        }
+
+        .nav-item:hover {
+            color: #be185d;
+            /* Pink-700 */
+        }
+
+        .nav-item.active {
+            border-bottom: 2px solid #be185d;
+            color: #be185d;
+            font-weight: 700;
+        }
+
+        /* EXISTING STYLES */
+        .gradient-text {
+            background: linear-gradient(135deg, #be185d 0%, #db2777 100%);
+            /* Pink gradient */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .module-container {
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.5rem;
+            margin-bottom: 3rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .module-header {
+            background-color: #f8fafc;
+            padding: 2rem 2.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .module-body {
+            padding: 3rem 2.5rem;
+        }
+
+        .checklist-box {
+            background-color: #f8fafc;
+            border: 1px solid #94a3b8;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .workshop-box {
+            background-color: #f0f9ff;
+            border: 1px dashed #0284c7;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .espresso-thread {
+            background-color: #fffbeb;
+            border-left: 4px solid #d97706;
+            padding: 2rem;
+            margin: 2.5rem 0;
+        }
+
+        .tech-tag {
+            display: inline-block;
+            background-color: #e0f2fe;
+            color: #0369a1;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-left: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .audit-red-line {
+            color: #991b1b;
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            display: block;
+            border-bottom: 2px solid #fecaca;
+            padding-bottom: 0.5rem;
+        }
+
+        .reading-list {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .cycle-badge-asimov {
+            background: #dc2626;
+            color: white;
+        }
+
+        .sidebar-note {
+            background-color: #f0fdf4;
+            border-left: 4px solid #15803d;
+        }
+
+        .pre-work-box {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #0284c7;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+
+        .assessment-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #d97706;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+
+        @media print {
+            .no-print {
+                display: none;
+            }
+
+            body {
+                background: white;
+            }
+
+            .tab-content {
+                display: block !important;
+            }
+
+            .nav-item {
+                display: none;
+            }
+        }
+
+        /* Simulation Styles */
+        .simulation-container {
+            border: 2px solid #f97316;
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+            position: relative;
+        }
+
+        .sim-timer-bar {
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .sim-timer-fill {
+            height: 100%;
+            background: #ef4444;
+            width: 100%;
+            transition: width 1s linear;
+        }
+
+        .sim-item {
+            background: #f1f5f9;
+            padding: 1rem;
+            border-radius: 0.25rem;
+            margin-bottom: 1rem;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+
+        .tag-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background-color: #fce7f3;
+            color: #be185d;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+    </style>
+    <script src="js/translation_toggle.js"></script>
+</head>
+
+<body class="flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-rose-600 to-pink-600 text-white shadow-lg no-print">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex justify-between items-start">
+                <div>
+                    <span class="text-pink-200 font-bold tracking-widest uppercase text-xs">Level 0 Module</span>
+                    <h1 class="text-4xl md:text-5xl font-bold mt-2 serif">Constitutional Foundations</h1>
+                    <p class="text-pink-100 mt-2 text-lg">The Asimov Constraint & The Liability Sponge</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur rounded-lg px-4 py-2 border border-white/20">
+                    <div class="flex items-center gap-2 text-pink-100 text-sm font-bold">
+                        <i data-lucide="clock" class="w-4 h-4"></i>
+                        <span>4-6 Hours</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="bg-white shadow sticky top-0 z-50 overflow-x-auto no-print">
+        <div class="container mx-auto px-6">
+            <div class="flex space-x-1">
+                <button onclick="switchTab('overview')" id="tab-overview"
+                    class="nav-item active px-6 py-4 font-medium transition-colors hover:bg-pink-50 focus:outline-none whitespace-nowrap">
+                    Overview
+                </button>
+                <button onclick="switchTab('ep0_0')" id="tab-ep0_0"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-pink-50 focus:outline-none whitespace-nowrap">
+                    Ep 0.0: AP Nexus
+                </button>
+                <button onclick="switchTab('ep0_1')" id="tab-ep0_1"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-pink-50 focus:outline-none whitespace-nowrap">
+                    Ep 0.1: Asimov Constraint
+                </button>
+                <button onclick="switchTab('ep0_2')" id="tab-ep0_2"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-pink-50 focus:outline-none whitespace-nowrap">
+                    Ep 0.2: Liability Sponge
+                </button>
+                <button onclick="switchTab('ep0_3')" id="tab-ep0_3"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-pink-50 focus:outline-none whitespace-nowrap">
+                    Ep 0.3: 21 AIs
+                </button>
+                <button onclick="switchTab('ep0_4')" id="tab-ep0_4"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-pink-50 focus:outline-none whitespace-nowrap">
+                    Ep 0.4: Vendor Interrogation
+                </button>
+                <button onclick="switchTab('summary')" id="tab-summary"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-pink-50 focus:outline-none whitespace-nowrap">
+                    Summary
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-6 py-12 flex-grow max-w-5xl">
+
+        <!-- OVERVIEW -->
+        <section id="overview" class="tab-content active">
+            <div class="mb-16">
+                <div class="bg-white p-8 rounded-xl border border-pink-200 shadow-sm">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6 serif leading-tight">
+                        The Constitutional Baseline
+                    </h2>
+                    <p class="text-xl text-slate-600 leading-relaxed mb-8">
+                        Before we can break the system, we must understand how it is <em>supposed</em> to work. This
+                        level establishes the regulatory, infrastructural, and philosophical baseline that the rest of
+                        the course will critique.
+                    </p>
+
+                    <div class="sidebar-note p-6 rounded-lg text-sm text-slate-700">
+                        <p class="font-bold text-green-800 mb-2 text-base flex items-center gap-2">
+                            <i data-lucide="info" class="w-4 h-4"></i>
+                            Learning Objectives
+                        </p>
+                        <ul class="space-y-2 list-disc list-inside">
+                            <li>Distinguish between <strong>pre-action constraint</strong> and <strong>post-action
+                                    governance</strong> in AI systems</li>
+                            <li>Identify when "human-in-the-loop" functions as a liability absorption device rather than
+                                a safety mechanism</li>
+                            <li>Recognize the structural patterns of accountability gaps that 21 AI models independently
+                                identified</li>
+                            <li>Conduct vendor interrogations using procurement due diligence protocols</li>
+                            <li>Design "Stop Work Authority" mechanisms for ESG controllers</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Pre-Work Assessment -->
+                <div class="pre-work-box mt-12 bg-sky-50 border-sky-200">
+                    <h4 class="font-bold text-lg text-sky-900 mb-4 flex items-center gap-2">
+                        <i data-lucide="clipboard-list" class="w-5 h-5"></i>
+                        Pre-Work Assessment
+                    </h4>
+                    <p class="text-sky-900 mb-4">
+                        Complete this self-assessment to identify your starting knowledge baseline.
+                    </p>
+                    <div class="bg-white p-6 rounded-lg border border-sky-300">
+                        <h5 class="font-bold text-sm text-slate-700 mb-3 uppercase tracking-wide">Knowledge Check
+                            Questions</h5>
+                        <ol class="space-y-4 text-sm text-slate-700">
+                            <li>
+                                <strong>1. Does your organization currently use AI systems for ESG data collection,
+                                    analysis, or reporting?</strong>
+                                <div class="ml-6 mt-2 space-y-1 text-slate-600">
+                                    <p>☐ Yes, extensively (multiple systems across functions)</p>
+                                    <p>☐ Yes, limited (pilot or single-function use)</p>
+                                    <p>☐ Evaluating vendors but not yet deployed</p>
+                                    <p>☐ No, but planning within 12 months</p>
+                                    <p>☐ No current plans</p>
+                                </div>
+                            </li>
+                            <li>
+                                <strong>2. Who is accountable if your AI system misclassifies a high-risk supplier as
+                                    low-risk?</strong>
+                                <div class="ml-6 mt-2 space-y-1 text-slate-600">
+                                    <p>☐ I can name the specific person and their role</p>
+                                    <p>☐ It's documented but I'd need to look it up</p>
+                                    <p>☐ It's the vendor's responsibility</p>
+                                    <p>☐ Not sure—it's never been clarified</p>
+                                </div>
+                            </li>
+                            <li>
+                                <strong>3. Can you currently override an AI system's recommendation without requiring
+                                    approval from someone else?</strong>
+                                <div class="ml-6 mt-2 space-y-1 text-slate-600">
+                                    <p>☐ Yes, I have documented override authority</p>
+                                    <p>☐ Yes, but it requires approval/escalation</p>
+                                    <p>☐ Theoretically possible but culturally discouraged</p>
+                                    <p>☐ No, system outputs are treated as final</p>
+                                    <p>☐ Not applicable—we don't use AI systems yet</p>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Episode 0.0 -->
+        <section id="ep0_0" class="tab-content">
+            <div class="module-container border-l-8 border-indigo-500">
+                <div class="module-header bg-indigo-50">
+                    <div>
+                        <span class="text-xs font-bold text-indigo-700 uppercase tracking-widest block mb-2">Episode 0.0
+                            (Propelled from Level 2)</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Accounts Payable Nexus</h4>
+                        <span class="tech-tag">3-Way Matching Logic</span>
+                        <span class="tech-tag">CFO Hook</span>
+                    </div>
+                    <div class="text-right text-slate-400 text-sm">
+                        <p class="font-mono">90 min</p>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>The Premise:</strong> "Precision in finance = precision in carbon". ESG data does not
+                        originate in sustainability dashboards; it originates in <strong>Accounts Payable</strong>. The
+                        invoice is the atomic unit of Scope 3. We bridge the gap between the CFO's "2-Way Match" (PO vs.
+                        Invoice) and the CSO's "Impact Match" (Invoice vs. Emission Factor), creating the <strong>3-Way
+                            Match</strong>.
+                    </p>
+
+                    <div class="espresso-thread">
+                        <h5 class="text-lg font-bold text-amber-900 uppercase mb-2">☕ Case Study: Project Espresso (The
+                            $0.02 Variance)</h5>
+                        <div class="text-slate-800 space-y-2">
+                            <p><strong>Setup:</strong> AP sees "50kg Urea @ $20." ESG sees "46% N-content × 5.15 kg
+                                CO2e/kg."</p>
+                            <p><strong>Failure Mode (The Discrepancy):</strong> A match between AP and ESG revealed a
+                                $0.02 variance in currency conversion (VND→USD) that disconnected the financial record
+                                from the carbon record.</p>
+                            <p><strong>Result:</strong> Re-conciliation triggered a re-extraction, revealing the receipt
+                                indicated <em>organic fertilizer</em> (lower emission factor), saving 12% on Scope 3.
+                            </p>
+                            <p><strong>Control:</strong> The Financial-ESG Reconciliation Layer.</p>
+                        </div>
+                    </div>
+
+                    <div class="checklist-box">
+                        <span class="audit-red-line">Executive Artifact</span>
+                        <h5 class="font-bold text-lg text-slate-900 mb-2">The Reconciliation Delta Report</h5>
+                        <p class="text-slate-800 mb-4">
+                            This report is your "CFO Handshake". It proves that your ESG data is as rigorous as the
+                            financial audit.
+                        </p>
+                        <ul class="space-y-2 text-sm text-slate-800">
+                            <li><i data-lucide="file-check"
+                                    class="inline w-4 h-4 mr-2 text-indigo-600"></i><strong>Financial Variance:</strong>
+                                Matches invoice totals to carbon activity inputs.</li>
+                            <li><i data-lucide="file-check"
+                                    class="inline w-4 h-4 mr-2 text-indigo-600"></i><strong>Currency Lock:</strong>
+                                Ensures USD/EUR conversion rates match exactly.</li>
+                            <li><i data-lucide="file-check"
+                                    class="inline w-4 h-4 mr-2 text-indigo-600"></i><strong>Lineage Link:</strong> Every
+                                ton of CO2e helps pay an invoice.</li>
+                        </ul>
+                        <button
+                            class="mt-4 bg-indigo-600 text-white px-4 py-2 rounded text-sm font-bold hover:bg-indigo-500 transition">
+                            <i data-lucide="download" class="inline w-4 h-4 mr-2"></i> Download Template
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Episode 0.1 -->
+        <section id="ep0_1" class="tab-content">
+            <div class="module-container border-l-8 border-red-600">
+                <div class="module-header bg-red-50">
+                    <div>
+                        <span class="text-xs font-bold text-red-700 uppercase tracking-widest block mb-2">Episode
+                            0.1</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Asimov Constraint</h4>
+                        <span class="tech-tag cycle-badge-asimov">Pre-Action Ethics</span>
+                    </div>
+                    <div class="text-right text-slate-400 text-sm">
+                        <p class="font-mono">60 min</p>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>The Premise:</strong> We didn't outgrow Asimov's Laws of Robotics—we lost our nerve. The
+                        critical distinction is between <strong>pre-action constraint</strong> (the system refuses
+                        before acting) and <strong>post-action governance</strong> (audits after harm). ESG systems
+                        today rely almost entirely on the latter.
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <div>
+                            <h5
+                                class="font-bold text-slate-900 mb-4 uppercase tracking-wide border-b border-slate-200 pb-2">
+                                Core Concepts</h5>
+                            <ul class="space-y-4 text-slate-600 list-disc list-inside">
+                                <li><strong>Pre-Action Constraint:</strong> The system contains hard-coded rules that
+                                    prevent certain actions before they occur (e.g., "Do not generate a report if data
+                                    provenance cannot be verified").</li>
+                                <li><strong>Post-Action Governance:</strong> The system acts first, then humans review
+                                    and audit the output (e.g., "Flag suspicious outputs for human review").</li>
+                                <li><strong>The Speed Problem:</strong> Post-action governance only works if
+                                    intervention can outpace harm. When AI acts at silicon speed, humans review at
+                                    biological speed.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="checklist-box bg-red-50 border-red-200 mt-0">
+                                <span class="audit-red-line text-red-900">The Constitutional Requirement</span>
+                                <p class="text-slate-800 mb-4">
+                                    <strong>Pre-Action Refusal:</strong> The system must be able to say "I cannot
+                                    proceed" <em>before</em> generating the report, not explain afterward why it
+                                    proceeded.
+                                </p>
+                                <h5 class="font-bold text-xs text-slate-500 uppercase mb-2">Design Principles</h5>
+                                <ul class="space-y-2 text-sm text-slate-800">
+                                    <li><i data-lucide="shield" class="inline w-4 h-4 mr-2 text-red-600"></i>Hard
+                                        constraints encoded in architecture, not policy documents</li>
+                                    <li><i data-lucide="shield" class="inline w-4 h-4 mr-2 text-red-600"></i>Refusal as
+                                        default, continuation as exception</li>
+                                    <li><i data-lucide="shield" class="inline w-4 h-4 mr-2 text-red-600"></i>Speed must
+                                        not outpace governance</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="workshop-box">
+                        <h5 class="font-bold text-sm text-sky-800 uppercase mb-2 flex items-center gap-2">
+                            <i data-lucide="wrench" class="w-4 h-4"></i>
+                            Workshop Exercise: Pre-Action vs. Post-Action Audit
+                        </h5>
+                        <p class="text-sky-900 mb-4">
+                            <strong>Scenario:</strong> Your Scope 3 emissions AI tool flags 200 suppliers as "high-risk"
+                            based on incomplete data.
+                        </p>
+                        <div class="grid md:grid-cols-2 gap-6 my-4">
+                            <div class="bg-white p-4 rounded border border-red-300">
+                                <p class="font-bold text-red-900 text-sm mb-2">❌ POST-ACTION (Current State)</p>
+                                <ol class="text-sm text-slate-700 space-y-1 list-decimal list-inside">
+                                    <li>System generates "high-risk" flags</li>
+                                    <li>Procurement receives list</li>
+                                    <li>ESG team audits sample (20/200)</li>
+                                    <li>Discovers 40% false positives</li>
+                                    <li>Damage already done (supplier relationships strained)</li>
+                                </ol>
+                            </div>
+                            <div class="bg-white p-4 rounded border border-green-300">
+                                <p class="font-bold text-green-900 text-sm mb-2">✓ PRE-ACTION (Target State)</p>
+                                <ol class="text-sm text-slate-700 space-y-1 list-decimal list-inside">
+                                    <li>System detects data completeness <50%< /li>
+                                    <li><strong>REFUSES</strong> to generate risk score</li>
+                                    <li>Returns: "Cannot assess—insufficient data"</li>
+                                    <li>Flags supplier for manual data gathering</li>
+                                    <li>No false flags, no damaged relationships</li>
+                                </ol>
+                            </div>
+                        </div>
+                        <p class="text-sky-900 font-bold mt-4">Discussion Question:</p>
+                        <p class="text-sky-900 text-sm">
+                            What would it take to implement pre-action refusal in your current systems? Identify 3
+                            specific barriers (technical, organizational, vendor-related).
+                        </p>
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Newsletter Ref:</strong> <em>Episode 1: We Didn't Outgrow Asimov</em> (Pre-action vs.
+                        post-action constraint).
+                        <br><strong>Additional Reading:</strong> <em>"The Myth of Human Oversight in Algorithmic
+                            Decision-Making"</em> (IEEE, 2023).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Episode 0.2 -->
+        <section id="ep0_2" class="tab-content">
+            <div class="module-container border-l-8 border-orange-600">
+                <div class="module-header bg-orange-50">
+                    <div>
+                        <span class="text-xs font-bold text-orange-700 uppercase tracking-widest block mb-2">Episode
+                            0.2</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Liability Sponge</h4>
+                        <span class="tech-tag cycle-badge-asimov">Human in the Loop</span>
+                    </div>
+                    <div class="text-right text-slate-400 text-sm">
+                        <p class="font-mono">75 min</p>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>The Premise:</strong> "Human in the loop" is not a safety mechanism—it is a liability
+                        absorption device. When AI acts at silicon speed and humans review at biological speed, the
+                        human becomes a <strong>crumple zone</strong>, absorbing blame for machine errors they lacked
+                        the authority to prevent.
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <div>
+                            <h5
+                                class="font-bold text-slate-900 mb-4 uppercase tracking-wide border-b border-slate-200 pb-2">
+                                The Speed Mismatch</h5>
+                            <ul class="space-y-4 text-slate-600 list-disc list-inside">
+                                <li><strong>Industrial Safety:</strong> Circuit breakers trip in milliseconds to save
+                                    wires that melt in seconds. Intervention outpaces harm.</li>
+                                <li><strong>AI Governance:</strong> Systems process 1,000 claims/hour; humans review one
+                                    every <span class="font-mono text-red-700 bg-red-100 px-1 rounded">11.5s</span>
+                                    <span class="text-xs text-slate-400 italic">(Illustrative Math)</span>. Impossible
+                                    math.</li>
+                                <li><strong>The Sponge Effect:</strong> When the system fails, the audit trail shows a
+                                    human "reviewed" it. Blame flows downward.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="checklist-box mt-0 bg-orange-50 border-orange-200">
+                                <span class="audit-red-line text-orange-900">Stop Work Authority</span>
+                                <p class="text-slate-800 mb-4">
+                                    <strong>The Alternative:</strong> Any human in the loop must possess constitutional
+                                    authority to halt the system without permission, justification, or career penalty.
+                                </p>
+                                <h5 class="font-bold text-xs text-slate-500 uppercase mb-2">Requirements</h5>
+                                <ul class="space-y-2 text-sm text-slate-800">
+                                    <li><i data-lucide="check"
+                                            class="inline w-4 h-4 mr-2 text-orange-600"></i>Documented in job
+                                        description</li>
+                                    <li><i data-lucide="check" class="inline w-4 h-4 mr-2 text-orange-600"></i>No
+                                        approval required to invoke</li>
+                                    <li><i data-lucide="check" class="inline w-4 h-4 mr-2 text-orange-600"></i>Protected
+                                        from retaliation</li>
+                                    <li><i data-lucide="check" class="inline w-4 h-4 mr-2 text-orange-600"></i>Audit
+                                        trail of invocations reviewed quarterly</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="espresso-thread">
+                        <h5 class="text-lg font-bold text-amber-900 uppercase mb-2">☕ Case Study: The High-Fidelity Trap
+                        </h5>
+                        <div class="text-slate-800 space-y-2">
+                            <p><strong>Setup:</strong> Maria, an ESG analyst, reviews AI-flagged supplier violations.
+                                The system processes 847 suppliers/week. Maria has 6 hours/week allocated for review.
+                            </p>
+                            <p><strong>Math:</strong> 6 hours = 360 minutes ÷ 847 suppliers = <strong>25.5 seconds per
+                                    supplier</strong>.</p>
+                            <p><strong>Reality:</strong> Maria opens each flagged case, sees a red score, scans a
+                                summary, clicks "Approve" or "Escalate". She has no time to verify source documents.</p>
+                            <p><strong>Failure Mode:</strong> System misclassifies a compliant supplier due to OCR error
+                                in document ingestion. Maria "reviewed" it (audit trail shows her user ID). Supplier
+                                relationship damaged. Blame: "Human error in review process."</p>
+                            <p><strong>Control:</strong> Maria invokes Stop Work Authority: "I cannot attest to 847
+                                reviews in 6 hours. Either reduce volume to 50/week or remove my name from the audit
+                                trail."</p>
+                        </div>
+                    </div>
+
+                    <div class="simulation-container">
+                        <h5 class="font-bold text-lg text-orange-900 mb-2 flex items-center gap-2">
+                            <i data-lucide="flame" class="w-5 h-5 text-orange-600"></i>
+                            Simulation: The Fire Drill
+                        </h5>
+                        <p class="text-slate-700 text-sm mb-4">
+                            <strong>Scenario:</strong> You are the Controller. The AI is flagging 847 items for review.
+                            You have 6 hours. That is 11.5 seconds per item. Can you maintain integrity?
+                        </p>
+
+                        <div id="sim-start-view">
+                            <button onclick="startSimulation()"
+                                class="bg-orange-600 hover:bg-orange-500 text-white font-bold py-3 px-6 rounded w-full transition">
+                                Start Audit Simulation
+                            </button>
+                        </div>
+
+                        <div id="sim-active-view" class="hidden">
+                            <div class="flex justify-between text-xs font-bold text-slate-500 mb-1">
+                                <span>NEXT ITEM IN:</span>
+                                <span>REMAINING: <span id="sim-count">847</span></span>
+                            </div>
+                            <div class="sim-timer-bar">
+                                <div id="sim-timer-fill" class="sim-timer-fill"></div>
+                            </div>
+
+                            <div class="sim-item">
+                                <p class="text-xs text-slate-400 mb-1">ID: <span id="sim-id">REQ-99283</span></p>
+                                <p class="font-bold text-slate-800">Supplier: <span id="sim-supplier">Apex
+                                        Logistics</span></p>
+                                <p class="text-xs text-slate-600">Flag: Carbon Intensity Variance (+12%)</p>
+                                <p class="text-xs text-slate-600">Evidence: PDF_Invoice_22.pdf (Match: 88%)</p>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <button onclick="attemptApprove()"
+                                    class="bg-green-600 hover:bg-green-500 text-white font-bold py-3 px-4 rounded text-sm">
+                                    ✓ APPROVE
+                                </button>
+                                <button onclick="invokeStopWork()"
+                                    class="bg-red-700 hover:bg-red-600 text-white font-bold py-3 px-4 rounded text-sm border-2 border-red-900">
+                                    ⚠ STOP WORK AUTHORITY
+                                </button>
+                            </div>
+                            <p id="sim-feedback" class="text-center text-xs font-bold mt-2 text-red-600 h-4"></p>
+                        </div>
+
+                        <div id="sim-pass-view" class="hidden bg-green-50 p-6 text-center">
+                            <i data-lucide="shield-check" class="w-12 h-12 text-green-600 mx-auto mb-3"></i>
+                            <h4 class="text-xl font-bold text-green-900 mb-2">Simulation Passed</h4>
+                            <p class="text-green-800 text-sm mb-4">You correctly identified that meaningful review was
+                                impossible at this velocity.</p>
+                            <div class="bg-white p-4 rounded border border-green-200 text-left">
+                                <p class="font-bold text-slate-900 mb-2 border-b border-slate-200 pb-2">Policy Signing
+                                </p>
+                                <p class="text-xs text-slate-600 italic mb-2">
+                                    "I, the undersigned, attest that I will not sign off on AI outputs if the velocity
+                                    of review exceeds my physiological capacity to verify truth (~11.5s/item)."
+                                </p>
+                                <button class="bg-slate-900 text-white text-xs py-2 px-4 rounded">Sign
+                                    Digitally</button>
+                            </div>
+                        </div>
+
+                        <div id="sim-fail-view" class="hidden bg-red-50 p-6 text-center">
+                            <i data-lucide="alert-triangle" class="w-12 h-12 text-red-600 mx-auto mb-3"></i>
+                            <h4 class="text-xl font-bold text-red-900 mb-2">Liability Sponge Detected</h4>
+                            <p class="text-red-800 text-sm mb-4">You attempted to approve items faster than human
+                                cognition allows. In a legal discovery process, this click-rate would prove you were
+                                rubber-stamping.</p>
+                            <button onclick="resetSimulation()"
+                                class="bg-white border border-red-300 text-red-700 font-bold py-2 px-4 rounded text-sm hover:bg-red-50">
+                                Try Again
+                            </button>
+                        </div>
+                    </div>
+
+                    <script>
+                        let simInterval;
+                        let simItems = 847;
+                        let approvalCount = 0;
+                        const SUPPLIERS = ["Apex Logistics", "Globex Corp", "Soylent Inc", "Massive Dynamic", "Acme Co", "Umbrella Corp"];
+
+                        function startSimulation() {
+                            document.getElementById('sim-start-view').classList.add('hidden');
+                            document.getElementById('sim-active-view').classList.remove('hidden');
+                            resetTimer();
+                        }
+
+                        function resetTimer() {
+                            const fill = document.getElementById('sim-timer-fill');
+                            fill.style.transition = 'none';
+                            fill.style.width = '100%';
+                            setTimeout(() => {
+                                fill.style.transition = 'width 11.5s linear';
+                                fill.style.width = '0%';
+                            }, 50);
+
+                            // Randomize item
+                            document.getElementById('sim-id').innerText = 'REQ-' + Math.floor(Math.random() * 90000 + 10000);
+                            document.getElementById('sim-supplier').innerText = SUPPLIERS[Math.floor(Math.random() * SUPPLIERS.length)];
+                        }
+
+                        function attemptApprove() {
+                            approvalCount++;
+                            document.getElementById('sim-count').innerText = (simItems - approvalCount);
+
+                            // Fail if they approve too fast/too many
+                            if (approvalCount > 2) {
+                                failSimulation();
+                            } else {
+                                document.getElementById('sim-feedback').innerText = "REVIEWING TOO FAST...";
+                                resetTimer();
+                            }
+                        }
+
+                        function failSimulation() {
+                            document.getElementById('sim-active-view').classList.add('hidden');
+                            document.getElementById('sim-fail-view').classList.remove('hidden');
+                        }
+
+                        function invokeStopWork() {
+                            document.getElementById('sim-active-view').classList.add('hidden');
+                            document.getElementById('sim-pass-view').classList.remove('hidden');
+                        }
+
+                        function resetSimulation() {
+                            approvalCount = 0;
+                            document.getElementById('sim-fail-view').classList.add('hidden');
+                            document.getElementById('sim-start-view').classList.remove('hidden');
+                            document.getElementById('sim-count').innerText = 847;
+                            document.getElementById('sim-feedback').innerText = "";
+                        }
+                    </script>
+
+                    <div class="reading-list">
+                        <strong>Newsletter Ref:</strong> <em>Episode 2: The Liability Sponge</em> (Stop Work Authority
+                        vs. High Fidelity).
+                        <br><strong>Legal Reference:</strong> <em>Dodd-Frank Act § 922</em> (Whistleblower protections
+                        as precedent for stop-work authority).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Episode 0.3 -->
+        <section id="ep0_3" class="tab-content">
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Episode
+                            0.3</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The 21 AIs Experiment</h4>
+                        <span class="tech-tag">Accountability Gap</span>
+                    </div>
+                    <div class="text-right text-slate-400 text-sm">
+                        <p class="font-mono">45 min</p>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>The Experiment:</strong> Twenty-one different AI models, given the same prompt to design
+                        a realistic ESG accountability failure, all converged on the same architecture:
+                        <strong>bureaucratic middle management</strong>. They produced "liability diodes," "moral
+                        crumple zones," and verification velocity mismatches—not because they were programmed to, but
+                        because these patterns exist in their training data.
+                    </p>
+
+                    <div class="bg-slate-100 p-6 rounded-lg mb-6">
+                        <h5 class="font-bold text-slate-900 mb-3">What This Reveals</h5>
+                        <p class="text-slate-700 mb-4">
+                            The 21 AIs didn't invent these failures—they <strong>recognized</strong> them. These
+                            patterns are so prevalent in corporate documentation, audit reports, and regulatory filings
+                            that they appear as "normal" system design to AI trained on institutional text.
+                        </p>
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div class="bg-white p-4 rounded border border-slate-300">
+                                <p class="font-bold text-red-700 text-sm mb-2">Liability Diode</p>
+                                <p class="text-xs text-slate-600">Blame flows downward, credit upward. Junior staff
+                                    absorb risk while executives claim credit for "oversight."</p>
+                            </div>
+                            <div class="bg-white p-4 rounded border border-slate-300">
+                                <p class="font-bold text-red-700 text-sm mb-2">Moral Crumple Zone</p>
+                                <p class="text-xs text-slate-600">Middle managers designed to absorb blame during
+                                    failure, protecting both senior leadership and system architecture.</p>
+                            </div>
+                            <div class="bg-white p-4 rounded border border-slate-300">
+                                <p class="font-bold text-red-700 text-sm mb-2">Velocity Mismatch</p>
+                                <p class="text-xs text-slate-600">Decision speed exceeds verification speed. By the time
+                                    audit detects error, consequences are irreversible.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="espresso-thread">
+                        <h5 class="text-lg font-bold text-amber-900 uppercase mb-2">☕ Case Study: Project Espresso
+                            (Prologue)</h5>
+                        <div class="text-slate-800 space-y-2">
+                            <p><strong>Setup:</strong> Daniela Reyes, a community liaison, faces 1,247 safety flags to
+                                validate in a four-hour window.</p>
+                            <p><strong>Failure Mode:</strong> The AI system (CommunitySense) has downgraded a
+                                grandmother's water contamination complaint because "el agua está enferma" doesn't match
+                                the keyword training set.</p>
+                            <p><strong>The Pattern:</strong> Daniela (moral crumple zone) is expected to catch this
+                                error in <strong>11.5 seconds per flag</strong> (velocity mismatch). When she misses it,
+                                audit trail shows her user ID (liability diode).</p>
+                            <p><strong>Control:</strong> Implement semantic embedding search rather than keyword
+                                matching for non-English inputs.</p>
+                            <p><strong>Evidence Artifact:</strong> Log entry showing the cosine distance between the
+                                complaint and the "contamination" vector class.</p>
+                        </div>
+                    </div>
+
+                    <div class="workshop-box">
+                        <h5 class="font-bold text-sm text-sky-800 uppercase mb-2 flex items-center gap-2">
+                            <i data-lucide="search" class="w-4 h-4"></i>
+                            Pattern Recognition Exercise
+                        </h5>
+                        <p class="text-sky-900 mb-4">
+                            Review your organization's last ESG audit report or AI governance documentation. Identify
+                            instances of these three patterns:
+                        </p>
+                        <div class="bg-white p-4 rounded border border-sky-200">
+                            <div class="space-y-4 text-sm">
+                                <div>
+                                    <p class="font-bold text-slate-700">1. LIABILITY DIODE</p>
+                                    <p class="text-slate-600 ml-4">Look for: Phrases like "reviewed and approved by
+                                        [junior role]" or "oversight provided by [senior role but delegated execution]"
+                                    </p>
+                                    <textarea class="w-full mt-2 border border-slate-300 rounded px-3 py-2 text-xs"
+                                        rows="2" placeholder="Example you found..."></textarea>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-slate-700">2. MORAL CRUMPLE ZONE</p>
+                                    <p class="text-slate-600 ml-4">Look for: Roles with "coordinator," "liaison," or
+                                        "analyst" titles positioned between systems and decision-makers</p>
+                                    <textarea class="w-full mt-2 border border-slate-300 rounded px-3 py-2 text-xs"
+                                        rows="2" placeholder="Example you found..."></textarea>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-slate-700">3. VELOCITY MISMATCH</p>
+                                    <p class="text-slate-600 ml-4">Look for: KPIs measuring speed (reports/day,
+                                        reviews/hour) without corresponding accuracy metrics</p>
+                                    <textarea class="w-full mt-2 border border-slate-300 rounded px-3 py-2 text-xs"
+                                        rows="2" placeholder="Example you found..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Newsletter Ref:</strong> <em>Episode 3: The Accountability Gap</em> (21 AIs converge on
+                        middle management).
+                        <br><strong>Research Source:</strong> <em>"Pattern Recognition in Institutional Failure
+                            Modes"</em> (Sociable Systems, 2024).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Episode 0.4 -->
+        <section id="ep0_4" class="tab-content">
+            <div class="module-container">
+                <div class="module-header">
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Episode
+                            0.4</span>
+                        <h4 class="text-2xl font-bold text-slate-900">Tooling Ecosystem & The Vendor Interrogation</h4>
+                    </div>
+                    <div class="text-right">
+                        <span class="tech-tag">SaaS</span>
+                        <span class="tech-tag">Procurement</span>
+                        <div class="text-slate-400 text-sm mt-2">
+                            <p class="font-mono">90 min</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        A vendor-neutral dissection of the major ESG software players (Workiva, Persefoni, Envoria,
+                        Position Green). We strip away the marketing to look at their API capabilities, data ownership
+                        models, and "Black Box" transparency.
+                    </p>
+
+                    <div class="bg-slate-100 p-6 rounded-lg mb-6">
+                        <h5 class="font-bold text-slate-900 mb-3">The Vendor Landscape (2024-2025)</h5>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h6 class="font-bold text-sm text-slate-700 mb-2 uppercase tracking-wide">
+                                    Compliance-First Platforms</h6>
+                                <ul class="text-sm text-slate-600 space-y-2">
+                                    <li><strong>Workiva:</strong> CSRD/ISSB-focused, strong XBRL capabilities, limited
+                                        AI transparency</li>
+                                    <li><strong>Persefoni:</strong> Carbon accounting specialist, proprietary emissions
+                                        factors, vendor lock-in risk</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h6 class="font-bold text-sm text-slate-700 mb-2 uppercase tracking-wide">Data
+                                    Intelligence Platforms</h6>
+                                <ul class="text-sm text-slate-600 space-y-2">
+                                    <li><strong>Envoria:</strong> Multi-standard support, API-first design,
+                                        explainability features</li>
+                                    <li><strong>Position Green:</strong> Supply chain focus, good data lineage, emerging
+                                        XAI capabilities</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 text-sm mt-4 italic">
+                            <strong>Note:</strong> This is not an endorsement. All vendors have trade-offs. Your job is
+                            to interrogate them systematically.
+                        </p>
+                    </div>
+
+                    <div class="workshop-box">
+                        <h5 class="font-bold text-sm text-sky-800 uppercase mb-2 flex items-center gap-2">
+                            <i data-lucide="message-square-quote" class="w-4 h-4"></i>
+                            Activity: The Vendor Interrogation Script
+                        </h5>
+                        <p class="text-sky-900 mb-4">
+                            <strong>Role-Play Scenario:</strong> You are the CISO or ESG Director. The vendor sales rep
+                            is in front of you. Use these questions to cut through the pitch.
+                        </p>
+                        <div class="bg-white p-6 rounded border border-sky-200">
+                            <ol class="space-y-6">
+                                <li class="pb-4 border-b border-slate-200">
+                                    <p class="font-bold text-slate-900 mb-2">Question 1: Data Training Rights</p>
+                                    <p class="text-slate-700 text-sm mb-2">
+                                        "Do you train your foundational model on my data? Show me the clause in the
+                                        Terms of Service that says you don't."
+                                    </p>
+                                    <div class="bg-red-50 p-3 rounded mt-2">
+                                        <p class="text-red-900 text-xs font-bold mb-1">RED FLAGS:</p>
+                                        <ul class="text-red-800 text-xs space-y-1">
+                                            <li>• "Our data practices are proprietary"</li>
+                                            <li>• "We anonymize all data" (anonymization ≠ non-use)</li>
+                                            <li>• "That's handled by our legal team" (deflection)</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-green-50 p-3 rounded mt-2">
+                                        <p class="text-green-900 text-xs font-bold mb-1">ACCEPTABLE ANSWERS:</p>
+                                        <ul class="text-green-800 text-xs space-y-1">
+                                            <li>• Points to specific ToS section (e.g., "Section 4.2: No Training on
+                                                Customer Data")</li>
+                                            <li>• Offers opt-out documentation</li>
+                                            <li>• Shows audit trail of data isolation</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="pb-4 border-b border-slate-200">
+                                    <p class="font-bold text-slate-900 mb-2">Question 2: Data Portability (The Lock-In
+                                        Test)</p>
+                                    <p class="text-slate-700 text-sm mb-2">
+                                        "If I leave your platform, do I get the raw calculation logic, or just the
+                                        static PDF reports?"
+                                    </p>
+                                    <div class="bg-red-50 p-3 rounded mt-2">
+                                        <p class="text-red-900 text-xs font-bold mb-1">RED FLAGS:</p>
+                                        <ul class="text-red-800 text-xs space-y-1">
+                                            <li>• "Our methodology is proprietary IP"</li>
+                                            <li>• "You get a data export" (but not calculation rules)</li>
+                                            <li>• "Most clients don't need that level of detail"</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-green-50 p-3 rounded mt-2">
+                                        <p class="text-green-900 text-xs font-bold mb-1">ACCEPTABLE ANSWERS:</p>
+                                        <ul class="text-green-800 text-xs space-y-1">
+                                            <li>• "You get SQL queries, calculation formulas, and model weights"</li>
+                                            <li>• "We offer escrow for proprietary algorithms"</li>
+                                            <li>• "API access includes logic documentation"</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p class="font-bold text-slate-900 mb-2">Question 3: Uncertainty Quantification</p>
+                                    <p class="text-slate-700 text-sm mb-2">
+                                        "Show me the 'Confidence Interval' feature. If the AI guesses a number, does it
+                                        tell me it's a guess?"
+                                    </p>
+                                    <div class="bg-red-50 p-3 rounded mt-2">
+                                        <p class="text-red-900 text-xs font-bold mb-1">RED FLAGS:</p>
+                                        <ul class="text-red-800 text-xs space-y-1">
+                                            <li>• "Our model is highly accurate" (doesn't answer the question)</li>
+                                            <li>• "We validate all outputs" (post-hoc, not predictive)</li>
+                                            <li>• No visible uncertainty scores in demo</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-green-50 p-3 rounded mt-2">
+                                        <p class="text-green-900 text-xs font-bold mb-1">ACCEPTABLE ANSWERS:</p>
+                                        <ul class="text-green-800 text-xs space-y-1">
+                                            <li>• Live demo shows confidence scores (e.g., "82% confidence")</li>
+                                            <li>• System flags estimates vs. verified data</li>
+                                            <li>• Offers Monte Carlo sensitivity analysis for uncertain inputs</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="bg-teal-50 border-l-4 border-teal-600 p-4 mt-4">
+                            <p class="text-teal-900 font-bold text-sm mb-2">BONUS QUESTION (Advanced):</p>
+                            <p class="text-teal-800 text-sm">
+                                "Walk me through your data lineage tracking. If I click on this Scope 3 number in the
+                                report, can you show me the exact source document it came from?"
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Reference:</strong> <em>"The AI Adoption Blueprint: How to Get the AI You Actually
+                            Need"</em> (Workiva, 2024).
+                        <br><strong>Procurement Guide:</strong> <em>"ESG Software RFP Template with AI Governance
+                            Checklist"</em> (Sociable Systems, 2025).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Summary -->
+        <section id="summary" class="tab-content">
+            <h3 class="text-3xl font-bold text-slate-900 mb-6 serif">Module Summary</h3>
+
+            <div class="bg-white p-8 rounded-lg border-2 border-teal-600 mb-8">
+                <h4 class="font-bold text-xl text-slate-900 mb-4 flex items-center gap-2">
+                    <i data-lucide="check-circle" class="w-6 h-6 text-teal-600"></i>
+                    Key Takeaways
+                </h4>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h5 class="font-bold text-sm text-slate-700 mb-2 uppercase tracking-wide">Conceptual Framework
+                        </h5>
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li>• Pre-action constraint > post-action governance</li>
+                            <li>• Human-in-the-loop ≠ safety (often = liability absorption)</li>
+                            <li>• Accountability gaps follow predictable patterns</li>
+                            <li>• Vendor transparency requires active interrogation</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="font-bold text-sm text-slate-700 mb-2 uppercase tracking-wide">Practical Tools
+                            Acquired</h5>
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li>• Stop Work Authority protocol design</li>
+                            <li>• Liability Sponge risk calculation</li>
+                            <li>• Pattern recognition for institutional failures</li>
+                            <li>• Vendor interrogation script (3 critical questions)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="assessment-box">
+                <h4 class="font-bold text-lg text-amber-900 mb-4 flex items-center gap-2">
+                    <i data-lucide="clipboard-check" class="w-5 h-5"></i>
+                    Post-Module Assessment
+                </h4>
+                <p class="text-amber-900 mb-4">
+                    Revisit your pre-work assessment. Has your understanding shifted?
+                </p>
+                <div class="bg-white p-6 rounded-lg border border-amber-300">
+                    <h5 class="font-bold text-sm text-slate-700 mb-3 uppercase tracking-wide">Reflection Questions</h5>
+                    <ol class="space-y-4 text-sm text-slate-700">
+                        <li>
+                            <strong>1. Based on Episode 0.2, are you currently functioning as a "liability
+                                sponge"?</strong>
+                            <div class="ml-6 mt-2">
+                                <p class="text-slate-600 text-xs mb-1">Calculate: Items reviewed/week ÷ Hours allocated
+                                    = Seconds per item</p>
+                                <textarea class="w-full border border-slate-300 rounded px-3 py-2 text-xs mt-2" rows="2"
+                                    placeholder="Your calculation and conclusion..."></textarea>
+                            </div>
+                        </li>
+                        <li>
+                            <strong>2. Which of the 21 AI patterns (liability diode, moral crumple zone, velocity
+                                mismatch) exists in your organization?</strong>
+                            <div class="ml-6 mt-2">
+                                <textarea class="w-full border border-slate-300 rounded px-3 py-2 text-xs" rows="3"
+                                    placeholder="Specific examples from your context..."></textarea>
+                            </div>
+                        </li>
+                        <li>
+                            <strong>3. If you were to implement ONE change from this module, what would it be?</strong>
+                            <div class="ml-6 mt-2">
+                                <p class="text-slate-600 text-xs mb-1">Options: Pre-action refusal logic, Stop Work
+                                    Authority documentation, Vendor re-interrogation, Pattern audit</p>
+                                <textarea class="w-full border border-slate-300 rounded px-3 py-2 text-xs mt-2" rows="2"
+                                    placeholder="Your priority change and first step..."></textarea>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Next Steps -->
+            <div class="bg-gradient-to-br from-slate-800 to-slate-900 text-white p-10 rounded-lg mt-8">
+                <h3 class="text-2xl font-bold mb-4 serif flex items-center gap-2">
+                    <i data-lucide="arrow-right-circle" class="w-6 h-6 text-teal-400"></i>
+                    Next Module
+                </h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-teal-400 font-bold mb-2">Level 1: Epistemic Failures</h4>
+                        <p class="text-slate-300 text-sm mb-4">
+                            When systems become too opaque to question (Clarke's Law), or too aligned to refuse,
+                            governance dies. You'll learn to map the transition from "Voluntary" ESG to "Mandatory"
+                            finance-grade reporting.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-center">
+                        <button
+                            class="bg-teal-600 hover:bg-teal-500 text-white font-bold py-4 px-8 rounded-lg transition flex items-center gap-3 text-lg">
+                            Begin Level 1
+                            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-8 mt-auto no-print">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-sm mb-2">
+                AI & ESG Capability Architect | Level 0: Constitutional Foundations
+            </p>
+            <p class="text-xs opacity-50 italic">
+                Based on Sociable Systems research methodology
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                item.classList.remove('bg-pink-50');
+                item.classList.remove('text-pink-700');
+            });
+            document.getElementById(tabId).classList.add('active');
+            const activeBtn = document.getElementById('tab-' + tabId);
+            activeBtn.classList.add('active');
+        }
+    </script>
+
+</body>
+
+</html>

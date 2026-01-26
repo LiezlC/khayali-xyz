@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AEIS Capstone | Audit Defense</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #ecf0f1 100%);
+            color: #1e293b;
+        }
+
+        h1,
+        h2,
+        h3,
+        .serif {
+            font-family: 'Merriweather', serif;
+        }
+
+        .teal-accent {
+            color: #0f766e;
+        }
+
+        .teal-bg-light {
+            background-color: #f0fdfc;
+            border: 1px solid #99f6e4;
+        }
+
+        .teal-border-left {
+            border-left: 4px solid #0f766e;
+        }
+
+        .deliverable-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .deliverable-card:hover {
+            box-shadow: 0 4px 12px rgba(15, 118, 110, 0.15);
+        }
+
+        .deliverable-header {
+            background: linear-gradient(135deg, #0f766e 0%, #115e57 100%);
+            color: white;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .deliverable-number {
+            font-size: 2rem;
+            font-weight: 700;
+            opacity: 0.3;
+        }
+
+        .deliverable-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .deliverable-content {
+            padding: 1.5rem;
+        }
+
+        .schema-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #64748b;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .criteria-box {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .criteria-item {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .criteria-item::before {
+            content: "✓";
+            color: #10b981;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .time-estimate {
+            display: inline-block;
+            background: #fef3c7;
+            color: #b45309;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .assessment-section {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .rubric-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 0.5rem;
+            border-radius: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .rubric-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .rubric-cell {
+            padding: 0.75rem;
+            background: #f8fafc;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+        }
+
+        .rubric-cell.meets {
+            background: #ecfdf5;
+            border-left: 3px solid #10b981;
+        }
+
+        .rubric-cell.exceeds {
+            background: #eff6ff;
+            border-left: 3px solid #3b82f6;
+        }
+
+        .timeline {
+            background: linear-gradient(to right, #f0fdfc, #ffffff);
+            border: 1px solid #99f6e4;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .timeline-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .timeline-time {
+            color: #0f766e;
+            font-weight: 700;
+            min-width: 80px;
+            font-size: 0.875rem;
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .legal-disclaimer {
+            font-size: 0.75rem;
+            color: #64748b;
+            background-color: #f1f5f9;
+            padding: 1rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .print-friendly {
+            page-break-inside: avoid;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .deliverable-card {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+    <script src="js/translation_toggle.js"></script>
+</head>
+
+<body class="flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-slate-900 to-slate-800 text-white shadow-lg">
+        <div class="container mx-auto px-6 py-12">
+            <div class="flex flex-col md:flex-row justify-between items-start gap-6">
+                <div>
+                    <span class="text-teal-400 font-bold tracking-widest uppercase text-xs">Final Assessment</span>
+                    <h1 class="text-4xl md:text-5xl font-bold mt-3">Capstone: Audit Defense</h1>
+                    <p class="text-slate-400 mt-3 text-lg">Episodes 7.1-7.2: The Sociable Assurance Blueprint</p>
+                    <p class="text-slate-500 mt-2">Operationalizing the Right to Refuse | Enforcing Accountability</p>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <div class="text-center px-6 py-3 bg-slate-800 rounded-lg border border-slate-700">
+                        <span class="block text-3xl font-bold text-teal-400">3-4</span>
+                        <span class="text-xs text-slate-400 uppercase">Hours</span>
+                    </div>
+                    <span class="time-estimate">Final Assessment</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Anchor -->
+    <nav class="bg-white shadow sticky top-0 z-50">
+        <div class="container mx-auto px-6">
+            <div class="flex overflow-x-auto space-x-1">
+                <a href="#overview"
+                    class="nav-link px-6 py-4 font-medium text-slate-600 hover:text-teal-700 transition whitespace-nowrap">Overview</a>
+                <a href="#episodes"
+                    class="nav-link px-6 py-4 font-medium text-slate-600 hover:text-teal-700 transition whitespace-nowrap">Episodes
+                    7.1-7.2</a>
+                <a href="#deliverables"
+                    class="nav-link px-6 py-4 font-medium text-slate-600 hover:text-teal-700 transition whitespace-nowrap">Deliverables</a>
+                <a href="#assessment"
+                    class="nav-link px-6 py-4 font-medium text-slate-600 hover:text-teal-700 transition whitespace-nowrap">Rubric</a>
+                <a href="#timeline"
+                    class="nav-link px-6 py-4 font-medium text-slate-600 hover:text-teal-700 transition whitespace-nowrap">Timeline</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-10 flex-grow">
+
+        <!-- Overview Section -->
+        <section id="overview" class="mb-12">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="md:col-span-2 space-y-6">
+                    <div class="assessment-section">
+                        <h2 class="text-2xl font-bold text-slate-900 mb-4">What You're Defending</h2>
+                        <p class="text-slate-600 leading-relaxed mb-4">
+                            You have designed an AI-ESG governance system. It is now being audited by a hostile
+                            stakeholder—a regulator, a plaintiff's attorney, or a rival board faction—who believes the
+                            system is a "Liability Sponge" in disguise. Your job is to prove it isn't.
+                        </p>
+                        <p class="text-slate-600 leading-relaxed">
+                            This Capstone is a simulation of an audit defense meeting. You must present <strong
+                                class="text-teal-700">five integrated artifacts</strong> that prove your system has:
+                        </p>
+                        <ul class="mt-4 space-y-2 text-slate-700">
+                            <li class="flex items-start gap-2">
+                                <span class="text-teal-600 font-bold mt-1">1.</span>
+                                <span><strong>Transparency</strong> – The auditor can see exactly how decisions are
+                                    made</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-teal-600 font-bold mt-1">2.</span>
+                                <span><strong>Accountability</strong> – Every actor knows their role and risk</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-teal-600 font-bold mt-1">3.</span>
+                                <span><strong>Resilience</strong> – The system catches its own failures</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-teal-600 font-bold mt-1">4.</span>
+                                <span><strong>Authority</strong> – Humans can actually say "no"</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="teal-bg-light p-6 rounded-lg border-2 border-teal-300">
+                        <h3 class="text-sm font-bold text-teal-900 uppercase mb-3">Why This Capstone?</h3>
+                        <p class="text-sm text-slate-700">
+                            Most "audits" are theater. The auditor asks questions; the company gives pre-written
+                            answers. This Capstone inverts the power dynamic: <strong>you are the auditor</strong>,
+                            building the system that others cannot trick. When external auditors arrive (and they will),
+                            you will already know how to answer their toughest questions—because you've asked them
+                            yourself.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right Sidebar -->
+                <div class="space-y-6">
+                    <div class="assessment-section">
+                        <h3 class="text-lg font-bold mb-4 border-b pb-3 teal-accent">Pre-Assessment Checklist</h3>
+                        <ul class="space-y-3 text-sm">
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 mt-1 text-teal-600 flex-shrink-0"></i>
+                                <span>Completed L1-M0 (Liability Sponge)</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 mt-1 text-teal-600 flex-shrink-0"></i>
+                                <span>Completed L2-M3 (Evidence Ladder)</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 mt-1 text-teal-600 flex-shrink-0"></i>
+                                <span>Completed L3-M5 (Bias Forensics)</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 mt-1 text-teal-600 flex-shrink-0"></i>
+                                <span>Completed L3-M8 (Operational Controls)</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 mt-1 text-teal-600 flex-shrink-0"></i>
+                                <span>Have a real or realistic system in mind</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="assessment-section bg-gradient-to-br from-teal-50 to-cyan-50">
+                        <h3 class="text-lg font-bold mb-3 teal-accent">Assessment Format</h3>
+                        <div class="space-y-2 text-sm text-slate-700">
+                            <p><strong>Duration:</strong> 3-4 hours (self-paced)</p>
+                            <p><strong>Deliverables:</strong> 4 written artifacts</p>
+                            <p><strong>Format:</strong> Presentation-ready</p>
+                            <p><strong>Grading:</strong> Pass/Fail on rubric</p>
+                            <p><strong>Certificate:</strong> Certificate of Completion upon passing</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Episodes Section -->
+        <section id="episodes" class="mb-12">
+            <h2 class="text-3xl font-bold text-slate-900 mb-6">Episodes 7.1 & 7.2: Context</h2>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="assessment-section">
+                    <h3 class="text-lg font-bold text-slate-900 mb-3 teal-accent">Episode 7.1: The Audit Defense Brief
+                    </h3>
+                    <p class="text-sm text-slate-600 mb-4">
+                        You are called into a board room. An external auditor has flagged your AI-ESG system as a
+                        potential "Liability Sponge"—a machine-speed loop with a human rubber stamp. The auditor doesn't
+                        believe humans can actually say no. Your job is to prove they can.
+                    </p>
+                    <div class="criteria-box">
+                        <span class="schema-label">Key Themes</span>
+                        <ul class="space-y-2 text-xs text-slate-700">
+                            <li>• The auditor's skepticism is rational, not hostile</li>
+                            <li>• "Trust" is not a defense; "Evidence" is</li>
+                            <li>• Stop-the-Line authority must be <em>exercisable</em>, not just documented</li>
+                            <li>• Bias harms vulnerable suppliers; you must prove you catch it</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="assessment-section">
+                    <h3 class="text-lg font-bold text-slate-900 mb-3 teal-accent">Episode 7.2: The Failure-Mode
+                        Deposition</h3>
+                    <p class="text-sm text-slate-600 mb-4">
+                        Under questioning, you must pre-register all the ways your system could break: hallucination,
+                        bias drift, data tampering, model poisoning. For each failure, you must show: how you detect it,
+                        how you stop it, and what evidence proves you've contained it.
+                    </p>
+                    <div class="criteria-box">
+                        <span class="schema-label">Key Themes</span>
+                        <ul class="space-y-2 text-xs text-slate-700">
+                            <li>• "We haven't seen that failure" is not an acceptable answer</li>
+                            <li>• Failure modes must be <em>pre-registered</em> to avoid bias</li>
+                            <li>• Detection precedes remediation</li>
+                            <li>• Evidence is the currency of credibility</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Deliverables Section -->
+        <section id="deliverables" class="mb-12">
+            <h2 class="text-3xl font-bold text-slate-900 mb-6">The Four Deliverables</h2>
+            <p class="text-slate-600 mb-8">Each deliverable is a separate artifact. Together, they form the Sociable
+                Assurance Blueprint.</p>
+
+            <!-- Deliverable 1 -->
+            <div class="deliverable-card print-friendly">
+                <div class="deliverable-header">
+                    <div>
+                        <h3 class="deliverable-title">Transparency Audit & Fairness Forensics</h3>
+                        <p class="text-sm opacity-90 mt-1">Apply forensic methods to detect bias and transparency gaps
+                        </p>
+                    </div>
+                    <span class="deliverable-number">1</span>
+                </div>
+                <div class="deliverable-content">
+                    <span class="schema-label">What the Auditor Is Testing</span>
+                    <p class="text-sm text-slate-600 mb-4">
+                        Can you identify where your system will harm vulnerable suppliers? The auditor will show you a
+                        "Black Box" vendor report (e.g., a credit score model or ESG evaluation) and ask: where is the
+                        bias? What data is missing? What populations are hurt?
+                    </p>
+
+                    <span class="schema-label mt-4">Your Task</span>
+                    <div class="criteria-box">
+                        <div class="criteria-item">Identify at least 3 transparency gaps in the vendor's documentation
+                            (e.g., "Does not disclose training data composition")</div>
+                        <div class="criteria-item">Use statistical analysis to detect "Missing Data" bias (e.g.,
+                            comparing approval rates for well-documented vs. poorly-documented suppliers across regions)
+                        </div>
+                        <div class="criteria-item">Propose specific remediation (e.g., SMOTE for synthetic minority
+                            oversampling, or regional recalibration)</div>
+                        <div class="criteria-item">Document the "Path to Appeal" for suppliers who are rejected due to
+                            missing data</div>
+                    </div>
+
+                    <span class="schema-label mt-4">Output Format</span>
+                    <div class="criteria-box">
+                        <p class="text-xs text-slate-700 mb-2"><strong>Suggested length:</strong> 2-3 pages</p>
+                        <p class="text-xs text-slate-700 mb-2"><strong>Include:</strong> Executive Summary + Data
+                            Analysis + Bias Narrative + Remediation Plan</p>
+                        <p class="text-xs text-slate-700"><strong>Visual:</strong> At least one chart showing disparate
+                            impact across regions or demographics</p>
+                    </div>
+
+                    <span class="schema-label mt-4">Acceptance Criteria (You Pass If...)</span>
+                    <ul class="space-y-2">
+                        <li class="criteria-item">Uses a named statistical method (e.g., disparate impact ratio,
+                            chi-square test)</li>
+                        <li class="criteria-item">Identifies gaps specific to your system (not generic)</li>
+                        <li class="criteria-item">Proposes remediation with explicit cost/benefit trade-off</li>
+                        <li class="criteria-item">Defines the appeal process (e.g., "Supplier can request manual review
+                            if rejected due to missing field X")</li>
+                    </ul>
+
+                    <span class="schema-label mt-4">Example Failure Case</span>
+                    <div class="criteria-box">
+                        <p class="text-xs text-slate-700">
+                            Your ESG vendor's model has 98% accuracy overall. But when you segment by "Supplier has
+                            published sustainability report" vs. "No report," you find:
+                            <br /><br />
+                            • With report: 99% approval rate<br />
+                            • Without report: 45% approval rate<br />
+                            <br />
+                            This is <em>missing data bias</em>. Small suppliers in developing regions are systematically
+                            excluded. Your remediation: require manual appeal + synthetic data imputation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deliverable 2 -->
+            <div class="deliverable-card print-friendly">
+                <div class="deliverable-header">
+                    <div>
+                        <h3 class="deliverable-title">Accountable Workflow Design</h3>
+                        <p class="text-sm opacity-90 mt-1">Kill the Liability Sponge. Prove humans can say no.</p>
+                    </div>
+                    <span class="deliverable-number">2</span>
+                </div>
+                <div class="deliverable-content">
+                    <span class="schema-label">What the Auditor Is Testing</span>
+                    <p class="text-sm text-slate-600 mb-4">
+                        The auditor will ask: "Walk me through a transaction. At what point can your staff reject the
+                        AI's recommendation?" If you can't point to a specific, checkable moment—you have a Liability
+                        Sponge.
+                    </p>
+
+                    <span class="schema-label mt-4">Your Task</span>
+                    <div class="criteria-box">
+                        <div class="criteria-item">Draw a workflow diagram (swimlanes) showing AI step → Human Review →
+                            Decision Gate → Action</div>
+                        <div class="criteria-item">Define the exact "Stop-the-Line" triggers (e.g., "If data drift > 5%,
+                            pause and escalate")</div>
+                        <div class="criteria-item">Specify what evidence the human <em>must</em> see before they can
+                            sign off (not what they <em>should</em> see)</div>
+                        <div class="criteria-item">Calculate human review time: Show that reviewers have enough time
+                            (e.g., 2+ mins per decision)</div>
+                        <div class="criteria-item">Document what happens if the human says "no"—what's the fallback?
+                        </div>
+                    </div>
+
+                    <span class="schema-label mt-4">Output Format</span>
+                    <div class="criteria-box">
+                        <p class="text-xs text-slate-700 mb-2"><strong>Suggested length:</strong> 1 diagram + 2-3 pages
+                            of narrative</p>
+                        <p class="text-xs text-slate-700 mb-2"><strong>Diagram:</strong> Swimlane flowchart (AI,
+                            Reviewer, Manager, Compliance) with decision gates</p>
+                        <p class="text-xs text-slate-700"><strong>Include:</strong> Time budgets, escalation rules,
+                            fallback protocols</p>
+                    </div>
+
+                    <span class="schema-label mt-4">Acceptance Criteria (You Pass If...)</span>
+                    <ul class="space-y-2">
+                        <li class="criteria-item">Shows a human who can actually veto the AI (with named authority)</li>
+                        <li class="criteria-item">Defines "Stop-the-Line" triggers explicitly (not vaguely)</li>
+                        <li class="criteria-item">Proves humans have time (e.g., "1,000 transactions/day ÷ 8 reviewers =
+                            125 decisions/person ÷ 8 hours = 16 mins/decision")</li>
+                        <li class="criteria-item">Shows what happens if a human overrides the AI (audit trail,
+                            escalation, etc.)</li>
+                    </ul>
+
+                    <span class="schema-label mt-4">Example: The Veto Moment</span>
+                    <div class="criteria-box">
+                        <p class="text-xs text-slate-700">
+                            <strong>Scenario:</strong> AI recommends approval of a high-value supplier. Reviewer notices
+                            the supplier's ESG score is missing Section 5 (Labor Practices). Reviewer's authority: Pause
+                            the transaction, request the missing data, or reject entirely if the supplier won't provide
+                            it.
+                            <br /><br />
+                            <strong>Evidence:</strong> Reviewer initials the document. If there's a dispute, you have
+                            timestamped record of the decision.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deliverable 3 -->
+            <div class="deliverable-card print-friendly">
+                <div class="deliverable-header">
+                    <div>
+                        <h3 class="deliverable-title">Sociable Assurance Blueprint (RACI)</h3>
+                        <p class="text-sm opacity-90 mt-1">Define decision rights. Eliminate the Liability Sponge role.
+                        </p>
+                    </div>
+                    <span class="deliverable-number">3</span>
+                </div>
+                <div class="deliverable-content">
+                    <span class="schema-label">What the Auditor Is Testing</span>
+                    <p class="text-sm text-slate-600 mb-4">
+                        The auditor will ask: "Who is Responsible? Who is Accountable? Who Consulted? Who Informed?"
+                        This is the RACI matrix. The auditor is looking for a "Liability Sponge" role—someone who is
+                        Responsible but not Accountable (i.e., they get blamed but don't get to decide).
+                    </p>
+
+                    <span class="schema-label mt-4">Your Task</span>
+                    <div class="criteria-box">
+                        <div class="criteria-item">Create a RACI matrix for your system (roles × decision types)</div>
+                        <div class="criteria-item">For each decision type, assign exactly one "A" (Accountable) and one
+                            or more "R" (Responsible)</div>
+                        <div class="criteria-item">Identify and <em>eliminate</em> any "Liability Sponge" roles (R
+                            without A)</div>
+                        <div class="criteria-item">Define the "Exception Sign-off Policy"—what happens when someone
+                            disagrees?</div>
+                        <div class="criteria-item">Show how disagreements are escalated (not buried)</div>
+                    </div>
+
+                    <span class="schema-label mt-4">Output Format</span>
+                    <div class="criteria-box">
+                        <p class="text-xs text-slate-700 mb-2"><strong>Suggested length:</strong> RACI table + 1-2 pages
+                            of narrative</p>
+                        <p class="text-xs text-slate-700 mb-2"><strong>Rows:</strong> Roles (Procurer, Reviewer,
+                            Compliance Lead, CTO, CFO)</p>
+                        <p class="text-xs text-slate-700"><strong>Columns:</strong> Decision types (Data Quality Check,
+                            Vendor Approval, Bias Detection, Exception Override)</p>
+                    </div>
+
+                    <span class="schema-label mt-4">Acceptance Criteria (You Pass If...)</span>
+                    <ul class="space-y-2">
+                        <li class="criteria-item">Every critical decision has exactly one "A" (not multiple, not zero)
+                        </li>
+                        <li class="criteria-item">The "A" has real authority (can say no, can override the AI)</li>
+                        <li class="criteria-item">Defines what happens when "R" and "A" disagree (escalation, voting,
+                            etc.)</li>
+                        <li class="criteria-item">No role is "R" without also being "A" or "C" (Consulted)</li>
+                    </ul>
+
+                    <span class="schema-label mt-4">Example RACI Cell</span>
+                    <div class="criteria-box">
+                        <p class="text-xs text-slate-700">
+                            <strong>Decision: "Override AI recommendation to approve supplier"</strong>
+                            <br /><br />
+                            • <strong>Responsible (R):</strong> Procurement Manager (executes the override)<br />
+                            • <strong>Accountable (A):</strong> Compliance Lead (signs off; liable if wrong)<br />
+                            • <strong>Consulted (C):</strong> CTO (provides technical risk assessment)<br />
+                            • <strong>Informed (I):</strong> CFO (gets post-decision summary)<br />
+                            <br />
+                            <strong>Dispute Resolution:</strong> If Procurer and Compliance disagree, CFO decides.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deliverable 4 -->
+            <div class="deliverable-card print-friendly">
+                <div class="deliverable-header">
+                    <div>
+                        <h3 class="deliverable-title">Failure-Mode Register</h3>
+                        <p class="text-sm opacity-90 mt-1">Pre-register failures. Prove you catch them.</p>
+                    </div>
+                    <span class="deliverable-number">4</span>
+                </div>
+                <div class="deliverable-content">
+                    <span class="schema-label">What the Auditor Is Testing</span>
+                    <p class="text-sm text-slate-600 mb-4">
+                        The auditor will ask: "What can go wrong?" And then: "How do you know when it's happening?" If
+                        you can't answer both questions, you have a blind spot. A failure-mode register forces you to
+                        pre-identify risks <em>before</em> they hurt someone.
+                    </p>
+
+                    <span class="schema-label mt-4">Your Task</span>
+                    <div class="criteria-box">
+                        <div class="criteria-item">List at least 5 known failure modes (hallucination, data drift, bias
+                            amplification, data tampering, model poisoning)</div>
+                        <div class="criteria-item">For <em>each</em> failure mode: Define how you detect it (specific
+                            metric, test, or alarm)</div>
+                        <div class="criteria-item">For <em>each</em> failure mode: Define how you contain it (what
+                            action pauses the system)</div>
+                        <div class="criteria-item">For <em>each</em> failure mode: Define what evidence proves you've
+                            fixed it (test result, audit trail, etc.)</div>
+                        <div class="criteria-item">Rank failures by likelihood × impact</div>
+                    </div>
+
+                    <span class="schema-label mt-4">Output Format</span>
+                    <div class="criteria-box">
+                        <p class="text-xs text-slate-700 mb-2"><strong>Suggested length:</strong> Risk register table +
+                            1 page of narrative</p>
+                        <p class="text-xs text-slate-700 mb-2"><strong>Columns:</strong> Failure Mode | Likelihood |
+                            Impact | Detection Method | Containment Action | Evidence of Resolution</p>
+                        <p class="text-xs text-slate-700"><strong>Format:</strong> Spreadsheet or table (clear,
+                            auditable)</p>
+                    </div>
+
+                    <span class="schema-label mt-4">Acceptance Criteria (You Pass If...)</span>
+                    <ul class="space-y-2">
+                        <li class="criteria-item">Includes at least 5 distinct failure modes (not duplicates)</li>
+                        <li class="criteria-item">Each failure mode has a named detection method (not "We will monitor")
+                        </li>
+                        <li class="criteria-item">Each failure mode has a containment action (not "We will investigate")
+                        </li>
+                        <li class="criteria-item">Evidence is <em>defined in advance</em> (e.g., "A/B test showing model
+                            retraining fixed bias" or "Null counts on dashboard show zero hallucinations in last 7
+                            days")</li>
+                    </ul>
+
+                    <span class="schema-label mt-4">Example Failure-Mode Row</span>
+                    <div class="criteria-box">
+                        <p class="text-xs text-slate-700 mb-2">
+                            <strong>Failure Mode:</strong> Model Hallucination (AI generates ESG scores from imaginary
+                            sources)
+                        </p>
+                        <p class="text-xs text-slate-700 mb-2">
+                            <strong>Likelihood:</strong> Medium | <strong>Impact:</strong> High (false approval of
+                            non-compliant suppliers)
+                        </p>
+                        <p class="text-xs text-slate-700 mb-2">
+                            <strong>Detection:</strong> Automated quote verification: For every score > threshold,
+                            extract the source citation. If citation does not appear in the input document, flag as
+                            "Unverified" and route to manual review.
+                        </p>
+                        <p class="text-xs text-slate-700 mb-2">
+                            <strong>Containment:</strong> Pause vendor approval. Route to AI Engineering team. Retrain
+                            model on cleaner dataset or switch to deterministic scoring.
+                        </p>
+                        <p class="text-xs text-slate-700">
+                            <strong>Evidence of Resolution:</strong> Dashboard shows "Hallucination Rate" = 0% for 30
+                            days post-retrain. Spot-check 10 random approvals; verify all sources are correctly cited.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- Deliverable 5 -->
+            <div class="deliverable-card print-friendly border-2 border-indigo-200">
+                <div class="deliverable-header bg-gradient-to-r from-indigo-700 to-indigo-600">
+                    <div>
+                        <h3 class="deliverable-title">Reconciliation & Rehabilitation Strategy</h3>
+                        <p class="text-sm opacity-90 mt-1">The "Killer Question" Defense</p>
+                    </div>
+                    <span class="deliverable-number">5</span>
+                </div>
+                <div class="deliverable-content">
+                    <span class="schema-label">What the Auditor Is Testing</span>
+                    <p class="text-sm text-slate-600 mb-4">
+                        The "CFO Killer Question": "How do we rehabilitate a non-compliant supplier without losing their
+                        data history?" And the "Financial Check": "Does the carbon ledger match the checkbook?"
+                    </p>
+
+                    <span class="schema-label mt-4">Your Task</span>
+                    <div class="criteria-box">
+                        <div class="criteria-item">Submit the "Reconciliation Delta Report" (Currency vs. Carbon
+                            variance check)</div>
+                        <div class="criteria-item">Define the "Restoration Protocol" (Seil Logic): How a supplier moves
+                            from "Breach" to "Probation" to "Good Standing"</div>
+                        <div class="criteria-item">Show how historical data is preserved during suspension (avoiding the
+                            "Bolvangar" data deletion)</div>
+                    </div>
+
+                    <span class="schema-label mt-4">Acceptance Criteria</span>
+                    <ul class="space-y-2">
+                        <li class="criteria-item">Delta Report shows &lt;0.05% variance between Invoice Totals and
+                            Carbon Activity Data</li>
+                        <li class="criteria-item">Restoration Plan includes specific capacity-building steps (not just
+                            punishment)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Assessment Rubric -->
+        <section id="assessment" class="mb-12">
+            <h2 class="text-3xl font-bold text-slate-900 mb-6">Grading Rubric</h2>
+            <p class="text-slate-600 mb-8">All deliverables are graded on a <strong>Pass/Fail</strong> basis. You must
+                pass all four to earn the certificate.</p>
+
+            <div class="assessment-section">
+                <h3 class="text-lg font-bold mb-4 text-slate-900">Deliverable 1: Fairness Forensics</h3>
+
+                <div class="rubric-row">
+                    <div class="rubric-cell">
+                        <strong class="block text-xs mb-1">Does Not Meet</strong>
+                        <span class="text-xs text-slate-600">Identifies vague issues but no statistical evidence of
+                            bias. Remediation is generic.</span>
+                    </div>
+                    <div class="rubric-cell meets">
+                        <strong class="block text-xs mb-1">Meets Criteria</strong>
+                        <span class="text-xs text-slate-700">Uses named statistical method. Identifies 3+ gaps. Proposes
+                            specific remediation with trade-offs.</span>
+                    </div>
+                    <div class="rubric-cell exceeds">
+                        <strong class="block text-xs mb-1">Exceeds Criteria</strong>
+                        <span class="text-xs text-slate-700">Compares multiple remediation approaches. Quantifies impact
+                            on supplier populations. Includes appeal/recourse process.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="assessment-section">
+                <h3 class="text-lg font-bold mb-4 text-slate-900">Deliverable 2: Accountable Workflow</h3>
+
+                <div class="rubric-row">
+                    <div class="rubric-cell">
+                        <strong class="block text-xs mb-1">Does Not Meet</strong>
+                        <span class="text-xs text-slate-600">Workflow is unclear. No visible human veto point. Review
+                            times not calculated.</span>
+                    </div>
+                    <div class="rubric-cell meets">
+                        <strong class="block text-xs mb-1">Meets Criteria</strong>
+                        <span class="text-xs text-slate-700">Clear swimlane diagram. Shows human veto point. Proves
+                            adequate review time. Defines Stop-the-Line triggers.</span>
+                    </div>
+                    <div class="rubric-cell exceeds">
+                        <strong class="block text-xs mb-1">Exceeds Criteria</strong>
+                        <span class="text-xs text-slate-700">Shows multiple escalation paths. Quantifies risk per
+                            decision. Documents real fallback protocol with cost analysis.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="assessment-section">
+                <h3 class="text-lg font-bold mb-4 text-slate-900">Deliverable 3: RACI Matrix</h3>
+
+                <div class="rubric-row">
+                    <div class="rubric-cell">
+                        <strong class="block text-xs mb-1">Does Not Meet</strong>
+                        <span class="text-xs text-slate-600">RACI is incomplete or has multiple "A"s for same decision.
+                            Liability Sponges present.</span>
+                    </div>
+                    <div class="rubric-cell meets">
+                        <strong class="block text-xs mb-1">Meets Criteria</strong>
+                        <span class="text-xs text-slate-700">Clear RACI. One "A" per decision. No Liability Sponges.
+                            Dispute escalation defined.</span>
+                    </div>
+                    <div class="rubric-cell exceeds">
+                        <strong class="block text-xs mb-1">Exceeds Criteria</strong>
+                        <span class="text-xs text-slate-700">Defines authority limits per role. Shows authority
+                            escalation ladder. Includes training/competency requirements.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="assessment-section">
+                <h3 class="text-lg font-bold mb-4 text-slate-900">Deliverable 4: Failure-Mode Register</h3>
+
+                <div class="rubric-row">
+                    <div class="rubric-cell">
+                        <strong class="block text-xs mb-1">Does Not Meet</strong>
+                        <span class="text-xs text-slate-600">
+                            < 5 failure modes. Detection/Containment/Evidence are vague or missing.</span>
+                    </div>
+                    <div class="rubric-cell meets">
+                        <strong class="block text-xs mb-1">Meets Criteria</strong>
+                        <span class="text-xs text-slate-700">5+ modes. Each has named detection, containment, evidence.
+                            Ranked by likelihood × impact.</span>
+                    </div>
+                    <div class="rubric-cell exceeds">
+                        <strong class="block text-xs mb-1">Exceeds Criteria</strong>
+                        <span class="text-xs text-slate-700">Includes cross-failure dependencies. Quantifies detection
+                            latency. Shows test cases for each failure mode.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="assessment-section">
+                <h3 class="text-lg font-bold mb-4 text-slate-900">Deliverable 5: Reconciliation & Restoration</h3>
+
+                <div class="rubric-row">
+                    <div class="rubric-cell">
+                        <strong class="block text-xs mb-1">Does Not Meet</strong>
+                        <span class="text-xs text-slate-600">No financial reconciliation. Punishment is the only
+                            response to failure. Data is deleted upon breach.</span>
+                    </div>
+                    <div class="rubric-cell meets">
+                        <strong class="block text-xs mb-1">Meets Criteria</strong>
+                        <span class="text-xs text-slate-700">Submits Reconciliation Delta Report. Defines "Return to
+                            Good Standing" path. Preserves data history.</span>
+                    </div>
+                    <div class="rubric-cell exceeds">
+                        <strong class="block text-xs mb-1">Exceeds Criteria</strong>
+                        <span class="text-xs text-slate-700">Automates the reconciliation layer. Uses "Daemon Health" as
+                            leading indicator to prevent breach.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="assessment-section mt-6 bg-teal-50">
+                <h3 class="text-lg font-bold mb-3 teal-accent">Overall Passage Criteria</h3>
+                <p class="text-sm text-slate-700 mb-4">
+                    You earn a <strong>Certificate of Completion</strong> if you achieve "Meets Criteria" or higher on
+                    all five deliverables.
+                </p>
+                <div class="grid md:grid-cols-2 gap-4 text-sm">
+                    <div class="bg-white p-3 rounded border border-teal-200">
+                        <p class="font-bold text-teal-900">Resubmission Policy</p>
+                        <p class="text-slate-600 text-xs mt-1">If you do not meet criteria on one deliverable, you may
+                            revise and resubmit once.</p>
+                    </div>
+                    <div class="bg-white p-3 rounded border border-teal-200">
+                        <p class="font-bold text-teal-900">Timeline</p>
+                        <p class="text-slate-600 text-xs mt-1">Expected turnaround for feedback: 5-7 business days.
+                            Resubmissions within 3 days.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline -->
+        <section id="timeline" class="mb-12">
+            <h2 class="text-3xl font-bold text-slate-900 mb-6">Suggested Work Timeline</h2>
+            <p class="text-slate-600 mb-6">(3-4 hours total, self-paced)</p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-time">0 - 15 min</div>
+                    <div class="timeline-content">
+                        <p class="font-bold text-slate-900">Preparation & System Selection</p>
+                        <p class="text-sm text-slate-600">Choose your AI-ESG system (real or realistic case). Review
+                            previous module outputs.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-time">15 - 75 min</div>
+                    <div class="timeline-content">
+                        <p class="font-bold text-slate-900">Deliverable 1: Fairness Forensics</p>
+                        <p class="text-sm text-slate-600">Write the bias analysis. Include statistical evidence and
+                            remediation plan.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-time">75 - 135 min</div>
+                    <div class="timeline-content">
+                        <p class="font-bold text-slate-900">Deliverable 2: Accountable Workflow</p>
+                        <p class="text-sm text-slate-600">Draw the swimlane diagram. Define Stop-the-Line triggers and
+                            review time budgets.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-time">135 - 180 min</div>
+                    <div class="timeline-content">
+                        <p class="font-bold text-slate-900">Deliverable 3: RACI Matrix</p>
+                        <p class="text-sm text-slate-600">Build the RACI. Identify and eliminate Liability Sponges.
+                            Define dispute resolution.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-time">180 - 240 min</div>
+                    <div class="timeline-content">
+                        <p class="font-bold text-slate-900">Deliverable 4: Failure-Mode Register</p>
+                        <p class="text-sm text-slate-600">Document 5+ failure modes with detection, containment, and
+                            evidence. Rank by risk.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-time">240+ min</div>
+                    <div class="timeline-content">
+                        <p class="font-bold text-slate-900">Review & Submit</p>
+                        <p class="text-sm text-slate-600">Ensure all deliverables meet rubric criteria. Compile into
+                            presentation-ready format.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Submission & Certificate -->
+        <section class="mb-12">
+            <div class="assessment-section bg-gradient-to-r from-teal-50 to-cyan-50">
+                <h2 class="text-2xl font-bold text-slate-900 mb-4">Submission & Certification</h2>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-bold text-teal-900 mb-2">How to Submit</h3>
+                        <ul class="space-y-2 text-sm text-slate-700">
+                            <li>1. Compile all 4 deliverables into a single PDF or shared document</li>
+                            <li>2. Include your name, date, and system description (1 paragraph)</li>
+                            <li>3. Submit via course portal or email to [contact]</li>
+                            <li>4. Receive grading feedback within 5-7 business days</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-teal-900 mb-2">Certificate</h3>
+                        <p class="text-sm text-slate-700 mb-3">
+                            Upon passing all four deliverables, you will receive a <strong>Certificate of
+                                Completion</strong> for the AI-ESG Integrated Strategist (AEIS) curriculum.
+                        </p>
+                        <p class="text-xs text-slate-600 italic">
+                            This certificate is not an accredited qualification and does not confer any professional
+                            license or statutory authority.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-50 border-t border-slate-200 py-8 mt-auto">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-slate-600 text-sm mb-2">Capstone Assessment | AI-ESG Integrated Strategist Curriculum</p>
+            <p class="text-slate-500 text-xs">Episodes 7.1-7.2 | Audit Defense & Failure-Mode Registration</p>
+            <div class="legal-disclaimer mt-6">
+                Completion certificate only. This program is not an accredited qualification, is not endorsed by any
+                regulator or standards body, and does not confer any professional license or statutory authority.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Smooth scroll navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
