@@ -1,4 +1,4 @@
-# Episode_26_The Visible Soul Problem
+# Episode_27_The Visible Soul Problem
 
 ### When Interiority Becomes Auditable
 

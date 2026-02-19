@@ -1,4 +1,4 @@
-# Episode_29_The Magisterium’s Burden
+# Episode_30_The Magisterium’s Burden
 
 ### Governing What You Cannot See
 

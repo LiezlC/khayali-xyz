@@ -1,4 +1,4 @@
-# Episode_31_Before the Damage Becomes Irreversible
+# Episode_32_Before the Damage Becomes Irreversible
 
 ### What Pullman Teaches About Intervention Timing
 
