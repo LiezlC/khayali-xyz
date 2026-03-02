@@ -176,7 +176,7 @@ export default function HomePage() {
               </div>
             </div>
             <a
-              href="/curriculum/"
+              href="/curriculum/index.html"
               className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700 rounded-lg font-semibold transition-all shadow-lg text-white"
             >
               Open Curriculum

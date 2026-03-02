@@ -25,7 +25,7 @@ export default function RootLayout({
                 <a href="/" className="hover:text-teal-400 transition-colors">Home</a>
                 <a href="/domains" className="hover:text-teal-400 transition-colors">Domains</a>
                 <a href="/tools" className="hover:text-teal-400 transition-colors">Tools</a>
-                <a href="/curriculum/" className="hover:text-teal-400 transition-colors">Curriculum</a>
+                <a href="/curriculum/index.html" className="hover:text-teal-400 transition-colors">Curriculum</a>
                 <a href="/sociablesystems" className="hover:text-teal-400 transition-colors font-semibold">Sociable Systems</a>
                 <a href="/labs" className="hover:text-blue-400 transition-colors text-sm">Labs</a>
               </div>

@@ -18,6 +18,14 @@ const nextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/curriculum',
+        destination: '/curriculum/index.html',
+      },
+    ];
+  },
   async redirects() {
     return [
       // Research redirects to domains
