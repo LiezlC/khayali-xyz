@@ -203,14 +203,25 @@ export default function DragonDataPage() {
 
             <div className="bg-gray-800/50 rounded-xl p-6 border border-gray-700 hover:border-blue-500 transition-all">
               <h3 className="text-xl font-bold text-blue-300 mb-2">PDF Materials</h3>
-              <p className="text-gray-400 text-sm mb-4">Downloadable course materials</p>
+              <p className="text-gray-400 text-sm mb-4">Course materials — click to view, or right-click to download</p>
               <div className="space-y-2">
                 <a
-                  href="/dragon-data/Data Dragon ID Kit.pdf"
-                  target="_blank"
+                  href="/dragon-data/pdf/Data Dragon ID Kit"
                   className="block text-blue-400 hover:text-blue-300 text-sm"
                 >
                   📄 Data Dragon ID Kit
+                </a>
+                <a
+                  href="/dragon-data/pdf/DragonDataIntro"
+                  className="block text-blue-400 hover:text-blue-300 text-sm"
+                >
+                  📄 Dragon Data Intro
+                </a>
+                <a
+                  href="/dragon-data/pdf/Foundation_DataDecay"
+                  className="block text-blue-400 hover:text-blue-300 text-sm"
+                >
+                  📄 Foundation: Data Decay
                 </a>
               </div>
             </div>
@@ -218,7 +229,7 @@ export default function DragonDataPage() {
             <div className="bg-gray-800/50 rounded-xl p-6 border border-gray-700 hover:border-blue-500 transition-all">
               <h3 className="text-xl font-bold text-blue-300 mb-2">Character Stories</h3>
               <p className="text-gray-400 text-sm mb-4">Meet the protagonists</p>
-              <div className="space-y-2">
+              <div className="grid grid-cols-2 gap-2">
                 <a
                   href="/dragon-data/chimwemwe_Batch Compress.pdf"
                   target="_blank"
@@ -232,6 +243,41 @@ export default function DragonDataPage() {
                   className="block text-blue-400 hover:text-blue-300 text-sm"
                 >
                   📄 Noela
+                </a>
+                <a
+                  href="/dragon-data/2head_Batch Compress.pdf"
+                  target="_blank"
+                  className="block text-blue-400 hover:text-blue-300 text-sm"
+                >
+                  📄 Two-Head
+                </a>
+                <a
+                  href="/dragon-data/leo_Batch Compress.pdf"
+                  target="_blank"
+                  className="block text-blue-400 hover:text-blue-300 text-sm"
+                >
+                  📄 Leo
+                </a>
+                <a
+                  href="/dragon-data/pixel_Batch Compress.pdf"
+                  target="_blank"
+                  className="block text-blue-400 hover:text-blue-300 text-sm"
+                >
+                  📄 Pixel
+                </a>
+                <a
+                  href="/dragon-data/puzzle_Batch Compress.pdf"
+                  target="_blank"
+                  className="block text-blue-400 hover:text-blue-300 text-sm"
+                >
+                  📄 Puzzle
+                </a>
+                <a
+                  href="/dragon-data/scribbles_Batch Compress.pdf"
+                  target="_blank"
+                  className="block text-blue-400 hover:text-blue-300 text-sm"
+                >
+                  📄 Scribbles
                 </a>
               </div>
             </div>

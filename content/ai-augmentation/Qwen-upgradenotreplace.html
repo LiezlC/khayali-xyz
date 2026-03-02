@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Upgrade, Not Replace — AI as Your Co-Pilot to Greatness</title>
+  <style>
+    :root {
+      --primary: #6e44ff;
+      --secondary: #00c9a7;
+      --dark: #1a1a2e;
+      --light: #f8f9fa;
+      --gray: #adb5bd;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: var(--dark);
+      color: var(--light);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, var(--primary), #3a0ca3);
+      color: white;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .subtitle {
+      font-size: 1.4rem;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      opacity: 0.9;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+
+    section {
+      margin-bottom: 5rem;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: var(--secondary);
+      position: relative;
+    }
+
+    h2:after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: var(--secondary);
+      margin-top: 10px;
+    }
+
+    .split-panel {
+      display: flex;
+      gap: 2rem;
+      margin: 3rem 0;
+      flex-wrap: wrap;
+    }
+
+    .panel {
+      flex: 1;
+      min-width: 300px;
+      padding: 2rem;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .panel:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .panel.bad {
+      border-left: 5px solid #e63946;
+    }
+
+    .panel.good {
+      border-left: 5px solid var(--secondary);
+    }
+
+    .panel h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .panel p {
+      margin-bottom: 1.5rem;
+    }
+
+    .visual-placeholder {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(45deg, #ff9a9e, #fecfef);
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #333;
+      font-weight: bold;
+      font-size: 0.9rem;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    /* Generator Section */
+    #upgrade-generator {
+      background: rgba(110, 68, 255, 0.1);
+      padding: 3rem;
+      border-radius: 20px;
+      text-align: center;
+    }
+
+    input, button {
+      padding: 12px 20px;
+      font-size: 1rem;
+      border-radius: 50px;
+      border: none;
+      margin: 0.5rem;
+    }
+
+    input {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      width: 60%;
+      max-width: 400px;
+    }
+
+    button {
+      background: var(--secondary);
+      color: var(--dark);
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    button:hover {
+      background: #00b392;
+      transform: scale(1.05);
+    }
+
+    #result {
+      margin-top: 2rem;
+      font-size: 1.5rem;
+      min-height: 60px;
+      padding: 1.5rem;
+      background: rgba(0,201,167,0.15);
+      border-radius: 12px;
+      display: none;
+    }
+
+    .share-buttons {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .share-btn {
+      padding: 10px 20px;
+      border-radius: 50px;
+      background: var(--gray);
+      color: var(--dark);
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .share-btn:hover {
+      background: #fff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 3rem;
+      background: #0f0f1a;
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+
+    .tagline {
+      font-size: 1.8rem;
+      margin: 3rem 0;
+      text-align: center;
+      color: var(--secondary);
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 2.5rem; }
+      .split-panel { flex-direction: column; }
+    }
+
+    /* Animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Upgrade, Not Replace</h1>
+    <p class="subtitle">What if AI didn’t take your job… but upgraded your mission to something world-changing?</p>
+    <p>👇 Scroll to transform your future</p>
+  </header>
+
+  <div class="container">
+
+    <section>
+      <h2>The Headline Flip</h2>
+      <div class="split-panel">
+        <div class="panel bad animate" style="animation-delay: 0.2s">
+          <h3>❌ The Fear Headline</h3>
+          <div class="visual-placeholder">
+            [Image: Grim newspaper headline “AI REPLACES 500 DEVELOPERS” with dark, dystopian office]
+          </div>
+          <p>Focuses on loss. On cost-cutting. On humans as redundant cogs.</p>
+          <p>Leads to anxiety, stagnation, and missed potential.</p>
+        </div>
+        <div class="panel good animate" style="animation-delay: 0.4s">
+          <h3>✅ The Upgrade Headline</h3>
+          <div class="visual-placeholder">
+            [Image: Same team in futuristic gear launching satellites made from recycled plastic, headline: “TEAM UPGRADED TO EARTH REPAIR ENGINEERS”]
+          </div>
+          <p>Focuses on evolution. On purpose. On humans as mission commanders.</p>
+          <p>Leads to innovation, meaning, and planetary-scale impact.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="tagline animate" style="animation-delay: 0.6s">
+      “Your job title is not your destiny. Your mission is.”
+    </div>
+
+    <section>
+      <h2>Real Upgrade Pathways</h2>
+      <div class="split-panel">
+        <div class="panel animate" style="animation-delay: 0.8s">
+          <h3>🚚 Delivery Driver</h3>
+          <div class="visual-placeholder">
+            [Image: Driver in exosuit using AR + AI to optimize city-wide logistics + reduce emissions by 90%]
+          </div>
+          <p><strong>→ Upgraded to:</strong> Urban Flow Architect</p>
+          <p>Designing zero-emission transit ecosystems for megacities.</p>
+        </div>
+        <div class="panel animate" style="animation-delay: 1.0s">
+          <h3>📊 Data Entry Clerk</h3>
+          <div class="visual-placeholder">
+            [Image: Person surrounded by holograms, training AI to predict famine zones and redirect aid]
+          </div>
+          <p><strong>→ Upgraded to:</strong> Humanitarian AI Whisperer</p>
+          <p>Turning raw data into life-saving global interventions.</p>
+        </div>
+        <div class="panel animate" style="animation-delay: 1.2s">
+          <h3>📞 Call Center Agent</h3>
+          <div class="visual-placeholder">
+            [Image: Person wearing neural headset, calming distressed users across 12 languages via AI-empathy bridge]
+          </div>
+          <p><strong>→ Upgraded to:</strong> Cross-Species Emotional Liaison</p>
+          <p>(Yes, including dolphins, AIs, and your in-laws.)</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="upgrade-generator">
+      <h2>What’s Your Upgrade?</h2>
+      <p>Enter your current role. We’ll imagine your world-changing future title.</p>
+      <input type="text" id="currentJob" placeholder="e.g., Graphic Designer, Accountant, Teacher..." />
+      <button onclick="generateUpgrade()">✨ UPGRADE ME</button>
+      <div id="result"></div>
+      <div class="share-buttons" id="shareBtns" style="display:none">
+        <div class="share-btn" onclick="shareResult('twitter')">🐦 Tweet It</div>
+        <div class="share-btn" onclick="shareResult('linkedin')">💼 LinkedIn</div>
+        <div class="share-btn" onclick="shareResult('instagram')">📸 Instagram Story</div>
+      </div>
+    </section>
+
+    <div class="tagline animate" style="animation-delay: 1.4s">
+      “AI won’t replace you. But a person using AI might.<br>So don’t compete. Co-evolve.”
+    </div>
+
+  </div>
+
+  <footer>
+    <p>✨ Created to reframe the AI narrative — from fear to frontier.<br>
+    Share with #UpgradeNotReplace #AIMissionShift<br>
+    © 2025 — Let’s build the upgrade economy together.</p>
+  </footer>
+
+  <script>
+    const upgrades = [
+      "Quantum Experience Architect",
+      "Bio-Ethical AI Trainer",
+      "Memory Curator for Digital Immortality",
+      "Galactic Outreach Liaison",
+      "Neural Systems Visionary",
+      "Climate Simulation Strategist",
+      "Waste-to-Warpfuel Alchemist",
+      "Empathy Infrastructure Engineer",
+      "Dream Protocol Designer",
+      "Post-Scarcity Economist",
+      "AI-Human Symbiosis Coach",
+      "Sentient Systems Diplomat"
+    ];
+
+    const missions = [
+      "solved global water scarcity using atmospheric condensers",
+      "converted landfills into quantum computing farms",
+      "designed AI-tutors that eliminated illiteracy in 3 years",
+      "engineered coral reefs that grow 10x faster using sound frequencies",
+      "turned old smartphones into distributed earthquake early-warning systems",
+      "created emotion-regulating public spaces that reduced urban violence by 80%",
+      "built AI co-pilots that help artists create therapies for PTSD",
+      "developed food printers that end malnutrition using local biomass"
+    ];
+
+    function getRandom(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function generateUpgrade() {
+      const job = document.getElementById("currentJob").value.trim();
+      const resultDiv = document.getElementById("result");
+      const shareBtns = document.getElementById("shareBtns");
+
+      if (!job) {
+        alert("Please enter your current role!");
+        return;
+      }
+
+      const newTitle = getRandom(upgrades);
+      const mission = getRandom(missions);
+
+      resultDiv.innerHTML = `
+        <strong>🚀 ${job} → ${newTitle}</strong><br>
+        Then you ${mission}.<br>
+        <em>Your upgrade is complete. Mission loading…</em>
+      `;
+      resultDiv.style.display = "block";
+      shareBtns.style.display = "flex";
+
+      // Track for analytics or sharing
+      window.upgradeResult = {
+        from: job,
+        to: newTitle,
+        mission: mission
+      };
+    }
+
+    function shareResult(platform) {
+      const r = window.upgradeResult;
+      if (!r) return;
+
+      let text = `I was a ${r.from}. Now I’m a ${r.to} — and I ${r.mission}. #UpgradeNotReplace #AIMissionShift`;
+      let url = encodeURIComponent(window.location.href);
+      let shareUrl = "";
+
+      switch(platform) {
+        case 'twitter':
+          shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${url}`;
+          break;
+        case 'linkedin':
+          shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}&quote=${encodeURIComponent(text)}`;
+          break;
+        case 'instagram':
+          alert("📸 Take a screenshot and post it to your Story with #UpgradeNotReplace!");
+          return;
+      }
+
+      window.open(shareUrl, '_blank');
+    }
+
+    // Animate on scroll (simple version)
+    document.addEventListener("DOMContentLoaded", function() {
+      const animated = document.querySelectorAll(".animate");
+      setTimeout(() => {
+        animated.forEach(el => el.style.opacity = 1);
+      }, 300);
+    });
+  </script>
+
+</body>
+</html>

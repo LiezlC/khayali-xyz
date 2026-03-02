@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amplify Not Replace - The AI Transformation Movement</title>
+    <meta name="description" content="What if AI didn't replace humans but amplified them to solve humanity's greatest challenges? Join the movement.">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #10b981;
+            --danger: #ef4444;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gradient-hope: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
+            --gradient-fear: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Hero Section - Maximum Emotional Impact */
+        .hero {
+            min-height: 100vh;
+            background: var(--gradient-hope);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            color: white;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            margin-bottom: 3rem;
+            opacity: 0.95;
+        }
+
+        /* The Flip - Visual Narrative Toggle */
+        .narrative-flip {
+            background: white;
+            padding: 4rem 2rem;
+        }
+
+        .flip-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .flip-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .toggle-btn {
+            padding: 1rem 2rem;
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn:hover, .toggle-btn.active {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+        }
+
+        .narrative-display {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .narrative-card {
+            padding: 2rem;
+            border-radius: 20px;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .narrative-card.fear {
+            background: var(--gradient-fear);
+            color: white;
+        }
+
+        .narrative-card.hope {
+            background: var(--gradient-hope);
+            color: white;
+        }
+
+        .narrative-card.inactive {
+            opacity: 0.3;
+            transform: scale(0.95);
+        }
+
+        .narrative-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .narrative-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .narrative-card li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* Transformation Calculator */
+        .calculator {
+            background: var(--light);
+            padding: 4rem 2rem;
+        }
+
+        .calculator-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .calculator h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 2rem;
+        }
+
+        .slider-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .slider {
+            width: 100%;
+            margin: 2rem 0;
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .metric {
+            background: var(--gradient-hope);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .metric:hover {
+            transform: translateY(-5px);
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+
+        /* Real Cases Section */
+        .cases {
+            padding: 4rem 2rem;
+            background: white;
+        }
+
+        .cases-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .cases h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--dark);
+        }
+
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .case-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .case-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .case-header {
+            background: var(--gradient-hope);
+            color: white;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .case-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .case-body {
+            padding: 1.5rem;
+        }
+
+        .transformation {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: var(--light);
+            border-radius: 10px;
+        }
+
+        .arrow {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin: 0 1rem;
+        }
+
+        /* Role Transformer Interactive */
+        .transformer {
+            background: var(--gradient-hope);
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .transformer-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .transformer h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .transformer-input {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .transformer-button {
+            padding: 1rem 3rem;
+            background: white;
+            color: var(--primary);
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .transformer-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255,255,255,0.3);
+        }
+
+        .transformation-result {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            min-height: 100px;
+            display: none;
+        }
+
+        .transformation-result.show {
+            display: block;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        /* Viral Action Section */
+        .action {
+            background: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .action-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .action h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 2rem;
+        }
+
+        .share-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .share-button {
+            padding: 1rem;
+            background: var(--gradient-hope);
+            color: white;
+            text-decoration: none;
+            border-radius: 15px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .share-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        }
+
+        .hashtags {
+            margin-top: 2rem;
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .narrative-display {
+                grid-template-columns: 1fr;
+            }
+            
+            .case-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .metrics {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll animations trigger */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Don't Replace. Amplify.</h1>
+            <p class="subtitle">
+                What if every "AI replaces X workers" headline became<br>
+                "X workers amplified by AI to solve impossible problems"?
+            </p>
+            <button class="toggle-btn active" onclick="scrollToSection('flip')">See The Difference</button>
+        </div>
+    </section>
+
+    <!-- The Narrative Flip -->
+    <section id="flip" class="narrative-flip">
+        <div class="flip-container">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 2rem;">Choose Your Future</h2>
+            <div class="flip-toggle">
+                <button class="toggle-btn" onclick="showNarrative('fear')" id="fear-btn">The Fear Story</button>
+                <button class="toggle-btn active" onclick="showNarrative('hope')" id="hope-btn">The Hope Story</button>
+            </div>
+            
+            <div class="narrative-display">
+                <div class="narrative-card fear inactive" id="fear-card">
+                    <h3>❌ Replacement</h3>
+                    <ul>
+                        <li>"AI replaced 500 developers"</li>
+                        <li>"Cut costs by 60%"</li>
+                        <li>"Eliminated entire departments"</li>
+                        <li>"Same work, fewer humans"</li>
+                        <li>"Efficiency through elimination"</li>
+                    </ul>
+                </div>
+                <div class="narrative-card hope" id="hope-card">
+                    <h3>✅ Amplification</h3>
+                    <ul>
+                        <li>"500 developers → Climate Solution Architects"</li>
+                        <li>"Solved clean water for 2B people"</li>
+                        <li>"Teams evolved to tackle bigger challenges"</li>
+                        <li>"Impossible problems now solvable"</li>
+                        <li>"Human creativity unleashed"</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transformation Calculator -->
+    <section class="calculator">
+        <div class="calculator-container animate-on-scroll">
+            <h2>Calculate Your Impact</h2>
+            <div class="slider-container">
+                <label for="workers">Team Size Being Transformed:</label>
+                <input type="range" id="workers" class="slider" min="10" max="1000" value="100">
+                <p>Workers: <span id="worker-count">100</span></p>
+                
+                <div class="metrics">
+                    <div class="metric">
+                        <span class="metric-value" id="problems-solved">1,000</span>
+                        <span class="metric-label">New Problems Solvable</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-value" id="impact-multiplier">10x</span>
+                        <span class="metric-label">Impact Multiplier</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-value" id="lives-improved">1M+</span>
+                        <span class="metric-label">Lives Improved</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Real Cases -->
+    <section class="cases">
+        <div class="cases-container">
+            <h2>It's Already Happening</h2>
+            
+            <div class="case-grid animate-on-scroll">
+                <!-- Real Company Case 1 -->
+                <div class="case-card">
+                    <div class="case-header">
+                        <span class="case-badge">REAL</span>
+                        <h3>Amazon</h3>
+                    </div>
+                    <div class="case-body">
+                        <div class="transformation">
+                            <span>Warehouse Workers</span>
+                            <span class="arrow">→</span>
+                            <span>Robotics Coordinators</span>
+                        </div>
+                        <p><strong>Impact:</strong> 30% faster training, 25% higher satisfaction, zero layoffs</p>
+                        <p><strong>Training:</strong> 6-8 weeks AI collaboration program</p>
+                    </div>
+                </div>
+
+                <!-- Real Company Case 2 -->
+                <div class="case-card">
+                    <div class="case-header">
+                        <span class="case-badge">REAL</span>
+                        <h3>Mastercard</h3>
+                    </div>
+                    <div class="case-body">
+                        <div class="transformation">
+                            <span>Financial Analysts</span>
+                            <span class="arrow">→</span>
+                            <span>Crypto/NFT Innovators</span>
+                        </div>
+                        <p><strong>Impact:</strong> $21M value unlocked, 100K hours capacity gained</p>
+                        <p><strong>Training:</strong> Internal talent marketplace with AI tools</p>
+                    </div>
+                </div>
+
+                <!-- Hypothetical Case -->
+                <div class="case-card">
+                    <div class="case-header">
+                        <span class="case-badge">VISION</span>
+                        <h3>Your Company?</h3>
+                    </div>
+                    <div class="case-body">
+                        <div class="transformation">
+                            <span>Current Role</span>
+                            <span class="arrow">→</span>
+                            <span>World Changer</span>
+                        </div>
+                        <p><strong>Potential:</strong> Every role can evolve to solve bigger problems</p>
+                        <p><strong>Next Step:</strong> Start the conversation today</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Role Transformer -->
+    <section class="transformer">
+        <div class="transformer-container animate-on-scroll">
+            <h2>Transform Your Role</h2>
+            <p style="margin-bottom: 2rem;">What could you become with AI as your amplifier?</p>
+            <input type="text" class="transformer-input" id="role-input" placeholder="Enter your current job title...">
+            <button class="transformer-button" onclick="transformRole()">See My Potential</button>
+            <div class="transformation-result" id="result"></div>
+        </div>
+    </section>
+
+    <!-- Viral Action Section -->
+    <section class="action">
+        <div class="action-container animate-on-scroll">
+            <h2>Start the Movement</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">
+                Every share changes the conversation from fear to possibility
+            </p>
+            
+            <div class="share-grid">
+                <a href="#" class="share-button" onclick="shareTwitter()">
+                    <span>🐦</span> Share on X
+                </a>
+                <a href="#" class="share-button" onclick="shareLinkedIn()">
+                    <span>💼</span> Share on LinkedIn
+                </a>
+                <a href="#" class="share-button" onclick="shareCopy()">
+                    <span>📋</span> Copy Message
+                </a>
+            </div>
+            
+            <div class="hashtags">
+                #AmplifyNotReplace #AIAmplification #FutureOfWork
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Narrative Toggle
+        function showNarrative(type) {
+            const fearCard = document.getElementById('fear-card');
+            const hopeCard = document.getElementById('hope-card');
+            const fearBtn = document.getElementById('fear-btn');
+            const hopeBtn = document.getElementById('hope-btn');
+            
+            if (type === 'fear') {
+                fearCard.classList.remove('inactive');
+                hopeCard.classList.add('inactive');
+                fearBtn.classList.add('active');
+                hopeBtn.classList.remove('active');
+            } else {
+                hopeCard.classList.remove('inactive');
+                fearCard.classList.add('inactive');
+                hopeBtn.classList.add('active');
+                fearBtn.classList.remove('active');
+            }
+        }
+
+        // Impact Calculator
+        const slider = document.getElementById('workers');
+        const workerCount = document.getElementById('worker-count');
+        const problemsSolved = document.getElementById('problems-solved');
+        const impactMultiplier = document.getElementById('impact-multiplier');
+        const livesImproved = document.getElementById('lives-improved');
+
+        slider.addEventListener('input', function() {
+            const workers = parseInt(this.value);
+            workerCount.textContent = workers;
+            
+            // Calculate metrics
+            const problems = workers * 10;
+            const multiplier = Math.min(50, Math.floor(workers / 20));
+            const lives = workers * 10000;
+            
+            problemsSolved.textContent = problems.toLocaleString();
+            impactMultiplier.textContent = multiplier + 'x';
+            livesImproved.textContent = lives > 1000000 ? 
+                (lives / 1000000).toFixed(1) + 'M+' : 
+                lives.toLocaleString() + '+';
+        });
+
+        // Role Transformer
+        const transformations = {
+            'developer': 'Climate Solution Architect - Design carbon-negative systems',
+            'accountant': 'Resource Flow Optimizer - Eliminate waste in global supply chains',
+            'teacher': 'Learning Experience Designer - Personalize education for millions',
+            'nurse': 'Health Pattern Analyst - Predict and prevent disease outbreaks',
+            'driver': 'Mobility System Designer - Create zero-emission transport networks',
+            'sales': 'Trust Network Builder - Create ethical AI marketplaces',
+            'lawyer': 'Rights Evolution Specialist - Design legal frameworks for AI-human collaboration',
+            'chef': 'Food Security Designer - Optimize nutrition distribution globally',
+            'artist': 'Cultural Bridge Creator - Use AI to preserve endangered languages and traditions',
+            'janitor': 'Environment Health Strategist - Design self-maintaining healthy spaces',
+            'cashier': 'Community Resource Coordinator - Match local needs with available solutions',
+            'analyst': 'Pattern Discovery Expert - Find hidden connections in complex systems',
+            'manager': 'Human Potential Architect - Design teams where AI amplifies every member',
+            'default': 'Systems Innovator - Take your domain expertise and apply it to challenges 10x bigger'
+        };
+
+        function transformRole() {
+            const input = document.getElementById('role-input').value.toLowerCase();
+            const result = document.getElementById('result');
+            
+            let transformation = transformations.default;
+            for (const key in transformations) {
+                if (input.includes(key)) {
+                    transformation = transformations[key];
+                    break;
+                }
+            }
+            
+            result.innerHTML = `
+                <h3>Your AI-Amplified Future:</h3>
+                <p style="font-size: 1.3rem; margin-top: 1rem;">${transformation}</p>
+            `;
+            result.classList.add('show');
+        }
+
+        // Share Functions
+        function shareTwitter() {
+            const text = "What if AI didn't replace workers but amplified them to solve impossible problems? Join the movement: ";
+            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&hashtags=AmplifyNotReplace,AIAmplification`, '_blank');
+        }
+
+        function shareLinkedIn() {
+            const url = window.location.href;
+            const text = "It's time to change the narrative from AI replacing humans to AI amplifying human potential.";
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank');
+        }
+
+        function shareCopy() {
+            const text = "What if instead of 'AI replaced X workers' we saw 'X workers amplified by AI solved impossible problems'? #AmplifyNotReplace #AIAmplification #FutureOfWork";
+            navigator.clipboard.writeText(text);
+            alert('Message copied to clipboard!');
+        }
+
+        // Scroll animations
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Auto-toggle narrative for demonstration
+        let autoToggle = true;
+        setInterval(() => {
+            if (autoToggle) {
+                showNarrative(document.getElementById('fear-btn').classList.contains('active') ? 'hope' : 'fear');
+            }
+        }, 4000);
+
+        // Stop auto-toggle on user interaction
+        document.querySelectorAll('.toggle-btn').forEach(btn => {
+            btn.addEventListener('click', () => { autoToggle = false; });
+        });
+    </script>
+</body>
+</html>

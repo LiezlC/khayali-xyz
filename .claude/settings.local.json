@@ -24,7 +24,8 @@
       "Bash(timeout 10 npm run dev:*)",
       "Bash(ls:*)",
       "Bash(git checkout:*)",
-      "Bash(tree:*)"
+      "Bash(tree:*)",
+      "Bash(wc -l /c/Users/Liezl/Documents/Github/khayali-xyz/public/dragon-data/*.html)"
     ],
     "deny": [],
     "ask": []
