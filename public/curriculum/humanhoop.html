@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Humans in the H∞P | The New AI Labor Model</title>
+    
+    <!-- SEO & Metadata -->
+    <meta name="description" content="Humans in the H∞P: a post-deployment operating model for AI systems, built around flow stewardship, stop-work authority, and audit-grade traceability." />
+    <meta property="og:title" content="Humans in the H∞P | The New AI Labor Model" />
+    <meta property="og:description" content="A two-lane model for AI labor: training-loop humans vs execution-h∞p operators. Continuous governance at scale." />
+    <meta property="og:type" content="website" />
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap');
+        
+        :root {
+            --accent: #3b82f6;
+            --h00p-glow: rgba(59, 130, 246, 0.3);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #f1f5f9;
+            line-height: 1.6;
+        }
+
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sidebar-item:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid var(--accent);
+        }
+
+        .org-node {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .org-node:hover {
+            transform: translateY(-4px);
+            background: rgba(51, 65, 85, 0.8);
+            border-color: rgba(59, 130, 246, 0.5) !important;
+        }
+
+        .scrolled-header {
+            background: rgba(15, 23, 42, 0.95);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        /* Custom Scrollbar */
+        .scroll-hide::-webkit-scrollbar {
+            width: 4px;
+        }
+        .scroll-hide::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .scroll-hide::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            padding: 1.5rem;
+            font-style: italic;
+            margin: 2.5rem 0;
+            background: rgba(59, 130, 246, 0.05);
+            border-radius: 0 1rem 1rem 0;
+        }
+
+        /* Typography */
+        .article-content h2 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: white;
+            margin-top: 3.5rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.025em;
+        }
+        .article-content p {
+            margin-bottom: 1.5rem;
+            color: #cbd5e1;
+        }
+
+        .drawer-list li {
+            margin-bottom: 0.35rem;
+            color: #cbd5e1;
+        }
+        .drawer-label {
+            letter-spacing: 0.12em;
+        }
+
+        .infinity-symbol {
+            font-size: 1.2em;
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 -0.1em;
+        }
+
+        @media print {
+            .glass { background: white !important; color: black !important; border: 1px solid #ccc !important; }
+            body { background: white !important; color: black !important; }
+            header, aside, .cta-area { display: none !important; }
+            .lg\:col-span-9 { width: 100% !important; grid-column: span 12 / span 12 !important; }
+            .gradient-text { -webkit-text-fill-color: black !important; color: black !important; font-weight: bold; }
+            #detail-drawer { display: none !important; }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="fixed top-0 w-full z-50 glass border-b border-slate-700 px-6 py-4 flex justify-between items-center transition-all duration-300" id="main-header">
+        <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full border-2 border-blue-500 flex items-center justify-center">
+                <div class="w-4 h-4 bg-blue-500 rounded-full animate-pulse"></div>
+            </div>
+            <span class="font-extrabold text-xl tracking-tighter uppercase italic">Humans in the <span class="text-blue-500 underline underline-offset-4 decoration-1">H<span class="infinity-symbol">∞</span>P</span></span>
+        </div>
+        <nav class="hidden md:flex gap-8 text-sm font-medium text-slate-400">
+            <a href="#manifesto" class="hover:text-white transition">The Model</a>
+            <a href="#org-chart" class="hover:text-white transition">Architecture</a>
+            <a href="#roles" class="hover:text-white transition">Role Definitions</a>
+        </nav>
+        <div class="hidden sm:block text-[10px] mono text-slate-500 uppercase tracking-widest">Manual v1.6.0</div>
+    </header>
+
+    <main class="pt-24 pb-20">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12">
+            
+            <!-- Sidebar -->
+            <aside class="lg:col-span-3 space-y-8 sticky top-32 max-h-[calc(100vh-8rem)] overflow-y-auto scroll-hide pr-2">
+                <div class="glass rounded-2xl p-6 space-y-6">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-blue-400">Framework Overview</h3>
+                    <div class="space-y-4">
+                        <div class="p-3 sidebar-item rounded-lg transition border-l-4 border-transparent">
+                            <p class="text-xs text-slate-500 mb-1">Lane 1</p>
+                            <p class="font-bold">The Training-Loop</p>
+                            <p class="text-sm text-slate-400">Focus: Model improvement.</p>
+                        </div>
+                        <div class="p-3 sidebar-item rounded-lg transition border-l-4 border-blue-500 bg-blue-500/10">
+                            <p class="text-xs text-blue-400 mb-1">Lane 2</p>
+                            <p class="font-bold">The Execution-h<span class="infinity-symbol">∞</span>p</p>
+                            <p class="text-sm text-slate-400">Focus: Continuous governance.</p>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-slate-700">
+                        <h3 class="text-xs font-bold uppercase tracking-widest text-blue-400 mb-4">Core Principles</h3>
+                        <p class="text-sm text-slate-400 italic leading-relaxed">"Governance is not a training phase; it is a permanent operating state."</p>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl p-6 shadow-xl">
+                    <h4 class="font-bold mb-2 italic">Infinity Logic</h4>
+                    <p class="text-sm text-blue-100 italic">Loops imply closure. The h<span class="infinity-symbol">∞</span>p represents the continuous flow of stewardship that persists as long as the system lives.</p>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <div class="lg:col-span-9 space-y-16">
+                
+                <!-- Hero Section -->
+                <section class="space-y-6 relative">
+                    <div class="absolute -top-10 -left-10 w-72 h-72 rounded-full border border-blue-500/20 blur-[0.5px]"></div>
+                    <div class="absolute top-6 left-8 w-56 h-56 rounded-full border border-purple-500/10"></div>
+
+                    <h1 class="text-5xl md:text-7xl font-black tracking-tight leading-tight relative">
+                        AI’s Real Scaling Problem Is <span class="gradient-text">Human, Not Technical</span>
+                    </h1>
+                    <p class="text-xl text-slate-400 max-w-2xl relative">
+                        From finite loops to continuous governance. Introducing Humans in the H<span class="infinity-symbol">∞</span>P.
+                    </p>
+                </section>
+
+                <!-- Manifesto Section -->
+                <section id="manifesto" class="article-content">
+                    <div class="space-y-8 text-lg text-slate-300">
+                        <p class="text-2xl text-white font-light border-l-2 border-blue-500 pl-6 italic mb-10">
+                            “Human in the loop” is one of those phrases that sounds reassuring precisely because it’s vague. Say it often enough and AI systems feel safer.
+                        </p>
+
+                        <h2>The Two-Lane Model</h2>
+                        <p>Most organizations fund Lane 1 heavily and assume it covers Lane 2. They are distinct economies of human labor.</p>
+
+                        <div class="grid md:grid-cols-2 gap-8 my-12">
+                            <div class="glass p-6 rounded-xl border-t-4 border-slate-500">
+                                <h4 class="text-white font-bold mb-2 uppercase text-xs tracking-widest">Lane 1: Training-loop</h4>
+                                <p class="text-sm text-slate-400">
+                                    Humans shape the model <strong>before</strong> it matters. Labeling, annotation, and validation to ensure the model is ready for launch.
+                                </p>
+                            </div>
+
+                            <div class="glass p-6 rounded-xl border-t-4 border-blue-500">
+                                <h4 class="text-blue-400 font-bold mb-2 uppercase text-xs tracking-widest">Lane 2: Execution-h<span class="infinity-symbol">∞</span>p</h4>
+                                <p class="text-sm text-slate-400">
+                                    Humans govern the system <strong>while</strong> it matters. Intercepting edge cases, enforcing stop-work authority, and ensuring audit-grade traceability.
+                                </p>
+                            </div>
+                        </div>
+
+                        <p class="text-sm text-slate-400 leading-relaxed italic">
+                            A concrete example of training-loop economy is
+                            <a href="https://humansintheloop.org/" target="_blank" rel="noopener noreferrer"
+                               class="text-blue-400 hover:text-blue-300 underline underline-offset-4">
+                                humansintheloop.org
+                            </a>.
+                            <strong>Humans in the H<span class="infinity-symbol">∞</span>P</strong> describes the missing downstream lane: governance while the system is live.
+                        </p>
+
+                        <h2>Why “h<span class="infinity-symbol">∞</span>p”?</h2>
+                        <p>
+                            A “loop” implies a cycle that eventually closes or repeats. Governance cannot be a cycle; it must be a continuous aperture. 
+                            Humans in the h<span class="infinity-symbol">∞</span>p are embedded in the motion of the system—oiling the gears of high-speed execution through active judgment and authority.
+                        </p>
+
+                        <blockquote>
+                            If you cannot stop it, you do not govern it. If you cannot reproduce it, you cannot defend it.
+                        </blockquote>
+                    </div>
+                </section>
+
+                <!-- Org Chart -->
+                <section id="org-chart" class="space-y-12 py-12 border-y border-slate-800">
+                    <div class="text-center">
+                        <h2 class="text-4xl font-black mb-4 uppercase italic">The H<span class="infinity-symbol">∞</span>P Labor Stack</h2>
+                        <p class="text-slate-400">Designing for Flow Stewardship. Click a role to view the operational manual.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="space-y-4">
+                            <h4 class="text-xs font-bold text-slate-500 uppercase tracking-widest ml-2">Flow Control</h4>
+                            <button type="button" class="w-full text-left glass p-5 rounded-xl border border-slate-700/60 border-l-4 border-green-500 org-node" onclick="showDetail('Operators')">
+                                <div class="flex items-center gap-3 mb-2 text-green-500"><i class="fas fa-microchip"></i><h5 class="font-bold text-white">Operators</h5></div>
+                                <p class="text-xs text-slate-400 italic">Interception and routing.</p>
+                            </button>
+                            <button type="button" class="w-full text-left glass p-5 rounded-xl border border-slate-700/60 border-l-4 border-green-400 org-node" onclick="showDetail('Leads')">
+                                <div class="flex items-center gap-3 mb-2 text-green-400"><i class="fas fa-users-gear"></i><h5 class="font-bold text-white">Ops Leads</h5></div>
+                                <p class="text-xs text-slate-400 italic">Cognition protection.</p>
+                            </button>
+                        </div>
+
+                        <div class="space-y-4">
+                            <h4 class="text-xs font-bold text-slate-500 uppercase tracking-widest ml-2">Guardrails</h4>
+                            <button type="button" class="w-full text-left glass p-5 rounded-xl border border-slate-700/60 border-l-4 border-blue-500 org-node" onclick="showDetail('Governors')">
+                                <div class="flex items-center gap-3 mb-2 text-blue-500"><i class="fas fa-shield-halved"></i><h5 class="font-bold text-white">Governors</h5></div>
+                                <p class="text-xs text-slate-400 italic">Threshold ownership.</p>
+                            </button>
+                            <button type="button" class="w-full text-left glass p-5 rounded-xl border border-slate-700/60 border-l-4 border-blue-400 org-node" onclick="showDetail('Assurance')">
+                                <div class="flex items-center gap-3 mb-2 text-blue-400"><i class="fas fa-scale-balanced"></i><h5 class="font-bold text-white">Assurance</h5></div>
+                                <p class="text-xs text-slate-400 italic">Audit verifiability.</p>
+                            </button>
+                        </div>
+
+                        <div class="space-y-4">
+                            <h4 class="text-xs font-bold text-slate-500 uppercase tracking-widest ml-2">Behavioral</h4>
+                            <button type="button" class="w-full text-left glass p-5 rounded-xl border border-slate-700/60 border-l-4 border-purple-500 org-node" onclick="showDetail('Psychologists')">
+                                <div class="flex items-center gap-3 mb-2 text-purple-500"><i class="fas fa-brain"></i><h5 class="font-bold text-white">Robopsychologists</h5></div>
+                                <p class="text-xs text-slate-400 italic">Trust calibration.</p>
+                            </button>
+                            <button type="button" class="w-full text-left glass p-5 rounded-xl border border-slate-700/60 border-l-4 border-purple-400 org-node" onclick="showDetail('Anthropologists')">
+                                <div class="flex items-center gap-3 mb-2 text-purple-400"><i class="fas fa-vial"></i><h5 class="font-bold text-white">AINthropologists</h5></div>
+                                <p class="text-xs text-slate-400 italic">Cultural mapping.</p>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="detail-drawer" class="glass p-6 rounded-2xl border border-blue-500/30 mono text-sm text-blue-300">
+                        <div class="text-center italic opacity-60 uppercase tracking-widest text-xs">Click a role to expand H<span class="infinity-symbol">∞</span>P operational parameters</div>
+                    </div>
+                </section>
+
+                <!-- Final CTA -->
+                <section class="bg-slate-800/50 p-12 rounded-3xl border border-slate-700 text-center space-y-6 cta-area">
+                    <h2 class="text-4xl font-black italic">Adopt the Infinity Stewardship Model</h2>
+                    <p class="text-slate-400 max-w-xl mx-auto">Scaling AI is a labor design challenge. Build your h<span class="infinity-symbol">∞</span>p today.</p>
+                    <div class="flex flex-wrap justify-center gap-4 pt-4">
+                        <button type="button" class="px-8 py-3 bg-blue-600 rounded-xl font-bold hover:bg-blue-500 transition shadow-lg" onclick="document.getElementById('org-chart').scrollIntoView({behavior:'smooth'})">
+                            View Manual (v1.6)
+                        </button>
+                        <button type="button" class="px-8 py-3 border border-slate-600 rounded-xl font-bold hover:bg-slate-700 transition" onclick="window.print()">
+                            Print / Save as PDF
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Footer -->
+                <footer class="text-center text-slate-500 text-xs border-t border-slate-800 pt-12 pb-8">
+                    <p class="max-w-2xl mx-auto uppercase tracking-tighter">
+                        <span class="font-bold text-slate-300">Humans in the H<span class="infinity-symbol">∞</span>P</span> is a framework for post-deployment AI operations.
+                    </p>
+                    <p class="mt-4 mono opacity-50 uppercase tracking-widest">© 2026 Sociable Systems Engineering | Manual v1.6.0</p>
+                </footer>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Data unchanged, only branding updated in logic
+        const roles = {
+            Operators: { title: "Control Room Operators", mandate: "Intercept ambiguity and route at machine speed.", stopConditions: ["Provenance break", "Policy mismatch", "Anomaly spike"], logFields: ["Case ID", "Trigger", "Evidence checked"] },
+            Leads: { title: "Ops Leads", mandate: "Protect operator cognition and shift discipline.", stopConditions: ["Panic threshold", "Quality collapse", "Shift risk"], logFields: ["Queue metrics", "Restart warrants"] },
+            Governors: { title: "Workflow Governors", mandate: "Define risk tiers and threshold ownership.", stopConditions: ["Scope breach", "Override abuse", "Threshold drift"], logFields: ["Residual risk statement", "Control ID"] },
+            Assurance: { title: "Independent Assurance", mandate: "Prove reproducibility for audit-grade defense.", stopConditions: ["Non-reproducibility", "Missing evidence", "Control bypass"], logFields: ["Audit sample set", "Repro test results"] },
+            Psychologists: { title: "Robopsychologists", mandate: "Detect automation bias and UI-induced errors.", stopConditions: ["Attention collapse", "Automation bias spike"], logFields: ["Behavioral signals", "Mitigation plan"] },
+            Anthropologists: { title: "AINthropologists", mandate: "Map the workaround culture and incentive distortions.", stopConditions: ["Workaround cluster", "Incentive inversion"], logFields: ["Practice vs Procedure", "Redesign tasks"] }
+        };
+
+        function showDetail(roleKey) {
+            const drawer = document.getElementById('detail-drawer');
+            const role = roles[roleKey];
+            if (!role) return;
+
+            drawer.innerHTML = `
+                <div class="text-left">
+                    <div class="mono text-xs drawer-label text-blue-400 uppercase mb-2">${role.title}</div>
+                    <div class="text-white font-bold mb-2">Mandate</div>
+                    <div class="text-slate-300 mb-5 text-sm">${role.mandate}</div>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <div class="text-white font-bold mb-2 text-[10px] uppercase tracking-widest">Stop Conditions</div>
+                            <ul class="drawer-list list-disc pl-5 text-[11px]">${role.stopConditions.map(i => `<li>${i}</li>`).join("")}</ul>
+                        </div>
+                        <div>
+                            <div class="text-white font-bold mb-2 text-[10px] uppercase tracking-widest">Logs</div>
+                            <ul class="drawer-list list-disc pl-5 text-[11px]">${role.logFields.map(i => `<li>${i}</li>`).join("")}</ul>
+                        </div>
+                    </div>
+                </div>`;
+            const rect = drawer.getBoundingClientRect();
+            if (rect.bottom > window.innerHeight || rect.top < 0) drawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 30) header.classList.add('scrolled-header');
+            else header.classList.remove('scrolled-header');
+        });
+    </script>
+</body>
+</html>

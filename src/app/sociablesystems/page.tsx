@@ -398,7 +398,12 @@ export default function SociableSystemsPage() {
       <section className="py-20">
         <div className="container mx-auto px-4 max-w-5xl">
           <h2 className="text-3xl font-bold text-center mb-12 text-gray-200">Related Research</h2>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <a href="/curriculum/index.html" className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-emerald-500 transition-all p-6 block">
+              <div className="text-3xl mb-3">🛡️</div>
+              <h3 className="text-lg font-bold mb-2 text-emerald-400">AI-ESG Curriculum</h3>
+              <p className="text-gray-400 text-sm">The full training program: modules, interactive tools, governance templates, and briefings</p>
+            </a>
             <a href="/research/esg" className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-teal-500 transition-all p-6 block">
               <div className="text-3xl mb-3">⚖️</div>
               <h3 className="text-lg font-bold mb-2 text-teal-400">ESG & AI Governance</h3>

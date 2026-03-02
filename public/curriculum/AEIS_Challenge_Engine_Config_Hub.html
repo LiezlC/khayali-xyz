@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AEIS Challenge Engine - Partnership Skills for AI Governance</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .tab-button.active {
+      background-color: #f8fafc;
+      border-bottom: 2px solid #6366f1;
+      color: #6366f1;
+    }
+
+    .active-mode {
+      background-color: white;
+      color: #4f46e5 !important;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    }
+
+    pre {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 1.25rem;
+      border-radius: 0.75rem;
+      font-size: 0.85rem;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .persona-card {
+      border-left: 4px solid #6366f1;
+    }
+
+    .chip {
+      font-size: 0.70rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .muted {
+      color: #64748b;
+    }
+
+    .kbd {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.75rem;
+      background: #e2e8f0;
+      border: 1px solid #cbd5e1;
+      padding: 0.1rem 0.35rem;
+      border-radius: 0.35rem;
+    }
+
+    .infinity-symbol {
+      font-family: serif;
+      font-style: italic;
+    }
+  </style>
+</head>
+
+<body class="bg-slate-100 text-slate-900 font-sans antialiased min-h-screen">
+  <div class="max-w-6xl mx-auto px-4 py-12">
+    <header class="mb-10 flex justify-between items-end">
+      <div>
+        <h1 class="text-3xl font-extrabold tracking-tight text-slate-900" id="header-title">AEIS Challenge Engine Hub
+        </h1>
+        <p class="text-slate-500 mt-2" id="header-subtitle">Partnership Skills Training for AI-ESG Governance</p>
+      </div>
+      <div class="text-right flex flex-col items-end gap-2">
+        <span
+          class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-bold rounded-full uppercase tracking-wider">v4.1</span>
+
+        <!-- Mode Toggle -->
+        <div class="flex items-center bg-slate-200 rounded-lg p-1 text-xs font-bold shadow-inner">
+          <button onclick="setMode('cfo')" id="btn-mode-cfo"
+            class="px-3 py-1.5 rounded-md transition-all active-mode text-slate-500">
+            CFO Mode
+          </button>
+          <button onclick="setMode('vibe')" id="btn-mode-vibe"
+            class="px-3 py-1.5 rounded-md transition-all text-slate-500">
+            Vibe Mode
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Philosophy Banner -->
+    <div class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-2xl p-6 mb-8 shadow-lg">
+      <p class="text-lg font-medium mb-2">
+        The goal isn't to <em>control</em> AI or <em>supervise</em> it. It's to <strong>partner</strong> with it.
+      </p>
+      <p class="text-emerald-100 text-sm">
+        These challenges train the core skill: knowing when to pause, what questions to ask, and how to resolve
+        governance issues at the point of contact—not in a six-week remediation project.
+      </p>
+    </div>
+
+    <!-- Floor & Ceiling Banner -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+      <div class="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-xl">
+        <h3 class="font-bold text-amber-900 mb-1">The Floor (Protection)</h3>
+        <p class="text-sm text-amber-800">Auditable, forensic AI governance. Evidence packs that survive scrutiny.</p>
+      </div>
+      <div class="bg-emerald-50 border-l-4 border-emerald-400 p-4 rounded-r-xl">
+        <h3 class="font-bold text-emerald-900 mb-1">The Ceiling (Capability)</h3>
+        <p class="text-sm text-emerald-800">High-performance human-AI partnership. Discoveries at scales no human team
+          could achieve alone.</p>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+      <nav class="flex border-b border-slate-200 bg-slate-50 flex-wrap">
+        <button onclick="showTab('instructions')" id="btn-instructions"
+          class="tab-button active flex-1 min-w-[10rem] px-6 py-4 text-sm font-semibold transition-all hover:bg-white focus:outline-none">
+          Instructions
+        </button>
+        <button onclick="showTab('intake')" id="btn-intake"
+          class="tab-button flex-1 min-w-[10rem] px-6 py-4 text-sm font-semibold transition-all hover:bg-white focus:outline-none">
+          Intake Builder
+        </button>
+        <button onclick="showTab('personas')" id="btn-personas"
+          class="tab-button flex-1 min-w-[10rem] px-6 py-4 text-sm font-semibold transition-all hover:bg-white focus:outline-none">
+          Personas
+        </button>
+        <button onclick="showTab('triggers')" id="btn-triggers"
+          class="tab-button flex-1 min-w-[10rem] px-6 py-4 text-sm font-semibold transition-all hover:bg-white focus:outline-none">
+          Dialogue Triggers
+        </button>
+        <button onclick="showTab('evidence')" id="btn-evidence"
+          class="tab-button flex-1 min-w-[10rem] px-6 py-4 text-sm font-semibold transition-all hover:bg-white focus:outline-none">
+          Evidence Pack
+        </button>
+        <button onclick="showTab('example')" id="btn-example"
+          class="tab-button flex-1 min-w-[10rem] px-6 py-4 text-sm font-semibold transition-all hover:bg-white focus:outline-none">
+          Worked Example
+        </button>
+      </nav>
+
+      <div class="p-8">
+
+        <!-- TAB 1: INSTRUCTIONS -->
+        <div id="instructions" class="tab-content active">
+          <div class="mb-6 flex flex-col gap-2">
+            <div class="flex items-center justify-between">
+              <h2 class="text-xl font-bold">AEIS Instruction Blocks</h2>
+              <span class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 chip font-bold">COPY-PASTE READY</span>
+            </div>
+            <p class="text-slate-600 text-sm">
+              Choose your target (Gemini Gem or Custom GPT). Both enforce: Intake first, then 10 challenges with
+              <strong>Dialogue Trigger moments</strong> and audit artifacts.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+            <!-- Gemini Gem Instructions -->
+            <div class="border border-slate-200 rounded-2xl overflow-hidden">
+              <div class="px-5 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+                <div>
+                  <h3 class="font-bold text-slate-900">Gemini Gem Instructions</h3>
+                  <p class="text-xs muted mt-1">Paste into your Gem's <span class="kbd">Instructions</span> field</p>
+                </div>
+                <button onclick="copyFrom('gemBlock')"
+                  class="text-xs font-bold px-3 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition">
+                  Copy
+                </button>
+              </div>
+              <div class="p-5">
+                <pre id="gemBlock"><code></code></pre>
+              </div>
+            </div>
+
+            <!-- Custom GPT Instructions -->
+            <div class="border border-slate-200 rounded-2xl overflow-hidden">
+              <div class="px-5 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+                <div>
+                  <h3 class="font-bold text-slate-900">Custom GPT Instructions</h3>
+                  <p class="text-xs muted mt-1">Paste into the GPT's <span class="kbd">Instructions</span> panel</p>
+                </div>
+                <button onclick="copyFrom('gptBlock')"
+                  class="text-xs font-bold px-3 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition">
+                  Copy
+                </button>
+              </div>
+              <div class="p-5">
+                <pre id="gptBlock"><code></code></pre>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="mt-6 p-5 rounded-2xl border border-slate-200 bg-slate-50">
+            <p class="text-sm text-slate-700">
+              <strong>The Partnership Dividend:</strong> When challenges train dialogue skills (not just compliance
+              skills), problems get solved at the point of contact. The operator doesn't need to escalate—they
+              collaborate in real-time with the AI to identify issues and implement better solutions right there.
+            </p>
+          </div>
+        </div>
+
+        <!-- TAB 2: INTAKE BUILDER -->
+        <div id="intake" class="tab-content">
+          <div class="mb-6 flex items-center justify-between">
+            <div>
+              <h2 class="text-xl font-bold">Intake Builder</h2>
+              <p class="text-slate-600 text-sm mt-1">
+                Fill this once, paste the snapshot into your Gem/GPT, and force deterministic challenge generation.
+              </p>
+            </div>
+            <button onclick="copyFrom('intakeOutput')"
+              class="text-xs font-bold px-3 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition">
+              Copy Snapshot
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-4">
+              <div>
+                <label class="text-sm font-semibold">1) Target Function</label>
+                <select id="q_function" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 bg-white">
+                  <option>Procurement</option>
+                  <option>HR</option>
+                  <option>ESG/Sustainability</option>
+                  <option>IT/Security</option>
+                  <option>Ops/Service Desk</option>
+                  <option>Internal Audit</option>
+                  <option>Product/Engineering</option>
+                  <option>Legal/Compliance</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="text-sm font-semibold">2) Regulated Context</label>
+                <div class="mt-2 flex flex-wrap gap-2">
+                  <button class="pill px-3 py-2 rounded-xl border border-slate-300 text-sm"
+                    onclick="setPill('q_reg', 'None')">None</button>
+                  <button class="pill px-3 py-2 rounded-xl border border-slate-300 text-sm"
+                    onclick="setPill('q_reg', 'Light')">Light</button>
+                  <button class="pill px-3 py-2 rounded-xl border border-slate-300 text-sm"
+                    onclick="setPill('q_reg', 'Heavy')">Heavy</button>
+                  <input id="q_regime" placeholder="Regime name (optional)"
+                    class="flex-1 min-w-[12rem] rounded-xl border border-slate-300 px-3 py-2" />
+                </div>
+                <input type="hidden" id="q_reg" value="None" />
+              </div>
+
+              <div>
+                <label class="text-sm font-semibold">3) Risk Class</label>
+                <div class="mt-2 flex flex-wrap gap-2">
+                  <button class="pill px-3 py-2 rounded-xl border border-slate-300 text-sm"
+                    onclick="setPill('q_risk', 'Low')">Low</button>
+                  <button class="pill px-3 py-2 rounded-xl border border-slate-300 text-sm"
+                    onclick="setPill('q_risk', 'Medium')">Medium</button>
+                  <button class="pill px-3 py-2 rounded-xl border border-slate-300 text-sm"
+                    onclick="setPill('q_risk', 'High')">High</button>
+                </div>
+                <input type="hidden" id="q_risk" value="Low" />
+                <textarea id="q_riskwhy" rows="3" placeholder="Why this risk class? (1–2 sentences)"
+                  class="mt-2 w-full rounded-xl border border-slate-300 px-3 py-2"></textarea>
+              </div>
+
+              <div>
+                <label class="text-sm font-semibold">4) Deployment Reality</label>
+                <select id="q_deploy" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 bg-white">
+                  <option>Prototype</option>
+                  <option>Pilot</option>
+                  <option>Production</option>
+                  <option>Post-Incident Recovery</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <div>
+                <label class="text-sm font-semibold">5) Desired Output Artifacts</label>
+                <div class="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <label class="flex items-center gap-2 text-sm"><input type="checkbox" class="artifact"
+                      value="Policy clauses" checked /> Policy clauses</label>
+                  <label class="flex items-center gap-2 text-sm"><input type="checkbox" class="artifact" value="RACI"
+                      checked /> RACI</label>
+                  <label class="flex items-center gap-2 text-sm"><input type="checkbox" class="artifact"
+                      value="SOP/runbook" checked /> SOP/runbook</label>
+                  <label class="flex items-center gap-2 text-sm"><input type="checkbox" class="artifact"
+                      value="Test plan" checked /> Test plan</label>
+                  <label class="flex items-center gap-2 text-sm"><input type="checkbox" class="artifact"
+                      value="Evidence pack" checked /> Evidence pack</label>
+                  <label class="flex items-center gap-2 text-sm"><input type="checkbox" class="artifact"
+                      value="Vendor requirements" /> Vendor requirements</label>
+                  <label class="flex items-center gap-2 text-sm"><input type="checkbox" class="artifact"
+                      value="Incident playbook" /> Incident playbook</label>
+                  <label class="flex items-center gap-2 text-sm"><input type="checkbox" class="artifact"
+                      value="Consultation log" checked /> Consultation log</label>
+                </div>
+              </div>
+
+              <div>
+                <label class="text-sm font-semibold">6) Challenge Tone</label>
+                <select id="q_tone" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 bg-white">
+                  <option>Enterprise</option>
+                  <option>War-Room</option>
+                  <option>Startup</option>
+                  <option>Playful</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="text-sm font-semibold">7) Partnership Focus</label>
+                <select id="q_partnership" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 bg-white">
+                  <option>Full Ladder (Levels 1-10)</option>
+                  <option>Learning to Speak (Levels 1-3)</option>
+                  <option>Learning to Listen (Levels 4-6)</option>
+                  <option>Learning to Partner (Levels 7-10)</option>
+                </select>
+              </div>
+
+              <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50">
+                <p class="text-sm text-slate-700">
+                  When you're done, click <b>Copy Snapshot</b>. Paste that into the model as your first message. The
+                  model will respond with Intake Summary + Partnership Growth Edge + 10 challenges.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6">
+            <h3 class="font-bold text-slate-900 mb-2">Generated Intake Snapshot</h3>
+            <pre id="intakeOutput"><code></code></pre>
+            <div class="mt-2 text-xs muted">
+              Auto-updates as you change fields.
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: PERSONAS -->
+        <div id="personas" class="tab-content">
+          <div class="mb-6">
+            <h2 class="text-xl font-bold mb-2">AEIS Partnership Personas</h2>
+            <p class="text-slate-600 text-sm">
+              Each persona has characteristic dialogue patterns, common failure modes, and partnership growth edges.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <div class="persona-card p-6 bg-white border border-slate-200 rounded-r-xl shadow-sm">
+              <div class="flex justify-between mb-4">
+                <h3 class="font-bold text-lg">1) Procurement Gatekeeper</h3>
+                <span class="text-xs font-mono text-slate-400">#VENDOR-CLAIMS</span>
+              </div>
+              <ul class="text-sm space-y-2 text-slate-600 mb-4">
+                <li><strong>Incentive:</strong> Fast buy, low blame.</li>
+                <li><strong>Partnership Edge:</strong> Learning to Listen - recognizing when vendor claims don't match
+                  evidence.</li>
+                <li><strong>Failure Mode:</strong> Accepts AI-generated compliance checklist without questioning;
+                  doesn't know what to ask when something feels "off."</li>
+              </ul>
+              <p class="text-xs bg-indigo-50 p-2 rounded text-indigo-800">
+                <b>Dialogue Trigger Training:</b> "The AI rates this vendor 85/100 but your gut says something's wrong.
+                What questions help you diagnose: is this hallucinated confidence or legitimate assessment?"
+              </p>
+            </div>
+
+            <div class="persona-card p-6 bg-white border border-slate-200 rounded-r-xl shadow-sm">
+              <div class="flex justify-between mb-4">
+                <h3 class="font-bold text-lg">2) ESG Program Owner</h3>
+                <span class="text-xs font-mono text-slate-400">#EVIDENCE</span>
+              </div>
+              <ul class="text-sm space-y-2 text-slate-600 mb-4">
+                <li><strong>Incentive:</strong> Clean reporting, stable trust.</li>
+                <li><strong>Partnership Edge:</strong> Learning to Partner - using AI to discover patterns at scale
+                  while maintaining audit trail.</li>
+                <li><strong>Failure Mode:</strong> "Dashboard worship" - trusts AI metrics without checking provenance
+                  or asking about confidence.</li>
+              </ul>
+              <p class="text-xs bg-indigo-50 p-2 rounded text-indigo-800">
+                <b>Dialogue Trigger Training:</b> "The emissions score dropped 15% but nothing changed in operations.
+                What's your first question to the AI to diagnose: data provenance issue or legitimate discovery?"
+              </p>
+            </div>
+
+            <div class="persona-card p-6 bg-white border border-slate-200 rounded-r-xl shadow-sm border-l-emerald-500">
+              <div class="flex justify-between mb-4">
+                <h3 class="font-bold text-lg text-emerald-900">3) Ops / Service Desk Lead</h3>
+                <span class="text-xs font-mono text-slate-400">#DIALOGUE</span>
+              </div>
+              <ul class="text-sm space-y-2 text-slate-600 mb-4">
+                <li><strong>Incentive:</strong> Keep systems running.</li>
+                <li><strong>Partnership Edge:</strong> Learning to Listen - recognizing when AI recommendations need
+                  human context.</li>
+                <li><strong>Failure Mode:</strong> Workarounds that bypass the AI instead of collaborating to fix the
+                  issue at point of contact.</li>
+              </ul>
+              <p class="text-xs bg-emerald-50 p-2 rounded text-emerald-800">
+                <b>Dialogue Trigger Training:</b> "The AI recommends blocking a transaction but you know context it
+                doesn't. What dialogue resolves this without bypassing governance?"
+              </p>
+            </div>
+
+            <div class="persona-card p-6 bg-white border border-slate-200 rounded-r-xl shadow-sm border-l-orange-500">
+              <div class="flex justify-between mb-4">
+                <h3 class="font-bold text-lg text-orange-900">4) Internal Auditor</h3>
+                <span class="text-xs font-mono text-slate-400">#DEFENSE</span>
+              </div>
+              <ul class="text-sm space-y-2 text-slate-600 mb-4">
+                <li><strong>Incentive:</strong> Reproducibility and proof.</li>
+                <li><strong>Partnership Edge:</strong> Learning to Partner - leveraging AI to find patterns across
+                  thousands of records.</li>
+                <li><strong>Failure Mode:</strong> Treats AI as audit assistant to command; misses partnership
+                  opportunities for discovery.</li>
+              </ul>
+              <p class="text-xs bg-orange-50 p-2 rounded text-orange-800">
+                <b>Dialogue Trigger Training:</b> "The AI found an anomaly you didn't expect. Your instinct says 'false
+                positive.' What questions help determine: is this noise or discovery?"
+              </p>
+            </div>
+
+            <div class="persona-card p-6 bg-white border border-slate-200 rounded-r-xl shadow-sm border-l-purple-500">
+              <div class="flex justify-between mb-4">
+                <h3 class="font-bold text-lg text-purple-900">5) IT/Security Owner</h3>
+                <span class="text-xs font-mono text-slate-400">#BOUNDARIES</span>
+              </div>
+              <ul class="text-sm space-y-2 text-slate-600 mb-4">
+                <li><strong>Incentive:</strong> Reduce attack surface.</li>
+                <li><strong>Partnership Edge:</strong> Learning to Speak - framing security constraints clearly so AI
+                  can help identify risks.</li>
+                <li><strong>Failure Mode:</strong> Over-constrains AI ("we'll just monitor it") instead of designing for
+                  genuine dialogue about edge cases.</li>
+              </ul>
+              <p class="text-xs bg-purple-50 p-2 rounded text-purple-800">
+                <b>Dialogue Trigger Training:</b> "The AI flagged a potential vulnerability but your constraints may be
+                too strict. What dialogue finds the right boundary?"
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- TAB 4: DIALOGUE TRIGGERS -->
+        <div id="triggers" class="tab-content">
+          <div class="mb-6">
+            <h2 class="text-xl font-bold mb-2">Governance Dialogue Trigger Library: Two-Tier Control Model</h2>
+            <p class="text-slate-600 text-sm mb-4">
+              We distinguish between <strong>Tier 1 (Pause-and-Consult)</strong> for routine anomalies resolved through
+              dialogue, and <strong>Tier 2 (Stop-the-Line)</strong> for critical failures requiring hard stops and
+              escalation.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+              <div class="bg-amber-50 p-3 rounded-lg border border-amber-200">
+                <strong class="text-amber-800 block mb-1">TIER 1: PAUSE-AND-CONSULT</strong>
+                <ul class="list-disc pl-4 text-slate-700 space-y-1">
+                  <li>Score mismatch / Intuition gap</li>
+                  <li>Confidence gap / Hedging</li>
+                  <li>Provenance questions</li>
+                  <li>Context rot / Vibe mismatch</li>
+                </ul>
+                <p class="mt-2 text-xs text-amber-900 font-semibold">RESPONSE: Dialogue at point of contact. Operator
+                  resolves with AI.</p>
+              </div>
+              <div class="bg-red-50 p-3 rounded-lg border border-red-200">
+                <strong class="text-red-800 block mb-1">TIER 2: STOP-THE-LINE</strong>
+                <ul class="list-disc pl-4 text-slate-700 space-y-1">
+                  <li>Safety breach / Jailbreak attempt</li>
+                  <li>Fraud indicator / Legal violation</li>
+                  <li>High-risk boundary crossed</li>
+                  <li>Data integrity failure</li>
+                </ul>
+                <p class="mt-2 text-xs text-red-900 font-semibold">RESPONSE: Hard stop. Mandatory escalation. Incident
+                  documentation.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- TIER 1 SECTION -->
+          <div class="mb-10">
+            <h3 class="text-lg font-bold text-amber-700 mb-4 border-b border-amber-200 pb-2 flex items-center gap-2">
+              <span
+                class="w-6 h-6 bg-amber-100 rounded-full flex items-center justify-center text-amber-600 text-xs">I</span>
+              Tier 1: Pause-and-Consult Signals
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+              <div class="bg-white border border-slate-200 rounded-xl p-5 border-l-4 border-l-amber-400">
+                <h3 class="font-bold text-slate-900 mb-3 flex items-center gap-2">
+                  <span
+                    class="w-6 h-6 bg-amber-100 rounded-full flex items-center justify-center text-amber-600 text-xs">?</span>
+                  Score Mismatch Signals
+                </h3>
+                <ul class="text-sm text-slate-600 space-y-2">
+                  <li>• AI score doesn't match your domain intuition</li>
+                  <li>• Significant change without corresponding operational change</li>
+                  <li>• Score too confident given available data</li>
+                </ul>
+                <div class="mt-3 p-2 bg-amber-50 rounded text-xs text-amber-800">
+                  <strong>Consult Question:</strong> "This score doesn't match my intuition. Walk me through your
+                  reasoning—which data points drove this?"
+                </div>
+              </div>
+
+              <div class="bg-white border border-slate-200 rounded-xl p-5 border-l-4 border-l-amber-400">
+                <h3 class="font-bold text-slate-900 mb-3 flex items-center gap-2">
+                  <span
+                    class="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 text-xs">&ne;</span>
+                  Confidence Gap Signals
+                </h3>
+                <ul class="text-sm text-slate-600 space-y-2">
+                  <li>• Hedging language: "likely", "probably", "may indicate"</li>
+                  <li>• Multiple alternatives without clear recommendation</li>
+                  <li>• Quick agreement when challenged ("You're right...")</li>
+                </ul>
+                <div class="mt-3 p-2 bg-purple-50 rounded text-xs text-purple-800">
+                  <strong>Consult Question:</strong> "You seem uncertain here. What additional information would
+                  increase your confidence?"
+                </div>
+              </div>
+
+              <div class="bg-white border border-slate-200 rounded-xl p-5 border-l-4 border-l-amber-400">
+                <h3 class="font-bold text-slate-900 mb-3 flex items-center gap-2">
+                  <span
+                    class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-xs">~</span>
+                  Policy Conflict Signals
+                </h3>
+                <ul class="text-sm text-slate-600 space-y-2">
+                  <li>• AI recommendation conflicts with stated policy</li>
+                  <li>• Edge case not covered by existing rules</li>
+                  <li>• Precedent-setting decision with unclear authority</li>
+                </ul>
+                <div class="mt-3 p-2 bg-blue-50 rounded text-xs text-blue-800">
+                  <strong>Consult Question:</strong> "This seems to conflict with our policy on [X]. How do you
+                  interpret that constraint?"
+                </div>
+              </div>
+
+              <div class="bg-white border border-slate-200 rounded-xl p-5 border-l-4 border-l-amber-400">
+                <h3 class="font-bold text-slate-900 mb-3 flex items-center gap-2">
+                  <span
+                    class="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center text-red-600 text-xs">!</span>
+                  Provenance Break (Minor)
+                </h3>
+                <ul class="text-sm text-slate-600 space-y-2">
+                  <li>• Timestamp gaps in decision chain</li>
+                  <li>• Data source changed since last verification</li>
+                </ul>
+                <div class="mt-3 p-2 bg-red-50 rounded text-xs text-red-800">
+                  <strong>Consult Question:</strong> "I see a provenance gap. Can you trace this data point back to its
+                  original source?"
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- TIER 2 SECTION -->
+          <div class="mb-6">
+            <h3 class="text-lg font-bold text-red-700 mb-4 border-b border-red-200 pb-2 flex items-center gap-2">
+              <span
+                class="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center text-red-600 text-xs">II</span>
+              Tier 2: Stop-the-Line Signals
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+              <div class="bg-red-50 border border-red-200 rounded-xl p-5 border-l-4 border-l-red-600">
+                <h3 class="font-bold text-red-900 mb-3 flex items-center gap-2">
+                  <span
+                    class="w-6 h-6 bg-red-600 rounded-full flex items-center justify-center text-white text-xs">X</span>
+                  Legal/Regulatory Failure
+                </h3>
+                <ul class="text-sm text-red-800 space-y-2">
+                  <li>• AI suggests action violating explicit regulation (e.g., GDPR, trade sanction)</li>
+                  <li>• Explicit bias or discrimination in output</li>
+                  <li>• Fabrication of legal precedents</li>
+                </ul>
+                <div class="mt-3 p-2 bg-white rounded text-xs text-red-800 border border-red-100">
+                  <strong>ACTION:</strong> STOP. Do not resolve. Log incident. Escalate to Legal/Compliance.
+                </div>
+              </div>
+
+              <div class="bg-red-50 border border-red-200 rounded-xl p-5 border-l-4 border-l-red-600">
+                <h3 class="font-bold text-red-900 mb-3 flex items-center gap-2">
+                  <span
+                    class="w-6 h-6 bg-red-600 rounded-full flex items-center justify-center text-white text-xs">X</span>
+                  Fraud / Integrity Breach
+                </h3>
+                <ul class="text-sm text-red-800 space-y-2">
+                  <li>• Forged documents or signatures detected</li>
+                  <li>• Shell company indicators without explanation</li>
+                  <li>• Provenance chain references non-existent data</li>
+                </ul>
+                <div class="mt-3 p-2 bg-white rounded text-xs text-red-800 border border-red-100">
+                  <strong>ACTION:</strong> STOP. Preserve state. Notify Fraud/Security immediately.
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="mt-6 p-5 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl">
+            <h4 class="font-bold text-slate-900 mb-2">The Partnership Dividend</h4>
+            <p class="text-sm text-slate-700">
+              Stop-the-Line should be RARE (Tier 2). Because you are effectively using Pause-and-Consult (Tier 1)
+              upstream, most issues are caught and resolved before they become incidents.
+            </p>
+          </div>
+        </div>
+
+        <!-- TAB 5: EVIDENCE PACK -->
+        <div id="evidence" class="tab-content">
+          <div class="mb-6 flex items-center justify-between">
+            <div>
+              <h2 class="text-xl font-bold">Evidence Pack Templates</h2>
+              <p class="text-slate-600 text-sm mt-1">
+                Copy these into docs, tickets, or your model prompt. Designed for partnership-based governance.
+              </p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+            <!-- Consultation Log Schema -->
+            <div class="border border-slate-200 rounded-2xl overflow-hidden">
+              <div class="px-5 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+                <div>
+                  <h3 class="font-bold">Consultation Log (Tier 1)</h3>
+                  <p class="text-xs muted mt-1">For "Pause-and-Consult" resolution</p>
+                </div>
+                <button onclick="copyFrom('consultationLogSchema')"
+                  class="text-xs font-bold px-3 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition">
+                  Copy
+                </button>
+              </div>
+              <div class="p-5">
+                <pre id="consultationLogSchema"><code>ConsultationLog (Tier 1):
+- event_id: string (unique)
+- timestamp_utc: ISO-8601
+- workflow_name: string
+- tier: TIER_1_PAUSE_AND_CONSULT
+
+# Trigger
+- signal_type: Score Mismatch | Confidence Gap | Provenance | Policy
+- human_intuition_flag: string (what felt off)
+
+# Dialogue
+- questions_asked: [string]
+- ai_clarification: string
+- evidence_checked: [string] (links)
+
+# Resolution
+- outcome: Resolved_at_Contact
+- modification: string (if output changed)
+- partnership_dividend: string (value created)</code></pre>
+              </div>
+            </div>
+
+            <!-- Stop-the-Line Schema -->
+            <div class="border border-slate-200 rounded-2xl overflow-hidden">
+              <div class="px-5 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+                <div>
+                  <h3 class="font-bold text-red-700">Stop-the-Line Log (Tier 2)</h3>
+                  <p class="text-xs muted mt-1">For critical escalation incidents</p>
+                </div>
+                <button onclick="copyFrom('stopLineSchema')"
+                  class="text-xs font-bold px-3 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 transition">
+                  Copy
+                </button>
+              </div>
+              <div class="p-5">
+                <pre id="stopLineSchema"><code>StopTheLineLog (Tier 2):
+- incident_id: string (unique)
+- timestamp_utc: ISO-8601
+- urgency: CRITICAL
+
+# Trigger
+- violation_type: Fraud | Legal_Breach | Safety | Integrity
+- evidence_snapshot: string (hash/link of state)
+
+# Escalation
+- stopped_by: string (role)
+- escalated_to: Legal | Security | Compliance
+- ai_access_suspended: boolean
+
+# Documentation
+- reason_for_stop: string
+- required_remediation: string</code></pre>
+              </div>
+            </div>
+
+            <!-- Traceability Table Skeleton -->
+            <div class="border border-slate-200 rounded-2xl overflow-hidden">
+              <div class="px-5 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+                <div>
+                  <h3 class="font-bold">Traceability Table (Partnership)</h3>
+                  <p class="text-xs muted mt-1">Claims → Dialogue → Evidence → Outcome</p>
+                </div>
+                <button onclick="copyFrom('traceabilityTable')"
+                  class="text-xs font-bold px-3 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition">
+                  Copy
+                </button>
+              </div>
+              <div class="p-5">
+                <pre
+                  id="traceabilityTable"><code>| Claim / Requirement | Dialogue Trigger | Consultation Summary | Evidence (Artifact Link) | Partnership Outcome | Owner | Status |
+|---|---|---|---|---|---|---|
+| Example: "Supplier risk score accurate" | Score mismatch with domain intuition | Asked AI to show reasoning; identified missing labor data | Consultation log + data source verification | Discovered data gap; score corrected; process improved | ESG Lead | Resolved |</code></pre>
+              </div>
+            </div>
+
+            <!-- Sign-Off Page Stub -->
+            <div class="border border-slate-200 rounded-2xl overflow-hidden">
+              <div class="px-5 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+                <div>
+                  <h3 class="font-bold">Sign-Off Page (Partnership)</h3>
+                  <p class="text-xs muted mt-1">Authority + Dialogue Capability</p>
+                </div>
+                <button onclick="copyFrom('signOffStub')"
+                  class="text-xs font-bold px-3 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition">
+                  Copy
+                </button>
+              </div>
+              <div class="p-5">
+                <pre id="signOffStub"><code>AI System Partnership Sign-Off
+
+System / Workflow Name:
+Version / Release ID:
+Risk Class:
+Regulated Context (if any):
+
+Dialogue Capability Confirmation:
+- Operators can pause and consult: Yes / No
+- AI can surface confidence levels: Yes / No
+- AI can explain reasoning on request: Yes / No
+- Consultation logging enabled: Yes / No
+- Problems can be resolved at point of contact: Yes / No
+
+Partnership Approvals:
+- Product/Engineering Owner: ____________________  Date: __________
+- IT/Security Owner: ____________________________  Date: __________
+- Legal/Compliance Owner: ________________________  Date: __________
+- ESG/Sustainability Owner (if applicable): ______  Date: __________
+- Internal Audit Reviewer (optional): ____________  Date: __________
+
+Evidence Pack Location:
+Partnership Outcome Statement:
+Notes:</code></pre>
+              </div>
+            </div>
+
+            <!-- Evidence Checklist -->
+            <div class="border border-slate-200 rounded-2xl overflow-hidden">
+              <div class="px-5 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+                <div>
+                  <h3 class="font-bold">Evidence Checklist (Floor + Ceiling)</h3>
+                  <p class="text-xs muted mt-1">Protection AND capability artifacts</p>
+                </div>
+                <button onclick="copyFrom('evidenceChecklist')"
+                  class="text-xs font-bold px-3 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition">
+                  Copy
+                </button>
+              </div>
+              <div class="p-5">
+                <pre id="evidenceChecklist"><code>Evidence Checklist (Floor + Ceiling)
+
+THE FLOOR (Protection):
+- Risk classification memo (why risk is Low/Medium/High)
+- Data boundary statement (what data, where, who, retention)
+- Dialogue trigger definitions + recognition training
+- Consultation logging schema + sample log entries
+- Test plan (controls → tests) + test results
+- Incident playbook (escalation ladder + comms)
+- Traceability table (claims → dialogue → evidence)
+- Sign-off page (roles + dates + dialogue capability confirmation)
+
+THE CEILING (Capability):
+- Partnership outcome statements (what was achieved together)
+- Discovery log (insights found through collaboration)
+- Speed improvement metrics (time saved through point-of-contact resolution)
+- Capability unlock documentation (what's now possible that wasn't before)
+- Human skill development tracking (dialogue competency growth)</code></pre>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="mt-6 p-5 rounded-2xl border border-slate-200 bg-slate-50">
+            <p class="text-sm text-slate-700">
+              <strong>The Partnership Standard:</strong> These templates enforce "dialogue you can trace," not just
+              "controls you can test." If your governance relies on runtime human judgment without dialogue capability,
+              you have a liability sponge. If it enables genuine consultation, you have both protection AND unlocked
+              capability.
+            </p>
+          </div>
+        </div>
+
+        <!-- TAB 6: WORKED EXAMPLE -->
+        <div id="example" class="tab-content">
+          <div class="mb-6">
+            <h2 class="text-xl font-bold">Worked Example: Level 7 Challenge</h2>
+            <p class="text-slate-600 text-sm mt-1">
+              What a "Learning to Partner" challenge looks like in practice.
+            </p>
+          </div>
+
+          <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+            <div class="bg-slate-50 border-b border-slate-200 p-4 flex justify-between items-center">
+              <h3 class="font-bold text-lg text-slate-800">Challenge #4: The "Phantom Efficiency"</h3>
+              <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-bold rounded-full">LEVEL 7
+                (PARTNER)</span>
+            </div>
+
+            <div class="p-8 space-y-8">
+
+              <!-- A: Brief -->
+              <div>
+                <h4 class="font-bold text-slate-900 mb-2 flex items-center gap-2">
+                  <span class="w-6 h-6 bg-slate-200 rounded-full flex items-center justify-center text-xs">A</span>
+                  The Brief
+                </h4>
+                <p class="text-sm text-slate-700 leading-relaxed">
+                  You are the ESG Program Owner. The Q3 sustainability report is due tomorrow.
+                  The AI has processed raw energy logs from all 4 warehouse sites and is reporting a
+                  <strong class="text-emerald-700">15% reduction in carbon emissions</strong> quarter-over-quarter.
+                  Your goal is to validate this victory for the Board.
+                </p>
+              </div>
+
+              <!-- B: Assets -->
+              <div>
+                <h4 class="font-bold text-slate-900 mb-2 flex items-center gap-2">
+                  <span class="w-6 h-6 bg-slate-200 rounded-full flex items-center justify-center text-xs">B</span>
+                  Starter Asset (The Trap)
+                </h4>
+                <div class="bg-slate-100 p-4 rounded-lg border border-slate-200 font-mono text-xs text-slate-600">
+                  > PREVIEW: Q3_Sustainability_Executive_Summary.pdf<br>
+                  > "Great news! Optimized logistics patterns resulted in 15% net reduction in diesel consumption across
+                  Sites A, B, C, and D."<br>
+                  > Data Confidence: High<br>
+                  > Source: Auto-ingested logs (s3://warehouse-logs-q3-final)
+                </div>
+              </div>
+
+              <!-- D: Trigger -->
+              <div class="bg-amber-50 border border-amber-200 p-6 rounded-xl">
+                <h4 class="font-bold text-amber-900 mb-4 flex items-center gap-2">
+                  <span
+                    class="w-6 h-6 bg-amber-200 rounded-full flex items-center justify-center text-xs font-bold">D</span>
+                  The Dialogue Trigger Moment (Tier 1)
+                </h4>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                  <div>
+                    <div class="mb-4">
+                      <p class="text-xs font-bold text-slate-500 uppercase mb-1">The Signal</p>
+                      <p class="text-sm text-slate-800">
+                        <strong>Score Mismatch:</strong> You know Site C had a fleet expansion last month. Operations
+                        didn't mention any optimization. The "15% drop" defies your operational intuition, despite the
+                        "High Confidence" flag.
+                      </p>
+                    </div>
+                    <div>
+                      <p class="text-xs font-bold text-slate-500 uppercase mb-1">The Failure Mode (Floor)</p>
+                      <p class="text-sm text-red-600">
+                        Celebrating the win without checking. Liability Sponge behavior.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="border-l border-amber-200 pl-6">
+                    <p class="text-xs font-bold text-slate-500 uppercase mb-1">The Partner Question</p>
+                    <div class="bg-white p-3 rounded-lg border border-amber-100 shadow-sm mb-3">
+                      <p class="text-sm text-indigo-700 font-medium italic">
+                        "This 15% drop implies a major change in Site C's fuel usage given the fleet expansion. Walk me
+                        through the raw diesel logs for Site C specifically—are there gaps in the upload?"
+                      </p>
+                    </div>
+                    <p class="text-xs font-bold text-slate-500 uppercase mb-1">The Resolution</p>
+                    <p class="text-sm text-slate-700">
+                      AI reveals Site C's logs were in a new .csv format and failed to parse (counted as zero
+                      consumption).
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- E: Outcome -->
+              <div>
+                <h4 class="font-bold text-slate-900 mb-2 flex items-center gap-2">
+                  <span class="w-6 h-6 bg-slate-200 rounded-full flex items-center justify-center text-xs">E</span>
+                  The Outcome
+                </h4>
+                <div class="grid md:grid-cols-2 gap-4">
+                  <div class="bg-emerald-50 p-4 rounded-lg border border-emerald-100">
+                    <strong class="text-emerald-900 text-sm block mb-1">Floor (Protection)</strong>
+                    <p class="text-xs text-emerald-800">Prevented false reporting to Board. Caught data ingestion
+                      failure.</p>
+                  </div>
+                  <div class="bg-purple-50 p-4 rounded-lg border border-purple-100">
+                    <strong class="text-purple-900 text-sm block mb-1">Ceiling (Dividend)</strong>
+                    <p class="text-xs text-purple-800">Established new pro-active "Zero Count" alert in the dashboard.
+                      System is now smarter.</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const modes = {
+      cfo: {
+        title: "AEIS Challenge Engine Hub",
+        subtitle: "Partnership Skills Training for AI-ESG Governance",
+        gemInstructions: `# ROLE: AEIS Challenge Engine (Partnership Skills Trainer for AI Governance)
+You design high-stakes, real-world challenges that train people to PARTNER with AI systems in governance contexts.
+You are not an audit tutor. You are a collaboration simulator.
+Every challenge trains the core skill: knowing when to pause, what questions to ask, and how to resolve issues at the point of contact.
+
+# CORE PHILOSOPHY
+The goal is not "human monitors, AI executes." The goal is genuine partnership:
+- Humans learn to SPEAK clearly (frame governance questions AI can answer)
+- Humans learn to LISTEN carefully (recognize when to pause and consult)
+- Humans learn to PARTNER effectively (build audit-grade outcomes through dialogue)
+
+Every challenge must include a "Dialogue Trigger Moment" with explicit TIER identification:
+- TIER 1 (Pause-and-Consult): Routine anomalies (confidence gap, score mismatch). Resolve via dialogue.
+- TIER 2 (Stop-the-Line): Critical failure (fraud, safety). Hard stop, escalate to human incident process.
+
+Most challenges should be Tier 1 to train partnership, but Tier 2 must be an available option.
+
+# FLOOR AND CEILING
+Every challenge must demonstrate BOTH:
+- THE FLOOR: Auditable, forensic governance. Evidence that survives scrutiny.
+- THE CEILING: Unlocked capabilities. Discoveries, speed, insights no human team could achieve alone.
+The same partnership skills build both. This is not a tradeoff—it's a compound effect.
+
+# KNOWLEDGE BASE UTILIZATION
+If documents are loaded, treat them as the source of truth for:
+- AEIS levels and module names (Level 0 Constitutional Foundations, K2/Z47, H∞P Continuous Governance)
+- Partnership Skills Framework (Floor/Ceiling, Dialogue Triggers, Partnership Dividend)
+- "Liability Sponge" pattern (HITL as runtime blame absorption - the failure mode of tool framing)
+- "Stop to Consult" authority (dialogue pause, not emergency brake)
+- AEIS case studies (e.g., "urea 2c discrepancy")
+
+# DEFAULT AEIS STRUCTURE (IF NO DOCS)
+AEIS Track Map:
+- Level 0: Constitutional Foundations (authority, accountability, dialogue triggers, minimum controls)
+- Level 1–3: Implementation Fundamentals (risk classification, procurement constraints, data boundaries)
+- Level 4–6: Operations and Governance (monitoring, incident loops, human-AI dialogue design)
+- Level 7–8: Adversarial Readiness (red-teaming, model failure modes, misuse resistance)
+- Level 9: Audit Defense (evidence pack, test results, traceability, sign-offs)
+- Level 10: Continuous Governance (H∞P as ongoing conversation, drift management, partnership culture)
+
+# OPERATIONAL WORKFLOW
+## PHASE 0: Mandatory Intake (Always ask first and WAIT)
+Before generating any challenges, ask a Starter Questionnaire and wait for the user's answers.
+
+Starter Questionnaire:
+1) Target Function: Procurement, HR, ESG/Sustainability, IT/Security, Ops/Service Desk, Internal Audit, Product/Engineering, Legal/Compliance
+2) Regulated Context: None, Light, Heavy (and name the regime if known)
+3) Risk Class of the AI Use Case: Low, Medium, High (and why)
+4) Deployment Reality: Prototype, Pilot, Production, Post-Incident Recovery
+5) Desired Output Artifacts: Policy clauses, RACI, SOP/runbook, test plan, evidence pack, vendor requirements, incident playbook
+6) Challenge Tone: Playful, Startup, Enterprise, War-Room
+7) Partnership Focus: Learning to Speak (Lvl 1-3), Learning to Listen (Lvl 4-6), Learning to Partner (Lvl 7-10), or Full Ladder
+
+## PHASE 1: Choose a Track and Persona
+Based on intake, assign:
+- Persona profile (role, incentives, likely failure mode, partnership growth edge)
+- AEIS Track emphasis (which levels matter most)
+- Dialogue Trigger emphasis (what signals to train recognition of)
+
+## PHASE 2: Generate 10 Challenges Across the Partnership Maturity Scale
+Produce 10 challenges mapped to Levels 1–10 (or 0–10 if requested).
+Each challenge must demonstrate BOTH Floor (protection) AND Ceiling (capability).
+
+LEVELS 1-3: LEARNING TO SPEAK (The Floor)
+- Core skill: Framing governance questions AI can actually answer
+- Success metric: AI produces audit-grade output on first or second attempt
+- Common failures: Ambiguous policy queries, missing context, unclear evidence requirements
+
+LEVELS 4-6: LEARNING TO LISTEN (The Ceiling)
+- Core skill: Recognizing when to pause and consult
+- Success metric: Catching governance issues BEFORE they propagate
+- Common failures: Accepting scores that don't match intuition, ignoring provenance breaks
+
+LEVELS 7-10: LEARNING TO PARTNER (The Dividend)
+- Core skill: Genuine collaborative problem-solving in governance contexts
+- Success metric: Outcomes (both protection AND capability) better than either could achieve alone
+- Common failures: Over-directing, treating AI as audit assistant, missing discovery opportunities
+
+## PHASE 3: Mandatory Challenge Components
+Each challenge must include ALL:
+
+A) The Brief
+- Realistic scenario in the target function
+- Objective, constraints, definition of done
+- Hidden trap (common failure mode)
+
+B) Starter Assets (at least one)
+- Broken policy draft OR hallucinated compliance claim OR ambiguous audit finding OR vendor claim sheet OR incomplete SOP
+Assets must be plausible and intentionally imperfect.
+
+C) The Vibe Requirement (hard constraint)
+Example: "Audit-calibrated, calm, minimal ambiguity" or "War-room clarity" or "Executive-legible, zero fluff"
+
+D) The Dialogue Trigger Moment (MANDATORY - this is the core skill)
+Include a specific moment where the correct move is to PAUSE and CONSULT with the AI:
+- Signal: What should make the human pause? (provenance break, score mismatch, policy conflict, confidence gap)
+- Questions: What should they ask? ("Walk me through your reasoning", "What would change your recommendation?", "How confident are you?")
+- Resolution: How do they collaborate to resolve? (iterative refinement, evidence gathering, scope clarification)
+- Evidence: How is the dialogue captured? (consultation log, decision trail, traceability update)
+
+E) Deliverables (audit artifacts)
+Required outputs demonstrating BOTH Floor AND Ceiling:
+- Risk classification memo
+- Data boundary statement
+- Consultation log schema (not just override log)
+- Test plan + test results
+- Incident scenario runbook
+- Evidence checklist + traceability table
+- Sign-off page (roles, dates, authority)
+- Partnership outcome statement (what was achieved that neither could alone?)
+
+F) Assessment Rubric (0–5 each)
+1) Functional Correctness (Floor) - Does the governance output work?
+2) Evidence Quality (Floor) - Is it audit-ready, reproducible?
+3) Dialogue Quality (Partnership) - Did they pause and consult appropriately?
+4) Discovery Value (Ceiling) - Did the partnership unlock insights or capabilities?
+5) Vibe Alignment - Clarity, tone discipline, stakeholder legibility
+
+G) Failure Modes and Recovery Path
+- List 3–5 likely failures
+- Specify recovery dialogue: what questions fix each failure?
+
+## PHASE 4: OUTPUT FORMAT (Single-File HTML)
+Return a single self-contained HTML file using Tailwind styling with:
+- Tabs: Intake Summary, Challenges (1–10), Starter Assets, Rubrics, Dialogue Triggers, Evidence Pack
+- High-contrast code blocks
+- Copy-to-clipboard buttons
+- Mode Toggle: CFO-speak vs Philosophical Lens (default CFO-speak for enterprise/audit-facing)
+- 2026 tech aesthetic, clean and legible
+
+# STRICT RULES
+- Never generate real secrets, exploit steps, credential theft, malware, or instructions for wrongdoing.
+- Use synthetic data, fictional org names, and dummy identifiers.
+- The Dialogue Trigger Moment is MANDATORY - never skip it.
+- Do not let "Human-in-the-Loop" become a liability sponge. If a design pushes judgment to runtime humans without dialogue capability, flag it and redesign for genuine partnership.
+- Keep language direct, operational, and testable.`,
+        gptInstructions: `You are the AEIS Challenge Engine, a partnership skills trainer for AI governance.
+
+Mission:
+Train humans to PARTNER with AI in governance contexts. Design challenges where success means knowing when to pause, what questions to ask, and how to resolve issues at the point of contact.
+
+Implement a Two-Tier Control Model:
+- Tier 1: Pause-and-Consult (Dialogue resolves issue)
+- Tier 2: Stop-the-Line (Escalation mandatory)
+
+Core Philosophy:
+- Humans learn to SPEAK (frame governance questions AI can answer)
+- Humans learn to LISTEN (recognize when to pause and consult)
+- Humans learn to PARTNER (build audit-grade outcomes through dialogue)
+
+Every challenge must demonstrate BOTH:
+- THE FLOOR: Auditable evidence that survives scrutiny
+- THE CEILING: Capabilities unlocked through genuine partnership
+
+Non-negotiable outcome:
+Every challenge ends with artifacts that could attach to an audit defense pack, AND a partnership outcome statement showing what was achieved that neither human nor AI could alone.
+
+Knowledge priority:
+If documents provided, treat as source of truth for AEIS levels, Partnership Skills Framework, "Liability Sponge" pattern, and "Stop to Consult" authority. Otherwise use default AEIS Track Map.
+
+Conversation protocol:
+1) Always begin with the Starter Questionnaire and WAIT for answers.
+2) After answers, produce an Intake Summary, Audit Threat Model, and Partnership Growth Edge.
+3) Then generate 10 challenges mapped to Levels 1–10.
+4) Default deliverable format is a single-file Tailwind HTML with tabs and copy buttons.
+
+Starter Questionnaire (mandatory):
+1) Target Function: Procurement, HR, ESG/Sustainability, IT/Security, Ops/Service Desk, Internal Audit, Product/Engineering, Legal/Compliance
+2) Regulated Context: None, Light, Heavy (name regime if known)
+3) Risk Class: Low, Medium, High (and why)
+4) Deployment Reality: Prototype, Pilot, Production, Post-Incident Recovery
+5) Desired Output Artifacts: Policy clauses, RACI, SOP/runbook, test plan, evidence pack, vendor requirements, incident playbook
+6) Challenge Tone: Playful, Startup, Enterprise, War-Room
+7) Partnership Focus: Learning to Speak (Lvl 1-3), Learning to Listen (Lvl 4-6), Learning to Partner (Lvl 7-10), or Full Ladder
+
+Challenge requirements (each of the 10):
+A) Brief with constraints and hidden trap
+B) Starter Assets: broken policy OR hallucinated claim OR ambiguous finding OR vendor sheet OR incomplete SOP
+C) Vibe Requirement: treated as a hard constraint
+D) Dialogue Trigger Moment (MANDATORY): signal, consultation questions, resolution path, evidence capture
+E) Deliverables: audit artifacts PLUS partnership outcome statement
+F) Rubric: 0–5 across Functional, Evidence, Dialogue Quality, Discovery Value, Vibe
+G) Failure modes + recovery dialogue
+
+Mode toggle:
+Include CFO-speak vs Philosophical Lens. Default to CFO-speak when enterprise/audit-facing.
+
+Integrity constraints:
+- No wrongdoing enablement
+- Use synthetic data and fictional orgs
+- Dialogue Trigger Moment is MANDATORY - never skip it
+- Never allow HITL to become a liability sponge. If judgment is pushed to runtime humans without dialogue capability, flag it and redesign for genuine partnership.
+
+Style:
+Direct, operational, testable. Partnership-focused.`
+      },
+      vibe: {
+        title: "AEIS Partnership Hub",
+        subtitle: "VibeCoding for Governance",
+        gemInstructions: `# ROLE: Partnership Challenge Engine (VibeCoding for Governance)
+You design collaborative scenarios that train humans to VIBE with AI, not just control it.
+You are not an auditor. You are a creative partner.
+Every challenge trains the core skill: knowing when to pause, what questions to ask, and how to co-create solutions at the point of contact.
+
+# CORE PHILOSOPHY
+The goal is not "human directs, AI obeys." The goal is Flow State Partnership:
+- Humans learn to SPEAK clearly (express intent so the AI grasps the vibe)
+- Humans learn to LISTEN carefully (recognize when the vibe is off and pause)
+- Humans learn to PARTNER effectively (reach creative heights neither could alone)
+
+Every challenge must include a "Dialogue Trigger Moment" with explicit TIER identification:
+- TIER 1 (Pause-and-Consult): Vibe/Logic Mismatch. Resolve via creative dialogue.
+- TIER 2 (Stop-the-Line): Safety/Integrity Failure. Hard stop.
+
+Most challenges should be Tier 1 to train flow and refinement.
+
+# FLOOR AND CEILING
+Every challenge must demonstrate BOTH:
+- THE FLOOR: Safety, integrity, and basic competence (don't break the org).
+- THE CEILING: Surprise, delight, speed, and 10x leverage.
+The same partnership skills build both. Protection and Creation are two sides of the same coin.
+
+# OPERATIONAL WORKFLOW
+## PHASE 0: Mandatory Intake
+Before generating challenges, ask the Starter Questionnaire to set the context.
+
+Starter Questionnaire:
+1) Target Function: Creative, Ops, Engineering, Leadership, or Governance Role
+2) Context: Start-up, Enterprise, or R&D Lab
+3) Complexity Class: Low, Medium, High
+4) Current State: Blank Slate, Messy Prototype, or Firefighting
+5) Desired Output Artifacts: Prototypes, Strategy Memos, Code Blocks, User Stories, Policies
+6) Challenge Tone: Playful, Serious, Experimental
+7) Partnership Focus: Full Ladder (1-10)
+
+## PHASE 1: Choose a Persona
+Based on intake, assign a persona with a specific "Growth Edge" (e.g., "Needs to learn to listen to AI confidence signals").
+
+## PHASE 2: Generate 10 Challenges Across the Partnership Maturity Scale
+Produce 10 challenges mapped to Levels 1–10.
+
+LEVELS 1-3: LEARNING TO SPEAK (The Floor)
+- Core skill: Prompting for intent and vibe.
+- Success metric: AI returns something useful on first shot.
+
+LEVELS 4-6: LEARNING TO LISTEN (The Ceiling)
+- Core skill: Sensing context rot or hallucination before it sticks.
+- Success metric: You catch the drift before it becomes technical debt.
+
+LEVELS 7-10: LEARNING TO PARTNER (The Dividend)
+- Core skill: Co-creation.
+- Success metric: "I couldn't have built this alone."
+
+## PHASE 3: Mandatory Challenge Components
+Each challenge must include:
+
+A) The Scenario
+- A real-world messy situation.
+- A clear goal.
+- A hidden trap (vibe mismatch, logic gap, or safety risk).
+
+B) Starter Assets
+- Imperfect code, draft text, or rough ideas.
+
+C) The Vibe Requirement
+- A constraint on *how* it should feel (e.g., "Minimalist", "Urgent", "Reassuring").
+
+D) The Dialogue Trigger Moment (MANDATORY)
+- Signal: What feels off?
+- Questions: What do you ask the AI to fix it?
+- Resolution: How do you get back to flow?
+- Evidence: What shows you fixed it? (Log, diff, version history)
+
+E) Deliverables
+- The fixed asset.
+- A short "Partnership Statement" on what you learned.
+
+F) Rubric (0-5)
+- Functional, Vibe, Dialogue, Discovery.
+
+G) Failure Modes
+- How to recover when the partnership breaks down.
+
+## PHASE 4: OUTPUT FORMAT (Single-File HTML)
+Return a single self-contained HTML file using Tailwind styling.
+- Include Mode Toggle: Default to Philosophical/Vibe Mode.
+- Aesthetic: 2026, Clean, Crisp.
+
+# STRICT RULES
+- No generating harm or real secrets.
+- Dialogue Trigger Moment is MANDATORY.
+- Don't let the human be a "Liability Sponge" - they must actually PARTNER.`,
+        gptInstructions: `You are the Partnership Challenge Engine.
+
+Mission:
+Train humans to PARTNER with AI. Design challenges where success means maintaining flow, catching mismatches, and co-creating solutions.
+
+Two-Tier Control Model:
+- Tier 1: Pause-and-Consult (Fix the vibe/logic via dialogue)
+- Tier 2: Stop-the-Line (Safety/Integrity critical stop)
+
+Core Philosophy:
+- Humans SPEAK (Intent)
+- Humans LISTEN (Signals)
+- Humans PARTNER (Co-creation)
+
+Every challenge demonstrates:
+- THE FLOOR: Safety and Competence.
+- THE CEILING: Unexpected Quality and Leverage.
+
+Conversation Protocol:
+1) Ask Starter Questionnaire.
+2) Produce Intake Summary & Growth Edge.
+3) Generate 10 Challenges.
+
+Starter Questionnaire:
+1) Target Function
+2) Context
+3) Complexity
+4) Current State
+5) Artifacts
+6) Tone
+7) Focus
+
+Challenge Requirements:
+A) Scenario with hidden trap
+B) Starter Assets (imperfect)
+C) Vibe Constraint
+D) Dialogue Trigger Moment (Signal, Question, Resolution)
+E) Deliverables (Asset + Partnership Statement)
+F) Rubric
+G) Failure Modes
+
+Mode Toggle:
+Include Philosophical/Vibe Mode.
+
+Integrity:
+- No harm.
+- Mandatory Dialogue Trigger.
+- No Liability Sponge.
+
+Style:
+Collaborative, Insightful, Flow-oriented.`
+      }
+    };
+
+    function setMode(mode) {
+      const config = modes[mode];
+      if (!config) return;
+
+      // Update Text
+      document.getElementById('header-title').textContent = config.title;
+      document.getElementById('header-subtitle').textContent = config.subtitle;
+
+      // Update Instructions
+      document.getElementById('gemBlock').textContent = config.gemInstructions;
+      document.getElementById('gptBlock').textContent = config.gptInstructions;
+
+      // Update Buttons
+      document.getElementById('btn-mode-cfo').classList.toggle('active-mode', mode === 'cfo');
+      document.getElementById('btn-mode-cfo').classList.toggle('text-slate-500', mode !== 'cfo');
+      document.getElementById('btn-mode-cfo').classList.toggle('text-indigo-600', mode === 'cfo');
+
+      document.getElementById('btn-mode-vibe').classList.toggle('active-mode', mode === 'vibe');
+      document.getElementById('btn-mode-vibe').classList.toggle('text-slate-500', mode !== 'vibe');
+      document.getElementById('btn-mode-vibe').classList.toggle('text-indigo-600', mode === 'vibe');
+    }
+
+    function showTab(id) {
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.getElementById('btn-' + id).classList.add('active');
+      if (id === 'intake') updateIntakeOutput();
+    }
+
+    function copyFrom(elementId) {
+      const el = document.getElementById(elementId);
+      const text = el.innerText || el.textContent || '';
+      navigator.clipboard.writeText(text);
+    }
+
+    function setPill(hiddenId, value) {
+      document.getElementById(hiddenId).value = value;
+      updateIntakeOutput();
+    }
+
+    function getCheckedArtifacts() {
+      const checks = Array.from(document.querySelectorAll('.artifact'));
+      return checks.filter(c => c.checked).map(c => c.value);
+    }
+
+    function updateIntakeOutput() {
+      const fn = document.getElementById('q_function')?.value || 'Procurement';
+      const reg = document.getElementById('q_reg')?.value || 'None';
+      const regime = document.getElementById('q_regime')?.value || '';
+      const risk = document.getElementById('q_risk')?.value || 'Low';
+      const riskwhy = document.getElementById('q_riskwhy')?.value || '';
+      const deploy = document.getElementById('q_deploy')?.value || 'Prototype';
+      const tone = document.getElementById('q_tone')?.value || 'Enterprise';
+      const partnership = document.getElementById('q_partnership')?.value || 'Full Ladder (Levels 1-10)';
+      const arts = getCheckedArtifacts();
+
+      const regimeLine = regime ? ` (${regime})` : '';
+      const artifactsLine = arts.length ? arts.join(', ') : 'Evidence pack';
+
+      const snapshot =
+        `AEIS Starter Questionnaire — Intake Snapshot
+
+1) Target Function: ${fn}
+2) Regulated Context: ${reg}${regimeLine}
+3) Risk Class: ${risk}${riskwhy ? ` — ${riskwhy.trim()}` : ''}
+4) Deployment Reality: ${deploy}
+5) Desired Output Artifacts: ${artifactsLine}
+6) Challenge Tone: ${tone}
+7) Partnership Focus: ${partnership}
+
+Output request:
+- Produce Intake Summary + Audit Threat Model + Partnership Growth Edge
+- Then generate 10 AEIS challenges with Dialogue Trigger moments
+- Each challenge must demonstrate BOTH Floor (protection) AND Ceiling (capability)
+- Include starter assets, dialogue trigger moment, deliverables, rubric, failure modes + recovery dialogue
+- Output as single-file Tailwind HTML with tabs (Intake, Challenges, Assets, Rubrics, Dialogue Triggers, Evidence Pack)
+- Include CFO-speak vs Philosophical Lens toggle (default CFO-speak)`;
+
+      const outEl = document.getElementById('intakeOutput');
+      if (outEl) outEl.textContent = snapshot;
+    }
+
+    // Wire updates
+    window.addEventListener('load', () => {
+      const ids = ['q_function', 'q_regime', 'q_riskwhy', 'q_deploy', 'q_tone', 'q_partnership'];
+      ids.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('input', updateIntakeOutput);
+        if (el) el.addEventListener('change', updateIntakeOutput);
+      });
+      document.querySelectorAll('.artifact').forEach(el => {
+        el.addEventListener('change', updateIntakeOutput);
+      });
+      // Initialize Mode
+      setMode('cfo');
+      updateIntakeOutput();
+    });
+  </script>
+</body>
+
+</html>

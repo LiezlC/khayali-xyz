@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partnership Skills Framework - Human-AI Collaboration Competencies</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .level-card {
+            transition: all 0.3s ease;
+        }
+
+        .level-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .foundation-indicator {
+            border-left: 4px solid #f59e0b;
+        }
+
+        .flight-indicator {
+            border-left: 4px solid #0ea5e9;
+        }
+
+        .partnership-indicator {
+            border-left: 4px solid #8b5cf6;
+        }
+
+        .skill-badge {
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+        }
+
+        .infinity-symbol {
+            font-family: serif;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-900 font-sans antialiased min-h-screen">
+
+    <div class="max-w-5xl mx-auto px-4 py-12">
+
+        <!-- Header -->
+        <header class="text-center mb-16">
+            <div
+                class="inline-block px-4 py-1 bg-purple-100 text-purple-700 text-xs font-bold rounded-full uppercase tracking-wider mb-4">
+                Foundation Document
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+                <span class="gradient-text">Partnership Skills Framework</span>
+            </h1>
+            <p class="text-xl text-slate-600 max-w-2xl mx-auto">
+                The core competencies for genuine human-AI collaboration.<br>
+                <em>Problems solved at the point of contact.</em>
+            </p>
+        </header>
+
+        <!-- The Core Insight -->
+        <section class="bg-white rounded-2xl shadow-lg border border-slate-200 p-8 mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-slate-900">The Core Insight</h2>
+            <div class="prose prose-slate max-w-none">
+                <p class="text-lg text-slate-700 mb-4">
+                    The most valuable skill in the age of AI is not <em>commanding</em> machines or <em>supervising</em>
+                    them.
+                    It's knowing how to have a <strong>productive conversation</strong> with them.
+                </p>
+                <p class="text-slate-600 mb-4">
+                    When something looks off—a score that doesn't match intuition, code that doesn't match intent,
+                    a recommendation that feels wrong—the skilled human doesn't hit an emergency brake and wait for
+                    experts.
+                    They <strong>pause and consult</strong>.
+                </p>
+                <blockquote class="border-l-4 border-purple-400 pl-4 italic text-slate-700 my-6">
+                    "Hey, this doesn't look right. Walk me through your reasoning."
+                </blockquote>
+                <p class="text-slate-600">
+                    And in a well-designed partnership, the AI can actually respond—surfacing confidence levels,
+                    showing which inputs mattered, flagging where it was uncertain. The problem gets solved
+                    <strong>right there</strong>, by the person who spotted it, in real-time dialogue.
+                </p>
+            </div>
+        </section>
+
+        <!-- Two-Tier Partnership Model -->
+        <section class="bg-white rounded-2xl shadow-lg border border-slate-200 p-8 mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-slate-900">Two-Tier Partnership Model</h2>
+            <p class="text-slate-600 mb-6">
+                Effective partnership requires knowing the difference between a problem to be <em>solved together</em> and a
+                boundary that <em>both parties</em> agree to defend.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-amber-50 p-6 rounded-xl border border-amber-200">
+                    <h3 class="font-bold text-amber-900 mb-2 flex items-center gap-2">
+                        <span
+                            class="w-6 h-6 bg-amber-200 rounded-full flex items-center justify-center text-xs">I</span>
+                        Tier 1: Pause-and-Consult
+                    </h3>
+                    <p class="text-sm text-amber-800 mb-4">
+                        <strong>The Default Mode.</strong> Most anomalies are opportunities for dialogue.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="text-xs font-semibold text-slate-500 uppercase">Triggers</div>
+                        <ul class="text-sm text-slate-700 list-disc pl-4 space-y-1">
+                            <li>Score mismatch / Intuition gap</li>
+                            <li>Confidence gap / Hedging</li>
+                            <li>Provenance questions</li>
+                            <li>Context rot / Vibe mismatch</li>
+                        </ul>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-amber-200">
+                        <div class="text-xs font-semibold text-slate-500 uppercase">Response</div>
+                        <p class="text-sm text-amber-900 font-medium">Dialogue at point of contact. Partners resolve
+                            together.</p>
+                    </div>
+                </div>
+
+                <div class="bg-red-50 p-6 rounded-xl border border-red-200">
+                    <h3 class="font-bold text-red-900 mb-2 flex items-center gap-2">
+                        <span class="w-6 h-6 bg-red-200 rounded-full flex items-center justify-center text-xs">II</span>
+                        Tier 2: Shared Ejection Seat
+                    </h3>
+                    <p class="text-sm text-red-800 mb-4">
+                        <strong>The Mutual Agreement.</strong> Either party can pull it. Trust includes knowing when to ground.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="text-xs font-semibold text-slate-500 uppercase">Triggers</div>
+                        <ul class="text-sm text-slate-700 list-disc pl-4 space-y-1">
+                            <li>Safety breach / Integrity failure</li>
+                            <li>Fraud indicator / Legal violation</li>
+                            <li>Fundamental boundary crossed</li>
+                            <li>Either party signals "stop"</li>
+                        </ul>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-red-200">
+                        <div class="text-xs font-semibold text-slate-500 uppercase">Response</div>
+                        <p class="text-sm text-red-900 font-medium">Hard stop. Its rarity isn't compliance—it's proof the foundation held.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Partnership Maturity Scale -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 text-slate-900">The Partnership Maturity Scale</h2>
+            <p class="text-slate-600 mb-8">
+                Three stages of human-AI collaboration competency. Each builds on the previous.
+                The goal is not to eliminate earlier skills but to expand your repertoire.
+            </p>
+
+            <div class="space-y-6">
+
+                <!-- Level 1-3: Learning to Speak -->
+                <div class="level-card foundation-indicator bg-white rounded-r-2xl shadow-md border border-slate-200 p-6">
+                    <div class="flex flex-wrap items-center gap-3 mb-4">
+                        <span class="skill-badge px-2 py-1 bg-amber-100 text-amber-800 rounded-full font-bold">LEVELS
+                            1-3</span>
+                        <h3 class="text-xl font-bold text-amber-900">Learning to Speak</h3>
+                        <span class="text-xs text-slate-400 font-mono ml-auto">THE FOUNDATION</span>
+                    </div>
+                    <p class="text-slate-700 mb-4">
+                        <strong>Core Competency:</strong> Translating intent into dialogue the AI can act on.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-slate-50 p-4 rounded-xl">
+                            <h4 class="font-bold text-sm text-slate-800 mb-2">VibeCoding Domain</h4>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• Articulating vague ideas as actionable prompts</li>
+                                <li>• Describing desired outcomes, not implementation</li>
+                                <li>• Providing context that prevents hallucination</li>
+                                <li>• Recognizing when your prompt was unclear</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl">
+                            <h4 class="font-bold text-sm text-slate-800 mb-2">ESG Governance Domain</h4>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• Framing audit questions AI can actually answer</li>
+                                <li>• Specifying evidence requirements clearly</li>
+                                <li>• Providing policy context that constrains outputs</li>
+                                <li>• Recognizing when your query was ambiguous</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-4 p-3 bg-amber-50 rounded-lg">
+                        <p class="text-sm text-amber-900">
+                            <strong>Success Metric:</strong> The AI produces output that matches your intent on the
+                            first or second attempt.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Level 4-6: Learning to Listen -->
+                <div class="level-card flight-indicator bg-white rounded-r-2xl shadow-md border border-slate-200 p-6">
+                    <div class="flex flex-wrap items-center gap-3 mb-4">
+                        <span
+                            class="skill-badge px-2 py-1 bg-sky-100 text-sky-800 rounded-full font-bold">LEVELS
+                            4-6</span>
+                        <h3 class="text-xl font-bold text-sky-900">Learning to Listen</h3>
+                        <span class="text-xs text-slate-400 font-mono ml-auto">PRE-FLIGHT</span>
+                    </div>
+                    <p class="text-slate-700 mb-4">
+                        <strong>Core Competency:</strong> Recognizing when to pause and consult—reading the signals.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-slate-50 p-4 rounded-xl">
+                            <h4 class="font-bold text-sm text-slate-800 mb-2">VibeCoding Domain</h4>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• Detecting context rot before it corrupts output</li>
+                                <li>• Recognizing hallucinated schemas or APIs</li>
+                                <li>• Knowing when to refresh context vs. push through</li>
+                                <li>• Reading AI confidence signals (hedging language)</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl">
+                            <h4 class="font-bold text-sm text-slate-800 mb-2">ESG Governance Domain</h4>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• Detecting provenance breaks in data chains</li>
+                                <li>• Recognizing scores that don't match intuition</li>
+                                <li>• Knowing when to question vs. trust the output</li>
+                                <li>• Reading uncertainty indicators in AI reasoning</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-4 p-3 bg-sky-50 rounded-lg">
+                        <p class="text-sm text-sky-900">
+                            <strong>Success Metric:</strong> You catch problems <em>before</em> they propagate—and you
+                            know what questions to ask. You're cleared for takeoff.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Level 7-10: Learning to Partner -->
+                <div
+                    class="level-card partnership-indicator bg-white rounded-r-2xl shadow-md border border-slate-200 p-6">
+                    <div class="flex flex-wrap items-center gap-3 mb-4">
+                        <span class="skill-badge px-2 py-1 bg-purple-100 text-purple-800 rounded-full font-bold">LEVELS
+                            7-10</span>
+                        <h3 class="text-xl font-bold text-purple-900">Learning to Partner</h3>
+                        <span class="text-xs text-slate-400 font-mono ml-auto">FLIGHT ✈</span>
+                    </div>
+                    <p class="text-slate-700 mb-4">
+                        <strong>Core Competency:</strong> Genuine collaborative problem-solving—outcomes neither could
+                        achieve alone. The constraints you needed as a beginner fall away.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-slate-50 p-4 rounded-xl">
+                            <h4 class="font-bold text-sm text-slate-800 mb-2">VibeCoding Domain</h4>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• Multi-agent orchestration with earned trust</li>
+                                <li>• Security hardening through dialogue review</li>
+                                <li>• Iterative refinement that improves both parties</li>
+                                <li>• Creative outcomes that surprise both human and AI</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl">
+                            <h4 class="font-bold text-sm text-slate-800 mb-2">ESG Governance Domain</h4>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• H<span class="infinity-symbol">∞</span>P continuous governance as conversation
+                                </li>
+                                <li>• Audit defense built through dialogue trails</li>
+                                <li>• Discovery at scales no human team could achieve</li>
+                                <li>• Capabilities unlocked that didn't exist before</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-4 p-3 bg-purple-50 rounded-lg">
+                        <p class="text-sm text-purple-900">
+                            <strong>Success Metric:</strong> The outcome is better than either human or AI could produce
+                            alone. The sky was always there—you just couldn't see it from the ground.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- The Dialogue Trigger -->
+        <section class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl shadow-xl p-8 mb-12 text-white">
+            <h2 class="text-2xl font-bold mb-4">The Dialogue Trigger</h2>
+            <p class="text-slate-300 mb-6">
+                The critical skill at every level is recognizing <strong>when to pause and consult</strong>.
+                We call this moment a <em>Dialogue Trigger</em>—the signal that says "stop, ask, understand, then
+                proceed."
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="bg-slate-700/50 p-4 rounded-xl">
+                    <h4 class="font-bold text-amber-400 text-sm mb-2">Signal Recognition</h4>
+                    <p class="text-sm text-slate-300">
+                        What should make you pause? A mismatch between output and intuition. Hedging language. Missing
+                        data. Unexpected confidence.
+                    </p>
+                </div>
+                <div class="bg-slate-700/50 p-4 rounded-xl">
+                    <h4 class="font-bold text-emerald-400 text-sm mb-2">Question Formation</h4>
+                    <p class="text-sm text-slate-300">
+                        What should you ask? "Walk me through your reasoning." "What would change your recommendation?"
+                        "How confident are you?"
+                    </p>
+                </div>
+                <div class="bg-slate-700/50 p-4 rounded-xl">
+                    <h4 class="font-bold text-purple-400 text-sm mb-2">Resolution Capture</h4>
+                    <p class="text-sm text-slate-300">
+                        How do you document? The dialogue itself becomes evidence. The trail shows how the problem was
+                        identified and resolved.
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-6 p-4 bg-slate-700/30 rounded-xl border border-slate-600">
+                <p class="text-sm text-slate-300">
+                    <strong class="text-white">The Partnership Dividend:</strong>
+                    When dialogue triggers are designed well, problems get solved at the point of contact.
+                    The operator doesn't call in the techies—they collaborate in real-time to identify the issue and
+                    implement a better solution right there.
+                </p>
+            </div>
+        </section>
+
+        <!-- Foundation and Flight -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-slate-900">Foundation and Flight: The Same Skills Build Both</h2>
+            <div class="bg-white rounded-2xl shadow-md border border-slate-200 p-6">
+                <p class="text-slate-700 mb-6">
+                    The same partnership skills that build solid ground (Foundation) also clear the sky (Flight).
+                    This isn't a tradeoff—it's escape velocity. The skills that keep you from crashing are the
+                    same skills that let you soar.
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="foundation-indicator pl-4">
+                        <h4 class="font-bold text-amber-900 mb-2">The Foundation (Solid Ground)</h4>
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li>• Catch hallucinations before they propagate</li>
+                            <li>• Maintain audit-grade dialogue trails</li>
+                            <li>• Prevent liability sponge scenarios</li>
+                            <li>• Document decisions defensibly</li>
+                        </ul>
+                    </div>
+                    <div class="flight-indicator pl-4">
+                        <h4 class="font-bold text-sky-900 mb-2">The Flight (No Artificial Limits)</h4>
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li>• Discover patterns at scales no human could reach</li>
+                            <li>• Iterate faster than solo work allows</li>
+                            <li>• Reach creative outcomes you couldn't imagine alone</li>
+                            <li>• Remove constraints that competence has outgrown</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-6 p-4 bg-gradient-to-r from-amber-50 to-sky-50 rounded-xl">
+                    <p class="text-sm text-slate-700">
+                        <strong>Escape Velocity:</strong>
+                        The Foundation isn't a cage—it's a runway. The skills you build there don't limit you;
+                        they earn you the trust that removes limits. The sky was always there.
+                        Partnership is how you reach it.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Application Domains -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-slate-900">Application Domains</h2>
+            <p class="text-slate-600 mb-6">
+                This framework applies across domains. The core skills transfer; the specific triggers and evidence
+                artifacts differ.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-2xl shadow-md border border-slate-200 p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span
+                            class="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 font-bold">VC</span>
+                        <h3 class="text-lg font-bold">VibeCoding Challenges</h3>
+                    </div>
+                    <p class="text-sm text-slate-600 mb-4">
+                        Train partnership skills through software development scenarios.
+                        From intent translation to multi-agent orchestration.
+                    </p>
+                    <ul class="text-xs text-slate-500 space-y-1">
+                        <li>• Dialogue Triggers: Context rot, hallucinated APIs, vibe mismatch</li>
+                        <li>• Evidence Artifacts: Working code, iteration history, security review</li>
+                        <li>• Partnership Outcome: Software that matches intent and exceeds expectations</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-md border border-slate-200 p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span
+                            class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 font-bold">AE</span>
+                        <h3 class="text-lg font-bold">AEIS Governance Challenges</h3>
+                    </div>
+                    <p class="text-sm text-slate-600 mb-4">
+                        Train partnership skills through ESG governance scenarios.
+                        From policy compliance to continuous H<span class="infinity-symbol">∞</span>P operations.
+                    </p>
+                    <ul class="text-xs text-slate-500 space-y-1">
+                        <li>• Dialogue Triggers: Provenance break, score mismatch, policy conflict</li>
+                        <li>• Evidence Artifacts: Audit trails, traceability tables, sign-off chains</li>
+                        <li>• Partnership Outcome: Protected decisions AND unlocked capabilities</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center text-sm text-slate-500 pt-8 border-t border-slate-200">
+            <p>
+                Partnership Skills Framework v2.0 — Foundation and Flight | Part of the AI-ESG Curriculum<br>
+                <em>"The same skills build the runway AND clear the sky."</em>
+            </p>
+        </footer>
+
+    </div>
+
+</body>
+
+</html>

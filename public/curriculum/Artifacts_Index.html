@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AEIS | AI Governance Artifact Templates & Guides</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+        
+        :root {
+            --header-height: 80px;
+            --primary-teal: #0f766e;
+            --primary-cyan: #0e7490;
+            --success-green: #15803d;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            color: #0f172a;
+            line-height: 1.7;
+        }
+        
+        h1, h2, h3, h4, h5, .serif {
+            font-family: 'Merriweather', serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary-teal) 0%, var(--primary-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header-bar {
+            background: white;
+            border-bottom: 2px solid var(--primary-teal);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .artifact-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .artifact-card:hover {
+            box-shadow: 0 12px 24px rgba(15, 118, 110, 0.15);
+            transform: translateY(-4px);
+            border-color: var(--primary-teal);
+        }
+        
+        .artifact-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            gap: 1rem;
+        }
+        
+        .artifact-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary-teal) 0%, var(--primary-cyan) 100%);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .artifact-title {
+            color: var(--primary-teal);
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        
+        .artifact-subtitle {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin: 0.5rem 0 0 0;
+        }
+        
+        .use-case-box {
+            background: #f0fdf4;
+            border-left: 3px solid var(--success-green);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0.25rem;
+            font-size: 0.95rem;
+        }
+        
+        .skill-badge {
+            display: inline-block;
+            background: #f3e8ff;
+            color: #6b21a8;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            margin: 0.25rem 0.25rem 0.25rem 0;
+            font-weight: 500;
+        }
+        
+        .section-intro {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            margin-bottom: 3rem;
+            border-top: 4px solid var(--primary-teal);
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-teal) 0%, var(--primary-cyan) 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(15, 118, 110, 0.3);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--primary-teal);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            border: 2px solid var(--primary-teal);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary-teal);
+            color: white;
+        }
+        
+        .flow-diagram {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            font-family: 'Courier New', monospace;
+            color: #0f172a;
+        }
+        
+        .artifact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .quick-ref-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .quick-ref-number {
+            font-size: 2rem;
+            color: var(--primary-teal);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .quick-ref-label {
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+        }
+        
+        .quick-ref-desc {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+        
+        .integration-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+        }
+        
+        .integration-table th {
+            background: var(--primary-teal);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .integration-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .integration-table tr:hover {
+            background: #f8fafc;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header-bar">
+        <div class="max-w-6xl mx-auto px-6 py-8">
+            <h1 class="text-4xl gradient-text mb-2">AI Governance Artifact Templates</h1>
+            <p class="text-gray-600 text-lg">Operational guides, rubrics, and templates for responsible AI deployment</p>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="max-w-6xl mx-auto px-6 py-8">
+        
+        <!-- Quick Overview -->
+        <div class="section-intro">
+            <h2 class="text-2xl serif mb-4 text-gray-800">What Are These Templates?</h2>
+            <p class="mb-4 text-gray-700">These five artifacts operationalize the five foundational AI skills taught in the AI-ESG curriculum. They are <strong>working documents</strong> designed for teams building and deploying AI systems—not compliance theater.</p>
+            <p class="text-gray-700"><strong>Use them to:</strong> Justify deployment decisions, design prompts, architect workflows, evaluate outputs, and document ethical guardrails.</p>
+            
+            <!-- Quick Reference Grid -->
+            <div class="artifact-grid mt-8">
+                <div class="quick-ref-card">
+                    <div class="quick-ref-number">1</div>
+                    <div class="quick-ref-label">Strategic Brief</div>
+                    <div class="quick-ref-desc">AI Strategy</div>
+                </div>
+                <div class="quick-ref-card">
+                    <div class="quick-ref-number">2</div>
+                    <div class="quick-ref-label">Prompting Toolkit</div>
+                    <div class="quick-ref-desc">Prompting</div>
+                </div>
+                <div class="quick-ref-card">
+                    <div class="quick-ref-number">3</div>
+                    <div class="quick-ref-label">Workflow Blueprint</div>
+                    <div class="quick-ref-desc">Workflow Integration</div>
+                </div>
+                <div class="quick-ref-card">
+                    <div class="quick-ref-number">4</div>
+                    <div class="quick-ref-label">Evaluation Rubric</div>
+                    <div class="quick-ref-desc">Critical Evaluation</div>
+                </div>
+                <div class="quick-ref-card">
+                    <div class="quick-ref-number">5</div>
+                    <div class="quick-ref-label">Ethics Memo</div>
+                    <div class="quick-ref-desc">Ethics & Trust</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Artifact 1: Strategic AI Brief -->
+        <div class="artifact-card" id="strategic-brief">
+            <div class="artifact-header">
+                <div class="artifact-icon">
+                    <i data-lucide="map-pin" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h3 class="artifact-title">Strategic AI Brief</h3>
+                    <p class="artifact-subtitle">AI Strategy Skill | Deployment Decision Framework</p>
+                </div>
+            </div>
+            
+            <p class="mb-4 text-gray-700">Justifies an AI deployment to business and risk stakeholders. Defines opportunity, risk tolerance, control architecture, financial model, and governance checkpoints.</p>
+            
+            <div class="use-case-box">
+                <strong>Use When:</strong> Proposing a new AI capability (e.g., "Deploy AI ticket classifier"), seeking budget approval, or needing sign-off from risk/compliance teams.
+            </div>
+            
+            <div class="mt-4">
+                <strong class="text-sm text-gray-700">Contents:</strong>
+                <ul class="list-disc list-inside mt-2 text-sm text-gray-700 space-y-1">
+                    <li>Executive summary (GO / conditional GO / NO GO recommendation)</li>
+                    <li>Business problem, AI capability, deployment context</li>
+                    <li>Risk threshold definition (critical/major/minor/negligible consequences)</li>
+                    <li>Control architecture (pre-action controls, circuit breakers, audit trails)</li>
+                    <li>Financial model (cost, savings, ROI, risk-adjusted scenarios)</li>
+                    <li>Governance checkpoints (pilot phases, quarterly reviews, annual renewal)</li>
+                    <li>Sign-off matrix (business sponsor, risk/compliance, tech lead)</li>
+                </ul>
+            </div>
+            
+            <div class="mt-4">
+                <div><strong class="text-sm text-gray-700">Foundational Skills:</strong></div>
+                <span class="skill-badge">AI Strategy</span>
+                <span class="skill-badge">Critical Evaluation</span>
+                <span class="skill-badge">Ethics & Trust</span>
+            </div>
+            
+            <div class="button-group">
+                <a href="artifacts/Strategic_AI_Brief_Template.md" class="btn-primary">
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                    View Template
+                </a>
+                <button class="btn-secondary" onclick="toggleDetails(this)">
+                    <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                    Example
+                </button>
+            </div>
+            
+            <div class="hidden mt-4 p-4 bg-amber-50 border border-amber-200 rounded text-sm">
+                <strong>Example Use Case:</strong> Support team proposes AI-powered ticket classification to reduce routing time. Brief documents: (1) 4 FTEs saved = $24K/month savings, (2) hallucination risk managed via confidence threshold + human review, (3) circuit breaker: pause if weekly error rate >2%, (4) needs sign-off from CFO (ROI), Compliance (liability), and VP Engineering (feasibility).
+            </div>
+        </div>
+
+        <!-- Artifact 2: Prompting Toolkit -->
+        <div class="artifact-card" id="prompting-toolkit">
+            <div class="artifact-header">
+                <div class="artifact-icon">
+                    <i data-lucide="message-circle" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h3 class="artifact-title">Prompting Toolkit</h3>
+                    <p class="artifact-subtitle">Prompting Skill | Intent-First Design & Iteration</p>
+                </div>
+            </div>
+            
+            <p class="mb-4 text-gray-700">Guides prompt design from intent definition through testing, iteration, and production monitoring. Model-agnostic methodology works across Claude, GPT-4, Gemini, and future models.</p>
+            
+            <div class="use-case-box">
+                <strong>Use When:</strong> Designing a new prompt, comparing models, optimizing for accuracy, migrating to a new model, or retraining an underperforming prompt.
+            </div>
+            
+            <div class="mt-4">
+                <strong class="text-sm text-gray-700">Contents:</strong>
+                <ul class="list-disc list-inside mt-2 text-sm text-gray-700 space-y-1">
+                    <li>Intent-first framework (task, success criteria, failure mode, context)</li>
+                    <li>Core instruction template (model-agnostic core)</li>
+                    <li>Model-specific adjustments (Claude, GPT-4, Gemini tweaks)</li>
+                    <li>Test dataset design (5–10 labeled examples covering edge cases)</li>
+                    <li>Evaluation matrix (compare outputs across models)</li>
+                    <li>Iteration rules (when to refine, how to improve)</li>
+                    <li>Production prompt library (version control, changelog)</li>
+                    <li>Monitoring dashboard (weekly drift detection, quarterly refresh cycle)</li>
+                </ul>
+            </div>
+            
+            <div class="mt-4">
+                <div><strong class="text-sm text-gray-700">Foundational Skills:</strong></div>
+                <span class="skill-badge">Prompting</span>
+                <span class="skill-badge">Critical Evaluation</span>
+                <span class="skill-badge">AI Strategy</span>
+            </div>
+            
+            <div class="button-group">
+                <a href="artifacts/Prompting_Toolkit_Template.md" class="btn-primary">
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                    View Template
+                </a>
+                <button class="btn-secondary" onclick="toggleDetails(this)">
+                    <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                    Example
+                </button>
+            </div>
+            
+            <div class="hidden mt-4 p-4 bg-blue-50 border border-blue-200 rounded text-sm">
+                <strong>Example Use Case:</strong> You want to classify support tickets. Intent: "Classify into 1 of 8 categories with ≥95% accuracy, <0.7 confidence → human review." You test Claude, GPT-4, Gemini on 10 test cases. Claude wins on ambiguous cases (adds reasoning). GPT-4 is fastest. You choose Claude + create a prompt library v1.0. Weekly monitoring shows accuracy 94.8%; quarterly refresh updates prompt with new examples, retrains to 96.5%.
+            </div>
+        </div>
+
+        <!-- Artifact 3: Workflow Blueprint -->
+        <div class="artifact-card" id="workflow-blueprint">
+            <div class="artifact-header">
+                <div class="artifact-icon">
+                    <i data-lucide="git-branch" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h3 class="artifact-title">Workflow Blueprint</h3>
+                    <p class="artifact-subtitle">Workflow Integration Skill | AI-Native Process Design</p>
+                </div>
+            </div>
+            
+            <p class="mb-4 text-gray-700">Designs an AI-native workflow where AI is embedded in the core decision path (not "off to the side"), with human checkpoints, stop cards, and audit trails baked in from the start.</p>
+            
+            <div class="use-case-box">
+                <strong>Use When:</strong> Architecting a new AI-assisted process, defining handoff rules between AI and humans, designing pilot & rollout phases, or documenting SLAs and escalation paths.
+            </div>
+            
+            <div class="mt-4">
+                <strong class="text-sm text-gray-700">Contents:</strong>
+                <ul class="list-disc list-inside mt-2 text-sm text-gray-700 space-y-1">
+                    <li>Workflow diagram (visual flow of AI decisions, human checkpoints, escalations)</li>
+                    <li>Inputs & outputs (what data flows in/out, source, format, frequency)</li>
+                    <li>AI task definition (what the AI does, latency SLA, cost, what it does NOT do)</li>
+                    <li>Decision logic & stop cards (confidence-based routing, circuit breaker conditions)</li>
+                    <li>Handoff points (AI → human review, human → AI learning loop, escalation path)</li>
+                    <li>Audit trail specification (JSON schema for every decision, retention policy)</li>
+                    <li>KPI monitoring (daily dashboard, weekly spot-check, monthly review)</li>
+                    <li>Pilot & validation phases (week 1–4 rollout strategy with go/no-go criteria)</li>
+                </ul>
+            </div>
+            
+            <div class="mt-4">
+                <div><strong class="text-sm text-gray-700">Foundational Skills:</strong></div>
+                <span class="skill-badge">Workflow Integration</span>
+                <span class="skill-badge">Critical Evaluation</span>
+                <span class="skill-badge">AI Strategy</span>
+            </div>
+            
+            <div class="button-group">
+                <a href="artifacts/Workflow_Blueprint_Template.md" class="btn-primary">
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                    View Template
+                </a>
+                <button class="btn-secondary" onclick="toggleDetails(this)">
+                    <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                    Example
+                </button>
+            </div>
+            
+            <div class="hidden mt-4 p-4 bg-green-50 border border-green-200 rounded text-sm">
+                <strong>Example Use Case:</strong> Ticket classification workflow: (1) AI classifies with confidence score, (2) IF confidence >0.85 → auto-route; (3) IF 0.65–0.85 → flag for review (<4 hr SLA); (4) IF <0.65 OR category="Safety/Fraud" → escalate immediately. Audit trail logs every decision. Weekly: 5% spot-check of auto-routed. Monthly: recalibrate thresholds. Pilot: Week 1 at 5% traffic, then expand if accuracy >92%.
+            </div>
+        </div>
+
+        <!-- Artifact 4: Output Evaluation Rubric -->
+        <div class="artifact-card" id="evaluation-rubric">
+            <div class="artifact-header">
+                <div class="artifact-icon">
+                    <i data-lucide="check-circle" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h3 class="artifact-title">Output Evaluation Rubric</h3>
+                    <p class="artifact-subtitle">Critical Evaluation Skill | Quality Assessment & Tracking</p>
+                </div>
+            </div>
+            
+            <p class="mb-4 text-gray-700">Provides explicit, repeatable criteria for assessing AI output quality. Scales from 10 to 1000s of evaluations while maintaining consistency.</p>
+            
+            <div class="use-case-box">
+                <strong>Use When:</strong> Establishing baseline accuracy, spot-checking outputs, conducting blind evaluations, feeding results into model retraining, or proving system safety to regulators.
+            </div>
+            
+            <div class="mt-4">
+                <strong class="text-sm text-gray-700">Contents:</strong>
+                <ul class="list-disc list-inside mt-2 text-sm text-gray-700 space-y-1">
+                    <li>Evaluation dimensions (correctness, confidence calibration, reasoning quality, boundary handling)</li>
+                    <li>Rubric template with example (classification tasks, text generation, data analysis)</li>
+                    <li>Evaluation tracking sheet (test case log, weekly summary, root cause analysis)</li>
+                    <li>Blind evaluation protocol (3-rater inter-rater agreement >80%)</li>
+                    <li>Automation options (human + sampling, AI-assisted evaluation, automated test suite)</li>
+                    <li>Continuous improvement loop (monthly aggregation, prompt retraining, deployment)</li>
+                </ul>
+            </div>
+            
+            <div class="mt-4">
+                <div><strong class="text-sm text-gray-700">Foundational Skills:</strong></div>
+                <span class="skill-badge">Critical Evaluation</span>
+                <span class="skill-badge">Prompting</span>
+                <span class="skill-badge">Workflow Integration</span>
+            </div>
+            
+            <div class="button-group">
+                <a href="artifacts/Output_Evaluation_Rubric_Template.md" class="btn-primary">
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                    View Template
+                </a>
+                <button class="btn-secondary" onclick="toggleDetails(this)">
+                    <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                    Example
+                </button>
+            </div>
+            
+            <div class="hidden mt-4 p-4 bg-purple-50 border border-purple-200 rounded text-sm">
+                <strong>Example Use Case:</strong> Testing ticket classifier. Rubric scores 4 dimensions: correctness (0/1), confidence calibration (0–1), reasoning quality (0–1), ambiguity handling (0/1). Week 1: Evaluate all 100 tickets/day (establish baseline: 80% accuracy). Week 2+: Sample 10% daily (10 tickets). If accuracy drops <92%, increase sampling to 25% and investigate drift. Monthly: Aggregate, identify top errors (e.g., "confuses Account Access with Technical Support"), retrain prompt, re-evaluate.
+            </div>
+        </div>
+
+        <!-- Artifact 5: Ethics Impact Memo -->
+        <div class="artifact-card" id="ethics-memo">
+            <div class="artifact-header">
+                <div class="artifact-icon">
+                    <i data-lucide="shield-alert" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h3 class="artifact-title">Ethics Impact Memo</h3>
+                    <p class="artifact-subtitle">Ethics & Trust Skill | Guardrails & Governance</p>
+                </div>
+            </div>
+            
+            <p class="mb-4 text-gray-700">Documents ethical risks, hard guardrails, and trust metrics. Ethics is treated as system design, not compliance theater. Guardrails are engineered to survive model upgrades and organizational pressure.</p>
+            
+            <div class="use-case-box">
+                <strong>Use When:</strong> Designing a new system, preparing for regulatory audit, documenting risk mitigation, or proving to customers that your system is trustworthy.
+            </div>
+            
+            <div class="mt-4">
+                <strong class="text-sm text-gray-700">Contents:</strong>
+                <ul class="list-disc list-inside mt-2 text-sm text-gray-700 space-y-1">
+                    <li>System overview (name, owner, model(s), deployment date, review schedule)</li>
+                    <li>Ethical risks (bias, hallucination, over-reliance, false negatives, data leakage)</li>
+                    <li>Risk mitigation for each (testing, monitoring, escalation)</li>
+                    <li>5 hard guardrails (category boundary, safety escalation, confidence threshold, audit trail, prompt versioning)</li>
+                    <li>5 trust metrics (accuracy by segment, safety detection rate, false escalation rate, human override rate, harm tracking)</li>
+                    <li>Decision records (why we made this choice, alternatives considered, conditions for change)</li>
+                    <li>Governance checklist (monthly/quarterly/annual reviews)</li>
+                </ul>
+            </div>
+            
+            <div class="mt-4">
+                <div><strong class="text-sm text-gray-700">Foundational Skills:</strong></div>
+                <span class="skill-badge">Ethics & Trust</span>
+                <span class="skill-badge">Critical Evaluation</span>
+                <span class="skill-badge">AI Strategy</span>
+            </div>
+            
+            <div class="button-group">
+                <a href="artifacts/Ethics_Impact_Memo_Template.md" class="btn-primary">
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                    View Template
+                </a>
+                <button class="btn-secondary" onclick="toggleDetails(this)">
+                    <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                    Example
+                </button>
+            </div>
+            
+            <div class="hidden mt-4 p-4 bg-red-50 border border-red-200 rounded text-sm">
+                <strong>Example Use Case:</strong> Ticket classifier raises 5 ethical risks: (1) Bias in routing (premium vs. free customers), (2) hallucination (assigns fake category), (3) over-reliance (agents rubber-stamp high-confidence), (4) missed safety cases (fraud underdetected), (5) data leakage (PII in logs). Guardrails: (1) hard-coded allowed categories, (2) keyword scan for safety + auto-escalate, (3) low-confidence triggers human review, (4) audit trail logs all decisions, (5) prompt versioned in git. Trust metrics: accuracy by segment (±2%), safety detection rate (≥95%), override rate (3–5%), harm count (0).
+            </div>
+        </div>
+
+        <!-- Integration Matrix -->
+        <div class="section-intro mt-12">
+            <h2 class="text-2xl serif mb-4 text-gray-800">How These Templates Work Together</h2>
+            
+            <table class="integration-table">
+                <thead>
+                    <tr>
+                        <th>Phase</th>
+                        <th>Question</th>
+                        <th>Use This Artifact</th>
+                        <th>Output</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Planning</strong></td>
+                        <td>Should we deploy this AI?</td>
+                        <td><strong>Strategic AI Brief</strong></td>
+                        <td>GO/NO GO decision, sign-off from stakeholders</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Design</strong></td>
+                        <td>How do we prompt the model?</td>
+                        <td><strong>Prompting Toolkit</strong></td>
+                        <td>Production prompt library v1.0, test results</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Architecture</strong></td>
+                        <td>How does AI fit into our process?</td>
+                        <td><strong>Workflow Blueprint</strong></td>
+                        <td>Workflow diagram, decision logic, SLAs, audit trail spec</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Validation</strong></td>
+                        <td>Is the output actually good?</td>
+                        <td><strong>Output Evaluation Rubric</strong></td>
+                        <td>Baseline accuracy, weekly monitoring, improvement recommendations</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Governance</strong></td>
+                        <td>Is it trustworthy & safe?</td>
+                        <td><strong>Ethics Impact Memo</strong></td>
+                        <td>Risk register, guardrails, trust metrics, quarterly reviews</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Recommended Reading Order -->
+        <div class="section-intro">
+            <h2 class="text-2xl serif mb-4 text-gray-800">Recommended Reading Order</h2>
+            
+            <div class="flow-diagram">
+1️⃣  READ: Strategic AI Brief
+    └─ Understand your deployment goal, risk tolerance, stakeholder needs
+
+2️⃣  READ: Ethics Impact Memo
+    └─ Name the risks and design guardrails BEFORE you build anything
+
+3️⃣  BUILD: Prompting Toolkit
+    └─ Design your prompt, test it, establish baseline accuracy
+
+4️⃣  BUILD: Workflow Blueprint
+    └─ Define decision logic, human checkpoints, audit trail, monitoring
+
+5️⃣  VALIDATE: Output Evaluation Rubric
+    └─ Measure quality continuously, feed results into prompt retraining
+
+🔄 REPEAT: Monthly prompt refresh + quarterly governance review
+            </div>
+            
+            <p class="mt-4 text-gray-700"><strong>Why this order?</strong> Strategy first (clarify what you're building). Ethics first (design for safety, not as an afterthought). Then design → build → validate → iterate.</p>
+        </div>
+
+        <!-- Module Integration -->
+        <div class="section-intro">
+            <h2 class="text-2xl serif mb-4 text-gray-800">Linked to AI-ESG Curriculum Modules</h2>
+            
+            <table class="integration-table">
+                <thead>
+                    <tr>
+                        <th>Module</th>
+                        <th>Sci-Fi Metaphor</th>
+                        <th>Recommended Template</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Module 1: The 201 Gap</strong></td>
+                        <td>The Teleporter Problem / Jagged Frontier</td>
+                        <td><strong>Strategic AI Brief</strong> (define frontier & risk threshold)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Module 2: Framing the Relationship</strong></td>
+                        <td>HAL 9000 / JARVIS</td>
+                        <td><strong>Prompting Toolkit</strong> (design transparent AI instructions)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Module 3: Unmasking the Liability Sponge</strong></td>
+                        <td>The Red Shirt / Tricorder</td>
+                        <td><strong>Workflow Blueprint</strong> (define human accountability, evidence collection)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Module 4: You Are The Liability Sponge</strong></td>
+                        <td>The Asimov Constraint</td>
+                        <td><strong>Output Evaluation Rubric</strong> (measure circuit-breaker effectiveness)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Module 5: Escaping the Liability Sponge</strong></td>
+                        <td>The Lucas Cycle / Seil</td>
+                        <td><strong>Prompting Toolkit</strong> (hard-code wisdom, version control)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Module 6: The Refusal Stack</strong></td>
+                        <td>The Refusal Stack</td>
+                        <td><strong>Ethics Impact Memo</strong> (defense-in-depth guardrails)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Module 7: The Upside</strong></td>
+                        <td>The Mentat</td>
+                        <td><strong>Workflow Blueprint</strong> (human-AI partnership design)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Footer -->
+        <div class="section-intro text-center text-gray-600 text-sm border-t-2 border-gray-200 mt-12 pt-8">
+            <p><strong>AI-ESG Integrated Strategist Curriculum</strong></p>
+            <p>Artifact Templates Index | Foundational Skills Framework</p>
+            <p class="mt-4 text-xs">
+                <a href="Sci-Fi_Governance_Rosetta_Stone.html" class="text-teal-700 hover:underline">← Back to Rosetta Stone</a> | 
+                <a href="#strategic-brief" class="text-teal-700 hover:underline">Strategic Brief</a> | 
+                <a href="#prompting-toolkit" class="text-teal-700 hover:underline">Prompting</a> | 
+                <a href="#workflow-blueprint" class="text-teal-700 hover:underline">Workflow</a> | 
+                <a href="#evaluation-rubric" class="text-teal-700 hover:underline">Evaluation</a> | 
+                <a href="#ethics-memo" class="text-teal-700 hover:underline">Ethics</a>
+            </p>
+        </div>
+    </div>
+    
+    <!-- Toggle Details Script -->
+    <script>
+        function toggleDetails(btn) {
+            const card = btn.closest('.artifact-card');
+            const details = card.querySelector('.hidden');
+            details.classList.toggle('hidden');
+            
+            const icon = btn.querySelector('i');
+            icon.classList.toggle('rotate-180');
+        }
+        
+        // Initialize Lucide icons
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

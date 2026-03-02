@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AEIS | Sci-Fi to Governance Rosetta Stone</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+        
+        :root {
+            --header-height: 80px;
+            --primary-teal: #0f766e;
+            --primary-cyan: #0e7490;
+            --success-green: #15803d;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            color: #0f172a;
+            line-height: 1.7;
+        }
+        
+        h1, h2, h3, h4, h5, .serif {
+            font-family: 'Merriweather', serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary-teal) 0%, var(--primary-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header-bar {
+            background: white;
+            border-bottom: 2px solid var(--primary-teal);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .metaphor-card {
+            background: white;
+            border-left: 5px solid var(--primary-teal);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .metaphor-card:hover {
+            box-shadow: 0 8px 16px rgba(15, 118, 110, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .metaphor-title {
+            color: var(--primary-teal);
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .corporate-equiv {
+            display: inline-block;
+            background: #f0fdf4;
+            border-left: 3px solid var(--success-green);
+            padding: 0.5rem 1rem;
+            margin: 0.5rem 0;
+            border-radius: 0.25rem;
+            font-size: 0.95rem;
+            color: #166534;
+        }
+        
+        .governance-box {
+            background: #eff6ff;
+            border-left: 3px solid #0284c7;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0.25rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .artifact-tag {
+            display: inline-block;
+            background: #fef3c7;
+            color: #92400e;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            margin: 0.25rem 0.25rem 0.25rem 0;
+            font-weight: 500;
+        }
+        
+        .skill-badge {
+            display: inline-block;
+            background: #f3e8ff;
+            color: #6b21a8;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            margin: 0.25rem 0.25rem 0.25rem 0;
+            font-weight: 500;
+        }
+        
+        .module-section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 0.75rem;
+            border-top: 4px solid var(--primary-teal);
+        }
+        
+        .module-title {
+            color: var(--primary-teal);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .legend {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .legend-item {
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 0.5rem;
+            border-left: 4px solid;
+        }
+        
+        .legend-item.corporate {
+            border-left-color: var(--success-green);
+        }
+        
+        .legend-item.governance {
+            border-left-color: #0284c7;
+        }
+        
+        .legend-item.artifact {
+            border-left-color: #d97706;
+        }
+        
+        .search-box {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-teal);
+        }
+        
+        .hidden-card {
+            display: none;
+        }
+        
+        .filter-info {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header-bar">
+        <div class="max-w-6xl mx-auto px-6 py-6">
+            <h1 class="text-4xl gradient-text mb-2">Sci-Fi to Governance Rosetta Stone</h1>
+            <p class="text-gray-600 text-lg">Quick reference guide mapping fictional metaphors to AI-ESG governance principles</p>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="max-w-6xl mx-auto px-6 py-8">
+        
+        <!-- Search & Filter -->
+        <div class="search-box">
+            <input 
+                type="text" 
+                id="searchInput" 
+                class="search-input" 
+                placeholder="Search metaphors, governance principles, artifacts, or modules..."
+            >
+            <div class="filter-info" id="filterInfo"></div>
+        </div>
+        
+        <!-- Legend -->
+        <div class="module-section">
+            <h2 class="text-2xl serif mb-4 text-gray-800">How to Use This Guide</h2>
+            <p class="mb-4 text-gray-700">Each mapping shows the sci-fi metaphor, its corporate equivalent, the governance principle it teaches, and the key artifact that demonstrates it.</p>
+            <div class="legend">
+                <div class="legend-item corporate">
+                    <strong class="text-sm text-gray-700">Corporate Equivalent</strong>
+                    <p class="text-xs text-gray-600 mt-1">Real-world business analog</p>
+                </div>
+                <div class="legend-item governance">
+                    <strong class="text-sm text-gray-700">Governance Principle</strong>
+                    <p class="text-xs text-gray-600 mt-1">Core lesson or requirement</p>
+                </div>
+                <div class="legend-item artifact">
+                    <strong class="text-sm text-gray-700">Key Artifact</strong>
+                    <p class="text-xs text-gray-600 mt-1">Deliverable that operationalizes the principle</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Templates & Guides -->
+        <div class="module-section" id="templates-guides">
+            <h2 class="module-title">Templates & Practical Guides</h2>
+            <p class="mb-4 text-gray-700">Five operational artifacts that operationalize the foundational skills. Use these templates to plan, design, evaluate, and govern your AI systems.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                <a href="Artifacts_Index.html" style="text-decoration:none;">
+                    <div class="metaphor-card" style="border-left-color:#0f766e; cursor:pointer; height:100%;">
+                        <div class="metaphor-title" style="color:#0f766e;">📋 View All Templates</div>
+                        <div style="font-size:0.9rem; color:#64748b; margin-top:0.5rem;">Strategic Brief, Prompting Toolkit, Workflow Blueprint, Evaluation Rubric, Ethics Memo</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Foundational AI Skills Index -->
+        <div class="module-section" id="foundational-skills">
+            <h2 class="module-title">Foundational AI Skills</h2>
+            <p class="mb-4 text-gray-700">These five cross-cutting skills appear throughout the curriculum. Click a badge to jump to related module content.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <a href="#module-1-201-gap" class="metaphor-card" style="border-left-color:#0f766e; text-decoration:none;">
+                    <div class="metaphor-title">AI Strategy</div>
+                    <div class="corporate-equiv">Where to deploy AI, why, and with what risk threshold</div>
+                </a>
+                <a href="#module-2-framing" class="metaphor-card" style="border-left-color:#0e7490; text-decoration:none;">
+                    <div class="metaphor-title">Prompting</div>
+                    <div class="corporate-equiv">Intent-first prompt design across models and modalities</div>
+                </a>
+                <a href="#module-3-unmasking" class="metaphor-card" style="border-left-color:#15803d; text-decoration:none;">
+                    <div class="metaphor-title">Workflow Integration</div>
+                    <div class="corporate-equiv">Designing AI-native workflows with stop-cards and handoffs</div>
+                </a>
+                <a href="#module-4-you-are" class="metaphor-card" style="border-left-color:#0284c7; text-decoration:none;">
+                    <div class="metaphor-title">Critical Evaluation</div>
+                    <div class="corporate-equiv">Rubrics and audit trails for model outputs</div>
+                </a>
+                <a href="#module-6-refusal-stack" class="metaphor-card" style="border-left-color:#d97706; text-decoration:none;">
+                    <div class="metaphor-title">Ethics & Trust</div>
+                    <div class="corporate-equiv">Guardrails, circuit-breakers, and product trust decisions</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Module 1: The 201 Gap -->
+        <div id="module-1-201-gap" class="module-section metaphor-container">
+            <h2 class="module-title">Module 1: The 201 Gap</h2>
+            
+            <div class="metaphor-card">
+                <div class="metaphor-title">🚀 The Teleporter Problem</div>
+                <div class="corporate-equiv">Corporate: Reliability Failure / Hallucination</div>
+                <div class="governance-box">
+                    <strong>Governance Lesson:</strong> When complex reality is turned into dashboard metrics, context is destroyed; signal verification is required.
+                </div>
+                <div class="mt-4">
+                    <div><strong class="text-sm text-gray-700">Key Artifact:</strong></div>
+                    <span class="artifact-tag">Data Lineage Map</span>
+                </div>
+                <div class="mt-3">
+                    <div><strong class="text-sm text-gray-700">Foundational Skills:</strong></div>
+                    <span class="skill-badge">AI Strategy</span>
+                    <span class="skill-badge">Critical Evaluation</span>
+                </div>
+            </div>
+            
+            <div class="metaphor-card">
+                <div class="metaphor-title">🗺️ The Jagged Frontier</div>
+                <div class="corporate-equiv">Corporate: Capability Boundary / Competence Limit</div>
+                <div class="governance-box">
+                    <strong>Governance Lesson:</strong> AI capability does not drop off smoothly; task performance can crash suddenly outside the frontier.
+                </div>
+                <div class="mt-4">
+                    <div><strong class="text-sm text-gray-700">Key Artifact:</strong></div>
+                    <span class="artifact-tag">Frontier Mapping Document</span>
+                </div>
+                <div class="mt-3">
+                    <div><strong class="text-sm text-gray-700">Foundational Skills:</strong></div>
+                    <span class="skill-badge">AI Strategy</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Module 2: Framing the Relationship -->
+        <div id="module-2-framing" class="module-section metaphor-container">
+            <h2 class="module-title">Module 2: Framing the Relationship</h2>
+            
+            <div class="metaphor-card">
+                <div class="metaphor-title">🤖 HAL 9000</div>
+                <div class="corporate-equiv">Corporate: Black Box / Opaque System</div>
+                <div class="governance-box">
+                    <strong>Governance Lesson:</strong> If you wait until a crisis to ask for authority, you have already lost; mission-first architectures can remove humans.
+                </div>
+                <div class="mt-4">
+                    <div><strong class="text-sm text-gray-700">Key Artifact:</strong></div>
+                    <span class="artifact-tag">Premortem Charter</span>
+                </div>
+                <div class="mt-3">
+                    <div><strong class="text-sm text-gray-700">Foundational Skills:</strong></div>
+                    <span class="skill-badge">AI Strategy</span>
+                    <span class="skill-badge">Critical Evaluation</span>
+                </div>
+            </div>
+            
+            <div class="metaphor-card">
+                <div class="metaphor-title">🎯 JARVIS</div>
+                <div class="corporate-equiv">Corporate: Sociable System / Transparent Partner</div>
+                <div class="governance-box">
+                    <strong>Governance Lesson:</strong> The system should wrap around the human to enhance capacity without removing agency.
+                </div>
+                <div class="mt-4">
+                    <div><strong class="text-sm text-gray-700">Key Artifact:</strong></div>
+                    <span class="artifact-tag">Stop Card / Pause Button</span>
+                </div>
+                <div class="mt-3">
+                    <div><strong class="text-sm text-gray-700">Foundational Skills:</strong></div>
+                    <span class="skill-badge">Prompting</span>
+                    <span class="skill-badge">Workflow Integration</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Module 3: Unmasking the Liability Sponge -->
+        <div id="module-3-unmasking" class="module-section metaphor-container">
+            <h2 class="module-title">Module 3: Unmasking the Liability Sponge</h2>
+            
+            <div class="metaphor-card">
+                <div class="metaphor-title">👕 The Red Shirt</div>
+                <div class="corporate-equiv">Corporate: Liability Sponge / Scapegoat</div>
+                <div class="governance-box">
+                    <strong>Governance Lesson:</strong> Institutions use individuals to provide plausible deniability without giving them the power to change anything.
+                </div>
+                <div class="mt-4">
+                    <div><strong class="text-sm text-gray-700">Key Artifact:</strong></div>
+                    <span class="artifact-tag">Refusal of Assignment Memo</span>
+                </div>
+                <div class="mt-3">
+                    <div><strong class="text-sm text-gray-700">Foundational Skills:</strong></div>
+                    <span class="skill-badge">Workflow Integration</span>
+                    <span class="skill-badge">Ethics & Trust</span>
+                </div>
+            </div>
+            
+            <div class="metaphor-card">
+                <div class="metaphor-title">📡 Tricorder</div>
+                <div class="corporate-equiv">Corporate: Verification Tools / Evidence</div>
+                <div class="governance-box">
+                    <strong>Governance Lesson:</strong> The difference between a costume (uniform) and armour is information; data allows for safe retreat.
+                </div>
+                <div class="mt-4">
+                    <div><strong class="text-sm text-gray-700">Key Artifact:</strong></div>
+                    <span class="artifact-tag">Audit Trail / Log</span>
+                </div>
+                <div class="mt-3">
+                    <div><strong class="text-sm text-gray-700">Foundational Skills:</strong></div>
+                    <span class="skill-badge">Critical Evaluation</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Module 4: You Are The Liability Sponge -->
+        <div id="module-4-you-are" class="module-section metaphor-container">
+            <h2 class="module-title">Module 4: You Are The Liability Sponge</h2>
+            
+            <div class="metaphor-card">
+                <div class="metaphor-title">⚙️ The Asimov Constraint</div>
+                <div class="corporate-equiv">Corporate: Pre-Action Safety Control / Circuit Breaker</div>
+                <div class="governance-box">
+                    <strong>Governance Lesson:</strong> Ethical guidelines must be hard-coded into the system physics, not just suggestions, to handle silicon-speed risks.
+                </div>
+                <div class="mt-4">
+                    <div><strong class="text-sm text-gray-700">Key Artifact:</strong></div>
+                    <span class="artifact-tag">Circuit Breaker Rule</span>
+                </div>
+                <div class="mt-3">
+                    <div><strong class="text-sm text-gray-700">Foundational Skills:</strong></div>
+                    <span class="skill-badge">Ethics & Trust</span>
+                    <span class="skill-badge">Critical Evaluation</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Module 5: Escaping the Liability Sponge -->
+        <div id="module-5-escaping" class="module-section metaphor-container">
+            <h2 class="module-title">Module 5: Escaping the Liability Sponge</h2>
+            
+            <div class="metaphor-card">
+                <div class="metaphor-title">📖 The Lucas Cycle</div>
+                <div class="corporate-equiv">Corporate: Historical Data Integrity / Data Integrity Cycle</div>
+                <div class="governance-box">
+                    <strong>Governance Lesson:</strong> Wisdom must be hard-coded so it survives personnel turnover (Key Person Risk).
+                </div>
+                <div class="mt-4">
+                    <div><strong class="text-sm text-gray-700">Key Artifact:</strong></div>
+                    <span class="artifact-tag">The Empty Field Test</span>
+                </div>
+                <div class="mt-3">
+                    <div><strong class="text-sm text-gray-700">Foundational Skills:</strong></div>
+                    <span class="skill-badge">Workflow Integration</span>
+                    <span class="skill-badge">Critical Evaluation</span>
+                </div>
+            </div>
+            
+            <div class="metaphor-card">
+                <div class="metaphor-title">🔗 Seil</div>
+                <div class="corporate-equiv">Corporate: Persistence / Capacity Building</div>
+                <div class="governance-box">
+                    <strong>Governance Lesson:</strong> Strategic wisdom lies in strengthening connections and rehabilitating suppliers rather than immediate severance.
+                </div>
+                <div class="mt-4">
+                    <div><strong class="text-sm text-gray-700">Key Artifact:</strong></div>
+                    <span class="artifact-tag">Graduation Certificate</span>
+                </div>
+                <div class="mt-3">
+                    <div><strong class="text-sm text-gray-700">Foundational Skills:</strong></div>
+                    <span class="skill-badge">AI Strategy</span>
+                    <span class="skill-badge">Workflow Integration</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Module 6: The Refusal Stack -->
+        <div id="module-6-refusal-stack" class="module-section metaphor-container">
+            <h2 class="module-title">Module 6: The Refusal Stack</h2>
+            
+            <div class="metaphor-card">
+                <div class="metaphor-title">🛡️ The Refusal Stack</div>
+                <div class="corporate-equiv">Corporate: Defense-in-Depth Governance Architecture</div>
+                <div class="governance-box">
+                    <strong>Governance Lesson:</strong> Refusal is not a sticker or filter; it is a core engineering requirement for system stability.
+                </div>
+                <div class="mt-4">
+                    <div><strong class="text-sm text-gray-700">Key Artifact:</strong></div>
+                    <span class="artifact-tag">Refusal Requirements Spec (RRS)</span>
+                </div>
+                <div class="mt-3">
+                    <div><strong class="text-sm text-gray-700">Foundational Skills:</strong></div>
+                    <span class="skill-badge">Ethics & Trust</span>
+                    <span class="skill-badge">Critical Evaluation</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Module 7: The Upside -->
+        <div id="module-7-upside" class="module-section metaphor-container">
+            <h2 class="module-title">Module 7: The Upside — Unlocking Collaborative Potential</h2>
+            
+            <div class="metaphor-card">
+                <div class="metaphor-title">🧠 The Mentat</div>
+                <div class="corporate-equiv">Corporate: Augmented Practitioner / Human-in-the-Loop 2.0</div>
+                <div class="governance-box">
+                    <strong>Governance Lesson:</strong> A human who learns to think like a machine while maintaining a soul can control outcomes previously impossible to answer.
+                </div>
+                <div class="mt-4">
+                    <div><strong class="text-sm text-gray-700">Key Artifact:</strong></div>
+                    <span class="artifact-tag">Override Log</span>
+                </div>
+                <div class="mt-3">
+                    <div><strong class="text-sm text-gray-700">Foundational Skills:</strong></div>
+                    <span class="skill-badge">Prompting</span>
+                    <span class="skill-badge">Workflow Integration</span>
+                    <span class="skill-badge">Critical Evaluation</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="module-section text-center text-gray-600 text-sm border-t-2 border-gray-200 mt-12 pt-8">
+            <p><strong>AI-ESG Integrated Strategist Curriculum</strong></p>
+            <p>Sci-Fi Governance Reference | Generated 2026</p>
+        </div>
+    </div>
+    
+    <!-- Search Script -->
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const filterInfo = document.getElementById('filterInfo');
+        const cards = document.querySelectorAll('.metaphor-card');
+        
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            let visibleCount = 0;
+            
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    card.style.display = 'block';
+                    card.classList.remove('hidden-card');
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                    card.classList.add('hidden-card');
+                }
+            });
+            
+            if (query === '') {
+                filterInfo.textContent = '';
+            } else {
+                filterInfo.textContent = `Showing ${visibleCount} of ${cards.length} mappings`;
+            }
+        });
+    </script>
+</body>
+</html>
