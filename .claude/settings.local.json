@@ -67,7 +67,11 @@
       "Bash(if [ ! -f \"$resolved\" ])",
       "Bash(grep -l \"translation_toggle\\\\|toggle\\\\|mode-switch\\\\|corporate\\\\|philosophical\" \"/c/Users/Liezl/Documents/Github/khayali-xyz/public/curriculum/\"*.html)",
       "Bash(grep -l \"translation_toggle\\\\|toggle\\\\|mode-switch\\\\|corporate\\\\|philosophical\" \"/c/Users/Liezl/Documents/Github/curriculum/AI-ESG_Curriculum/AI-ESG/htmls/\"*.html)",
-      "Bash(wc -l \"/c/Users/Liezl/Documents/Github/curriculum/AI-ESG_Curriculum/js/\"*.js)"
+      "Bash(wc -l \"/c/Users/Liezl/Documents/Github/curriculum/AI-ESG_Curriculum/js/\"*.js)",
+      "Bash(grep -l \"script src\\\\|link rel\" *.html)",
+      "Bash(du -sh */)",
+      "Bash(head -n 300 The*)",
+      "Bash(identify *.png)"
     ],
     "deny": [],
     "ask": []

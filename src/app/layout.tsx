@@ -43,11 +43,6 @@ export default function RootLayout({
                 <h3 className="text-white font-bold mb-4">Publications</h3>
                 <ul className="space-y-2 text-gray-400">
                   <li>
-                    <a href="https://www.amazon.com/dp/B0FP5BMB59" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors">
-                      📚 Amazon Book
-                    </a>
-                  </li>
-                  <li>
                     <a href="https://substack.com/@khayali?" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors">
                       ✍️ Substack
                     </a>
@@ -77,6 +72,11 @@ export default function RootLayout({
                   <li>
                     <a href="https://www.youtube.com/@LiezlCoetzee" target="_blank" rel="noopener noreferrer" className="hover:text-red-400 transition-colors">
                       🎥 Liezl Coetzee
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.youtube.com/@khayali-tunes" target="_blank" rel="noopener noreferrer" className="hover:text-red-400 transition-colors">
+                      🎵 Khayali Tunes
                     </a>
                   </li>
                 </ul>

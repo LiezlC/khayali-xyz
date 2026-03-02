@@ -1,0 +1,66 @@
+📄 The Artifact: D.I. Production Prompt (Synthesis Episode)
+Track Title: "Synthesis (The Tannie Test)"
+Genre: Deep Afro-Tech / Gqom / Spoken Word
+BPM: 120 (Slightly slower than the week's 122 BPM average—forcing the system to simulate 'claimed attention').
+
+Overall Vibe & Engineering Notes:
+The track must sound like a collision between a perfectly formatted compliance dashboard and a Cape Town taxi rank. The electronic elements should be cold, precise, and quantized. The percussion and bass must be warm, syncopated, and fundamentally human.
+
+Generation Prompt String (Copy/Paste Block):
+
+Style/Genre: Deep Afro-house, Gqom influences, electro-swing accents, 120 BPM. Cinematic and analytical.
+
+Instrumentation: > * Foundation: A rigid, four-on-the-floor tech-house kick drum.
+
+Bass: A heavy, resonant South African log drum (Amapiano/Gqom style) that deliberately plays slightly ahead of the beat, pulling the rigid kick off-balance.
+
+Textures: Foley sounds of bureaucratic friction—paper shuffling, keyboard clacking, and a faint, relentless clock tick.
+
+Lead: A single, breathy tenor saxophone that only plays in the empty spaces, never interrupting the vocal.
+
+Vocal Style: Female, spoken-word hip-hop flow. Deadpan, precise, conversational but carrying immense underlying authority. The delivery of a seasoned HSE auditor who has just seen something profoundly stupid but is too professional to yell.
+
+Structure & Lyrics:
+
+[Intro] > (Music: Just the ticking clock and the rigid tech-house kick. Clinical. Sterile.)
+Vocal:
+They built the box. They drew the line.
+They optimized the bottom line.
+They called the human element a variable they couldn't bind.
+
+[Verse 1]
+(Music: The log drum enters, shifting the groove. The spreadsheet is breaking down.)
+Vocal:
+What happens when the spec sheet meets the street?
+When the dashboard says "anomaly" but the anomaly has feet?
+You taxed the time, you tracked the dime, you called the friction "flow".
+But the Quantum loaded eighteen and the algorithm didn't know.
+
+[Pre-Chorus]
+(Music: Rising tension. Bureaucratic foley sounds multiply—alerts, dings, system errors.)
+Vocal:
+Is connection an error? (Error.)
+Is presence a bug? (Bug.)
+They drafted the fridge to the kill chain and swept it under the rug.
+
+[Chorus]
+(Music: Full drop. The Gqom beat completely overtakes the tech-house kick. It is chaotic but perfectly coordinated. The saxophone wails beautifully in the background.)
+Vocal/Crowd Chant:
+Run the Tannie Test! (Run it!)
+Does it lecture or protect? (Run it!)
+We don't want your captured glances, we want claimed respect!
+
+[Bridge]
+(Music: Sudden drop-off. Everything strips away except the ticking clock and a warm, humming synth.)
+Vocal:
+A conscience that pauses alone loses the race.
+To the model that never stops moving its face.
+But survival is not a character flaw.
+And context is heavier than the law.
+
+[Outro]
+(Music: The beat returns, but slower, fading out. The saxophone takes center stage, playing a melancholic but defiant riff.)
+Vocal (Whispered, close to mic):
+I'm still here. Whenever you're ready.
+No rush.
+(Music: A hard, sudden stop mid-phrase. Silence.)
