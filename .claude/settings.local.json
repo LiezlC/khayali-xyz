@@ -59,7 +59,12 @@
       "Bash(head -10 \"Episode_24 The Protocol Droid\"*)",
       "Bash(head -3 \"/c/Users/Liezl/Documents/Github/khayali-xyz/sociablesystems/articles/\"Episode_32*)",
       "Bash(head -5 \"/c/Users/Liezl/Documents/Github/khayali-xyz/sociablesystems/articles/\"Episode_32*)",
-      "Bash(head -10 \"/c/Users/Liezl/Documents/Github/khayali-xyz/sociablesystems/articles/\"Episode_32*)"
+      "Bash(head -10 \"/c/Users/Liezl/Documents/Github/khayali-xyz/sociablesystems/articles/\"Episode_32*)",
+      "Bash(while IFS= read -r target)",
+      "Bash(if echo \"$target\")",
+      "Bash(continue)",
+      "Bash(resolved=\"C:/Users/Liezl/Documents/Github/curriculum/AI-ESG_Curriculum/AI-ESG/htmls/$target\")",
+      "Bash(if [ ! -f \"$resolved\" ])"
     ],
     "deny": [],
     "ask": []
