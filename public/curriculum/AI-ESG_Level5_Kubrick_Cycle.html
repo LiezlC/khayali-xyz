@@ -294,8 +294,25 @@
         .module-container {
             animation: fadeIn 0.6s ease-out;
         }
+        .assessment-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #d97706;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .case-study-box {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border: 2px solid #059669;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
     </style>
     <script src="js/translation_toggle.js"></script>
+    <script src="js/assessment_engine.js"></script>
+    <script src="js/case_study_engine.js"></script>
+    <script src="js/progress_tracker.js"></script>
 </head>
 
 <body class="min-h-screen flex flex-col">
@@ -877,6 +894,21 @@
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
+            });
+        }
+
+        // Initialize assessment engine
+        if (window.AEISAssessment) {
+            window.AEISAssessment.init({
+                moduleId: 'L5',
+                summaryTabId: 'summary',
+                hasExercise: false
+            });
+        }
+        if (window.AEISCaseStudy) {
+            window.AEISCaseStudy.init({
+                moduleId: 'L5',
+                summaryTabId: 'summary'
             });
         }
     </script>

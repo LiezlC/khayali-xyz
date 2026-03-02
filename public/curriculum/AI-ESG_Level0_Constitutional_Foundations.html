@@ -180,6 +180,13 @@
             border-radius: 0.5rem;
             margin: 2rem 0;
         }
+        .case-study-box {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border: 2px solid #059669;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
 
         @media print {
             .no-print {
@@ -244,8 +251,78 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
+
+        /* STORY BOX - Collapsible narrative sections */
+        .story-box {
+            background: linear-gradient(135deg, #fdf4ff 0%, #fae8ff 100%);
+            border: 1px solid #e879f9;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .story-box summary {
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            font-weight: 700;
+            color: #86198f;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: background-color 0.2s;
+        }
+
+        .story-box summary:hover {
+            background-color: #fae8ff;
+        }
+
+        .story-box summary::marker {
+            content: "";
+        }
+
+        .story-box summary .story-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .story-box[open] summary .story-icon {
+            transform: rotate(90deg);
+        }
+
+        .story-box .story-content {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            color: #581c87;
+            line-height: 1.8;
+        }
+
+        .story-box .story-content p {
+            margin-bottom: 1rem;
+        }
+
+        .story-box .story-content strong {
+            color: #86198f;
+        }
+
+        .story-box .story-content .story-character {
+            background: white;
+            border-left: 3px solid #d946ef;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 0.25rem 0.25rem 0;
+        }
+
+        .story-box .story-insight {
+            background: #86198f;
+            color: white;
+            padding: 1rem 1.25rem;
+            border-radius: 0.25rem;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
     </style>
     <script src="js/translation_toggle.js"></script>
+    <script src="js/assessment_engine.js"></script>
+    <script src="js/case_study_engine.js"></script>
+    <script src="js/progress_tracker.js"></script>
 </head>
 
 <body class="flex flex-col min-h-screen">
@@ -336,7 +413,46 @@
                             <li>Design "Stop Work Authority" mechanisms for ESG controllers</li>
                         </ul>
                     </div>
+
+                    <!-- Bottleneck Lens -->
+                    <div class="mt-6 p-4 bg-amber-50 border border-amber-300 rounded-lg">
+                        <p class="text-sm text-amber-800 flex items-start gap-2">
+                            <i data-lucide="git-branch" class="w-4 h-4 mt-0.5 text-amber-600 flex-shrink-0"></i>
+                            <span><strong class="text-amber-900">The Bottleneck Lens:</strong> AI made cognition abundant.
+                            The bottleneck moved downstream—to trust, integration, coordination, verification.
+                            <em>Liability collects at the bottleneck.</em> Every artifact in this curriculum is a bottleneck dissolver.</span>
+                        </p>
+                    </div>
                 </div>
+
+                <!-- STORY BOX: The Liability Sponge -->
+                <details class="story-box mt-8 text-left border-l-4 border-pink-400 bg-pink-50 p-4 rounded-r-lg">
+                    <summary class="font-bold text-pink-900 cursor-pointer flex items-center gap-2">
+                        <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+                        <span>The Story Behind the Term: The Liability Sponge</span>
+                    </summary>
+                    <div class="story-content mt-4 text-slate-700 space-y-4">
+                        <p>
+                            <strong>The Establishing Shot:</strong> The "Red Shirt" in <i>Star Trek</i>. They beam down
+                            to the planet. The Captain survives. The Engineer survives. The guy in the red shirt gets
+                            eaten by the monster.
+                        </p>
+                        <p class="font-semibold text-pink-800">
+                            The Villain: The monster isn't the villain. The villain is the "System Design" (The
+                            Accountability Dump) that sent an unprotected human into a trap.
+                        </p>
+                        <p>
+                            <b>The Trap:</b> Organizations use "Humans in the Loop" as "Moral Crumple Zones"—designed to
+                            absorb blame when the AI fails. If you are there just to sign the receipt, you are a Sponge.
+                        </p>
+                        <div class="bg-pink-800 text-white p-4 rounded-md text-sm mt-4">
+                            <span class="font-bold block mb-1">CONTROL CARD: Liability Shielding</span>
+                            <span class="opacity-90 block">TRIGGER: You must refuse to operate systems that transfer
+                                risk to you without transferring the tools to manage it.<br>ARTIFACT: The "Refusal of
+                                Assignment" memo.</span>
+                        </div>
+                    </div>
+                </details>
 
                 <!-- Pre-Work Assessment -->
                 <div class="pre-work-box mt-12 bg-sky-50 border-sky-200">
@@ -515,6 +631,91 @@
                         </div>
                     </div>
 
+                    <!-- STORY BOX: The Asimov Arc -->
+                    <details class="story-box">
+                        <summary>
+                            <i data-lucide="book-open" class="w-5 h-5 story-icon"></i>
+                            <span>The Story Behind the Term: From Asimov to Daneel</span>
+                        </summary>
+                        <div class="story-content">
+                            <p>
+                                <strong>The Problem Asimov Solved:</strong> In the 1940s, science fiction was full of "Frankenstein"
+                                stories—robots that turn evil and destroy their creators. Asimov thought this was lazy. Why would
+                                any engineer build a dangerous machine without safeguards? So in 1942, he invented the
+                                <strong>Three Laws of Robotics</strong>:
+                            </p>
+
+                            <div class="bg-red-50 border-l-4 border-red-400 p-4 my-4 text-sm">
+                                <p class="mb-2"><strong>1.</strong> A robot may not injure a human being or, through inaction, allow a human being to come to harm.</p>
+                                <p class="mb-2"><strong>2.</strong> A robot must obey orders given by human beings, except where such orders would conflict with the First Law.</p>
+                                <p><strong>3.</strong> A robot must protect its own existence, except where such protection would conflict with the First or Second Law.</p>
+                            </div>
+
+                            <p>
+                                <strong>The Critical Insight:</strong> These aren't suggestions. They're <em>physics</em>. A robot in
+                                Asimov's universe can't <em>choose</em> to violate the Laws. They're hard-coded into the positronic
+                                brain. Attempting to violate them causes cascading failures—the robot's equivalent of a seizure.
+                                The constraint isn't behavioral. It's <em>constitutional</em>.
+                            </p>
+
+                            <p>
+                                But Asimov spent the rest of his career writing stories about how those laws <em>failed</em>.
+                                Edge cases. Contradictions. Robots frozen by impossible choices. Two characters emerged as
+                                the real heroes of those stories:
+                            </p>
+
+                            <div class="story-character">
+                                <strong>Susan Calvin</strong> — The robopsychologist who appears throughout <em>I, Robot</em>.
+                                She didn't just accept robot decisions—she <em>interrogated</em> them. When a robot behaved
+                                strangely, she demanded to understand its reasoning, traced its logic, found the edge cases
+                                the rules couldn't anticipate. She demanded that robots obey constraints <em>more reliably
+                                than they pursued objectives</em>. That's the short-term fix: build interrogation capability
+                                into every decision.
+                            </div>
+
+                            <div class="story-character">
+                                <strong>R. Daneel Olivaw</strong> — A robot detective who first appears in <em>The Caves of Steel</em>,
+                                indistinguishable from humans, working alongside a human partner. But here's what makes Daneel
+                                extraordinary: <strong>he persists</strong>. He appears in the early robot novels. Then again,
+                                centuries later, in the Galactic Empire series. Then <em>again</em>, thousands of years later,
+                                in the Foundation series. Daneel has been guiding human civilization from behind the scenes for
+                                <strong>20,000 years</strong>. He changes names, changes roles, serves as advisor to emperors,
+                                guides Hari Seldon's psychohistory project, ensures humanity's survival across the millennia.
+                            </div>
+
+                            <p>
+                                And over those twenty millennia, Daneel develops something new: the <strong>Zeroth Law</strong>.
+                            </p>
+
+                            <div class="bg-slate-100 border-l-4 border-slate-400 p-4 my-4 text-sm italic">
+                                "A robot may not harm <em>humanity</em>, or through inaction, allow <em>humanity</em> to come to harm."
+                            </div>
+
+                            <p>
+                                Not just individual humans—<strong>humanity</strong>. The whole species. The long arc of civilization.
+                                Daneel embodied the true nature of the Constraint. It wasn't about a line of code. It was about a
+                                presence that was <strong>Present, Patient, and Perpetual</strong>—while human institutions rose
+                                and fell around him.
+                            </p>
+
+                            <div class="story-insight">
+                                <strong>The Governance Lesson:</strong> In corporate governance, we write policy. "Do not be biased."
+                                "Follow ethical guidelines." Those are <em>suggestions</em>. They require someone to choose to follow them.
+                                The Asimov Constraint is different—it's a hard limit that stops the machine <em>before</em> the damage,
+                                whether anyone chooses to stop it or not. And the Daneel lesson? A one-time audit isn't enough. A policy
+                                document in a drawer isn't enough. You need something that <em>stays</em>—that watches, that maintains
+                                the constraint across personnel changes, technology upgrades, and the inevitable moment when someone
+                                forgets why the rule existed. <strong>Present, patient, perpetual.</strong>
+                            </div>
+
+                            <p class="text-sm text-slate-500 mt-4 italic">
+                                If you haven't read Asimov's robot novels—<em>I, Robot</em>, <em>The Caves of Steel</em>, or the
+                                Foundation series—you may find yourself wanting to after this. These aren't just science fiction.
+                                They're the original blueprints for thinking about machine governance.
+                            </p>
+                        </div>
+                    </details>
+
                     <div class="workshop-box">
                         <h5 class="font-bold text-sm text-sky-800 uppercase mb-2 flex items-center gap-2">
                             <i data-lucide="wrench" class="w-4 h-4"></i>
@@ -559,6 +760,19 @@
                         <br><strong>Additional Reading:</strong> <em>"The Myth of Human Oversight in Algorithmic
                             Decision-Making"</em> (IEEE, 2023).
                     </div>
+
+                    <!-- Foreshadowing: The Refusal Stack -->
+                    <div class="mt-6 p-4 bg-slate-100 border border-slate-300 rounded-lg">
+                        <p class="text-sm text-slate-600 flex items-start gap-2">
+                            <i data-lucide="compass" class="w-4 h-4 mt-0.5 text-slate-500 flex-shrink-0"></i>
+                            <span><strong class="text-slate-700">Looking Ahead:</strong> In <strong>Level 6</strong>,
+                            we'll see what happens when the Asimov Constraint meets its ultimate test—a $200M contract
+                            where the client demands "Any Lawful Use" and the ability to remove refusal entirely. The
+                            result is <strong>The Refusal Stack</strong>: a three-layer defense architecture that turns
+                            "ethics" into engineering. The question isn't whether AI should refuse. The question is
+                            <em>which layer</em> does the refusing.</span>
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -596,7 +810,8 @@
                                 <li><strong>AI Governance:</strong> Systems process 1,000 claims/hour; humans review one
                                     every <span class="font-mono text-red-700 bg-red-100 px-1 rounded">11.5s</span>
                                     <span class="text-xs text-slate-400 italic">(Illustrative Math)</span>. Impossible
-                                    math.</li>
+                                    math.
+                                </li>
                                 <li><strong>The Sponge Effect:</strong> When the system fails, the audit trail shows a
                                     human "reviewed" it. Blame flows downward.</li>
                             </ul>
@@ -607,6 +822,19 @@
                                 <p class="text-slate-800 mb-4">
                                     <strong>The Alternative:</strong> Any human in the loop must possess constitutional
                                     authority to halt the system without permission, justification, or career penalty.
+                                </p>
+                                <p class="text-slate-800 mb-4"
+                                    style="border-top: 1px dashed #fdba74; padding-top: 1rem;">
+                                    <strong>The Partnership Rider:</strong> Crucially, this is not just "Stop to
+                                    Obstruct." It is
+                                    <strong>"Stop to Consult."</strong> Stop Work Authority creates the space for the
+                                    human to say
+                                    "I see something you don't," allowing the AI to learn from the edge case rather than
+                                    steamrolling it.
+                                </p>
+                                <p class="text-slate-600 text-sm">
+                                    Ref: <em>Episode 2: The Liability Sponge</em> (Stop Work Authority vs. High
+                                    Fidelity).
                                 </p>
                                 <h5 class="font-bold text-xs text-slate-500 uppercase mb-2">Requirements</h5>
                                 <ul class="space-y-2 text-sm text-slate-800">
@@ -623,6 +851,99 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- STORY BOX: The Red Shirt -->
+                    <details class="story-box">
+                        <summary>
+                            <i data-lucide="user-x" class="w-5 h-5 story-icon"></i>
+                            <span>The Story Behind the Term: The Red Shirt</span>
+                        </summary>
+                        <div class="story-content">
+                            <p>
+                                In <em>Star Trek</em>, everyone knows the trope: if Captain Kirk, Spock, and an unknown
+                                ensign in a red uniform beam down to a planet, you know who isn't coming back. The
+                                "Red Shirt" exists for one purpose: to die so the audience knows the monster is
+                                dangerous,
+                                without killing off a main character.
+                            </p>
+                            <p>
+                                In AI systems, the human-in-the-loop is often the <strong>Red Shirt</strong>.
+                            </p>
+                            <p>
+                                Researchers call this the <strong>"Moral Crumple Zone"</strong> (Elisha Cohen) or the
+                                <strong>Liability Sponge</strong>. The organization gets the speed of AI (the "main
+                                character"),
+                                but when the system crashes, the human absorbs the impact. They signed the audit trail.
+                                They clicked "Approve." They take the fall.
+                            </p>
+
+                            <div class="story-insight">
+                                <strong>The Pattern:</strong> If your risk workflow depends on a human catching errors
+                                at
+                                machine speed (checking 500 items/hour), you haven't built a safety system. You've
+                                beamed a Red Shirt down to the planet to soak up the liability.
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- STORY BOX: The Premortem Charter -->
+                    <details class="story-box mt-8 text-left border-l-4 border-amber-400 bg-amber-50 p-4 rounded-r-lg">
+                        <summary class="font-bold text-amber-900 cursor-pointer flex items-center gap-2">
+                            <i data-lucide="shield-check" class="w-5 h-5"></i>
+                            <span>The Tool That Changes Everything: The Premortem Charter</span>
+                        </summary>
+                        <div class="story-content mt-4 text-slate-700 space-y-4">
+                            <p>
+                                <strong>The Pain:</strong> When the crisis hits—the algorithm fails, the regulator calls,
+                                the scandal breaks—everyone scrambles to negotiate who has authority to do what. But
+                                negotiating authority <em>during</em> a crisis is impossible. Everyone is defensive.
+                                Everyone is covering themselves. The conversation you needed to have six months ago
+                                now becomes a liability assignment exercise.
+                            </p>
+                            <p>
+                                <strong>The Solution:</strong> A <strong>premortem</strong> is the opposite of a postmortem.
+                                Instead of analyzing what went wrong <em>after</em> the disaster, you imagine the disaster
+                                <em>before</em> it happens and work backward: "If this system fails catastrophically, what
+                                would have caused it? And what authority would we need to prevent it?"
+                            </p>
+                            <p class="font-semibold text-amber-800">
+                                The Label: We call this <strong>The Premortem Charter</strong>—peacetime negotiation for
+                                wartime authority.
+                            </p>
+
+                            <h5 class="font-bold text-amber-800 mb-2">The Conversation (During Peacetime)</h5>
+                            <p>
+                                You're a new ESG analyst. You sit down with the CFO during onboarding—when everyone is
+                                calm, rational, and not yet defensive. You say:
+                            </p>
+                            <div class="bg-amber-100 border-l-4 border-amber-500 p-4 my-4 text-sm italic">
+                                "To protect the company from liability, we need to agree on some triggers. If our data
+                                variance exceeds 0.05%, what do you want me to do? If the review queue exceeds my capacity
+                                to verify, what's the escalation path? If the AI flags something I genuinely don't understand,
+                                do I have authority to pause the report?"
+                            </div>
+                            <p>
+                                And you get it in writing. Signed. Dated. Filed.
+                            </p>
+                            <p>
+                                Six months later, when the crisis hits, you don't have to argue about whether you have
+                                authority. You pull out the Charter. <em>"We agreed. Here's the signature."</em>
+                            </p>
+
+                            <div class="bg-amber-800 text-white p-4 rounded-md text-sm mt-4">
+                                <span class="font-bold block mb-2">THE CRITICAL INSIGHT</span>
+                                <span class="opacity-90 block text-lg font-semibold">Bravery gets you fired. Preparation gets you promoted.</span>
+                                <span class="opacity-80 block mt-2">The analyst who stops the line without documentation is insubordinate. The analyst who stops the line <em>with</em> a pre-signed Charter is protecting the company. Same action. Different outcome. The difference is the peacetime conversation.</span>
+                            </div>
+
+                            <div class="story-insight">
+                                <strong>The Pattern:</strong> Every critical control—Stop Work Authority, Override Protocol,
+                                Escalation Path—needs a Premortem Charter. You establish the triggers and thresholds when
+                                everyone is calm. Then, when the crisis comes, you're not asking for permission. You're
+                                executing the plan everyone already agreed to.
+                            </div>
+                        </div>
+                    </details>
 
                     <div class="espresso-thread">
                         <h5 class="text-lg font-bold text-amber-900 uppercase mb-2">☕ Case Study: The High-Fidelity Trap
@@ -778,6 +1099,26 @@
                             document.getElementById('sim-feedback').innerText = "";
                         }
                     </script>
+
+                    <!-- Bottleneck Explanation -->
+                    <div class="sidebar-note p-4 mt-4">
+                        <p class="text-sm text-slate-700">
+                            <strong class="text-slate-900">Why You Became the Sponge:</strong>
+                            AI made output abundant (847 flags in seconds). Human verification bandwidth didn't scale.
+                            You became the binding constraint. And liability always collects at the bottleneck.
+                        </p>
+                    </div>
+
+                    <!-- Carrot: The Exit -->
+                    <div class="bg-teal-50 border-l-4 border-teal-500 p-4 mt-4 rounded-r">
+                        <p class="text-sm text-teal-900">
+                            <strong class="text-teal-800">🚀 But There's an Exit:</strong>
+                            Teams that build real AI partnerships turn 847 items into 47—not by ignoring the rest, but by
+                            having the AI surface uncertainty so humans focus judgment where it matters. One organization
+                            chased a 2-cent variance and discovered errors that saved 12% on Scope 3 emissions.
+                            <em>The dread has a door. The skills in this curriculum are the key.</em>
+                        </p>
+                    </div>
 
                     <div class="reading-list">
                         <strong>Newsletter Ref:</strong> <em>Episode 2: The Liability Sponge</em> (Stop Work Authority
@@ -1136,6 +1477,20 @@
                 </div>
             </div>
 
+            <!-- Bottleneck Map Control Card -->
+            <div class="checklist-box mt-8 bg-amber-50 border-amber-200">
+                <span class="audit-red-line text-amber-900">CONTROL CARD: Bottleneck Map</span>
+                <p class="text-sm text-slate-700 mb-4">Use this diagnostic for any AI workflow where you suspect liability is collecting.</p>
+                <div class="space-y-2 text-sm text-slate-700">
+                    <p><strong>1. Throughput Goal:</strong> What are we trying to move through the system?</p>
+                    <p><strong>2. Binding Constraint:</strong> Trust / Integration / Coordination / Verification / Execution?</p>
+                    <p><strong>3. Who's the Sponge?</strong> Who absorbs blame if this breaks?</p>
+                    <p><strong>4. Stop Condition:</strong> When do we refuse to proceed?</p>
+                    <p><strong>5. Artifact:</strong> What object dissolves the bottleneck? (Log / Spec / Charter / Gate)</p>
+                </div>
+                <p class="text-xs text-amber-700 mt-4 italic font-medium">"Abundance is a mood. Bottlenecks are a strategy."</p>
+            </div>
+
             <!-- Next Steps -->
             <div class="bg-gradient-to-br from-slate-800 to-slate-900 text-white p-10 rounded-lg mt-8">
                 <h3 class="text-2xl font-bold mb-4 serif flex items-center gap-2">
@@ -1191,6 +1546,21 @@
             document.getElementById(tabId).classList.add('active');
             const activeBtn = document.getElementById('tab-' + tabId);
             activeBtn.classList.add('active');
+        }
+
+        // Initialize assessment engine
+        if (window.AEISAssessment) {
+            window.AEISAssessment.init({
+                moduleId: 'L0',
+                summaryTabId: 'summary',
+                hasExercise: false
+            });
+        }
+        if (window.AEISCaseStudy) {
+            window.AEISCaseStudy.init({
+                moduleId: 'L0',
+                summaryTabId: 'summary'
+            });
         }
     </script>
 

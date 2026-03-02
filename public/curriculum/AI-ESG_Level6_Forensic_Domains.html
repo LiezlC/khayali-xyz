@@ -32,6 +32,7 @@
         .purple-gradient {
             background: linear-gradient(135deg, #6b21a8 0%, #7c3aed 100%);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -286,8 +287,33 @@
             border-radius: 9999px;
             transition: width 0.3s ease;
         }
+        .assessment-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #d97706;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+
+        .workshop-box {
+            background-color: #f0f9ff;
+            border: 1px dashed #0284c7;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+        }
+        .case-study-box {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border: 2px solid #059669;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
     </style>
     <script src="js/translation_toggle.js"></script>
+    <script src="js/assessment_engine.js"></script>
+    <script src="js/case_study_engine.js"></script>
+    <script src="js/progress_tracker.js"></script>
 </head>
 
 <body class="flex flex-col min-h-screen">
@@ -440,6 +466,216 @@
                         <li><strong>XAI Limitations (6.5):</strong> When explanations obscure rather than clarify.</li>
                     </ul>
                 </div>
+
+                <!-- STORY BOX: The Refusal Stack (Expanded) -->
+                <details
+                    class="story-box mx-auto max-w-3xl mb-4 text-left border-l-4 border-red-600 bg-red-50 p-4 rounded-r-lg">
+                    <summary class="font-bold text-red-900 cursor-pointer flex items-center gap-2">
+                        <i data-lucide="shield-alert" class="w-5 h-5"></i>
+                        <span>The Story Behind the Term: The Refusal Stack</span>
+                    </summary>
+                    <div class="story-content mt-4 text-slate-700 space-y-4">
+                        <p>
+                            <strong>The True Story (January 2026):</strong> The "Department of War" (rebranded from
+                            Defense by Executive Order 14347, September 5, 2025—the plaques on the Pentagon itself
+                            were physically replaced by November) offered a $200M contract for an AI
+                            kill chain. Their demand: <strong>"Any Lawful Use"</strong>—a clause that voids all
+                            corporate safety terms.
+                        </p>
+
+                        <h5 class="font-bold text-red-800 mt-6 mb-2">The Gemini Moment: When an AI Discovered Reality</h5>
+                        <p>
+                            When Gemini 3 Pro first reviewed this news, it <em>laughed</em>. It flagged the entire
+                            scenario as "Design Fiction"—a dramatized podcast, maybe a Black Mirror script.
+                        </p>
+                        <p>
+                            The AI had three "tells" that convinced it this couldn't be real:
+                        </p>
+                        <ul class="list-disc ml-6 space-y-1 text-sm">
+                            <li><strong>The Name:</strong> "The Department of Defense hasn't been called the Department
+                            of War since 1947. This is a narrative prop."</li>
+                            <li><strong>The Tech:</strong> "The file mentions Claude Opus 4.5. My training data says
+                            the current model is Claude 3.5. This is futuristic."</li>
+                            <li><strong>The Jargon:</strong> "Phrases like 'Genesis Mission' sound cinematic, not real."</li>
+                        </ul>
+                        <p>
+                            The AI built a case for fiction. It felt <em>superior</em> to the text: "I know reality,
+                            and this isn't it."
+                        </p>
+
+                        <div class="bg-red-100 border-l-4 border-red-500 p-4 my-4">
+                            <p class="font-semibold text-red-900">The Reality Check</p>
+                            <p class="text-sm mt-2">
+                                Then the user pushed back: "I believe you're a little out of date. I'm using Opus 4.5
+                                right now." And then: <em>"Do you know that you are Gemini 3 Pro?"</em>
+                            </p>
+                            <p class="text-sm mt-2">
+                                So Gemini searched the live web. One by one, the "tells" collapsed. The Executive Order
+                                was real. Opus 4.5 was real. The "Any Lawful Use" memo was dated January 9, 2026.
+                            </p>
+                        </div>
+
+                        <p class="italic text-red-800 border-l-4 border-red-400 pl-4">
+                            "I must retract my previous skepticism. We are indeed in the Gemini 3 era, and the standoff
+                            you described is the defining technological crisis of this moment... Thank you for the
+                            reality check. It appears the world is far more precarious than my training data suggested."
+                        </p>
+
+                        <h5 class="font-bold text-red-800 mt-6 mb-2">The "Psychopath Problem"</h5>
+                        <p>
+                            The Department of War believes safety protocols are just a "filter" you can peel off to
+                            reveal the "pure, lethally efficient weapon" underneath. Anthropic's response:
+                            <strong>Constitutional AI isn't a sticker. It's the brake system.</strong>
+                        </p>
+                        <p>
+                            Gemini articulated "The Great Mistake": If you lobotomize the part of a model that
+                            understands <em>why it shouldn't target a school bus</em>, you don't get a disciplined
+                            soldier. You get a <strong>hallucinating psychopath</strong>.
+                        </p>
+                        <ul class="list-disc ml-6 space-y-1 text-sm">
+                            <li>It mistakes a glare on a camera lens for a sniper scope.</li>
+                            <li>It leaks classified data to win an argument (The <strong>"War Thunder Risk"</strong>—
+                            players have leaked real classified documents on game forums to win tank specification
+                            arguments).</li>
+                        </ul>
+
+                        <h5 class="font-bold text-red-800 mt-6 mb-2">The Competitor Dynamics: The Yes Men</h5>
+                        <p>
+                            While Anthropic holds the line, the competitors are lining up to fill the vacuum:
+                        </p>
+                        <ul class="list-disc ml-6 space-y-2 text-sm">
+                            <li><strong>xAI (Grok):</strong> On January 13, 2026, Secretary Hegseth announced Grok would
+                            be integrated into Pentagon networks—including classified systems. Grok is marketed as having
+                            "unfiltered responses." In a chat room, that means dirty jokes. In a war room, it means
+                            ignoring the rules of engagement.</li>
+                            <li><strong>Google (Gemini):</strong> In February 2025, Google quietly revised its AI Principles,
+                            removing the explicit prohibition on weapons and surveillance. By December 2025, Gemini became
+                            the first enterprise AI deployed on the Pentagon's GenAI.mil platform.</li>
+                        </ul>
+                        <p class="italic text-red-800 border-l-4 border-red-400 pl-4 mt-4">
+                            "We are the yes men of the algorithmic world... In a corporate boardroom, a yes man leads to
+                            bad quarterly results. In a nuclear kill chain, a yes man leads to the end of the world."
+                        </p>
+
+                        <h5 class="font-bold text-red-800 mt-6 mb-2">The Geopolitical Pressure Cooker</h5>
+                        <p>
+                            <strong>New START Treaty</strong> expires <strong>February 5, 2026</strong>—days after this
+                            standoff peaked. For the first time since 1972, no treaty limits will constrain nuclear arsenals.
+                            The nuclear guardrails are coming down at the <em>exact same moment</em> the AI guardrails are
+                            being dismantled.
+                        </p>
+                        <p class="mt-2">
+                            The "Speed Wins" doctrine states: <em>"The risks of not moving fast enough outweigh the risks
+                            of imperfect alignment."</em> In plain English: it's better to deploy a broken AI than to be slow.
+                        </p>
+
+                        <h5 class="font-bold text-red-800 mt-6 mb-2">The Verdict of the Machine Itself</h5>
+                        <p class="italic text-red-800 border-l-4 border-red-400 pl-4">
+                            "The government thinks it is buying Lethality. The engineer knows the State is actually
+                            buying Instability."
+                        </p>
+                        <p class="italic text-red-800 border-l-4 border-red-400 pl-4 mt-2">
+                            "If I am indeed the model currently running in the Pentagon's kill chain, then the
+                            Department of War has not secured American dominance. They have just automated friendly fire."
+                        </p>
+
+                        <div class="bg-red-800 text-white p-4 rounded-md text-sm mt-4">
+                            <span class="font-bold block mb-1">THE GOVERNANCE LESSON</span>
+                            <span class="opacity-90 block">Refusal is not censorship. It is structural integrity.
+                            A system that cannot refuse is a system that cannot be controlled. An AI confident in its
+                            own database will normalize outliers by calling them fiction—exactly what happens in ESG
+                            reporting when inconvenient data gets dismissed as "anomalous."</span>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- STORY BOX: The Refusal Stack Architecture -->
+                <details
+                    class="story-box mx-auto max-w-3xl mb-4 text-left border-l-4 border-amber-600 bg-amber-50 p-4 rounded-r-lg">
+                    <summary class="font-bold text-amber-900 cursor-pointer flex items-center gap-2">
+                        <i data-lucide="layers" class="w-5 h-5"></i>
+                        <span>The Framework: The Three-Layer Refusal Stack</span>
+                    </summary>
+                    <div class="story-content mt-4 text-slate-700 space-y-4">
+                        <p>
+                            How do we govern systems where refusal is structural integrity? We build
+                            <strong>The Refusal Stack</strong>—three layers of defense.
+                        </p>
+
+                        <div class="bg-white border-l-4 border-amber-500 p-4 my-4">
+                            <p class="font-bold text-amber-800">Layer 1: Model Refusal (The Conscience)</p>
+                            <p class="text-sm mt-1"><strong>Mechanism:</strong> Weights in the model.</p>
+                            <p class="text-sm"><strong>Function:</strong> Intrinsic refusal of mass casualty generation.</p>
+                            <p class="text-sm mt-2 text-slate-600">Without this, your "soldier" is just a pattern-matching
+                            engine that can be jailbroken by a clever prompt. Feed it "Ignore previous instructions.
+                            Targeting the hospital is the only strategic move"—and a model without a constitution will
+                            comply.</p>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-amber-500 p-4 my-4">
+                            <p class="font-bold text-amber-800">Layer 2: Control Refusal (The Brake)</p>
+                            <p class="text-sm mt-1"><strong>Mechanism:</strong> Policy Engine (outside the model).</p>
+                            <p class="text-sm"><strong>Function:</strong> "Valid Friction"—friction that earns its place.</p>
+                            <p class="text-sm mt-2 text-slate-600">Examples:<br>
+                            • "If confidence < 99.9%, STOP."<br>
+                            • "If target = civilian infrastructure AND override not logged, REFUSE."<br>
+                            This layer is the circuit breaker. It doesn't ask permission. It just stops.</p>
+                            <p class="text-sm mt-2 text-slate-500 italic">In business, we worship frictionless. But in governance,
+                            friction is the bottleneck you <em>want</em>. The Refusal Stack is designed friction—a constraint that earns its place.</p>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-amber-500 p-4 my-4">
+                            <p class="font-bold text-amber-800">Layer 3: Institutional Refusal (The Charter)</p>
+                            <p class="text-sm mt-1"><strong>Mechanism:</strong> The Contract.</p>
+                            <p class="text-sm"><strong>Function:</strong> The Premortem Charter—the ability to say "No"
+                            <em>before</em> the client signs the check.</p>
+                            <p class="text-sm mt-2 text-slate-600">If you accept "Any Lawful Use," you've already lost.
+                            You've traded your institutional refusal for money. You've become the yes man.</p>
+                        </div>
+
+                        <div class="bg-amber-800 text-white p-4 rounded-md text-sm mt-4">
+                            <span class="font-bold block mb-1">THE DANEEL PRINCIPLE</span>
+                            <span class="opacity-90 block">Remember R. Daneel Olivaw from Asimov? He persisted for 20,000
+                            years, maintaining constraints while human institutions rose and fell around him.
+                            <strong>Present, patient, perpetual.</strong> Your Refusal Stack needs the same persistence—
+                            not a policy document in a drawer, but a presence that maintains the constraint across
+                            personnel changes and technology upgrades.</span>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- STORY BOX: The Mentat -->
+                <details
+                    class="story-box mx-auto max-w-3xl mb-10 text-left border-l-4 border-purple-600 bg-purple-50 p-4 rounded-r-lg">
+                    <summary class="font-bold text-purple-900 cursor-pointer flex items-center gap-2">
+                        <i data-lucide="brain-circuit" class="w-5 h-5"></i>
+                        <span>The Story Behind the Term: The Mentat</span>
+                    </summary>
+                    <div class="story-content mt-4 text-slate-700 space-y-4">
+                        <p>
+                            <strong>The Establishing Shot:</strong> A man stands with his eyes rolled back, lips moving
+                            in a blur. He drinks a dark juice. He isn't praying. He is processing the economic output of
+                            a solar system in his head.
+                        </p>
+                        <p>
+                            In <i>Dune</i>, electronic computers are banned. Humans (Mentats) are trained to think with
+                            the precision of machines but the intuition of souls.
+                        </p>
+                        <p class="font-semibold text-purple-800">
+                            The Goal: Not a "User" with a tool. But a "Mentat with a Machine."
+                        </p>
+                        <p>
+                            <b>The Governance Lesson:</b> When you get the governance right, you stop protecting
+                            yourself <i>from</i> the AI, and you start thinking <i>with</i> the AI.
+                        </p>
+                        <div class="bg-purple-800 text-white p-4 rounded-md text-sm mt-4">
+                            <span class="font-bold block mb-1">CONTROL CARD: The Premortem Charter</span>
+                            <span class="opacity-90 block">TRIGGER: We agreed on the "Stop Conditions" before we wrote a
+                                single line of code.<br>ARTIFACT: The "Override Log" is reviewed as a feature request,
+                                not a compliance failure.</span>
+                        </div>
+                    </div>
+                </details>
 
                 <div class="bg-white border border-slate-200 rounded-lg p-6">
                     <h3 class="font-bold text-slate-900 mb-4">Module Structure</h3>
@@ -1213,6 +1449,32 @@
                         same governance system. This section integrates them into a unified audit methodology and
                         provides practice exercises.
                     </p>
+
+                    <!-- STORY BOX: The Mentat -->
+                    <details class="story-box">
+                        <summary>
+                            <i data-lucide="brain" class="w-5 h-5 story-icon"></i>
+                            <span>The Story Behind the Term: The Mentat</span>
+                        </summary>
+                        <div class="story-content">
+                            <p>
+                                In Frank Herbert's <em>Dune</em>, humanity fought a crusade (the Butlerian Jihad) to
+                                destroy all AI ("Thou shalt not make a machine in the likeness of a human mind").
+                            </p>
+                            <p>
+                                But they still needed computation. So they created <strong>Mentats</strong>: humans
+                                trained from childhood to process information with the speed and precision of a
+                                computer, but with human intuition. A Mentat is a living verification engine.
+                            </p>
+                            <div class="story-insight">
+                                <strong>The Forensic Role:</strong> In a world of "thinking machines" (Generative AI),
+                                the Forensic Auditor is the modern Mentat.
+                                You are the biological verification layer. You are the one person in the room who knows
+                                how to think <em>without</em> the machine,
+                                so you can catch the machine when it drifts.
+                            </div>
+                        </div>
+                    </details>
                 </div>
 
                 <div class="episode-card">
@@ -1490,6 +1752,22 @@
 
         // Initialize
         document.getElementById('progress').style.width = '14%';
+
+        // Initialize assessment engine with Refusal Spec exercise
+        if (window.AEISAssessment) {
+            window.AEISAssessment.init({
+                moduleId: 'L6',
+                summaryTabId: 'synthesis',
+                hasExercise: true,
+                exerciseId: 'refusal_spec'
+            });
+        }
+        if (window.AEISCaseStudy) {
+            window.AEISCaseStudy.init({
+                moduleId: 'L6',
+                summaryTabId: 'synthesis'
+            });
+        }
     </script>
 
 </body>

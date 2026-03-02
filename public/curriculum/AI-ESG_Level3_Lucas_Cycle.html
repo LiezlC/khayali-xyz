@@ -197,8 +197,92 @@
         .level3-accent {
             color: #ea580c;
         }
+
+        /* STORY BOX - Collapsible narrative sections */
+        .story-box {
+            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+            border: 1px solid #fb923c;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .story-box summary {
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            font-weight: 700;
+            color: #c2410c;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: background-color 0.2s;
+        }
+
+        .story-box summary:hover {
+            background-color: #ffedd5;
+        }
+
+        .story-box summary::marker {
+            content: "";
+        }
+
+        .story-box summary .story-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .story-box[open] summary .story-icon {
+            transform: rotate(90deg);
+        }
+
+        .story-box .story-content {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            color: #7c2d12;
+            line-height: 1.8;
+        }
+
+        .story-box .story-content p {
+            margin-bottom: 1rem;
+        }
+
+        .story-box .story-content strong {
+            color: #c2410c;
+        }
+
+        .story-box .story-content .story-character {
+            background: white;
+            border-left: 3px solid #f97316;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 0.25rem 0.25rem 0;
+        }
+
+        .story-box .story-insight {
+            background: #c2410c;
+            color: white;
+            padding: 1rem 1.25rem;
+            border-radius: 0.25rem;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+        .assessment-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #d97706;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .case-study-box {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border: 2px solid #059669;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
     </style>
     <script src="js/translation_toggle.js"></script>
+    <script src="js/assessment_engine.js"></script>
+    <script src="js/case_study_engine.js"></script>
+    <script src="js/progress_tracker.js"></script>
 </head>
 
 <body class="flex flex-col min-h-screen">
@@ -278,6 +362,37 @@
                         institutional practices, audit frameworks, and technical controls needed to move ESG
                         reporting from theater to evidence.
                     </div>
+
+                    <!-- STORY BOX: Why "Lucas"? -->
+                    <details class="story-box">
+                        <summary>
+                            <i data-lucide="book-open" class="w-5 h-5 story-icon"></i>
+                            <span>The Story Behind the Term: The Lucas Cycle</span>
+                        </summary>
+                        <div class="story-content">
+                            <p class="mb-4">
+                                <strong>The Pain:</strong> You have a brilliant analyst who knows every data quirk. Then
+                                she leaves. We call this the <strong>Turnover Black Hole</strong>. The data remains, but
+                                the meaning vanishes.
+                            </p>
+                            <p class="mb-4">
+                                <strong>The Solution:</strong> You need "Selective Memory"—a way to hard-code her
+                                intuition into the system so the wisdom survives.
+                            </p>
+                            <p class="mb-4 font-semibold text-orange-800">
+                                The Label: We call this "The Lucas Cycle."
+                            </p>
+                            <p class="mb-4">
+                                Named after the only characters in Star Wars to witness the entire 9-film saga:
+                                <strong>R2-D2 and C-3PO</strong>. Generals died, Empires fell, but the Droids
+                                remembered. They were the continuity.
+                            </p>
+                            <div class="story-insight">
+                                <strong>The Lesson:</strong> Most organizations rely on heroes (Jedi). But heroes
+                                retire. Droids result in audit trails. You need to build a system that remembers.
+                            </div>
+                        </div>
+                    </details>
 
                     <p class="text-xl text-slate-600 leading-relaxed mb-8">
                         By the end of Level 3, participants can design and audit <strong>"Sociable
@@ -734,6 +849,21 @@
             document.getElementById(tabId).classList.add('active');
             const activeBtn = document.getElementById('tab-' + tabId);
             activeBtn.classList.add('active');
+        }
+
+        // Initialize assessment engine
+        if (window.AEISAssessment) {
+            window.AEISAssessment.init({
+                moduleId: 'L3',
+                summaryTabId: 'outcomes',
+                hasExercise: false
+            });
+        }
+        if (window.AEISCaseStudy) {
+            window.AEISCaseStudy.init({
+                moduleId: 'L3',
+                summaryTabId: 'outcomes'
+            });
         }
     </script>
 

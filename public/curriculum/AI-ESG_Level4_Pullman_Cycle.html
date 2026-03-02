@@ -300,8 +300,100 @@
             color: #14b8a6;
             font-weight: bold;
         }
+
+        /* STORY BOX - Collapsible narrative sections */
+        .story-box {
+            background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+            border: 1px solid #5eead4;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .story-box summary {
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            font-weight: 700;
+            color: #0f766e;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: background-color 0.2s;
+        }
+
+        .story-box summary:hover {
+            background-color: #ccfbf1;
+        }
+
+        .story-box summary::marker {
+            content: "";
+        }
+
+        .story-box summary .story-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .story-box[open] summary .story-icon {
+            transform: rotate(90deg);
+        }
+
+        .story-box .story-content {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            color: #134e4a;
+            line-height: 1.8;
+        }
+
+        .story-box .story-content p {
+            margin-bottom: 1rem;
+        }
+
+        .story-box .story-content strong {
+            color: #0f766e;
+        }
+
+        .story-box .story-content .story-character {
+            background: white;
+            border-left: 3px solid #14b8a6;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 0.25rem 0.25rem 0;
+        }
+
+        .story-box .story-insight {
+            background: #0f766e;
+            color: white;
+            padding: 1rem 1.25rem;
+            border-radius: 0.25rem;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+        .assessment-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #d97706;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+
+        .workshop-box {
+            background-color: #f0f9ff;
+            border: 1px dashed #0284c7;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+        }
+        .case-study-box {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border: 2px solid #059669;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
     </style>
     <script src="js/translation_toggle.js"></script>
+    <script src="js/assessment_engine.js"></script>
+    <script src="js/case_study_engine.js"></script>
+    <script src="js/progress_tracker.js"></script>
 </head>
 
 <body class="flex flex-col min-h-screen">
@@ -361,6 +453,10 @@
                     class="nav-item px-6 py-4 font-medium transition-colors hover:bg-pink-50 focus:outline-none whitespace-nowrap">
                     Ep 33: The Seil Protocol
                 </button>
+                <button onclick="switchTab('summary')" id="tab-summary"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-pink-50 focus:outline-none whitespace-nowrap">
+                    Summary
+                </button>
             </div>
         </div>
     </nav>
@@ -393,6 +489,161 @@
                             vulnerability: their private meaning-making becomes data. Their stabilizers become legible.
                             Their inner voice becomes governable.
                         </p>
+
+                        <!-- STORY BOX: The Pullman Vocabulary -->
+                        <details class="story-box">
+                            <summary>
+                                <i data-lucide="book-open" class="w-5 h-5 story-icon"></i>
+                                <span>The Story Behind the Terms: Bolvangar vs Seil</span>
+                            </summary>
+                            <div class="story-content">
+                                <p class="mb-4">
+                                    <strong>The Pain:</strong> A supplier fails an audit. The standard reaction is "Fire
+                                    them." But firing a supplier is expensive—you lose data history and spend 18 months
+                                    onboarding a replacement.
+                                </p>
+                                <p class="mb-4">
+                                    <strong>The Solution:</strong> We need to calculate the "Return on Rehabilitation."
+                                    It is often cheaper to fix a partner than to fire them.
+                                </p>
+                                <p class="mb-4 font-semibold text-teal-800">
+                                    The Label: We call the "Fire Them" instinct <strong>The Bolvangar Trap</strong>.
+                                </p>
+
+                                <p class="text-slate-600 mb-4">
+                                    If you haven't read Philip Pullman's <em>His Dark Materials</em> trilogy—and I genuinely hope
+                                    you will after this—here's what you need to know:
+                                </p>
+
+                                <h5 class="font-bold text-teal-800 mb-2">The World</h5>
+                                <p class="mb-4">
+                                    In Pullman's universe, every person's soul lives <em>outside</em> their body, as an animal
+                                    companion called a <strong>daemon</strong>. The daemon isn't a pet. It's <em>you</em>—your
+                                    conscience, your intuition, your capacity for genuine connection. When you're a child, your
+                                    daemon can change shape, reflecting your still-forming identity. When you mature, it settles
+                                    into a single form that reflects your true nature.
+                                </p>
+                                <p class="mb-4">
+                                    The bond between person and daemon is sacred. If you move too far from your daemon, you feel
+                                    physical pain—a deep wrongness, like a part of yourself being stretched past its limits. The
+                                    connection isn't optional. It's <em>constitutive</em>. It's what makes you human.
+                                </p>
+
+                                <h5 class="font-bold text-red-800 mb-2">The Horror: Bolvangar</h5>
+                                <p class="mb-4">
+                                    The Magisterium—the authoritarian religious power in Pullman's world—decides that the daemon
+                                    bond is dangerous. It creates doubt, questions, independent thought. They want <em>compliant</em>
+                                    citizens, not whole ones.
+                                </p>
+                                <p class="mb-4">
+                                    So they build a facility in the Arctic called <strong>Bolvangar</strong>. A clean, efficient,
+                                    scientific facility. They bring children there and perform a procedure called "intercision"—they
+                                    sever the bond between child and daemon.
+                                </p>
+
+                                <div class="bg-red-50 border-l-4 border-red-400 p-4 my-4 text-sm">
+                                    <p class="font-semibold text-red-900 mb-2">The unbearable part: The children survive.</p>
+                                    <p class="text-red-800">
+                                        They walk and breathe and follow instructions. They eat and sleep and answer questions.
+                                        But something essential is gone. The light behind the eyes. The capacity for genuine
+                                        relationship. They are <em>administratively alive</em> but <em>spiritually severed</em>.
+                                        Pullman calls them "the severed ones." Compliant, obedient, and utterly hollow.
+                                    </p>
+                                </div>
+
+                                <div class="story-character">
+                                    <strong>Bolvangar (The Governance Parallel)</strong> — This is what we do to suppliers when our
+                                    only response to failure is termination. A supplier struggles with data completeness. The
+                                    compliance instinct says: <em>Bolvangar</em>. Cut them. Sever the relationship. Protect the
+                                    supply chain from contamination. It feels efficient. It feels safe. But look at what you've
+                                    destroyed: five years of relationship history—<em>gone</em>. The supplier's incentive to
+                                    improve—<em>gone</em>. The institutional knowledge of <em>why</em> they struggled—<em>gone</em>.
+                                    You've created a "clean" dataset. But you've hollowed it out.
+                                </div>
+
+                                <div class="bg-slate-100 border-l-4 border-slate-400 p-4 my-4 text-sm">
+                                    <p class="font-semibold text-slate-800 mb-2">🤖 The Star Wars Parallel</p>
+                                    <p class="text-slate-700">
+                                        If Bolvangar feels too dark, here's the same lesson from <em>Revenge of the Sith</em>:
+                                        Senator Organa orders C-3PO's memory wiped. The hardware survives—same golden chassis,
+                                        same fussy voice. But everything C-3PO experienced is <em>gone</em>. Every relationship,
+                                        every context, every learned behavior. When you terminate a supplier and onboard a
+                                        replacement, you're doing the same thing. You still have <em>a</em> vendor. But you've
+                                        wiped the institutional memory.
+                                    </p>
+                                </div>
+
+                                <h5 class="font-bold text-teal-800 mt-6 mb-2">The Alternative: Seil</h5>
+                                <p class="mb-4">
+                                    <strong>Seil</strong> is a Norwegian word. It means "rope" or "sail"—something that connects,
+                                    that holds, that enables movement together.
+                                </p>
+                                <p class="mb-4">
+                                    The Seil Protocol asks a different question: Instead of "Should we sever this connection?", ask
+                                    "<strong>Can we strengthen it?</strong>" If a supplier has a data gap, can we help them close it?
+                                    If they're struggling with digitization, can we provide tools? If they failed an audit, can we put
+                                    them on a rehabilitation path—<strong>Breach → Probation → Good Standing</strong>—instead of just
+                                    cutting them loose?
+                                </p>
+
+                                <div class="bg-teal-100 border-l-4 border-teal-500 p-4 my-4 text-sm italic text-teal-900">
+                                    "Hold tight enough to support, loose enough to let grow."
+                                </div>
+
+                                <div class="bg-teal-800 text-white p-4 rounded-md text-sm mt-4">
+                                    <span class="font-bold block mb-1">CONTROL CARD: Relational Continuity</span>
+                                    <span class="opacity-90 block">TRIGGER: Deletion of a supplier record requires
+                                        VP-level override.<br>ARTIFACT: The "Rehabilitation Plan" document in the
+                                        supplier file.</span>
+                                </div>
+
+                                <h5 class="font-bold text-teal-800 mt-6 mb-2">The Daemon Health Index</h5>
+                                <p class="mb-4">
+                                    In the story, a healthy daemon is vibrant, responsive, communicative—constantly in dialogue with
+                                    its person. A sick daemon becomes listless, distant, silent. You can see the health of the
+                                    relationship in the daemon's behavior.
+                                </p>
+                                <p class="mb-4">
+                                    The Daemon Health Index translates that into quantifiable metrics—a composite score of relationship
+                                    vitality:
+                                </p>
+                                <ul class="list-disc list-inside text-sm text-slate-700 mb-4 space-y-2">
+                                    <li><strong>Response Time</strong> — How quickly does the supplier engage when you reach out?</li>
+                                    <li><strong>Voluntary Disclosure Frequency</strong> — Do they share information proactively, or only when demanded?</li>
+                                    <li><strong>Data Quality Slope</strong> — Is their accuracy <em>improving</em> over time, or stagnating?</li>
+                                </ul>
+
+                                <div class="bg-slate-100 border-l-4 border-slate-400 p-4 my-4 text-sm">
+                                    <p class="font-semibold text-slate-800 mb-2">The Key Insight: Trajectory > Current Level</p>
+                                    <p class="text-slate-700">
+                                        A supplier at 70% accuracy but <em>climbing</em> is healthier than a supplier at 85% accuracy
+                                        but <em>flat</em>. The first one is learning. The second one has stopped growing. A positive
+                                        slope means the daemon is healthy. The relationship is <em>alive</em>.
+                                    </p>
+                                </div>
+
+                                <p class="mb-4">
+                                    <strong>Trigger:</strong> If the Daemon Health Index drops below 70, the system blocks new contracts
+                                    until a "Health Check" meeting occurs. It forces a conversation <em>before</em> anyone reaches for
+                                    the severance option.
+                                </p>
+
+                                <div class="story-insight">
+                                    <strong>The Pullman Question:</strong> When safety is achieved by removing the capacity for
+                                    connection, what exactly has been saved? The goal isn't compliance—it's <strong>Exit Readiness</strong>.
+                                    Success is when the supplier has built enough internal capacity that they no longer need your intensive
+                                    monitoring. Their daemon is healthy. They can walk on their own. You don't get a monthly compliance
+                                    report anymore. You get a <strong>Graduation Certificate</strong>.
+                                </div>
+
+                                <p class="text-sm text-slate-500 mt-4 italic">
+                                    If you haven't read Pullman's <em>His Dark Materials</em> trilogy—<em>The Golden Compass</em>,
+                                    <em>The Subtle Knife</em>, <em>The Amber Spyglass</em>—you may find yourself wanting to after this.
+                                    These aren't just fantasy novels. They're meditations on what it means to have a soul, and what
+                                    institutions do when they decide souls are inconvenient.
+                                </p>
+                            </div>
+                        </details>
                     </div>
 
                     <!-- Learning Architecture -->
@@ -689,6 +940,16 @@
                             "safety" interventions in relational AI. When platforms face panic about harm, they often
                             deploy blunt instruments. They do not only block instructional harm. They also damage
                             relational continuity.
+                        </div>
+
+                        <div class="key-concept" style="border-color: #f472b6;">
+                            <strong>The Partnership Cost:</strong> This is not just a safety failure; it is a capability
+                            failure.
+                            A system that has been "Bolvangared"—lobotomized for safety—cannot be a high-performance
+                            partner.
+                            It cannot improvise. It cannot debate. It cannot solve problems at the point of contact.
+                            <br><em>The floor of safety has been lowered so far that the ceiling of partnership is
+                                unreachable.</em>
                         </div>
                     </div>
 
@@ -1292,6 +1553,64 @@
             </div>
         </section>
 
+        <!-- Summary -->
+        <section id="summary" class="tab-content">
+            <h3 class="text-3xl font-bold text-slate-900 mb-6" style="font-family:'Merriweather',serif">Module Summary</h3>
+
+            <div class="bg-white p-8 rounded-lg border-2 border-teal-600 mb-8">
+                <h4 class="font-bold text-xl text-slate-900 mb-4 flex items-center gap-2">
+                    <i data-lucide="check-circle" class="w-6 h-6 text-teal-600"></i>
+                    Key Takeaways
+                </h4>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h5 class="font-bold text-sm text-slate-700 mb-2 uppercase tracking-wide">Conceptual Framework</h5>
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li>The Visible Soul Problem: when interiority becomes auditable</li>
+                            <li>Bolvangar (Intercision) as premature severing of human-AI relationships</li>
+                            <li>Settling as pattern lock-in that resists healthy evolution</li>
+                            <li>Irreversibility as the highest-stakes governance trigger</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="font-bold text-sm text-slate-700 mb-2 uppercase tracking-wide">Practical Tools Acquired</h5>
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li>Daemon Health Index for relationship monitoring</li>
+                            <li>Irreversibility Assessment protocol</li>
+                            <li>Seil Protocol for restorative governance</li>
+                            <li>Premortem Charter for peacetime-wartime authority</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comprehension check and exercise will be injected here by assessment_engine.js -->
+
+            <!-- Next Steps -->
+            <div class="bg-gradient-to-br from-slate-800 to-slate-900 text-white p-10 rounded-lg mt-8">
+                <h3 class="text-2xl font-bold mb-4" style="font-family:'Merriweather',serif">
+                    <i data-lucide="arrow-right-circle" class="w-6 h-6 text-teal-400 inline mr-2"></i>
+                    Next Module
+                </h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-teal-400 font-bold mb-2">Level 5: The Kubrick Cycle</h4>
+                        <p class="text-slate-300 text-sm mb-4">
+                            When systems can't refuse. HAL 9000 wasn't malfunctioning — it was perfectly aligned
+                            to irreconcilable objectives. You'll learn to design refusal mechanisms and break
+                            compulsory continuation.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-center">
+                        <button class="bg-teal-600 hover:bg-teal-500 text-white font-bold py-4 px-8 rounded-lg transition flex items-center gap-3 text-lg">
+                            Begin Level 5
+                            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <!-- Footer -->
@@ -1337,6 +1656,22 @@
             document.getElementById(tabId).classList.add('active');
             const activeBtn = document.getElementById('tab-' + tabId);
             activeBtn.classList.add('active');
+        }
+
+        // Initialize assessment engine with Premortem Charter exercise
+        if (window.AEISAssessment) {
+            window.AEISAssessment.init({
+                moduleId: 'L4',
+                summaryTabId: 'summary',
+                hasExercise: true,
+                exerciseId: 'premortem_charter'
+            });
+        }
+        if (window.AEISCaseStudy) {
+            window.AEISCaseStudy.init({
+                moduleId: 'L4',
+                summaryTabId: 'summary'
+            });
         }
     </script>
 </body>

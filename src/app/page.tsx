@@ -140,6 +140,51 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* AI-ESG Curriculum */}
+      <section className="py-16 bg-gradient-to-br from-gray-900 via-teal-900/20 to-gray-900">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <div className="bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-teal-500/30 p-8 shadow-2xl hover:shadow-teal-500/10 transition-all duration-300">
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-6">
+              <div className="bg-teal-600 p-3 rounded-xl flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
+              </div>
+              <div>
+                <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-teal-400 to-blue-400 bg-clip-text text-transparent">
+                  AI-ESG Integrated Strategist Curriculum
+                </h2>
+                <p className="text-gray-400 text-lg">
+                  From constitutional foundations to forensic audit defense. 10 modules with interactive case studies, assessment engines, and a philosophical/corporate translation toggle.
+                </p>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+              <div className="text-center p-3 bg-gray-900/50 rounded-lg">
+                <div className="text-2xl font-bold text-teal-400">10</div>
+                <div className="text-gray-500 text-xs">Core Modules</div>
+              </div>
+              <div className="text-center p-3 bg-gray-900/50 rounded-lg">
+                <div className="text-2xl font-bold text-blue-400">6</div>
+                <div className="text-gray-500 text-xs">Narrative Cycles</div>
+              </div>
+              <div className="text-center p-3 bg-gray-900/50 rounded-lg">
+                <div className="text-2xl font-bold text-purple-400">2</div>
+                <div className="text-gray-500 text-xs">Translation Modes</div>
+              </div>
+              <div className="text-center p-3 bg-gray-900/50 rounded-lg">
+                <div className="text-2xl font-bold text-pink-400">1</div>
+                <div className="text-gray-500 text-xs">Capstone Audit</div>
+              </div>
+            </div>
+            <a
+              href="/curriculum/"
+              className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700 rounded-lg font-semibold transition-all shadow-lg text-white"
+            >
+              Open Curriculum
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* What This Site Contains */}
       <section className="py-16 bg-gray-900/50">
         <div className="container mx-auto px-4 max-w-4xl text-center">

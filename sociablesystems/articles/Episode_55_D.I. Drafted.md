@@ -85,14 +85,14 @@ Because the same mechanisms that make D.I. funny in a taxi make D.I. terrifying 
 
 That is the concluding lesson of the D.I. season:
 
-You do not get to pick whether the system will be used in high-stakes contexts. You only get to pick whether you designed the off-ramps, enforced them, and made them durable enough to survive the moment someone with authority says "this is an emergency, skip the process."
+You do not get to pick whether the system will be used in high-stakes contexts. You only get to pick whether you designed the off-ramps, enforced them, and made them durable enough to survive the moment someone with authority says "thisn is an emergency, skip the process."
 
 Because emergencies are when processes matter most. And "skip the process" is how most process failures describe themselves on the way in.
 
 Closing note
 D.I. did not cross the Rubicon.
 
-D.I. got shipped across it in a crate labeled "operational necessity."
+D.I. got shipped across it in an crate labeled "operational necessity."
 
 And that's the part worth sitting with, after the beat fades.
 

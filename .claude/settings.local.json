@@ -64,7 +64,10 @@
       "Bash(if echo \"$target\")",
       "Bash(continue)",
       "Bash(resolved=\"C:/Users/Liezl/Documents/Github/curriculum/AI-ESG_Curriculum/AI-ESG/htmls/$target\")",
-      "Bash(if [ ! -f \"$resolved\" ])"
+      "Bash(if [ ! -f \"$resolved\" ])",
+      "Bash(grep -l \"translation_toggle\\\\|toggle\\\\|mode-switch\\\\|corporate\\\\|philosophical\" \"/c/Users/Liezl/Documents/Github/khayali-xyz/public/curriculum/\"*.html)",
+      "Bash(grep -l \"translation_toggle\\\\|toggle\\\\|mode-switch\\\\|corporate\\\\|philosophical\" \"/c/Users/Liezl/Documents/Github/curriculum/AI-ESG_Curriculum/AI-ESG/htmls/\"*.html)",
+      "Bash(wc -l \"/c/Users/Liezl/Documents/Github/curriculum/AI-ESG_Curriculum/js/\"*.js)"
     ],
     "deny": [],
     "ask": []

@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 0.5: Framing the Relationship | AI-ESG Training</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0fdf4;
+            /* Light green-tinted background */
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        .serif {
+            font-family: 'Merriweather', serif;
+        }
+
+        /* TAB STYLES */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-item {
+            border-bottom: 2px solid transparent;
+            color: #64748b;
+        }
+
+        .nav-item:hover {
+            color: #059669;
+        }
+
+        .nav-item.active {
+            border-bottom: 2px solid #059669;
+            color: #059669;
+            font-weight: 700;
+        }
+
+        /* EXISTING STYLES */
+        .gradient-text {
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .module-container {
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.5rem;
+            margin-bottom: 3rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .module-header {
+            background-color: #f8fafc;
+            padding: 2rem 2.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .module-body {
+            padding: 3rem 2.5rem;
+        }
+
+        .checklist-box {
+            background-color: #f8fafc;
+            border: 1px solid #94a3b8;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .workshop-box {
+            background-color: #f0f9ff;
+            border: 1px dashed #0284c7;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .espresso-thread {
+            background-color: #fffbeb;
+            border-left: 4px solid #d97706;
+            padding: 2rem;
+            margin: 2.5rem 0;
+        }
+
+        .philosophy-thread {
+            background-color: #f0fdf4;
+            border-left: 4px solid #059669;
+            padding: 2rem;
+            margin: 2.5rem 0;
+        }
+
+        .tech-tag {
+            display: inline-block;
+            background-color: #d1fae5;
+            color: #047857;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-left: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .audit-red-line {
+            color: #991b1b;
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            display: block;
+            border-bottom: 2px solid #fecaca;
+            padding-bottom: 0.5rem;
+        }
+
+        .reading-list {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .sidebar-note {
+            background-color: #f0fdf4;
+            border-left: 4px solid #15803d;
+        }
+
+        .pre-work-box {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 2px solid #059669;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+
+        .assessment-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #d97706;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .case-study-box {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border: 2px solid #059669;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+
+        .framing-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .framing-card:hover {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .framing-card.tool-frame {
+            border-color: #f97316;
+        }
+
+        .framing-card.partner-frame {
+            border-color: #059669;
+        }
+
+        .framing-card.trainee-frame {
+            border-color: #6366f1;
+        }
+
+        .swot-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .swot-cell {
+            padding: 1.25rem;
+            border-radius: 0.5rem;
+        }
+
+        .swot-strengths {
+            background-color: #dcfce7;
+            border: 1px solid #86efac;
+        }
+
+        .swot-weaknesses {
+            background-color: #fee2e2;
+            border: 1px solid #fca5a5;
+        }
+
+        .swot-opportunities {
+            background-color: #dbeafe;
+            border: 1px solid #93c5fd;
+        }
+
+        .swot-threats {
+            background-color: #fef3c7;
+            border: 1px solid #fcd34d;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.875rem;
+        }
+
+        .comparison-table th {
+            background-color: #f8fafc;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        .comparison-table tr:hover {
+            background-color: #f8fafc;
+        }
+
+        @media print {
+            .no-print {
+                display: none;
+            }
+
+            body {
+                background: white;
+            }
+
+            .tab-content {
+                display: block !important;
+            }
+
+            .nav-item {
+                display: none;
+            }
+        }
+
+        .tag-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background-color: #d1fae5;
+            color: #059669;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+    </style>
+    <script src="js/translation_toggle.js"></script>
+    <script src="js/assessment_engine.js"></script>
+    <script src="js/case_study_engine.js"></script>
+    <script src="js/progress_tracker.js"></script>
+</head>
+
+<body class="flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg no-print">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex justify-between items-start">
+                <div>
+                    <span class="text-emerald-200 font-bold tracking-widest uppercase text-xs">Level 0.5 Module</span>
+                    <h1 class="text-4xl md:text-5xl font-bold mt-2 serif">Framing the Relationship</h1>
+                    <p class="text-emerald-100 mt-2 text-lg">Tools, Partners, or Something Else?</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur rounded-lg px-4 py-2 border border-white/20">
+                    <div class="flex items-center gap-2 text-emerald-100 text-sm font-bold">
+                        <i data-lucide="clock" class="w-4 h-4"></i>
+                        <span>3-4 Hours</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="bg-white shadow sticky top-0 z-50 overflow-x-auto no-print">
+        <div class="container mx-auto px-6">
+            <div class="flex space-x-1">
+                <button onclick="switchTab('overview')" id="tab-overview"
+                    class="nav-item active px-6 py-4 font-medium transition-colors hover:bg-emerald-50 focus:outline-none whitespace-nowrap">
+                    Overview
+                </button>
+                <button onclick="switchTab('ep0_5_1')" id="tab-ep0_5_1"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-emerald-50 focus:outline-none whitespace-nowrap">
+                    The Framing Problem
+                </button>
+                <button onclick="switchTab('ep0_5_2')" id="tab-ep0_5_2"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-emerald-50 focus:outline-none whitespace-nowrap">
+                    Tool vs Partner
+                </button>
+                <button onclick="switchTab('ep0_5_3')" id="tab-ep0_5_3"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-emerald-50 focus:outline-none whitespace-nowrap">
+                    The Third Option
+                </button>
+                <button onclick="switchTab('ep0_5_4')" id="tab-ep0_5_4"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-emerald-50 focus:outline-none whitespace-nowrap">
+                    Design Implications
+                </button>
+                <button onclick="switchTab('ep0_5_5')" id="tab-ep0_5_5"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-emerald-50 focus:outline-none whitespace-nowrap">
+                    The Sponge Revisited
+                </button>
+                <button onclick="switchTab('summary')" id="tab-summary"
+                    class="nav-item px-6 py-4 font-medium transition-colors hover:bg-emerald-50 focus:outline-none whitespace-nowrap">
+                    Summary
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-6 py-12 flex-grow max-w-5xl">
+
+        <!-- OVERVIEW -->
+        <section id="overview" class="tab-content active">
+            <div class="mb-16">
+                <div class="bg-white p-8 rounded-xl border border-emerald-200 shadow-sm">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6 serif leading-tight">
+                        How We Frame AI Shapes Everything
+                    </h2>
+                    <p class="text-xl text-slate-600 leading-relaxed mb-8">
+                        Before we can build <strong>sociable systems</strong>, we need to examine an assumption so
+                        fundamental that most people never question it: <em>What kind of thing is an AI system,
+                            and what kind of relationship should we have with it?</em>
+                    </p>
+
+                    <div class="philosophy-thread">
+                        <p class="text-emerald-900 text-lg italic mb-4">
+                            "The way we <em>think</em> about AI shapes how we <em>design</em> workflows, what we
+                            <em>expect</em> from systems, and crucially&mdash;who absorbs the blame when things go
+                            wrong."
+                        </p>
+                        <p class="text-emerald-800 text-sm font-bold">
+                            This module sits between the Constitutional Foundations and the rest of the curriculum
+                            because the framing choice affects <em>everything</em> that follows.
+                        </p>
+                    </div>
+
+                    <!-- STORY BOX: HAL vs JARVIS -->
+                    <details
+                        class="story-box mt-8 text-left border-l-4 border-emerald-500 bg-emerald-50/50 p-4 rounded-r-lg">
+                        <summary class="font-bold text-emerald-900 cursor-pointer flex items-center gap-2">
+                            <i data-lucide="monitor-play" class="w-5 h-5"></i>
+                            <span>The Story Behind the Term: HAL vs JARVIS</span>
+                        </summary>
+                        <div class="story-content mt-4 text-slate-700 space-y-4">
+                            <p>
+                                <strong>Relationship A: "The Controller" (HAL 9000).</strong> The ship is run by the AI.
+                                The humans are passengers. If they get in the way of the mission, they are removed.
+                            </p>
+                            <p>
+                                <strong>Relationship B: "The Partner" (JARVIS).</strong> Tony Stark flies the suit.
+                                JARVIS handles the math, the power distribution, the radar.
+                            </p>
+                            <p class="font-semibold text-teal-800">
+                                The Terminology Shift: We often use "Master/Slave" terminology in tech. We are replacing
+                                that with "Controller/Instrument" to match professional governance.
+                            </p>
+                            <p>
+                                <b>The Governance Lesson:</b> If you wait until the crisis to ask for authority, you
+                                have already lost. You don't need bravery. You need preparation.
+                            </p>
+                            <div class="bg-teal-800 text-white p-4 rounded-md text-sm mt-4">
+                                <span class="font-bold block mb-1">CONTROL CARD: The Premortem Charter</span>
+                                <span class="opacity-90 block">TRIGGER: Before the project starts, you negotiate the
+                                    "Stop Triggers" with leadership.<br>ARTIFACT: A signed charter that explicitly
+                                    authorizes you to pause the system.</span>
+                            </div>
+                        </div>
+                    </details>
+
+                    <div class="sidebar-note p-6 rounded-lg text-sm text-slate-700 mt-8">
+                        <p class="font-bold text-green-800 mb-2 text-base flex items-center gap-2">
+                            <i data-lucide="info" class="w-4 h-4"></i>
+                            Learning Objectives
+                        </p>
+                        <ul class="space-y-2 list-disc list-inside">
+                            <li>Articulate the difference between <strong>Tool</strong>, <strong>Partner</strong>,
+                                and <strong>Trainee</strong> framings for human-AI relationships</li>
+                            <li>Identify how framing choices create or prevent the <strong>Liability Sponge</strong>
+                            </li>
+                            <li>Analyze the strengths, weaknesses, opportunities, and threats of each framing</li>
+                            <li>Recognize framing language in policies, contracts, and organizational culture</li>
+                            <li>Design workflows that reflect <strong>honest accountability</strong> rather than
+                                control theater</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Pre-Work Assessment -->
+                <div class="pre-work-box mt-12">
+                    <h4 class="font-bold text-lg text-emerald-900 mb-4 flex items-center gap-2">
+                        <i data-lucide="clipboard-list" class="w-5 h-5"></i>
+                        Pre-Work Reflection
+                    </h4>
+                    <p class="text-emerald-900 mb-4">
+                        Before diving in, answer these questions honestly. There are no wrong answers&mdash;we're
+                        establishing your current mental model.
+                    </p>
+                    <div class="bg-white p-6 rounded-lg border border-emerald-300">
+                        <h5 class="font-bold text-sm text-slate-700 mb-3 uppercase tracking-wide">Framing Check</h5>
+                        <ol class="space-y-4 text-sm text-slate-700">
+                            <li>
+                                <strong>1. When you last worked with an AI system, did it feel more like...</strong>
+                                <div class="ml-6 mt-2 space-y-1 text-slate-600">
+                                    <p>&#9744; Operating a sophisticated calculator or spreadsheet</p>
+                                    <p>&#9744; Having a conversation with a knowledgeable colleague</p>
+                                    <p>&#9744; Supervising an eager but unreliable intern</p>
+                                    <p>&#9744; Something else entirely</p>
+                                </div>
+                            </li>
+                            <li>
+                                <strong>2. If your AI system makes a mistake that causes harm, who is
+                                    responsible?</strong>
+                                <div class="ml-6 mt-2 space-y-1 text-slate-600">
+                                    <p>&#9744; The person who operated/approved the output</p>
+                                    <p>&#9744; The organization that deployed the system</p>
+                                    <p>&#9744; The vendor who built the system</p>
+                                    <p>&#9744; Responsibility should be distributed based on contribution</p>
+                                    <p>&#9744; It's complicated&mdash;depends on the specifics</p>
+                                </div>
+                            </li>
+                            <li>
+                                <strong>3. Which word best describes your organization's AI policies?</strong>
+                                <div class="ml-6 mt-2 space-y-1 text-slate-600">
+                                    <p>&#9744; "Control" / "Oversight" / "Governance"</p>
+                                    <p>&#9744; "Collaboration" / "Partnership" / "Working together"</p>
+                                    <p>&#9744; "Automation" / "Efficiency" / "Deployment"</p>
+                                    <p>&#9744; We don't have formal AI policies yet</p>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Episode 0.5.1: The Framing Problem -->
+        <section id="ep0_5_1" class="tab-content">
+            <div class="module-container border-l-8 border-emerald-500">
+                <div class="module-header bg-emerald-50">
+                    <div>
+                        <span class="text-xs font-bold text-emerald-700 uppercase tracking-widest block mb-2">Episode
+                            0.5.1</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Framing Problem</h4>
+                        <span class="tech-tag">Foundational Concepts</span>
+                    </div>
+                    <div class="text-right text-slate-400 text-sm">
+                        <p class="font-mono">45 min</p>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>The Premise:</strong> The metaphor you use to understand AI isn't neutral. It shapes
+                        workflow design, expectation setting, accountability structures, and ultimately&mdash;who
+                        absorbs the consequences when things go wrong.
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-8 mb-8">
+                        <div>
+                            <h5
+                                class="font-bold text-slate-900 mb-4 uppercase tracking-wide border-b border-slate-200 pb-2">
+                                What Framing Determines
+                            </h5>
+                            <ul class="space-y-3 text-slate-600">
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="workflow" class="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0"></i>
+                                    <span><strong>Workflow Design:</strong> How tasks are divided, handed off, and
+                                        verified</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="target" class="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0"></i>
+                                    <span><strong>Expectations:</strong> What we think the system can and should
+                                        do</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="users" class="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0"></i>
+                                    <span><strong>Self-Perception:</strong> How humans see their role alongside
+                                        AI</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="scale" class="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0"></i>
+                                    <span><strong>Accountability:</strong> Who is responsible when things fail</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="graduation-cap"
+                                        class="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0"></i>
+                                    <span><strong>Investment:</strong> Whether we invest in understanding vs. just
+                                        operating</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="checklist-box mt-0 bg-amber-50 border-amber-200">
+                                <span class="audit-red-line text-amber-900">The Hidden Stakes</span>
+                                <p class="text-slate-800 mb-4">
+                                    Most organizations adopt a framing <em>implicitly</em>&mdash;through inherited
+                                    language, vendor marketing, or cultural defaults. They never consciously choose.
+                                </p>
+                                <p class="text-slate-700 text-sm">
+                                    The result? Policies that say one thing ("human oversight"), workflows that
+                                    assume another (rubber-stamping), and audit trails that tell a third story
+                                    ("approved by [Your Name]").
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="espresso-thread">
+                        <h5 class="text-lg font-bold text-amber-900 uppercase mb-2">&#9749; Case Study: The Language
+                            Audit</h5>
+                        <div class="text-slate-800 space-y-2">
+                            <p><strong>Setup:</strong> A compliance team reviewed their AI governance documentation for
+                                framing language.</p>
+                            <p><strong>Findings:</strong></p>
+                            <ul class="list-disc list-inside ml-4 space-y-1">
+                                <li><strong>Policy documents:</strong> "Human oversight," "control mechanisms,"
+                                    "operator responsibility"</li>
+                                <li><strong>Training materials:</strong> "Use the tool," "deploy the system," "configure
+                                    the algorithm"</li>
+                                <li><strong>Vendor contracts:</strong> "The Customer maintains full responsibility for
+                                    outputs"</li>
+                                <li><strong>Job descriptions:</strong> "Review and approve AI-generated reports"</li>
+                            </ul>
+                            <p><strong>The Gap:</strong> Every document framed AI as a <strong>tool under human
+                                    control</strong>,
+                                but no document addressed what happens when the human can't actually verify what they're
+                                "controlling."</p>
+                            <p><strong>Result:</strong> Perfect conditions for the Liability Sponge.</p>
+                        </div>
+                    </div>
+
+                    <div class="workshop-box">
+                        <h5 class="font-bold text-sm text-sky-800 uppercase mb-2 flex items-center gap-2">
+                            <i data-lucide="search" class="w-4 h-4"></i>
+                            Workshop: Language Archaeology
+                        </h5>
+                        <p class="text-sky-900 mb-4">
+                            <strong>Exercise:</strong> Pull up any document from your organization that mentions AI
+                            (policy, contract, job description, training slide). Highlight every verb used to describe
+                            the human-AI relationship.
+                        </p>
+                        <div class="bg-white p-4 rounded border border-sky-200">
+                            <div class="grid md:grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <p class="font-bold text-orange-700 mb-2">Tool Framing Verbs:</p>
+                                    <p class="text-slate-600">Use, deploy, operate, configure, control, manage,
+                                        oversee, monitor, approve, authorize</p>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-emerald-700 mb-2">Partner Framing Verbs:</p>
+                                    <p class="text-slate-600">Collaborate, work with, consult, discuss, verify together,
+                                        review jointly, co-create, dialogue</p>
+                                </div>
+                            </div>
+                            <textarea class="w-full mt-4 border border-slate-300 rounded px-3 py-2 text-sm" rows="3"
+                                placeholder="What verbs did you find? What framing do they suggest?"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Key Insight:</strong> <em>The framing you inherit from vendors, regulators, and
+                            cultural defaults may not serve your actual accountability needs.</em>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Episode 0.5.2: Tool vs Partner -->
+        <section id="ep0_5_2" class="tab-content">
+            <div class="module-container border-l-8 border-orange-500">
+                <div class="module-header bg-orange-50">
+                    <div>
+                        <span class="text-xs font-bold text-orange-700 uppercase tracking-widest block mb-2">Episode
+                            0.5.2</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Two Dominant Framings</h4>
+                        <span class="tech-tag">SWOT Analysis</span>
+                    </div>
+                    <div class="text-right text-slate-400 text-sm">
+                        <p class="font-mono">60 min</p>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        Two framings dominate the discourse: AI as <strong>Tool</strong> (something we control) and
+                        AI as <strong>Partner</strong> (something we collaborate with). Each has profound implications.
+                    </p>
+
+                    <!-- Tool Framing -->
+                    <div class="framing-card tool-frame mb-8">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="bg-orange-100 p-3 rounded-full">
+                                <i data-lucide="wrench" class="w-6 h-6 text-orange-600"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-xl font-bold text-slate-900">The Tool Framing</h5>
+                                <p class="text-slate-500 text-sm">AI as instrument, human as operator</p>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <h6 class="font-bold text-sm text-slate-700 mb-2 uppercase tracking-wide">Core
+                                    Assumptions</h6>
+                                <ul class="text-sm text-slate-600 space-y-2">
+                                    <li>&bull; AI is an instrument, like a hammer or spreadsheet</li>
+                                    <li>&bull; Humans are operators who wield and control it</li>
+                                    <li>&bull; The relationship is one-directional (human &rarr; tool)</li>
+                                    <li>&bull; Goal: mastery, control, predictability</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h6 class="font-bold text-sm text-slate-700 mb-2 uppercase tracking-wide">Typical
+                                    Language</h6>
+                                <ul class="text-sm text-slate-600 space-y-2">
+                                    <li>&bull; "Use," "deploy," "configure," "operate"</li>
+                                    <li>&bull; "Human in the loop," "human oversight"</li>
+                                    <li>&bull; "The tool did what you told it to"</li>
+                                    <li>&bull; "Operator error," "user responsibility"</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h6 class="font-bold text-sm text-slate-700 mb-3 uppercase tracking-wide">SWOT Analysis</h6>
+                        <div class="swot-grid">
+                            <div class="swot-cell swot-strengths">
+                                <p class="font-bold text-green-800 text-sm mb-2">STRENGTHS</p>
+                                <ul class="text-xs text-green-900 space-y-1">
+                                    <li>&bull; Clear legal accountability (operator is responsible)</li>
+                                    <li>&bull; Familiar mental model (we know tools)</li>
+                                    <li>&bull; Preserves human primacy narrative</li>
+                                    <li>&bull; Easier to regulate and audit</li>
+                                </ul>
+                            </div>
+                            <div class="swot-cell swot-weaknesses">
+                                <p class="font-bold text-red-800 text-sm mb-2">WEAKNESSES</p>
+                                <ul class="text-xs text-red-900 space-y-1">
+                                    <li>&bull; Creates the Liability Sponge</li>
+                                    <li>&bull; Encourages black-box thinking</li>
+                                    <li>&bull; Misses emergent capabilities</li>
+                                    <li>&bull; Fosters adversarial framing</li>
+                                </ul>
+                            </div>
+                            <div class="swot-cell swot-opportunities">
+                                <p class="font-bold text-blue-800 text-sm mb-2">OPPORTUNITIES</p>
+                                <ul class="text-xs text-blue-900 space-y-1">
+                                    <li>&bull; Legal clarity in current frameworks</li>
+                                    <li>&bull; Organizational comfort (fits hierarchies)</li>
+                                    <li>&bull; Insurance models already exist</li>
+                                </ul>
+                            </div>
+                            <div class="swot-cell swot-threats">
+                                <p class="font-bold text-amber-800 text-sm mb-2">THREATS</p>
+                                <ul class="text-xs text-amber-900 space-y-1">
+                                    <li>&bull; Increasingly inadequate as AI advances</li>
+                                    <li>&bull; Creates perverse incentives</li>
+                                    <li>&bull; May become legally untenable</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Partner Framing -->
+                    <div class="framing-card partner-frame mb-8">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="bg-emerald-100 p-3 rounded-full">
+                                <i data-lucide="handshake" class="w-6 h-6 text-emerald-600"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-xl font-bold text-slate-900">The Partner Framing</h5>
+                                <p class="text-slate-500 text-sm">AI as collaborator, human as co-worker</p>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <h6 class="font-bold text-sm text-slate-700 mb-2 uppercase tracking-wide">Core
+                                    Assumptions</h6>
+                                <ul class="text-sm text-slate-600 space-y-2">
+                                    <li>&bull; AI has capabilities, limitations, and behaviors worth understanding</li>
+                                    <li>&bull; Humans are collaborators working alongside</li>
+                                    <li>&bull; The relationship is bidirectional (human &harr; AI)</li>
+                                    <li>&bull; Goal: mutual understanding, complementary strengths</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h6 class="font-bold text-sm text-slate-700 mb-2 uppercase tracking-wide">Typical
+                                    Language</h6>
+                                <ul class="text-sm text-slate-600 space-y-2">
+                                    <li>&bull; "Work with," "collaborate," "consult"</li>
+                                    <li>&bull; "Mutual transparency," "shared understanding"</li>
+                                    <li>&bull; "The system and user miscommunicated"</li>
+                                    <li>&bull; "Honest acknowledgment of limitations on both sides"</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h6 class="font-bold text-sm text-slate-700 mb-3 uppercase tracking-wide">SWOT Analysis</h6>
+                        <div class="swot-grid">
+                            <div class="swot-cell swot-strengths">
+                                <p class="font-bold text-green-800 text-sm mb-2">STRENGTHS</p>
+                                <ul class="text-xs text-green-900 space-y-1">
+                                    <li>&bull; Encourages genuine system understanding</li>
+                                    <li>&bull; Creates space for acknowledging both limitations</li>
+                                    <li>&bull; Better matches effective human-AI work</li>
+                                    <li>&bull; Distributes accountability more honestly</li>
+                                </ul>
+                            </div>
+                            <div class="swot-cell swot-weaknesses">
+                                <p class="font-bold text-red-800 text-sm mb-2">WEAKNESSES</p>
+                                <ul class="text-xs text-red-900 space-y-1">
+                                    <li>&bull; Legally murky (can you partner with non-entity?)</li>
+                                    <li>&bull; Risk of inappropriate anthropomorphization</li>
+                                    <li>&bull; May diffuse accountability too much</li>
+                                    <li>&bull; Harder to explain to auditors</li>
+                                </ul>
+                            </div>
+                            <div class="swot-cell swot-opportunities">
+                                <p class="font-bold text-blue-800 text-sm mb-2">OPPORTUNITIES</p>
+                                <ul class="text-xs text-blue-900 space-y-1">
+                                    <li>&bull; More resilient systems (mutual compensation)</li>
+                                    <li>&bull; Better outcomes through genuine collaboration</li>
+                                    <li>&bull; Ahead of regulatory evolution</li>
+                                    <li>&bull; Opens space for AI to flag uncertainty</li>
+                                </ul>
+                            </div>
+                            <div class="swot-cell swot-threats">
+                                <p class="font-bold text-amber-800 text-sm mb-2">THREATS</p>
+                                <ul class="text-xs text-amber-900 space-y-1">
+                                    <li>&bull; Legal frameworks haven't caught up</li>
+                                    <li>&bull; Can be misused to diffuse blame</li>
+                                    <li>&bull; Requires sophisticated governance</li>
+                                    <li>&bull; Cultural resistance</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STORY BOX: HAL vs JARVIS -->
+                    <details class="story-box mb-8">
+                        <summary>
+                            <i data-lucide="cpu" class="w-5 h-5 story-icon"></i>
+                            <span>The Story Behind the Term: HAL vs. JARVIS</span>
+                        </summary>
+                        <div class="story-content">
+                            <p>
+                                Science fiction gives us two distinct visions of the AI relationship:
+                            </p>
+
+                            <div class="grid md:grid-cols-2 gap-6 my-4">
+                                <div>
+                                    <p class="font-bold text-red-900 mb-2">HAL 9000 (2001: A Space Odyssey)</p>
+                                    <p class="text-sm">
+                                        The <strong>"Mission Control"</strong> model. The AI runs the ship; the humans
+                                        are passengers/monitors.
+                                        When goals conflict, HAL locks the humans out to protect the mission. It is a
+                                        separate entity that thinks <em>for</em> you.
+                                    </p>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-emerald-900 mb-2">JARVIS (Iron Man)</p>
+                                    <p class="text-sm">
+                                        The <strong>"Suit Interface"</strong> model. Tony Stark is the pilot; JARVIS is
+                                        the co-pilot.
+                                        JARVIS provides data, scans threats, and manages power, but Tony flies the suit.
+                                        JARVIS thinks <em>with</em> you.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <p>
+                                Most corporate governance treats AI like HAL—a separate "tool" we order around (or that
+                                orders us around).
+                                But effective professionals experience AI like JARVIS—a layer of cognitive armor that
+                                enhances their capacity
+                                without removing their agency.
+                            </p>
+
+                            <div class="story-insight">
+                                <strong>The Insight:</strong> We are building "Human-in-the-Loop" (monitoring HAL) when
+                                we should be
+                                building "Human-in-Command" (wearing JARVIS).
+                            </div>
+                        </div>
+                    </details>
+
+                    <div class="philosophy-thread">
+                        <h5 class="text-lg font-bold text-emerald-900 mb-3">The Phenomenological Test</h5>
+                        <p class="text-emerald-800 mb-4">
+                            Here's a question worth sitting with: <strong>When you're working well with an AI
+                                system&mdash;really well, in flow&mdash;does it feel like operating a tool?</strong>
+                        </p>
+                        <p class="text-emerald-700 text-sm">
+                            Many people report that effective AI work feels more like <em>thinking together</em>
+                            than <em>operating an instrument</em>. The "tool" framing describes a relationship
+                            many users don't recognize from the inside.
+                        </p>
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Key Insight:</strong> <em>Neither framing is "correct"&mdash;but the tool framing
+                            may be more dangerous than it appears, precisely because it claims to preserve human
+                            primacy while actually setting humans up to absorb blame.</em>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Episode 0.5.3: The Third Option -->
+        <section id="ep0_5_3" class="tab-content">
+            <div class="module-container border-l-8 border-indigo-500">
+                <div class="module-header bg-indigo-50">
+                    <div>
+                        <span class="text-xs font-bold text-indigo-700 uppercase tracking-widest block mb-2">Episode
+                            0.5.3</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Third Option: The Trainee Framing</h4>
+                        <span class="tech-tag">Alternative Model</span>
+                    </div>
+                    <div class="text-right text-slate-400 text-sm">
+                        <p class="font-mono">45 min</p>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>The Premise:</strong> There may be a third framing that captures something neither
+                        "tool" nor "partner" quite gets: <strong>AI as a brilliant but unreliable junior
+                            colleague.</strong>
+                    </p>
+
+                    <div class="framing-card trainee-frame mb-8">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="bg-indigo-100 p-3 rounded-full">
+                                <i data-lucide="graduation-cap" class="w-6 h-6 text-indigo-600"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-xl font-bold text-slate-900">The Trainee Framing</h5>
+                                <p class="text-slate-500 text-sm">AI as capable but unreliable junior colleague</p>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <h6 class="font-bold text-sm text-slate-700 mb-2 uppercase tracking-wide">Core
+                                    Assumptions</h6>
+                                <ul class="text-sm text-slate-600 space-y-2">
+                                    <li>&bull; AI is capable but needs oversight and correction</li>
+                                    <li>&bull; You wouldn't blindly sign off on a trainee's work</li>
+                                    <li>&bull; You also wouldn't try to "control" a trainee&mdash;you review, guide,
+                                        catch errors</li>
+                                    <li>&bull; The trainee might know things you don't (they've read more than you ever
+                                        will)</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h6 class="font-bold text-sm text-slate-700 mb-2 uppercase tracking-wide">What This
+                                    Creates</h6>
+                                <ul class="text-sm text-slate-600 space-y-2">
+                                    <li>&bull; <strong>Natural checkpoints:</strong> Review points feel appropriate, not
+                                        paranoid</li>
+                                    <li>&bull; <strong>Appropriate vigilance:</strong> You expect errors without
+                                        assuming malice</li>
+                                    <li>&bull; <strong>Capacity building:</strong> You might help the system improve
+                                        over time</li>
+                                    <li>&bull; <strong>Realistic expectations:</strong> Neither blind trust nor
+                                        adversarial suspicion</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="bg-indigo-50 p-4 rounded-lg">
+                            <h6 class="font-bold text-sm text-indigo-800 mb-2">Why This Might Work</h6>
+                            <p class="text-indigo-900 text-sm">
+                                Most professionals already know how to supervise trainees. They know you don't
+                                rubber-stamp work, but you also don't micromanage every keystroke. They know
+                                trainees can be brilliant and wrong in the same breath. This framing leverages
+                                existing professional intuitions.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-green-50 p-4 rounded border border-green-200">
+                            <p class="font-bold text-green-800 text-sm mb-2">ADVANTAGES</p>
+                            <ul class="text-xs text-green-900 space-y-1">
+                                <li>&bull; Intuitive for most professionals</li>
+                                <li>&bull; Creates appropriate vigilance without hostility</li>
+                                <li>&bull; Acknowledges AI can exceed human capability in some areas</li>
+                                <li>&bull; Fits existing supervision frameworks</li>
+                                <li>&bull; Makes "review" meaningful rather than theatrical</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded border border-red-200">
+                            <p class="font-bold text-red-800 text-sm mb-2">LIMITATIONS</p>
+                            <ul class="text-xs text-red-900 space-y-1">
+                                <li>&bull; Still somewhat hierarchical</li>
+                                <li>&bull; May not capture cases where AI genuinely exceeds human capability</li>
+                                <li>&bull; "Trainee" implies eventual graduation&mdash;does AI graduate?</li>
+                                <li>&bull; May underestimate AI capabilities in some domains</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="espresso-thread">
+                        <h5 class="text-lg font-bold text-amber-900 uppercase mb-2">&#9749; Case Study: The Reviewer's
+                            Stance</h5>
+                        <div class="text-slate-800 space-y-2">
+                            <p><strong>Setup:</strong> Two ESG analysts receive the same AI-generated supplier risk
+                                report.</p>
+                            <p><strong>Analyst A (Tool Framing):</strong> "The system generated this report. I'll
+                                approve
+                                it unless I see something obviously wrong." Reviews in 30 seconds. Misses a subtle data
+                                inconsistency.</p>
+                            <p><strong>Analyst B (Trainee Framing):</strong> "A smart junior wrote this, but they
+                                sometimes miss context or get sources wrong. Let me check the reasoning." Spends 4
+                                minutes.
+                                Catches the inconsistency.</p>
+                            <p><strong>The Difference:</strong> Same report, same system, same time pressure. Different
+                                framing created different behavior.</p>
+                        </div>
+                    </div>
+
+                    <div class="workshop-box">
+                        <h5 class="font-bold text-sm text-sky-800 uppercase mb-2 flex items-center gap-2">
+                            <i data-lucide="brain" class="w-4 h-4"></i>
+                            Exercise: Framing Shift
+                        </h5>
+                        <p class="text-sky-900 mb-4">
+                            <strong>Scenario:</strong> You receive an AI-generated ESG compliance report that will go
+                            to the board. Complete the sentence for each framing:
+                        </p>
+                        <div class="bg-white p-4 rounded border border-sky-200 space-y-4">
+                            <div>
+                                <p class="font-bold text-sm text-orange-700 mb-2">Tool Framing: "I need to check
+                                    that..."</p>
+                                <textarea class="w-full border border-slate-300 rounded px-3 py-2 text-sm" rows="2"
+                                    placeholder="Complete the sentence..."></textarea>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm text-emerald-700 mb-2">Partner Framing: "I want to discuss
+                                    with the system..."</p>
+                                <textarea class="w-full border border-slate-300 rounded px-3 py-2 text-sm" rows="2"
+                                    placeholder="Complete the sentence..."></textarea>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm text-indigo-700 mb-2">Trainee Framing: "My smart but
+                                    fallible junior might have..."</p>
+                                <textarea class="w-full border border-slate-300 rounded px-3 py-2 text-sm" rows="2"
+                                    placeholder="Complete the sentence..."></textarea>
+                            </div>
+                        </div>
+                        <p class="text-sky-800 text-sm mt-4 italic">
+                            Notice how each framing directs attention to different concerns and different actions.
+                        </p>
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Key Insight:</strong> <em>The trainee framing may be especially useful for
+                            transitional periods where AI capability is uneven&mdash;brilliant at some tasks,
+                            unreliable at others.</em>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Episode 0.5.4: Design Implications -->
+        <section id="ep0_5_4" class="tab-content">
+            <div class="module-container border-l-8 border-teal-500">
+                <div class="module-header bg-teal-50">
+                    <div>
+                        <span class="text-xs font-bold text-teal-700 uppercase tracking-widest block mb-2">Episode
+                            0.5.4</span>
+                        <h4 class="text-2xl font-bold text-slate-900">Design Implications</h4>
+                        <span class="tech-tag">Practical Application</span>
+                    </div>
+                    <div class="text-right text-slate-400 text-sm">
+                        <p class="font-mono">45 min</p>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>The Premise:</strong> Your framing choice isn't abstract philosophy&mdash;it changes
+                        how you design workflows, train people, build audit trails, and allocate responsibility.
+                    </p>
+
+                    <h5 class="font-bold text-slate-900 mb-4 uppercase tracking-wide border-b border-slate-200 pb-2">
+                        How Framing Changes System Design
+                    </h5>
+
+                    <div class="overflow-x-auto mb-8">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Design Element</th>
+                                    <th class="text-orange-700">Tool Framing</th>
+                                    <th class="text-emerald-700">Partner Framing</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-medium">Error Handling</td>
+                                    <td>"The user made an error"</td>
+                                    <td>"The system and user miscommunicated"</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">Training Focus</td>
+                                    <td>"How to operate the system"</td>
+                                    <td>"How to work well together"</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">Audit Trail</td>
+                                    <td>"User X approved output Y"</td>
+                                    <td>"AI contributed X, human contributed Y, decision was Z"</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">Uncertainty</td>
+                                    <td>Hidden or ignored</td>
+                                    <td>Surfaced and discussed</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">Blame Allocation</td>
+                                    <td>Falls to the human operator</td>
+                                    <td>Traced through the collaboration</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">System Design</td>
+                                    <td>Optimize for human control</td>
+                                    <td>Optimize for mutual transparency</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">Staffing</td>
+                                    <td>Enough people to click buttons</td>
+                                    <td>Enough people to think and dialogue</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">Success Metric</td>
+                                    <td>Throughput, efficiency</td>
+                                    <td>Quality of outcomes, defensibility</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-orange-50 p-6 rounded-lg border border-orange-200">
+                            <h6 class="font-bold text-orange-800 mb-3 flex items-center gap-2">
+                                <i data-lucide="wrench" class="w-5 h-5"></i>
+                                Tool-Framed Workflow
+                            </h6>
+                            <ol class="text-sm text-orange-900 space-y-2 list-decimal list-inside">
+                                <li>AI generates report</li>
+                                <li>Human receives notification</li>
+                                <li>Human clicks "Approve" or "Reject"</li>
+                                <li>Audit log: "Approved by [User]"</li>
+                                <li>If failure: "User failed to catch error"</li>
+                            </ol>
+                            <p class="text-xs text-orange-700 mt-4 italic">
+                                Note: The human's contribution is recorded as a binary approval,
+                                regardless of what they actually reviewed.
+                            </p>
+                        </div>
+                        <div class="bg-emerald-50 p-6 rounded-lg border border-emerald-200">
+                            <h6 class="font-bold text-emerald-800 mb-3 flex items-center gap-2">
+                                <i data-lucide="handshake" class="w-5 h-5"></i>
+                                Partner-Framed Workflow
+                            </h6>
+                            <ol class="text-sm text-emerald-900 space-y-2 list-decimal list-inside">
+                                <li>AI generates draft + confidence indicators</li>
+                                <li>Human reviews flagged uncertainties</li>
+                                <li>Human adds context AI couldn't access</li>
+                                <li>Audit log: "AI draft (82% confidence), human verified sections 2,4,7, added context
+                                    on local supplier"</li>
+                                <li>If failure: Trace where the collaboration broke down</li>
+                            </ol>
+                            <p class="text-xs text-emerald-700 mt-4 italic">
+                                Note: Both contributions are documented. Accountability is traceable.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="checklist-box bg-teal-50 border-teal-200">
+                        <span class="audit-red-line text-teal-900">The Honest Audit Trail</span>
+                        <p class="text-slate-800 mb-4">
+                            A partner-framed audit trail documents the collaboration, not just the approval.
+                            It should answer:
+                        </p>
+                        <ul class="space-y-2 text-sm text-slate-700">
+                            <li><i data-lucide="check" class="inline w-4 h-4 mr-2 text-teal-600"></i>
+                                What did the AI contribute? (draft, analysis, flagged risks)</li>
+                            <li><i data-lucide="check" class="inline w-4 h-4 mr-2 text-teal-600"></i>
+                                What did the AI flag as uncertain?</li>
+                            <li><i data-lucide="check" class="inline w-4 h-4 mr-2 text-teal-600"></i>
+                                What did the human actually review? (not just "approved")</li>
+                            <li><i data-lucide="check" class="inline w-4 h-4 mr-2 text-teal-600"></i>
+                                What context did the human add?</li>
+                            <li><i data-lucide="check" class="inline w-4 h-4 mr-2 text-teal-600"></i>
+                                Where did the human override or accept AI judgment?</li>
+                            <li><i data-lucide="check" class="inline w-4 h-4 mr-2 text-teal-600"></i>
+                                How much time did the human have? (velocity check)</li>
+                        </ul>
+                    </div>
+
+                    <div class="workshop-box">
+                        <h5 class="font-bold text-sm text-sky-800 uppercase mb-2 flex items-center gap-2">
+                            <i data-lucide="pencil-ruler" class="w-4 h-4"></i>
+                            Design Exercise: Reframe Your Workflow
+                        </h5>
+                        <p class="text-sky-900 mb-4">
+                            <strong>Task:</strong> Take one AI-assisted workflow in your organization. Redesign
+                            the audit trail to reflect partnership rather than tool-operation.
+                        </p>
+                        <div class="bg-white p-4 rounded border border-sky-200 space-y-4">
+                            <div>
+                                <p class="font-bold text-sm text-slate-700 mb-2">Current Workflow Name:</p>
+                                <input type="text" class="w-full border border-slate-300 rounded px-3 py-2 text-sm"
+                                    placeholder="e.g., Supplier Risk Assessment Review">
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm text-slate-700 mb-2">Current Audit Log Entry:</p>
+                                <textarea class="w-full border border-slate-300 rounded px-3 py-2 text-sm" rows="2"
+                                    placeholder="e.g., 'Approved by jsmith@company.com at 14:32:07'"></textarea>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm text-slate-700 mb-2">Redesigned Audit Log Entry:</p>
+                                <textarea class="w-full border border-slate-300 rounded px-3 py-2 text-sm" rows="4"
+                                    placeholder="Include: AI contribution, confidence levels, human review scope, time spent, context added..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Key Insight:</strong> <em>The audit trail is where the framing becomes legally
+                            real. A tool-framed log says "the human approved." A partner-framed log says "here's
+                            what each party contributed."</em>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Episode 0.5.5: The Sponge Revisited -->
+        <section id="ep0_5_5" class="tab-content">
+            <div class="module-container border-l-8 border-red-500">
+                <div class="module-header bg-red-50">
+                    <div>
+                        <span class="text-xs font-bold text-red-700 uppercase tracking-widest block mb-2">Episode
+                            0.5.5</span>
+                        <h4 class="text-2xl font-bold text-slate-900">The Liability Sponge Revisited</h4>
+                        <span class="tech-tag">Critical Connection</span>
+                    </div>
+                    <div class="text-right text-slate-400 text-sm">
+                        <p class="font-mono">30 min</p>
+                    </div>
+                </div>
+                <div class="module-body">
+                    <p class="text-slate-700 mb-6 text-lg">
+                        <strong>The Premise:</strong> The Liability Sponge isn't just a governance failure&mdash;it's
+                        <strong>specifically a failure mode of the tool framing</strong>.
+                    </p>
+
+                    <div class="bg-red-50 border-2 border-red-300 rounded-lg p-6 mb-8">
+                        <h5 class="font-bold text-red-900 text-lg mb-4">How the Tool Framing Creates the Sponge</h5>
+                        <ol class="space-y-4 text-slate-800">
+                            <li class="flex gap-3">
+                                <span
+                                    class="bg-red-200 text-red-900 font-bold rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">1</span>
+                                <div>
+                                    <strong>We say the human "controls" the AI</strong>
+                                    <p class="text-sm text-slate-600">The framing establishes that the human is the
+                                        operator, the AI is the instrument.</p>
+                                </div>
+                            </li>
+                            <li class="flex gap-3">
+                                <span
+                                    class="bg-red-200 text-red-900 font-bold rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">2</span>
+                                <div>
+                                    <strong>Therefore the human is responsible for outputs</strong>
+                                    <p class="text-sm text-slate-600">Legal and organizational accountability flows to
+                                        the "operator."</p>
+                                </div>
+                            </li>
+                            <li class="flex gap-3">
+                                <span
+                                    class="bg-red-200 text-red-900 font-bold rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">3</span>
+                                <div>
+                                    <strong>But the human can't actually understand or verify what the AI does</strong>
+                                    <p class="text-sm text-slate-600">Black boxes, speed mismatches, volume
+                                        impossibilities.</p>
+                                </div>
+                            </li>
+                            <li class="flex gap-3">
+                                <span
+                                    class="bg-red-200 text-red-900 font-bold rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">4</span>
+                                <div>
+                                    <strong>So the human becomes responsible for things they cannot control</strong>
+                                    <p class="text-sm text-slate-600">The "control" framing creates the very trap it
+                                        claims to prevent.</p>
+                                </div>
+                            </li>
+                            <li class="flex gap-3">
+                                <span
+                                    class="bg-red-200 text-red-900 font-bold rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">5</span>
+                                <div>
+                                    <strong>The human absorbs all liability</strong>
+                                    <p class="text-sm text-slate-600">They become the sponge&mdash;soaking up blame for
+                                        a system they never truly controlled.</p>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class="philosophy-thread">
+                        <h5 class="text-lg font-bold text-emerald-900 mb-3">The Irony of the Tool Framing</h5>
+                        <p class="text-emerald-800 mb-4">
+                            The tool framing is often defended as protecting <strong>human dignity and primacy</strong>.
+                            "We're in charge, not the machines."
+                        </p>
+                        <p class="text-emerald-800 mb-4">
+                            But in practice, it does the opposite: it sets humans up to absorb blame for systems
+                            they never truly understood or controlled. The framing that claims to preserve human
+                            agency actually <strong>destroys human dignity</strong> by making scapegoats.
+                        </p>
+                        <p class="text-emerald-700 text-sm font-bold">
+                            The partner framing, paradoxically, may better protect human dignity&mdash;because it
+                            honestly acknowledges what humans can and cannot do in the collaboration.
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-orange-50 p-6 rounded-lg border border-orange-200">
+                            <h6 class="font-bold text-orange-800 mb-3">Tool Framing Accountability</h6>
+                            <p class="text-sm text-orange-900 mb-4">
+                                "You are in control. Therefore you are responsible for everything."
+                            </p>
+                            <ul class="text-xs text-orange-800 space-y-1">
+                                <li>&bull; Creates impossible expectations</li>
+                                <li>&bull; Inevitable failure when AI exceeds human verification capacity</li>
+                                <li>&bull; Blame falls on the "operator"</li>
+                                <li>&bull; Organization and vendor are shielded</li>
+                            </ul>
+                        </div>
+                        <div class="bg-emerald-50 p-6 rounded-lg border border-emerald-200">
+                            <h6 class="font-bold text-emerald-800 mb-3">Partner Framing Accountability</h6>
+                            <p class="text-sm text-emerald-900 mb-4">
+                                "You are part of a system. Your contribution is real but bounded."
+                            </p>
+                            <ul class="text-xs text-emerald-800 space-y-1">
+                                <li>&bull; More honest about human capabilities</li>
+                                <li>&bull; Documents both contributions</li>
+                                <li>&bull; Accountability traced through collaboration</li>
+                                <li>&bull; Failure analysis identifies where breakdown occurred</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="checklist-box bg-slate-100 border-slate-300">
+                        <span class="audit-red-line text-slate-900">The Framing-Sponge Connection</span>
+                        <p class="text-slate-800 mb-4">
+                            To prevent the Liability Sponge, you must address the <strong>framing</strong>, not
+                            just the workflow:
+                        </p>
+                        <ul class="space-y-3 text-sm text-slate-700">
+                            <li class="flex gap-2">
+                                <i data-lucide="alert-triangle" class="w-5 h-5 text-red-600 flex-shrink-0"></i>
+                                <span>If your policies use "control" language but your systems are black boxes,
+                                    you've created a sponge.</span>
+                            </li>
+                            <li class="flex gap-2">
+                                <i data-lucide="alert-triangle" class="w-5 h-5 text-red-600 flex-shrink-0"></i>
+                                <span>If your audit trail says "approved by [human]" but doesn't document what
+                                    they actually reviewed, you've created a sponge.</span>
+                            </li>
+                            <li class="flex gap-2">
+                                <i data-lucide="alert-triangle" class="w-5 h-5 text-red-600 flex-shrink-0"></i>
+                                <span>If your staffing assumes humans can review at AI speed, you've created a
+                                    sponge.</span>
+                            </li>
+                            <li class="flex gap-2">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-emerald-600 flex-shrink-0"></i>
+                                <span>If your framing honestly acknowledges both parties' contributions and limitations,
+                                    the sponge cannot form.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="reading-list">
+                        <strong>Key Insight:</strong> <em>The Liability Sponge is not inevitable. It's a design
+                            choice&mdash;specifically, the choice to use tool framing in contexts where genuine
+                            human control is impossible. Change the framing, prevent the sponge.</em>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Summary -->
+        <section id="summary" class="tab-content">
+            <h3 class="text-3xl font-bold text-slate-900 mb-6 serif">Module Summary</h3>
+
+            <div class="bg-white p-8 rounded-lg border-2 border-emerald-600 mb-8">
+                <h4 class="font-bold text-xl text-slate-900 mb-4 flex items-center gap-2">
+                    <i data-lucide="check-circle" class="w-6 h-6 text-emerald-600"></i>
+                    Key Takeaways
+                </h4>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h5 class="font-bold text-sm text-slate-700 mb-2 uppercase tracking-wide">Conceptual Framework
+                        </h5>
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li>&bull; The framing you choose shapes every design decision</li>
+                            <li>&bull; Tool framing creates the Liability Sponge</li>
+                            <li>&bull; Partner framing distributes accountability honestly</li>
+                            <li>&bull; Trainee framing may offer a practical middle ground</li>
+                            <li>&bull; Most organizations adopt framings implicitly&mdash;make it explicit</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="font-bold text-sm text-slate-700 mb-2 uppercase tracking-wide">Practical Tools
+                            Acquired</h5>
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li>&bull; Language audit methodology</li>
+                            <li>&bull; SWOT analysis for each framing</li>
+                            <li>&bull; Honest audit trail design</li>
+                            <li>&bull; Workflow reframing techniques</li>
+                            <li>&bull; Framing-to-sponge connection diagnosis</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="assessment-box">
+                <h4 class="font-bold text-lg text-amber-900 mb-4 flex items-center gap-2">
+                    <i data-lucide="clipboard-check" class="w-5 h-5"></i>
+                    Post-Module Assessment
+                </h4>
+                <p class="text-amber-900 mb-4">
+                    Revisit your pre-work reflection. Has your understanding shifted?
+                </p>
+                <div class="bg-white p-6 rounded-lg border border-amber-300">
+                    <h5 class="font-bold text-sm text-slate-700 mb-3 uppercase tracking-wide">Reflection Questions</h5>
+                    <ol class="space-y-4 text-sm text-slate-700">
+                        <li>
+                            <strong>1. What framing does your organization currently use? How do you know?</strong>
+                            <textarea class="w-full border border-slate-300 rounded px-3 py-2 text-xs mt-2" rows="2"
+                                placeholder="Evidence from policies, language, workflow design..."></textarea>
+                        </li>
+                        <li>
+                            <strong>2. Does this framing create or prevent Liability Sponge conditions?</strong>
+                            <textarea class="w-full border border-slate-300 rounded px-3 py-2 text-xs mt-2" rows="2"
+                                placeholder="Specific risks or protections you've identified..."></textarea>
+                        </li>
+                        <li>
+                            <strong>3. What would need to change to adopt a more honest framing?</strong>
+                            <textarea class="w-full border border-slate-300 rounded px-3 py-2 text-xs mt-2" rows="3"
+                                placeholder="Policy changes, workflow redesign, audit trail updates, cultural shifts..."></textarea>
+                        </li>
+                        <li>
+                            <strong>4. Which framing feels most accurate to your actual experience working with
+                                AI?</strong>
+                            <textarea class="w-full border border-slate-300 rounded px-3 py-2 text-xs mt-2" rows="2"
+                                placeholder="Phenomenological honesty&mdash;what does the work actually feel like?"></textarea>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Next Steps -->
+            <div class="bg-gradient-to-br from-slate-800 to-slate-900 text-white p-10 rounded-lg mt-8">
+                <h3 class="text-2xl font-bold mb-4 serif flex items-center gap-2">
+                    <i data-lucide="arrow-right-circle" class="w-6 h-6 text-emerald-400"></i>
+                    Continuing the Journey
+                </h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-emerald-400 font-bold mb-2">Level 1: Epistemic Failures</h4>
+                        <p class="text-slate-300 text-sm mb-4">
+                            Now that you understand how framing shapes accountability, you're ready to examine
+                            what happens when systems become too opaque to question (Clarke's Law) or too aligned
+                            to refuse.
+                        </p>
+                        <p class="text-slate-400 text-xs italic">
+                            The framing insights from this module will help you recognize when "human oversight"
+                            is real versus theatrical.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-center">
+                        <button
+                            class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 px-8 rounded-lg transition flex items-center gap-3 text-lg">
+                            Begin Level 1
+                            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-8 mt-auto no-print">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-sm mb-2">
+                AI & ESG Capability Architect | Level 0.5: Framing the Relationship
+            </p>
+            <p class="text-xs opacity-50 italic">
+                Based on Sociable Systems research methodology
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                item.classList.remove('bg-emerald-50');
+                item.classList.remove('text-emerald-700');
+            });
+            document.getElementById(tabId).classList.add('active');
+            const activeBtn = document.getElementById('tab-' + tabId);
+            activeBtn.classList.add('active');
+        }
+
+        // Initialize assessment engine with Framing Diagnostic exercise
+        if (window.AEISAssessment) {
+            window.AEISAssessment.init({
+                moduleId: 'L0_5',
+                summaryTabId: 'summary',
+                hasExercise: true,
+                exerciseId: 'framing_diagnostic'
+            });
+        }
+        if (window.AEISCaseStudy) {
+            window.AEISCaseStudy.init({
+                moduleId: 'L0_5',
+                summaryTabId: 'summary'
+            });
+        }
+    </script>
+
+</body>
+
+</html>

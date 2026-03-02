@@ -49,7 +49,29 @@
         "The Fire Drill": "Velocity Stress Test",
         "Vendor Interrogation": "Vendor Due Diligence",
         "Greenwashing Firewall": "Claim Validation Control",
-        "Shadow AI": "Unauthorized AI Usage"
+        "Shadow AI": "Unauthorized AI Usage",
+        // Framing module additions
+        "Tool Framing": "Operator-Centric Model",
+        "Partner Framing": "Collaborative Accountability Model",
+        "Trainee Framing": "Supervised Delegation Model",
+        "sociable system": "accountable governance framework",
+        "Sociable System": "Accountable Governance Framework",
+        "sociable systems": "accountable governance frameworks",
+        "Sociable Systems": "Accountable Governance Frameworks",
+        "genuine partnership": "distributed accountability structure",
+        "mutual transparency": "bilateral disclosure requirements",
+        "honest audit trail": "comprehensive attribution log",
+        "Honest Audit Trail": "Comprehensive Attribution Log",
+        "Framing the Relationship": "Accountability Model Selection",
+        // H∞P Continuous Governance module additions
+        "Dialogue Triggers": "Escalation Conditions",
+        "Partnership Evidence": "Compliance Documentation",
+        "real-time dialogue": "structured escalation protocol",
+        "collaboration culture": "operational compliance culture",
+        "Robopsychologists": "Human Factors Specialists",
+        "AINthropologists": "Process Compliance Analysts",
+        "thinking time": "review allocation",
+        "Partnership Dividend": "Operational ROI"
     };
 
     // Reverse dictionary for toggling back

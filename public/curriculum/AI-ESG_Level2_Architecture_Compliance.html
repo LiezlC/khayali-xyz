@@ -172,6 +172,13 @@
             border-radius: 0.5rem;
             margin: 2rem 0;
         }
+        .case-study-box {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border: 2px solid #059669;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
 
         @media print {
             .no-print {
@@ -192,6 +199,9 @@
         }
     </style>
     <script src="js/translation_toggle.js"></script>
+    <script src="js/assessment_engine.js"></script>
+    <script src="js/case_study_engine.js"></script>
+    <script src="js/progress_tracker.js"></script>
 </head>
 
 <body class="flex flex-col min-h-screen">
@@ -723,8 +733,22 @@
             document.getElementById(tabId).classList.add('active');
             const activeBtn = document.getElementById('tab-' + tabId);
             activeBtn.classList.add('active');
-            // Re-apply specific color hacks not handled by CSS class alone if needed, 
-            // but here we used specific classes in CSS.
+        }
+
+        // Initialize assessment engine with Data Lineage Map exercise
+        if (window.AEISAssessment) {
+            window.AEISAssessment.init({
+                moduleId: 'L2',
+                summaryTabId: 'summary',
+                hasExercise: true,
+                exerciseId: 'data_lineage_map'
+            });
+        }
+        if (window.AEISCaseStudy) {
+            window.AEISCaseStudy.init({
+                moduleId: 'L2',
+                summaryTabId: 'summary'
+            });
         }
     </script>
 
