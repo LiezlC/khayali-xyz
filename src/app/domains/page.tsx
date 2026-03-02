@@ -19,9 +19,9 @@ export default function DomainsPage() {
       color: "from-cyan-400 to-teal-500"
     },
     {
-      title: "Worker Voice",
-      href: "/domains/worker-voice",
-      description: "Labor management systems, worker representation, and industrial relations",
+      title: "GrieVoice",
+      href: "/grievoice",
+      description: "AI-powered grievance systems with multilingual voice agents and worker-centered design",
       color: "from-emerald-400 to-green-500"
     },
     {

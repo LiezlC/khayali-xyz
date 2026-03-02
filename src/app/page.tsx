@@ -193,15 +193,15 @@ export default function HomePage() {
               </a>
             </div>
 
-            {/* Worker Voice & Labor */}
+            {/* GrieVoice */}
             <div className="group relative p-8 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-emerald-500 transition-all duration-300">
-              <div className="text-4xl mb-4">👷</div>
-              <h3 className="text-2xl font-bold mb-3 text-emerald-400">Worker Voice</h3>
+              <div className="text-4xl mb-4">🎙️</div>
+              <h3 className="text-2xl font-bold mb-3 text-emerald-400">GrieVoice</h3>
               <p className="text-gray-400 mb-4 leading-relaxed">
-                Labor management systems, worker representation, and industrial relations.
+                AI-powered grievance systems with multilingual voice agents, interactive demos, and worker-centered design.
               </p>
-              <a href="/domains/worker-voice" className="text-emerald-400 hover:text-emerald-300 font-semibold">
-                Explore Worker Voice →
+              <a href="/grievoice" className="text-emerald-400 hover:text-emerald-300 font-semibold">
+                Explore GrieVoice →
               </a>
             </div>
 
