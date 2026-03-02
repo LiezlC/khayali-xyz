@@ -4,16 +4,32 @@ import { getContentCategories, getContentByCategory } from '@/utils/content';
 export default async function ExplorePage() {
   const categories = await getContentCategories();
 
+  // Categories without functioning routes or [slug] pages — exclude from archive
+  const excludedCategories = new Set([
+    'articles',
+    'avatar',
+    'cinevoyage',
+    'creative',
+    'intros',
+    'multimedia',
+    'observatory',
+    'saraloosa',
+    'videos',
+    'ai-augmentation',
+  ]);
+
   // Get content counts for each category
   const categoryData = await Promise.all(
-    categories.map(async (category) => {
-      const items = await getContentByCategory(category);
-      return {
-        name: category,
-        count: items.length,
-        items: items.slice(0, 3), // Show first 3 items as preview
-      };
-    })
+    categories
+      .filter(cat => !excludedCategories.has(cat))
+      .map(async (category) => {
+        const items = await getContentByCategory(category);
+        return {
+          name: category,
+          count: items.length,
+          items: items.slice(0, 3), // Show first 3 items as preview
+        };
+      })
   );
 
   // Filter out empty categories and sort by count

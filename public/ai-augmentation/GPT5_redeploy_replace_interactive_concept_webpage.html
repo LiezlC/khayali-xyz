@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Redeploy > Replace — An Interactive Thought Experiment</title>
+  <meta name="description" content="What if we used AI to re-strategize, upskill, tool‑stack, and redeploy people — instead of replacing them? Explore interactive scenarios, case studies, and a meme kit you can share." />
+  <style>
+    :root{
+      --bg:#0b0f14; --panel:#0f1720; --ink:#e6f1ff; --muted:#9fb2c8; --accent:#64ffda; --hot:#ff5a8a; --ok:#7cf29c; --warn:#ffd166;
+      --card:#0c141c; --border:#182534; --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0; font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Noto Sans, "Apple Color Emoji","Segoe UI Emoji"; color:var(--ink); background: radial-gradient(1000px 600px at 10% -10%, #122033, transparent), radial-gradient(800px 400px at 110% -20%, #14263a, transparent), var(--bg)}
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1100px; margin:0 auto; padding:28px}
+    header{display:grid; gap:16px; align-items:center; grid-template-columns:1fr auto}
+    .logo{display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.3px}
+    .logo .dot{width:10px; height:10px; border-radius:99px; background:linear-gradient(135deg, var(--accent), #8afff0)}
+    .tag{font-size:12px; color:var(--muted)}
+
+    .hero{margin-top:14px; padding:28px; background:linear-gradient(180deg, rgba(100,255,218,.08), rgba(100,255,218,0) 40%), var(--panel); border:1px solid var(--border); border-radius:18px; box-shadow:var(--shadow)}
+    .kicker{color:var(--accent); font-weight:600; letter-spacing:.12em; text-transform:uppercase; font-size:12px}
+    .title{font-size:clamp(28px, 3.5vw, 48px); line-height:1.08; margin:.35em 0}
+    .subtitle{color:var(--muted); max-width:75ch}
+    .switch{margin-top:16px; display:flex; gap:8px; align-items:center}
+    .pill{display:inline-flex; border:1px solid var(--border); background:var(--card); border-radius:80px; overflow:hidden}
+    .pill button{padding:8px 14px; background:transparent; color:var(--muted); border:0; cursor:pointer}
+    .pill button.active{background:linear-gradient(135deg, rgba(100,255,218,.15), rgba(100,255,218,.05)); color:var(--ink)}
+
+    .grid{display:grid; gap:18px; grid-template-columns:repeat(12,1fr)}
+    .col-6{grid-column:span 6}
+    .col-12{grid-column:span 12}
+    @media (max-width:900px){ .col-6{grid-column:span 12} }
+
+    .panel{padding:18px; background:var(--panel); border:1px solid var(--border); border-radius:16px; box-shadow:var(--shadow)}
+    .panel h3{margin:0 0 10px; font-size:18px}
+    .panel p{color:var(--muted)}
+
+    .slider-row{display:grid; grid-template-columns:160px 1fr 80px; gap:12px; align-items:center; margin:12px 0}
+    input[type=range]{width:100%}
+
+    .metric{display:flex; align-items:center; justify-content:space-between; padding:12px; border:1px dashed var(--border); border-radius:12px; margin-top:8px}
+    .metric b{font-size:20px}
+
+    .cards{display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:14px}
+    .card{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:14px; display:flex; flex-direction:column; gap:10px}
+    .badge{align-self:flex-start; font-size:11px; color:#061018; background:linear-gradient(135deg, #7cf29c, #4dd0e1); padding:4px 8px; border-radius:999px; font-weight:700; letter-spacing:.04em}
+    .badge.hypo{background:linear-gradient(135deg, #ffd166, #ff8a5a)}
+
+    details{border:1px solid var(--border); border-radius:12px; padding:10px 12px; background:var(--panel)}
+    summary{cursor:pointer; font-weight:600}
+
+    .meme-kit textarea{width:100%; min-height:120px; background:#0a121a; color:var(--ink); border:1px solid var(--border); border-radius:12px; padding:12px}
+    .btn{display:inline-flex; gap:8px; align-items:center; padding:10px 14px; border-radius:10px; border:1px solid var(--border); background:linear-gradient(180deg, rgba(100,255,218,.12), rgba(100,255,218,0)); color:var(--ink); cursor:pointer}
+    .btn:hover{transform:translateY(-1px)}
+    .muted{color:var(--muted)}
+    .foot{margin-top:22px; font-size:13px; color:var(--muted)}
+    .list{display:grid; gap:8px}
+    .tiny{font-size:12px; color:var(--muted)}
+    .hot{color:var(--hot)}
+    .ok{color:var(--ok)}
+
+    .share{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px}
+    .share a{border:1px solid var(--border); padding:10px 12px; border-radius:10px}
+
+    .inline-tag{display:inline-block; border:1px solid var(--border); border-radius:999px; padding:2px 8px; font-size:11px; color:var(--muted)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo"><span class="dot"></span> Redeploy &gt; Replace <span class="tag">interactive thought tool</span></div>
+      <div class="tiny">Made for leaders, builders, and the occasionally-jaded. 🛠️</div>
+    </header>
+
+    <section class="hero">
+      <div class="kicker">Imagine if…</div>
+      <h1 class="title">Instead of boasting “we fired N people with AI,” we said:<br><span class="hot">“We used AI to re‑strategize, upskill, tool‑stack, and redeploy that team”</span> — and then we <span class="ok">solved bigger problems</span>.</h1>
+      <p class="subtitle">This page makes the case — interactively. Toggle the framing, play with redeployment levers, and scan composite case studies (some real‑world patterns; some clearly hypothetical) showing how to turn disruption into a capability upgrade.
+      </p>
+      <div class="switch" role="tablist" aria-label="Framing switch">
+        <div class="pill" id="framing">
+          <button class="active" data-framing="replace">Replace (old default)</button>
+          <button data-framing="redeploy">Redeploy (new default)</button>
+        </div>
+        <span class="tiny">Tip: notice how priorities and outcomes shift.</span>
+      </div>
+    </section>
+
+    <section class="grid" style="margin-top:16px">
+      <div class="col-6">
+        <div class="panel" id="levers">
+          <h3>Redeployment Simulator</h3>
+          <p class="muted">Drag a few sliders. Watch the outcomes change. (Toy model, but useful to spark boardroom sense‑making.)</p>
+
+          <div class="slider-row">
+            <label for="people"><b>People redeployed</b></label>
+            <input id="people" type="range" min="0" max="500" value="120" />
+            <output id="peopleOut">120</output>
+          </div>
+
+          <div class="slider-row">
+            <label for="upskill"><b>Upskill intensity</b> <span class="inline-tag">hours / person</span></label>
+            <input id="upskill" type="range" min="0" max="200" value="60" />
+            <output id="upskillOut">60</output>
+          </div>
+
+          <div class="slider-row">
+            <label for="automation"><b>Automation coverage</b> <span class="inline-tag">% of rote work</span></label>
+            <input id="automation" type="range" min="0" max="100" value="45" />
+            <output id="automationOut">45%</output>
+          </div>
+
+          <div class="slider-row">
+            <label for="impact"><b>Problem ambition</b> <span class="inline-tag">local → moonshot</span></label>
+            <input id="impact" type="range" min="1" max="5" value="3" />
+            <output id="impactOut">3</output>
+          </div>
+
+          <div class="metric"><span>New capability bandwidth</span><b id="bandwidth">~ 38 FTE</b></div>
+          <div class="metric"><span>Time‑to‑value acceleration</span><b id="ttv">~ 2.4×</b></div>
+          <div class="metric"><span>Strategic surface area</span><b id="surface">~ 1.7×</b></div>
+          <p class="tiny">Math is intentionally back‑of‑napkin. Use it to open minds, not close books.</p>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="panel" id="copyPanel">
+          <h3>Executive Narrative</h3>
+          <p id="narrative" style="min-height:5lh"></p>
+          <button class="btn" id="copyBtn">Copy narrative</button>
+          <div class="foot">Suggested use: board decks, all‑hands, investor letters, and the slack thread where someone inevitably asks “but did headcount go down?”</div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="panel">
+          <h3>Case Studies — Composite Real Patterns & Hypotheticals</h3>
+          <p class="muted">These are designed to be de‑identifiable and safe to share. “Real‑pattern” items reflect widely reported dynamics; “Hypothetical” items are plausible playbooks you can adapt.</p>
+          <div class="cards" id="caseCards"></div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="panel meme-kit">
+          <h3>Visuals & Meme Kit</h3>
+          <p class="muted">Prompt ideas for your favorite image model. Keep it ethical, keep it human‑centred.</p>
+          <details open>
+            <summary>Prompt Pack A — "Redeploy, don’t discard"</summary>
+            <ul class="list">
+              <li><code>isometric infographic, split screen: left shows "Replace" conveyor belt dropping workers into a chute, right shows "Redeploy" workshop with people pairing with AI tools, neon teal accents, dark modern UI, minimalistic labels, high contrast, cinematic rim light</code></li>
+              <li><code>futurist mural: hands passing a toolkit labeled "Upskill" across a bridge from "Old Roles" to "New Capabilities", soft solarpunk palette, hopeful, detailed, magazine cover quality</code></li>
+              <li><code>dashboard hero image: sliders (people, upskilling hours, automation %), glowing metrics with humane iconography (heart, lightbulb, globe), tasteful cyber-brutalism</code></li>
+            </ul>
+          </details>
+          <details>
+            <summary>Prompt Pack B — Moonshots by Redeployment</summary>
+            <ul class="list">
+              <li><code>collage: former call center team now "Workflow Architects" mapping processes with AI agents, post‑it notes evolving into circuit traces, vibrant teal and amber, optimistic</code></li>
+              <li><code>radiology triage room where AI flags images while techs become patient navigators, compassionate lighting, clarity, privacy‑respecting representation</code></li>
+              <li><code>logistics war‑room: dispatchers become route‑optimization and safety ops, large map UI, ethical AI, no surveillance vibes, focus on dignity</code></li>
+            </ul>
+          </details>
+
+          <h4 style="margin-top:14px">Hook Generator</h4>
+          <p class="tiny">Pick a persona and generate a shareable hook.</p>
+          <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:8px">
+            <select id="persona">
+              <option>Exec</option>
+              <option>Policy</option>
+              <option>Engineer</option>
+              <option>Creator</option>
+              <option>Gen‑X Skeptic</option>
+            </select>
+            <button class="btn" id="hookBtn">Generate hook</button>
+          </div>
+          <textarea id="hookOut" placeholder="Your viral‑ish hook will appear here…"></textarea>
+
+          <div class="share">
+            <a id="tw" href="#" target="_blank" rel="noopener">Share to X/Twitter</a>
+            <a id="li" href="#" target="_blank" rel="noopener">Share to LinkedIn</a>
+            <a id="cp" href="#" onclick="copyHook();return false;">Copy hook</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="panel">
+          <h3>Go‑Viral Strategy (ethical edition)</h3>
+          <ol class="list">
+            <li><b>Own the contrast.</b> Lead with the replace → redeploy flip. Visual before verbal. Keep it punchy.</li>
+            <li><b>Package a tiny tool.</b> Ship this page (or a fork) with your brand; invite screenshots of slider settings that unlocked breakthroughs.</li>
+            <li><b>Make it personal.</b> Ask, “What was your oldest job title? What’s its coolest redeployed version?” Thread the replies.</li>
+            <li><b>Case‑drop weekly.</b> Publish one real‑pattern and one hypothetical every week for 6 weeks. End each with a 2‑minute teardown.</li>
+            <li><b>Ally up.</b> Partner with a union, a bootcamp, and an open‑source maintainer to co‑author a "Redeploy Playbook" PDF. Free, no email wall.</li>
+            <li><b>Instrument the meme.</b> Use the hook generator to iterate; A/B test headline + first image in 24h sprints. Retire the duds quickly.</li>
+          </ol>
+          <p class="tiny">Golden rule: celebrate capability, not casualties.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot">P.S. If you actually redeploy people into meaningful work, tell that story loudly. The future notices.</footer>
+  </div>
+
+<script>
+  // --- Framing toggle & narrative ---
+  const framing = document.getElementById('framing');
+  const narrative = document.getElementById('narrative');
+  const copyBtn = document.getElementById('copyBtn');
+  let mode = 'replace';
+
+  const narratives = {
+    replace: `We used AI to reduce headcount and increase output. Costs down, margins up. Same roadmap; fewer people.`,
+    redeploy: `We used AI to re‑strategize, upskill, tool‑stack, and redeploy our teams. Automation took the rote; humans took the roadmap. We created new capabilities, entered two adjacencies, and accelerated time‑to‑value while retaining institutional memory.`
+  };
+
+  framing.addEventListener('click', (e)=>{
+    if(e.target.tagName !== 'BUTTON') return;
+    [...framing.querySelectorAll('button')].forEach(b=>b.classList.remove('active'));
+    e.target.classList.add('active');
+    mode = e.target.dataset.framing;
+    narrative.textContent = narratives[mode];
+  });
+
+  // init
+  narrative.textContent = narratives[mode];
+
+  copyBtn.addEventListener('click', async ()=>{
+    try{ await navigator.clipboard.writeText(narrative.textContent); copyBtn.textContent = 'Copied!'; setTimeout(()=>copyBtn.textContent='Copy narrative', 1200);}catch(err){ alert('Copy failed — your browser may block clipboard access here.'); }
+  });
+
+  // --- Simulator math ---
+  const people = document.getElementById('people');
+  const upskill = document.getElementById('upskill');
+  const automation = document.getElementById('automation');
+  const impact = document.getElementById('impact');
+  const peopleOut = document.getElementById('peopleOut');
+  const upskillOut = document.getElementById('upskillOut');
+  const automationOut = document.getElementById('automationOut');
+  const impactOut = document.getElementById('impactOut');
+  const bandwidth = document.getElementById('bandwidth');
+  const ttv = document.getElementById('ttv');
+  const surface = document.getElementById('surface');
+
+  function recalc(){
+    const p = +people.value; const u = +upskill.value; const a = +automation.value / 100; const i = +impact.value;
+    peopleOut.textContent = p;
+    upskillOut.textContent = u;
+    automationOut.textContent = a*100 + '%';
+    impactOut.textContent = i;
+
+    // toy model: derived pseudo‑FTE bandwidth from automation freeing time and upskill leverage
+    const fte = Math.round((p * (0.15 + a*0.5) * (1 + u/200)) * (0.6 + i*0.1));
+    const ttvx = (1.2 + a*1.5 + u/300).toFixed(1);
+    const surf = (1 + a*0.7 + i*0.2).toFixed(1);
+
+    bandwidth.textContent = `~ ${fte} FTE`;
+    ttv.textContent = `~ ${ttvx}×`;
+    surface.textContent = `~ ${surf}×`;
+  }
+
+  [people, upskill, automation, impact].forEach(el=>el.addEventListener('input', recalc));
+  recalc();
+
+  // --- Case cards ---
+  const cards = [
+    { type:'real', title:'Customer Support → Workflow Architects', desc:'A support org uses AI copilots to deflect tier‑0 tickets. Instead of layoffs, agents are trained as workflow designers who encode tribal knowledge into the copilot, shrinking handle time and elevating complex human cases.', payoff:'CSAT +18%, complex‑case backlog −35%, internal promotion rate +22%.' },
+    { type:'real', title:'Radiology Techs → Patient Navigators', desc:'AI triage flags priority images. Techs redeploy into navigation roles that coordinate care faster and improve consent & comprehension, especially for anxious patients.', payoff:'Wait‑time −27%, no‑show rate −14%, reported understanding of results +31%.' },
+    { type:'real', title:'QA Testers → Prompt QA & Eval Guild', desc:'Legacy QA teams become prompt‑and‑policy QA. They build eval sets, red‑team flows, and quality gates for generative systems.', payoff:'Regression escapes −40%, model drift caught earlier, auditability improves.' },
+    { type:'real', title:'Data Entry → Data Curators for RAG', desc:'Clerical teams are upskilled into “knowledge librarians,” deduplicating sources, tagging provenance, and hardening retrieval pipelines.', payoff:'Answer accuracy +24% on internal copilots, fewer compliance issues.' },
+    { type:'hypo', title:'Dispatchers → Safety & Optimization Ops', desc:'Fleet dispatchers redeploy to monitor safety signals and tune optimization objectives with the route AI (fuel, on‑time, risk).', payoff:'Fuel −12%, incidents −9%, driver retention +11%.' },
+    { type:'hypo', title:'Accounts Payable → Supplier Intelligence', desc:'AP clerks shift from keystrokes to insights — mapping supplier risk, ESG signals, and pricing anomalies with AI agents.', payoff:'Early‑pay discounts +$1.2M/yr on mid‑market baseline; risk flags up 3× earlier.' },
+    { type:'hypo', title:'Field Survey Team → Community Insights Guild', desc:'Survey enumerators in infrastructure projects retrain as community insight analysts, pairing qualitative signals with AI summaries to guide resettlement & benefit sharing.', payoff:'Complaint resolution time −40%; participation rates up.' },
+    { type:'hypo', title:'Educators → AI Curriculum Designers', desc:'Teachers co‑design adaptive curricula and local datasets; AI handles admin and drills while educators mentor and contextualize.', payoff:'Learning gains +0.25 SD in pilots; teacher burnout indicators down.' }
+  ];
+
+  const caseRoot = document.getElementById('caseCards');
+  caseRoot.innerHTML = cards.map(c=>{
+    const badge = c.type==='real' ? '<span class="badge">Real‑pattern</span>' : '<span class="badge hypo">Hypothetical</span>';
+    return `<article class="card"><div>${badge}</div><h4>${c.title}</h4><p class="muted">${c.desc}</p><p><b>Outcomes:</b> ${c.payoff}</p></article>`
+  }).join('');
+
+  // --- Hook generator ---
+  const hookBtn = document.getElementById('hookBtn');
+  const hookOut = document.getElementById('hookOut');
+  const persona = document.getElementById('persona');
+
+  const hooks = {
+    'Exec': [
+      'Stop celebrating cuts. Start shipping capabilities. Redeploy > Replace.',
+      'AI took the grunt work. Our people took the roadmap. Outcome: new revenue in 2 quarters.',
+      'Headcount math is easy. Capability math wins markets. Redeploy your moat.'
+    ],
+    'Policy': [
+      'Jobs policy for the AI era: fund redeployment, not fallout. Upskill as critical infrastructure.',
+      'Measure success by mobility, not layoffs. Redeploy > Replace.',
+      'Tie incentives to capability creation — not just cost compression.'
+    ],
+    'Engineer': [
+      'Automate the boring so humans can ship the impossible.',
+      'Turn runbooks into agents; turn agents into new roles. Redeploy FTW.',
+      'AI without evals is a vibes app. Build the Prompt QA guild.'
+    ],
+    'Creator': [
+      'We didn’t lose our jobs; we lost our busywork. Keep the craft, drop the drudge.',
+      'Tool‑stack your studio; teach the model your taste. Redeploy your time into story.',
+      'Replace the grind, not the voice.'
+    ],
+    'Gen‑X Skeptic': [
+      'Cool story about firing folks. Did you build anything new though?',
+      'We kept the humans and shipped bigger outcomes. Because we like winning more than memeing.',
+      'Less gloating, more building. Redeploy or get left in the 90s.'
+    ]
+  };
+
+  function genHook(){
+    const set = hooks[persona.value];
+    const h = set[Math.floor(Math.random()*set.length)];
+    hookOut.value = h + ' #RedeployNotReplace';
+    updateShareLinks();
+  }
+
+  function updateShareLinks(){
+    const text = encodeURIComponent(hookOut.value);
+    document.getElementById('tw').href = `https://twitter.com/intent/tweet?text=${text}`;
+    document.getElementById('li').href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://example.com')}&summary=${text}`;
+  }
+
+  function copyHook(){
+    navigator.clipboard.writeText(hookOut.value).then(()=>{
+      document.getElementById('cp').textContent = 'Copied!';
+      setTimeout(()=>{document.getElementById('cp').textContent='Copy hook'}, 1200)
+    });
+  }
+
+  hookBtn.addEventListener('click', genHook);
+  genHook(); // seed
+</script>
+</body>
+</html>

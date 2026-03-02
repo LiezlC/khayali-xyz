@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Imagine If... Redeploying AI with Purpose</title>
+    <script src="https://cdn.jsdelivr.net/npm/framer-motion@10.12.16/dist/framer-motion.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gradient-to-br from-blue-50 to-purple-100 text-gray-800 font-sans">
+    <main class="p-6 space-y-12">
+      <section class="text-center max-w-3xl mx-auto">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4">Imagine If...</h1>
+        <p class="text-lg md:text-xl leading-relaxed">
+          Instead of celebrating job losses to automation, we spotlighted human transformation: <br />
+          <span class="italic">"Used AI to retrain, toolstack, and redeploy X humans into world-solvers..."</span>
+        </p>
+      </section>
+
+      <section class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div class="bg-red-100 rounded-2xl p-6 shadow">
+          <h2 class="text-2xl font-semibold mb-2 text-red-700">Old Narrative</h2>
+          <ul class="list-disc pl-6 space-y-2 text-red-900">
+            <li>"Replaced 20,000 analysts with AI"</li>
+            <li>"Cut costs by 80% through automation"</li>
+            <li>"One AI model replaces whole legal team"</li>
+          </ul>
+        </div>
+        <div class="bg-green-100 rounded-2xl p-6 shadow">
+          <h2 class="text-2xl font-semibold mb-2 text-green-700">New Narrative</h2>
+          <ul class="list-disc pl-6 space-y-2 text-green-900">
+            <li>"Retrained call center staff as disaster response analysts"</li>
+            <li>"Transformed logistics managers into climate infrastructure coordinators"</li>
+            <li>"From financial clerks to renewable energy strategists"</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="text-center max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Case Studies</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-white rounded-xl shadow-lg p-4 space-y-2">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAACBCAYAAABGe3InAAEAAElEQVR4nOzBMQEAAAgDINc/9K3hABUYLUDswUIMMGGDBgwYYMGCDBjwhWcAAdsdtXcAAAAASUVORK5CYII=" alt="Call Center to Crisis Modelling" class="rounded-lg w-full h-40 object-cover"/>
+            <h3 class="text-xl font-semibold">📞 Call Center ➝ 🌀 Crisis Modelling</h3>
+            <p>Retrained 500 agents to use predictive AI for real-time humanitarian response coordination during climate events.</p>
+          </div>
+          <div class="bg-white rounded-xl shadow-lg p-4 space-y-2">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAACBCAYAAABGe3InAAEAAElEQVR4nOzBMQEAAAgDINc/9K3hABUYLUDswUIMMGGDBgwYYMGCDBjwhWcAAdsdtXcAAAAASUVORK5CYII="  alt="Admin Clerk to Battery Strategist" class="rounded-lg w-full h-40 object-cover"/>
+            <h3 class="text-xl font-semibold">📋 Admin Clerk ➝ 🔋 Battery Recycling Strategist</h3>
+            <p>Upskilled in LLM tooling and systems design; led municipal battery waste to energy program.</p>
+          </div>
+          <div class="bg-white rounded-xl shadow-lg p-4 space-y-2">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAACBCAYAAABGe3InAAEAAElEQVR4nOzBMQEAAAgDINc/9K3hABUYLUDswUIMMGGDBgwYYMGCDBjwhWcAAdsdtXcAAAAASUVORK5CYII=" alt="Accountants to Climate Architects" class="rounded-lg w-full h-40 object-cover"/>
+            <h3 class="text-xl font-semibold">🧾 Accountants ➝ 🌍 Climate Credit Architects</h3>
+            <p>Created verified impact credits to fund water restoration in rural regions using automated ledgers + satellite data.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="text-center py-12 bg-gradient-to-br from-green-100 to-blue-100 rounded-2xl shadow-md">
+        <h2 class="text-3xl font-bold mb-4">AI Role Reimaginer</h2>
+        <p class="mb-6">Enter a job title below to discover a possible redeployment path and impact narrative.</p>
+        <input id="roleInput" type="text" placeholder="e.g., Warehouse Picker"
+          class="px-4 py-2 rounded-lg border border-gray-300 shadow focus:outline-none focus:ring" />
+        <button onclick="generateRole()"
+          class="ml-2 px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700">Reimagine</button>
+        <div id="output" class="mt-6 text-lg italic text-gray-700"></div>
+      </section>
+
+      <section class="text-center max-w-xl mx-auto">
+        <h2 class="text-2xl font-bold mb-4">Share the Vision</h2>
+        <p>Join the movement: <span class="text-purple-600 font-semibold">#ImagineIfAI</span> & <span class="text-green-600 font-semibold">#RedeployNotReplace</span></p>
+      </section>
+    </main>
+
+    <script>
+      const transformations = {
+        "warehouse picker": "Trained in robotics oversight + supply analytics ➝ Inventory Resilience Planner for disaster-prone regions.",
+        "cashier": "Became a retail data strategist, optimizing fair-trade supply chains through LLM interfaces.",
+        "teacher": "Amplified reach via AI curriculum builders, then deployed as multilingual remote education consultant.",
+        "driver": "Reskilled into fleet management AI trainer ensuring safety protocols across autonomous transit fleets."
+      };
+
+      function generateRole() {
+        const role = document.getElementById("roleInput").value.toLowerCase();
+        const output = document.getElementById("output");
+        output.innerText = transformations[role] || `Trained in AI-assisted workflows ➝ Innovated within new domains like biofuels, resilient cities, or cognitive care.`;
+      }
+    </script>
+  </body>
+</html>
