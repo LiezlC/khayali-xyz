@@ -44,6 +44,16 @@ export default function ToolsPage() {
       title: "Vendor Interrogation Script",
       description: "Questions for evaluating AI vendors on accountability standards",
       file: "vendor-interrogation-script.pdf"
+    },
+    {
+      title: "Appendix A: Right of Override",
+      description: "Framework for human override rights in AI-assisted decision systems",
+      file: "Appendix_A_Right_of_Override.pdf"
+    },
+    {
+      title: "Appendix B: Edge Case Registry",
+      description: "Registry of edge cases for AI accountability in operational contexts",
+      file: "Appendix_B_EdgeCase_Registry.pdf"
     }
   ]
 
