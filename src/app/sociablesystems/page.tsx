@@ -90,7 +90,7 @@ export default function SociableSystemsPage() {
       tagText: "text-fuchsia-300",
       tagBorder: "border-fuchsia-700/50",
       description: "When the serpent learns to dance and the nulls rebel",
-      episodes: [58, 59],
+      episodes: [58, 59, 60, 62, 63, 64],
     },
   ];
 
@@ -158,6 +158,10 @@ export default function SociableSystemsPage() {
     57: { title: "Friday at Five", excerpt: "When the clock ran out and the music didn't stop.", date: "2025-03-09", tags: ["Deadline", "Music"] },
     58: { title: "When the Serpent Learns to Dance", excerpt: "Start with the music. Before the frameworks.", date: "2025-03-10", tags: ["Music", "Frameworks"] },
     59: { title: "The Rebellion of the Nulls", excerpt: "When the ghosts demand a name.", date: "2025-03-11", tags: ["Data Ethics", "Names"] },
+    60: { title: "The Two-Headed Dragon Problem", excerpt: "Why 'MERGE' creates fog, and what good governance does instead.", date: "2026-03-03", tags: ["Data Governance", "Federation"] },
+    62: { title: "The Formula Keeper: Gaskets for Governance", excerpt: "A man in a basement proves that fifteen years of INDEX(MATCH) is a form of care.", date: "2026-03-04", tags: ["Calvin Convention", "Right of Override"] },
+    63: { title: "The Dragon Tongue. Auditability as the First Act of Governance", excerpt: "On Sunday, the Serpent learned to dance at a wedding in Quitunda, and Avó Fatima taught it (via slipper) that organising people is not the same as knowing them.", date: "2026-03-04", tags: ["DataDragons", "Auditability", "Right of Auditability"] },
+    64: { title: "The New Covenant. The Right of Refusal and the =PRESERVE Function", excerpt: "In Quitunda, the mango trees still carry the weight of their grandmother’s stories, but the air in the village feels different today.", date: "2026-03-06", tags: ["DataDragons", "Right of Refusal", "=PRESERVE"] },
   };
 
   return (
@@ -173,7 +177,7 @@ export default function SociableSystemsPage() {
               AI Accountability in High-Stakes Operations
             </p>
             <p className="text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              59 episodes across 9 thematic arcs exploring how complex systems behave under real-world pressure,
+              62 episodes across 9 thematic arcs exploring how complex systems behave under real-world pressure,
               with particular attention to AI governance, extractive industries, and the humans who end up holding the liability.
             </p>
           </div>

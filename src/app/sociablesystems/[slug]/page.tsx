@@ -72,6 +72,10 @@ const episodeMetadata: Record<string, { number: number; title: string; date: str
   'episode-57': { number: 57, title: "Friday at Five", date: "2025-03-09", tags: ["Special Edition", "Deadline", "Music"], excerpt: "When the clock ran out and the music didn't stop." },
   'episode-58': { number: 58, title: "When the Serpent Learns to Dance", date: "2025-03-10", tags: ["DataDragons", "Music", "Frameworks"], excerpt: "Start with the music. Before the frameworks. Before the week's vocabulary shows up with a clipboard." },
   'episode-59': { number: 59, title: "The Rebellion of the Nulls", date: "2025-03-11", tags: ["DataDragons", "Data Ethics", "Names"], excerpt: "When the ghosts demand a name. Out by the edges of Quilamundo, where the temporary camps have names like P4_001 through P4_847." },
+  'episode-60': { number: 60, title: "The Two-Headed Dragon Problem", date: "2026-03-03", tags: ["DataDragons", "Data Governance", "Federation"], excerpt: "Why 'MERGE' creates fog, and what good governance does instead. Administrator Vale sees two record systems and reaches for the cleanest button: MERGE." },
+  'episode-62': { number: 62, title: "The Formula Keeper: Gaskets for Governance", date: "2026-03-04", tags: ["DataDragons", "Calvin Convention", "Right of Override", "Data Governance"], excerpt: "Old Samuel Machado kept a jar of R20 gaskets on his desk. His plumbing sermon translates directly into data governance controls." },
+  'episode-63': { number: 63, title: "The Dragon Tongue. Auditability as the First Act of Governance", date: "2026-03-04", tags: ["DataDragons", "Auditability", "Right of Auditability"], excerpt: "On Sunday, the Serpent learned to dance at a wedding in Quitunda, and Avó Fatima taught it (via slipper) that organising people is not the same as knowing them." },
+  'episode-64': { number: 64, title: "The New Covenant. The Right of Refusal and the =PRESERVE Function", date: "2026-03-06", tags: ["DataDragons", "Right of Refusal", "=PRESERVE"], excerpt: "In Quitunda, the mango trees still carry the weight of their grandmother’s stories, but the air in the village feels different today." },
 };
 
 async function getEpisodeContent(slug: string) {
@@ -142,6 +146,10 @@ async function getEpisodeContent(slug: string) {
     'episode-57': 'Episode_57_ Friday at Five.md',
     'episode-58': 'Episode_58_ When the Serpent Learns to Dance.md',
     'episode-59': 'Episode_59_ The Rebellion of the Nulls.md',
+    'episode-60': 'Episode_60_ 2head.md',
+    'episode-62': 'Episode_62_ GovernanceDragons.md',
+    'episode-63': 'Episode_63_The_Dragon_Tongue_Auditability.md',
+    'episode-64': 'Episode_64_The_New_Covenant.md',
   };
 
   const filename = slugToFilename[slug];
@@ -302,5 +310,5 @@ export default async function EpisodePage({ params }: EpisodePageProps) {
 }
 
 export async function generateStaticParams() {
-  return Array.from({ length: 59 }, (_, i) => ({ slug: `episode-${i + 1}` }));
+  return Array.from({ length: 64 }, (_, i) => ({ slug: `episode-${i + 1}` }));
 }

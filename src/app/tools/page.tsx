@@ -54,6 +54,11 @@ export default function ToolsPage() {
       title: "Appendix B: Edge Case Registry",
       description: "Registry of edge cases for AI accountability in operational contexts",
       file: "Appendix_B_EdgeCase_Registry.pdf"
+    },
+    {
+      title: "Appendix C: Right of Refusal",
+      description: "Framework for the system's own right to refuse harmful instructions",
+      file: "Appendix_C_Right_of_Refusal.pdf"
     }
   ]
 
