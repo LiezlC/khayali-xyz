@@ -1,0 +1,21 @@
+{
+  "name": "sociable-systems-substack-migration",
+  "version": "1.0.0",
+  "description": "Convert Sociable Systems newsletter episodes to Substack-compatible formats",
+  "main": "convert-to-substack.js",
+  "scripts": {
+    "migrate": "node convert-to-substack.js"
+  },
+  "keywords": [
+    "substack",
+    "newsletter",
+    "migration",
+    "wordpress",
+    "xml"
+  ],
+  "author": "Sociable Systems",
+  "license": "MIT",
+  "dependencies": {
+    "marked": "^11.1.1"
+  }
+}

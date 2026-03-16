@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **Sociable Systems** (khayali.xyz) is a Next.js TypeScript website focused on AI accountability in high-stakes operations. The site features the **Sociable Systems newsletter**, applied research on ESG/AI governance, grievance mechanisms, and development rights, plus experimental research labs exploring human-AI collaboration methods.
 
-**Primary Audience**: ESG specialists, social safeguards experts, resettlement practitioners, M&E professionals, AI governance researchers, and development finance professionals (382+ newsletter subscribers).
+**Primary Audience**: ESG specialists, social safeguards experts, resettlement practitioners, M&E professionals, AI governance researchers, and development finance professionals (677+ newsletter subscribers).
 
 **Content Hierarchy**:
 1. **Primary**: Sociable Systems newsletter, ESG research, grievance systems, AI accountability

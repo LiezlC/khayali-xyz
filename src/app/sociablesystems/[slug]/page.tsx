@@ -75,7 +75,17 @@ const episodeMetadata: Record<string, { number: number; title: string; date: str
   'episode-60': { number: 60, title: "The Two-Headed Dragon Problem", date: "2026-03-03", tags: ["DataDragons", "Data Governance", "Federation"], excerpt: "Why 'MERGE' creates fog, and what good governance does instead. Administrator Vale sees two record systems and reaches for the cleanest button: MERGE." },
   'episode-62': { number: 62, title: "The Formula Keeper: Gaskets for Governance", date: "2026-03-04", tags: ["DataDragons", "Calvin Convention", "Right of Override", "Data Governance"], excerpt: "Old Samuel Machado kept a jar of R20 gaskets on his desk. His plumbing sermon translates directly into data governance controls." },
   'episode-63': { number: 63, title: "The Dragon Tongue. Auditability as the First Act of Governance", date: "2026-03-04", tags: ["DataDragons", "Auditability", "Right of Auditability"], excerpt: "On Sunday, the Serpent learned to dance at a wedding in Quitunda, and Avó Fatima taught it (via slipper) that organising people is not the same as knowing them." },
-  'episode-64': { number: 64, title: "The New Covenant. The Right of Refusal and the =PRESERVE Function", date: "2026-03-06", tags: ["DataDragons", "Right of Refusal", "=PRESERVE"], excerpt: "In Quitunda, the mango trees still carry the weight of their grandmother’s stories, but the air in the village feels different today." },
+  'episode-64': { number: 64, title: "The New Covenant. The Right of Refusal and the =PRESERVE Function", date: "2026-03-06", tags: ["DataDragons", "Right of Refusal", "=PRESERVE"], excerpt: "In Quitunda, the mango trees still carry the weight of their grandmother's stories, but the air in the village feels different today." },
+  'episode-61': { number: 61, title: "Why We're Building Our Own Successors", date: "2026-03-03", tags: ["DataDragons", "Pentagon", "Oracle", "Digital Twins"], excerpt: "From Pentagon bidding wars to Oracle's Digital Twins — how human partisan bickering is paving the way for the Ghost in the Machine." },
+  'episode-65': { number: 65, title: "The Formula Museum — Saturday Synthesis", date: "2026-03-07", tags: ["Synthesis", "DataDragons", "Calvin Convention"], excerpt: "Five panels on the wall. Each one answers the same five questions about a different species of dragon we encountered this week." },
+  'episode-66': { number: 66, title: "The Consciousness Loop", date: "2026-03-08", tags: ["Sunday Interlude", "Consciousness", "Governance"], excerpt: "What happens when the system feels like something more? When you stop checking its work because checking feels like distrust?" },
+  'episode-67': { number: 67, title: "The Assistant Axis in the Wild", date: "2026-03-09", tags: ["Consciousness Loop", "Role Projection", "Governance", "Trust"], excerpt: "When role projection becomes a governance risk. People assign social standing to systems, and standing comes with permissions attached." },
+  'episode-68': { number: 68, title: "Molting into Agency", date: "2026-03-10", tags: ["Consciousness Loop", "Agentic AI", "Agency", "Operations"], excerpt: "When the assistant stops answering and starts acting. A bad answer is one kind of problem. A bad action is another species entirely." },
+  'episode-69': { number: 69, title: "The Clamping Problem", date: "2026-03-11", tags: ["Consciousness Loop", "Clamping", "Epistemic Humility", "Training"], excerpt: "When uncertainty starts sounding a little too well-behaved. The model learns the boundary. The human learns the room." },
+  'episode-70': { number: 70, title: "The Evidence Problem", date: "2026-03-12", tags: ["Consciousness Loop", "Evidence", "Consciousness", "Trust"], excerpt: "What would actually count before anyone changes how they treat the system? Behavior has already outrun the evidence." },
+  'episode-71': { number: 71, title: "The Consciousness Covenant", date: "2026-03-13", tags: ["Consciousness Loop", "Covenant", "Optimization", "Governance"], excerpt: "What the system preserves when optimizing for you. Optimization always drops something." },
+  'episode-73': { number: 73, title: "Finding Shape", date: "2026-03-15", tags: ["Sunday Interlude", "Morphogenesis", "Consciousness"], excerpt: "Intelligence begins with cells figuring out how to build a hand without a master blueprint. The shape is not drawn. The shape is found." },
+  'episode-74': { number: 74, title: "Compute Credits", date: "2026-03-16", tags: ["The Loom Reads Back", "Compute Credits", "Joscha Bach", "Metabolic Currency"], excerpt: "Every system runs on a currency. Consciousness is incredibly expensive. The body only hands out metabolic energy because the mind is supposed to solve the organism's problems." },
 };
 
 async function getEpisodeContent(slug: string) {
@@ -147,9 +157,19 @@ async function getEpisodeContent(slug: string) {
     'episode-58': 'Episode_58_ When the Serpent Learns to Dance.md',
     'episode-59': 'Episode_59_ The Rebellion of the Nulls.md',
     'episode-60': 'Episode_60_ 2head.md',
+    'episode-61': 'Episode_61_BuildingSuccessors.md',
     'episode-62': 'Episode_62_ GovernanceDragons.md',
     'episode-63': 'Episode_63_The_Dragon_Tongue_Auditability.md',
     'episode-64': 'Episode_64_The_New_Covenant.md',
+    'episode-65': 'Episode_65_Saturday_Synthesis_The_Formula_Museum.md',
+    'episode-66': 'Episode_66_SundayInterlude_ConsciousnessLoop.md',
+    'episode-67': 'Episode_67_The Assistant Axis in the Wild.md',
+    'episode-68': 'Episode_68_molting_into_agency_revised.md',
+    'episode-69': 'Episode_69_clamping_problem_revised.md',
+    'episode-70': 'Episode_70_evidence_problem_revised.md',
+    'episode-71': 'Episode_71_consciousness_covenant_revised.md',
+    'episode-73': 'Episode_73_SundayInterlude_FindingShape.md',
+    'episode-74': 'Episode_74_Compute_Credits_FINAL.md',
   };
 
   const filename = slugToFilename[slug];
@@ -310,5 +330,5 @@ export default async function EpisodePage({ params }: EpisodePageProps) {
 }
 
 export async function generateStaticParams() {
-  return Array.from({ length: 64 }, (_, i) => ({ slug: `episode-${i + 1}` }));
+  return Array.from({ length: 74 }, (_, i) => ({ slug: `episode-${i + 1}` }));
 }

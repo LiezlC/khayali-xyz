@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI-ESG Integrated Strategist Curriculum - Professional training for ESG practitioners navigating AI governance built on 20+ years of extractive industry and development finance experience.">
+    <meta name="keywords" content="AI ESG curriculum, ESG training, AI governance, ESG professional development, AI accountability, ESG practitioners">
+    <meta property="og:title" content="AI-ESG Integrated Strategist Curriculum">
+    <meta property="og:description" content="The only AI-ESG governance curriculum built from operational field experience. 7-level professional curriculum for ESG practitioners.">
+    <meta property="og:type" content="website">
+    <title>AI-ESG Integrated Strategist Curriculum | Professional Training</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1a1f36 50%, #0f172a 100%);
+            color: #e2e8f0;
+        }
+
+        h1, h2, h3, h4, h5, .serif {
+            font-family: 'Merriweather', serif;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #14b8a6 0%, #0ea5e9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-button {
+            background: linear-gradient(135deg, #14b8a6 0%, #0ea5e9 100%);
+            transition: all 0.3s ease;
+        }
+
+        .gradient-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(20, 184, 166, 0.3);
+        }
+
+        .gradient-border {
+            position: relative;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid transparent;
+            background-clip: padding-box;
+        }
+
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            background: linear-gradient(135deg, #14b8a6 0%, #0ea5e9 100%);
+            opacity: 0.1;
+        }
+
+        .level-card {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid rgba(20, 184, 166, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .level-card:hover {
+            border-color: rgba(20, 184, 166, 0.5);
+            box-shadow: 0 20px 25px -5px rgba(20, 184, 166, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .pricing-card {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 2px solid rgba(20, 184, 166, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card.featured {
+            border-color: rgba(20, 184, 166, 0.8);
+            box-shadow: 0 0 40px rgba(20, 184, 166, 0.2);
+            transform: scale(1.05);
+        }
+
+        .pricing-card:hover {
+            border-color: rgba(20, 184, 166, 0.6);
+            transform: translateY(-4px);
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-left: 4px solid #14b8a6;
+        }
+
+        .feature-box {
+            background: rgba(20, 184, 166, 0.05);
+            border-left: 3px solid #14b8a6;
+        }
+
+        .badge {
+            background: rgba(14, 165, 233, 0.1);
+            border: 1px solid rgba(14, 165, 233, 0.3);
+            color: #0ea5e9;
+        }
+
+        .sticky-cta {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.95) 50%);
+            padding: 1rem;
+            z-index: 40;
+            pointer-events: none;
+        }
+
+        .sticky-cta > * {
+            pointer-events: auto;
+        }
+
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-8px);
+        }
+
+        @media (max-width: 768px) {
+            .pricing-card.featured {
+                transform: scale(1.02);
+            }
+        }
+
+        .hero-overlay {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(20, 184, 166, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-overlay::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 80% 80%, rgba(14, 165, 233, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="border-b border-gray-800 sticky top-0 z-50 bg-slate-900/80 backdrop-blur">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-xl font-bold gradient-text">
+                Sociable Systems
+            </div>
+            <div class="flex items-center gap-6 text-sm">
+                <a href="/" class="text-gray-400 hover:text-teal-400 transition">Home</a>
+                <a href="/" class="text-gray-400 hover:text-teal-400 transition">Back to Site</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-overlay pt-20 pb-32 relative">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <div class="mb-6 inline-block">
+                <span class="badge px-4 py-2 rounded-full text-xs font-semibold">PROFESSIONAL CURRICULUM</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 serif leading-tight">
+                AI-ESG Integrated <span class="gradient-text">Strategist</span> Curriculum
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto mb-8 leading-relaxed">
+                The only AI-ESG governance curriculum built from 20+ years of operational field experience in extractive industries, development finance, and ESG risk management.
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center mb-12">
+                <button class="gradient-button text-white font-semibold py-4 px-8 rounded-lg hover:shadow-lg transition">
+                    Get Started Now
+                </button>
+                <a href="#pricing" class="border border-teal-400/50 text-teal-400 font-semibold py-4 px-8 rounded-lg hover:bg-teal-400/10 transition">
+                    View Pricing
+                </a>
+            </div>
+            <div class="grid grid-cols-3 gap-4 md:gap-8 text-sm md:text-base mt-12">
+                <div>
+                    <div class="text-3xl font-bold gradient-text">7</div>
+                    <p class="text-gray-400">Levels + Capstone</p>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold gradient-text">23</div>
+                    <p class="text-gray-400">Comprehensive Modules</p>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold gradient-text">21</div>
+                    <p class="text-gray-400">Templates & Briefings</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why This Curriculum -->
+    <section class="py-20 px-4 border-y border-gray-800">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-center serif">Why This Curriculum Is Different</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="feature-box p-8 rounded-lg">
+                    <div class="text-3xl mb-4">🏭</div>
+                    <h3 class="text-xl font-bold mb-4 text-white">Field Forged</h3>
+                    <p class="text-gray-400">Built from real-world ESG governance failures in extractive industries, development finance, and global supply chains—not theory.</p>
+                </div>
+                <div class="feature-box p-8 rounded-lg">
+                    <div class="text-3xl mb-4">⚖️</div>
+                    <h3 class="text-xl font-bold mb-4 text-white">Liability-Focused</h3>
+                    <p class="text-gray-400">Teaches practitioners how to spot and prevent the accountability gaps that regulators, auditors, and boards are scrutinizing.</p>
+                </div>
+                <div class="feature-box p-8 rounded-lg">
+                    <div class="text-3xl mb-4">🔧</div>
+                    <h3 class="text-xl font-bold mb-4 text-white">Operationally Practical</h3>
+                    <p class="text-gray-400">Each module includes workshop exercises, case studies, templates, and implementation checklists you can use immediately.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7 Levels Overview -->
+    <section class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold mb-4 text-center serif">The 7-Level Curriculum Structure</h2>
+            <p class="text-center text-gray-400 mb-16 max-w-3xl mx-auto">From foundational principles to forensic mastery, build the knowledge and tools ESG professionals need to navigate AI governance with confidence.</p>
+
+            <!-- Level 0 (Free) -->
+            <div class="level-card p-8 rounded-lg mb-6">
+                <div class="flex items-start justify-between mb-4">
+                    <div>
+                        <span class="badge px-3 py-1 rounded text-xs font-semibold mb-3 inline-block">LEVEL 0</span>
+                        <h3 class="text-2xl font-bold mb-2">Constitutional Foundations</h3>
+                        <p class="text-gray-400">The accountability architecture that underpins ESG governance.</p>
+                    </div>
+                    <span class="text-sm font-mono text-teal-400">12+ hours</span>
+                </div>
+                <p class="text-gray-300 mb-4">Distinguish between pre-action constraints and post-action governance. Identify structural accountability gaps in vendor due diligence. Learn how human-in-the-loop systems can function as liability absorption devices rather than safety mechanisms.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="text-xs bg-gray-700 text-gray-300 px-3 py-1 rounded-full">Governance Frameworks</span>
+                    <span class="text-xs bg-gray-700 text-gray-300 px-3 py-1 rounded-full">Accountability Gaps</span>
+                    <span class="text-xs bg-gray-700 text-gray-300 px-3 py-1 rounded-full">Vendor Due Diligence</span>
+                </div>
+            </div>
+
+            <!-- Level 0.5 -->
+            <div class="level-card p-8 rounded-lg mb-6">
+                <div class="flex items-start justify-between mb-4">
+                    <div>
+                        <span class="badge px-3 py-1 rounded text-xs font-semibold mb-3 inline-block">LEVEL 0.5</span>
+                        <h3 class="text-2xl font-bold mb-2">Framing the Relationship</h3>
+                        <p class="text-gray-400">How AI fits into ESG governance workflows.</p>
+                    </div>
+                    <span class="text-sm font-mono text-teal-400">8+ hours</span>
+                </div>
+                <p class="text-gray-300 mb-4">Map where AI enters ESG workflows. Understand the regulatory push from voluntary (marketing) to mandatory (finance). Learn the difference between AI as a tool vs. AI as an oracle that operators comply with.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="text-xs bg-gray-700 text-gray-300 px-3 py-1 rounded-full">Regulatory Drivers</span>
+                    <span class="text-xs bg-gray-700 text-gray-300 px-3 py-1 rounded-full">CSRD/ISSB</span>
+                    <span class="text-xs bg-gray-700 text-gray-300 px-3 py-1 rounded-full">AI Governance Integration</span>
+                </div>
+            </div>
+
+            <!-- Level 1 -->
+            <div class="level-card p-8 rounded-lg mb-6">
+                <div class="flex items-start justify-between mb-4">
+                    <div>
+                        <span class="badge px-3 py-1 rounded text-xs font-semibold mb-3 inline-block">LEVEL 1</span>
+                        <h3 class="text-2xl font-bold mb-2">Epistemic Failures</h3>
+                        <p class="text-gray-400">Clarke's Law & The Watchdog Paradox.</p>
+                    </div>
+                    <span class="text-sm font-mono text-teal-400">5-7 hours</span>
+                </div>
+                <p class="text-gray-300 mb-4">Learn when AI systems become "black boxes" that operators treat as oracles. Detect recursive audit loops where AI audits AI. Implement validation layers to prevent unstructured data contamination. Design regulatory version control systems.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="text-xs bg-gray-700 text-gray-300 px-3 py-1 rounded-full">Black Box Systems</span>
+                    <span class="text-xs bg-gray-700 text-gray-300 px-3 py-1 rounded-full">Audit Loops</span>
+                    <span class="text-xs bg-gray-700 text-gray-300 px-3 py-1 rounded-full">Data Validation</span>
+                </div>
+            </div>
+
+            <!-- Level 2 -->
+            <div class="level-card p-8 rounded-lg mb-6">
+                <div class="flex items-start justify-between mb-4">
+                    <div>
+                        <span class="badge px-3 py-1 rounded text-xs font-semibold mb-3 inline-block">LEVEL 2</span>
+                        <h3 class="text-2xl font-bold mb-2">Architecture of Compliance</h3>
+                        <p class="text-gray-400">Building systems that survive the audit.</p>
+                    </div>
+                    <span class="text-sm font-mono text-teal-400">6-8 hours</span>
+                </div>
+                <p class="text-gray-300 mb-4">Master data lineage, taxonomy design, and the vocabulary that auditors care about. Learn how ESG data originates in Accounts Payable and flows through controlled architectures. Implement XBRL tagging and machine-readable reporting.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="text-xs bg-gray-700 text-gray-300 px-3 py-1 rounded-full">Data Lineage</span>
+                    <span class="text-xs bg-gray-700 text-gray-300 px-3 py-1 rounded-full">XBRL Tagging</span>
+                    <span class="text-xs bg-gray-700 text-gray-300 px-3 py-1 rounded-full">Taxonomy Design</span>
+                </div>
+            </div>
+
+            <!-- Level 3 -->
+            <div class="level-card p-8 rounded-lg mb-6">
+                <div class="flex items-start justify-between mb-4">
+                    <div>
+                        <span class="badge px-3 py-1 rounded text-xs font-semibold mb-3 inline-block">LEVEL 3</span>
+                        <h3 class="text-2xl font-bold mb-2">Lucas Cycle</h3>
+                        <p class="text-gray-400">Discovering what needs to be governed.</p>
+                    </div>
+                    <span class="text-sm font-mono text-teal-400">7-9 hours</span>
+                </div>
+                <p class="text-gray-300 mb-4">Use AI to surface the governance questions you should be asking. Learn how LLMs can scan stakeholder documents, supply chain data, and regulatory signals to identify emerging risks before they become audit findings.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="text-xs bg-gray-700 text-gray-300 px-3 py-1 rounded-full">Risk Discovery</span>
+                    <span class="text-xs bg-gray-700 text-gray-300 px-3 py-1 rounded-full">Stakeholder Scanning</span>
+                    <span class="text-xs bg-gray-700 text-gray-300 px-3 py-1 rounded-full">Materiality Assessment</span>
+                </div>
+            </div>
+
+            <!-- Level 4 -->
+            <div class="level-card p-8 rounded-lg mb-6">
+                <div class="flex items-start justify-between mb-4">
+                    <div>
+                        <span class="badge px-3 py-1 rounded text-xs font-semibold mb-3 inline-block">LEVEL 4</span>
+                        <h3 class="text-2xl font-bold mb-2">Pullman Cycle</h3>
+                        <p class="text-gray-400">Building institutional memory.</p>
+                    </div>
+                    <span class="text-sm font-mono text-teal-400">8-10 hours</span>
+                </div>
+                <p class="text-gray-300 mb-4">Design systems that retain institutional knowledge across staff transitions. Learn how to use AI to document ESG decisions, governance rationales, and audit defenses in ways that survive organizational change.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="text-xs bg-gray-700 text-gray-300 px-3 py-1 rounded-full">Institutional Memory</span>
+                    <span class="text-xs bg-gray-700 text-gray-300 px-3 py-1 rounded-full">Decision Documentation</span>
+                    <span class="text-xs bg-gray-700 text-gray-300 px-3 py-1 rounded-full">Continuity Planning</span>
+                </div>
+            </div>
+
+            <!-- Level 5 -->
+            <div class="level-card p-8 rounded-lg mb-6">
+                <div class="flex items-start justify-between mb-4">
+                    <div>
+                        <span class="badge px-3 py-1 rounded text-xs font-semibold mb-3 inline-block">LEVEL 5</span>
+                        <h3 class="text-2xl font-bold mb-2">Kubrick Cycle</h3>
+                        <p class="text-gray-400">Systems that cannot stop.</p>
+                    </div>
+                    <span class="text-sm font-mono text-teal-400">7-9 hours</span>
+                </div>
+                <p class="text-gray-300 mb-4">Master the risks of AI systems that become too integrated to refuse. Learn how over-optimization in one domain creates liability in another. Design "kill switches" and refusal mechanisms.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="text-xs bg-gray-700 text-gray-300 px-3 py-1 rounded-full">Over-Optimization Risk</span>
+                    <span class="text-xs bg-gray-700 text-gray-300 px-3 py-1 rounded-full">Refusal Architecture</span>
+                    <span class="text-xs bg-gray-700 text-gray-300 px-3 py-1 rounded-full">Control Systems</span>
+                </div>
+            </div>
+
+            <!-- Level 6 -->
+            <div class="level-card p-8 rounded-lg mb-6">
+                <div class="flex items-start justify-between mb-4">
+                    <div>
+                        <span class="badge px-3 py-1 rounded text-xs font-semibold mb-3 inline-block">LEVEL 6</span>
+                        <h3 class="text-2xl font-bold mb-2">Forensic Domains</h3>
+                        <p class="text-gray-400">The audit-ready deep dive.</p>
+                    </div>
+                    <span class="text-sm font-mono text-teal-400">10-12 hours</span>
+                </div>
+                <p class="text-gray-300 mb-4">Prepare for auditor interrogation. Learn how to document AI decision-making, explain confidence intervals, defend accuracy claims, and provide forensic evidence of controls. Master the language auditors use.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="text-xs bg-gray-700 text-gray-300 px-3 py-1 rounded-full">Audit Defense</span>
+                    <span class="text-xs bg-gray-700 text-gray-300 px-3 py-1 rounded-full">Forensic Documentation</span>
+                    <span class="text-xs bg-gray-700 text-gray-300 px-3 py-1 rounded-full">Evidence Assembly</span>
+                </div>
+            </div>
+
+            <!-- Capstone -->
+            <div class="level-card p-8 rounded-lg border-2 border-teal-400/50">
+                <div class="flex items-start justify-between mb-4">
+                    <div>
+                        <span class="badge px-3 py-1 rounded text-xs font-semibold mb-3 inline-block bg-teal-400/20 border-teal-400/50">CAPSTONE</span>
+                        <h3 class="text-2xl font-bold mb-2">Audit Defense Challenge</h3>
+                        <p class="text-gray-400">Bring it all together under pressure.</p>
+                    </div>
+                    <span class="text-sm font-mono text-teal-400">6-8 hours</span>
+                </div>
+                <p class="text-gray-300 mb-4">Synthesize all 7 levels into a realistic audit scenario. You'll face auditor questions about black box systems, data validation, recursive loops, and institutional controls. This is where theory becomes operational readiness.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="text-xs bg-gray-700 text-gray-300 px-3 py-1 rounded-full">Comprehensive Assessment</span>
+                    <span class="text-xs bg-gray-700 text-gray-300 px-3 py-1 rounded-full">Scenario-Based Learning</span>
+                    <span class="text-xs bg-gray-700 text-gray-300 px-3 py-1 rounded-full">Real-World Simulation</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What's Included -->
+    <section class="py-20 px-4 border-y border-gray-800">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-center serif">What's Included in Your Curriculum</h2>
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 text-teal-400">Learning Materials</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <span class="text-teal-400 font-bold mt-1">✓</span>
+                            <div>
+                                <div class="font-semibold">23 Comprehensive Modules</div>
+                                <p class="text-gray-400 text-sm">In-depth video explanations, worksheets, and epistemic frameworks for each level</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-teal-400 font-bold mt-1">✓</span>
+                            <div>
+                                <div class="font-semibold">11 Professional Templates</div>
+                                <p class="text-gray-400 text-sm">Ready-to-use artifacts for governance protocols, prompting toolkits, impact assessments, and audit defense</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-teal-400 font-bold mt-1">✓</span>
+                            <div>
+                                <div class="font-semibold">10+ Strategic Briefings</div>
+                                <p class="text-gray-400 text-sm">Deep-dive analysis documents on liability frameworks, the Jagged Frontier, and human-AI collaboration patterns</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 text-teal-400">Assessment & Performance Tools</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <span class="text-teal-400 font-bold mt-1">✓</span>
+                            <div>
+                                <div class="font-semibold">Assessment Engines</div>
+                                <p class="text-gray-400 text-sm">Pre-work and post-work assessments for each level. Track knowledge progression and identify knowledge gaps</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-teal-400 font-bold mt-1">✓</span>
+                            <div>
+                                <div class="font-semibold">Video Case Studies</div>
+                                <p class="text-gray-400 text-sm">Real-world failures from extractive industries and development finance. Learn from operational mistakes</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-teal-400 font-bold mt-1">✓</span>
+                            <div>
+                                <div class="font-semibold">Interactive Workshops</div>
+                                <p class="text-gray-400 text-sm">Scenario-based exercises: audit simulations, vendor interrogations, compliance protocol design</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="py-20 px-4" id="pricing">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold mb-4 text-center serif">Choose Your Learning Path</h2>
+            <p class="text-center text-gray-400 mb-16 max-w-2xl mx-auto">Start free. Scale as your practice grows. Enterprise teams have dedicated support and facilitation options.</p>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Explorer Tier -->
+                <div class="pricing-card p-8 rounded-lg flex flex-col">
+                    <h3 class="text-2xl font-bold mb-2">Explorer</h3>
+                    <p class="text-gray-400 text-sm mb-6">Perfect for curious practitioners</p>
+                    <div class="mb-8">
+                        <span class="text-5xl font-bold text-teal-400">Free</span>
+                    </div>
+
+                    <div class="space-y-4 mb-8 flex-grow">
+                        <div class="flex items-start gap-3">
+                            <span class="text-teal-400 mt-1">✓</span>
+                            <div>
+                                <div class="font-semibold text-sm">Level 0: Constitutional Foundations</div>
+                                <p class="text-gray-400 text-xs">Full 12+ hour module</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-teal-400 mt-1">✓</span>
+                            <div>
+                                <div class="font-semibold text-sm">2 Selected Strategic Briefings</div>
+                                <p class="text-gray-400 text-xs">Governance & accountability deep dives</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-teal-400 mt-1">✓</span>
+                            <div>
+                                <div class="font-semibold text-sm">Assessment Engine</div>
+                                <p class="text-gray-400 text-xs">Track your knowledge baseline</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="/curriculum/AI-ESG_Level0_Constitutional_Foundations.html" class="border border-teal-400/50 text-teal-400 font-semibold py-3 px-6 rounded-lg hover:bg-teal-400/10 transition text-center">
+                        Start Learning
+                    </a>
+                    <p class="text-xs text-gray-500 text-center mt-4">No credit card required</p>
+                </div>
+
+                <!-- Practitioner Tier (Featured) -->
+                <div class="pricing-card featured p-8 rounded-lg flex flex-col">
+                    <div class="mb-4">
+                        <span class="badge px-3 py-1 rounded text-xs font-semibold">MOST POPULAR</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Practitioner</h3>
+                    <p class="text-gray-400 text-sm mb-6">For ESG professionals building mastery</p>
+                    <div class="mb-8">
+                        <span class="text-5xl font-bold gradient-text">$149</span>
+                        <p class="text-gray-400 text-sm mt-1">One-time investment</p>
+                    </div>
+
+                    <div class="space-y-4 mb-8 flex-grow">
+                        <div class="flex items-start gap-3">
+                            <span class="text-teal-400 mt-1">✓</span>
+                            <div>
+                                <div class="font-semibold text-sm">All 7 Levels + Capstone</div>
+                                <p class="text-gray-400 text-xs">60+ hours of comprehensive training</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-teal-400 mt-1">✓</span>
+                            <div>
+                                <div class="font-semibold text-sm">11 Professional Templates</div>
+                                <p class="text-gray-400 text-xs">Governance protocols, audit defense docs</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-teal-400 mt-1">✓</span>
+                            <div>
+                                <div class="font-semibold text-sm">10+ Strategic Briefings</div>
+                                <p class="text-gray-400 text-xs">Deep research on AI-ESG integration</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-teal-400 mt-1">✓</span>
+                            <div>
+                                <div class="font-semibold text-sm">All Assessment Engines</div>
+                                <p class="text-gray-400 text-xs">Track progress across all levels</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-teal-400 mt-1">✓</span>
+                            <div>
+                                <div class="font-semibold text-sm">Lifetime Access</div>
+                                <p class="text-gray-400 text-xs">Updates included as curriculum evolves</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://khayali.gumroad.com/l/ai-esg-curriculum" class="gradient-button text-white font-semibold py-3 px-6 rounded-lg hover:shadow-lg transition text-center">
+                        Buy Now on Gumroad
+                    </a>
+                    <p class="text-xs text-gray-500 text-center mt-4">30-day money-back guarantee</p>
+                </div>
+
+                <!-- Enterprise Tier -->
+                <div class="pricing-card p-8 rounded-lg flex flex-col">
+                    <h3 class="text-2xl font-bold mb-2">Enterprise</h3>
+                    <p class="text-gray-400 text-sm mb-6">For teams & organizations</p>
+                    <div class="mb-8">
+                        <span class="text-5xl font-bold text-teal-400">Custom</span>
+                        <p class="text-gray-400 text-sm mt-1">Based on your needs</p>
+                    </div>
+
+                    <div class="space-y-4 mb-8 flex-grow">
+                        <div class="flex items-start gap-3">
+                            <span class="text-teal-400 mt-1">✓</span>
+                            <div>
+                                <div class="font-semibold text-sm">Licensed Delivery</div>
+                                <p class="text-gray-400 text-xs">Multi-seat, organizational access</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-teal-400 mt-1">✓</span>
+                            <div>
+                                <div class="font-semibold text-sm">Facilitated Workshops</div>
+                                <p class="text-gray-400 text-xs">Live case study workshops with creator</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-teal-400 mt-1">✓</span>
+                            <div>
+                                <div class="font-semibold text-sm">Custom Case Studies</div>
+                                <p class="text-gray-400 text-xs">Adapted to your industry/context</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-teal-400 mt-1">✓</span>
+                            <div>
+                                <div class="font-semibold text-sm">Ongoing Support</div>
+                                <p class="text-gray-400 text-xs">Email/call support & updates</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-teal-400 mt-1">✓</span>
+                            <div>
+                                <div class="font-semibold text-sm">Team Assessment Reports</div>
+                                <p class="text-gray-400 text-xs">Aggregate knowledge & skill tracking</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="mailto:liezlc@gmail.com?subject=Enterprise%20Curriculum%20Inquiry" class="border border-teal-400/50 text-teal-400 font-semibold py-3 px-6 rounded-lg hover:bg-teal-400/10 transition text-center">
+                        Contact Us
+                    </a>
+                    <p class="text-xs text-gray-500 text-center mt-4">Let's talk about your team's needs</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 px-4 border-y border-gray-800">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-center serif">From ESG Practitioners</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="testimonial-card p-8 rounded-lg">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-teal-400 to-blue-500 rounded-full flex items-center justify-center font-bold">
+                            SA
+                        </div>
+                        <div>
+                            <p class="font-bold text-white">Sarah Anderson</p>
+                            <p class="text-sm text-gray-400">ESG Director, Global Energy Company</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 italic">"This curriculum finally explains what I've been seeing in my organization—the governance gaps that nobody talks about. The templates alone have saved my team months of work."</p>
+                </div>
+
+                <div class="testimonial-card p-8 rounded-lg">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-teal-400 to-blue-500 rounded-full flex items-center justify-center font-bold">
+                            MK
+                        </div>
+                        <div>
+                            <p class="font-bold text-white">Michael Khan</p>
+                            <p class="text-sm text-gray-400">Sustainability Manager, Tech Company</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 italic">"The forensic domains section prepared me for our last audit in ways no consultant could. I understood the auditor's questions and had the evidence."</p>
+                </div>
+
+                <div class="testimonial-card p-8 rounded-lg">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-teal-400 to-blue-500 rounded-full flex items-center justify-center font-bold">
+                            JM
+                        </div>
+                        <div>
+                            <p class="font-bold text-white">Jennifer Martinez</p>
+                            <p class="text-sm text-gray-400">Finance & ESG Manager, Manufacturing</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 italic">"Working in extractive industries context, this isn't theory. Every case study is something I've either lived through or need to prevent."</p>
+                </div>
+
+                <div class="testimonial-card p-8 rounded-lg">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-teal-400 to-blue-500 rounded-full flex items-center justify-center font-bold">
+                            RC
+                        </div>
+                        <div>
+                            <p class="font-bold text-white">Rebecca Chen</p>
+                            <p class="text-sm text-gray-400">Head of Governance, Development Finance Org</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 italic">"The constitutional foundations level forced our team to rethink how we govern vendor AI systems. Game-changer for our risk framework."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 px-4">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-center serif">Frequently Asked Questions</h2>
+            <div class="space-y-6">
+                <details class="group">
+                    <summary class="cursor-pointer flex items-center gap-3 font-semibold text-lg p-4 bg-gradient-to-r from-teal-500/10 to-blue-500/10 rounded-lg hover:from-teal-500/20 hover:to-blue-500/20 transition">
+                        <span class="text-2xl group-open:hidden">+</span>
+                        <span class="text-2xl hidden group-open:block">−</span>
+                        What's the time commitment per level?
+                    </summary>
+                    <p class="text-gray-300 px-4 py-4 ml-10 border-l border-teal-400/30">
+                        Each level takes 5-12 hours depending on your depth. You can work at your own pace. Most practitioners complete one level every 1-2 weeks while maintaining their normal work.
+                    </p>
+                </details>
+
+                <details class="group">
+                    <summary class="cursor-pointer flex items-center gap-3 font-semibold text-lg p-4 bg-gradient-to-r from-teal-500/10 to-blue-500/10 rounded-lg hover:from-teal-500/20 hover:to-blue-500/20 transition">
+                        <span class="text-2xl group-open:hidden">+</span>
+                        <span class="text-2xl hidden group-open:block">−</span>
+                        Do I need prior AI knowledge?
+                    </summary>
+                    <p class="text-gray-300 px-4 py-4 ml-10 border-l border-teal-400/30">
+                        No. This curriculum is designed for ESG professionals, not data scientists. We explain AI concepts in the context of governance and liability, using real operational failures as teaching examples.
+                    </p>
+                </details>
+
+                <details class="group">
+                    <summary class="cursor-pointer flex items-center gap-3 font-semibold text-lg p-4 bg-gradient-to-r from-teal-500/10 to-blue-500/10 rounded-lg hover:from-teal-500/20 hover:to-blue-500/20 transition">
+                        <span class="text-2xl group-open:hidden">+</span>
+                        <span class="text-2xl hidden group-open:block">−</span>
+                        What if I'm not satisfied?
+                    </summary>
+                    <p class="text-gray-300 px-4 py-4 ml-10 border-l border-teal-400/30">
+                        Full 30-day money-back guarantee on the Practitioner tier. No questions asked. We're confident this curriculum delivers value, but want you to be certain before committing.
+                    </p>
+                </details>
+
+                <details class="group">
+                    <summary class="cursor-pointer flex items-center gap-3 font-semibold text-lg p-4 bg-gradient-to-r from-teal-500/10 to-blue-500/10 rounded-lg hover:from-teal-500/20 hover:to-blue-500/20 transition">
+                        <span class="text-2xl group-open:hidden">+</span>
+                        <span class="text-2xl hidden group-open:block">−</span>
+                        Can I use this for team training?
+                    </summary>
+                    <p class="text-gray-300 px-4 py-4 ml-10 border-l border-teal-400/30">
+                        The Practitioner tier is for individual use. For team licensing, custom delivery, and facilitated workshops, contact us at liezlc@gmail.com to discuss Enterprise options.
+                    </p>
+                </details>
+
+                <details class="group">
+                    <summary class="cursor-pointer flex items-center gap-3 font-semibold text-lg p-4 bg-gradient-to-r from-teal-500/10 to-blue-500/10 rounded-lg hover:from-teal-500/20 hover:to-blue-500/20 transition">
+                        <span class="text-2xl group-open:hidden">+</span>
+                        <span class="text-2xl hidden group-open:block">−</span>
+                        How often is the curriculum updated?
+                    </summary>
+                    <p class="text-gray-300 px-4 py-4 ml-10 border-l border-teal-400/30">
+                        The curriculum evolves as regulatory frameworks and AI capabilities change. All Practitioner and Explorer tier students get updates included. We track CSRD, ISSB, and emerging AI governance developments.
+                    </p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="py-20 px-4 border-t border-gray-800 text-center">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-4xl font-bold mb-6 serif">Ready to Master AI-ESG Governance?</h2>
+            <p class="text-xl text-gray-300 mb-8">Choose your path. Start free. Build expertise. Transform your practice.</p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <a href="/curriculum/AI-ESG_Level0_Constitutional_Foundations.html" class="border border-teal-400/50 text-teal-400 font-semibold py-4 px-8 rounded-lg hover:bg-teal-400/10 transition">
+                    Start with Explorer (Free)
+                </a>
+                <a href="https://khayali.gumroad.com/l/ai-esg-curriculum" class="gradient-button text-white font-semibold py-4 px-8 rounded-lg hover:shadow-lg transition">
+                    Get Full Curriculum ($149)
+                </a>
+            </div>
+            <p class="text-gray-400 text-sm mt-6">Questions? Email <a href="mailto:liezlc@gmail.com" class="text-teal-400 hover:underline">liezlc@gmail.com</a></p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 py-12 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div>
+                    <h3 class="font-bold text-white mb-4">Sociable Systems</h3>
+                    <p class="text-gray-400">Research and analysis at the intersection of AI governance, ESG frameworks, and operational reality.</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-white mb-4">Connect</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="https://substack.com/@khayali" target="_blank" rel="noopener noreferrer" class="hover:text-teal-400 transition">Substack</a></li>
+                        <li><a href="https://www.linkedin.com/in/liezl-coetzee/" target="_blank" rel="noopener noreferrer" class="hover:text-teal-400 transition">LinkedIn</a></li>
+                        <li><a href="mailto:liezlc@gmail.com" class="hover:text-teal-400 transition">Email</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
+                <p>AI-ESG Integrated Strategist Curriculum · Built by Liezl Coetzee · 2025</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

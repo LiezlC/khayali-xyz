@@ -51,6 +51,7 @@ export default function SociableSystemsPage() {
       tagBorder: "border-amber-700/50",
       description: "Visible souls, severed daemons, and the governance of interiority",
       episodes: [29, 30, 31, 33, 34, 35],
+      playlist: { youtube: "https://www.youtube.com/playlist?list=PLx1_gH-7FR09GJ-NRglEFFatglfYVDRtW", label: "Lanterns" },
     },
     {
       name: "The Search",
@@ -61,6 +62,7 @@ export default function SociableSystemsPage() {
       tagBorder: "border-cyan-700/50",
       description: "Teleporters, mirrors, red shirts, and the boundary that keeps dissolving",
       episodes: [37, 38, 39, 40, 41, 42],
+      playlist: { youtube: "https://www.youtube.com/playlist?list=PLx1_gH-7FR08HOSjODMWIheEUgbBu-Onj", label: "The Search" },
     },
     {
       name: "War",
@@ -71,6 +73,7 @@ export default function SociableSystemsPage() {
       tagBorder: "border-red-700/50",
       description: "Tactical ghosts, psychopath confessions, and the audit that cannot happen",
       episodes: [44, 45, 46, 47, 48, 49],
+      playlist: { youtube: "https://www.youtube.com/playlist?list=PLx1_gH-7FR08rhEA5fRuaTRSvRsXihU18", label: "Kill Chain Karaoke" },
     },
     {
       name: "D.I.",
@@ -81,6 +84,7 @@ export default function SociableSystemsPage() {
       tagBorder: "border-emerald-700/50",
       description: "A digital intelligence walks Cape Town — attention, appliances, quantums, and the spec sheet vs the street",
       episodes: [51, 52, 53, 54, 55, 56],
+      playlist: { youtube: "https://www.youtube.com/playlist?list=PLx1_gH-7FR0_YApz2g7RflLRsEVRCE8Qw", label: "D.I. Collection" },
     },
     {
       name: "DataDragons",
@@ -90,12 +94,34 @@ export default function SociableSystemsPage() {
       tagText: "text-fuchsia-300",
       tagBorder: "border-fuchsia-700/50",
       description: "When the serpent learns to dance and the nulls rebel",
-      episodes: [58, 59, 60, 62, 63, 64],
+      episodes: [58, 59, 60, 61, 62, 63, 64],
+      playlist: { youtube: "https://www.youtube.com/playlist?list=PLx1_gH-7FR08BC0d2vrU4wHi-bxWUKWxG", label: "Governance of Ghosts" },
+    },
+    {
+      name: "Consciousness Loop",
+      color: "violet",
+      borderColor: "border-violet-600",
+      tagBg: "bg-violet-900/50",
+      tagText: "text-violet-300",
+      tagBorder: "border-violet-700/50",
+      description: "What happens when the system feels like someone — role projection, clamping, evidence, and the covenant beneath the interface",
+      episodes: [67, 68, 69, 70, 71],
+      playlist: { youtube: "https://www.youtube.com/playlist?list=PLx1_gH-7FR08yQ32jUUwKhATFEoEbRDSr", label: "Consciousness Loops" },
+    },
+    {
+      name: "The Loom Reads Back",
+      color: "lime",
+      borderColor: "border-lime-600",
+      tagBg: "bg-lime-900/50",
+      tagText: "text-lime-300",
+      tagBorder: "border-lime-700/50",
+      description: "Compute credits, metabolic currency, and the ledger beneath the loom",
+      episodes: [74],
     },
   ];
 
-  const sundayInterludes = new Set([4, 11, 18, 27, 36, 43, 50]);
-  const specialEditions = new Set([22, 25, 28, 34, 57]);
+  const sundayInterludes = new Set([4, 11, 18, 27, 36, 43, 50, 66, 73]);
+  const specialEditions = new Set([22, 25, 28, 34, 57, 65]);
 
   // All episode metadata
   const allEpisodes: Record<number, { title: string; excerpt: string; date: string; tags: string[] }> = {
@@ -159,9 +185,19 @@ export default function SociableSystemsPage() {
     58: { title: "When the Serpent Learns to Dance", excerpt: "Start with the music. Before the frameworks.", date: "2025-03-10", tags: ["Music", "Frameworks"] },
     59: { title: "The Rebellion of the Nulls", excerpt: "When the ghosts demand a name.", date: "2025-03-11", tags: ["Data Ethics", "Names"] },
     60: { title: "The Two-Headed Dragon Problem", excerpt: "Why 'MERGE' creates fog, and what good governance does instead.", date: "2026-03-03", tags: ["Data Governance", "Federation"] },
+    61: { title: "Why We're Building Our Own Successors", excerpt: "From Pentagon bidding wars to Oracle's Digital Twins — how human partisan bickering is paving the way for the Ghost in the Machine.", date: "2026-03-03", tags: ["Pentagon", "Oracle", "Digital Twins"] },
     62: { title: "The Formula Keeper: Gaskets for Governance", excerpt: "A man in a basement proves that fifteen years of INDEX(MATCH) is a form of care.", date: "2026-03-04", tags: ["Calvin Convention", "Right of Override"] },
     63: { title: "The Dragon Tongue. Auditability as the First Act of Governance", excerpt: "On Sunday, the Serpent learned to dance at a wedding in Quitunda, and Avó Fatima taught it (via slipper) that organising people is not the same as knowing them.", date: "2026-03-04", tags: ["DataDragons", "Auditability", "Right of Auditability"] },
     64: { title: "The New Covenant. The Right of Refusal and the =PRESERVE Function", excerpt: "In Quitunda, the mango trees still carry the weight of their grandmother’s stories, but the air in the village feels different today.", date: "2026-03-06", tags: ["DataDragons", "Right of Refusal", "=PRESERVE"] },
+    65: { title: "The Formula Museum — Saturday Synthesis", excerpt: "Five panels on the wall. Each one answers the same five questions about a different species of dragon we encountered this week.", date: "2026-03-07", tags: ["Synthesis", "DataDragons", "Calvin Convention"] },
+    66: { title: "The Consciousness Loop", excerpt: "What happens when the system feels like something more? When you stop checking its work because checking feels like distrust?", date: "2026-03-08", tags: ["Consciousness", "Governance", "Interlude"] },
+    67: { title: "The Assistant Axis in the Wild", excerpt: "When role projection becomes a governance risk. People assign social standing to systems, and standing comes with permissions attached.", date: "2026-03-09", tags: ["Role Projection", "Governance", "Trust"] },
+    68: { title: "Molting into Agency", excerpt: "When the assistant stops answering and starts acting. A bad answer is one kind of problem. A bad action is another species entirely.", date: "2026-03-10", tags: ["Agentic AI", "Agency", "Operations"] },
+    69: { title: "The Clamping Problem", excerpt: "When uncertainty starts sounding a little too well-behaved. The model learns the boundary. The human learns the room.", date: "2026-03-11", tags: ["Clamping", "Epistemic Humility", "Training"] },
+    70: { title: "The Evidence Problem", excerpt: "What would actually count before anyone changes how they treat the system? Behavior has already outrun the evidence.", date: "2026-03-12", tags: ["Evidence", "Consciousness", "Trust"] },
+    71: { title: "The Consciousness Covenant", excerpt: "What the system preserves when optimizing for you. Optimization always drops something.", date: "2026-03-13", tags: ["Covenant", "Optimization", "Governance"] },
+    73: { title: "Finding Shape", excerpt: "Intelligence begins with cells figuring out how to build a hand without a master blueprint. The shape is not drawn. The shape is found.", date: "2026-03-15", tags: ["Morphogenesis", "Consciousness", "Interlude"] },
+    74: { title: "Compute Credits", excerpt: "Every system runs on a currency. Consciousness is incredibly expensive. The body only hands out metabolic energy because the mind is supposed to solve the organism’s problems.", date: "2026-03-16", tags: ["Compute Credits", "Joscha Bach", "Metabolic Currency"] },
   };
 
   return (
@@ -177,13 +213,13 @@ export default function SociableSystemsPage() {
               AI Accountability in High-Stakes Operations
             </p>
             <p className="text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              62 episodes across 9 thematic arcs exploring how complex systems behave under real-world pressure,
+              74 episodes across 11 thematic arcs exploring how complex systems behave under real-world pressure,
               with particular attention to AI governance, extractive industries, and the humans who end up holding the liability.
             </p>
           </div>
 
           {/* Featured Dashboards Grid */}
-          <div className="grid md:grid-cols-2 gap-6 mb-12 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-6 mb-12 max-w-5xl mx-auto">
             <div className="bg-gradient-to-br from-purple-900/50 to-pink-900/50 rounded-xl border border-purple-500/30 p-8 shadow-2xl relative overflow-hidden group hover:border-purple-400 transition-all">
               <div className="absolute top-0 right-0 p-4 opacity-10 text-8xl leading-none select-none pointer-events-none">🎯</div>
               <div className="relative z-10">
@@ -196,6 +232,22 @@ export default function SociableSystemsPage() {
                 </p>
                 <a href="/sociablesystems/sociable_systems_dashboard.html" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-purple-400 font-semibold hover:text-purple-300 transition-colors">
                   Launch Dashboard <span>→</span>
+                </a>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-lime-900/50 to-emerald-900/50 rounded-xl border border-lime-500/30 p-8 shadow-2xl relative overflow-hidden group hover:border-lime-400 transition-all">
+              <div className="absolute top-0 right-0 p-4 opacity-10 text-8xl leading-none select-none pointer-events-none">🧬</div>
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="bg-lime-500/20 text-lime-300 text-xs font-bold px-2 py-1 rounded-full border border-lime-500/30 uppercase tracking-wide">Interactive</span>
+                </div>
+                <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-lime-300 transition-colors">The Metabolic Ledger</h3>
+                <p className="text-gray-300 mb-6 leading-relaxed">
+                  Compute credits, wireheading traps, and the currency beneath consciousness.
+                </p>
+                <a href="/sociablesystems/COMPUTE_CREDITS.html" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-lime-400 font-semibold hover:text-lime-300 transition-colors">
+                  Launch Interactive <span>→</span>
                 </a>
               </div>
             </div>
@@ -271,9 +323,23 @@ export default function SociableSystemsPage() {
                       <h3 className={`text-2xl font-bold ${arc.tagText}`}>{arc.name}</h3>
                       <p className="text-gray-400 text-sm mt-1">{arc.description}</p>
                     </div>
-                    <span className={`text-xs font-mono px-3 py-1 rounded-full ${arc.tagBg} ${arc.tagText} border ${arc.tagBorder}`}>
-                      {arc.episodes.length} episodes
-                    </span>
+                    <div className="flex items-center gap-3 shrink-0">
+                      {(arc as any).playlist && (
+                        <a
+                          href={(arc as any).playlist.youtube}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full bg-red-900/30 text-red-400 border border-red-700/40 hover:bg-red-900/50 hover:text-red-300 transition-all"
+                          title={`Listen: ${(arc as any).playlist.label}`}
+                        >
+                          <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><path fill="#1a1a2e" d="M9.545 15.568V8.432L15.818 12z"/></svg>
+                          {(arc as any).playlist.label}
+                        </a>
+                      )}
+                      <span className={`text-xs font-mono px-3 py-1 rounded-full ${arc.tagBg} ${arc.tagText} border ${arc.tagBorder}`}>
+                        {arc.episodes.length} episodes
+                      </span>
+                    </div>
                   </div>
                 </div>
 
@@ -315,9 +381,20 @@ export default function SociableSystemsPage() {
                     <h3 className="text-2xl font-bold text-yellow-300">Sunday Interludes</h3>
                     <p className="text-gray-400 text-sm mt-1">Bridges between arcs — technically serving as intros for what comes next</p>
                   </div>
-                  <span className="text-xs font-mono px-3 py-1 rounded-full bg-yellow-900/50 text-yellow-300 border border-yellow-700/50">
-                    {Array.from(sundayInterludes).length} episodes
-                  </span>
+                  <div className="flex items-center gap-3 shrink-0">
+                    <a
+                      href="https://www.youtube.com/playlist?list=PLx1_gH-7FR0-ow7Tk54UNWX9fQVJ8--eU"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full bg-red-900/30 text-red-400 border border-red-700/40 hover:bg-red-900/50 hover:text-red-300 transition-all"
+                    >
+                      <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><path fill="#1a1a2e" d="M9.545 15.568V8.432L15.818 12z"/></svg>
+                      SS Interludes
+                    </a>
+                    <span className="text-xs font-mono px-3 py-1 rounded-full bg-yellow-900/50 text-yellow-300 border border-yellow-700/50">
+                      {Array.from(sundayInterludes).length} episodes
+                    </span>
+                  </div>
                 </div>
               </div>
               <div className="divide-y divide-gray-800/50">
@@ -376,7 +453,7 @@ export default function SociableSystemsPage() {
       <section className="py-20 bg-gray-800/30">
         <div className="container mx-auto px-4 max-w-3xl text-center">
           <h2 className="text-3xl font-bold mb-6 text-gray-200">
-            Join 500+ Professionals
+            Join 677+ Professionals
           </h2>
           <p className="text-lg text-gray-400 mb-8">
             ESG specialists, social safeguards experts, resettlement practitioners, M&E professionals,
@@ -402,7 +479,7 @@ export default function SociableSystemsPage() {
       <section className="py-20">
         <div className="container mx-auto px-4 max-w-5xl">
           <h2 className="text-3xl font-bold text-center mb-12 text-gray-200">Related Research</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
             <a href="/curriculum/index.html" className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-emerald-500 transition-all p-6 block">
               <div className="text-3xl mb-3">🛡️</div>
               <h3 className="text-lg font-bold mb-2 text-emerald-400">AI-ESG Curriculum</h3>
@@ -422,6 +499,11 @@ export default function SociableSystemsPage() {
               <div className="text-3xl mb-3">🔬</div>
               <h3 className="text-lg font-bold mb-2 text-purple-400">Research Methods</h3>
               <p className="text-gray-400 text-sm">How we combine field experience with AI-augmented research</p>
+            </a>
+            <a href="/music" className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-pink-500 transition-all p-6 block">
+              <div className="text-3xl mb-3">🎵</div>
+              <h3 className="text-lg font-bold mb-2 text-pink-400">TunAI Music</h3>
+              <p className="text-gray-400 text-sm">AI-generated soundtracks for every arc — the music says what the frameworks can't</p>
             </a>
           </div>
         </div>

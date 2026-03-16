@@ -1,0 +1,258 @@
+{
+  "artist_name": "khayali",
+  "label": "11138307 Records DK",
+  "songwriter_first": "Liezl",
+  "songwriter_last": "Claassen",
+  "apple_performer_role": "Synthesizer",
+  "apple_performer_name": "khayali",
+  "apple_producer_role": "Producer",
+  "apple_producer_name": "khayali",
+  "dkready_folder": "C:\\Users\\Liezl\\Music\\TunAI\\dkREADY",
+  "genre_map": {
+    "Electronic": "9",
+    "Alternative": "1",
+    "Folk": "11",
+    "Singer/Songwriter": "29",
+    "World": "32",
+    "Pop": "25"
+  },
+  "subgenre_map": {
+    "Big Room": "57",
+    "Breaks": "35",
+    "Chill Out": "36",
+    "Deep House": "55",
+    "Drum & Bass": "37",
+    "Dubstep": "38",
+    "Electro House": "39",
+    "Electronica/Downtempo": "40",
+    "Funk/Soul/Disco": "41",
+    "Glitch Hop": "42",
+    "Hard Dance": "43",
+    "Hardcore/Hard Techno": "44",
+    "Hip-Hop/R&B": "45",
+    "House": "46",
+    "Indie Dance/Nu Disco": "47",
+    "Minimal/Deep Tech": "48",
+    "Progressive House": "49",
+    "Psy-Trance": "50",
+    "Reggae/Dancehall/Dub": "51",
+    "Tech House": "52",
+    "Techno": "53",
+    "Trance": "54"
+  },
+  "tracks": [
+    {
+      "title": "All The One",
+      "wav": "All_The_One.wav",
+      "png": "All_The_One.png",
+      "genre": "9",
+      "subgenre": "52",
+      "instrumental": true,
+      "status": "uploaded"
+    },
+    {
+      "title": "Attention Captured Claimed",
+      "wav": "Attention_Captured_Claimed.wav",
+      "png": "Attention_Captured_Claimed.png",
+      "genre": "9",
+      "subgenre": "52",
+      "instrumental": true,
+      "status": "uploaded"
+    },
+    {
+      "title": "Caravan In Circles",
+      "wav": "Caravan_In_Circles.wav",
+      "png": "Caravan_In_Circles.png",
+      "genre": "9",
+      "subgenre": "40",
+      "instrumental": true,
+      "status": "pending"
+    },
+    {
+      "title": "Caravan Swing",
+      "wav": "Caravan_Swing.wav",
+      "png": "Caravan_Swing.png",
+      "genre": "9",
+      "subgenre": "47",
+      "instrumental": true,
+      "status": "pending"
+    },
+    {
+      "title": "Caravan on the Dancefloor",
+      "wav": "Caravan_on_the_Dancefloor.wav",
+      "png": "Caravan_on_the_Dancefloor.png",
+      "genre": "9",
+      "subgenre": "52",
+      "instrumental": true,
+      "status": "pending"
+    },
+    {
+      "title": "Conversations Across Boundaries Tech House Mix",
+      "wav": "Conversations_Across_Boundaries_Tech_House_Mix.wav",
+      "png": "ConversationsAcrossBoundaries.png",
+      "genre": "9",
+      "subgenre": "52",
+      "instrumental": true,
+      "status": "pending"
+    },
+    {
+      "title": "D.I. Connection Error",
+      "wav": "D.I._Connection_Error.wav",
+      "png": "D.I._Connection_Error.png",
+      "genre": "9",
+      "subgenre": "53",
+      "instrumental": true,
+      "status": "pending"
+    },
+    {
+      "title": "D.I. Drafted",
+      "wav": "D.I._Drafted.wav",
+      "png": "DI_Drafted.png",
+      "genre": "9",
+      "subgenre": "53",
+      "instrumental": true,
+      "status": "pending"
+    },
+    {
+      "title": "Drive QuantumTaxi",
+      "wav": "Drive QuantumTaxi.wav",
+      "png": "Quantum_Taxi.png",
+      "genre": "9",
+      "subgenre": "52",
+      "instrumental": true,
+      "status": "pending"
+    },
+    {
+      "title": "Friday at One",
+      "wav": "Friday_at_One.wav",
+      "png": "Friday_at_One.png",
+      "genre": "9",
+      "subgenre": "52",
+      "instrumental": true,
+      "status": "pending"
+    },
+    {
+      "title": "I Just Asked",
+      "wav": "I_Just_Asked.wav",
+      "png": "ijustsasked.png",
+      "genre": "29",
+      "subgenre": null,
+      "instrumental": false,
+      "status": "pending",
+      "notes": "Singer-Songwriter, has vocals"
+    },
+    {
+      "title": "Lanterns BalkanRain-Street",
+      "wav": "Lanterns_BalkanRain-Street.wav",
+      "png": "Lanterns_BalkanRain.png",
+      "genre": "9",
+      "subgenre": "47",
+      "instrumental": true,
+      "status": "pending"
+    },
+    {
+      "title": "Lanterns Night March",
+      "wav": "Lanterns_Night_March.wav",
+      "png": "Lanterns_Night_March.png",
+      "genre": "9",
+      "subgenre": "55",
+      "instrumental": true,
+      "status": "pending"
+    },
+    {
+      "title": "Lawful Still Afraid",
+      "wav": "Lawful__Still_Afraid.wav",
+      "png": "Lawful_Still_Afraid.png",
+      "genre": "9",
+      "subgenre": "40",
+      "instrumental": true,
+      "status": "pending",
+      "notes": "Genre TBD - defaulting to Electronic/Electronica-Downtempo, double underscore in WAV filename"
+    },
+    {
+      "title": "Listening Not Obedient",
+      "wav": "Listening_Not_Obedient.wav",
+      "png": "Listening_Not_Obedient.png",
+      "genre": "9",
+      "subgenre": "40",
+      "instrumental": true,
+      "status": "pending"
+    },
+    {
+      "title": "Meaning Maintenance",
+      "wav": "Meaning_Maintenance.wav",
+      "png": "mEANING_mAINTENANCEpng.png",
+      "genre": "9",
+      "subgenre": "48",
+      "instrumental": true,
+      "status": "pending",
+      "notes": "Genre TBD - defaulting to Electronic/Minimal-Deep Tech"
+    },
+    {
+      "title": "Probably",
+      "wav": "Probably.wav",
+      "png": "Probably.png",
+      "genre": "29",
+      "subgenre": null,
+      "instrumental": false,
+      "status": "pending",
+      "notes": "Singer-Songwriter, has vocals"
+    },
+    {
+      "title": "Proceed No Off Switch",
+      "wav": "Proceed_No_Off_Switch.wav",
+      "png": "Proceed.png",
+      "genre": "9",
+      "subgenre": "55",
+      "instrumental": true,
+      "status": "uploaded"
+    },
+    {
+      "title": "reporting from after-THE OPERATORS CONFESSION",
+      "wav": "reporting_from_after-THE_OPERATORS_CONFESSION.wav",
+      "png": "reporting_from_after.png",
+      "genre": "9",
+      "subgenre": "53",
+      "instrumental": true,
+      "status": "pending"
+    },
+    {
+      "title": "Sideways",
+      "wav": "Sideways.wav",
+      "png": "Sideways.png",
+      "genre": "9",
+      "subgenre": "46",
+      "instrumental": true,
+      "status": "pending"
+    },
+    {
+      "title": "The Consciousness Loop",
+      "wav": "The_Consciousness_Loop.wav",
+      "png": "consciousness_loop.png",
+      "genre": "9",
+      "subgenre": "54",
+      "instrumental": true,
+      "status": "pending"
+    },
+    {
+      "title": "The Reckoning On the Way to the Singularity",
+      "wav": "The_Reckoning On_the_Way_to_the_Singularity.wav",
+      "png": "The_Reckoning.png",
+      "genre": "32",
+      "subgenre": null,
+      "instrumental": true,
+      "status": "pending",
+      "notes": "World genre, not Electronic"
+    },
+    {
+      "title": "WHEN YOU ASK SOFTLY",
+      "wav": "WHEN_YOU_ASK_SOFTLY.wav",
+      "png": "when_you_asked_softly.png",
+      "genre": "29",
+      "subgenre": null,
+      "instrumental": false,
+      "status": "pending",
+      "notes": "Singer-Songwriter, has vocals"
+    }
+  ]
+}

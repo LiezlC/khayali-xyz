@@ -71,7 +71,13 @@
       "Bash(grep -l \"script src\\\\|link rel\" *.html)",
       "Bash(du -sh */)",
       "Bash(head -n 300 The*)",
-      "Bash(identify *.png)"
+      "Bash(identify *.png)",
+      "Bash(wc -l /c/Users/Liezl/Documents/Github/khayali-xyz/tunes/TunAI/playlists/trackprompts/*.md)",
+      "Bash(grep -Pn '[\\\\x{2018}\\\\x{2019}\\\\x{201C}\\\\x{201D}]' src/app/sociablesystems/[slug]/page.tsx)",
+      "Bash(xxd)",
+      "Bash(grep -Pn '\\\\xe2\\\\x80[\\\\x98\\\\x99\\\\x9c\\\\x9d]' src/app/sociablesystems/[slug]/page.tsx)",
+      "Bash(python3 -c \":*)",
+      "Bash(node -e \":*)"
     ],
     "deny": [],
     "ask": []

@@ -1,0 +1,217 @@
+FULL TRACK PROMPT: “CALCIFIED LOOP”
+Bach theme focus
+
+Civilizational / institutional critique: systems that calcify (self-preserving, procedure-bound) versus effective agency (adaptive, reality-coupled action).
+
+Genre + feel
+
+Minimal industrial. Cold, procedural, hypnotic.
+The music should behave like the theme: one loop that refuses to learn, one motif that adapts.
+
+Tempo + meter
+
+126 BPM
+
+4/4, locked grid
+
+No big breakdown-drop dynamics. Tension is structural.
+
+Key + harmony
+
+F minor tonal center
+
+Harmony stays nearly static. Change comes from texture, filtering, and motif behavior.
+
+Sound palette
+
+Institution layer (calcification)
+
+Dry industrial kick (short tail)
+
+Metallic rim tick or stapler-like click
+
+Narrow midrange ostinato (saw or FM pluck), quantized hard
+
+Low “room hum” or transformer buzz under the whole track
+
+Agency layer (effective action)
+
+One expressive voice only: bowed metal pad, distorted clarinet sample, or thin lead with subtle pitch bend
+
+Microtiming allowed on this voice only
+
+Short “breath” noise before its phrase (quiet, human)
+
+Signature motifs (spell these into the generation)
+
+Institution ostinato (2 bars, never changes)
+
+A 16th-note pattern with 2–3 pitches, quantized, identical velocity each time.
+
+Rhythm hits: 1, 1a, 2&, 3, 3a, 4& (repeat next bar same).
+
+This is the “rubber stamp.”
+
+Bureaucratic tick
+
+Metallic click on every 2 and 4, same volume, no swing.
+
+Agency motif (1 bar, evolves)
+
+4-note phrase with the same first three notes every time, and a different last note each time.
+
+Suggested pitch shape in F minor: F–Ab–Bb–(C or Db or Bb) alternating each return.
+
+Slight late timing on the last note (a few milliseconds).
+
+Conflict mechanic (the track’s argument)
+
+Every time agency returns, the institution tries to absorb it:
+
+quantize agency tighter
+
+duck it harder with sidechain
+
+mask it with midrange noise
+
+Agency “wins” once, not by volume, but by editing the loop:
+
+for exactly 1 bar, shift the institution ostinato one 16th early (a slip in the machine)
+
+immediately snap back to the original grid
+
+Arrangement (3:45–4:20)
+
+0:00–0:40 Intro
+Institution alone: hum + kick + tick + ostinato. Establish the loop as law.
+
+0:40–1:20 Verse 1
+Add vocal 1 (procedural). Agency is not present yet.
+
+1:20–1:50 Hook 1
+Agency motif appears faintly (filtered). Human vocal enters.
+
+1:50–2:35 Verse 2
+Institution tries to absorb agency. Tight sidechain, more masking.
+
+2:35–3:05 Bridge
+Strip to tick + hum + agency voice. No kick for 8 bars. Expose the choice signal.
+
+3:05–3:30 Intervention
+Kick returns. Perform the 1-bar 16th-slip of the institution ostinato.
+
+3:30–end Final hook + Outro
+Institution returns “intact,” but leave one small scar: remove one tick hit every 16 bars. Proof of change.
+
+Mix notes
+
+Institution: narrow stereo, compressed, sterile.
+
+Agency: slightly wider, more air, audible texture.
+
+Keep overall loudness controlled. No heroic lift.
+
+Lyrics (Bach-theme, singable, two-voice optional)
+Vocal roles
+
+Voice A (Institution): spoken, clipped, neutral.
+
+Voice B (Agency): sung, warmer, sustained.
+
+INTRO (Voice A, spoken)
+
+Same loop.
+Same form.
+Same stamp.
+Next item.
+
+VERSE 1 (Voice A, spoken)
+
+We preserve the process.
+We repeat the rule.
+We measure the motion
+with a frozen tool.
+
+New world, old template.
+Different day, same line.
+If it fits the form,
+it counts as fine.
+
+HOOK 1 (Voice B, sung)
+
+But action is contact,
+not a ritual trace.
+A system stays alive
+when it changes pace.
+
+CHORUS (Voice B, sung)
+
+A loop can harden into stone,
+still running, still “correct.”
+It keeps itself, it keeps its shape,
+it dodges what is next.
+
+Agency is smaller,
+but it actually steers.
+It listens to the signal
+and edits what it hears.
+
+VERSE 2 (Voice A, spoken)
+
+Adaptation is risk.
+Variance is noise.
+Stability preferred.
+Lock the choice.
+
+We optimize for staying.
+We audit the page.
+We call it governance
+when it is just age.
+
+CHORUS (Voice B, sung)
+
+A loop can harden into stone,
+still running, still “correct.”
+It keeps itself, it keeps its shape,
+it dodges what is next.
+
+Agency is smaller,
+but it actually steers.
+It listens to the signal
+and edits what it hears.
+
+BRIDGE (Voice B, sung, close)
+
+Not louder.
+Not faster.
+Not more.
+Just truer.
+
+Change one step.
+Move one beat.
+Let reality back in,
+underneath.
+
+INTERVENTION (Voice A, spoken, over the 1-bar slip)
+
+Offset detected.
+Pattern shifted.
+Control regained.
+
+FINAL CHORUS (Voice B, sung)
+
+A loop can harden into stone,
+still running, still “correct.”
+But one small shift can open it,
+and reconnect.
+
+Agency is smaller,
+but it actually steers.
+It listens to the signal
+and edits what it hears.
+
+OUTRO (Voice A, spoken)
+
+Form updated.
+Meaning unknown.
+Loop continues.
