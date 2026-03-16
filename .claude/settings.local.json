@@ -77,7 +77,19 @@
       "Bash(xxd)",
       "Bash(grep -Pn '\\\\xe2\\\\x80[\\\\x98\\\\x99\\\\x9c\\\\x9d]' src/app/sociablesystems/[slug]/page.tsx)",
       "Bash(python3 -c \":*)",
-      "Bash(node -e \":*)"
+      "Bash(node -e \":*)",
+      "Bash(tasklist)",
+      "Bash(taskkill //F //IM git.exe)",
+      "Bash(taskkill //F //IM git-remote-https.exe)",
+      "Bash(powershell -Command \"Remove-Item -Force ''C:\\\\Users\\\\Liezl\\\\Documents\\\\Github\\\\khayali-xyz\\\\.git\\\\index.lock''\")",
+      "Bash(powershell -Command \"Get-Process | Where-Object { $_.Modules.FileName -like ''*git*'' } | Select-Object Id, ProcessName, Path\")",
+      "Bash(cmd //c \"del /f C:\\\\Users\\\\Liezl\\\\Documents\\\\Github\\\\khayali-xyz\\\\.git\\\\index.lock && cd C:\\\\Users\\\\Liezl\\\\Documents\\\\Github\\\\khayali-xyz && git add .gitignore\")",
+      "Bash(powershell -Command \"[System.IO.File]::Delete\\(''C:\\\\Users\\\\Liezl\\\\Documents\\\\Github\\\\khayali-xyz\\\\.git\\\\index.lock''\\)\")",
+      "Bash(powershell -Command \"[System.IO.File]::Delete\\(''C:\\\\Users\\\\Liezl\\\\Documents\\\\Github\\\\khayali-xyz\\\\.git\\\\index.lock''\\); Start-Process -NoNewWindow -Wait -FilePath ''git'' -ArgumentList ''add'',''.gitignore'' -WorkingDirectory ''C:\\\\Users\\\\Liezl\\\\Documents\\\\Github\\\\khayali-xyz''\")",
+      "Bash(powershell -Command \"[System.IO.File]::Delete\\(''C:\\\\Users\\\\Liezl\\\\Documents\\\\Github\\\\khayali-xyz\\\\.git\\\\index.lock''\\); Start-Process -NoNewWindow -Wait -FilePath ''git'' -ArgumentList ''status'',''--short'' -WorkingDirectory ''C:\\\\Users\\\\Liezl\\\\Documents\\\\Github\\\\khayali-xyz''\")",
+      "Bash(powershell -Command \"[System.IO.File]::Delete\\(''C:\\\\Users\\\\Liezl\\\\Documents\\\\Github\\\\khayali-xyz\\\\.git\\\\index.lock''\\); Start-Process -NoNewWindow -Wait -FilePath ''git'' -ArgumentList ''commit'',''-m'',''Add episodes 61-74, music page, YouTube playlist links, COMPUTE_CREDITS interactive. Wire up new episodes with Consciousness Loop and Loom Reads Back arcs. Cross-link YouTube playlists on arc headers. Update subscriber count to 677+. Add .gitignore for large binaries. Fix smart quote bug. Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>'' -WorkingDirectory ''C:\\\\Users\\\\Liezl\\\\Documents\\\\Github\\\\khayali-xyz''\")",
+      "Bash(powershell -Command \"[System.IO.File]::Delete\\(''C:\\\\Users\\\\Liezl\\\\Documents\\\\Github\\\\khayali-xyz\\\\.git\\\\index.lock''\\); Start-Process -NoNewWindow -Wait -FilePath ''git'' -ArgumentList ''commit'',''-F'',''.git/COMMIT_MSG'' -WorkingDirectory ''C:\\\\Users\\\\Liezl\\\\Documents\\\\Github\\\\khayali-xyz''\")",
+      "Bash(powershell -Command \"[System.IO.File]::Delete\\(''C:\\\\Users\\\\Liezl\\\\Documents\\\\Github\\\\khayali-xyz\\\\.git\\\\index.lock''\\) -ErrorAction SilentlyContinue; Start-Process -NoNewWindow -Wait -FilePath ''git'' -ArgumentList ''push'',''origin'',''main'' -WorkingDirectory ''C:\\\\Users\\\\Liezl\\\\Documents\\\\Github\\\\khayali-xyz''\")"
     ],
     "deny": [],
     "ask": []
