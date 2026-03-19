@@ -116,7 +116,10 @@
       "Bash(NDIR=\"C:/Users/Liezl/Documents/Content/Notion Full Export\" echo \"=== Top-level items ===\" ls -1 \"$NDIR\")",
       "Bash(NDIR=\"C:/Users/Liezl/Documents/Content/Notion Full Export/Export-7b918437-9d49-48ad-b320-706e43f75a67\" find \"$NDIR\" -maxdepth 1 -name \"*.md\" -type f -printf \"%f\\\\n\")",
       "Bash(NDIR=\"C:/Users/Liezl/Documents/Content/Notion Full Export\")",
-      "Bash(__NEW_LINE_3af5077fb8152c42__ python -c \":*)"
+      "Bash(__NEW_LINE_3af5077fb8152c42__ python -c \":*)",
+      "Bash(LANG=C sort)",
+      "Bash(python organize_notion.py)",
+      "Bash(xargs grep:*)"
     ],
     "deny": [],
     "ask": []
