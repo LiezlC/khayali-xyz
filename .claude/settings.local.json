@@ -119,7 +119,21 @@
       "Bash(__NEW_LINE_3af5077fb8152c42__ python -c \":*)",
       "Bash(LANG=C sort)",
       "Bash(python organize_notion.py)",
-      "Bash(xargs grep:*)"
+      "Bash(xargs grep:*)",
+      "WebFetch(domain:www.youtube.com)",
+      "Bash(python embed_tracks.py)",
+      "Bash(pip install:*)",
+      "Bash(python -m pip install markdown)",
+      "Bash(python generate_substack_xml.py)",
+      "Bash(for f:*)",
+      "Bash(do basename:*)",
+      "Bash(sort -t_ -k2 -n)",
+      "Bash(/tmp/compare.txt:*)",
+      "Read(//tmp/**)",
+      "Bash(grep -E \"^---$|^date:|Date:|published|2025|2026|January|February|March|April|May|June|July|August|September|October|November|December\")",
+      "Bash(python \"C:/Users/Liezl/Documents/Content/generate_substack_xml.py\")",
+      "Bash(python \"C:/Users/Liezl/Documents/Content/add_frontmatter.py\")",
+      "Bash(python -c \":*)"
     ],
     "deny": [],
     "ask": []
