@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "applet-preview",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["C:/Users/Liezl/Documents/Github/khayali-xyz/serve-applets.js"],
+      "port": 8765
+    }
+  ]
+}

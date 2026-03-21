@@ -2,10 +2,73 @@
 
 import { useState } from 'react';
 
-type TabType = 'art' | 'farming' | 'futures';
+type TabType = 'arcs' | 'art' | 'farming' | 'futures';
 
 export default function PlayspacePage() {
-  const [activeTab, setActiveTab] = useState<TabType>('art');
+  const [activeTab, setActiveTab] = useState<TabType>('arcs');
+
+  const arcCompanionApps = [
+    {
+      title: 'The Asimov Interface',
+      description: 'Drag-and-drop Robotic Logic Trainer — match scenarios to the Three Laws. The interactive companion to the Asimov Arc.',
+      path: '/applets/speculative-ai-futures/the-asimov-interface/index.html',
+      arc: 'Asimov Arc (Episodes 1–5)',
+    },
+    {
+      title: 'AI Ethics: The Dilemma Engine',
+      description: 'Navigate trolley-problem-scale ethical dilemmas in real time. Spans Asimov, Clarke, and Kubrick themes.',
+      path: '/applets/speculative-ai-futures/ai-ethics-the-dilemma-engine/index.html',
+      arc: 'Multi-Arc (Asimov / Clarke / Kubrick)',
+    },
+    {
+      title: 'Project Plato\'s Cave',
+      description: 'Build simulated realities and discover what\'s hidden from the inhabitants. Algorithmic opacity made interactive.',
+      path: '/applets/speculative-ai-futures/project-plato-s-cave-simulation-architect/index.html',
+      arc: 'Clarke Arc (Episodes 6–10)',
+    },
+    {
+      title: 'AI Futures: Alignment vs Convergence',
+      description: 'Balance alignment protocols against convergent optimization pressure. The missing stop button, visualized.',
+      path: '/applets/speculative-ai-futures/ai-futures-alignment-vs-convergence/index.html',
+      arc: 'Kubrick Arc (Episodes 12–17)',
+    },
+    {
+      title: 'The Creator\'s Dilemma: Artificial Beings',
+      description: 'Three eras of creation — Gnosticism, the Golem, Modern AI. Explore caretaker systems and guardian failures across history.',
+      path: '/applets/speculative-ai-futures/the-creator-s-dilemma-artificial-beings/index.html',
+      arc: 'Lucas Arc (Episodes 19–26)',
+    },
+    {
+      title: 'SoulQuery: The Organic Database',
+      description: 'SQL terminal for querying floating souls. Harvest data, inspect interiority, confront the Bolvangar Procedure.',
+      path: '/applets/speculative-ai-futures/soulquery-the-organic-database/index.html',
+      arc: 'Pullman Arc (Episodes 29–35)',
+    },
+    {
+      title: 'The Algoriture: Influence Simulator',
+      description: 'Influence and manipulation simulator mapping to kill chains and tactical ghost concepts.',
+      path: '/applets/speculative-ai-futures/the-algoriture-influence-simulator/index.html',
+      arc: 'War Arc (Episodes 44–49)',
+    },
+    {
+      title: 'The AI Voice: Promise vs Peril',
+      description: 'Interactive policy simulator — when the spec sheet meets the street. Ground truth governance.',
+      path: '/applets/speculative-ai-futures/the-ai-voice-promise-vs-peril-interactive-policy-simulator/index.html',
+      arc: 'D.I. Arc (Episodes 51–56)',
+    },
+    {
+      title: 'MOBIUS DATA: Self-Referential Consciousness',
+      description: '2000-particle torus engine with entropy, rotation, and spectrum controls. The Consciousness Covenant, visualized.',
+      path: '/applets/speculative-ai-futures/mobius-data-self-referential-consciousness/index.html',
+      arc: 'Consciousness Loop (Episodes 67–72)',
+    },
+    {
+      title: 'Strange Loops: Eternal Learning',
+      description: 'Self-referential learning algorithms with inject, chaos, and reset controls. Invariance through recursion.',
+      path: '/applets/speculative-ai-futures/strange-loops-eternal-learning-algorithm/index.html',
+      arc: 'The Loom (Episodes 73–79)',
+    },
+  ];
 
   const artMindfulnessApps = [
     {
@@ -298,7 +361,34 @@ export default function PlayspacePage() {
   ];
 
   const renderApps = () => {
-    let apps = [];
+    if (activeTab === 'arcs') {
+      return (
+        <div className="grid md:grid-cols-2 gap-6">
+          {arcCompanionApps.map((app, index) => (
+            <a
+              key={index}
+              href={app.path}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-teal-500 transition-all duration-300 hover:scale-105"
+            >
+              <div className="relative z-10">
+                <div className="text-xs font-mono text-teal-500 mb-2">{app.arc}</div>
+                <h3 className="text-xl font-bold mb-3 text-teal-400 group-hover:text-teal-300">
+                  {app.title}
+                </h3>
+                <p className="text-gray-400 mb-4">{app.description}</p>
+                <span className="text-teal-400 hover:text-teal-300 font-semibold">
+                  Launch →
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+      );
+    }
+
+    let apps: { title: string; description: string; path: string }[] = [];
     switch (activeTab) {
       case 'art':
         apps = artMindfulnessApps;
@@ -365,6 +455,16 @@ export default function PlayspacePage() {
         <div className="container mx-auto px-4">
           {/* Tab Navigation */}
           <div className="flex justify-center gap-4 mb-12 flex-wrap">
+            <button
+              onClick={() => setActiveTab('arcs')}
+              className={`px-6 py-3 rounded-lg font-semibold transition-all ${
+                activeTab === 'arcs'
+                  ? 'bg-gradient-to-r from-teal-600 to-blue-600 text-white'
+                  : 'bg-gray-800/50 text-gray-400 hover:text-white border border-gray-700'
+              }`}
+            >
+              🧭 Arc Companions
+            </button>
             <button
               onClick={() => setActiveTab('art')}
               className={`px-6 py-3 rounded-lg font-semibold transition-all ${
