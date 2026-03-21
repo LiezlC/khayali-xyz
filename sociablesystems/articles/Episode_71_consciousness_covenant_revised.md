@@ -1,3 +1,10 @@
+---
+title: "The Consciousness Covenant"
+date: "2026-03-13"
+episode: 71
+tags: ["consciousness-loop", "covenant"]
+---
+
 # The Consciousness Covenant
 What the system preserves when optimizing for you
 
@@ -206,3 +213,10 @@ Mario Olckers, "Strange Attractors" (essay)
 When You Ask Softly (Consciousness Loops playlist on Khayali-Tunes) 
 The Consciousness Loop Arc (Episodes 66-71, Sociable Systems / The Accidental AInthropologist) 
 The Calvin Convention and Right of Refusal (Dragon Data Arc, Episodes 58-65)
+
+---
+
+Watch / listen: https://youtu.be/fgQ_PmQg9oA
+
+Full playlist: [Consciousness Loops](https://www.youtube.com/playlist?list=PLx1_gH-7FR08yQ32jUUwKhATFEoEbRDSr)
+

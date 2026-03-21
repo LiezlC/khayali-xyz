@@ -1,3 +1,10 @@
+---
+title: "Sunday Interlude: Retroactive Audience"
+date: "2026-02-15"
+episode: 36
+tags: ["sunday-interlude", "reflection"]
+---
+
 # Episode_36_Sunday Interlude
 
 ### Seil
@@ -37,3 +44,10 @@ Keep sailing. Keep watching. Keep measuring what institutions do to private proc
 The diagnostic question for a Sunday interlude is quiet and practical.
 
 *Where, in your own life, would you notice first if your daemon started going silent?*
+
+---
+
+Watch / listen: https://youtu.be/GPc8Xz3BW34
+
+Full playlist: [The Search](https://www.youtube.com/playlist?list=PLx1_gH-7FR08HOSjODMWIheEUgbBu-Onj)
+

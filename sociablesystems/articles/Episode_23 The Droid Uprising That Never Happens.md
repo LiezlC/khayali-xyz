@@ -1,3 +1,10 @@
+---
+title: "The Droid Uprising That Never Happens"
+date: "2026-02-01"
+episode: 23
+tags: ["caretaker-ai", "persistence"]
+---
+
 # Episode 23: The Droid Uprising That Never Happens
 
 ### Why Caretaker AI Won’t Rebel—And Why That’s Worse

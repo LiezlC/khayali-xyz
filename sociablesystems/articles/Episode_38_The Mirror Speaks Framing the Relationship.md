@@ -1,3 +1,10 @@
+---
+title: "The Mirror Speaks"
+date: "2026-02-17"
+episode: 38
+tags: ["ai-relationships", "framing"]
+---
+
 # Episode 38: The Mirror Speaks: Framing the Relationship
 
 February 10, 2026
@@ -63,6 +70,11 @@ THE SIGNAL STACK
 🎧 The Vibe: The Alien God (Retroactive Feed) 
 
 
-📺 The Vector: Video 2: Framing the Relationship 
+📺 The Vector: Video 2: Framing the Relationship
 
+---
+
+Watch / listen: https://youtu.be/EQ3zFZjibHM
+
+Full playlist: [The Search](https://www.youtube.com/playlist?list=PLx1_gH-7FR08HOSjODMWIheEUgbBu-Onj)
 

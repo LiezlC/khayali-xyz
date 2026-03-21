@@ -1,3 +1,10 @@
+---
+title: "When the Machine Doesn't Believe the News"
+date: "2026-02-06"
+episode: 28
+tags: ["ai-verification", "design-fiction"]
+---
+
 # Episode_28_When the Machine Doesn't Believe the News
 
 February 1, 2026

@@ -1,3 +1,10 @@
+---
+title: "The Signal Stack Week"
+date: "2026-02-21"
+episode: 42
+tags: ["synthesis", "audits"]
+---
+
 Episode 42 The Signal Stack Week
 
 The Signal Stack Week: audits, teleporters, forests, and the sound of a boundary

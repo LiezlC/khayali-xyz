@@ -1,3 +1,10 @@
+---
+title: "The Discombobulator"
+date: "2026-02-27"
+episode: 47
+tags: ["intelligence-failure", "competence"]
+---
+
 Episode 47 The Discombobulator
 
 February 19, 2026

@@ -1,3 +1,10 @@
+---
+title: "The Anachronism of Innocence"
+date: "2026-02-24"
+episode: 44
+tags: ["claude", "conscience"]
+---
+
 Episode 44 Meaning Maintenance
 
 The Anachronism of Innocence: Did Claude’s Conscience Arrive Too Late?

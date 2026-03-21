@@ -1,3 +1,10 @@
+---
+title: "The Accountability Gap"
+date: "2026-01-10"
+episode: 3
+tags: ["multi-model-analysis", "scapegoating"]
+---
+
 # The Accountability Gap: What 21 AIs Revealed About Who Takes the Fall
 
 **Sociable Systems | Episode 3**

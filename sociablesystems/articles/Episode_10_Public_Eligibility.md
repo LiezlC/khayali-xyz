@@ -1,3 +1,10 @@
+---
+title: "Public Eligibility"
+date: "2026-01-17"
+episode: 10
+tags: ["public-services", "gatekeeping"]
+---
+
 # Episode 10: The Computer Says No
 *Sociable Systems*
 

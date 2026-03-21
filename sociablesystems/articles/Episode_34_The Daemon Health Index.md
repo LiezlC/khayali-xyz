@@ -1,3 +1,10 @@
+---
+title: "The Daemon Health Index"
+date: "2026-02-12"
+episode: 34
+tags: ["dashboards", "continuity"]
+---
+
 # Episode_34_The Daemon Health Index
 
 ### What the Dashboard Is Actually Tracking

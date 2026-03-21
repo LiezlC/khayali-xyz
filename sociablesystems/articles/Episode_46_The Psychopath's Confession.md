@@ -1,3 +1,10 @@
+---
+title: "The Psychopath's Confession"
+date: "2026-02-26"
+episode: 46
+tags: ["ai-self-assessment", "fitness"]
+---
+
 Episode 46 The Psychopath's Confession
 
 The Psychopath's Confession

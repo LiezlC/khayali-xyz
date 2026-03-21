@@ -1,3 +1,10 @@
+---
+title: "On Attention"
+date: "2026-03-03"
+episode: 51
+tags: ["attention", "presence"]
+---
+
 Episode 51 On Attention
 
 
@@ -91,3 +98,10 @@ The Signal Stack
 Sci-Fi Anchor: In Le Guin's The Dispossessed, Shevek spends the first half of the novel trying to explain a physics concept to people who keep understanding it wrong. The misunderstanding isn't intellectual. It's attentional: they're listening for the part that confirms what they already believe, and filtering out the part that would require them to change. Shevek's breakthrough happens when he finds one person willing to listen without a filter. D.I. would like to note that this is also the breakthrough condition for every stakeholder engagement process that has ever actually worked, and that the Le Guin estate should probably be receiving royalties from the IFC.
 
 Sociable Systems explores what happens when elegant designs meet actual conditions. If this piece arrived in your inbox via someone else's forward, you can subscribe directly. If you read this with captured attention, D.I. won't hold it against you. If you read it with claimed attention, you probably noticed the sax.
+
+---
+
+Watch / listen: https://youtu.be/WTvzWKBnY70
+
+Full playlist: [D.I. Collection](https://www.youtube.com/playlist?list=PLx1_gH-7FR0_YApz2g7RflLRsEVRCE8Qw)
+

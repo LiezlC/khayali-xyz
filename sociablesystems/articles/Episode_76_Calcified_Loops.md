@@ -1,4 +1,12 @@
-# Calcified Loop
+---
+title: "Calcified Loops"
+date: "2026-03-18"
+episode: 76
+tags: ["calcification", "agency", "loom-arc"]
+excerpt: "Yesterday's question was what happens when a system learns to silence the alarm. Today's question is what happens when the alarm was the only thing keeping the system honest."
+---
+
+# Calcified Loops
 
 **Liezl Coetzee**
 *Accidental AInthropologist | Human-AI Decision Systems for Social Risk, Accountability & Institutional Memory*

@@ -1,3 +1,10 @@
+---
+title: "Training the Trainers"
+date: "2026-01-30"
+episode: 21
+tags: ["training", "delegation"]
+---
+
 # Episode 21: Training the Trainers
 
 ### Recursive Authority and the Delegation Cascade

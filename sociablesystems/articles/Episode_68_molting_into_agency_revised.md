@@ -1,3 +1,10 @@
+---
+title: "Molting into Agency"
+date: "2026-03-10"
+episode: 68
+tags: ["consciousness-loop", "agentic-ai"]
+---
+
 # **Molting into Agency**
 
 **When the assistant stops answering and starts acting**

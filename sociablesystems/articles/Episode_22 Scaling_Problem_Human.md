@@ -1,3 +1,10 @@
+---
+title: "AI's Real Scaling Problem Is Human"
+date: "2026-01-31"
+episode: 22
+tags: ["human-in-the-loop", "scaling"]
+---
+
 # Episode 23: AI’s Real Scaling Problem Is Human (And That’s Actually Good News)
 
 January 28, 2026

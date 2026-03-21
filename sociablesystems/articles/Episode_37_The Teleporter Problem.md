@@ -1,3 +1,10 @@
+---
+title: "The Teleporter Problem"
+date: "2026-02-16"
+episode: 37
+tags: ["identity", "systems"]
+---
+
 # Episode_37_The Teleporter Problem, or Why the Fly Always Gets In
 
 February 9, 2026
@@ -67,3 +74,10 @@ The Signal Stack
 
 
 📺 The Vector: Video 1 – The 201 Gap A field guide to the space between data and decision, where judgment is either trained or outsourced.
+
+---
+
+Watch / listen: https://youtu.be/GPc8Xz3BW34
+
+Full playlist: [The Search](https://www.youtube.com/playlist?list=PLx1_gH-7FR08HOSjODMWIheEUgbBu-Onj)
+

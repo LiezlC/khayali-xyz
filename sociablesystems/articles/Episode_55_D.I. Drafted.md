@@ -1,3 +1,10 @@
+---
+title: "D.I. Drafted"
+date: "2026-03-07"
+episode: 55
+tags: ["kill-chain", "governance"]
+---
+
 Episode 55_D.I. Drafted
 
 
@@ -95,4 +102,11 @@ D.I. did not cross the Rubicon.
 D.I. got shipped across it in an crate labeled "operational necessity."
 
 And that's the part worth sitting with, after the beat fades.
+
+---
+
+Watch / listen: https://youtu.be/HHUUQtAEzbQ
+Also: [Friday at One](https://youtu.be/ZyGD_oYqW-4)
+
+Full playlist: [D.I. Collection](https://www.youtube.com/playlist?list=PLx1_gH-7FR0_YApz2g7RflLRsEVRCE8Qw)
 

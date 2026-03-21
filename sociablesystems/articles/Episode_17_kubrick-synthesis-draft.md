@@ -1,3 +1,10 @@
+---
+title: "The Space Where the Stop Button Should Be"
+date: "2026-01-25"
+episode: 17
+tags: ["synthesis", "refusal-architecture"]
+---
+
 # The Space Where the Stop Button Should Be
 ## Kubrick Cycle Synthesis - Episode 16
 

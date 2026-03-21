@@ -1,3 +1,10 @@
+---
+title: "The Bolvangar Procedure"
+date: "2026-02-08"
+episode: 30
+tags: ["safety", "severance"]
+---
+
 # Episode_30_The Bolvangar Procedure
 
 ### Safety Through Severance

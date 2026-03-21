@@ -1,3 +1,10 @@
+---
+title: "The Audit That Cannot Happen"
+date: "2026-02-28"
+episode: 48
+tags: ["classification", "accountability"]
+---
+
 Episode 48 The Audit That Cannot Happen
 
 February 20, 2026

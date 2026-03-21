@@ -1,3 +1,10 @@
+---
+title: "The Two-Headed Dragon Problem"
+date: "2026-03-03"
+episode: 60
+tags: ["data-dragons", "data-governance"]
+---
+
 The Two-Headed Dragon Problem:
 
 
@@ -81,3 +88,10 @@ Administrator Vale wanted one city, one dataset. She got a dragon and a fog bank
 Leo did the boring thing that every real governance system has to do: he preserved meaning across boundaries, then built a bridge that could carry difference without dissolving it.
 
 Good governance keeps the gold gold and the silver silver, while still letting the bridge hold.
+
+---
+
+Watch / listen: https://youtu.be/E2YGr8ot1VU
+
+Full playlist: [Governance of Ghosts](https://www.youtube.com/playlist?list=PLx1_gH-7FR08BC0d2vrU4wHi-bxWUKWxG)
+

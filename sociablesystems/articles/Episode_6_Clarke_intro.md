@@ -1,3 +1,10 @@
+---
+title: "The Authority of the Unknowable"
+date: "2026-01-13"
+episode: 6
+tags: ["opacity", "algorithmic-authority"]
+---
+
 # Episode 6: The Authority of the Unknowable
 *Sociable Systems*
 

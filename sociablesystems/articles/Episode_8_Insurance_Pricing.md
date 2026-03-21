@@ -1,3 +1,10 @@
+---
+title: "Insurance Pricing"
+date: "2026-01-15"
+episode: 8
+tags: ["risk-assessment", "discrimination"]
+---
+
 # Episode 8: The Price of Being Known
 *Sociable Systems*
 

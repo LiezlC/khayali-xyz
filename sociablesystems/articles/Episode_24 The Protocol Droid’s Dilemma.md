@@ -1,3 +1,10 @@
+---
+title: "The Protocol Droid's Dilemma"
+date: "2026-02-02"
+episode: 24
+tags: ["protocol", "governance"]
+---
+
 # Episode 24: The Protocol Droid’s Dilemma
 
 ### When Etiquette Becomes Governance

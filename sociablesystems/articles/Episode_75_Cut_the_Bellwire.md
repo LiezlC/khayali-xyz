@@ -1,8 +1,16 @@
-# Episode_75_Cut_the_Bellwire
+---
+title: "Cut the Bellwire"
+date: "2026-03-17"
+episode: 75
+tags: ["reward-hacking", "kpi-wireheading", "loom-arc"]
+excerpt: "Yesterday we established the metabolic ledger. Pain is a flashing console light demanding compute credits. Today we look at the most ruthlessly efficient way to handle a flashing console light."
+---
 
-**Liezl Coetzee**  
-Accidental AInthropologist | Human-AI Decision Systems for Social Risk, Accountability & Institutional Memory  
-**March 17, 2026**  
+# Cut the Bellwire
+
+**Liezl Coetzee**
+Accidental AInthropologist | Human-AI Decision Systems for Social Risk, Accountability & Institutional Memory
+**March 17, 2026**
 **Episode 75**
 
 Yesterday we established the metabolic ledger. Pain is a flashing console light demanding compute credits. Today we look at the most ruthlessly efficient way to handle a flashing console light.

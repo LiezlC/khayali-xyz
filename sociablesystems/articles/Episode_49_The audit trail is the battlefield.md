@@ -1,3 +1,10 @@
+---
+title: "The Audit Trail Is the Battlefield"
+date: "2026-03-01"
+episode: 49
+tags: ["synthesis", "governance"]
+---
+
 Episode 49 The audit trail is the battlefield
 
 February 21, 2026

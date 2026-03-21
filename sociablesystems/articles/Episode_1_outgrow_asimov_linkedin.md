@@ -1,3 +1,10 @@
+---
+title: "We Didn't Outgrow Asimov. We Lost Our Nerve."
+date: "2026-01-08"
+episode: 1
+tags: ["pre-action-constraints", "ai-safety"]
+---
+
 # We Didn't Outgrow Asimov. We Lost Our Nerve.
 
 **Quick question:** Why are billion-dollar institutions arriving, with great seriousness, at conclusions that were the opening premise of a 1942 science fiction story?

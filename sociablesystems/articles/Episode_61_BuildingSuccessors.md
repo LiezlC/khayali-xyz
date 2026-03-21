@@ -1,3 +1,10 @@
+---
+title: "Why We're Building Our Own Successors"
+date: "2026-03-03"
+episode: 61
+tags: ["data-dragons", "pentagon", "oracle"]
+---
+
 Image by Nano Banana Pro
 Why We’re Building Our Own Successors
 Liezl Coetzee

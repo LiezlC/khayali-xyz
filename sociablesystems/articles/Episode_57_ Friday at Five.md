@@ -1,3 +1,10 @@
+---
+title: "Friday at Five"
+date: "2026-03-09"
+episode: 57
+tags: ["deadline", "music"]
+---
+
 Episode 57_Friday at Five: When the Clock Ran Out and the Music Didn't Stop
 
 February 28, 2026
@@ -180,4 +187,17 @@ Friday at One | Carnival Brass / Stomp-Clap (published with D.I. Drafted episode
 📺 The Vector: D.I. Arc Complete + War Week Synthesis + Kill Chain Karaoke Podcast 📄 The Artifact: Regulatory Impact Assessment: DPA and AI Frontier Labs (available on request)
 
 Sociable Systems explores what happens when elegant designs meet actual conditions. If this piece arrived in your inbox via someone else's forward, you can subscribe directly. If you read the whole thing with claimed attention, you probably noticed the cello. If you read it with captured attention, the hook is already in your head anyway. That's how it works.
+
+---
+
+Watch / listen: https://youtu.be/Wo8-Bh36Ns0
+Also: [Rubicon Protocol](https://youtu.be/RvWEvKw66mI)
+Also: [Rubicon Ripple](https://youtu.be/IltcFPVq3Pc)
+Also: [Rubicon Lanterns](https://youtu.be/mMvTIkwx3os)
+Also: [War Machine's Anthem](https://youtu.be/mBGmKZaujN4)
+Also: [Friday at One](https://youtu.be/ZyGD_oYqW-4)
+Also: [D.I. Drafted](https://youtu.be/HHUUQtAEzbQ)
+Also: [I Just Asked](https://youtu.be/2wPvIkCaVvk)
+
+Full playlist: [Kill Chain Karaoke](https://www.youtube.com/playlist?list=PLx1_gH-7FR08rhEA5fRuaTRSvRsXihU18)
 

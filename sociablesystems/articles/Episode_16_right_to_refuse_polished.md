@@ -1,3 +1,10 @@
+---
+title: "The Right to Refuse"
+date: "2026-01-24"
+episode: 16
+tags: ["refusal", "worker-rights"]
+---
+
 # Episode 16: Designing the Right to Refuse
 
 ## Alignment Without Recourse, Part V

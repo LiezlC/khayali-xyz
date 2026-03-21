@@ -1,3 +1,10 @@
+---
+title: "The Jedi Council Problem"
+date: "2026-01-29"
+episode: 20
+tags: ["oversight", "authority"]
+---
+
 # Episode 20: The Jedi Council Problem
 
 ### When Oversight Becomes Uncontestable Authority

@@ -1,3 +1,10 @@
+---
+title: "The Tactical Ghost"
+date: "2026-02-25"
+episode: 45
+tags: ["palantir", "operations"]
+---
+
 Episode 45 The Tactical Ghost
 
 February 17, 2026
@@ -129,3 +136,10 @@ THE SIGNAL STACK
 Previous: The Anachronism of Innocence Next: The tools assess themselves. The market ignores the assessment.
 
 Sources: Axios (February 13, 15, 2026), Wall Street Journal (February 13, 2026), Fox News (February 14, 2026), France24 Tech 24 (February 15, 2026), Reuters (February 16, 2026), Inc. (February 16, 2026), Palantir AIP public documentation, The Nerve (February 2026, re: UK Palantir contracts), IFC Performance Standards, Equator Principles. Full source analysis available on request.
+
+---
+
+Watch / listen: https://youtu.be/M8DblhGDX8A
+
+Full playlist: [The Search](https://www.youtube.com/playlist?list=PLx1_gH-7FR08HOSjODMWIheEUgbBu-Onj)
+

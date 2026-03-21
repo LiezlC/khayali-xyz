@@ -1,3 +1,10 @@
+---
+title: "Whistle Mouth"
+date: "2026-02-19"
+episode: 40
+tags: ["signal", "boundaries"]
+---
+
 Episode 40 Whistle Mouth: Staying Locatable in the Noise
 
 February 12, 2026
@@ -70,3 +77,10 @@ Course playlist (Modules 1–3)
 Weekly track playlist: The Search
 
 Carry-forward question: where does your workflow require approval after verification has been blocked?
+
+---
+
+Watch / listen: https://youtu.be/Eupa8r7VkNs
+
+Full playlist: [The Search](https://www.youtube.com/playlist?list=PLx1_gH-7FR08HOSjODMWIheEUgbBu-Onj)
+

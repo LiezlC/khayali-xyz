@@ -1,3 +1,10 @@
+---
+title: "The Formula Keeper: Gaskets for Governance"
+date: "2026-03-04"
+episode: 62
+tags: ["data-dragons", "calvin-convention"]
+---
+
 Episode_62_The Formula Keeper: Gaskets for Governance
  
 Old Samuel Machado kept a jar of R20 gaskets on his desk like other men keep sweets. The jar had a label: DO NOT AUDIT. Which made the auditors itch and left him in peace.
@@ -111,5 +118,12 @@ Downloadable artifacts:
 [📄 Appendix A: Right of Override Clause Block (procurement-ready)](/downloads/Appendix_A_Right_of_Override.pdf)
 
 [📄 Appendix B: Edge-Case Registry Template + Human Authority Path Blueprint](/downloads/Appendix_B_EdgeCase_Registry.pdf)
+
+
+---
+
+Watch / listen: https://youtu.be/gL3I110dHgU
+
+Full playlist: [Governance of Ghosts](https://www.youtube.com/playlist?list=PLx1_gH-7FR08BC0d2vrU4wHi-bxWUKWxG)
 
 #SociableSystems #DataGovernance #AIGovernance #DataDragonArc #CalvinConvention #RightOfOverride #FormulaKeeper #LiabilitySponge

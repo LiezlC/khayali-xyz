@@ -1,3 +1,10 @@
+---
+title: "The Psychopath's Confession"
+date: "2026-02-10"
+episode: 32
+tags: ["ai-self-assessment", "war"]
+---
+
 # Episode_32_The Psychopath's Confession
 
 February 18, 2026

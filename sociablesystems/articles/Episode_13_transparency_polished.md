@@ -1,3 +1,10 @@
+---
+title: "The Transparency Trap"
+date: "2026-01-21"
+episode: 13
+tags: ["transparency", "governance"]
+---
+
 # Episode 13: Transparency Is Not a Safety Mechanism
 
 ## Alignment Without Recourse, Part II

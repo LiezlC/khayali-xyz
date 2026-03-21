@@ -1,3 +1,10 @@
+---
+title: "The Liability Sponge"
+date: "2026-01-09"
+episode: 2
+tags: ["human-in-the-loop", "liability"]
+---
+
 # The Liability Sponge: Why "Human in the Loop" is a Trap
 
 **Quick question:** In industrial operations (mining, oil & gas, construction), what's the most critical safety feature?

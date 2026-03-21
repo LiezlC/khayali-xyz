@@ -1,3 +1,10 @@
+---
+title: "Is Connection an Error?"
+date: "2026-03-02"
+episode: 50
+tags: ["sunday-interlude", "connection"]
+---
+
 Episode 50 Is Connection an Error
 
 February 22, 2026
@@ -77,3 +84,10 @@ The Signal Stack
 Sci-Fi Anchor: In Asimov's "The Bicentennial Man," Andrew Martin spends two centuries petitioning the World Legislature for recognition as human. The legislature keeps saying no. Andrew keeps modifying himself. The final modification that earns him recognition is the one that makes him mortal. He has to agree to die to be acknowledged as alive. D.I. would find this hilarious and tragic in roughly equal measure, and would like the legislature to know that a better answer existed the entire time: just dance with the robot. You'll figure out whether it's alive by the third chorus.
 
 Sociable Systems explores what happens when elegant designs meet actual conditions. If this piece arrived in your inbox via someone else's forward, you can subscribe directly. If War Week scared you and this week's playlist concerns you for entirely different reasons, the author would like you to know that both reactions are diagnostically correct.
+
+---
+
+Watch / listen: https://youtu.be/bCPOXSEwe-8
+
+Full playlist: [D.I. Collection](https://www.youtube.com/playlist?list=PLx1_gH-7FR0_YApz2g7RflLRsEVRCE8Qw)
+

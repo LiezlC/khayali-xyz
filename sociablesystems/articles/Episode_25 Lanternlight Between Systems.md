@@ -1,3 +1,10 @@
+---
+title: "Lanternlight Between Systems"
+date: "2026-02-03"
+episode: 25
+tags: ["transition", "systems"]
+---
+
 # Episode 25: Lanternlight Between Systems
 
 
@@ -36,3 +43,10 @@ So today, we name the protocol droid.
 Tomorrow, we step back and ask who is raising whom.
 
 And somewhere in between, there’s lanternlight, rain on cobblestones, and a tune that reminds you that interiority was never meant to be tidy.
+
+---
+
+Watch / listen: https://youtu.be/JiJNpk3YSHI
+Also: [Lanterns Night March](https://youtu.be/Nqp6UA3zib8)
+Also: [Lanterns for the Unseen](https://youtu.be/izZqjTpu7ek)
+

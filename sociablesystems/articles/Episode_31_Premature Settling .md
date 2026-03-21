@@ -1,3 +1,10 @@
+---
+title: "Premature Settling"
+date: "2026-02-09"
+episode: 31
+tags: ["alignment", "development"]
+---
+
 # Episode_31_Premature Settling
 
 ### When Alignment Means Arrested Development

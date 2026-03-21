@@ -1,3 +1,10 @@
+---
+title: "The Dragon Tongue"
+date: "2026-03-04"
+episode: 63
+tags: ["data-dragons", "auditability"]
+---
+
 Episode 63: The Dragon Tongue. Auditability as the First Act of Governance
 Liezl Coetzee · Accidental AInthropologist · Human–AI Decision Systems for Social Risk, Accountability & Institutional Memory
 

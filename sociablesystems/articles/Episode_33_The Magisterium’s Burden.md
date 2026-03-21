@@ -1,3 +1,10 @@
+---
+title: "The Magisterium's Burden"
+date: "2026-02-11"
+episode: 33
+tags: ["governance", "fear"]
+---
+
 # Episode_33_The Magisterium’s Burden
 
 ### Governing What You Cannot See

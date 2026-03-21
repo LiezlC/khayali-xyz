@@ -1,3 +1,10 @@
+---
+title: "Credit Scoring"
+date: "2026-01-14"
+episode: 7
+tags: ["financial-systems", "economic-access"]
+---
+
 # Episode 7: The Number That Speaks for You
 *Sociable Systems*
 

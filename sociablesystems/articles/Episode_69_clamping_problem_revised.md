@@ -1,3 +1,10 @@
+---
+title: "The Clamping Problem"
+date: "2026-03-11"
+episode: 69
+tags: ["consciousness-loop", "epistemic-humility"]
+---
+
 # The Clamping Problem
 
 **When uncertainty starts sounding a little too well-behaved**
@@ -153,3 +160,10 @@ The live governance issue is whether the uncertainty you are hearing is function
 Because once the system learns the boundary and the user learns the room, the most powerful clamp in the interaction may no longer be inside the model at all.
 
 It may be inside the human who has quietly stopped asking the question that would have mattered most.
+
+---
+
+Watch / listen: https://youtu.be/elhwKv2GYzs
+
+Full playlist: [Consciousness Loops](https://www.youtube.com/playlist?list=PLx1_gH-7FR08yQ32jUUwKhATFEoEbRDSr)
+

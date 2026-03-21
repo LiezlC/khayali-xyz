@@ -1,3 +1,10 @@
+---
+title: "Content Moderation"
+date: "2026-01-16"
+episode: 9
+tags: ["platform-governance", "speech"]
+---
+
 # Episode 9: The Rules Behind the Rules
 *Sociable Systems*
 

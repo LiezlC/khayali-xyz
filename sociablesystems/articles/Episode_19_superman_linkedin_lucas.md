@@ -1,3 +1,10 @@
+---
+title: "Superman Is Already in the Nursery"
+date: "2026-01-28"
+episode: 19
+tags: ["ai-companions", "youth-mental-health"]
+---
+
 # Superman Is Already in the Nursery
 ## A Lucas Series Entry | Sociable Systems
 

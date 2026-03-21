@@ -1,3 +1,10 @@
+---
+title: "Who Raises Whom"
+date: "2026-02-04"
+episode: 26
+tags: ["socialization", "authority"]
+---
+
 # Episode 26: Who Raises Whom
 
 ### Authority That Cannot Be Challenged

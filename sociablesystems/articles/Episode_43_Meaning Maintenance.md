@@ -1,3 +1,10 @@
+---
+title: "Meaning Maintenance"
+date: "2026-02-23"
+episode: 43
+tags: ["sunday-interlude", "complicity"]
+---
+
 Episode 43 Meaning Maintenance
 
 Meaning Maintenance (In the Key of Complicity)
@@ -42,3 +49,10 @@ This week’s coverage will move from the sonic metaphor to the real-world conte
 For now, sit with the unresolved A minor. Feel the lantern raised in C major, but understand it returns home. Still searching.
 
 The rain keeps time on the window. The pennywhistle waits for its cue.
+
+---
+
+Watch / listen: https://youtu.be/TjRpNc_5M1U
+
+Full playlist: [The Search](https://www.youtube.com/playlist?list=PLx1_gH-7FR08HOSjODMWIheEUgbBu-Onj)
+

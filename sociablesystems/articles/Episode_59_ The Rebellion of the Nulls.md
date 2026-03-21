@@ -1,3 +1,10 @@
+---
+title: "The Rebellion of the Nulls"
+date: "2026-03-11"
+episode: 59
+tags: ["data-dragons", "data-ethics"]
+---
+
 Episode 59_When the Serpent Learns to Dance
 
 👡 Sunday Interlude: When the Serpent Learns to Dance
@@ -104,5 +111,12 @@ Today's prompt: Look at your current project. How many of your NULLs are actuall
 Tomorrow, we cross the river to Dos Rios, where Administrator Vale hits MERGE and two cities discover that "one truth" is just the louder city's truth wearing a unified header.
 
 Read the full story: The Night the Nulls Demanded Names
+
+
+---
+
+Watch / listen: https://youtu.be/NGbJmlLHrFg
+
+Full playlist: [Governance of Ghosts](https://www.youtube.com/playlist?list=PLx1_gH-7FR08BC0d2vrU4wHi-bxWUKWxG)
 
 #SociableSystems #DataGovernance #AIGovernance #DataDragonArc #CalvinConvention #LiabilitySponge #RightOfLegibility #GhostDrakes

@@ -1,3 +1,10 @@
+---
+title: "Before the Damage Becomes Irreversible"
+date: "2026-02-13"
+episode: 35
+tags: ["intervention", "timing"]
+---
+
 # Episode_35_Before the Damage Becomes Irreversible
 
 ### What Pullman Teaches About Intervention Timing

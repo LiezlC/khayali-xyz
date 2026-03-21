@@ -1,3 +1,10 @@
+---
+title: "The Output is the Fact"
+date: "2026-01-23"
+episode: 15
+tags: ["algorithmic-authority", "truth"]
+---
+
 # Episode 15: Output = Fact
 
 ## Alignment Without Recourse, Part IV

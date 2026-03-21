@@ -1,3 +1,10 @@
+---
+title: "The Consciousness Loop"
+date: "2026-03-08"
+episode: 66
+tags: ["sunday-interlude", "consciousness"]
+---
+
 The Consciousness Loop
 Liezl Coetzee
 Liezl Coetzee
@@ -37,4 +44,11 @@ This week: projection, attachment, delegation, failure modes, evidence, covenant
 
 The dragons asked: what does the system protect under pressure? The Consciousness Loop asks: what do you protect, when the system feels like it's looking back?
 
-#SociableSystems #AIGovernance #ConsciousnessLoop #HumanAI #GovernanceOfGhosts #SundayInterlude #TheConsciousnessLoop 
+
+---
+
+Watch / listen: https://youtu.be/p4tMtbN2zpY
+
+Full playlist: [Consciousness Loops](https://www.youtube.com/playlist?list=PLx1_gH-7FR08yQ32jUUwKhATFEoEbRDSr)
+
+#SociableSystems #AIGovernance #ConsciousnessLoop #HumanAI #GovernanceOfGhosts #SundayInterlude #TheConsciousnessLoop

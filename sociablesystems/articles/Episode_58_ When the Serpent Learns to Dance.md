@@ -1,3 +1,10 @@
+---
+title: "When the Serpent Learns to Dance"
+date: "2026-03-10"
+episode: 58
+tags: ["data-dragons", "music"]
+---
+
 Episode 58_When the Serpent Learns to Dance
 
 👡 Sunday Interlude: When the Serpent Learns to Dance
@@ -89,5 +96,13 @@ The stories will stay warm this week. The governance stays sharp. And somewhere 
 Put your boots by the door. We are going back into the mud to find the names the systems forgot.
 
 Drop one real-world example where a system couldn't see someone, and what it cost.
+
+
+---
+
+Watch / listen: https://youtu.be/NGbJmlLHrFg
+Also: [Serpente da Tabela](https://youtu.be/t6dXsclWQSw)
+
+Full playlist: [Governance of Ghosts](https://www.youtube.com/playlist?list=PLx1_gH-7FR08BC0d2vrU4wHi-bxWUKWxG)
 
 #SociableSystems #DataGovernance #AIGovernance #DigitalFolklore #CalvinConvention #DataDragonArc #RightOfLegibility #RightOfOverride #RightOfRefusal

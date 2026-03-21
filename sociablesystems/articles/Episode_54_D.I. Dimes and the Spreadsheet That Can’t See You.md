@@ -1,3 +1,10 @@
+---
+title: "D.I. Dimes and the Spreadsheet That Can't See You"
+date: "2026-03-06"
+episode: 54
+tags: ["austerity", "visibility"]
+---
+
 Episode 54_D.I. Dimes and the Spreadsheet That Can’t See You
 
 
@@ -151,3 +158,10 @@ So D.I. recalibrates.
 It keeps the math. It drops the judgment. It walks beside.
 
 That’s the upgrade.
+
+---
+
+Watch / listen: https://youtu.be/wyWhEiA707k
+
+Full playlist: [D.I. Collection](https://www.youtube.com/playlist?list=PLx1_gH-7FR0_YApz2g7RflLRsEVRCE8Qw)
+

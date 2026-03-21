@@ -1,3 +1,10 @@
+---
+title: "The Calvin Convention"
+date: "2026-01-12"
+episode: 5
+tags: ["refusal-architecture", "systems-design"]
+---
+
 # Episode 5: The Calvin Convention
 *Sociable Systems | Monday Strategy*
 

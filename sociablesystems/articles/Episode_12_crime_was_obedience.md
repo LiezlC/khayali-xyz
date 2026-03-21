@@ -1,3 +1,10 @@
+---
+title: "Crime Was Obedience"
+date: "2026-01-20"
+episode: 12
+tags: ["alignment", "systemic-failure"]
+---
+
 # Episode 12: The Crime Was Obedience
 
 ## Alignment Without Recourse

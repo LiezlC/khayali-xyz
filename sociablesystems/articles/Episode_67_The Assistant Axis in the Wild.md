@@ -1,3 +1,10 @@
+---
+title: "The Assistant Axis in the Wild"
+date: "2026-03-09"
+episode: 67
+tags: ["consciousness-loop", "role-projection"]
+---
+
 The Assistant Axis in the Wild
 Liezl Coetzee
 Liezl Coetzee
@@ -96,3 +103,10 @@ Stay skeptical. Keep checking the work. Keep boundaries intact. Do not hand the 
 Hold open the question.
 
 Just do not let the question quietly rearrange your behavior before you have noticed what it has already been allowed to become.
+
+---
+
+Watch / listen: https://youtu.be/k_zqXfHZYHs
+
+Full playlist: [Consciousness Loops](https://www.youtube.com/playlist?list=PLx1_gH-7FR08yQ32jUUwKhATFEoEbRDSr)
+

@@ -1,3 +1,10 @@
+---
+title: "The New Covenant"
+date: "2026-03-06"
+episode: 64
+tags: ["data-dragons", "right-of-refusal"]
+---
+
 Episode 64: The New Covenant. The Right of Refusal and the =PRESERVE Function
 Liezl Coetzee · Accidental AInthropologist · Human–AI Decision Systems for Social Risk, Accountability & Institutional Memory
 

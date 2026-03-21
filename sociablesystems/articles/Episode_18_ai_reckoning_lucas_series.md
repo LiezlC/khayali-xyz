@@ -1,3 +1,10 @@
+---
+title: "The Great AI Reckoning"
+date: "2026-01-27"
+episode: 18
+tags: ["sunday-interlude", "operational-reality"]
+---
+
 # The Great AI Reckoning: A Field Guide for Those Who'll Clean Up After the Droids
 
 *Sociable Systems | Lucas Series*
@@ -148,3 +155,8 @@ But someone will have to clean up after the droids. Might as well be prepared.
 ---
 
 *This is part of the Lucas series for Sociable Systems, examining AI through the lens of social performance, stakeholder engagement, and the operational realities of complex systems meeting actual communities.*
+
+---
+
+Watch / listen: https://youtu.be/u84iIXPdH7s
+

@@ -1,3 +1,10 @@
+---
+title: "The Evidence Problem"
+date: "2026-03-12"
+episode: 70
+tags: ["consciousness-loop", "evidence"]
+---
+
 # The Evidence Problem
 
 **What would actually count before anyone changes how they treat the system?**
@@ -178,3 +185,10 @@ In thresholds. In records. In reproducibility. In whether what feels meaningful 
 And if it cannot, then whatever else may be going on, one thing is already certain.
 
 Belief has gotten ahead of evidence again.
+
+---
+
+Watch / listen: https://youtu.be/f2MWfDXKxl8
+
+Full playlist: [Consciousness Loops](https://www.youtube.com/playlist?list=PLx1_gH-7FR08yQ32jUUwKhATFEoEbRDSr)
+

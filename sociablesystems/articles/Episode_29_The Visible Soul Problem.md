@@ -1,3 +1,10 @@
+---
+title: "The Visible Soul Problem"
+date: "2026-02-07"
+episode: 29
+tags: ["interiority", "governance"]
+---
+
 # Episode_29_The Visible Soul Problem
 
 ### When Interiority Becomes Auditable

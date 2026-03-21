@@ -1,3 +1,10 @@
+---
+title: "When the Spec Sheet Meets the Street"
+date: "2026-03-08"
+episode: 56
+tags: ["synthesis", "governance"]
+---
+
 Episode 56_When the Spec Sheet Meets the Street
 
 February 28, 2026
@@ -76,3 +83,10 @@ The Signal Stack
 🎧 The Vibe: "Synthesis (The Tannie Test)" (Deep Afro-Tech / Gqom / Spoken Word, 120 BPM) 📺 The Vector: D.I. Arc Complete Collection 📄 The Artifact: The Tannie Test Integration Framework (available on request)
 
 Sociable Systems explores what happens when elegant designs meet actual conditions. If this piece arrived in your inbox via someone else's forward, you can subscribe directly. If you read this with captured attention, D.I. won't hold it against you. If you read it with claimed attention, you probably noticed the sax.
+
+---
+
+Watch / listen: https://youtu.be/foiqr6qpt-0
+
+Full playlist: [D.I. Collection](https://www.youtube.com/playlist?list=PLx1_gH-7FR0_YApz2g7RflLRsEVRCE8Qw)
+

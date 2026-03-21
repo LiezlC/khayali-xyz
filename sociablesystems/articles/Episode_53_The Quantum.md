@@ -1,3 +1,10 @@
+---
+title: "The Quantum"
+date: "2026-03-05"
+episode: 53
+tags: ["cape-town", "transport"]
+---
+
 Episode 53_The Quantum
 
 
@@ -35,5 +42,12 @@ None of this argues for abandoning safety constraints. Overloading vehicles and 
 As D.I. discovered: you can code the world. You can code the sky. You can't code a Quantum.
 
 What's the "Quantum Taxi" in your industry? The complex, human-run process that keeps delivering results while defying every formal specification written about it?
+
+
+---
+
+Watch / listen: https://youtu.be/xK7Nnw5O_tg
+
+Full playlist: [D.I. Collection](https://www.youtube.com/playlist?list=PLx1_gH-7FR0_YApz2g7RflLRsEVRCE8Qw)
 
 #SociableSystems #AIGovernance #HumanInTheLoop #DigitalAnthropology #CapeTown

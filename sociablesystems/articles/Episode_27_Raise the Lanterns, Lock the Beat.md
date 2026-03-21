@@ -1,3 +1,10 @@
+---
+title: "Raise the Lanterns, Lock the Beat"
+date: "2026-02-05"
+episode: 27
+tags: ["sunday-interlude", "pullman", "safety"]
+---
+
 # Episode_27_Raise the Lanterns, Lock the Beat
 
 
@@ -396,5 +403,10 @@ If the world wants in on you, let it look. But read you true.
 Question for the room: When a safety intervention “works” on paper but users describe the system as suddenly hollow, what do you treat that as: churn, or harm?
 
 (And if you’re curious, the hook chant is there for a reason: Oi-na, oi-na, lanterns blaze. Sometimes you need a street chorus to keep a complicated truth alive.)
+
+
+---
+
+Watch / listen: https://youtu.be/JiJNpk3YSHI
 
 #AIGovernance #TrustAndSafety #ResponsibleAI #SociableSystems #HumanCenteredAI #DigitalWellbeing #HisDarkMaterials #Pullman #ProductEthics

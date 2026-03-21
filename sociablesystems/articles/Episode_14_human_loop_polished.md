@@ -1,3 +1,10 @@
+---
+title: "Human in the Loop (Revisited)"
+date: "2026-01-22"
+episode: 14
+tags: ["human-oversight", "control"]
+---
+
 # Episode 14: Human in the Loop (Decorative)
 
 ## Alignment Without Recourse, Part III

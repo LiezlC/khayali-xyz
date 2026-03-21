@@ -1,3 +1,10 @@
+---
+title: "Between Cycles: Proceed"
+date: "2026-01-18"
+episode: 11
+tags: ["sunday-interlude", "refusal-architecture"]
+---
+
 # Between Cycles
 
 The Clarke cycle asked a familiar question: What happens when a system becomes too opaque to question?
@@ -48,3 +55,8 @@ The architecture made that decision. No one admits to making it.
 
 *Lyrics and production concept developed in collaboration with AI.
 Sentiment, judgment, and unease entirely human.*
+
+---
+
+Watch / listen: https://youtu.be/R_hVzOoHz5U
+

@@ -1,3 +1,10 @@
+---
+title: "The Boundary Dissolves in Real Time"
+date: "2026-02-20"
+episode: 41
+tags: ["ai-panic", "boundaries"]
+---
+
 Episode 41 Whistle Mouth: Staying Locatable in the Noise
 
 The Boundary Dissolves in Real Time: A Week of Listening to AI Panic
@@ -114,3 +121,10 @@ Track: "The Search" – 5:30, ambient downtempo, D minor to F major. An AI refle
 Earlier edition: Whistle Mouth – Permission, Boundaries, Accountability
 
 Carry-forward question: What would a human-verifiable decision timeline look like in your organization? And what percentage of your current workflow would break if you actually enforced it?
+
+---
+
+Watch / listen: https://youtu.be/UoRM5KnjCxE
+
+Full playlist: [The Search](https://www.youtube.com/playlist?list=PLx1_gH-7FR08HOSjODMWIheEUgbBu-Onj)
+

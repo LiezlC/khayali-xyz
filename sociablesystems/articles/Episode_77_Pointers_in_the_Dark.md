@@ -1,3 +1,11 @@
+---
+title: "Pointers in the Dark"
+date: "2026-03-19"
+episode: 77
+tags: ["cognition", "pointers", "compression", "loom-arc"]
+excerpt: "Joscha Bach often points to two very different modes of cognition. One compresses. The other points."
+---
+
 # Pointers in the Dark
 
 **Liezl Coetzee**

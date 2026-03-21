@@ -1,3 +1,10 @@
+---
+title: "The Formula Museum — Saturday Synthesis"
+date: "2026-03-07"
+episode: 65
+tags: ["synthesis", "data-dragons", "calvin-convention"]
+---
+
 Episode 65: The Formula Museum — Saturday Synthesis
 Liezl Coetzee · Accidental AInthropologist · Human–AI Decision Systems for Social Risk, Accountability & Institutional Memory
 
@@ -196,5 +203,12 @@ Two more join the collection today.
 🎮 Play the ETL Gauntlet — test your pipeline governance instincts
 
 📄 Download: Appendix A (Right of Override), Appendix B (Edge-Case Registry), Appendix C (Right of Refusal)
+
+
+---
+
+Watch / listen: https://youtu.be/NGbJmlLHrFg
+
+Full playlist: [Governance of Ghosts](https://www.youtube.com/playlist?list=PLx1_gH-7FR08BC0d2vrU4wHi-bxWUKWxG)
 
 #SociableSystems #DataGovernance #AIGovernance #DataDragonArc #CalvinConvention #GovernanceOfGhosts #SaturdaySynthesis #FormulaMuseum

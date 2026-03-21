@@ -1,3 +1,10 @@
+---
+title: "The Red Shirt Problem"
+date: "2026-02-18"
+episode: 39
+tags: ["human-in-the-loop", "liability"]
+---
+
 # Episode_39_The Red Shirt Problem
 
 February 11, 2026

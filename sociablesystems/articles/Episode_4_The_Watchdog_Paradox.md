@@ -1,3 +1,10 @@
+---
+title: "The Watchdog Paradox"
+date: "2026-01-11"
+episode: 4
+tags: ["oversight", "regulatory-capture"]
+---
+
 # Episode 4: The Watchdog Paradox
 *Sociable Systems | Sunday Reflection*
 

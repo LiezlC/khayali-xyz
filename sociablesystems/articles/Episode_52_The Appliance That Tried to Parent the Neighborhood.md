@@ -1,3 +1,10 @@
+---
+title: "The Appliance That Tried to Parent the Neighborhood"
+date: "2026-03-04"
+episode: 52
+tags: ["cape-town", "smart-systems"]
+---
+
 Episode 52 The Appliance That Tried to Parent the Neighborhood
 
 
