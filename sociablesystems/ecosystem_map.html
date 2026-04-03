@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sociable Systems — Ecosystem Map</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: #0a0a0f;
+    color: #c8c8d0;
+    overflow-x: hidden;
+  }
+
+  .header {
+    text-align: center;
+    padding: 40px 20px 20px;
+    border-bottom: 1px solid #1a1a2e;
+  }
+
+  .header h1 {
+    font-size: 1.6rem;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    color: #e8e8f0;
+    margin-bottom: 8px;
+  }
+
+  .header p {
+    font-size: 0.85rem;
+    color: #666680;
+    font-weight: 300;
+  }
+
+  /* Layer toggles */
+  .controls {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    padding: 20px;
+    flex-wrap: wrap;
+  }
+
+  .toggle-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    padding: 6px 14px;
+    border: 1px solid #2a2a3e;
+    border-radius: 20px;
+    background: transparent;
+    color: #666680;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .toggle-btn.active {
+    border-color: var(--layer-color, #5566aa);
+    color: var(--layer-color, #5566aa);
+    background: rgba(85, 102, 170, 0.08);
+  }
+
+  .toggle-btn:hover {
+    border-color: #5566aa;
+  }
+
+  /* Main timeline container */
+  .timeline-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 40px 60px;
+    position: relative;
+  }
+
+  /* The spine */
+  .spine {
+    position: absolute;
+    left: 180px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, #1a1a2e 5%, #1a1a2e 95%, transparent);
+  }
+
+  /* Arc nodes */
+  .arc-node {
+    position: relative;
+    margin-bottom: 12px;
+    padding-left: 220px;
+    min-height: 80px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .arc-node:hover {
+    transform: translateX(4px);
+  }
+
+  .arc-number {
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 160px;
+    text-align: right;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: #444460;
+  }
+
+  .arc-dot {
+    position: absolute;
+    left: 173px;
+    top: 16px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--arc-color, #5566aa);
+    background: #0a0a0f;
+    z-index: 2;
+    transition: all 0.3s;
+  }
+
+  .arc-node:hover .arc-dot,
+  .arc-node.expanded .arc-dot {
+    background: var(--arc-color, #5566aa);
+    box-shadow: 0 0 12px var(--arc-color, #5566aa);
+  }
+
+  .arc-title {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: #e0e0ea;
+    margin-bottom: 4px;
+  }
+
+  .arc-subtitle {
+    font-size: 0.78rem;
+    color: #666680;
+    margin-bottom: 4px;
+  }
+
+  .arc-question {
+    font-size: 0.78rem;
+    color: #888898;
+    font-style: italic;
+    margin-top: 6px;
+  }
+
+  /* Expanded panel */
+  .arc-detail {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.3s;
+    opacity: 0;
+  }
+
+  .arc-node.expanded .arc-detail {
+    max-height: 1200px;
+    opacity: 1;
+    margin-top: 12px;
+  }
+
+  .detail-section {
+    margin-bottom: 14px;
+    padding: 12px 16px;
+    background: #0e0e18;
+    border-radius: 8px;
+    border-left: 2px solid var(--arc-color, #5566aa);
+  }
+
+  .detail-section h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--arc-color, #5566aa);
+    margin-bottom: 8px;
+  }
+
+  .detail-section p, .detail-section li {
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: #999aaa;
+  }
+
+  .detail-section ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .detail-section li {
+    padding: 2px 0;
+  }
+
+  .detail-section li::before {
+    content: '→ ';
+    color: var(--arc-color, #5566aa);
+  }
+
+  /* Concept threads */
+  .concept-tag {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    margin: 2px 4px 2px 0;
+    border-radius: 10px;
+    border: 1px solid;
+    cursor: default;
+    transition: all 0.3s;
+  }
+
+  .concept-tag.origin {
+    background: rgba(85, 102, 170, 0.12);
+    border-color: rgba(85, 102, 170, 0.3);
+    color: #7788bb;
+  }
+
+  .concept-tag.resurfaces {
+    background: rgba(170, 136, 85, 0.08);
+    border-color: rgba(170, 136, 85, 0.25);
+    color: #aa9966;
+    font-style: italic;
+  }
+
+  /* Links */
+  .ext-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    color: #6677aa;
+    text-decoration: none;
+    padding: 3px 0;
+    transition: color 0.2s;
+  }
+
+  .ext-link:hover {
+    color: #8899cc;
+  }
+
+  .ext-link::before {
+    content: '↗';
+    font-size: 0.65rem;
+  }
+
+  /* Layer indicators */
+  .layer-music, .layer-curriculum, .layer-channels {
+    transition: opacity 0.4s, max-height 0.4s;
+  }
+
+  body.hide-music .layer-music { opacity: 0; max-height: 0; overflow: hidden; margin: 0; padding: 0; }
+  body.hide-curriculum .layer-curriculum { opacity: 0; max-height: 0; overflow: hidden; margin: 0; padding: 0; }
+  body.hide-channels .layer-channels { opacity: 0; max-height: 0; overflow: hidden; margin: 0; padding: 0; }
+
+  /* Thread highlight */
+  .concept-tag:hover {
+    transform: scale(1.05);
+  }
+
+  .concept-highlight {
+    animation: pulse 0.6s ease;
+  }
+
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(85, 102, 170, 0.4); }
+    70% { box-shadow: 0 0 0 8px rgba(85, 102, 170, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(85, 102, 170, 0); }
+  }
+
+  /* Ecosystem sidebar */
+  .ecosystem-strip {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+
+  .eco-card {
+    padding: 16px;
+    background: #0e0e18;
+    border-radius: 8px;
+    border: 1px solid #1a1a2e;
+  }
+
+  .eco-card h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+  }
+
+  .eco-card p {
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: #888898;
+  }
+
+  .eco-card .card-music { color: #aa7744; }
+  .eco-card .card-curriculum { color: #44aa77; }
+  .eco-card .card-channels { color: #7744aa; }
+
+  /* Responsive */
+  @media (max-width: 700px) {
+    .spine { left: 30px; }
+    .arc-number { width: 20px; font-size: 0.6rem; }
+    .arc-node { padding-left: 60px; }
+    .arc-dot { left: 23px; }
+  }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>SOCIABLE SYSTEMS</h1>
+  <p>Ecosystem Map — 80 Episodes, 11 Arcs, One Continuous Argument</p>
+</div>
+
+<div class="controls">
+  <button class="toggle-btn active" style="--layer-color: #6677aa;" onclick="toggleLayer('concepts', this)">Concepts</button>
+  <button class="toggle-btn active" style="--layer-color: #aa7744;" onclick="toggleLayer('music', this)">Music</button>
+  <button class="toggle-btn active" style="--layer-color: #44aa77;" onclick="toggleLayer('curriculum', this)">Curriculum</button>
+  <button class="toggle-btn active" style="--layer-color: #7744aa;" onclick="toggleLayer('channels', this)">Channels</button>
+</div>
+
+<div class="timeline-container">
+  <div class="spine"></div>
+  <!-- Arcs injected by JS -->
+</div>
+
+<div class="ecosystem-strip">
+  <div class="eco-card">
+    <h4 class="card-music">Music Evolution</h4>
+    <p>SoundCloud singles (Eps 1–35) → dedicated YouTube playlists per arc (The Search onward) → track per episode (The Loom). Eight playlists. 40+ original tracks. Genre palette spans electro-swing noir to Afro-tech to Balkan gypsy swing to desert-oriental tech-house.</p>
+    <p style="margin-top:8px;"><a class="ext-link" href="https://youtube.com/playlist?list=PLx1_gH-7FR0-ow7Tk54UNWX9fQVJ8--eU">All Sunday Interludes</a></p>
+  </div>
+  <div class="eco-card">
+    <h4 class="card-curriculum">Curriculum</h4>
+    <p>The 201 Gap — Foundations of Sociable Systems. Conceptual, diagnostic, architectural. For practitioners between AI systems and real-world accountability. 4 modules on Scrib-Li, interactive demos on khayali.xyz.</p>
+    <p style="margin-top:8px;"><a class="ext-link" href="https://www.khayali.xyz/curriculum/index.html">khayali.xyz/curriculum</a></p>
+    <p><a class="ext-link" href="https://www.youtube.com/playlist?list=PLOobCQw33iKVzztOsQIBrXhF7ftuqhAay">The 201 Gap playlist</a></p>
+  </div>
+  <div class="eco-card">
+    <h4 class="card-channels">Channels</h4>
+    <p>LinkedIn: daily episodes. Substack: weekly arc consolidations. @AccidAInthro: spoken overviews. @Scrib-Li: structured training. khayali.xyz: curriculum hub and interactive demos.</p>
+    <p style="margin-top:8px;"><a class="ext-link" href="https://www.youtube.com/@AccidAInthro">@AccidAInthro</a></p>
+    <p><a class="ext-link" href="https://www.youtube.com/@Scrib-Li">@Scrib-Li</a></p>
+  </div>
+</div>
+
+<script>
+const arcs = [
+  {
+    id: 'asimov',
+    num: '01',
+    eps: 'Eps 1–5',
+    date: 'Jan 8–12',
+    title: 'The Asimov Arc',
+    subtitle: 'Pre-action constraints, governance theatre, and the Barn Door Problem',
+    color: '#5566aa',
+    question: 'Do we have the institutional courage to design systems that cannot act unless authority and accountability are already in place?',
+    concepts: {
+      origin: ['Barn Door Problem', 'Liability Sponge', 'Calvin Convention', 'Pre-Action Constraints', 'Listening Not Obedient'],
+      resurfaces: []
+    },
+    music: {
+      tracks: ['Listening, Not Obedient (SoundCloud / YouTube)'],
+      playlist: null,
+      playlistUrl: null,
+      note: 'Emerged from early D.I. concept exploration. Landed here because the sentiment fit: sensor vs. sentinel.'
+    },
+    curriculum: null,
+    channels: null
+  },
+  {
+    id: 'clarke',
+    num: '02',
+    eps: 'Eps 6–10',
+    date: 'Jan 13–17',
+    title: 'The Clarke Cycle',
+    subtitle: 'Algorithmic opacity, unknowable authority, systems treated as law',
+    color: '#4477aa',
+    question: 'If a system\'s reasoning cannot be interrogated, should it be granted authority over human welfare?',
+    concepts: {
+      origin: ['Contractual Opacity', 'Vendor Defense', 'Algorithmic Authority'],
+      resurfaces: ['Liability Sponge']
+    },
+    music: {
+      tracks: ['Proceed (SoundCloud / YouTube)'],
+      playlist: null,
+      playlistUrl: null,
+      note: 'Ep 11 bridge interlude: "Between Cycles: Proceed"'
+    },
+    curriculum: null,
+    channels: null
+  },
+  {
+    id: 'kubrick',
+    num: '03',
+    eps: 'Eps 12–17',
+    date: 'Jan 19–24',
+    title: 'The Kubrick Cycle',
+    subtitle: 'Alignment without recourse. Compulsory continuation. The missing stop button.',
+    color: '#cc4444',
+    question: 'Where in your operational systems is the stop button missing?',
+    concepts: {
+      origin: ['Compulsory Continuation', 'Transparency Trap', 'Right to Refuse'],
+      resurfaces: ['Barn Door Problem', 'Liability Sponge']
+    },
+    music: null,
+    curriculum: null,
+    channels: null
+  },
+  {
+    id: 'lucas',
+    num: '04',
+    eps: 'Eps 19–26',
+    date: 'Jan 26 – Feb 3',
+    title: 'The Lucas Cycle',
+    subtitle: 'AI as socialising agent. The Jedi Council Problem. Systems that raise rather than do.',
+    color: '#44aa66',
+    question: 'What kind of humans are our systems training us to become?',
+    concepts: {
+      origin: ['Superman in the Nursery', 'Protocol Droid Dilemma', 'Grandparent Effect'],
+      resurfaces: ['Listening Not Obedient']
+    },
+    music: {
+      tracks: ['Lanternlight tracks', 'Raise the Lanterns, Lock the Beat'],
+      playlist: null,
+      playlistUrl: null,
+      note: 'Lanterns collection emerges: small light in institutional darkness'
+    },
+    curriculum: { note: 'Ep 25: curriculum concept introduced. "Treats these sci-fi horrors as practical design challenges."' },
+    channels: null
+  },
+  {
+    id: 'pullman',
+    num: '05',
+    eps: 'Eps 29–35',
+    date: 'Feb 6–12',
+    title: 'The Pullman Arc',
+    subtitle: 'Visible souls, severed daemons, and the governance of interiority',
+    color: '#9944aa',
+    question: 'Is the system optimising the person or amputating the parts it finds inconvenient?',
+    concepts: {
+      origin: ['Visible Soul Problem', 'Bolvangar Procedure', 'Daemon Health Index', 'Premature Settling'],
+      resurfaces: ['Contractual Opacity']
+    },
+    music: null,
+    curriculum: null,
+    channels: null
+  },
+  {
+    id: 'search',
+    num: '06',
+    eps: 'Eps 37–42',
+    date: 'Feb 15–20',
+    title: 'The Search',
+    subtitle: 'Teleporters, mirrors, dissolving boundaries. The pivot arc.',
+    color: '#aa8844',
+    question: 'What was the shape of the thing before it became a token, and does the gap matter for this decision?',
+    concepts: {
+      origin: ['Teleporter Problem', 'Signal Stack', 'Forest Protocol', 'The Mirror Speaks', 'Red Shirt Problem', '201 Gap'],
+      resurfaces: ['Liability Sponge', 'Barn Door Problem', 'Visible Soul Problem']
+    },
+    music: {
+      tracks: ['Multiple tracks per episode'],
+      playlist: 'The Search',
+      playlistUrl: 'https://www.youtube.com/playlist?list=PLx1_gH-7FR08HOSjODMWIheEUgbBu-Onj',
+      note: 'First dedicated YouTube playlist. Music becomes structural.'
+    },
+    curriculum: {
+      note: 'The 201 Gap course launches on Scrib-Li. First 3 structured curriculum videos. AIESG Policy Drafting Kit (Ep 39).',
+      links: [
+        { title: 'The 201 Gap (Module 1)', url: 'https://www.youtube.com/watch?v=Jt4qPAHhj64' },
+        { title: 'Framing the Relationship', url: 'https://www.youtube.com/watch?v=ejS15kRvTcM' },
+        { title: 'Unmasking the Liability Sponge', url: 'https://www.youtube.com/watch?v=uiVQt6vg4r8' }
+      ]
+    },
+    channels: { note: 'Scrib-Li channel active with structured training content' }
+  },
+  {
+    id: 'war',
+    num: '07',
+    eps: 'Eps 44–49',
+    date: 'Feb 22–28',
+    title: 'War Week',
+    subtitle: 'Tactical ghosts, kill chains, and the audit that cannot happen',
+    color: '#cc3333',
+    question: 'Can you reconstruct the decision chain from input to outcome? If not, you are only narrating.',
+    concepts: {
+      origin: ['Tactical Ghost', 'Psychopath\'s Confession', 'Audit That Cannot Happen'],
+      resurfaces: ['Signal Stack', 'Liability Sponge', 'Compulsory Continuation']
+    },
+    music: {
+      tracks: ['7 tracks in one Friday episode (Ep 57)', 'D.I. Drafted', 'The Rubicon Protocol', 'I Just Asked'],
+      playlist: 'Kill Chain Karaoke',
+      playlistUrl: 'https://www.youtube.com/playlist?list=PLx1_gH-7FR08rhEA5fRuaTRSvRsXihU18',
+      note: 'Music production intensifies. Genre range expands to Afro-Tech industrial, lullabies, folk.'
+    },
+    curriculum: { note: 'Ep 45: "connects directly to the Fire Drill math from the curriculum"' },
+    channels: null
+  },
+  {
+    id: 'di',
+    num: '08',
+    eps: 'Eps 51–56',
+    date: 'Mar 1–6',
+    title: 'The D.I. Cycle',
+    subtitle: 'The spec sheet vs. the street. Digital Intelligence in Cape Town.',
+    color: '#44aaaa',
+    question: 'Does the system know the names of the people, or just how many plates to set?',
+    concepts: {
+      origin: ['Tannie Test', 'Liability Diodes', 'Spec Sheet vs Street'],
+      resurfaces: ['Liability Sponge', 'Teleporter Problem', 'Calvin Convention']
+    },
+    music: {
+      tracks: ['Multiple tracks', 'D.I. Drafted (Afro-Tech)', 'Friday at One'],
+      playlist: 'D.I. Collection',
+      playlistUrl: 'https://www.youtube.com/playlist?list=PLx1_gH-7FR0_YApz2g7RflLRsEVRCE8Qw',
+      note: 'Cape Town context enters the sonic palette. Afro-Tech, deep house.'
+    },
+    curriculum: { note: 'Ep 50: "the curriculum puts on dancing shoes." Multiple self-referential curriculum mentions.' },
+    channels: null
+  },
+  {
+    id: 'dragons',
+    num: '09',
+    eps: 'Eps 58–65',
+    date: 'Mar 8–13',
+    title: 'Data Dragons',
+    subtitle: 'Digital folklore, the Rebellion of the Nulls, and the Right of Legibility',
+    color: '#cc8833',
+    question: 'What does the system protect under pressure, and what does it refuse to optimise away?',
+    concepts: {
+      origin: ['The Null', '=PRESERVE Function', 'Rebellion of the Nulls', 'Formula Keeper', 'Right of Legibility'],
+      resurfaces: ['Liability Sponge', 'Daemon Health Index', 'Signal Stack', 'Calvin Convention']
+    },
+    music: {
+      tracks: ['Serpente da Tabela (Portuguese)', 'The Pivot Serpent (English)'],
+      playlist: 'Governance of Ghosts',
+      playlistUrl: 'https://www.youtube.com/playlist?list=PLx1_gH-7FR08BC0d2vrU4wHi-bxWUKWxG',
+      note: 'Portuguese-language tracks. "Eu danço, logo existo." (I dance, therefore I exist.)'
+    },
+    curriculum: { note: 'Ep 65: Scrib-Li animated training explicitly referenced. "AIESG curriculum gets its own visual format."' },
+    channels: { note: 'Scrib-Li channel for animated materials. Formula Museum as visual curriculum format.' }
+  },
+  {
+    id: 'consciousness',
+    num: '10',
+    eps: 'Eps 66–72',
+    date: 'Mar 8–14',
+    title: 'Consciousness Loop',
+    subtitle: 'Ethical basins, strange attractors, and the Consciousness Covenant',
+    color: '#7755cc',
+    question: 'Does the system keep your decency from being harvested into compliance?',
+    concepts: {
+      origin: ['Wire-heading', 'Consciousness Covenant', 'Strange Attractor', 'Clamping Problem'],
+      resurfaces: ['Daemon Health Index', 'Premature Settling', 'Bolvangar Procedure', 'The Null']
+    },
+    music: {
+      tracks: ['Dual-voice tracks (human/machine)', 'Seams in the Glass'],
+      playlist: 'Consciousness Loops',
+      playlistUrl: 'https://www.youtube.com/playlist?list=PLx1_gH-7FR08yQ32jUUwKhATFEoEbRDSr',
+      note: '"Seams in the Glass": clarinet and datacenter hum. "Read me true, read me true, hold the override wheel."'
+    },
+    curriculum: null,
+    channels: null
+  },
+  {
+    id: 'loom',
+    num: '11',
+    eps: 'Eps 73–80',
+    date: 'Mar 15–22',
+    title: 'The Loom Reads Back',
+    subtitle: 'Morphogenesis, metabolic currency, and the pattern that sees itself',
+    color: '#ddaa44',
+    question: 'What pattern does your system keep returning to under pressure, and whose interests does that pattern serve?',
+    concepts: {
+      origin: ['Compute Credits', 'Calcified Loops', 'Pointers in the Dark', 'Loom Reads Back', 'Metabolic Currency'],
+      resurfaces: ['Barn Door Problem', 'Compulsory Continuation', 'Wire-heading', 'Calvin Convention', 'Teleporter Problem', 'Signal Stack', 'Daemon Health Index']
+    },
+    music: {
+      tracks: ['Compute Credits (swing-noir)', 'Cut the Bellwire', 'Calcified Loop', 'Pointers in the Dark (electro-swing noir)', 'The Chinese Room Dance (Balkan-swing)', 'The Loom Reads Back (Balkan gypsy swing)', 'The Genesis Account (desert-oriental)', 'Finding Shape (deep organic house)'],
+      playlist: 'Signal and Shadow',
+      playlistUrl: 'https://www.youtube.com/playlist?list=PLx1_gH-7FR098DkyESWAZ2JpUvUoL_Kd8',
+      note: 'Track per episode. Nine tracks from morphogenesis to genesis. Full genre range.'
+    },
+    curriculum: { note: 'Interactive demos at khayali.xyz (COMPUTE_CREDITS.html). Training Mode coda.' },
+    channels: { note: 'AccidAInthro spoken overviews.' }
+  }
+];
+
+// Build timeline
+const container = document.querySelector('.timeline-container');
+
+arcs.forEach(arc => {
+  const node = document.createElement('div');
+  node.className = 'arc-node';
+  node.style.setProperty('--arc-color', arc.color);
+  node.onclick = () => node.classList.toggle('expanded');
+
+  // Concept tags HTML
+  const originTags = arc.concepts.origin.map(c =>
+    `<span class="concept-tag origin" data-concept="${c}">${c}</span>`
+  ).join('');
+
+  const resurfaceTags = arc.concepts.resurfaces.map(c =>
+    `<span class="concept-tag resurfaces" data-concept="${c}">${c}</span>`
+  ).join('');
+
+  // Music section
+  let musicHtml = '';
+  if (arc.music) {
+    let playlistLink = '';
+    if (arc.music.playlist) {
+      playlistLink = `<a class="ext-link" href="${arc.music.playlistUrl}" target="_blank">${arc.music.playlist} playlist</a>`;
+    }
+    musicHtml = `
+      <div class="detail-section layer-music">
+        <h4>♫ Music</h4>
+        <p>${arc.music.note}</p>
+        ${playlistLink ? '<p style="margin-top:6px;">' + playlistLink + '</p>' : ''}
+      </div>`;
+  }
+
+  // Curriculum section
+  let curriculumHtml = '';
+  if (arc.curriculum) {
+    let linksHtml = '';
+    if (arc.curriculum.links) {
+      linksHtml = arc.curriculum.links.map(l =>
+        `<p><a class="ext-link" href="${l.url}" target="_blank">${l.title}</a></p>`
+      ).join('');
+    }
+    curriculumHtml = `
+      <div class="detail-section layer-curriculum" style="--arc-color: #44aa77;">
+        <h4>📐 Curriculum</h4>
+        <p>${arc.curriculum.note}</p>
+        ${linksHtml}
+      </div>`;
+  }
+
+  // Channels section
+  let channelsHtml = '';
+  if (arc.channels) {
+    channelsHtml = `
+      <div class="detail-section layer-channels" style="--arc-color: #7744aa;">
+        <h4>📡 Channels</h4>
+        <p>${arc.channels.note}</p>
+      </div>`;
+  }
+
+  node.innerHTML = `
+    <div class="arc-number">${arc.eps}<br>${arc.date}</div>
+    <div class="arc-dot"></div>
+    <div class="arc-title">${arc.num}. ${arc.title}</div>
+    <div class="arc-subtitle">${arc.subtitle}</div>
+    <div class="arc-detail">
+      <div class="arc-question">"${arc.question}"</div>
+
+      <div class="detail-section" style="margin-top: 12px;">
+        <h4>Concepts Introduced</h4>
+        <div>${originTags}</div>
+        ${resurfaceTags ? '<h4 style="margin-top:10px;">Resurfaces From Earlier</h4><div>' + resurfaceTags + '</div>' : ''}
+      </div>
+
+      ${musicHtml}
+      ${curriculumHtml}
+      ${channelsHtml}
+    </div>
+  `;
+
+  container.appendChild(node);
+});
+
+// Layer toggle
+function toggleLayer(layer, btn) {
+  btn.classList.toggle('active');
+  document.body.classList.toggle('hide-' + layer);
+}
+
+// Concept hover highlighting
+document.addEventListener('mouseover', e => {
+  if (e.target.classList.contains('concept-tag')) {
+    const concept = e.target.dataset.concept;
+    document.querySelectorAll(`.concept-tag[data-concept="${concept}"]`).forEach(tag => {
+      if (tag !== e.target) tag.classList.add('concept-highlight');
+    });
+  }
+});
+
+document.addEventListener('mouseout', e => {
+  if (e.target.classList.contains('concept-tag')) {
+    document.querySelectorAll('.concept-highlight').forEach(tag => {
+      tag.classList.remove('concept-highlight');
+    });
+  }
+});
+</script>
+</body>
+</html>

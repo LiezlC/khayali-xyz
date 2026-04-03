@@ -133,7 +133,22 @@
       "Bash(grep -E \"^---$|^date:|Date:|published|2025|2026|January|February|March|April|May|June|July|August|September|October|November|December\")",
       "Bash(python \"C:/Users/Liezl/Documents/Content/generate_substack_xml.py\")",
       "Bash(python \"C:/Users/Liezl/Documents/Content/add_frontmatter.py\")",
-      "Bash(python -c \":*)"
+      "Bash(python -c \":*)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(butler version:*)",
+      "Read(//c/Users/Liezl/Downloads/**)",
+      "Bash(unzip -o butler-windows.zip -d butler-install)",
+      "Bash(mkdir -p \"/c/Users/Liezl/bin\")",
+      "Bash(cp \"/c/Users/Liezl/Downloads/butler-install/butler.exe\" \"/c/Users/Liezl/Downloads/butler-install/7z.dll\" \"/c/Users/Liezl/Downloads/butler-install/c7zip.dll\" \"/c/Users/Liezl/bin/\")",
+      "Bash(\"/c/Users/Liezl/bin/butler.exe\" version:*)",
+      "WebFetch(domain:itch.io)",
+      "Bash(\"/c/Users/Liezl/bin/butler.exe\" status:*)",
+      "Bash(python \"C:/Users/Liezl/Documents/Content/itch_upload.py\")",
+      "Bash(\"/c/Users/Liezl/bin/butler.exe\" push:*)",
+      "Bash(python \"C:/Users/Liezl/Documents/Content/itch_create_and_push.py\")",
+      "Bash(C:/Users/Liezl/bin/butler.exe push:*)",
+      "Bash(for slug:*)",
+      "WebFetch(domain:khayali.itch.io)"
     ],
     "deny": [],
     "ask": []
