@@ -1,4 +1,12 @@
 export default function ToolsPage() {
+  const visualDecks = [
+    {
+      title: "Bending AI Truth",
+      description: "The Epistemology of Acceptability: how format, perspective, and sequence bend AI truth. Multi-batch qualitative analysis of LLM cognitive mechanics across prose, satire, song, and victim registers.",
+      file: "Bending_AI_Truth.pdf"
+    }
+  ]
+
   const tools = [
     {
       title: "AI vs IFC - Executive Extract",
@@ -72,6 +80,33 @@ export default function ToolsPage() {
           Practical frameworks, interrogation scripts, and architectural patterns for AI accountability in high-stakes operations.
         </p>
 
+        <h2 className="text-3xl font-bold mb-6 text-teal-400">Visual Decks</h2>
+        <p className="text-gray-400 mb-8">
+          Presentation decks from the Sideways Arc and related AI interpretability research.
+        </p>
+        <div className="grid gap-6 mb-16">
+          {visualDecks.map((deck, index) => (
+            <div
+              key={index}
+              className="bg-gray-800 border border-gray-700 rounded-lg p-6 hover:border-teal-500 transition-all"
+            >
+              <h2 className="text-2xl font-bold text-white mb-2">{deck.title}</h2>
+              <p className="text-gray-400 mb-4">{deck.description}</p>
+              <a
+                href={`/downloads/${deck.file}`}
+                download
+                className="inline-flex items-center px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-lg transition-colors"
+              >
+                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Download PDF
+              </a>
+            </div>
+          ))}
+        </div>
+
+        <h2 className="text-3xl font-bold mb-6 text-teal-400">Frameworks &amp; Tools</h2>
         <div className="grid gap-6">
           {tools.map((tool, index) => (
             <div
