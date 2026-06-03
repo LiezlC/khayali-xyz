@@ -30,7 +30,7 @@ export default async function WorldWorkshopPage() {
             through human-AI co-creation, including Project Aethel and beyond.
           </p>
           <p className="text-md text-gray-400 max-w-2xl mx-auto">
-            Part of the <a href="/ai-arena" className="text-indigo-400 hover:text-indigo-300 underline">AI Arena</a> multi-model
+            Part of the AI Village multi-model
             roundtable methodology, where different AI systems contribute unique perspectives to shared creative challenges.
           </p>
         </div>

@@ -113,7 +113,7 @@ export default function LabsPage() {
                   <div>• Emergence Documentation</div>
                   <div>• Methodology Evolution</div>
                 </div>
-                <a href="/protocol" className="inline-block px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg font-semibold transition-colors">
+                <a href="/khayali-protocol" className="inline-block px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg font-semibold transition-colors">
                   Explore Protocols →
                 </a>
               </div>
@@ -133,7 +133,7 @@ export default function LabsPage() {
                 <div>• Comparative Reasoning</div>
                 <div>• Blind Spot Detection</div>
               </div>
-              <a href="/ai-arena" className="inline-block px-6 py-3 bg-orange-600 hover:bg-orange-700 rounded-lg font-semibold transition-colors">
+              <a href="/ai-village" className="inline-block px-6 py-3 bg-orange-600 hover:bg-orange-700 rounded-lg font-semibold transition-colors">
                 View Dialogues →
               </a>
             </div>
@@ -168,7 +168,7 @@ export default function LabsPage() {
           </h2>
 
           <div className="grid md:grid-cols-3 gap-6">
-            <a href="/dragon-data" className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-purple-500 transition-all p-6 block">
+            <a href="https://sociable.systems" className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-purple-500 transition-all p-6 block">
               <div className="text-3xl mb-3">🐉</div>
               <h3 className="text-lg font-bold mb-2 text-purple-400">Dragon Data Course</h3>
               <p className="text-gray-400 text-sm">
@@ -184,7 +184,7 @@ export default function LabsPage() {
               </p>
             </a>
 
-            <a href="/ai-augmentation" className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-fuchsia-500 transition-all p-6 block">
+            <a href="https://sociable.systems" className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-fuchsia-500 transition-all p-6 block">
               <div className="text-3xl mb-3">🧠</div>
               <h3 className="text-lg font-bold mb-2 text-fuchsia-400">AI Augmentation</h3>
               <p className="text-gray-400 text-sm">
@@ -277,10 +277,10 @@ export default function LabsPage() {
             All are documented.
           </p>
           <div className="flex justify-center gap-4">
-            <a href="/methods" className="px-8 py-4 border border-purple-500 hover:bg-purple-500/10 rounded-lg font-semibold transition-colors">
+            <a href="https://sociable.systems" className="px-8 py-4 border border-purple-500 hover:bg-purple-500/10 rounded-lg font-semibold transition-colors">
               Our Methods
             </a>
-            <a href="/sociablesystems" className="px-8 py-4 bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700 rounded-lg font-semibold transition-colors">
+            <a href="https://sociable.systems" className="px-8 py-4 bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700 rounded-lg font-semibold transition-colors">
               Read Professional Research
             </a>
           </div>

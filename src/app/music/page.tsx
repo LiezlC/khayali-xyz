@@ -193,7 +193,7 @@ export default function MusicPage() {
                     </a>
                   )}
                   <a
-                    href="/sociablesystems"
+                    href="https://sociable.systems"
                     className={`inline-flex items-center gap-1.5 text-sm ${pl.tagText} hover:text-white font-semibold transition-colors`}
                   >
                     Read the Arc &rarr;
@@ -230,7 +230,7 @@ export default function MusicPage() {
           </div>
           <div className="text-center mt-8">
             <a
-              href="/sociablesystems"
+              href="https://sociable.systems"
               className="inline-block px-6 py-3 bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700 rounded-lg font-semibold transition-colors"
             >
               Explore the Newsletter &rarr;
