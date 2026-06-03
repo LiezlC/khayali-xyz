@@ -21,11 +21,6 @@ export default function ObservatoryPage() {
       description: "Enhanced visualization of cosmic harmonics and resonance"
     },
     {
-      title: "Cosmic Scale Explorer Fixed",
-      file: "cosmic-scale-explorer-fixed.html",
-      description: "Fixed version of the cosmic scale exploration tool"
-    },
-    {
       title: "Enhanced Warp Timeline",
       file: "enhanced-warp-timeline.html",
       description: "Timeline visualization of warp drive development"

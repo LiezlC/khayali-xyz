@@ -5,7 +5,7 @@ import path from 'path';
 import matter from 'gray-matter';
 
 export const metadata = {
-  title: 'Sociology of Synthetic Minds | Video Archive | Sociable Systems',
+  title: 'Sociology of Synthetic Minds | Video Archive | Khayali',
   description: 'Exploring how AIs behave when they interact with each other and us. The AI Village ethnography and emergent digital sociology.',
 };
 

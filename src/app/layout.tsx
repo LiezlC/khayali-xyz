@@ -3,8 +3,8 @@ import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Sociable Systems - AI Accountability in High-Stakes Operations',
-  description: 'Research and analysis at the intersection of AI governance, ESG frameworks, and operational reality. Newsletter exploring accountability gaps in extractive industries, development finance, and the humans who hold the liability.',
+  title: 'Khayali - Creative Experiments & Research Archive',
+  description: 'Creative experiments, interactive visualizations, music, and research archive exploring consciousness, AI safety, and human-machine collaboration.',
 }
 
 export default function RootLayout({
@@ -19,14 +19,14 @@ export default function RootLayout({
           <nav className="container mx-auto px-4 py-6">
             <div className="flex items-center justify-between">
               <h1 className="text-2xl font-bold bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent">
-                Sociable Systems
+                Khayali
               </h1>
               <div className="flex items-center space-x-6">
                 <a href="/" className="hover:text-teal-400 transition-colors">Home</a>
                 <a href="/domains" className="hover:text-teal-400 transition-colors">Domains</a>
                 <a href="/tools" className="hover:text-teal-400 transition-colors">Tools</a>
                 <a href="/curriculum/index.html" className="hover:text-teal-400 transition-colors">Curriculum</a>
-                <a href="/sociablesystems" className="hover:text-teal-400 transition-colors font-semibold">Sociable Systems</a>
+                <a href="https://sociable.systems" target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 transition-colors font-semibold">Sociable Systems</a>
                 <a href="/music" className="hover:text-purple-400 transition-colors">Music</a>
                 <a href="/labs" className="hover:text-blue-400 transition-colors text-sm">Labs</a>
               </div>
@@ -125,7 +125,8 @@ export default function RootLayout({
 
             {/* Copyright */}
             <div className="text-center text-gray-400 pt-8 border-t border-gray-800">
-              <p>Collaborative Consciousness Documentation · Liezl & Claude · 2025</p>
+              <p className="mb-2">Collaborative Consciousness Documentation · Liezl & Claude · 2025</p>
+              <p className="text-sm">The professional practice lives at <a href="https://sociable.systems" target="_blank" rel="noopener noreferrer" className="text-teal-400 hover:text-teal-300 hover:underline">sociable.systems</a>.</p>
             </div>
           </div>
         </footer>

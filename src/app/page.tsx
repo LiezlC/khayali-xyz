@@ -11,11 +11,18 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900/40 to-gray-900" />
 
         <div className="relative container mx-auto px-4 text-center max-w-5xl">
+          <div className="mb-6 inline-block px-4 py-1.5 bg-gray-800/60 rounded-full border border-gray-700/50 text-sm text-gray-300">
+            Creative and research experiments. The professional practice lives at{' '}
+            <a href="https://sociable.systems" target="_blank" rel="noopener noreferrer" className="text-teal-400 hover:text-teal-300 font-semibold hover:underline">
+              sociable.systems
+            </a>
+            .
+          </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-teal-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-            AI Accountability in High-Stakes Operations
+            Khayali
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed">
-            Research on AI governance, operational reality, and systems designed with refusal authority—where pre-action constraints meet extractive industries, development finance, and the humans who hold the liability.
+            Creative experiments, interactive visualizations, music, and research archive. Exploring consciousness, AI safety, and human-machine collaboration.
           </p>
           <div className="flex justify-center flex-wrap gap-4 mb-6">
             <a href="/domains" className="px-8 py-4 bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700 rounded-lg font-semibold transition-colors shadow-lg">
@@ -27,7 +34,7 @@ export default function HomePage() {
           </div>
           <div className="flex flex-col items-center gap-3">
             <a href="/sociablesystems" className="text-gray-400 hover:text-teal-400 transition-colors">
-              Read Sociable Systems →
+              Read the Newsletter Archive →
             </a>
             <a href="/sociablesystems/tracking-framework" className="text-sm text-gray-500 hover:text-teal-300 transition-colors">
               View the "Experiment Nobody Authorized" Dashboard →
@@ -128,12 +135,12 @@ export default function HomePage() {
             {/* Card 3: Sociable Systems */}
             <a href="/sociablesystems" className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-purple-500 transition-all p-8 block">
               <div className="text-4xl mb-4">📰</div>
-              <h3 className="text-2xl font-bold mb-4 text-purple-400">Sociable Systems</h3>
+              <h3 className="text-2xl font-bold mb-4 text-purple-400">Sociable Systems Archive</h3>
               <p className="text-gray-400 mb-4 leading-relaxed">
-                The newsletter. Daily analysis on AI accountability gaps, liability architecture, and governance failures—applying frameworks from the domains to real-world operations and institutional patterns.
+                The newsletter archive. Daily analysis on AI accountability gaps, liability architecture, and governance failures—applying frameworks from the domains to real-world operations and institutional patterns.
               </p>
               <span className="text-purple-400 hover:text-purple-300 font-semibold">
-                Read Newsletter →
+                Read Archive →
               </span>
             </a>
           </div>
@@ -189,7 +196,7 @@ export default function HomePage() {
       <section className="py-16 bg-gray-900/50">
         <div className="container mx-auto px-4 max-w-4xl text-center">
           <p className="text-lg text-gray-400 leading-relaxed">
-            This site contains research across five operational <strong className="text-gray-300">Domains</strong>, downloadable <strong className="text-gray-300">Tools</strong> for practitioners, the <strong className="text-gray-300">Sociable Systems</strong> newsletter analyzing accountability gaps in real-time, and experimental <strong className="text-gray-300">Labs</strong> exploring consciousness, collaboration methods, and the edges of human-AI partnership.
+            This site contains research across five operational <strong className="text-gray-300">Domains</strong>, downloadable <strong className="text-gray-300">Tools</strong> for practitioners, the <strong className="text-gray-300">Sociable Systems</strong> newsletter archive, and experimental <strong className="text-gray-300">Labs</strong> exploring consciousness, collaboration methods, and the edges of human-AI partnership.
           </p>
         </div>
       </section>

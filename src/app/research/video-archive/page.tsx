@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Book, Users, Briefcase, Brain } from 'lucide-react';
 
 export const metadata = {
-  title: 'Video Archive | Accidental AInthropologist | Sociable Systems',
+  title: 'Video Archive | Accidental AInthropologist | Khayali',
   description: 'Thematic exploration of AI accountability, synthetic intelligence sociology, and the future of human-AI collaboration from the Accidental AInthropologist YouTube channel.',
 };
 
