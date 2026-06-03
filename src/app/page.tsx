@@ -4,9 +4,10 @@ export default function HomePage() {
       {/* Hero */}
       <section className="relative py-28 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-purple-900/30 to-gray-900" />
-        <div className="absolute inset-0 opacity-[0.07] bg-cover bg-center"
-          style={{ backgroundImage: 'url(/images/homepage/hero-ai-accountability.webp)' }}
+        <div className="absolute inset-0 opacity-[0.22] bg-cover bg-center"
+          style={{ backgroundImage: 'url(/images/homepage/khayali-dj.png)' }}
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-gray-900/70" />
         <div className="relative container mx-auto px-4 text-center max-w-4xl">
           <p className="text-sm tracking-[0.3em] text-purple-300/70 mb-4">خيالى · OF THE IMAGINATION</p>
           <h1 className="text-7xl md:text-8xl font-bold mb-6 lowercase tracking-tight bg-gradient-to-r from-purple-400 via-pink-400 to-amber-300 bg-clip-text text-transparent">
@@ -41,6 +42,9 @@ export default function HomePage() {
           <p className="text-xl text-gray-300 max-w-3xl mb-10 leading-relaxed">
             The music started as a side passion and quietly took over the place. AI-built tracks with actual arguments in them: tactical ghosts, a digital intelligence loose in Cape Town at 5 a.m., data dragons learning to dance, and the occasional bureaucratic deep-house anthem.
           </p>
+          <a href="/music" className="block mb-10 rounded-2xl overflow-hidden border border-purple-500/30 hover:border-pink-400/60 transition-all shadow-lg shadow-purple-900/20">
+            <img src="/images/homepage/khayali-tunes-banner.png" alt="Khayali Tunes — Melodies of the Machine Mind" className="w-full" />
+          </a>
           <div className="grid md:grid-cols-3 gap-6 mb-10">
             <a href="/music" className="bg-gray-800/50 rounded-xl border border-red-500/30 hover:border-red-400 transition-all p-6 block">
               <div className="text-xs font-semibold text-red-300 mb-2 uppercase tracking-wide">War Arc</div>
