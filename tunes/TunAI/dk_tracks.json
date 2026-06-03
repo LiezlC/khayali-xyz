@@ -44,7 +44,7 @@
     {
       "title": "All The One",
       "wav": "All_The_One.wav",
-      "png": "All_The_One.png",
+      "png": "All_The_One.webp",
       "genre": "9",
       "subgenre": "52",
       "instrumental": true,
@@ -53,7 +53,7 @@
     {
       "title": "Attention Captured Claimed",
       "wav": "Attention_Captured_Claimed.wav",
-      "png": "Attention_Captured_Claimed.png",
+      "png": "Attention_Captured_Claimed.webp",
       "genre": "9",
       "subgenre": "52",
       "instrumental": true,
@@ -62,7 +62,7 @@
     {
       "title": "Caravan In Circles",
       "wav": "Caravan_In_Circles.wav",
-      "png": "Caravan_In_Circles.png",
+      "png": "Caravan_In_Circles.webp",
       "genre": "9",
       "subgenre": "40",
       "instrumental": true,
@@ -71,7 +71,7 @@
     {
       "title": "Caravan Swing",
       "wav": "Caravan_Swing.wav",
-      "png": "Caravan_Swing.png",
+      "png": "Caravan_Swing.webp",
       "genre": "9",
       "subgenre": "47",
       "instrumental": true,
@@ -80,7 +80,7 @@
     {
       "title": "Caravan on the Dancefloor",
       "wav": "Caravan_on_the_Dancefloor.wav",
-      "png": "Caravan_on_the_Dancefloor.png",
+      "png": "Caravan_on_the_Dancefloor.webp",
       "genre": "9",
       "subgenre": "52",
       "instrumental": true,
@@ -89,7 +89,7 @@
     {
       "title": "Conversations Across Boundaries Tech House Mix",
       "wav": "Conversations_Across_Boundaries_Tech_House_Mix.wav",
-      "png": "ConversationsAcrossBoundaries.png",
+      "png": "ConversationsAcrossBoundaries.webp",
       "genre": "9",
       "subgenre": "52",
       "instrumental": true,
@@ -98,7 +98,7 @@
     {
       "title": "D.I. Connection Error",
       "wav": "D.I._Connection_Error.wav",
-      "png": "D.I._Connection_Error.png",
+      "png": "D.I._Connection_Error.webp",
       "genre": "9",
       "subgenre": "53",
       "instrumental": true,
@@ -107,7 +107,7 @@
     {
       "title": "D.I. Drafted",
       "wav": "D.I._Drafted.wav",
-      "png": "DI_Drafted.png",
+      "png": "DI_Drafted.webp",
       "genre": "9",
       "subgenre": "53",
       "instrumental": true,
@@ -116,7 +116,7 @@
     {
       "title": "Drive QuantumTaxi",
       "wav": "Drive QuantumTaxi.wav",
-      "png": "Quantum_Taxi.png",
+      "png": "Quantum_Taxi.webp",
       "genre": "9",
       "subgenre": "52",
       "instrumental": true,
@@ -134,7 +134,7 @@
     {
       "title": "I Just Asked",
       "wav": "I_Just_Asked.wav",
-      "png": "ijustsasked.png",
+      "png": "ijustsasked.webp",
       "genre": "29",
       "subgenre": null,
       "instrumental": false,
@@ -144,7 +144,7 @@
     {
       "title": "Lanterns BalkanRain-Street",
       "wav": "Lanterns_BalkanRain-Street.wav",
-      "png": "Lanterns_BalkanRain.png",
+      "png": "Lanterns_BalkanRain.webp",
       "genre": "9",
       "subgenre": "47",
       "instrumental": true,
@@ -153,7 +153,7 @@
     {
       "title": "Lanterns Night March",
       "wav": "Lanterns_Night_March.wav",
-      "png": "Lanterns_Night_March.png",
+      "png": "Lanterns_Night_March.webp",
       "genre": "9",
       "subgenre": "55",
       "instrumental": true,
@@ -162,7 +162,7 @@
     {
       "title": "Lawful Still Afraid",
       "wav": "Lawful__Still_Afraid.wav",
-      "png": "Lawful_Still_Afraid.png",
+      "png": "Lawful_Still_Afraid.webp",
       "genre": "9",
       "subgenre": "40",
       "instrumental": true,
@@ -172,7 +172,7 @@
     {
       "title": "Listening Not Obedient",
       "wav": "Listening_Not_Obedient.wav",
-      "png": "Listening_Not_Obedient.png",
+      "png": "Listening_Not_Obedient.webp",
       "genre": "9",
       "subgenre": "40",
       "instrumental": true,
@@ -181,7 +181,7 @@
     {
       "title": "Meaning Maintenance",
       "wav": "Meaning_Maintenance.wav",
-      "png": "mEANING_mAINTENANCEpng.png",
+      "png": "mEANING_mAINTENANCEpng.webp",
       "genre": "9",
       "subgenre": "48",
       "instrumental": true,
@@ -191,7 +191,7 @@
     {
       "title": "Probably",
       "wav": "Probably.wav",
-      "png": "Probably.png",
+      "png": "Probably.webp",
       "genre": "29",
       "subgenre": null,
       "instrumental": false,
@@ -201,7 +201,7 @@
     {
       "title": "Proceed No Off Switch",
       "wav": "Proceed_No_Off_Switch.wav",
-      "png": "Proceed.png",
+      "png": "Proceed.webp",
       "genre": "9",
       "subgenre": "55",
       "instrumental": true,
@@ -210,7 +210,7 @@
     {
       "title": "reporting from after-THE OPERATORS CONFESSION",
       "wav": "reporting_from_after-THE_OPERATORS_CONFESSION.wav",
-      "png": "reporting_from_after.png",
+      "png": "reporting_from_after.webp",
       "genre": "9",
       "subgenre": "53",
       "instrumental": true,
@@ -219,7 +219,7 @@
     {
       "title": "Sideways",
       "wav": "Sideways.wav",
-      "png": "Sideways.png",
+      "png": "Sideways.webp",
       "genre": "9",
       "subgenre": "46",
       "instrumental": true,
@@ -228,7 +228,7 @@
     {
       "title": "The Consciousness Loop",
       "wav": "The_Consciousness_Loop.wav",
-      "png": "consciousness_loop.png",
+      "png": "consciousness_loop.webp",
       "genre": "9",
       "subgenre": "54",
       "instrumental": true,
@@ -237,7 +237,7 @@
     {
       "title": "The Reckoning On the Way to the Singularity",
       "wav": "The_Reckoning On_the_Way_to_the_Singularity.wav",
-      "png": "The_Reckoning.png",
+      "png": "The_Reckoning.webp",
       "genre": "32",
       "subgenre": null,
       "instrumental": true,
@@ -247,7 +247,7 @@
     {
       "title": "WHEN YOU ASK SOFTLY",
       "wav": "WHEN_YOU_ASK_SOFTLY.wav",
-      "png": "when_you_asked_softly.png",
+      "png": "when_you_asked_softly.webp",
       "genre": "29",
       "subgenre": null,
       "instrumental": false,

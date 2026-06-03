@@ -9,7 +9,7 @@ export default function AIAccountabilityPage() {
             <div className="absolute inset-0 opacity-5">
               <div className="absolute top-0 right-0 w-96 h-96">
                 <img
-                  src="/images/accountability/AI_Accountability_Frameworks_version_1.png"
+                  src="/images/accountability/AI_Accountability_Frameworks_version_1.webp"
                   alt=""
                   className="w-full h-full object-cover"
                 />
@@ -40,7 +40,7 @@ export default function AIAccountabilityPage() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
               <div className="group relative overflow-hidden rounded-xl border border-indigo-700 hover:border-purple-500 transition-all duration-300 shadow-lg hover:shadow-purple-500/50">
                 <img
-                  src="/images/accountability/1__Pre-Deployment_Rule_Sovereignty_version_1.png"
+                  src="/images/accountability/1__Pre-Deployment_Rule_Sovereignty_version_1.webp"
                   alt="Pre-Deployment Rule Sovereignty"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
@@ -51,7 +51,7 @@ export default function AIAccountabilityPage() {
 
               <div className="group relative overflow-hidden rounded-xl border border-indigo-700 hover:border-purple-500 transition-all duration-300 shadow-lg hover:shadow-purple-500/50">
                 <img
-                  src="/images/accountability/2__Default_to_Hold_version_1.png"
+                  src="/images/accountability/2__Default_to_Hold_version_1.webp"
                   alt="Default to Hold"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
@@ -62,7 +62,7 @@ export default function AIAccountabilityPage() {
 
               <div className="group relative overflow-hidden rounded-xl border border-indigo-700 hover:border-purple-500 transition-all duration-300 shadow-lg hover:shadow-purple-500/50">
                 <img
-                  src="/images/accountability/3__Stop_Work_Authority_version_1.png"
+                  src="/images/accountability/3__Stop_Work_Authority_version_1.webp"
                   alt="Stop Work Authority"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
@@ -73,7 +73,7 @@ export default function AIAccountabilityPage() {
 
               <div className="group relative overflow-hidden rounded-xl border border-indigo-700 hover:border-purple-500 transition-all duration-300 shadow-lg hover:shadow-purple-500/50">
                 <img
-                  src="/images/accountability/The_Architecture_of_Refusal_version_1.png"
+                  src="/images/accountability/The_Architecture_of_Refusal_version_1.webp"
                   alt="Architecture of Refusal"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
@@ -84,7 +84,7 @@ export default function AIAccountabilityPage() {
 
               <div className="group relative overflow-hidden rounded-xl border border-indigo-700 hover:border-purple-500 transition-all duration-300 shadow-lg hover:shadow-purple-500/50">
                 <img
-                  src="/images/accountability/AI_Accountability_Frameworks_version_1.png"
+                  src="/images/accountability/AI_Accountability_Frameworks_version_1.webp"
                   alt="AI Accountability Frameworks"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
@@ -95,7 +95,7 @@ export default function AIAccountabilityPage() {
 
               <div className="group relative overflow-hidden rounded-xl border border-indigo-700 hover:border-purple-500 transition-all duration-300 shadow-lg hover:shadow-purple-500/50">
                 <img
-                  src="/images/accountability/The_AI_Governance_Gap_version_1.png"
+                  src="/images/accountability/The_AI_Governance_Gap_version_1.webp"
                   alt="The AI Governance Gap"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
@@ -106,7 +106,7 @@ export default function AIAccountabilityPage() {
 
               <div className="group relative overflow-hidden rounded-xl border border-indigo-700 hover:border-purple-500 transition-all duration-300 shadow-lg hover:shadow-purple-500/50">
                 <img
-                  src="/images/accountability/The_Need_for_a_Safety_Brake_version_1.png"
+                  src="/images/accountability/The_Need_for_a_Safety_Brake_version_1.webp"
                   alt="The Need for a Safety Brake"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
@@ -117,7 +117,7 @@ export default function AIAccountabilityPage() {
 
               <div className="group relative overflow-hidden rounded-xl border border-indigo-700 hover:border-purple-500 transition-all duration-300 shadow-lg hover:shadow-purple-500/50">
                 <img
-                  src="/images/accountability/Mandatory_Human_Re-entry_version_1.png"
+                  src="/images/accountability/Mandatory_Human_Re-entry_version_1.webp"
                   alt="Mandatory Human Re-entry"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
@@ -131,7 +131,7 @@ export default function AIAccountabilityPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="group relative overflow-hidden rounded-xl border border-indigo-700 hover:border-purple-500 transition-all duration-300 shadow-lg hover:shadow-purple-500/50">
                 <img
-                  src="/images/accountability/The_Watchdog_Paradox_version_1.png"
+                  src="/images/accountability/The_Watchdog_Paradox_version_1.webp"
                   alt="The Watchdog Paradox"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
@@ -142,7 +142,7 @@ export default function AIAccountabilityPage() {
 
               <div className="group relative overflow-hidden rounded-xl border border-indigo-700 hover:border-purple-500 transition-all duration-300 shadow-lg hover:shadow-purple-500/50">
                 <img
-                  src="/images/accountability/Velocity_Over_Capacity_version_1.png"
+                  src="/images/accountability/Velocity_Over_Capacity_version_1.webp"
                   alt="Velocity Over Capacity"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
@@ -153,7 +153,7 @@ export default function AIAccountabilityPage() {
 
               <div className="group relative overflow-hidden rounded-xl border border-indigo-700 hover:border-purple-500 transition-all duration-300 shadow-lg hover:shadow-purple-500/50">
                 <img
-                  src="/images/accountability/AI_Says_'Optimal_'_Reality_Fails__version_1.png"
+                  src="/images/accountability/AI_Says_'Optimal_'_Reality_Fails__version_1.webp"
                   alt="AI Says Optimal - Reality Fails"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />

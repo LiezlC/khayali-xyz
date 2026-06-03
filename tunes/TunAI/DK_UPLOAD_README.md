@@ -67,9 +67,9 @@ C:\Users\Liezl\Music\TunAI\
 ├── DK_UPLOAD_README.md   ← this file
 ├── dkREADY/
 │   ├── All_The_One.wav
-│   ├── All_The_One.png
+│   ├── All_The_One.webp
 │   ├── Sideways.wav
-│   ├── Sideways.png
+│   ├── Sideways.webp
 │   └── ...
 └── .dk_browser_profile/  ← created automatically, stores login session
 ```
