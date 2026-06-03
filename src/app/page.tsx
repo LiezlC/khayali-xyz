@@ -111,6 +111,11 @@ export default function HomePage() {
               <h3 className="text-xl font-bold mb-2 text-indigo-400">Soulspaces</h3>
               <p className="text-gray-400 text-sm leading-relaxed">Quieter protocols and consciousness documentation. The contemplative corner.</p>
             </a>
+            <a href="/playspace" className="group p-7 bg-gray-800/40 rounded-xl border border-amber-500/40 hover:border-amber-400 transition-all block">
+              <div className="text-3xl mb-3">🎮</div>
+              <h3 className="text-xl font-bold mb-2 text-amber-300">Playspace</h3>
+              <p className="text-gray-400 text-sm leading-relaxed">The arcade wing: arc-companion simulators, mindfulness soundscapes, farming sims, and visual-art studios. Dozens of interactive toys to actually play with.</p>
+            </a>
           </div>
           <div className="mt-10">
             <a href="/labs" className="inline-block px-8 py-4 border border-gray-600 hover:border-gray-500 hover:bg-gray-800/30 rounded-lg font-semibold transition-colors text-gray-300">

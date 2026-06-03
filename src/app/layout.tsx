@@ -23,6 +23,7 @@ export default function RootLayout({
               </a>
               <div className="flex items-center space-x-6">
                 <a href="/music" className="hover:text-pink-400 transition-colors font-semibold">Tunes</a>
+                <a href="/playspace" className="hover:text-amber-300 transition-colors font-semibold">Playspace</a>
                 <a href="/writings" className="hover:text-purple-400 transition-colors">Writings</a>
                 <a href="/observatory" className="hover:text-blue-400 transition-colors">Observatory</a>
                 <a href="/labs" className="hover:text-amber-300 transition-colors">Labs</a>
