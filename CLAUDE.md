@@ -4,14 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**Sociable Systems** (khayali.xyz) is a Next.js TypeScript website focused on AI accountability in high-stakes operations. The site features the **Sociable Systems newsletter**, applied research on ESG/AI governance, grievance mechanisms, and development rights, plus experimental research labs exploring human-AI collaboration methods.
+**khayali** (khayali.xyz) is a Next.js TypeScript site: the creative, bohemian home of Liezl Coetzee's work. *Khayali* means "of the imagination." It centres on **Khayali Tunes** (AI-built music, each arc carrying its own argument), collaborative writing, long consciousness dialogues with the machines, and interactive visual experiments. The arty side of the multivariate.
 
-**Primary Audience**: ESG specialists, social safeguards experts, resettlement practitioners, M&E professionals, AI governance researchers, and development finance professionals (677+ newsletter subscribers).
+The professional AI-governance practice (the **Sociable Systems** newsletter, ESG and accountability research) grew up here and then moved to its own home at **sociable.systems** (a separate repo). khayali links out to it but no longer hosts it. Remaining SS residue here is being removed; see `.claude/SS-RESIDUE-CLEANUP-PLAN.md` and `.claude/KHAYALI-RECLAIM-STATUS.md`.
 
-**Content Hierarchy**:
-1. **Primary**: Sociable Systems newsletter, ESG research, grievance systems, AI accountability
-2. **Secondary**: Research methodology, experimental labs (Observatory, Protocol Archive, AI Arena)
-3. **Supporting**: Creative works, consciousness exploration, collaborative experiments
+**Content focus**:
+1. **Primary**: Khayali Tunes / music (`/music`, `tunes/`) — the rising centre.
+2. **Creative**: writings, creative works, world workshop, soulspaces.
+3. **Consciousness play**: chats and dialogues, the Observatory's visualisations, experimental labs.
 
 ## Development Commands
 

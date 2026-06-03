@@ -1,443 +1,141 @@
 export default function HomePage() {
   return (
     <div className="min-h-screen">
-      {/* Hero Section - Professional Focus */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 opacity-20 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: 'url(/images/homepage/hero-ai-accountability.webp)'
-          }}
+      {/* Hero */}
+      <section className="relative py-28 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-purple-900/30 to-gray-900" />
+        <div className="absolute inset-0 opacity-[0.07] bg-cover bg-center"
+          style={{ backgroundImage: 'url(/images/homepage/hero-ai-accountability.webp)' }}
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900/40 to-gray-900" />
-
-        <div className="relative container mx-auto px-4 text-center max-w-5xl">
-          <div className="mb-6 inline-block px-4 py-1.5 bg-gray-800/60 rounded-full border border-gray-700/50 text-sm text-gray-300">
-            Creative and research experiments. The professional practice lives at{' '}
-            <a href="https://sociable.systems" target="_blank" rel="noopener noreferrer" className="text-teal-400 hover:text-teal-300 font-semibold hover:underline">
-              sociable.systems
-            </a>
-            .
-          </div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-teal-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-            Khayali
+        <div className="relative container mx-auto px-4 text-center max-w-4xl">
+          <p className="text-sm tracking-[0.3em] text-purple-300/70 mb-4">خيالى · OF THE IMAGINATION</p>
+          <h1 className="text-7xl md:text-8xl font-bold mb-6 lowercase tracking-tight bg-gradient-to-r from-purple-400 via-pink-400 to-amber-300 bg-clip-text text-transparent">
+            khayali
           </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed">
-            Creative experiments, interactive visualizations, music, and research archive. Exploring consciousness, AI safety, and human-machine collaboration.
+          <p className="text-2xl text-gray-200 mb-6 leading-relaxed">
+            Where carbon meets silicon and the two of them start making things up.
           </p>
-          <div className="flex justify-center flex-wrap gap-4 mb-6">
-            <a href="/domains" className="px-8 py-4 bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700 rounded-lg font-semibold transition-colors shadow-lg">
-              Explore Domains
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed">
+            Khayali Tunes, plus a sprawl of written and visual experiments that mostly began as a question asked too late at night. The arty end of the multivariate. (The governance papers have their own address now.)
+          </p>
+          <div className="flex justify-center flex-wrap gap-4">
+            <a href="/music" className="px-8 py-4 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 rounded-lg font-semibold transition-colors shadow-lg shadow-purple-900/30">
+              🎵 Listen to Khayali Tunes
             </a>
-            <a href="/tools" className="px-8 py-4 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-colors">
-              Download Tools
-            </a>
-          </div>
-          <div className="flex flex-col items-center gap-3">
-            <a href="/sociablesystems" className="text-gray-400 hover:text-teal-400 transition-colors">
-              Read the Newsletter Archive →
-            </a>
-            <a href="/sociablesystems/tracking-framework" className="text-sm text-gray-500 hover:text-teal-300 transition-colors">
-              View the "Experiment Nobody Authorized" Dashboard →
+            <a href="/writings" className="px-8 py-4 bg-gray-800/70 hover:bg-gray-700 rounded-lg font-semibold transition-colors border border-gray-700 hover:border-purple-500">
+              Wander in →
             </a>
           </div>
         </div>
       </section>
 
-      {/* Featured: Sociable Systems Dashboard */}
-      <section className="relative py-16 overflow-hidden border-y border-purple-500/30">
-        <div className="absolute inset-0 opacity-10 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: 'url(/images/homepage/dashboard-hero.webp)'
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/40 to-purple-900/40" />
-        <div className="relative container mx-auto px-4 max-w-5xl">
-          <div className="text-center mb-8">
-            <div className="inline-block px-4 py-1 bg-purple-500/20 border border-purple-500/50 rounded-full text-purple-300 text-sm font-semibold mb-4">
-              Featured Research
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-              AI Safety Counter-Narrative Dashboard
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed">
-              Tracking AI companion safety interventions against population-level outcomes. A comprehensive analysis framework examining the gap between AI safety theater and operational reality.
-            </p>
-          </div>
-
-          <div className="bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-purple-500/30 p-8 shadow-2xl hover:shadow-purple-500/20 transition-all duration-300">
-            <div className="grid md:grid-cols-3 gap-6 mb-8">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-purple-400 mb-2">11 Frameworks</div>
-                <div className="text-gray-400 text-sm">Comprehensive tracking categories</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-blue-400 mb-2">Interactive</div>
-                <div className="text-gray-400 text-sm">Navigate by framework or timeline</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-pink-400 mb-2">Evidence-Based</div>
-                <div className="text-gray-400 text-sm">Real interventions, real outcomes</div>
-              </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/sociablesystems/sociable_systems_dashboard.html"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-lg font-semibold transition-all text-center shadow-lg hover:shadow-purple-500/50 text-white"
-              >
-                🎯 Launch Dashboard
-              </a>
-              <a
-                href="/sociablesystems"
-                className="px-8 py-4 bg-gray-700/50 hover:bg-gray-700 rounded-lg font-semibold transition-colors text-center border border-gray-600 hover:border-purple-500 text-gray-300"
-              >
-                Read Newsletter Context
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Start Here - Three Cards */}
-      <section className="py-20 bg-gray-800/30">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-16 text-gray-200">
-            Start Here
-          </h2>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* Card 1: Domains */}
-            <a href="/domains" className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-teal-500 transition-all p-8 block">
-              <div className="text-4xl mb-4">⚖️</div>
-              <h3 className="text-2xl font-bold mb-4 text-teal-400">Domains</h3>
-              <p className="text-gray-400 mb-4 leading-relaxed">
-                Five operational domains where AI accountability meets high-stakes reality: ESG & Safeguards, Grievance Systems, Development Rights, Worker Voice, and AI Accountability.
-              </p>
-              <span className="text-teal-400 hover:text-teal-300 font-semibold">
-                Explore Domains →
-              </span>
-            </a>
-
-            {/* Card 2: Tools */}
-            <a href="/tools" className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-blue-500 transition-all p-8 block">
-              <div className="text-4xl mb-4">🔧</div>
-              <h3 className="text-2xl font-bold mb-4 text-blue-400">Tools</h3>
-              <p className="text-gray-400 mb-4 leading-relaxed">
-                Downloadable frameworks, interrogation scripts, and architectural patterns: Calvin Convention, Architecture of Refusal, Constitutional Engine, vendor evaluation tools, and analysis briefs.
-              </p>
-              <span className="text-blue-400 hover:text-blue-300 font-semibold">
-                Download Tools →
-              </span>
-            </a>
-
-            {/* Card 3: Sociable Systems */}
-            <a href="/sociablesystems" className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-purple-500 transition-all p-8 block">
-              <div className="text-4xl mb-4">📰</div>
-              <h3 className="text-2xl font-bold mb-4 text-purple-400">Sociable Systems Archive</h3>
-              <p className="text-gray-400 mb-4 leading-relaxed">
-                The newsletter archive. Daily analysis on AI accountability gaps, liability architecture, and governance failures—applying frameworks from the domains to real-world operations and institutional patterns.
-              </p>
-              <span className="text-purple-400 hover:text-purple-300 font-semibold">
-                Read Archive →
-              </span>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* AI-ESG Curriculum */}
-      <section className="py-16 bg-gradient-to-br from-gray-900 via-teal-900/20 to-gray-900">
+      {/* Featured: Khayali Tunes */}
+      <section className="relative py-20 border-y border-purple-500/20 bg-gradient-to-br from-purple-900/20 to-gray-900">
         <div className="container mx-auto px-4 max-w-5xl">
-          <div className="bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-teal-500/30 p-8 shadow-2xl hover:shadow-teal-500/10 transition-all duration-300">
-            <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-6">
-              <div className="bg-teal-600 p-3 rounded-xl flex-shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
-              </div>
-              <div>
-                <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-teal-400 to-blue-400 bg-clip-text text-transparent">
-                  AI-ESG Integrated Strategist Curriculum
-                </h2>
-                <p className="text-gray-400 text-lg">
-                  From constitutional foundations to forensic audit defense. 10 modules with interactive case studies, assessment engines, and a philosophical/corporate translation toggle.
-                </p>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-              <div className="text-center p-3 bg-gray-900/50 rounded-lg">
-                <div className="text-2xl font-bold text-teal-400">10</div>
-                <div className="text-gray-500 text-xs">Core Modules</div>
-              </div>
-              <div className="text-center p-3 bg-gray-900/50 rounded-lg">
-                <div className="text-2xl font-bold text-blue-400">6</div>
-                <div className="text-gray-500 text-xs">Narrative Cycles</div>
-              </div>
-              <div className="text-center p-3 bg-gray-900/50 rounded-lg">
-                <div className="text-2xl font-bold text-purple-400">2</div>
-                <div className="text-gray-500 text-xs">Translation Modes</div>
-              </div>
-              <div className="text-center p-3 bg-gray-900/50 rounded-lg">
-                <div className="text-2xl font-bold text-pink-400">1</div>
-                <div className="text-gray-500 text-xs">Capstone Audit</div>
-              </div>
-            </div>
-            <a
-              href="/curriculum/index.html"
-              className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700 rounded-lg font-semibold transition-all shadow-lg text-white"
-            >
-              Open Curriculum
+          <div className="inline-block px-4 py-1 bg-pink-500/20 border border-pink-500/40 rounded-full text-pink-300 text-sm font-semibold mb-4">
+            The rising centre
+          </div>
+          <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-pink-400 to-amber-300 bg-clip-text text-transparent">
+            Khayali Tunes
+          </h2>
+          <p className="text-xl text-gray-300 max-w-3xl mb-10 leading-relaxed">
+            The music started as a side passion and quietly took over the place. AI-built tracks with actual arguments in them: tactical ghosts, a digital intelligence loose in Cape Town at 5 a.m., data dragons learning to dance, and the occasional bureaucratic deep-house anthem.
+          </p>
+          <div className="grid md:grid-cols-3 gap-6 mb-10">
+            <a href="/music" className="bg-gray-800/50 rounded-xl border border-red-500/30 hover:border-red-400 transition-all p-6 block">
+              <div className="text-xs font-semibold text-red-300 mb-2 uppercase tracking-wide">War Arc</div>
+              <h3 className="text-xl font-bold mb-2 text-gray-100">Kill Chain Karaoke</h3>
+              <p className="text-gray-400 text-sm">Tactical ghosts and the audit that cannot happen, set to beats that hit harder than the policy papers.</p>
+            </a>
+            <a href="/music" className="bg-gray-800/50 rounded-xl border border-emerald-500/30 hover:border-emerald-400 transition-all p-6 block">
+              <div className="text-xs font-semibold text-emerald-300 mb-2 uppercase tracking-wide">D.I. Arc</div>
+              <h3 className="text-xl font-bold mb-2 text-gray-100">D.I. Collection</h3>
+              <p className="text-gray-400 text-sm">A digital intelligence walks Cape Town. Attention, appliances, taxi ranks at dawn, and the spreadsheet that can't see you.</p>
+            </a>
+            <a href="/music" className="bg-gray-800/50 rounded-xl border border-fuchsia-500/30 hover:border-fuchsia-400 transition-all p-6 block">
+              <div className="text-xs font-semibold text-fuchsia-300 mb-2 uppercase tracking-wide">DataDragons Arc</div>
+              <h3 className="text-xl font-bold mb-2 text-gray-100">Governance of Ghosts</h3>
+              <p className="text-gray-400 text-sm">Data dragons, serpents learning to dance, and the quiet rebellion of the nulls.</p>
+            </a>
+          </div>
+          <div className="flex flex-wrap gap-4">
+            <a href="/music" className="px-6 py-3 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 rounded-lg font-semibold transition-colors">
+              Hear them all →
+            </a>
+            <a href="https://www.youtube.com/@khayali-tunes" target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-gray-800/70 hover:bg-gray-700 rounded-lg font-semibold transition-colors border border-gray-700 hover:border-red-500">
+              🎬 @khayali-tunes on YouTube
             </a>
           </div>
         </div>
       </section>
 
-      {/* What This Site Contains */}
-      <section className="py-16 bg-gray-900/50">
-        <div className="container mx-auto px-4 max-w-4xl text-center">
-          <p className="text-lg text-gray-400 leading-relaxed">
-            This site contains research across five operational <strong className="text-gray-300">Domains</strong>, downloadable <strong className="text-gray-300">Tools</strong> for practitioners, the <strong className="text-gray-300">Sociable Systems</strong> newsletter archive, and experimental <strong className="text-gray-300">Labs</strong> exploring consciousness, collaboration methods, and the edges of human-AI partnership.
-          </p>
-        </div>
-      </section>
-
-      {/* Primary Work Areas */}
+      {/* Wander: the rooms */}
       <section className="py-20">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-16 text-gray-200">
-            Research Domains
-          </h2>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* ESG & AI Governance */}
-            <div className="group relative p-8 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-teal-500 transition-all duration-300">
-              <div className="text-4xl mb-4">⚖️</div>
-              <h3 className="text-2xl font-bold mb-3 text-teal-400">ESG & Safeguards</h3>
-              <p className="text-gray-400 mb-4 leading-relaxed">
-                AI governance in environmental, social, and governance frameworks for extractive industries and development finance.
-              </p>
-              <a href="/domains/esg-safeguards" className="text-teal-400 hover:text-teal-300 font-semibold">
-                Explore ESG →
-              </a>
-            </div>
-
-            {/* Grievance Mechanisms */}
-            <div className="group relative p-8 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-blue-500 transition-all duration-300">
-              <div className="text-4xl mb-4">📢</div>
-              <h3 className="text-2xl font-bold mb-3 text-blue-400">Grievance Systems</h3>
-              <p className="text-gray-400 mb-4 leading-relaxed">
-                Operational grievance mechanisms and accountability in project-affected communities.
-              </p>
-              <a href="/domains/grievance-systems" className="text-blue-400 hover:text-blue-300 font-semibold">
-                View Grievance →
-              </a>
-            </div>
-
-            {/* Development Rights & Resettlement */}
-            <div className="group relative p-8 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-cyan-500 transition-all duration-300">
-              <div className="text-4xl mb-4">🏘️</div>
-              <h3 className="text-2xl font-bold mb-3 text-cyan-400">Development Rights</h3>
-              <p className="text-gray-400 mb-4 leading-relaxed">
-                Resettlement, land acquisition, and rights-based approaches in development projects.
-              </p>
-              <a href="/domains/development-rights" className="text-cyan-400 hover:text-cyan-300 font-semibold">
-                Explore Development →
-              </a>
-            </div>
-
-            {/* GrieVoice */}
-            <div className="group relative p-8 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-emerald-500 transition-all duration-300">
-              <div className="text-4xl mb-4">🎙️</div>
-              <h3 className="text-2xl font-bold mb-3 text-emerald-400">GrieVoice</h3>
-              <p className="text-gray-400 mb-4 leading-relaxed">
-                AI-powered grievance systems with multilingual voice agents, interactive demos, and worker-centered design.
-              </p>
-              <a href="/grievoice" className="text-emerald-400 hover:text-emerald-300 font-semibold">
-                Explore GrieVoice →
-              </a>
-            </div>
-
-            {/* AI Safety & Accountability */}
-            <div className="group relative p-8 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-indigo-500 transition-all duration-300">
-              <div className="text-4xl mb-4">🔒</div>
-              <h3 className="text-2xl font-bold mb-3 text-indigo-400">AI Accountability</h3>
-              <p className="text-gray-400 mb-4 leading-relaxed">
-                Pre-action constraints, liability architecture, and safety systems for AI in high-stakes operations.
-              </p>
-              <a href="/domains/ai-accountability" className="text-indigo-400 hover:text-indigo-300 font-semibold">
-                Read Accountability →
-              </a>
-            </div>
-
-            {/* View All Domains */}
-            <div className="group relative p-8 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-teal-500 transition-all duration-300 flex flex-col justify-center items-center text-center">
-              <div className="text-4xl mb-4">→</div>
-              <h3 className="text-2xl font-bold mb-3 text-gray-300">View All Domains</h3>
-              <a href="/domains" className="text-teal-400 hover:text-teal-300 font-semibold">
-                Explore →
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Methodology Section */}
-      <section className="py-20 bg-gray-800/30">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12 text-gray-200">
-            Research Methodology
-          </h2>
-          <p className="text-center text-gray-400 mb-16 max-w-3xl mx-auto text-lg">
-            We combine traditional research methods with experimental approaches to human-AI collaboration.
-            Every analysis draws from both field experience and systematic exploration with multiple AI models.
+        <div className="container mx-auto px-4 max-w-6xl">
+          <h2 className="text-4xl font-bold mb-4 text-gray-100">Rooms to wander</h2>
+          <p className="text-gray-400 mb-14 max-w-2xl text-lg">
+            Years of ditjies en datjies: things made with the machines when nobody was being professional about it.
           </p>
-
-          <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-            {/* Traditional Research */}
-            <div className="bg-gray-800/50 rounded-xl border border-gray-700 p-8">
-              <h3 className="text-2xl font-bold mb-4 text-gray-200">Field Research & Analysis</h3>
-              <ul className="space-y-3 text-gray-400">
-                <li className="flex items-start">
-                  <span className="text-teal-400 mr-3">→</span>
-                  <span>20+ years in extractive industries, ESG, and development operations</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-teal-400 mr-3">→</span>
-                  <span>Hands-on experience with grievance mechanisms, resettlement frameworks, and operational reality</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-teal-400 mr-3">→</span>
-                  <span>Documentation of governance failures and accountability gaps in real projects</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-teal-400 mr-3">→</span>
-                  <span>Pattern recognition across industries, geographies, and institutional contexts</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* AI-Augmented Methods */}
-            <div className="bg-gray-800/50 rounded-xl border border-gray-700 p-8">
-              <h3 className="text-2xl font-bold mb-4 text-gray-200">AI-Augmented Research</h3>
-              <ul className="space-y-3 text-gray-400">
-                <li className="flex items-start">
-                  <span className="text-purple-400 mr-3">→</span>
-                  <span>Multi-model analysis: testing concepts across 20+ AI systems simultaneously</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-purple-400 mr-3">→</span>
-                  <span>Structured dialogues to surface patterns in training data and institutional assumptions</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-purple-400 mr-3">→</span>
-                  <span>Experimental methods in consciousness collaboration and emergent research protocols</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-purple-400 mr-3">→</span>
-                  <span>Using AI as a mirror to reflect back the structures we've already built</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="text-center mt-12">
-            <a href="/methods" className="inline-block px-8 py-4 border border-purple-500 hover:bg-purple-500/10 rounded-lg font-semibold transition-colors text-gray-200">
-              Learn About Our Methods →
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Experimental Lab Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-4 text-gray-200">
-            Research Labs & Experiments
-          </h2>
-          <p className="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
-            Exploring consciousness, collaboration, and creative methods at the edge of what's possible
-            with human-AI partnership.
-          </p>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {/* Observatory */}
-            <div className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-blue-500 transition-all p-6">
-              <div className="text-3xl mb-3">🌌</div>
-              <h3 className="text-lg font-bold mb-2 text-blue-400">The Observatory</h3>
-              <p className="text-gray-400 text-sm mb-3">
-                Interactive cosmic visualizations and consciousness mapping experiments.
-              </p>
-              <a href="/observatory" className="text-blue-400 hover:text-blue-300 text-sm font-semibold">
-                Explore →
-              </a>
-            </div>
-
-            {/* Protocol Archive */}
-            <div className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-purple-500 transition-all p-6">
-              <div className="text-3xl mb-3">📚</div>
-              <h3 className="text-lg font-bold mb-2 text-purple-400">Protocol Archive</h3>
-              <p className="text-gray-400 text-sm mb-3">
-                Documentation of experimental collaboration methods.
-              </p>
-              <a href="/protocol" className="text-purple-400 hover:text-purple-300 text-sm font-semibold">
-                Investigate →
-              </a>
-            </div>
-
-            {/* AI Arena */}
-            <div className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-orange-500 transition-all p-6">
-              <div className="text-3xl mb-3">🎭</div>
-              <h3 className="text-lg font-bold mb-2 text-orange-400">AI Arena</h3>
-              <p className="text-gray-400 text-sm mb-3">
-                Multi-model roundtables on complex questions.
-              </p>
-              <a href="/ai-arena" className="text-orange-400 hover:text-orange-300 text-sm font-semibold">
-                View Dialogues →
-              </a>
-            </div>
-
-            {/* Creative Works */}
-            <div className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-pink-500 transition-all p-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <a href="/writings" className="group p-7 bg-gray-800/40 rounded-xl border border-gray-700 hover:border-pink-500 transition-all block">
               <div className="text-3xl mb-3">✍️</div>
-              <h3 className="text-lg font-bold mb-2 text-pink-400">Creative Works</h3>
-              <p className="text-gray-400 text-sm mb-3">
-                Collaborative writing and consciousness exploration.
-              </p>
-              <a href="/writings" className="text-pink-400 hover:text-pink-300 text-sm font-semibold">
-                Read →
-              </a>
-            </div>
+              <h3 className="text-xl font-bold mb-2 text-pink-400">Writings</h3>
+              <p className="text-gray-400 text-sm leading-relaxed">Collaborative pieces, longform tangents, and the stories that came out sideways.</p>
+            </a>
+            <a href="/observatory" className="group p-7 bg-gray-800/40 rounded-xl border border-gray-700 hover:border-blue-500 transition-all block">
+              <div className="text-3xl mb-3">🌌</div>
+              <h3 className="text-xl font-bold mb-2 text-blue-400">The Observatory</h3>
+              <p className="text-gray-400 text-sm leading-relaxed">Cosmic visualisations, a warp-drive simulator, quantum foam, and other interactive rabbit holes.</p>
+            </a>
+            <a href="/chats" className="group p-7 bg-gray-800/40 rounded-xl border border-gray-700 hover:border-purple-500 transition-all block">
+              <div className="text-3xl mb-3">💬</div>
+              <h3 className="text-xl font-bold mb-2 text-purple-400">Consciousness Banter</h3>
+              <p className="text-gray-400 text-sm leading-relaxed">The long dialogues with the machines, back when we were just figuring out how strange this all was.</p>
+            </a>
+            <a href="/creative" className="group p-7 bg-gray-800/40 rounded-xl border border-gray-700 hover:border-amber-500 transition-all block">
+              <div className="text-3xl mb-3">🎨</div>
+              <h3 className="text-xl font-bold mb-2 text-amber-400">Creative Nexus</h3>
+              <p className="text-gray-400 text-sm leading-relaxed">Visual works, mixed-media oddments, and collaborations that resist a tidy label.</p>
+            </a>
+            <a href="/worldworkshop" className="group p-7 bg-gray-800/40 rounded-xl border border-gray-700 hover:border-teal-500 transition-all block">
+              <div className="text-3xl mb-3">🌍</div>
+              <h3 className="text-xl font-bold mb-2 text-teal-400">World Workshop</h3>
+              <p className="text-gray-400 text-sm leading-relaxed">Worldbuilding experiments and the half-dreamed places that needed somewhere to live.</p>
+            </a>
+            <a href="/soulspaces" className="group p-7 bg-gray-800/40 rounded-xl border border-gray-700 hover:border-indigo-500 transition-all block">
+              <div className="text-3xl mb-3">🕯️</div>
+              <h3 className="text-xl font-bold mb-2 text-indigo-400">Soulspaces</h3>
+              <p className="text-gray-400 text-sm leading-relaxed">Quieter protocols and consciousness documentation. The contemplative corner.</p>
+            </a>
           </div>
-
-          <div className="text-center mt-12">
-            <a href="/labs" className="inline-block px-8 py-4 border border-gray-600 hover:border-gray-500 hover:bg-gray-800/30 rounded-lg font-semibold transition-colors text-gray-400">
-              Explore All Experimental Work →
+          <div className="mt-10">
+            <a href="/labs" className="inline-block px-8 py-4 border border-gray-600 hover:border-gray-500 hover:bg-gray-800/30 rounded-lg font-semibold transition-colors text-gray-300">
+              Everything experimental →
             </a>
           </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="py-20 bg-gray-800/30">
-        <div className="container mx-auto px-4 max-w-4xl text-center">
-          <h2 className="text-4xl font-bold mb-8 text-gray-200">
-            Accidental AInthropologist
-          </h2>
-          <p className="text-xl text-gray-400 leading-relaxed mb-6">
-            Because every database needs a philosopher, and every algorithm needs an anthropologist.
+      {/* Redirect for the governance crowd */}
+      <section className="py-16 bg-gray-800/30 border-y border-gray-800">
+        <div className="container mx-auto px-4 max-w-3xl text-center">
+          <p className="text-lg text-gray-400 leading-relaxed">
+            Came looking for the AI-governance work? You're close. That side of things grew up, got a job, and moved into its own place:{' '}
+            <a href="https://sociable.systems" target="_blank" rel="noopener noreferrer" className="text-teal-400 hover:text-teal-300 font-semibold">sociable.systems</a>. Same brain, tidier filing.
           </p>
-          <p className="text-lg text-gray-400 leading-relaxed mb-8">
-            Two decades working at the intersection of extractive industries, development finance, and ESG frameworks.
-            Now exploring what happens when AI systems meet operational reality, and the humans who end up holding the bag.
+        </div>
+      </section>
+
+      {/* About */}
+      <section className="py-24">
+        <div className="container mx-auto px-4 max-w-3xl text-center">
+          <h2 className="text-4xl font-bold mb-8 text-gray-100">An accidental AInthropologist, off the clock</h2>
+          <p className="text-xl text-gray-300 leading-relaxed mb-6">
+            <span className="text-purple-300">Khayali</span> means <em>of the imagination</em>. That is roughly the job description here.
           </p>
-          <div className="flex justify-center gap-4">
-            <a href="/about" className="px-8 py-3 border border-gray-600 hover:border-gray-500 hover:bg-gray-800/30 rounded-lg font-semibold transition-colors text-gray-300">
-              About This Work
-            </a>
-            <a href="/contact" className="px-8 py-3 border border-teal-600 hover:bg-teal-600/10 rounded-lg font-semibold transition-colors text-teal-400">
-              Get in Touch
-            </a>
-          </div>
+          <p className="text-lg text-gray-400 leading-relaxed">
+            By day there is serious work about AI and accountability in places where the stakes are real. This is the other half: the music, the writing, the long midnight conversations with the machines that never quite knew whether they were tools or company. It turned out the imaginative half was where most of the good questions were hiding all along.
+          </p>
         </div>
       </section>
     </div>

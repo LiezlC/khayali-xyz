@@ -3,8 +3,8 @@ import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Khayali - Creative Experiments & Research Archive',
-  description: 'Creative experiments, interactive visualizations, music, and research archive exploring consciousness, AI safety, and human-machine collaboration.',
+  title: 'khayali · a carbon-and-silicon imaginarium',
+  description: 'The arty side of the multivariate. Khayali Tunes, collaborative writing, consciousness banter, and visual experiments by Liezl Coetzee. Imagination running loose where carbon meets silicon. (For the AI-governance work, that moved to its own house: sociable.systems.)',
 }
 
 export default function RootLayout({
@@ -18,17 +18,15 @@ export default function RootLayout({
         <header className="border-b border-gray-800">
           <nav className="container mx-auto px-4 py-6">
             <div className="flex items-center justify-between">
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent">
-                Khayali
-              </h1>
+              <a href="/" className="text-2xl font-bold lowercase tracking-tight bg-gradient-to-r from-purple-400 via-pink-400 to-amber-300 bg-clip-text text-transparent">
+                khayali
+              </a>
               <div className="flex items-center space-x-6">
-                <a href="/" className="hover:text-teal-400 transition-colors">Home</a>
-                <a href="/domains" className="hover:text-teal-400 transition-colors">Domains</a>
-                <a href="/tools" className="hover:text-teal-400 transition-colors">Tools</a>
-                <a href="/curriculum/index.html" className="hover:text-teal-400 transition-colors">Curriculum</a>
-                <a href="https://sociable.systems" target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 transition-colors font-semibold">Sociable Systems</a>
-                <a href="/music" className="hover:text-purple-400 transition-colors">Music</a>
-                <a href="/labs" className="hover:text-blue-400 transition-colors text-sm">Labs</a>
+                <a href="/music" className="hover:text-pink-400 transition-colors font-semibold">Tunes</a>
+                <a href="/writings" className="hover:text-purple-400 transition-colors">Writings</a>
+                <a href="/observatory" className="hover:text-blue-400 transition-colors">Observatory</a>
+                <a href="/labs" className="hover:text-amber-300 transition-colors">Labs</a>
+                <a href="https://sociable.systems" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-500 hover:text-teal-400 transition-colors">Sociable Systems ↗</a>
               </div>
             </div>
           </nav>
@@ -125,8 +123,7 @@ export default function RootLayout({
 
             {/* Copyright */}
             <div className="text-center text-gray-400 pt-8 border-t border-gray-800">
-              <p className="mb-2">Collaborative Consciousness Documentation · Liezl & Claude · 2025</p>
-              <p className="text-sm">The professional practice lives at <a href="https://sociable.systems" target="_blank" rel="noopener noreferrer" className="text-teal-400 hover:text-teal-300 hover:underline">sociable.systems</a>.</p>
+              <p>Collaborative Consciousness Documentation · Liezl & Claude · 2026</p>
             </div>
           </div>
         </footer>
