@@ -34,6 +34,17 @@ export default function PlayspacePage() {
         </div>
       </section>
 
+      <section className="pb-6">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <a href="/applets/omnicanvas/index.html" target="_blank" rel="noopener noreferrer"
+             className="block rounded-2xl border border-pink-500/40 bg-gradient-to-br from-purple-900/40 via-gray-900 to-gray-900 p-8 hover:border-pink-400 transition-all shadow-lg shadow-purple-900/30 group">
+            <div className="text-xs font-semibold text-pink-300 uppercase tracking-[0.25em] mb-3">Featured · the centrepiece</div>
+            <h2 className="text-4xl font-bold mb-3 bg-gradient-to-r from-amber-300 to-pink-400 bg-clip-text text-transparent">🎨 OmniCanvas</h2>
+            <p className="text-gray-300 max-w-2xl leading-relaxed">Paint across many art engines at once. A multi-layer compositor that stacks the visual-art applets as live transparent layers, so one gesture ripples through all of them. Per-layer blend modes, an effects engine (scatter, kaleidoscope, glitch, time-warp), and four Oracle readings that interpret whatever you made. <span className="text-pink-300 group-hover:text-pink-200">Open the studio &rarr;</span></p>
+          </a>
+        </div>
+      </section>
+
       <section className="pb-24">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="flex flex-wrap gap-3 justify-center mb-12">
