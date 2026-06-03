@@ -68,6 +68,16 @@ export default function PlayspacePage() {
               </a>
             ))}
           </div>
+
+          <div className="mt-16 pt-10 border-t border-gray-800 text-center">
+            <p className="text-gray-400 mb-5">Chasing the cosmos, or wandered out of the arcade? It is all close by.</p>
+            <div className="flex flex-wrap gap-3 justify-center">
+              <a href="/observatory" className="px-5 py-2.5 rounded-full text-sm font-semibold bg-gray-800/50 border border-gray-700 hover:border-blue-400 text-gray-200 transition-all">🔭 Observatory · cosmic &amp; warp-drive pieces</a>
+              <a href="/music" className="px-5 py-2.5 rounded-full text-sm font-semibold bg-gray-800/50 border border-gray-700 hover:border-pink-400 text-gray-200 transition-all">🎵 Khayali Tunes</a>
+              <a href="/writings" className="px-5 py-2.5 rounded-full text-sm font-semibold bg-gray-800/50 border border-gray-700 hover:border-purple-400 text-gray-200 transition-all">✍️ Writings</a>
+              <a href="/" className="px-5 py-2.5 rounded-full text-sm font-semibold bg-gray-800/50 border border-gray-700 hover:border-amber-300 text-gray-200 transition-all">↩ Home</a>
+            </div>
+          </div>
         </div>
       </section>
     </div>
