@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neon Neural Flow</title>
+    <script src="../../omni-adapter.js"></script>
     <style>
         :root {
             --neon-cyan: #00f3ff;
@@ -223,7 +224,9 @@
         let animationId;
         let time = 0;
         let mouse = { x: 0, y: 0, active: false };
-        
+        let omniHue = null; // OMNI color override (hue 0-360), set by the bindings script; null = native colors
+        const MAX_NODES = 12;
+
         // Config
         const config = {
             particleCount: 2000,
@@ -266,7 +269,7 @@
                 this.vx = 0;
                 this.vy = 0;
                 this.life = Math.random() * 0.5 + 0.5; // Opacity
-                let bSize = window.omniSize || 50; this.size = Math.random() * (bSize/20) + 0.5;
+                this.size = (Math.random() * 2.5 + 0.5) * OMNI.sizeFactor;
                 
                 // Assign a "lane" preference to mimic the bundled cables in the image
                 this.lane = Math.floor(Math.random() * 5); 
@@ -274,8 +277,9 @@
             }
 
             update() {
-                // Base upward movement
-                let speedMult = config.baseSpeed * 0.02 + 0.5;
+                // Base upward movement — native flow slider and the global
+                // Time Warp (OMNI.speed) compose multiplicatively.
+                let speedMult = (config.baseSpeed * 0.02 + 0.5) * OMNI.speed;
                 this.y -= (Math.random() * 1 + 1) * speedMult;
 
                 // Calculate Flow Field (Sine waves to mimic the image curves)
@@ -287,7 +291,9 @@
                 // Complex sine wave pattern for the "cable" look
                 let flowX = Math.sin(this.y * 0.005 + time * 0.002) * 2;
                 flowX += Math.sin(this.y * 0.01) * 1;
-                flowX += (Math.random() - 0.5) * config.chaos;
+                // Viscosity maps to turbulence: runny paint (viscFactor < 1)
+                // is MORE chaotic, thick paint calms the stream. Neutral = 1.
+                flowX += (Math.random() - 0.5) * (config.chaos / Math.max(0.25, OMNI.viscFactor));
 
                 // Apply Node Gravity
                 nodes.forEach(node => {
@@ -313,9 +319,9 @@
                     }
                 }
 
-                // Apply velocity with damping
-                this.x += this.vx + flowX;
-                this.y += this.vy;
+                // Apply velocity with damping (scaled by global Time Warp)
+                this.x += (this.vx + flowX) * OMNI.speed;
+                this.y += this.vy * OMNI.speed;
                 this.vx *= 0.95;
                 this.vy *= 0.95;
 
@@ -330,9 +336,20 @@
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 
                 // Color Logic based on X position and Lane (Cyan vs Magenta split)
-                let hue;
-                if (config.colorMode === 'cyber') {
+                if (omniHue !== null) {
+                    // OMNI color override: render ALL particles in the chosen
+                    // hue family (slight jitter), regardless of color mode.
+                    let hue = omniHue + (Math.random() * 30 - 15);
+                    let nearNode = false;
+                    nodes.forEach(n => {
+                        let d = Math.hypot(n.x - this.x, n.y - this.y);
+                        if (d < 50) nearNode = true;
+                    });
+                    let lightness = nearNode ? 90 : 50;
+                    ctx.fillStyle = `hsla(${hue}, 100%, ${lightness}%, ${this.life})`;
+                } else if (config.colorMode === 'cyber') {
                     // Left side cyan, right side magenta/purple, mixed in middle
+                    let hue;
                     let ratio = this.x / width;
                     if (ratio < 0.4) hue = 180; // Cyan
                     else if (ratio > 0.6) hue = 300; // Magenta
@@ -345,8 +362,6 @@
                         if (d < 50) nearNode = true;
                     });
 
-                    // OmniCanvas hue override
-                    if (window.omniHueOverride !== undefined) hue = window.omniHueOverride;
                     let lightness = nearNode ? 90 : 50;
                     ctx.fillStyle = `hsla(${hue}, 100%, ${lightness}%, ${this.life})`;
                 } else {
@@ -397,6 +412,12 @@
             }
         }
 
+        // Add a gravity node, capping the total (oldest dropped first)
+        function addNode(x, y) {
+            nodes.push(new Node(x, y));
+            while (nodes.length > MAX_NODES) nodes.shift();
+        }
+
         function initParticles() {
             particles = [];
             for (let i = 0; i < config.particleCount; i++) {
@@ -405,6 +426,9 @@
         }
 
         function animate() {
+            // Global pause: keep rAF ticking, skip the frame body
+            if (OMNI.paused) { animationId = requestAnimationFrame(animate); return; }
+
             // Trail effect
             ctx.fillStyle = 'rgba(5, 5, 16, 0.2)'; // Keep trails
             ctx.fillRect(0, 0, width, height);
@@ -424,7 +448,7 @@
             // Reset composite
             ctx.globalCompositeOperation = 'source-over';
 
-            time++;
+            time += OMNI.speed; // flow-field evolution follows Time Warp (neutral = 1/frame)
             animationId = requestAnimationFrame(animate);
         }
 
@@ -440,7 +464,9 @@
         });
 
         canvas.addEventListener('dblclick', (e) => {
-            nodes.push(new Node(e.clientX, e.clientY));
+            // Symmetry-aware: create nodes at all mirrored points (1 when off)
+            OMNI.symPoints(e.clientX, e.clientY, width, height)
+                .forEach(([px, py]) => addNode(px, py));
             ui.tooltip.style.opacity = '0'; // Hide tooltip after first interaction
         });
 
@@ -492,148 +518,61 @@
     </script>
 
 <script>
-    window.addEventListener('message', (event) => {
-        
-        if (event.data && event.data.type === 'omni-color') {
-            const hex = event.data.color;
-            if (typeof activeColor !== 'undefined') activeColor = hex;
-            if (typeof currentColor !== 'undefined') currentColor = hex;
-            if (typeof COLORS !== 'undefined' && Array.isArray(COLORS)) {
-                COLORS.length = 0;
-                COLORS.push(hex, '#ffffff', hex, '#000000', hex);
-            }
-            // For Neon Neural Flow (cyber mode usually hardcodes hue by X pos)
-            // But we can override it by setting a global variable
-            window.omniHueOverride = parseInt(hex.substring(1), 16) % 360; 
-            // In a better implementation we'd convert hex to hsl hue, but let's just force the color mode if we need to.
-        }
-        
-        if (event.data && event.data.type === 'omni-settings') {
-            window.omniSize = event.data.size; // 1 to 100
-            window.omniVisc = event.data.viscosity; // 1 to 100
-        }
+// === OmniCanvas bindings (protocol lives in ../../omni-adapter.js) ===
+OmniAdapter.register({
+    name: 'Neon Neural Flow',
+    hideSelectors: ['#ui-layer', '.tooltip'],
+    eventTarget: () => canvas,
+    capture: () => canvas.toDataURL('image/png'),
 
-        if (event.data && event.data.type === 'omni-speed') {
-            window.omniSpeed = event.data.speed;
-            config.baseSpeed = Math.max(0.5, event.data.speed * 3);
-        }
+    controls: [
+        { id: 'flow', label: 'Flow Intensity', type: 'slider', min: 1, max: 100, step: 1, value: 50 },
+        { id: 'chaos', label: 'Chaos Factor', type: 'slider', min: 0, max: 100, step: 1, value: 20 },
+        { id: 'particles', label: 'Particle Count', type: 'slider', min: 500, max: 5000, step: 100, value: 2000 },
+        { id: 'resetNodes', label: 'Reset Nodes', type: 'action' },
+        { id: 'palette', label: 'Switch Palette', type: 'action' }
+    ],
 
-        if (event.data && event.data.type === 'omni-scatter') {
-            // Add a burst of new gravity nodes at random positions
-            for (let i = 0; i < 5; i++) {
-                nodes.push(new Node(Math.random() * width, Math.random() * height));
-            }
+    setControl(id, value) {
+        if (id === 'flow') {
+            config.baseSpeed = parseInt(value);
+            ui.speed.value = value;
+            ui.valSpeed.textContent = value + '%';
         }
+        if (id === 'chaos') {
+            config.chaos = parseInt(value) / 50; // same scaling as the native slider
+            ui.chaos.value = value;
+            ui.valChaos.textContent = value + '%';
+        }
+        if (id === 'particles') {
+            config.particleCount = parseInt(value);
+            ui.count.value = value;
+            ui.valCount.textContent = config.particleCount;
+            initParticles();
+        }
+        if (id === 'resetNodes') nodes = [];
+        if (id === 'palette') ui.colorBtn.click(); // toggles cyber/fire + native accent CSS
+    },
 
-        if (event.data && event.data.type === 'omni-effect') {
-            if (event.data.effect === 'mirror') {
-                const c = document.getElementById('flowCanvas');
-                if (c) c.style.transform = c.style.transform === 'scaleX(-1)' ? '' : 'scaleX(-1)';
-            }
-            if (event.data.effect === 'invert') {
-                document.body.style.filter = document.body.style.filter === 'invert(1)' ? '' : 'invert(1)';
-            }
-            if (event.data.effect === 'randomize') {
-                config.colorMode = config.colorMode === 'cyber' ? 'fire' : 'cyber';
-                config.chaos = Math.random() * 0.8;
-                window.omniHueOverride = Math.random() * 360;
-            }
-        }
+    onColor(color) {
+        omniHue = color ? OmniAdapter.hexToHue(color) : null;
+    },
 
-        if (event.data && event.data.type === 'omni-capture') {
-            const zIndex = event.data.zIndex;
-            
-            // Check if we have a raw canvas
-            let rawCanvas = document.getElementById('flowCanvas') || document.getElementById('artCanvas');
-            
-            if (rawCanvas) {
-                // Easy route: canvas.toDataURL
-                window.parent.postMessage({
-                    type: 'omni-capture-result',
-                    zIndex: zIndex,
-                    dataUrl: rawCanvas.toDataURL('image/png')
-                }, '*');
-            } else {
-                // Hard route: html2canvas
-                if (typeof html2canvas !== 'undefined') {
-                    html2canvas(document.body, { backgroundColor: null, logging: false }).then(canvas => {
-                        window.parent.postMessage({
-                            type: 'omni-capture-result',
-                            zIndex: zIndex,
-                            dataUrl: canvas.toDataURL('image/png')
-                        }, '*');
-                    });
-                } else {
-                    console.error("html2canvas not loaded in iframe");
-                }
-            }
+    scatter() {
+        // Burst of gravity nodes; addNode caps total at MAX_NODES (oldest dropped)
+        for (let i = 0; i < 5; i++) {
+            addNode(Math.random() * width, Math.random() * height);
         }
-        if (event.data && event.data.type === 'omni-mouse' && event.source === window.parent) {
-            const { action, clientX, clientY } = event.data;
-            let target = document.elementFromPoint(clientX, clientY) || document.body;
-            
-            // Neon Neural Flow specific: dispatch to canvas
-            if (document.getElementById('flowCanvas')) target = document.getElementById('flowCanvas');
-            else if (document.getElementById('artCanvas')) target = document.getElementById('artCanvas');
-            else if (document.getElementById('canvas-container')) target = document.getElementById('canvas-container');
-            
-            // Fake mouse/touch events
-            const ev = new MouseEvent(action, {
-                view: window,
-                bubbles: true,
-                cancelable: true,
-                clientX: clientX,
-                clientY: clientY
-            });
-            target.dispatchEvent(ev);
+    },
 
-            // Also dispatch parallel Touch events for apps that use them
-            if (action.startsWith('mouse')) {
-                const touchType = action.replace('mouse', 'touch');
-                if (touchType === 'touchdown') var type = 'touchstart';
-                else if (touchType === 'touchup') var type = 'touchend';
-                else var type = touchType;
-                
-                try {
-                    const touch = new Touch({
-                        identifier: Date.now(),
-                        target: target,
-                        clientX: clientX,
-                        clientY: clientY,
-                        radiusX: 2.5,
-                        radiusY: 2.5,
-                        rotationAngle: 10,
-                        force: 0.5,
-                    });
-                    const touchEvent = new TouchEvent(type, {
-                        cancelable: true,
-                        bubbles: true,
-                        touches: type === 'touchend' ? [] : [touch],
-                        targetTouches: type === 'touchend' ? [] : [touch],
-                        changedTouches: [touch]
-                    });
-                    target.dispatchEvent(touchEvent);
-                } catch(e) {}
-            }
-        }
-    });
-
-    // Make backgrounds transparent
-    document.addEventListener('DOMContentLoaded', () => {
-        document.body.style.backgroundColor = 'transparent';
-        document.documentElement.style.backgroundColor = 'transparent';
-        
-        // Hide UI elements if running in OmniCanvas iframe to avoid stacking 4 UIs
-        if (window.self !== window.top) {
-            const uis = document.querySelectorAll('#ui-layer, .ui-panel, #controls, #intro, .hint, .header-overlay, .tooltip, #reset-btn');
-            uis.forEach(ui => ui.style.display = 'none');
-            
-            // For digital entropy cube: click body to start
-            if(document.body.innerHTML.includes('Digital Entropy Cube')) {
-                // hide some things
-            }
-        }
-    });
+    randomize() {
+        ui.colorBtn.click(); // toggle colorMode (cyber/fire)
+        config.chaos = Math.random() * 0.8;
+        const chaosPct = Math.round(config.chaos * 50);
+        ui.chaos.value = chaosPct;
+        ui.valChaos.textContent = chaosPct + '%';
+    }
+});
 </script>
 
 </body>

@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Omni-Canvas: Multimedium Artspace</title>
-    <!-- html2canvas for capturing composited iframes -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -22,7 +20,7 @@
             <iframe id="layer-neon" src="applets/neon-neural-flow/index.html" class="art-layer active"></iframe>
             <iframe id="layer-entropy" src="applets/digital-entropy-cube/index.html" class="art-layer active"></iframe>
         </div>
-        
+
         <!-- The Invisible Interaction Pane -->
         <div id="interaction-pane"></div>
     </div>
@@ -51,7 +49,9 @@
                     <option value="exclusion">Exclusion</option>
                     <option value="luminosity">Luminosity</option>
                 </select>
+                <button class="layer-expand" data-target="layer-noir" title="This layer's own tools">▸</button>
             </div>
+            <div class="layer-native hidden" data-panel="layer-noir"><p class="native-waiting">Waiting for layer…</p></div>
 
             <div class="layer-row" data-layer="layer-abstractify">
                 <input type="checkbox" data-target="layer-abstractify" checked>
@@ -60,7 +60,9 @@
                 <select class="layer-blend" data-target="layer-abstractify" title="Blend Mode">
                     <option value="normal">Normal</option><option value="multiply">Multiply</option><option value="screen">Screen</option><option value="overlay">Overlay</option><option value="difference">Difference</option><option value="color-dodge">Color Dodge</option><option value="exclusion">Exclusion</option><option value="luminosity">Luminosity</option>
                 </select>
+                <button class="layer-expand" data-target="layer-abstractify" title="This layer's own tools">▸</button>
             </div>
+            <div class="layer-native hidden" data-panel="layer-abstractify"><p class="native-waiting">Waiting for layer…</p></div>
 
             <div class="layer-row" data-layer="layer-chromatic">
                 <input type="checkbox" data-target="layer-chromatic">
@@ -69,7 +71,9 @@
                 <select class="layer-blend" data-target="layer-chromatic" title="Blend Mode">
                     <option value="normal">Normal</option><option value="multiply">Multiply</option><option value="screen" selected>Screen</option><option value="overlay">Overlay</option><option value="difference">Difference</option><option value="color-dodge">Color Dodge</option><option value="exclusion">Exclusion</option><option value="luminosity">Luminosity</option>
                 </select>
+                <button class="layer-expand" data-target="layer-chromatic" title="This layer's own tools">▸</button>
             </div>
+            <div class="layer-native hidden" data-panel="layer-chromatic"><p class="native-waiting">Waiting for layer…</p></div>
 
             <div class="layer-row" data-layer="layer-impasto">
                 <input type="checkbox" data-target="layer-impasto" checked>
@@ -78,7 +82,9 @@
                 <select class="layer-blend" data-target="layer-impasto" title="Blend Mode">
                     <option value="normal">Normal</option><option value="multiply">Multiply</option><option value="screen">Screen</option><option value="overlay">Overlay</option><option value="difference">Difference</option><option value="color-dodge">Color Dodge</option><option value="exclusion">Exclusion</option><option value="luminosity">Luminosity</option>
                 </select>
+                <button class="layer-expand" data-target="layer-impasto" title="This layer's own tools">▸</button>
             </div>
+            <div class="layer-native hidden" data-panel="layer-impasto"><p class="native-waiting">Waiting for layer…</p></div>
 
             <div class="layer-row" data-layer="layer-trippy">
                 <input type="checkbox" data-target="layer-trippy">
@@ -87,7 +93,9 @@
                 <select class="layer-blend" data-target="layer-trippy" title="Blend Mode">
                     <option value="normal">Normal</option><option value="multiply">Multiply</option><option value="screen" selected>Screen</option><option value="overlay">Overlay</option><option value="difference">Difference</option><option value="color-dodge">Color Dodge</option><option value="exclusion">Exclusion</option><option value="luminosity">Luminosity</option>
                 </select>
+                <button class="layer-expand" data-target="layer-trippy" title="This layer's own tools">▸</button>
             </div>
+            <div class="layer-native hidden" data-panel="layer-trippy"><p class="native-waiting">Waiting for layer…</p></div>
 
             <div class="layer-row" data-layer="layer-neon">
                 <input type="checkbox" data-target="layer-neon" checked>
@@ -96,7 +104,9 @@
                 <select class="layer-blend" data-target="layer-neon" title="Blend Mode">
                     <option value="normal">Normal</option><option value="multiply">Multiply</option><option value="screen" selected>Screen</option><option value="overlay">Overlay</option><option value="difference">Difference</option><option value="color-dodge">Color Dodge</option><option value="exclusion">Exclusion</option><option value="luminosity">Luminosity</option>
                 </select>
+                <button class="layer-expand" data-target="layer-neon" title="This layer's own tools">▸</button>
             </div>
+            <div class="layer-native hidden" data-panel="layer-neon"><p class="native-waiting">Waiting for layer…</p></div>
 
             <div class="layer-row" data-layer="layer-entropy">
                 <input type="checkbox" data-target="layer-entropy" checked>
@@ -105,18 +115,33 @@
                 <select class="layer-blend" data-target="layer-entropy" title="Blend Mode">
                     <option value="normal">Normal</option><option value="multiply">Multiply</option><option value="screen" selected>Screen</option><option value="overlay">Overlay</option><option value="difference">Difference</option><option value="color-dodge">Color Dodge</option><option value="exclusion">Exclusion</option><option value="luminosity">Luminosity</option>
                 </select>
+                <button class="layer-expand" data-target="layer-entropy" title="This layer's own tools">▸</button>
             </div>
+            <div class="layer-native hidden" data-panel="layer-entropy"><p class="native-waiting">Waiting for layer…</p></div>
         </div>
 
         <!-- Brush Dynamics -->
         <div class="settings-section">
             <h3>Brush Dynamics</h3>
             <div class="slider-row">
-                <label>Thickness <span id="val-size">50%</span></label>
+                <label>Paint Target</label>
+                <select id="paint-target">
+                    <option value="all">🎯 All active layers</option>
+                    <option value="layer-noir">🌆 Noir Studio only</option>
+                    <option value="layer-abstractify">🎨 Kinetic Canvas only</option>
+                    <option value="layer-chromatic">💧 Chromatic Dialogue only</option>
+                    <option value="layer-impasto">🔪 Impasto Strokes only</option>
+                    <option value="layer-trippy">🌀 Trippy Neural only</option>
+                    <option value="layer-neon">💫 Neon Flow only</option>
+                    <option value="layer-entropy">🧊 Entropy Cube only</option>
+                </select>
+            </div>
+            <div class="slider-row">
+                <label>Thickness <span id="val-size">100%</span></label>
                 <input type="range" id="global-size" min="1" max="100" value="50">
             </div>
             <div class="slider-row">
-                <label>Viscosity / Chaos <span id="val-visc">50%</span></label>
+                <label>Viscosity <span id="val-visc">100%</span></label>
                 <input type="range" id="global-visc" min="1" max="100" value="50">
             </div>
         </div>
@@ -133,9 +158,9 @@
                 <input type="range" id="global-bloom" min="0" max="100" value="0">
             </div>
             <div class="effects-grid">
-                <button id="btn-scatter" class="btn-fx" title="Random paint burst on all layers">💥 Scatter</button>
+                <button id="btn-scatter" class="btn-fx" title="Random paint burst on targeted layers">💥 Scatter</button>
                 <button id="btn-mirror" class="btn-fx" title="Flip canvas horizontally">🪞 Mirror</button>
-                <button id="btn-kaleidoscope" class="btn-fx" title="Cycle kaleidoscope symmetry">🔮 Kaleidoscope</button>
+                <button id="btn-kaleidoscope" class="btn-fx" title="Paint with 2/4/8-fold symmetry">🔮 Kaleidoscope</button>
                 <button id="btn-glitch" class="btn-fx" title="Random glitch distortion">⚡ Glitch</button>
                 <button id="btn-invert" class="btn-fx" title="Invert all colors">🔄 Invert</button>
                 <button id="btn-randomize" class="btn-fx" title="Randomize all layer palettes">🎲 Randomize</button>
@@ -147,7 +172,21 @@
             <div class="color-picker-wrapper">
                 <label for="global-color">Brush Color:</label>
                 <input type="color" id="global-color" value="#ff3366">
+                <button id="btn-color-native" class="btn-fx" title="Let each layer use its own native colors">↺ Native</button>
             </div>
+        </div>
+
+        <!-- Presets -->
+        <div class="settings-section">
+            <h3>Compositions</h3>
+            <div class="preset-row">
+                <select id="preset-list">
+                    <option value="">— saved compositions —</option>
+                </select>
+                <button id="btn-save-preset" class="btn-fx" title="Save current composition">💾</button>
+                <button id="btn-delete-preset" class="btn-fx" title="Delete selected composition">🗑</button>
+            </div>
+            <button id="btn-shuffle" class="btn-fx btn-wide" title="Random layers, blends and palettes">🎰 Shuffle Composition</button>
         </div>
 
         <!-- Actions -->

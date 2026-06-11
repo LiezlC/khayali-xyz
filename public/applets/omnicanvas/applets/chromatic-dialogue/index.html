@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chromatic Dialogue | Interactive Art</title>
+    <script src="../../omni-adapter.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap');
@@ -213,19 +214,20 @@
             this.x = x;
             this.y = y;
             this.color = color;
-            this.size = Math.random() * 15 + 5;
-            this.speedY = Math.random() * 5 + 2;
+            this.size = (Math.random() * 15 + 5) * OMNI.sizeFactor;
+            // Runny paint (low viscosity) falls faster; thick paint crawls
+            this.speedY = (Math.random() * 5 + 2) / Math.max(0.3, OMNI.viscFactor);
             this.life = 1.0;
             this.decay = Math.random() * 0.005 + 0.002;
             this.wobble = Math.random() * Math.PI * 2;
         }
 
         update() {
-            this.y += this.speedY;
-            this.life -= this.decay;
-            this.size -= 0.05;
-            this.wobble += 0.1;
-            this.x += Math.sin(this.wobble) * 0.5; // Slight horizontal drip wobble
+            this.y += this.speedY * OMNI.speed;
+            this.life -= this.decay * OMNI.speed;
+            this.size -= 0.05 * OMNI.speed;
+            this.wobble += 0.1 * OMNI.speed;
+            this.x += Math.sin(this.wobble) * 0.5 * OMNI.speed; // Slight horizontal drip wobble
             
             // Leave a trail
             if (this.life > 0 && this.size > 0) {
@@ -251,14 +253,14 @@
         }
 
         update() {
-            this.radius += this.speed;
-            this.opacity -= 0.02;
-            
+            this.radius += this.speed * OMNI.speed;
+            this.opacity -= 0.02 * OMNI.speed;
+
             if (this.opacity > 0) {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
                 ctx.strokeStyle = this.color;
-                ctx.lineWidth = 2;
+                ctx.lineWidth = 2 * OMNI.sizeFactor;
                 ctx.globalAlpha = this.opacity;
                 ctx.stroke();
                 ctx.globalAlpha = 1.0;
@@ -268,10 +270,11 @@
 
     // Animation Loop
     function animate() {
-        // We don't clearRect here to allow paint to pile up, 
+        // We don't clearRect here to allow paint to pile up,
         // but we slightly darken the background for a trail effect?
         // No, let's keep it persistent like a painting.
-        
+        if (OMNI.paused) { requestAnimationFrame(animate); return; }
+
         // Update Particles
         for (let i = particles.length - 1; i >= 0; i--) {
             let p = particles[i];
@@ -286,10 +289,23 @@
     animate();
 
     // Input Handling
+
+    // OMNI.color overrides the palette for ALL new paint; small lightness
+    // jitter keeps it organic. When null, native palette behavior.
+    function pickColor() {
+        if (OMNI.color) {
+            const n = parseInt(String(OMNI.color).replace('#', ''), 16);
+            const j = Math.round((Math.random() - 0.5) * 50);
+            const clamp = v => Math.max(0, Math.min(255, v + j));
+            return `rgb(${clamp((n >> 16) & 255)},${clamp((n >> 8) & 255)},${clamp(n & 255)})`;
+        }
+        return currentPalette[Math.floor(Math.random() * currentPalette.length)];
+    }
+
     function addDrip(x, y) {
-        const color = currentPalette[Math.floor(Math.random() * currentPalette.length)];
+        const color = pickColor();
         particles.push(new Drip(x, y, color));
-        
+
         // Occasionally add a splatter ring
         if (Math.random() > 0.9) {
             particles.push(new Splatter(x, y, color));
@@ -299,26 +315,30 @@
     window.addEventListener('mousemove', (e) => {
         mouse.x = e.clientX;
         mouse.y = e.clientY;
-        
-        // Add drips if moving fast or randomly
-        if (Math.random() > 0.5) {
-            addDrip(mouse.x, mouse.y);
+
+        // Spawn probability scales with viscosity: runny = more drips
+        const spawnChance = Math.min(0.95, 0.5 / Math.max(0.3, OMNI.viscFactor));
+        if (Math.random() < spawnChance) {
+            OMNI.symPoints(mouse.x, mouse.y, width, height)
+                .forEach(([px, py]) => addDrip(px, py));
         }
     });
 
     window.addEventListener('touchmove', (e) => {
         const touch = e.touches[0];
-        addDrip(touch.clientX, touch.clientY);
+        OMNI.symPoints(touch.clientX, touch.clientY, width, height)
+            .forEach(([px, py]) => addDrip(px, py));
     });
 
     window.addEventListener('click', (e) => {
-        // Burst of drips
-        for(let i=0; i<10; i++) {
-            addDrip(e.clientX + (Math.random()-0.5)*40, e.clientY + (Math.random()-0.5)*40);
-        }
-        // Big splatter
-        const color = currentPalette[Math.floor(Math.random() * currentPalette.length)];
-        particles.push(new Splatter(e.clientX, e.clientY, color));
+        OMNI.symPoints(e.clientX, e.clientY, width, height).forEach(([px, py]) => {
+            // Burst of drips
+            for (let i = 0; i < 10; i++) {
+                addDrip(px + (Math.random() - 0.5) * 40, py + (Math.random() - 0.5) * 40);
+            }
+            // Big splatter
+            particles.push(new Splatter(px, py, pickColor()));
+        });
     });
 
     // UI Functions
@@ -341,14 +361,21 @@
         
         if (autoMode) {
             autoInterval = setInterval(() => {
-                // Simulate conversation flow
-                // Random x between 20% and 80% of screen (between faces)
-                const x = Math.random() * (width * 0.6) + (width * 0.2);
-                const y = Math.random() * (height * 0.5);
-                
-                // Burst
-                for(let i=0; i<5; i++) {
-                    addDrip(x + (Math.random()-0.5)*20, y);
+                if (OMNI.paused) return;
+                // Scale conversation rate with OMNI.speed (0.1..3, 1 = neutral)
+                let bursts = OMNI.speed;
+                while (bursts > 0) {
+                    if (bursts < 1 && Math.random() > bursts) break;
+                    // Simulate conversation flow
+                    // Random x between 20% and 80% of screen (between faces)
+                    const x = Math.random() * (width * 0.6) + (width * 0.2);
+                    const y = Math.random() * (height * 0.5);
+
+                    // Burst
+                    for(let i=0; i<5; i++) {
+                        addDrip(x + (Math.random()-0.5)*20, y);
+                    }
+                    bursts -= 1;
                 }
             }, 100);
         } else {
@@ -372,97 +399,44 @@
 
 </script>
 <script>
-// === OmniCanvas Integration Layer ===
-(function() {
-    // Hide UI when running as iframe layer
-    if (window.self !== window.top) {
-        document.addEventListener('DOMContentLoaded', () => {
-            document.body.classList.add('omni-transparent');
-            document.body.style.backgroundColor = 'transparent';
-            document.documentElement.style.backgroundColor = 'transparent';
-            // Hide applet-specific UI
-            const hide = document.querySelectorAll('.controls, .overlay, .tooltip');
-            hide.forEach(el => el.style.display = 'none');
-            // Make canvas background transparent empty pass
-            const canvas = document.getElementById('artCanvas');
-            if (canvas) {
-                const ctx = canvas.getContext('2d');
-            }
-        });
+// === OmniCanvas bindings (protocol lives in ../../omni-adapter.js) ===
+OmniAdapter.register({
+    name: 'Chromatic Dialogue',
+    hideSelectors: ['.controls', '.overlay', '.tooltip'],
+    eventTarget: () => canvas,
+    capture: () => canvas.toDataURL('image/png'),
+
+    controls: [
+        { id: 'palette', label: 'Palette', type: 'select', value: 'neon', options: [
+            { value: 'neon', label: 'Neon Nights' },
+            { value: 'fire', label: 'Passion Fire' },
+            { value: 'ocean', label: 'Deep Ocean' },
+            { value: 'nature', label: 'Toxic Nature' }
+        ]},
+        { id: 'auto', label: 'Auto Dialogue', type: 'toggle', value: false },
+        { id: 'clear', label: 'Clear Canvas', type: 'action' }
+    ],
+
+    setControl(id, value) {
+        if (id === 'palette') currentPalette = palettes[value] || currentPalette;
+        if (id === 'auto' && !!value !== autoMode) toggleAutoMode();
+        if (id === 'clear') clearCanvas();
+    },
+
+    scatter() {
+        for (let i = 0; i < 20; i++) {
+            const x = Math.random() * width;
+            const y = Math.random() * height;
+            particles.push(new Drip(x, y, pickColor()));
+            particles.push(new Splatter(x, y, pickColor()));
+        }
+    },
+
+    randomize() {
+        const keys = Object.keys(palettes);
+        currentPalette = palettes[keys[Math.floor(Math.random() * keys.length)]];
     }
-
-    window.addEventListener('message', (event) => {
-        const d = event.data;
-        if (!d || !d.type) return;
-
-        // --- Mouse event forwarding ---
-        if (d.type === 'omni-mouse') {
-            const target = document.getElementById('artCanvas') || document.getElementById('app-container') || document.body;
-            const ev = new MouseEvent(d.action, {
-                view: window, bubbles: true, cancelable: true,
-                clientX: d.clientX, clientY: d.clientY
-            });
-            target.dispatchEvent(ev);
-            try {
-                const touchMap = { mousedown: 'touchstart', mousemove: 'touchmove', mouseup: 'touchend' };
-                const touchType = touchMap[d.action];
-                if (touchType) {
-                    const touch = new Touch({
-                        identifier: Date.now(), target,
-                        clientX: d.clientX, clientY: d.clientY,
-                        radiusX: 2.5, radiusY: 2.5, rotationAngle: 10, force: 0.5
-                    });
-                    target.dispatchEvent(new TouchEvent(touchType, {
-                        cancelable: true, bubbles: true,
-                        touches: touchType === 'touchend' ? [] : [touch],
-                        targetTouches: touchType === 'touchend' ? [] : [touch],
-                        changedTouches: [touch]
-                    }));
-                }
-            } catch(e) {}
-        }
-
-        // --- Color override ---
-        if (d.type === 'omni-color') {
-            if(typeof currentPalette!=='undefined') currentPalette[0]=d.color; // also set mouse-spawned drip color
-        }
-
-        // --- Size/Viscosity ---
-        if (d.type === 'omni-settings') {
-            window.omniSize = d.size;
-            window.omniVisc = d.viscosity;
-        }
-
-        // --- Capture for save ---
-        if (d.type === 'omni-capture') {
-            const c=document.getElementById('artCanvas'); window.parent.postMessage({type:'omni-capture-result',zIndex:d.zIndex,dataUrl:c.toDataURL('image/png')},'*');
-        }
-
-        // --- Speed control ---
-        if (d.type === 'omni-speed') {
-            window.omniSpeed = d.speed;
-        }
-
-        // --- Scatter burst ---
-        if (d.type === 'omni-scatter') {
-            for(let i=0;i<20;i++){const x=Math.random()*window.innerWidth;const y=Math.random()*window.innerHeight;particles.push(new Drip(x,y,currentPalette[Math.floor(Math.random()*currentPalette.length)]));particles.push(new Splatter(x,y,currentPalette[Math.floor(Math.random()*currentPalette.length)]));}
-        }
-
-        // --- Effects ---
-        if (d.type === 'omni-effect') {
-            if (d.effect === 'mirror') {
-                const c = document.getElementById('artCanvas');
-                if (c) c.style.transform = c.style.transform === 'scaleX(-1)' ? '' : 'scaleX(-1)';
-            }
-            if (d.effect === 'invert') {
-                document.body.style.filter = document.body.style.filter === 'invert(1)' ? '' : 'invert(1)';
-            }
-            if (d.effect === 'randomize') {
-                const keys=Object.keys(palettes);currentPalette=palettes[keys[Math.floor(Math.random()*keys.length)]];
-            }
-        }
-    });
-})();
+});
 </script>
 </body>
 </html>

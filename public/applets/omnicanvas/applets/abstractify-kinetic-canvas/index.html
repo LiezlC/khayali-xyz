@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abstractify: Kinetic Canvas</title>
+    <script src="../../omni-adapter.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
@@ -292,17 +293,18 @@
                 this.y = y;
                 this.color = color;
                 this.width = width;
-                this.speed = Math.random() * 2 + 0.5;
+                // Runnier paint (low viscosity) falls faster
+                this.speed = (Math.random() * 2 + 0.5) / Math.max(0.3, OMNI.viscFactor);
                 this.life = Math.random() * 300 + 100; // How long it drips
                 this.history = [];
             }
 
             update() {
                 if (this.life > 0) {
-                    this.y += this.speed;
-                    this.life--;
+                    this.y += this.speed * OMNI.speed;
+                    this.life -= OMNI.speed;
                     this.width *= 0.995; // Taper off
-                    
+
                     // Add wobble
                     this.x += Math.sin(this.y * 0.05) * 0.5;
 
@@ -326,17 +328,18 @@
                 this.color = color;
                 this.angle = Math.random() * Math.PI * 2;
                 this.speed = Math.random() * 10 + 2;
-                this.friction = 0.92;
-                this.size = Math.random() * 15 + 5;
+                // Thicker paint stops sooner; runny paint flies further
+                this.friction = Math.min(0.97, Math.max(0.82, 0.95 - 0.03 * OMNI.viscFactor));
+                this.size = (Math.random() * 15 + 5) * OMNI.sizeFactor;
                 this.life = 1.0;
             }
 
             update() {
-                this.x += Math.cos(this.angle) * this.speed;
-                this.y += Math.sin(this.angle) * this.speed;
+                this.x += Math.cos(this.angle) * this.speed * OMNI.speed;
+                this.y += Math.sin(this.angle) * this.speed * OMNI.speed;
                 this.speed *= this.friction;
                 this.size *= 0.96;
-                this.life -= 0.02;
+                this.life -= 0.02 * OMNI.speed;
             }
 
             draw(ctx) {
@@ -387,46 +390,62 @@
         canvas.addEventListener('touchend', () => isMouseDown = false);
 
         function handleInteraction(x, y, isClick) {
+            // Symmetry-aware primitives: segments stay endpoint-aligned per
+            // mirror so strokes don't web across the canvas.
+            const segs = OMNI.symSegments(lastMouse.x, lastMouse.y, x, y, width, height);
+            const pts = OMNI.symPoints(x, y, width, height);
+
             if (currentTool === 'brush') {
                 // Draw thick strokes
-                ctx.beginPath();
-                ctx.moveTo(lastMouse.x, lastMouse.y);
-                ctx.lineTo(x, y);
                 ctx.strokeStyle = activeColor;
-                ctx.lineWidth = Math.random() * 30 + 10;
+                ctx.lineWidth = (Math.random() * 30 + 10) * OMNI.sizeFactor;
                 ctx.lineCap = 'round';
                 ctx.lineJoin = 'round';
                 ctx.shadowBlur = 10;
                 ctx.shadowColor = activeColor;
-                ctx.stroke();
+                segs.forEach(([x0, y0, x1, y1]) => {
+                    ctx.beginPath();
+                    ctx.moveTo(x0, y0);
+                    ctx.lineTo(x1, y1);
+                    ctx.stroke();
+                });
                 ctx.shadowBlur = 0;
 
-                // Chance to spawn a drip
-                if (Math.random() > 0.8) {
-                    drips.push(new Drip(x, y, activeColor, Math.random() * 5 + 2));
-                }
-            } 
+                // Chance to spawn a drip: runnier paint drips more often
+                const dripChance = Math.min(0.6, 0.2 / Math.max(0.2, OMNI.viscFactor));
+                pts.forEach(([px, py]) => {
+                    if (Math.random() < dripChance) {
+                        drips.push(new Drip(px, py, activeColor, (Math.random() * 5 + 2) * OMNI.sizeFactor));
+                    }
+                });
+            }
             else if (currentTool === 'splatter') {
                 if (isClick || Math.random() > 0.8) {
-                    for (let i = 0; i < 10; i++) {
-                        particles.push(new SplatterParticle(x, y, activeColor));
-                    }
-                    // Draw main blob
-                    ctx.beginPath();
-                    ctx.fillStyle = activeColor;
-                    ctx.arc(x, y, Math.random() * 30 + 10, 0, Math.PI * 2);
-                    ctx.fill();
+                    // Split the particle budget across symmetry points
+                    const count = Math.max(3, Math.round(10 / Math.max(1, pts.length / 2)));
+                    pts.forEach(([px, py]) => {
+                        for (let i = 0; i < count; i++) {
+                            particles.push(new SplatterParticle(px, py, activeColor));
+                        }
+                        // Draw main blob
+                        ctx.beginPath();
+                        ctx.fillStyle = activeColor;
+                        ctx.arc(px, py, (Math.random() * 30 + 10) * OMNI.sizeFactor, 0, Math.PI * 2);
+                        ctx.fill();
+                    });
                 }
             }
             else if (currentTool === 'eraser') {
                 // "Blend" tool - actually smears by drawing with low opacity background colors or white
-                ctx.beginPath();
-                ctx.moveTo(lastMouse.x, lastMouse.y);
-                ctx.lineTo(x, y);
                 ctx.strokeStyle = "rgba(255,255,255,0.2)";
-                ctx.lineWidth = 50;
+                ctx.lineWidth = 50 * OMNI.sizeFactor;
                 ctx.lineCap = 'round';
-                ctx.stroke();
+                segs.forEach(([x0, y0, x1, y1]) => {
+                    ctx.beginPath();
+                    ctx.moveTo(x0, y0);
+                    ctx.lineTo(x1, y1);
+                    ctx.stroke();
+                });
             }
         }
 
@@ -434,6 +453,7 @@
         function animate() {
             // We do NOT clear the canvas every frame. We paint ON TOP of it.
             // This creates the permanent painting effect.
+            if (OMNI.paused) { requestAnimationFrame(animate); return; }
 
             // Update and draw drips
             for (let i = drips.length - 1; i >= 0; i--) {
@@ -497,97 +517,58 @@
 
     </script>
 <script>
-// === OmniCanvas Integration Layer ===
-(function() {
-    // Hide UI when running as iframe layer
-    if (window.self !== window.top) {
-        document.addEventListener('DOMContentLoaded', () => {
-            document.body.classList.add('omni-transparent');
-            document.body.style.backgroundColor = 'transparent';
-            document.documentElement.style.backgroundColor = 'transparent';
-            // Hide applet-specific UI
-            const hide = document.querySelectorAll('.ui-panel, .header-overlay, .hint, .texture-overlay');
-            hide.forEach(el => el.style.display = 'none');
-            // Make canvas background transparent
-            const canvas = document.getElementById('artCanvas');
-            if (canvas) {
-                const ctx = canvas.getContext('2d');
-            }
-        });
+// === OmniCanvas bindings (protocol lives in ../../omni-adapter.js) ===
+OmniAdapter.register({
+    name: 'Kinetic Canvas',
+    hideSelectors: ['.ui-panel', '.header-overlay', '.hint', '.texture-overlay'],
+    eventTarget: () => canvas,
+    capture: () => canvas.toDataURL('image/png'),
+
+    controls: [
+        { id: 'tool', label: 'Tool', type: 'buttons', value: 'brush', options: [
+            { value: 'brush', label: 'Brush' },
+            { value: 'splatter', label: 'Splatter' },
+            { value: 'eraser', label: 'Blend' }
+        ]},
+        { id: 'palette', label: 'Palette', type: 'select', value: 'original', options: [
+            { value: 'original', label: 'Original' },
+            { value: 'neon', label: 'Neon' },
+            { value: 'earth', label: 'Earth' }
+        ]},
+        { id: 'newbase', label: 'New Base Coat', type: 'action' }
+    ],
+
+    setControl(id, value) {
+        if (id === 'tool') setTool(value);
+        if (id === 'palette') {
+            currentPalette = PALETTES[value] || currentPalette;
+            if (!OMNI.color) activeColor = currentPalette[Math.floor(Math.random() * currentPalette.length)];
+        }
+        if (id === 'newbase') resetCanvas();
+    },
+
+    onColor(color) {
+        activeColor = color || currentPalette[3];
+    },
+
+    scatter() {
+        for (let i = 0; i < 12; i++) {
+            const x = Math.random() * width, y = Math.random() * height;
+            const color = OMNI.color || currentPalette[Math.floor(Math.random() * currentPalette.length)];
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.arc(x, y, (Math.random() * 25 + 8) * OMNI.sizeFactor, 0, Math.PI * 2);
+            ctx.fill();
+            for (let j = 0; j < 6; j++) particles.push(new SplatterParticle(x, y, color));
+        }
+    },
+
+    randomize() {
+        const keys = Object.keys(PALETTES);
+        currentPalette = PALETTES[keys[Math.floor(Math.random() * keys.length)]];
+        activeColor = currentPalette[Math.floor(Math.random() * currentPalette.length)];
     }
-
-    window.addEventListener('message', (event) => {
-        const d = event.data;
-        if (!d || !d.type) return;
-
-        // --- Mouse event forwarding ---
-        if (d.type === 'omni-mouse') {
-            const target = document.getElementById('artCanvas') || document.getElementById('canvas-container') || document.body;
-            const ev = new MouseEvent(d.action, {
-                view: window, bubbles: true, cancelable: true,
-                clientX: d.clientX, clientY: d.clientY
-            });
-            target.dispatchEvent(ev);
-            try {
-                const touchMap = { mousedown: 'touchstart', mousemove: 'touchmove', mouseup: 'touchend' };
-                const touchType = touchMap[d.action];
-                if (touchType) {
-                    const touch = new Touch({
-                        identifier: Date.now(), target,
-                        clientX: d.clientX, clientY: d.clientY,
-                        radiusX: 2.5, radiusY: 2.5, rotationAngle: 10, force: 0.5
-                    });
-                    target.dispatchEvent(new TouchEvent(touchType, {
-                        cancelable: true, bubbles: true,
-                        touches: touchType === 'touchend' ? [] : [touch],
-                        targetTouches: touchType === 'touchend' ? [] : [touch],
-                        changedTouches: [touch]
-                    }));
-                }
-            } catch(e) {}
-        }
-
-        // --- Color override ---
-        if (d.type === 'omni-color') {
-            if(typeof activeColor!=='undefined') activeColor=d.color;
-        }
-
-        // --- Size/Viscosity ---
-        if (d.type === 'omni-settings') {
-            window.omniSize = d.size;
-            window.omniVisc = d.viscosity;
-        }
-
-        // --- Capture for save ---
-        if (d.type === 'omni-capture') {
-            const c=document.getElementById('artCanvas'); window.parent.postMessage({type:'omni-capture-result',zIndex:d.zIndex,dataUrl:c.toDataURL('image/png')},'*');
-        }
-
-        // --- Speed control ---
-        if (d.type === 'omni-speed') {
-            window.omniSpeed = d.speed;
-        }
-
-        // --- Scatter burst ---
-        if (d.type === 'omni-scatter') {
-            for(let i=0;i<15;i++){const x=Math.random()*canvas.width;const y=Math.random()*canvas.height;particles.push(new SplatterParticle(x,y,activeColor));}
-        }
-
-        // --- Effects ---
-        if (d.type === 'omni-effect') {
-            if (d.effect === 'mirror') {
-                const c = document.getElementById('artCanvas');
-                if (c) c.style.transform = c.style.transform === 'scaleX(-1)' ? '' : 'scaleX(-1)';
-            }
-            if (d.effect === 'invert') {
-                document.body.style.filter = document.body.style.filter === 'invert(1)' ? '' : 'invert(1)';
-            }
-            if (d.effect === 'randomize') {
-                const keys=Object.keys(PALETTES);currentPalette=PALETTES[keys[Math.floor(Math.random()*keys.length)]];activeColor=currentPalette[Math.floor(Math.random()*currentPalette.length)];
-            }
-        }
-    });
-})();
+});
 </script>
 </body>
 </html>

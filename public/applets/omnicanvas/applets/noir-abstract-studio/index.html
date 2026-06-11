@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Noir Abstract Studio</title>
+    <script src="../../omni-adapter.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto+Mono:wght@400;500&display=swap');
@@ -17,6 +18,7 @@
             background-color: #1a1a1a;
             font-family: 'Roboto Mono', monospace;
         }
+        .omni-transparent { background: transparent !important; }
 
         #canvas-container {
             position: absolute;
@@ -287,93 +289,114 @@
             const y = e.clientY;
             const speed = Math.sqrt(Math.pow(x - lastX, 2) + Math.pow(y - lastY, 2));
 
+            // Symmetry-aware primitives (OMNI defaults: 1 point / 1 segment)
+            const pts = OMNI.symPoints(x, y, width, height);
+            const segs = OMNI.symSegments(lastX, lastY, x, y, width, height);
+
             ctx.save();
 
             if (currentTool === 'city') {
                 // Draw vertical blocks resembling buildings
                 ctx.fillStyle = `rgba(${Math.random()*30}, ${Math.random()*30}, ${Math.random()*40}, 0.9)`;
-                const w = Math.random() * 60 + 20;
-                const h = (height - y) + (Math.random() * 100); // Extend to bottom
-                // Snap to bottom somewhat
-                const drawY = y; 
-                ctx.fillRect(x - w/2, drawY, w, height - drawY);
-                
-                // Add some texture lines
-                ctx.strokeStyle = 'rgba(0,0,0,0.5)';
-                ctx.beginPath();
-                ctx.moveTo(x, drawY);
-                ctx.lineTo(x, height);
-                ctx.stroke();
+                const w = (Math.random() * 60 + 20) * OMNI.sizeFactor;
+                pts.forEach(([px, py]) => {
+                    ctx.fillRect(px - w/2, py, w, height - py);
+
+                    // Add some texture lines
+                    ctx.strokeStyle = 'rgba(0,0,0,0.5)';
+                    ctx.beginPath();
+                    ctx.moveTo(px, py);
+                    ctx.lineTo(px, height);
+                    ctx.stroke();
+                });
 
             } else if (currentTool === 'red') {
                 // Vibrant red strokes with drips
-                ctx.strokeStyle = '#D93025';
-                ctx.lineWidth = Math.random() * 20 + 5;
+                ctx.strokeStyle = OMNI.color || '#D93025';
+                ctx.lineWidth = (Math.random() * 20 + 5) * OMNI.sizeFactor;
                 ctx.lineCap = 'round';
                 ctx.shadowBlur = 10;
-                ctx.shadowColor = '#800';
-                
-                ctx.beginPath();
-                ctx.moveTo(lastX, lastY);
-                ctx.lineTo(x, y);
-                ctx.stroke();
+                ctx.shadowColor = OMNI.color || '#800';
 
-                // Chance to spawn a drip
-                if (Math.random() > 0.8) {
-                    drips.push({
-                        x: x,
-                        y: y,
-                        vy: Math.random() * 2 + 1,
-                        color: '#D93025',
-                        life: 100 + Math.random() * 100,
-                        width: Math.random() * 4 + 1
-                    });
-                }
+                segs.forEach(([x0, y0, x1, y1]) => {
+                    ctx.beginPath();
+                    ctx.moveTo(x0, y0);
+                    ctx.lineTo(x1, y1);
+                    ctx.stroke();
+                });
+
+                // Chance to spawn a drip: runnier paint (low viscosity) drips more often
+                const dripChance = Math.min(0.6, 0.2 / Math.max(0.2, OMNI.viscFactor));
+                pts.forEach(([px, py]) => {
+                    if (Math.random() < dripChance) {
+                        drips.push({
+                            x: px,
+                            y: py,
+                            // Runny paint falls faster, thick paint slower
+                            vy: (Math.random() * 2 + 1) / Math.max(0.3, OMNI.viscFactor),
+                            color: OMNI.color || '#D93025',
+                            life: 100 + Math.random() * 100,
+                            width: (Math.random() * 4 + 1) * OMNI.sizeFactor
+                        });
+                    }
+                });
 
             } else if (currentTool === 'light') {
                 // Yellow/Orange square lights
-                const size = Math.random() * 10 + 4;
-                ctx.fillStyle = Math.random() > 0.5 ? '#F9AB00' : '#FFF';
+                const size = (Math.random() * 10 + 4) * OMNI.sizeFactor;
+                ctx.fillStyle = OMNI.color || (Math.random() > 0.5 ? '#F9AB00' : '#FFF');
                 ctx.shadowBlur = 15;
-                ctx.shadowColor = '#F9AB00';
+                ctx.shadowColor = OMNI.color || '#F9AB00';
                 ctx.globalCompositeOperation = 'lighter';
-                
-                // Draw scattered windows
-                if (Math.random() > 0.5) {
-                    ctx.fillRect(x + (Math.random()*40-20), y + (Math.random()*40-20), size, size * 1.5);
-                }
-                
-                // Occasional "streak" reflection
-                if (Math.random() > 0.9) {
-                    ctx.fillStyle = 'rgba(249, 171, 0, 0.3)';
-                    ctx.fillRect(x - 20, y + 20, 40, 2);
-                }
+
+                pts.forEach(([px, py]) => {
+                    // Draw scattered windows
+                    if (Math.random() > 0.5) {
+                        ctx.fillRect(px + (Math.random()*40-20), py + (Math.random()*40-20), size, size * 1.5);
+                    }
+
+                    // Occasional "streak" reflection
+                    if (Math.random() > 0.9) {
+                        const prevAlpha = ctx.globalAlpha;
+                        ctx.globalAlpha = 0.3;
+                        ctx.fillStyle = OMNI.color || '#F9AB00';
+                        ctx.fillRect(px - 20 * OMNI.sizeFactor, py + 20, 40 * OMNI.sizeFactor, 2);
+                        ctx.globalAlpha = prevAlpha;
+                        ctx.fillStyle = OMNI.color || (Math.random() > 0.5 ? '#F9AB00' : '#FFF');
+                    }
+                });
 
             } else if (currentTool === 'white') {
                 // Chaotic white noise/scratching
                 ctx.strokeStyle = '#F1F3F5';
-                ctx.lineWidth = Math.random() * 2 + 1;
-                ctx.beginPath();
-                ctx.moveTo(lastX + (Math.random()*20-10), lastY + (Math.random()*20-10));
-                ctx.lineTo(x + (Math.random()*20-10), y + (Math.random()*20-10));
-                ctx.stroke();
-                
-                // Splatter
-                if (Math.random() > 0.9) {
-                    ctx.fillStyle = '#fff';
+                ctx.lineWidth = (Math.random() * 2 + 1) * OMNI.sizeFactor;
+                segs.forEach(([x0, y0, x1, y1]) => {
                     ctx.beginPath();
-                    ctx.arc(x + (Math.random()*40-20), y + (Math.random()*40-20), Math.random()*2, 0, Math.PI*2);
-                    ctx.fill();
-                }
+                    ctx.moveTo(x0 + (Math.random()*20-10), y0 + (Math.random()*20-10));
+                    ctx.lineTo(x1 + (Math.random()*20-10), y1 + (Math.random()*20-10));
+                    ctx.stroke();
+                });
+
+                // Splatter
+                pts.forEach(([px, py]) => {
+                    if (Math.random() > 0.9) {
+                        ctx.fillStyle = '#fff';
+                        ctx.beginPath();
+                        ctx.arc(px + (Math.random()*40-20), py + (Math.random()*40-20), Math.random() * 2 * OMNI.sizeFactor, 0, Math.PI*2);
+                        ctx.fill();
+                    }
+                });
 
             } else if (currentTool === 'fog') {
                 // Soft grey airbrush
-                const rad = 50;
-                const grad = ctx.createRadialGradient(x, y, 0, x, y, rad);
-                grad.addColorStop(0, 'rgba(100, 100, 100, 0.1)');
-                grad.addColorStop(1, 'rgba(100, 100, 100, 0)');
-                ctx.fillStyle = grad;
-                ctx.fillRect(x - rad, y - rad, rad * 2, rad * 2);
+                const rad = 50 * OMNI.sizeFactor;
+                pts.forEach(([px, py]) => {
+                    const grad = ctx.createRadialGradient(px, py, 0, px, py, rad);
+                    grad.addColorStop(0, 'rgba(100, 100, 100, 0.1)');
+                    grad.addColorStop(1, 'rgba(100, 100, 100, 0)');
+                    ctx.fillStyle = grad;
+                    ctx.fillRect(px - rad, py - rad, rad * 2, rad * 2);
+                });
             }
 
             ctx.restore();
@@ -381,14 +404,16 @@
 
         // Animation Loop for Drips
         function animate() {
+            // Keep rAF ticking while omni-paused, just skip updates
+            if (OMNI.paused) { requestAnimationFrame(animate); return; }
             if (drips.length > 0) {
                 drips.forEach((drip, index) => {
                     ctx.fillStyle = drip.color;
                     ctx.globalAlpha = drip.life / 200;
                     ctx.fillRect(drip.x, drip.y, drip.width, drip.vy);
-                    
-                    drip.y += drip.vy;
-                    drip.life--;
+
+                    drip.y += drip.vy * OMNI.speed;
+                    drip.life -= OMNI.speed;
 
                     if (drip.life <= 0) {
                         drips.splice(index, 1);
@@ -493,95 +518,54 @@
 
     </script>
 <script>
-// === OmniCanvas Integration Layer ===
-(function() {
-    // Hide UI when running as iframe layer
-    if (window.self !== window.top) {
-        document.addEventListener('DOMContentLoaded', () => {
-            // Hide applet-specific UI
-            const hide = document.querySelectorAll('#tutorial, #ui-layer, .toolbar, .header');
-            hide.forEach(el => el.style.display = 'none');
-            // Make canvas background transparent empty pass (handled via iframe blend-mode for noir)
-            const canvas = document.getElementById('artCanvas');
-            if (canvas) {
-                const ctx = canvas.getContext('2d');
-            }
-        });
+// === OmniCanvas bindings (protocol lives in ../../omni-adapter.js) ===
+OmniAdapter.register({
+    name: 'Noir Abstract Studio',
+    hideSelectors: ['#tutorial', '#ui-layer', '.toolbar', '.header'],
+    eventTarget: () => canvas,
+    capture: () => canvas.toDataURL('image/png'),
+
+    controls: [
+        { id: 'tool', label: 'Tool', type: 'buttons', value: 'city', options: [
+            { value: 'city', label: '🏢 Structure' },
+            { value: 'red', label: '🩸 Passion' },
+            { value: 'light', label: '💡 Lights' },
+            { value: 'white', label: '❄️ Noise' },
+            { value: 'fog', label: '🌫️ Fog' }
+        ]},
+        { id: 'auto', label: 'Auto Scene', type: 'action' },
+        { id: 'clear', label: 'Clear', type: 'action' }
+    ],
+
+    setControl(id, value) {
+        if (id === 'tool') setTool(value);
+        if (id === 'auto') generateRandom();
+        if (id === 'clear') clearCanvas();
+    },
+
+    // draw() reads OMNI.color live, so no cached state to update here.
+    onColor() {},
+
+    scatter() {
+        // Paint a burst by invoking the real draw() routine per random point.
+        const tools = ['city', 'red', 'light', 'white', 'fog'];
+        const prevTool = currentTool;
+        for (let i = 0; i < 15; i++) {
+            const x = Math.random() * width;
+            const y = Math.random() * height;
+            currentTool = tools[Math.floor(Math.random() * tools.length)];
+            // Seed a short stroke segment so segment-based tools (red/white) show up
+            lastX = x + (Math.random() * 60 - 30);
+            lastY = y + (Math.random() * 60 - 30);
+            draw({ clientX: x, clientY: y });
+        }
+        currentTool = prevTool;
+    },
+
+    randomize() {
+        generateRandom();
     }
-
-    window.addEventListener('message', (event) => {
-        const d = event.data;
-        if (!d || !d.type) return;
-
-        // --- Mouse event forwarding ---
-        if (d.type === 'omni-mouse') {
-            const target = document.getElementById('artCanvas') || document.getElementById('canvas-container') || document.body;
-            const ev = new MouseEvent(d.action, {
-                view: window, bubbles: true, cancelable: true,
-                clientX: d.clientX, clientY: d.clientY
-            });
-            target.dispatchEvent(ev);
-            try {
-                const touchMap = { mousedown: 'touchstart', mousemove: 'touchmove', mouseup: 'touchend' };
-                const touchType = touchMap[d.action];
-                if (touchType) {
-                    const touch = new Touch({
-                        identifier: Date.now(), target,
-                        clientX: d.clientX, clientY: d.clientY,
-                        radiusX: 2.5, radiusY: 2.5, rotationAngle: 10, force: 0.5
-                    });
-                    target.dispatchEvent(new TouchEvent(touchType, {
-                        cancelable: true, bubbles: true,
-                        touches: touchType === 'touchend' ? [] : [touch],
-                        targetTouches: touchType === 'touchend' ? [] : [touch],
-                        changedTouches: [touch]
-                    }));
-                }
-            } catch(e) {}
-        }
-
-        // --- Color override ---
-        if (d.type === 'omni-color') {
-            // Noir uses currentTool colors - override the draw color: window.omniColorOverride = d.color;
-            window.omniColorOverride = d.color;
-        }
-
-        // --- Size/Viscosity ---
-        if (d.type === 'omni-settings') {
-            window.omniSize = d.size;
-            window.omniVisc = d.viscosity;
-        }
-
-        // --- Capture for save ---
-        if (d.type === 'omni-capture') {
-            const c=document.getElementById('artCanvas'); window.parent.postMessage({type:'omni-capture-result',zIndex:d.zIndex,dataUrl:c.toDataURL('image/png')},'*');
-        }
-
-        // --- Speed control ---
-        if (d.type === 'omni-speed') {
-            window.omniSpeed = d.speed;
-        }
-
-        // --- Scatter burst ---
-        if (d.type === 'omni-scatter') {
-            const tools=['city','red','light','white','fog'];for(let i=0;i<15;i++){const x=Math.random()*width;const y=Math.random()*height;currentTool=tools[Math.floor(Math.random()*tools.length)];drawWithTool(x,y);}
-        }
-
-        // --- Effects ---
-        if (d.type === 'omni-effect') {
-            if (d.effect === 'mirror') {
-                const c = document.getElementById('artCanvas');
-                if (c) c.style.transform = c.style.transform === 'scaleX(-1)' ? '' : 'scaleX(-1)';
-            }
-            if (d.effect === 'invert') {
-                document.body.style.filter = document.body.style.filter === 'invert(1)' ? '' : 'invert(1)';
-            }
-            if (d.effect === 'randomize') {
-                generateRandom();
-            }
-        }
-    });
-})();
+});
 </script>
 </body>
 </html>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI's Trippy Vision - Interactive Neural Art</title>
+    <script src="../../omni-adapter.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
@@ -349,16 +350,20 @@
         resize();
 
         function draw() {
+            if (OMNI.paused) { requestAnimationFrame(draw); return; }
+
             // Clear with trail effect
             ctx.fillStyle = 'rgba(5, 5, 16, 0.1)';
             ctx.fillRect(0, 0, width, height);
 
-            const warpFactor = state.warp / 20;
-            const speedFactor = state.speed / 500;
+            // Viscosity maps to effective warp amplitude (state.warp untouched)
+            const warpFactor = (state.warp / 20) * OMNI.viscFactor;
+            // OMNI.speed composes with the applet's own flow slider
+            const speedFactor = (state.speed / 500) * OMNI.speed;
             time += speedFactor;
 
             // Draw Trippy Waves
-            ctx.lineWidth = 2;
+            ctx.lineWidth = 2 * OMNI.sizeFactor;
             
             // Create a "floor" effect similar to the image
             const lines = 30;
@@ -387,7 +392,7 @@
                 const y = (height/2) + Math.sin(time * (i+1) + nIndex) * (200 + Math.cos(time)*100);
                 
                 ctx.beginPath();
-                ctx.arc(x, y, 5 + (Math.sin(time*10)*2), 0, Math.PI * 2);
+                ctx.arc(x, y, (5 + (Math.sin(time*10)*2)) * OMNI.sizeFactor, 0, Math.PI * 2);
                 ctx.fillStyle = `hsla(${(state.colorOffset + nIndex*50)%360}, 100%, 70%, 0.8)`;
                 ctx.shadowBlur = 20;
                 ctx.shadowColor = ctx.fillStyle;
@@ -505,97 +510,55 @@
 
     </script>
 <script>
-// === OmniCanvas Integration Layer ===
-(function() {
-    // Hide UI when running as iframe layer
-    if (window.self !== window.top) {
-        document.addEventListener('DOMContentLoaded', () => {
-            document.body.classList.add('omni-transparent');
-            document.body.style.backgroundColor = 'transparent';
-            document.documentElement.style.backgroundColor = 'transparent';
-            // Hide applet-specific UI
-            const hide = document.querySelectorAll('.controls, #ui-layer, .brain-container');
-            hide.forEach(el => el.style.display = 'none');
-            // Make canvas background transparent
-            const canvas = document.getElementById('canvas-layer');
-            if (canvas) {
-                const ctx = canvas.getContext('2d');
-            }
-        });
+// === OmniCanvas bindings (protocol lives in ../../omni-adapter.js) ===
+OmniAdapter.register({
+    name: "AI's Trippy Vision",
+    hideSelectors: ['.controls', '#ui-layer', '.brain-container'],
+    eventTarget: () => canvas,
+    capture: () => canvas.toDataURL('image/png'),
+
+    controls: [
+        { id: 'warp', label: 'Neuro-Plasticity', type: 'slider', min: 1, max: 100, step: 1, value: 50 },
+        { id: 'hue', label: 'Dopamine (Hue)', type: 'slider', min: 0, max: 360, step: 1, value: 180 },
+        { id: 'flow', label: 'Synapse Speed', type: 'slider', min: 1, max: 50, step: 1, value: 10 },
+        { id: 'stimulate', label: 'Stimulate', type: 'action' }
+    ],
+
+    setControl(id, value) {
+        if (id === 'warp') { state.warp = Number(value); warpSlider.value = state.warp; }
+        if (id === 'hue') { state.colorOffset = Number(value); colorSlider.value = state.colorOffset; }
+        if (id === 'flow') { state.speed = Number(value); speedSlider.value = state.speed; }
+        if (id === 'stimulate') stimulateBrain();
+    },
+
+    onColor(color) {
+        // Proper hex -> hue; null = leave hallucination palette as-is
+        if (color) {
+            state.colorOffset = OmniAdapter.hexToHue(color);
+            colorSlider.value = state.colorOffset;
+        }
+    },
+
+    scatter() {
+        // Activate 3 random neurons the same way stimulateBrain does:
+        // activeNeurons holds INDICES into neuronPositions.
+        for (let i = 0; i < 3; i++) {
+            const idx = Math.floor(Math.random() * neuronPositions.length);
+            if (!state.activeNeurons.includes(idx)) state.activeNeurons.push(idx);
+        }
+        while (state.activeNeurons.length > 5) state.activeNeurons.shift();
+        renderNeurons();
+    },
+
+    randomize() {
+        state.warp = Math.floor(Math.random() * 100) + 1;
+        state.colorOffset = Math.floor(Math.random() * 360);
+        state.speed = Math.floor(Math.random() * 50) + 1;
+        warpSlider.value = state.warp;
+        colorSlider.value = state.colorOffset;
+        speedSlider.value = state.speed;
     }
-
-    window.addEventListener('message', (event) => {
-        const d = event.data;
-        if (!d || !d.type) return;
-
-        // --- Mouse event forwarding ---
-        if (d.type === 'omni-mouse') {
-            const target = document.getElementById('canvas-layer') || document.getElementById('ui-layer') || document.body;
-            const ev = new MouseEvent(d.action, {
-                view: window, bubbles: true, cancelable: true,
-                clientX: d.clientX, clientY: d.clientY
-            });
-            target.dispatchEvent(ev);
-            try {
-                const touchMap = { mousedown: 'touchstart', mousemove: 'touchmove', mouseup: 'touchend' };
-                const touchType = touchMap[d.action];
-                if (touchType) {
-                    const touch = new Touch({
-                        identifier: Date.now(), target,
-                        clientX: d.clientX, clientY: d.clientY,
-                        radiusX: 2.5, radiusY: 2.5, rotationAngle: 10, force: 0.5
-                    });
-                    target.dispatchEvent(new TouchEvent(touchType, {
-                        cancelable: true, bubbles: true,
-                        touches: touchType === 'touchend' ? [] : [touch],
-                        targetTouches: touchType === 'touchend' ? [] : [touch],
-                        changedTouches: [touch]
-                    }));
-                }
-            } catch(e) {}
-        }
-
-        // --- Color override ---
-        if (d.type === 'omni-color') {
-            if(typeof state!=='undefined') state.colorOffset = parseInt(d.color.substring(1),16) % 360;
-        }
-
-        // --- Size/Viscosity ---
-        if (d.type === 'omni-settings') {
-            window.omniSize = d.size;
-            window.omniVisc = d.viscosity;
-        }
-
-        // --- Capture for save ---
-        if (d.type === 'omni-capture') {
-            const c=document.getElementById('canvas-layer'); window.parent.postMessage({type:'omni-capture-result',zIndex:d.zIndex,dataUrl:c.toDataURL('image/png')},'*');
-        }
-
-        // --- Speed control ---
-        if (d.type === 'omni-speed') {
-            window.omniSpeed = d.speed;
-        }
-
-        // --- Scatter burst ---
-        if (d.type === 'omni-scatter') {
-            for(let i=0;i<5;i++){const idx=Math.floor(Math.random()*neuronPositions.length);state.activeNeurons.push({...neuronPositions[idx],time:0});}
-        }
-
-        // --- Effects ---
-        if (d.type === 'omni-effect') {
-            if (d.effect === 'mirror') {
-                const c = document.getElementById('canvas-layer');
-                if (c) c.style.transform = c.style.transform === 'scaleX(-1)' ? '' : 'scaleX(-1)';
-            }
-            if (d.effect === 'invert') {
-                document.body.style.filter = document.body.style.filter === 'invert(1)' ? '' : 'invert(1)';
-            }
-            if (d.effect === 'randomize') {
-                state.warp=Math.random()*100;state.colorOffset=Math.random()*360;state.speed=Math.random()*50;
-            }
-        }
-    });
-})();
+});
 </script>
 </body>
 </html>

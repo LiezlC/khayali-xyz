@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Impasto: Abstract Art Generator</title>
+    <script src="../../omni-adapter.js"></script>
     <style>
         :root {
             --bg-color: #1a1a1a;
@@ -187,7 +188,7 @@
         }
 
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="../../html2canvas.min.js"></script>
 </head>
 <body>
 
@@ -252,16 +253,19 @@
 
         // Drawing Logic
         const createStroke = (x, y, force = false) => {
-            // Don't draw too frequently unless forced (explosion)
-            if (!force && Math.random() > 0.6) return;
+            // Don't draw too frequently unless forced (explosion).
+            // Runny paint (low OMNI viscosity) lays down denser strokes,
+            // thick paint sparser. Neutral (viscFactor=1) keeps the 0.6 gate.
+            const keepChance = Math.min(1, 0.6 / Math.max(0.2, OMNI.viscFactor));
+            if (!force && Math.random() > keepChance) return;
 
             const stroke = document.createElement('div');
             stroke.classList.add('stroke');
             stroke.classList.add('animate');
 
             // Randomize dimensions to look like palette knife strokes
-            const width = 20 + Math.random() * 60;
-            const height = 10 + Math.random() * 40;
+            const width = (20 + Math.random() * 60) * OMNI.sizeFactor;
+            const height = (10 + Math.random() * 40) * OMNI.sizeFactor;
             
             // Random rotation
             const rotation = Math.random() * 360;
@@ -294,18 +298,22 @@
             const { clientX, clientY } = e.touches ? e.touches[0] : e;
             lastX = clientX;
             lastY = clientY;
-            createStroke(clientX, clientY, true);
+            // Strokes live in viewport space, so mirror across the window
+            OMNI.symPoints(clientX, clientY, window.innerWidth, window.innerHeight)
+                .forEach(([px, py]) => createStroke(px, py, true));
         };
 
         const moveDraw = (e) => {
             if (!isDrawing) return;
             const { clientX, clientY } = e.touches ? e.touches[0] : e;
-            
-            // Calculate distance to avoid stacking too many on one spot
+
+            // Calculate distance to avoid stacking too many on one spot.
+            // Runny paint (low OMNI viscosity) allows closer, denser strokes.
             const dist = Math.hypot(clientX - lastX, clientY - lastY);
-            
-            if (dist > 10) {
-                createStroke(clientX, clientY);
+
+            if (dist > 10 * Math.max(0.4, OMNI.viscFactor)) {
+                OMNI.symPoints(clientX, clientY, window.innerWidth, window.innerHeight)
+                    .forEach(([px, py]) => createStroke(px, py));
                 lastX = clientX;
                 lastY = clientY;
             }
@@ -348,8 +356,8 @@
                     stroke.classList.add('stroke');
                     stroke.classList.add('animate');
                     
-                    const width = 30 + Math.random() * 80;
-                    const height = 15 + Math.random() * 30;
+                    const width = (30 + Math.random() * 80) * OMNI.sizeFactor;
+                    const height = (15 + Math.random() * 30) * OMNI.sizeFactor;
                     
                     // Angle the stroke to point away from center (like an explosion)
                     const rotation = (angle * 180 / Math.PI); 
@@ -384,92 +392,48 @@
 
     </script>
 <script>
-// === OmniCanvas Integration Layer ===
-(function() {
-    // Hide UI when running as iframe layer
-    if (window.self !== window.top) {
-        document.addEventListener('DOMContentLoaded', () => {
-            document.body.classList.add('omni-transparent');
-            document.body.style.backgroundColor = 'transparent';
-            document.documentElement.style.backgroundColor = 'transparent';
-            // Hide applet-specific UI
-            const hide = document.querySelectorAll('#intro, #controls');
-            hide.forEach(el => el.style.display = 'none');
-        });
+// === OmniCanvas bindings (protocol lives in ../../omni-adapter.js) ===
+// Note: omni-speed is intentionally a no-op here — impasto strokes are
+// static DOM divs with no animation loop, so speed has nothing to drive.
+const NATIVE_PALETTE = ['#e63946', '#f1faee', '#a8dadc', '#457b9d', '#1d3557', '#ffb703', '#fb8500', '#2a9d8f'];
+
+OmniAdapter.register({
+    name: 'Digital Impasto',
+    hideSelectors: ['#intro', '#controls'],
+    eventTarget: () => container,
+    capture: () => html2canvas(document.body, { backgroundColor: null, logging: false })
+        .then(c => c.toDataURL('image/png')),
+
+    controls: [
+        { id: 'explode', label: '💥 Explode', type: 'action' },
+        { id: 'clear', label: 'Clear', type: 'action' }
+    ],
+
+    setControl(id) {
+        if (id === 'explode') triggerExplosion();
+        if (id === 'clear') {
+            container.innerHTML = '';
+            strokeCount = 0;
+        }
+    },
+
+    onColor(color) {
+        // Revert to a native palette color when the omni override clears
+        currentColor = color || NATIVE_PALETTE[Math.floor(Math.random() * NATIVE_PALETTE.length)];
+    },
+
+    scatter() {
+        for (let i = 0; i < 25; i++) {
+            // force=true so the density gate can't swallow them
+            createStroke(Math.random() * window.innerWidth, Math.random() * window.innerHeight, true);
+        }
+    },
+
+    randomize() {
+        currentColor = NATIVE_PALETTE[Math.floor(Math.random() * NATIVE_PALETTE.length)];
+        triggerExplosion();
     }
-
-    window.addEventListener('message', (event) => {
-        const d = event.data;
-        if (!d || !d.type) return;
-
-        // --- Mouse event forwarding ---
-        if (d.type === 'omni-mouse') {
-            const target = document.getElementById('canvas-container') || document.body;
-            const ev = new MouseEvent(d.action, {
-                view: window, bubbles: true, cancelable: true,
-                clientX: d.clientX, clientY: d.clientY
-            });
-            target.dispatchEvent(ev);
-            try {
-                const touchMap = { mousedown: 'touchstart', mousemove: 'touchmove', mouseup: 'touchend' };
-                const touchType = touchMap[d.action];
-                if (touchType) {
-                    const touch = new Touch({
-                        identifier: Date.now(), target,
-                        clientX: d.clientX, clientY: d.clientY,
-                        radiusX: 2.5, radiusY: 2.5, rotationAngle: 10, force: 0.5
-                    });
-                    target.dispatchEvent(new TouchEvent(touchType, {
-                        cancelable: true, bubbles: true,
-                        touches: touchType === 'touchend' ? [] : [touch],
-                        targetTouches: touchType === 'touchend' ? [] : [touch],
-                        changedTouches: [touch]
-                    }));
-                }
-            } catch(e) {}
-        }
-
-        // --- Color override ---
-        if (d.type === 'omni-color') {
-            if(typeof currentColor!=='undefined') currentColor=d.color;
-        }
-
-        // --- Size/Viscosity ---
-        if (d.type === 'omni-settings') {
-            window.omniSize = d.size;
-            window.omniVisc = d.viscosity;
-        }
-
-        // --- Capture for save ---
-        if (d.type === 'omni-capture') {
-            html2canvas(document.body,{backgroundColor:null,logging:false}).then(c=>{window.parent.postMessage({type:'omni-capture-result',zIndex:d.zIndex,dataUrl:c.toDataURL('image/png')},'*');});
-        }
-
-        // --- Speed control ---
-        if (d.type === 'omni-speed') {
-            window.omniSpeed = d.speed;
-        }
-
-        // --- Scatter burst ---
-        if (d.type === 'omni-scatter') {
-            for(let i=0;i<30;i++){createStroke(Math.random()*window.innerWidth,Math.random()*window.innerHeight);}
-        }
-
-        // --- Effects ---
-        if (d.type === 'omni-effect') {
-            if (d.effect === 'mirror') {
-                const c = document.getElementById('canvas-container');
-                if (c) c.style.transform = c.style.transform === 'scaleX(-1)' ? '' : 'scaleX(-1)';
-            }
-            if (d.effect === 'invert') {
-                document.body.style.filter = document.body.style.filter === 'invert(1)' ? '' : 'invert(1)';
-            }
-            if (d.effect === 'randomize') {
-                const colors=['#e63946','#f1faee','#a8dadc','#457b9d','#1d3557','#ffbe0b','#fb5607','#8ac926'];currentColor=colors[Math.floor(Math.random()*colors.length)];createExplosion();
-            }
-        }
-    });
-})();
+});
 </script>
 </body>
 </html>

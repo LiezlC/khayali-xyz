@@ -257,13 +257,102 @@ body, html {
 /* === Layer Row Controls === */
 .layer-row {
     display: grid;
-    grid-template-columns: 24px 1fr 60px 80px;
+    grid-template-columns: 24px 1fr 52px 72px 18px;
     align-items: center;
     gap: 6px;
     margin-bottom: 8px;
     font-size: 0.85rem;
     padding: 4px 0;
 }
+
+.layer-expand {
+    background: transparent;
+    border: none;
+    color: #777;
+    cursor: pointer;
+    font-size: 0.8rem;
+    padding: 0;
+    transition: color 0.2s, transform 0.2s;
+}
+.layer-expand:hover { color: var(--accent); }
+.layer-expand.open { color: var(--accent); }
+
+/* Per-layer native control panels (populated from omni-hello manifests) */
+.layer-native {
+    margin: -4px 0 10px 30px;
+    padding: 8px 10px;
+    background: rgba(0, 243, 255, 0.04);
+    border-left: 2px solid rgba(0, 243, 255, 0.3);
+    border-radius: 0 6px 6px 0;
+}
+.native-waiting {
+    font-size: 0.72rem;
+    color: #666;
+    margin: 2px 0;
+    font-style: italic;
+}
+.native-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    font-size: 0.75rem;
+}
+.native-row:last-child { margin-bottom: 0; }
+.native-row label {
+    color: #aaa;
+    min-width: 52px;
+    flex-shrink: 0;
+}
+.native-row input[type="range"] {
+    flex: 1;
+    height: 3px;
+    min-width: 0;
+}
+.native-row select {
+    flex: 1;
+    background: rgba(0,0,0,0.4);
+    color: #ccc;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 0.7rem;
+    padding: 2px;
+    min-width: 0;
+}
+.native-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    flex: 1;
+}
+.native-buttons button {
+    padding: 3px 8px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: #ccc;
+    font-size: 0.68rem;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.native-buttons button:hover { border-color: var(--accent); color: white; }
+.native-buttons button.active {
+    background: rgba(0,243,255,0.15);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+.native-action {
+    width: 100%;
+    padding: 5px 8px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: #ccc;
+    font-size: 0.72rem;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.native-action:hover { border-color: var(--accent); color: white; }
 
 .layer-row input[type="checkbox"] {
     appearance: none;
@@ -441,19 +530,42 @@ body, html {
 #ui-panel::-webkit-scrollbar { width: 4px; }
 #ui-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 2px; }
 
-/* === Kaleidoscope Effect === */
-#artboard.kaleidoscope-2 { }
-#artboard.kaleidoscope-4 .art-layer {
-    clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+/* === Presets / Compositions === */
+.preset-row {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 8px;
 }
-.kaleidoscope-reflect {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    transform: scaleX(-1);
-    z-index: 45;
+.preset-row select {
+    flex: 1;
+    background: rgba(0,0,0,0.4);
+    color: #ccc;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    padding: 4px;
+    min-width: 0;
 }
+.preset-row .btn-fx { flex-shrink: 0; padding: 4px 10px; }
+.btn-wide { width: 100%; padding: 8px; }
+
+/* === Color picker row === */
+.color-picker-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.color-picker-wrapper label { font-size: 0.8rem; color: #ccc; }
+.color-picker-wrapper input[type="color"] {
+    flex: 1;
+    height: 28px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    cursor: pointer;
+    min-width: 0;
+}
+.color-picker-wrapper .btn-fx { flex-shrink: 0; padding: 5px 8px; }
 
 /* === Glitch Effect === */
 @keyframes glitchShake {
