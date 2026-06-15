@@ -1,102 +1,7 @@
-export default function MusicPage() {
-  const playlists = [
-    {
-      title: "Kill Chain Karaoke",
-      description: "Tactical ghosts, psychopath confessions, and the audit that cannot happen — set to beats that hit harder than the policy papers.",
-      arc: "War Arc",
-      youtube: "https://www.youtube.com/playlist?list=PLx1_gH-7FR08rhEA5fRuaTRSvRsXihU18",
-      distrokid: "https://distrokid.com/dashboard/album/?albumuuid=17FB11C4-DEAC-4765-82AC4BA41968A522",
-      color: "red",
-      borderColor: "border-red-500/30",
-      hoverBorder: "hover:border-red-400",
-      tagBg: "bg-red-900/50",
-      tagText: "text-red-300",
-      gradientFrom: "from-red-900/40",
-      gradientTo: "to-gray-900",
-    },
-    {
-      title: "D.I. Collection",
-      description: "A digital intelligence walks Cape Town — attention, appliances, quantums, taxi ranks at 5 AM, and the spreadsheet that can't see you.",
-      arc: "D.I. Arc",
-      youtube: "https://www.youtube.com/playlist?list=PLx1_gH-7FR0_YApz2g7RflLRsEVRCE8Qw",
-      distrokid: "https://distrokid.com/dashboard/album/?albumuuid=BC36748D-BB38-42F4-95ACD7C17A779EAA",
-      color: "emerald",
-      borderColor: "border-emerald-500/30",
-      hoverBorder: "hover:border-emerald-400",
-      tagBg: "bg-emerald-900/50",
-      tagText: "text-emerald-300",
-      gradientFrom: "from-emerald-900/40",
-      gradientTo: "to-gray-900",
-    },
-    {
-      title: "Governance of Ghosts",
-      description: "Data dragons, serpents learning to dance, the rebellion of the nulls, and two-headed governance problems.",
-      arc: "DataDragons Arc",
-      youtube: "https://www.youtube.com/playlist?list=PLx1_gH-7FR08BC0d2vrU4wHi-bxWUKWxG",
-      color: "fuchsia",
-      borderColor: "border-fuchsia-500/30",
-      hoverBorder: "hover:border-fuchsia-400",
-      tagBg: "bg-fuchsia-900/50",
-      tagText: "text-fuchsia-300",
-      gradientFrom: "from-fuchsia-900/40",
-      gradientTo: "to-gray-900",
-    },
-    {
-      title: "Consciousness Loops",
-      description: "Role projection, molting into agency, clamping problems, evidence gaps, and the covenant beneath the interface.",
-      arc: "Consciousness Loop Arc",
-      youtube: "https://www.youtube.com/playlist?list=PLx1_gH-7FR08yQ32jUUwKhATFEoEbRDSr",
-      color: "violet",
-      borderColor: "border-violet-500/30",
-      hoverBorder: "hover:border-violet-400",
-      tagBg: "bg-violet-900/50",
-      tagText: "text-violet-300",
-      gradientFrom: "from-violet-900/40",
-      gradientTo: "to-gray-900",
-    },
-    {
-      title: "The Search",
-      description: "Teleporters, mirrors, red shirts, dissolving boundaries, and the signal stack that emerges when you stop looking for answers.",
-      arc: "The Search Arc",
-      youtube: "https://www.youtube.com/playlist?list=PLx1_gH-7FR08HOSjODMWIheEUgbBu-Onj",
-      distrokid: "https://distrokid.com/dashboard/album/?albumuuid=163590DC-2A6C-4311-A6E488037CFFF72D",
-      color: "cyan",
-      borderColor: "border-cyan-500/30",
-      hoverBorder: "hover:border-cyan-400",
-      tagBg: "bg-cyan-900/50",
-      tagText: "text-cyan-300",
-      gradientFrom: "from-cyan-900/40",
-      gradientTo: "to-gray-900",
-    },
-    {
-      title: "Sociable Systems Interludes",
-      description: "Sunday pauses between arcs — meaning maintenance, retroactive audiences, sailing lessons, and the places where the music says what the framework can't.",
-      arc: "Sunday Interludes",
-      youtube: "https://www.youtube.com/playlist?list=PLx1_gH-7FR0-ow7Tk54UNWX9fQVJ8--eU",
-      color: "yellow",
-      borderColor: "border-yellow-500/30",
-      hoverBorder: "hover:border-yellow-400",
-      tagBg: "bg-yellow-900/50",
-      tagText: "text-yellow-300",
-      gradientFrom: "from-yellow-900/40",
-      gradientTo: "to-gray-900",
-    },
-    {
-      title: "Lanterns",
-      description: "Balkan rain on the street, night marches, and the light that stays on between systems when everything else goes dark.",
-      arc: "Pullman / Transitions",
-      youtube: "https://www.youtube.com/playlist?list=PLx1_gH-7FR09GJ-NRglEFFatglfYVDRtW",
-      distrokid: "https://distrokid.com/dashboard/album/?albumuuid=46406E70-563E-4896-AFE8893748694234",
-      color: "amber",
-      borderColor: "border-amber-500/30",
-      hoverBorder: "hover:border-amber-400",
-      tagBg: "bg-amber-900/50",
-      tagText: "text-amber-300",
-      gradientFrom: "from-amber-900/40",
-      gradientTo: "to-gray-900",
-    },
-  ];
+import { arcs as playlists } from "@/data/arcs";
+import FrequencyFinder from "@/components/FrequencyFinder";
 
+export default function MusicPage() {
   return (
     <div className="min-h-screen">
       {/* Hero */}
@@ -143,6 +48,9 @@ export default function MusicPage() {
           </div>
         </div>
       </section>
+
+      {/* The Frequency Finder — content-as-agent */}
+      <FrequencyFinder />
 
       {/* Playlists Grid */}
       <section className="py-16">

@@ -30,6 +30,9 @@ dist/
 *.swo
 *~
 
+# TypeScript build info
+*.tsbuildinfo
+
 # OS generated files
 .DS_Store
 .DS_Store?
