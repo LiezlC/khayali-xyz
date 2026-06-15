@@ -1,5 +1,6 @@
 import { arcs as playlists } from "@/data/arcs";
 import FrequencyFinder from "@/components/FrequencyFinder";
+import TrackBriefGenerator from "@/components/TrackBriefGenerator";
 
 export default function MusicPage() {
   return (
@@ -112,6 +113,9 @@ export default function MusicPage() {
           </div>
         </div>
       </section>
+
+      {/* The Track Brief Generator — content-as-agent */}
+      <TrackBriefGenerator />
 
       {/* About the Music */}
       <section className="py-16 bg-gray-800/20">
