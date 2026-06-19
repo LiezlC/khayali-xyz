@@ -6,9 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "index:build": "node scripts/build-pinecone-index.mjs"
   },
   "dependencies": {
+    "@pinecone-database/pinecone": "^8.0.0",
     "cloudinary": "^2.0.0",
     "next-cloudinary": "^6.0.0",
     "@tailwindcss/typography": "^0.5.16",

@@ -1,4 +1,5 @@
 import ReactMarkdown from 'react-markdown';
+import type { Metadata } from 'next';
 import { getContentBySlug, getContentByCategory } from '@/utils/content';
 import Link from 'next/link';
 
@@ -12,6 +13,24 @@ export async function generateStaticParams() {
   return chats.map((chat) => ({
     slug: chat.slug,
   }));
+}
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const chat = await getChat(params.slug);
+  if (!chat) return {};
+  const title = chat.title;
+  const description = chat.excerpt || `A consciousness dialogue on khayali.`;
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: 'article',
+      url: `https://khayali.xyz/chats/${params.slug}`,
+    },
+    twitter: { card: 'summary', title, description },
+  };
 }
 
 export default async function ChatPage({ params }: { params: { slug: string } }) {

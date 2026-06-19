@@ -2,9 +2,72 @@ import type { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
 
+const siteUrl = 'https://khayali.xyz'
+
 export const metadata: Metadata = {
-  title: 'khayali · a carbon-and-silicon imaginarium',
-  description: 'The arty side of the multivariate. Khayali Tunes, collaborative writing, consciousness banter, and visual experiments by Liezl Coetzee. Imagination running loose where carbon meets silicon. (For the AI-governance work, that moved to its own house: sociable.systems.)',
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: 'khayali · a carbon-and-silicon imaginarium',
+    template: '%s · khayali',
+  },
+  description: 'The arty side of the multivariate. Khayali Tunes (AI music arcs), collaborative writing, consciousness dialogues, 100+ interactive applets, and the Observatory — by Liezl Coetzee.',
+  keywords: ['AI music', 'Khayali Tunes', 'interactive applets', 'consciousness', 'generative art', 'Liezl Coetzee', 'AI collaboration', 'playspace'],
+  authors: [{ name: 'Liezl Coetzee', url: siteUrl }],
+  creator: 'Liezl Coetzee',
+  openGraph: {
+    type: 'website',
+    locale: 'en_ZA',
+    url: siteUrl,
+    siteName: 'khayali',
+    title: 'khayali · a carbon-and-silicon imaginarium',
+    description: 'AI music arcs, 100+ interactive applets, consciousness dialogues, and generative art experiments by Liezl Coetzee.',
+    images: [
+      {
+        url: '/og-default.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'khayali — a carbon-and-silicon imaginarium',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'khayali · a carbon-and-silicon imaginarium',
+    description: 'AI music arcs, 100+ interactive applets, consciousness dialogues, and generative art experiments by Liezl Coetzee.',
+    images: ['/og-default.jpg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+    },
+  },
+  alternates: {
+    canonical: siteUrl,
+  },
+}
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Liezl Coetzee',
+  url: siteUrl,
+  sameAs: [
+    'https://www.youtube.com/@khayali-tunes',
+    'https://soundcloud.com/khayali',
+    'https://www.linkedin.com/in/liezl-coetzee/',
+    'https://substack.com/@khayali',
+  ],
+  knowsAbout: ['AI music', 'generative art', 'AI governance', 'consciousness exploration'],
+  worksFor: {
+    '@type': 'Organization',
+    name: 'khayali',
+    url: siteUrl,
+    description: 'A carbon-and-silicon imaginarium: AI music, interactive experiments, and consciousness exploration.',
+  },
 }
 
 export default function RootLayout({
@@ -14,11 +77,24 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="bg-gray-900 text-white">
+        {/* Skip to main content — accessibility */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:bg-purple-600 focus:text-white focus:rounded focus:font-semibold"
+        >
+          Skip to main content
+        </a>
         <header className="border-b border-gray-800">
-          <nav className="container mx-auto px-4 py-6">
+          <nav className="container mx-auto px-4 py-6" aria-label="Main navigation">
             <div className="flex items-center justify-between">
-              <a href="/" className="text-2xl font-bold lowercase tracking-tight bg-gradient-to-r from-purple-400 via-pink-400 to-amber-300 bg-clip-text text-transparent">
+              <a href="/" className="text-2xl font-bold lowercase tracking-tight bg-gradient-to-r from-purple-400 via-pink-400 to-amber-300 bg-clip-text text-transparent" aria-label="khayali — home">
                 khayali
               </a>
               <div className="flex items-center space-x-6">
@@ -27,14 +103,15 @@ export default function RootLayout({
                 <a href="/writings" className="hover:text-purple-400 transition-colors">Writings</a>
                 <a href="/observatory" className="hover:text-blue-400 transition-colors">Observatory</a>
                 <a href="/labs" className="hover:text-amber-300 transition-colors">Labs</a>
-                <a href="https://sociable.systems" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-500 hover:text-teal-400 transition-colors">Sociable Systems ↗</a>
+                <a href="/search" className="hover:text-purple-400 transition-colors">Search</a>
+                <a href="https://sociable.systems" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-500 hover:text-teal-400 transition-colors" aria-label="Sociable Systems (opens in new tab)">Sociable Systems ↗</a>
               </div>
             </div>
           </nav>
         </header>
-        <main>{children}</main>
+        <main id="main-content">{children}</main>
         <Analytics />
-        <footer className="border-t border-gray-800 mt-20">
+        <footer className="border-t border-gray-800 mt-20" aria-label="Site footer">
           <div className="container mx-auto px-4 py-12">
             {/* Footer Links Grid */}
             <div className="grid md:grid-cols-4 gap-8 mb-8">
@@ -43,13 +120,13 @@ export default function RootLayout({
                 <h3 className="text-white font-bold mb-4">Publications</h3>
                 <ul className="space-y-2 text-gray-400">
                   <li>
-                    <a href="https://substack.com/@khayali?" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors">
-                      ✍️ Substack
+                    <a href="https://substack.com/@khayali?" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors" aria-label="Substack newsletter (opens in new tab)">
+                      <span aria-hidden="true">✍️</span> Substack
                     </a>
                   </li>
                   <li>
-                    <a href="https://medium.com/@liezlc_48039" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors">
-                      📝 Medium
+                    <a href="https://medium.com/@liezlc_48039" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors" aria-label="Medium blog (opens in new tab)">
+                      <span aria-hidden="true">📝</span> Medium
                     </a>
                   </li>
                 </ul>
@@ -60,23 +137,23 @@ export default function RootLayout({
                 <h3 className="text-white font-bold mb-4">Video Channels</h3>
                 <ul className="space-y-2 text-gray-400">
                   <li>
-                    <a href="https://www.youtube.com/@AccidAInthro" target="_blank" rel="noopener noreferrer" className="hover:text-red-400 transition-colors">
-                      🎬 AccidAInthro
+                    <a href="https://www.youtube.com/@AccidAInthro" target="_blank" rel="noopener noreferrer" className="hover:text-red-400 transition-colors" aria-label="AccidAInthro (opens in new tab)">
+                      <span aria-hidden="true">🎬</span> AccidAInthro
                     </a>
                   </li>
                   <li>
-                    <a href="https://www.youtube.com/@Scrib-Li" target="_blank" rel="noopener noreferrer" className="hover:text-red-400 transition-colors">
-                      📹 Scrib-Li
+                    <a href="https://www.youtube.com/@Scrib-Li" target="_blank" rel="noopener noreferrer" className="hover:text-red-400 transition-colors" aria-label="Scrib-Li (opens in new tab)">
+                      <span aria-hidden="true">📹</span> Scrib-Li
                     </a>
                   </li>
                   <li>
-                    <a href="https://www.youtube.com/@LiezlCoetzee" target="_blank" rel="noopener noreferrer" className="hover:text-red-400 transition-colors">
-                      🎥 Liezl Coetzee
+                    <a href="https://www.youtube.com/@LiezlCoetzee" target="_blank" rel="noopener noreferrer" className="hover:text-red-400 transition-colors" aria-label="LiezlCoetzee (opens in new tab)">
+                      <span aria-hidden="true">🎥</span> Liezl Coetzee
                     </a>
                   </li>
                   <li>
-                    <a href="https://www.youtube.com/@khayali-tunes" target="_blank" rel="noopener noreferrer" className="hover:text-red-400 transition-colors">
-                      🎵 Khayali Tunes
+                    <a href="https://www.youtube.com/@khayali-tunes" target="_blank" rel="noopener noreferrer" className="hover:text-red-400 transition-colors" aria-label="khayali-tunes (opens in new tab)">
+                      <span aria-hidden="true">🎵</span> Khayali Tunes
                     </a>
                   </li>
                 </ul>
@@ -87,23 +164,23 @@ export default function RootLayout({
                 <h3 className="text-white font-bold mb-4">Audio & Social</h3>
                 <ul className="space-y-2 text-gray-400">
                   <li>
-                    <a href="https://soundcloud.com/khayali" target="_blank" rel="noopener noreferrer" className="hover:text-orange-400 transition-colors">
-                      🎵 SoundCloud
+                    <a href="https://soundcloud.com/khayali" target="_blank" rel="noopener noreferrer" className="hover:text-orange-400 transition-colors" aria-label="SoundCloud (opens in new tab)">
+                      <span aria-hidden="true">🎵</span> SoundCloud
                     </a>
                   </li>
                   <li>
-                    <a href="https://www.linkedin.com/in/liezl-coetzee/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors">
-                      💼 LinkedIn
+                    <a href="https://www.linkedin.com/in/liezl-coetzee/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors" aria-label="LinkedIn (opens in new tab)">
+                      <span aria-hidden="true">💼</span> LinkedIn
                     </a>
                   </li>
                   <li>
-                    <a href="https://www.facebook.com/liezlc/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors">
-                      👤 Facebook - Liezl
+                    <a href="https://www.facebook.com/liezlc/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors" aria-label="Facebook - Liezl (opens in new tab)">
+                      <span aria-hidden="true">👤</span> Facebook - Liezl
                     </a>
                   </li>
                   <li>
-                    <a href="https://www.facebook.com/saraloosafarm/" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors">
-                      🌾 Facebook - Saraloosa Farm
+                    <a href="https://www.facebook.com/saraloosafarm/" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors" aria-label="Facebook - Saraloosa Farm (opens in new tab)">
+                      <span aria-hidden="true">🌾</span> Facebook - Saraloosa Farm
                     </a>
                   </li>
                 </ul>
@@ -114,8 +191,8 @@ export default function RootLayout({
                 <h3 className="text-white font-bold mb-4">Contact</h3>
                 <ul className="space-y-2 text-gray-400">
                   <li>
-                    <a href="mailto:liezlc@gmail.com" className="hover:text-purple-400 transition-colors">
-                      ✉️ liezlc@gmail.com
+                    <a href="mailto:liezlc@gmail.com" className="hover:text-purple-400 transition-colors" aria-label="Email: liezlc@gmail.com">
+                      <span aria-hidden="true">✉️</span> liezlc@gmail.com
                     </a>
                   </li>
                 </ul>

@@ -1,4 +1,6 @@
-export const metadata = {
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
   title: "The Observatory — khayali",
   description:
     "Eight instruments for looking at everything at once: warp drive simulations, cosmic scale explorers, generative nebulae, quantum foam, and a monastery for digital minds.",
