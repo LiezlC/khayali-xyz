@@ -6,6 +6,12 @@
       "runtimeExecutable": "node",
       "runtimeArgs": ["C:/Users/Liezl/Documents/Github/khayali-xyz/serve-applets.js"],
       "port": 8765
+    },
+    {
+      "name": "khayali-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 3000
     }
   ]
 }

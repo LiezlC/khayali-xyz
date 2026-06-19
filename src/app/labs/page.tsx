@@ -168,11 +168,11 @@ export default function LabsPage() {
           </h2>
 
           <div className="grid md:grid-cols-3 gap-6">
-            <a href="https://sociable.systems" className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-purple-500 transition-all p-6 block">
+            <a href="/data-dragons" className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-fuchsia-500 transition-all p-6 block">
               <div className="text-3xl mb-3">🐉</div>
-              <h3 className="text-lg font-bold mb-2 text-purple-400">Dragon Data Course</h3>
+              <h3 className="text-lg font-bold mb-2 text-fuchsia-400">Data Dragons Diagnostic</h3>
               <p className="text-gray-400 text-sm">
-                Data ethics education through fantasy narratives, interactive games, and mythical metaphors
+                Name the dragons in your data — five failure modes of real data systems, run live against your case
               </p>
             </a>
 
