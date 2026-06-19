@@ -1,4 +1,5 @@
 import ReactMarkdown from 'react-markdown';
+import type { Metadata } from 'next';
 import { getContentBySlug, getContentByCategory } from '@/utils/content';
 
 async function getWriting(slug: string) {
@@ -11,6 +12,25 @@ export async function generateStaticParams() {
   return writings.map((writing) => ({
     slug: writing.slug,
   }));
+}
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const writing = await getWriting(params.slug);
+  if (!writing) return {};
+  const title = writing.title;
+  const description = writing.excerpt || `A writing by Liezl Coetzee on khayali.`;
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: 'article',
+      url: `https://khayali.xyz/writings/${params.slug}`,
+    },
+    twitter: { card: 'summary', title, description },
+    other: writing.date ? { 'article:published_time': writing.date } : {},
+  };
 }
 
 export default async function WritingPage({ params }: { params: { slug: string } }) {

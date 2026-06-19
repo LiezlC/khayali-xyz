@@ -1,3 +1,35 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'TunAI — Khayali Tunes',
+  description: 'AI-generated music as research output. Seven playlists spanning AI accountability, governance, consciousness loops, and transitions — by Liezl Coetzee. On YouTube, SoundCloud, and streaming platforms.',
+  openGraph: {
+    title: 'TunAI — Khayali Tunes',
+    description: 'AI-generated music as research output. Seven playlists spanning AI accountability, governance, consciousness loops, and transitions.',
+    url: 'https://khayali.xyz/music',
+    type: 'music.playlist',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'TunAI — Khayali Tunes',
+    description: 'AI-generated music as research output — seven arcs, each a companion to a newsletter cycle.',
+  },
+};
+
+const musicJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'MusicPlaylist',
+  name: 'Khayali Tunes — AI Music Arcs',
+  description: 'AI-generated music as research output by Liezl Coetzee. Seven playlists spanning AI accountability, governance, consciousness, and transitions.',
+  url: 'https://khayali.xyz/music',
+  creator: {
+    '@type': 'Person',
+    name: 'Liezl Coetzee',
+    url: 'https://khayali.xyz',
+  },
+  numTracks: 7,
+};
+
 export default function MusicPage() {
   const playlists = [
     {
@@ -99,6 +131,10 @@ export default function MusicPage() {
 
   return (
     <div className="min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(musicJsonLd) }}
+      />
       {/* Hero */}
       <section className="relative py-20 overflow-hidden bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900">
         <div className="container mx-auto px-4 max-w-5xl">

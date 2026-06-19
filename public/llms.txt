@@ -1,0 +1,54 @@
+# khayali.xyz — a carbon-and-silicon imaginarium
+
+## About
+
+khayali (meaning "of the imagination") is the creative hub of Liezl Coetzee, a South African researcher and artist working at the intersection of human and machine intelligence.
+
+The site has five main wings:
+
+### Khayali Tunes / Music (/music)
+AI-generated music as research output. Seven playlist arcs, each a companion to a Sociable Systems newsletter cycle:
+- Kill Chain Karaoke (War Arc)
+- D.I. Collection (D.I. Arc — a digital intelligence walks Cape Town)
+- Governance of Ghosts (DataDragons Arc)
+- Consciousness Loops
+- The Search
+- Sociable Systems Interludes (Sunday pauses between arcs)
+- Lanterns (Pullman / Transitions)
+
+Available on YouTube (@khayali-tunes), SoundCloud, and streaming platforms via DistroKid / 11138307 Records DK.
+
+### Playspace (/playspace)
+100+ interactive HTML applets organised into six wings:
+- AI Futures (39 simulators, ethics engines, consciousness toys)
+- Mindfulness & Sound (25 soundscapes and contemplative spaces)
+- Visual Art (11 generative studios)
+- Farming Sims (12 cozy homestead/tycoon games)
+- Memory & Pattern (2 games)
+- Curios (3 arcade oddities)
+- OmniCanvas (centrepiece — multi-layer compositor stacking visual-art applets)
+
+### Observatory (/observatory)
+Iframe-embedded cosmic instruments: warp drive simulations, nebulae, quantum foam, scale explorers, and a monastery for digital minds.
+
+### Writings (/writings)
+Collaborative explorations at the intersection of human and artificial intelligence. Loaded from markdown files in /content/writings/.
+
+### Consciousness Dialogues (/chats)
+Deep conversations exploring consciousness, intelligence, and the loop between human and artificial minds. Loaded from /content/chats/.
+
+## Related
+- Sociable Systems (sociable.systems) — AI governance and accountability research, the professional practice that grew out of this hub and moved to its own home.
+
+## Contact
+Liezl Coetzee · liezlc@gmail.com · https://khayali.xyz
+
+## Technical
+Built with Next.js 14 (App Router), TypeScript, Tailwind CSS, Framer Motion.
+Content loaded via gray-matter from markdown files with YAML frontmatter.
+Deployed on Vercel at khayali.xyz.
+
+## Crawling notes
+All routes are public. /sitemap.xml lists all dynamic content pages.
+Applets live under /applets/ (static HTML) and /public/observatory/ (static HTML).
+No login walls. No paywalled content.

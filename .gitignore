@@ -106,6 +106,10 @@ experiment-logs/
 personal-reflections/
 nul
 
+# Private/local drop zones — ignore any "_"-prefixed folder at any depth (e.g. _internal).
+# Mirrors the convention in sociable.systems. Put maybe-private material under _internal/.
+_*/
+
 # Large audio/video files — these live on DistroKid/YouTube, not in git
 *.wav
 *.mp3
