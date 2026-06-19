@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/react'
+import SiteNav from '@/components/SiteNav'
 import './globals.css'
 
 const siteUrl = 'https://khayali.xyz'
@@ -91,24 +92,7 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        <header className="border-b border-gray-800">
-          <nav className="container mx-auto px-4 py-6" aria-label="Main navigation">
-            <div className="flex items-center justify-between">
-              <a href="/" className="text-2xl font-bold lowercase tracking-tight bg-gradient-to-r from-purple-400 via-pink-400 to-amber-300 bg-clip-text text-transparent" aria-label="khayali — home">
-                khayali
-              </a>
-              <div className="flex items-center space-x-6">
-                <a href="/music" className="hover:text-pink-400 transition-colors font-semibold">Tunes</a>
-                <a href="/playspace" className="hover:text-amber-300 transition-colors font-semibold">Playspace</a>
-                <a href="/writings" className="hover:text-purple-400 transition-colors">Writings</a>
-                <a href="/observatory" className="hover:text-blue-400 transition-colors">Observatory</a>
-                <a href="/labs" className="hover:text-amber-300 transition-colors">Labs</a>
-                <a href="/search" className="hover:text-purple-400 transition-colors">Search</a>
-                <a href="https://sociable.systems" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-500 hover:text-teal-400 transition-colors" aria-label="Sociable Systems (opens in new tab)">Sociable Systems ↗</a>
-              </div>
-            </div>
-          </nav>
-        </header>
+        <SiteNav />
         <main id="main-content">{children}</main>
         <Analytics />
         <footer className="border-t border-gray-800 mt-20" aria-label="Site footer">
