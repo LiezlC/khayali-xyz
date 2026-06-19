@@ -1,3 +1,5 @@
+import { cld } from '@/lib/cloudinary'
+
 export default function HomePage() {
   return (
     <div className="min-h-screen">
@@ -43,7 +45,8 @@ export default function HomePage() {
             The music started as a side passion and quietly took over the place. AI-built tracks with actual arguments in them: tactical ghosts, a digital intelligence loose in Cape Town at 5 a.m., data dragons learning to dance, and the occasional bureaucratic deep-house anthem.
           </p>
           <a href="/music" className="block mb-10 rounded-2xl overflow-hidden border border-purple-500/30 hover:border-pink-400/60 transition-all shadow-lg shadow-purple-900/20">
-            <img src="/images/homepage/khayali-tunes-banner.webp" alt="Khayali Tunes — Melodies of the Machine Mind" className="w-full" />
+            {/* cld() is a no-op when NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME is unset */}
+            <img src={cld('/images/homepage/khayali-tunes-banner.webp', { width: 1200 })} alt="Khayali Tunes — Melodies of the Machine Mind" className="w-full" />
           </a>
           <div className="grid md:grid-cols-3 gap-6 mb-10">
             <a href="/music" className="bg-gray-800/50 rounded-xl border border-red-500/30 hover:border-red-400 transition-all p-6 block">
