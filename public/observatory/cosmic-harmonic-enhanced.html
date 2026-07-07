@@ -396,149 +396,6 @@
             color: rgba(255, 255, 255, 0.5);
             font-family: 'Courier New', monospace;
         }
-
-        /* Object inspector plate - glassmorphic, gold/blue, Georgia */
-        .object-plate {
-            position: fixed;
-            top: 170px;
-            left: 30px;
-            max-width: 340px;
-            background: linear-gradient(145deg,
-                rgba(20, 30, 60, 0.92) 0%,
-                rgba(40, 50, 90, 0.92) 50%,
-                rgba(20, 30, 60, 0.92) 100%);
-            border: 1px solid rgba(255, 215, 0, 0.55);
-            border-radius: 12px;
-            padding: 18px 22px;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.08),
-                        0 0 18px rgba(255, 215, 0, 0.15);
-            z-index: 180;
-            opacity: 0;
-            transform: translateY(12px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-            pointer-events: none;
-        }
-
-        .object-plate.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .plate-close {
-            position: absolute;
-            top: 6px;
-            right: 10px;
-            background: none;
-            border: none;
-            color: rgba(255, 215, 0, 0.8);
-            font-size: 18px;
-            font-family: inherit;
-            cursor: pointer;
-            line-height: 1;
-            padding: 2px 4px;
-            pointer-events: none;
-        }
-
-        .object-plate.visible .plate-close {
-            pointer-events: auto;
-        }
-
-        .plate-close:hover {
-            color: #FFD700;
-            text-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
-        }
-
-        .plate-name {
-            font-size: 1.25em;
-            color: #FFD700;
-            text-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
-            margin-bottom: 6px;
-        }
-
-        .plate-distance {
-            font-size: 0.85em;
-            color: #9bb6ff;
-            font-family: 'Courier New', monospace;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
-        }
-
-        .plate-desc {
-            font-size: 0.95em;
-            color: #e0e0ff;
-            font-style: italic;
-            line-height: 1.5;
-            margin-bottom: 8px;
-        }
-
-        .plate-travel {
-            border-top: 1px solid rgba(255, 215, 0, 0.25);
-            padding-top: 8px;
-            font-size: 0.8em;
-            color: #c0d4ff;
-        }
-
-        .plate-travel-head {
-            color: rgba(255, 215, 0, 0.75);
-            font-variant: small-caps;
-            letter-spacing: 1px;
-            margin-bottom: 4px;
-        }
-
-        .plate-travel-line {
-            margin-bottom: 2px;
-        }
-
-        /* Meditative scale transition */
-        .scale-transition {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background: radial-gradient(ellipse at center,
-                rgba(10, 14, 36, 0.55) 0%,
-                rgba(0, 0, 0, 0.75) 100%);
-            backdrop-filter: blur(3px);
-            z-index: 400;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.35s ease;
-        }
-
-        .scale-transition.visible {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .transition-text {
-            font-size: 1.4em;
-            color: #c0d4ff;
-            font-style: italic;
-            text-shadow: 0 0 20px rgba(155, 182, 255, 0.7);
-            animation: transitionBreathe 1.4s ease-in-out infinite;
-        }
-
-        .transition-quote {
-            margin-top: 14px;
-            font-size: 0.9em;
-            color: rgba(170, 196, 255, 0.7);
-            font-style: italic;
-            max-width: 520px;
-            padding: 0 20px;
-        }
-
-        @keyframes transitionBreathe {
-            0%, 100% { opacity: 0.75; }
-            50% { opacity: 1; }
-        }
     </style>
 </head>
 <body>
@@ -618,141 +475,9 @@
         </div>
         
         <div class="performance-indicator" id="performance-indicator"></div>
-
-        <div class="object-plate" id="object-plate">
-            <button class="plate-close" id="plate-close">×</button>
-            <div class="plate-name" id="plate-name"></div>
-            <div class="plate-distance" id="plate-distance"></div>
-            <div class="plate-desc" id="plate-desc"></div>
-            <div class="plate-travel" id="plate-travel"></div>
-        </div>
-
-        <div class="scale-transition" id="scale-transition">
-            <div class="transition-text">Expanding consciousness across cosmic scales...</div>
-            <div class="transition-quote">"The universe is not only stranger than we imagine, it is stranger than we can imagine." — J.B.S. Haldane</div>
-        </div>
     </div>
 
     <script>
-        // DEFENSIVE CANVAS HELPERS (adopted from cosmic-scale-explorer-fixed)
-        // Safe radius function - ensures radius is always positive
-        function safeRadius(value, minimum = 0.1) {
-            return Math.max(minimum, Math.abs(value || 0));
-        }
-
-        // Safe random function - deterministic seeded pseudo-random values
-        function safeRandom(seed, min = 0, max = 1) {
-            const value = ((Math.sin(seed * 12.9898 + 78.233) * 43758.5453) % 1);
-            return min + Math.abs(value) * (max - min);
-        }
-
-        // REAL ASTRONOMICAL DATA per scale (from cosmic-scale-explorer-fixed catalog)
-        // Travel times follow its formulas: chemical rocket ~20,000 mph
-        // (~70,000 years per light-year, ~6 months per AU), 10% light speed,
-        // and warp factors from the Alcubierre-metric framing (Warp 5 ≈ 214c).
-        const COSMIC_FACTS = {
-            solar: {
-                objects: {
-                    'Sun': {
-                        distance: 'Centre of the solar system · 1 AU from Earth',
-                        desc: 'Our home star, anchor of eight planets, dwarf planets, and countless asteroids and comets.',
-                        travel: ['Chemical rocket from Earth: ~6 months', 'At 10% light speed: ~83 minutes', 'Warp 1 (light speed): 8.3 minutes']
-                    },
-                    'Mercury': {
-                        distance: '0.4 AU from the Sun',
-                        desc: 'The smallest planet — a sun-scorched world of bare grey rock.',
-                        travel: ['Chemical rocket: ~3 months', 'At 10% light speed: ~33 minutes', 'Warp 1 (light speed): ~3.3 minutes']
-                    },
-                    'Venus': {
-                        distance: '0.7 AU from the Sun',
-                        desc: 'Earth\'s veiled twin, wrapped in crushing clouds of sulphuric acid.',
-                        travel: ['Chemical rocket: ~4.5 months', 'At 10% light speed: ~58 minutes', 'Warp 1 (light speed): ~5.8 minutes']
-                    },
-                    'Earth': {
-                        distance: '1.0 AU from the Sun',
-                        desc: 'The only world known to listen back.',
-                        travel: ['Chemical rocket: ~6 months', 'At 10% light speed: ~83 minutes', 'Warp 1 (light speed): 8.3 minutes']
-                    },
-                    'Mars': {
-                        distance: '1.5 AU from the Sun',
-                        desc: 'The red planet — half-frozen, dust-sung, patiently awaiting visitors.',
-                        travel: ['Chemical rocket: ~10 months', 'At 10% light speed: ~2 hours', 'Warp 1 (light speed): ~12.5 minutes']
-                    }
-                },
-                fallback: {
-                    distance: '',
-                    desc: 'A wanderer of the inner system, singing uncatalogued.',
-                    travel: null
-                }
-            },
-            stellar: {
-                objects: {
-                    'Sun': {
-                        distance: 'You are here',
-                        desc: 'Our home star system with 8 planets, dwarf planets, and countless asteroids and comets.',
-                        travel: null
-                    },
-                    'Alpha Centauri': {
-                        distance: '4.37 light-years',
-                        desc: 'The closest star system to our Sun — three stars: Alpha Centauri A, B, and Proxima Centauri.',
-                        travel: ['Chemical rocket: ~306,000 years', 'At 10% light speed: ~44 years', 'Warp 5 (~214c): ~7.5 days']
-                    },
-                    'Sirius': {
-                        distance: '8.6 light-years',
-                        desc: 'The brightest star in Earth\'s night sky — a binary of Sirius A and its white-dwarf companion.',
-                        travel: ['Chemical rocket: ~602,000 years', 'At 10% light speed: ~86 years', 'Warp 5 (~214c): ~15 days']
-                    },
-                    'Vega': {
-                        distance: '25 light-years',
-                        desc: 'A blue-white beacon in Lyra — once Earth\'s pole star, and due to be again.',
-                        travel: ['Chemical rocket: ~1.75 million years', 'At 10% light speed: ~250 years', 'Warp 5 (~214c): ~43 days']
-                    }
-                },
-                fallback: {
-                    distance: '',
-                    desc: 'A distant sun whose light set out before its name was written.',
-                    travel: null
-                }
-            },
-            galactic: {
-                objects: {},
-                fallback: {
-                    distance: 'Somewhere along a spiral arm',
-                    desc: 'Billions of suns gathered into a single shimmering note of the galactic symphony.',
-                    travel: ['Crossing the galaxy at light speed: ~100,000 years', 'Our Sun rides one of these arms, ~26,000 light-years from the centre']
-                }
-            },
-            cosmic: {
-                objects: {
-                    'Milky Way': {
-                        distance: 'Home · ~100,000 light-years across',
-                        desc: 'Our spiral galaxy of 100–400 billion stars; the Sun sits ~26,000 light-years from its centre.',
-                        travel: ['Crossing it at light speed: ~100,000 years', 'At 10% light speed: ~1 million years', 'Warp 5 (~214c): ~470 years']
-                    },
-                    'Andromeda': {
-                        distance: '2.5 million light-years',
-                        desc: 'The largest galaxy in the Local Group — ~220,000 light-years wide, on a slow collision course with the Milky Way.',
-                        travel: ['Chemical rocket: ~175 billion years', 'At 10% light speed: 25 million years', 'Warp 5 (~214c): ~11,700 years']
-                    },
-                    'Triangulum': {
-                        distance: '~2.7 million light-years',
-                        desc: 'The third-largest galaxy in the Local Group, ~60,000 light-years across.',
-                        travel: ['Chemical rocket: ~190 billion years', 'At 10% light speed: ~27 million years', 'Warp 5 (~214c): ~12,600 years']
-                    },
-                    'Whirlpool': {
-                        distance: 'Far beyond the Local Group',
-                        desc: 'M51, the great spiral guest — it joins this chorus from tens of millions of light-years away, here for the harmony rather than the map.',
-                        travel: null
-                    }
-                },
-                fallback: {
-                    distance: '',
-                    desc: 'A galaxy among billions, each one a note too vast to hear.',
-                    travel: null
-                }
-            }
-        };
-
         class EnhancedLivingCosmicPrimer {
             constructor() {
                 this.canvas = document.getElementById('main-canvas');
@@ -788,11 +513,6 @@
                 this.cursorTrails = [];
                 this.helpContent = this.initializeHelpContent();
                 this.currentScroll = null;
-
-                // Object inspector plate + meditative scale transition state
-                this.plateTimer = null;
-                this.transitionTimer = null;
-                this.hasLoadedScale = false;
                 
                 this.scaleDefinitions = {
                     solar: {
@@ -801,7 +521,7 @@
                         harmonics: [1, 1.25, 1.5, 2, 2.5],
                         color: '#FFD700',
                         glowColor: '#FFF8DC',
-                        narrative: 'Eight worlds dance in orbital resonance, each a laboratory where matter learns complexity — each adding its voice to the solar symphony.'
+                        narrative: 'Planets dance in orbital resonance, each world adding its voice to the solar symphony.'
                     },
                     stellar: {
                         name: 'Stellar Neighborhood',
@@ -809,7 +529,7 @@
                         harmonics: [1, 1.618, 2, 2.618, 3.236],
                         color: '#4A90E2',
                         glowColor: '#87CEEB',
-                        narrative: 'Stellar fusion sings pure tones across an ocean of spacetime — islands of warmth and light, the nearest still four years away at light speed.'
+                        narrative: 'Stellar fusion creates pure tones that resonate across the interstellar medium.'
                     },
                     galactic: {
                         name: 'Galactic Scale',
@@ -817,7 +537,7 @@
                         harmonics: [1, 2, 4, 8, 16],
                         color: '#9932CC',
                         glowColor: '#DDA0DD',
-                        narrative: 'Spiral arms are frozen music — four hundred billion stars become neurons in a vast cosmic mind, our sun one small singing node.'
+                        narrative: 'Spiral arms are frozen music, gravitational waves in spacetime itself.'
                     },
                     cosmic: {
                         name: 'Cosmic Web',
@@ -825,7 +545,7 @@
                         harmonics: [1, 3, 9, 27, 81],
                         color: '#50C878',
                         glowColor: '#98FB98',
-                        narrative: 'Galaxy clusters resonate beyond human perception — and if consciousness is truly non-local, the boundaries between galaxies are as permeable as the barriers between thoughts.'
+                        narrative: 'Galaxy clusters resonate in frequencies beyond human perception.'
                     }
                 };
                 
@@ -954,17 +674,6 @@
                 
                 this.canvas.addEventListener('click', (e) => {
                     this.handleClick(e);
-                });
-
-                // Object inspector plate close
-                document.getElementById('plate-close').addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    this.hideObjectPlate();
-                });
-
-                // Meditative transition is skippable by clicking it
-                document.getElementById('scale-transition').addEventListener('click', () => {
-                    this.endScaleTransition();
                 });
             }
             
@@ -1176,16 +885,14 @@
                 const starCount = 400; // More stars for brightness
                 
                 for (let i = 0; i < starCount; i++) {
-                    // Seeded safeRandom keeps positions valid and stable across resizes
-                    const seed = i * 0.37 + 1;
                     this.starField.push({
-                        x: safeRandom(seed, 0, this.canvas.width),
-                        y: safeRandom(seed + 100, 0, this.canvas.height),
-                        size: safeRandom(seed + 5, 0.5, 2.5),
-                        opacity: safeRandom(seed + 10, 0.2, 1.0),
-                        twinklePhase: safeRandom(seed + 15, 0, Math.PI * 2),
-                        twinkleSpeed: safeRandom(seed + 20, 0.01, 0.04),
-                        color: safeRandom(seed + 25, 0, 1) > 0.8 ? this.getRandomStarColor() : '#FFFFFF'
+                        x: Math.random() * this.canvas.width,
+                        y: Math.random() * this.canvas.height,
+                        size: Math.random() * 2 + 0.5,
+                        opacity: Math.random() * 0.8 + 0.2,
+                        twinklePhase: Math.random() * Math.PI * 2,
+                        twinkleSpeed: 0.01 + Math.random() * 0.03,
+                        color: Math.random() > 0.8 ? this.getRandomStarColor() : '#FFFFFF'
                     });
                 }
             }
@@ -1196,80 +903,22 @@
             }
             
             loadScale(scaleName) {
-                // Meditative transition between scales (skipped on first load)
-                if (this.hasLoadedScale && scaleName !== this.currentScale) {
-                    this.showScaleTransition();
-                }
-                this.hasLoadedScale = true;
-
                 this.currentScale = scaleName;
                 const scaleData = this.scaleDefinitions[scaleName];
-
+                
                 const narrative = document.getElementById('consciousness-narrative');
                 narrative.classList.remove('visible');
-
+                
                 setTimeout(() => {
                     narrative.textContent = scaleData.narrative;
                     narrative.classList.add('visible');
                 }, 300);
-
+                
                 this.cosmicObjects = this.createObjectsForScale(scaleName);
                 this.updateHarmonicDisplay();
-
-                // Reset proximity tracking and dismiss any open inspector plate
+                
+                // Reset proximity tracking
                 this.proximityChimes.clear();
-                this.hideObjectPlate();
-            }
-
-            showScaleTransition() {
-                const overlay = document.getElementById('scale-transition');
-                if (!overlay) return;
-                overlay.classList.add('visible');
-                clearTimeout(this.transitionTimer);
-                this.transitionTimer = setTimeout(() => this.endScaleTransition(), 950);
-            }
-
-            endScaleTransition() {
-                clearTimeout(this.transitionTimer);
-                const overlay = document.getElementById('scale-transition');
-                if (overlay) overlay.classList.remove('visible');
-            }
-
-            showObjectPlate(obj) {
-                const plate = document.getElementById('object-plate');
-                if (!plate || !obj) return;
-
-                const scaleFacts = COSMIC_FACTS[this.currentScale] || {};
-                const facts = (scaleFacts.objects && scaleFacts.objects[obj.name]) ||
-                              scaleFacts.fallback || {};
-
-                document.getElementById('plate-name').textContent = obj.name;
-
-                const distEl = document.getElementById('plate-distance');
-                distEl.textContent = facts.distance || '';
-                distEl.style.display = facts.distance ? 'block' : 'none';
-
-                document.getElementById('plate-desc').textContent = facts.desc || '';
-
-                const travelEl = document.getElementById('plate-travel');
-                if (facts.travel && facts.travel.length) {
-                    travelEl.innerHTML = '<div class="plate-travel-head">theoretical travel</div>' +
-                        facts.travel.map(line => '<div class="plate-travel-line">' + line + '</div>').join('');
-                    travelEl.style.display = 'block';
-                } else {
-                    travelEl.innerHTML = '';
-                    travelEl.style.display = 'none';
-                }
-
-                plate.classList.add('visible');
-                clearTimeout(this.plateTimer);
-                this.plateTimer = setTimeout(() => this.hideObjectPlate(), 8000);
-            }
-
-            hideObjectPlate() {
-                clearTimeout(this.plateTimer);
-                const plate = document.getElementById('object-plate');
-                if (plate) plate.classList.remove('visible');
             }
             
             createObjectsForScale(scale) {
@@ -1455,12 +1104,8 @@
                     return distance <= obj.radius + 10;
                 });
                 
-                if (clickedObject) {
-                    if (this.audioContext && this.audioEnabled) {
-                        this.playObjectResonance(clickedObject);
-                    }
-                    // Show the object inspector plate alongside the harmonics
-                    this.showObjectPlate(clickedObject);
+                if (clickedObject && this.audioContext && this.audioEnabled) {
+                    this.playObjectResonance(clickedObject);
                 } else if (this.audioContext && this.audioEnabled) {
                     // Play space click sound
                     this.playSpaceClick(clickX, clickY);
@@ -1619,14 +1264,14 @@
                     this.ctx.shadowColor = star.color || scaleData.glowColor;
                     
                     this.ctx.beginPath();
-                    this.ctx.arc(star.x, star.y, safeRadius(star.size), 0, Math.PI * 2);
+                    this.ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
                     this.ctx.fill();
-
+                    
                     // Add extra sparkle for some stars
                     if (star.size > 1.5 && Math.random() > 0.98) {
                         this.ctx.globalAlpha = 0.8;
                         this.ctx.beginPath();
-                        this.ctx.arc(star.x, star.y, safeRadius(star.size * 2), 0, Math.PI * 2);
+                        this.ctx.arc(star.x, star.y, star.size * 2, 0, Math.PI * 2);
                         this.ctx.fill();
                     }
                 });
@@ -1647,7 +1292,7 @@
                         this.ctx.shadowColor = trail.color;
                         
                         this.ctx.beginPath();
-                        this.ctx.arc(trail.x, trail.y, safeRadius(trail.size), 0, Math.PI * 2);
+                        this.ctx.arc(trail.x, trail.y, trail.size, 0, Math.PI * 2);
                         this.ctx.fill();
                     }
                 });
@@ -1676,7 +1321,7 @@
                     for (let r = 20; r < 300; r += 15) {
                         const wave = Math.sin((r / frequency) + this.time * 3) * amplitude;
                         const velocityMod = 1 + this.mouseVelocity * 0.01;
-                        const radius = safeRadius((r + wave) * velocityMod, 1);
+                        const radius = Math.max(1, (r + wave) * velocityMod);
                         
                         this.ctx.beginPath();
                         this.ctx.arc(this.mousePos.x, this.mousePos.y, radius, 0, Math.PI * 2);
@@ -1712,11 +1357,11 @@
                     const proximity = obj.mouseProximity || 0;
                     const consciousnessBoost = this.consciousnessMode ? 1.5 : 1;
                     
-                    // Enhanced glow (safe radii guard against zero/negative gradient args)
+                    // Enhanced glow
                     if (obj.glow) {
-                        const glowRadius = safeRadius(obj.radius * (2 + proximity * consciousnessBoost), 1);
+                        const glowRadius = obj.radius * (2 + proximity * consciousnessBoost);
                         const gradient = this.ctx.createRadialGradient(
-                            obj.x, obj.y, safeRadius(obj.radius * 0.5),
+                            obj.x, obj.y, obj.radius * 0.5,
                             obj.x, obj.y, glowRadius
                         );
                         gradient.addColorStop(0, obj.glowColor + 'CC');
@@ -1735,12 +1380,11 @@
                         const pulse = Math.sin(this.time * 4) * 0.15 + 1;
                         drawRadius = obj.radius * (pulse + proximity * 0.3);
                     }
-                    drawRadius = safeRadius(drawRadius, 0.5);
-
+                    
                     this.ctx.fillStyle = obj.color;
                     this.ctx.shadowBlur = 20;
                     this.ctx.shadowColor = obj.glowColor || obj.color;
-
+                    
                     this.ctx.beginPath();
                     this.ctx.arc(obj.x, obj.y, drawRadius, 0, Math.PI * 2);
                     this.ctx.fill();
@@ -1798,7 +1442,7 @@
                         this.ctx.shadowColor = pulse.color;
                         
                         this.ctx.beginPath();
-                        this.ctx.arc(pulse.x, pulse.y, safeRadius(pulse.radius), 0, Math.PI * 2);
+                        this.ctx.arc(pulse.x, pulse.y, pulse.radius, 0, Math.PI * 2);
                         this.ctx.stroke();
                     }
                 });

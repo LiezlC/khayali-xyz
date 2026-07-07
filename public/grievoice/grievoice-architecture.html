@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrieVoice - Modular Architecture</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #1a2f38 0%, #0d1b21 100%);
+            min-height: 100vh;
+            padding: 40px;
+            color: #e8f4f3;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            color: #5fb3a1;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        
+        .header p {
+            color: #8eb8b0;
+            font-size: 1.1rem;
+        }
+        
+        .architecture {
+            display: grid;
+            grid-template-columns: 1fr 100px 1fr 100px 1fr;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .column-header {
+            text-align: center;
+            padding: 12px;
+            background: rgba(95, 179, 161, 0.15);
+            border-radius: 8px;
+            border: 1px solid rgba(95, 179, 161, 0.3);
+            margin-bottom: 8px;
+        }
+        
+        .column-header h3 {
+            color: #5fb3a1;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .channel-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .channel-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(95, 179, 161, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        .channel-card.active {
+            border-color: #5fb3a1;
+            box-shadow: 0 0 20px rgba(95, 179, 161, 0.2);
+        }
+        
+        .channel-card.planned {
+            border-style: dashed;
+            opacity: 0.7;
+        }
+        
+        .channel-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+        
+        .channel-card h4 {
+            color: #e8f4f3;
+            margin-bottom: 6px;
+            font-size: 1.1rem;
+        }
+        
+        .channel-card p {
+            color: #8eb8b0;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 10px;
+        }
+        
+        .status-live {
+            background: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+        }
+        
+        .status-ready {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+        }
+        
+        .status-planned {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+        }
+        
+        .arrow-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .arrow {
+            color: #5fb3a1;
+            font-size: 1.5rem;
+            opacity: 0.6;
+        }
+        
+        .arrow-label {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            color: #5fb3a1;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+        
+        .processing-card {
+            background: linear-gradient(135deg, rgba(95, 179, 161, 0.15) 0%, rgba(95, 179, 161, 0.05) 100%);
+            border: 2px solid rgba(95, 179, 161, 0.4);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+        }
+        
+        .processing-card h4 {
+            color: #5fb3a1;
+            margin-bottom: 16px;
+            font-size: 1.2rem;
+        }
+        
+        .processing-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .stack-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #e8f4f3;
+        }
+        
+        .stack-item span {
+            color: #8eb8b0;
+            font-size: 0.75rem;
+        }
+        
+        .output-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .output-card h4 {
+            color: #e8f4f3;
+            margin-bottom: 12px;
+        }
+        
+        .output-features {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            text-align: left;
+        }
+        
+        .output-feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: #8eb8b0;
+        }
+        
+        .output-feature::before {
+            content: "✓";
+            color: #5fb3a1;
+            font-weight: bold;
+        }
+        
+        .footer-note {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+        }
+        
+        .footer-note h4 {
+            color: #5fb3a1;
+            margin-bottom: 12px;
+        }
+        
+        .footer-note p {
+            color: #8eb8b0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cost-note {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 8px 16px;
+            background: rgba(95, 179, 161, 0.1);
+            border-radius: 8px;
+            color: #5fb3a1;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>GrieVoice</h1>
+            <p>Multi-Channel Grievance Collection Architecture</p>
+        </div>
+        
+        <div class="architecture">
+            <!-- Intake Channels Column -->
+            <div class="column">
+                <div class="column-header">
+                    <h3>📱 Intake Channels</h3>
+                </div>
+                
+                <div class="channel-card active">
+                    <div class="channel-icon">🎙️</div>
+                    <h4>Voice Agent</h4>
+                    <p>Real-time empathic voice conversation with emotion detection</p>
+                    <span class="status-badge status-live">Live</span>
+                </div>
+                
+                <div class="channel-card active">
+                    <div class="channel-icon">📝</div>
+                    <h4>Web Form</h4>
+                    <p>Text-based submission with GPS location capture</p>
+                    <span class="status-badge status-ready">Built</span>
+                </div>
+                
+                <div class="channel-card planned">
+                    <div class="channel-icon">💬</div>
+                    <h4>WhatsApp Voice</h4>
+                    <p>Async voice messages transcribed & processed</p>
+                    <span class="status-badge status-planned">Planned</span>
+                </div>
+                
+                <div class="channel-card planned">
+                    <div class="channel-icon">📞</div>
+                    <h4>USSD</h4>
+                    <p>Menu-driven, works on any phone, no data required</p>
+                    <span class="status-badge status-planned">Planned</span>
+                </div>
+            </div>
+            
+            <!-- Arrow Column 1 -->
+            <div class="arrow-column">
+                <div class="arrow">→</div>
+                <div class="arrow-label">AUDIO / TEXT</div>
+                <div class="arrow">→</div>
+            </div>
+            
+            <!-- Processing Column -->
+            <div class="column">
+                <div class="column-header">
+                    <h3>⚙️ Processing Layer</h3>
+                </div>
+                
+                <div class="processing-card">
+                    <h4>AI Processing Stack</h4>
+                    <div class="processing-stack">
+                        <div class="stack-item">
+                            Hume EVI / Whisper
+                            <br><span>Speech Recognition</span>
+                        </div>
+                        <div class="stack-item">
+                            Claude Sonnet
+                            <br><span>Field Extraction & Classification</span>
+                        </div>
+                        <div class="stack-item">
+                            GPT-3.5 / Gemini
+                            <br><span>Translation (PT/SW → EN)</span>
+                        </div>
+                        <div class="stack-item">
+                            Keyword Analysis
+                            <br><span>Urgency Detection</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="output-card">
+                    <h4>Structured Output</h4>
+                    <div class="output-features">
+                        <div class="output-feature">Submitter name/contact</div>
+                        <div class="output-feature">Incident date & location</div>
+                        <div class="output-feature">People involved</div>
+                        <div class="output-feature">Category (customizable)</div>
+                        <div class="output-feature">Description</div>
+                        <div class="output-feature">Urgency level</div>
+                        <div class="output-feature">Source channel</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Arrow Column 2 -->
+            <div class="arrow-column">
+                <div class="arrow">→</div>
+                <div class="arrow-label">STRUCTURED DATA</div>
+                <div class="arrow">→</div>
+            </div>
+            
+            <!-- Output Column -->
+            <div class="column">
+                <div class="column-header">
+                    <h3>📊 Backend & Outputs</h3>
+                </div>
+                
+                <div class="channel-card active">
+                    <div class="channel-icon">🗄️</div>
+                    <h4>Supabase</h4>
+                    <p>PostgreSQL database with unified grievance table + audio storage</p>
+                    <span class="status-badge status-live">Live</span>
+                </div>
+                
+                <div class="channel-card active">
+                    <div class="channel-icon">📈</div>
+                    <h4>Dashboard</h4>
+                    <p>Filter by date, category, urgency, source. Export to CSV/Excel</p>
+                    <span class="status-badge status-live">Live</span>
+                </div>
+                
+                <div class="channel-card planned">
+                    <div class="channel-icon">🔔</div>
+                    <h4>Notifications</h4>
+                    <p>Email/SMS alerts for high-urgency cases, daily digests</p>
+                    <span class="status-badge status-planned">Planned</span>
+                </div>
+                
+                <div class="channel-card planned">
+                    <div class="channel-icon">📑</div>
+                    <h4>Reporting</h4>
+                    <p>IFC-compliant reports, trend analysis, resolution tracking</p>
+                    <span class="status-badge status-planned">Planned</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-note">
+            <h4>Modular Design Philosophy</h4>
+            <p>
+                All intake channels feed into the same processing layer and unified database. 
+                New channels can be added without modifying existing infrastructure. 
+                Categories, languages, and urgency rules are configurable per deployment.
+                The system is designed for contexts where workers have varying levels of literacy, 
+                technology access, and comfort with different communication methods.
+            </p>
+            <div class="cost-note">
+                Per-conversation cost: $0.26 (enterprise) to $0.65 (pilot) | Phone integration: +$0.17/call
+            </div>
+        </div>
+    </div>
+</body>
+</html>

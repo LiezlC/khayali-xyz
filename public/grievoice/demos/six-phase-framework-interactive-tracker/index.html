@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Six Phase Framework Interactive Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #f4f3ee;
+            --text-teal: #114b45;
+            --accent-teal: #2d7a74;
+            --light-teal: #a8dcd7;
+            --path-inactive: #d1d5db;
+            --path-active: #2d7a74;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-teal);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .phase-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .phase-card.active {
+            background-color: white;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid var(--accent-teal);
+            transform: translateX(10px);
+        }
+
+        .node-circle {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            transform-origin: center;
+        }
+
+        .node-circle:hover {
+            transform: scale(1.2);
+        }
+
+        .node-circle.active {
+            fill: var(--accent-teal);
+            stroke: white;
+            stroke-width: 3px;
+        }
+
+        .node-circle.completed {
+            fill: var(--text-teal);
+        }
+
+        /* SVG Path Animation */
+        .path-line {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            transition: stroke-dashoffset 1s ease-in-out;
+        }
+        
+        .checkbox-custom {
+            appearance: none;
+            background-color: #fff;
+            margin: 0;
+            font: inherit;
+            color: currentColor;
+            width: 1.15em;
+            height: 1.15em;
+            border: 2px solid currentColor;
+            border-radius: 0.15em;
+            display: grid;
+            place-content: center;
+            cursor: pointer;
+        }
+
+        .checkbox-custom::before {
+            content: "";
+            width: 0.65em;
+            height: 0.65em;
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+            box-shadow: inset 1em 1em var(--accent-teal);
+            transform-origin: center;
+            clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+        }
+
+        .checkbox-custom:checked::before {
+            transform: scale(1);
+        }
+
+        /* Floating particles for visual flair */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: float 10s infinite linear;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-100vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col lg:flex-row">
+
+    <!-- Left Panel: Content & Controls -->
+    <div class="w-full lg:w-1/2 p-8 lg:p-16 flex flex-col justify-center z-10">
+        <div class="mb-10">
+            <h1 class="text-5xl lg:text-6xl font-bold text-[#114b45] mb-4">Six Phase<br>Framework</h1>
+            <p class="text-lg text-gray-600">Interactive Implementation Roadmap</p>
+        </div>
+
+        <!-- Dynamic Phase Detail View -->
+        <div id="detail-view" class="bg-white/80 backdrop-blur-md p-8 rounded-2xl shadow-xl border border-teal-100 min-h-[400px] relative overflow-hidden">
+            <!-- Background Decoration -->
+            <div class="absolute -right-10 -top-10 text-9xl opacity-5 select-none" id="bg-icon">🔍</div>
+            
+            <div class="relative z-10">
+                <div class="flex items-center gap-4 mb-6">
+                    <div id="current-icon" class="w-12 h-12 rounded-full bg-teal-100 flex items-center justify-center text-2xl shadow-inner">🔍</div>
+                    <div>
+                        <span class="text-sm font-bold tracking-widest text-teal-600 uppercase">Phase <span id="phase-number">1</span></span>
+                        <h2 id="phase-title" class="text-2xl font-bold text-[#114b45]">Needs Assessment</h2>
+                    </div>
+                </div>
+
+                <p id="phase-desc" class="text-gray-600 mb-6 leading-relaxed">
+                    Identify gaps, map current processes, and define the scope of the project to ensure alignment with business goals.
+                </p>
+
+                <!-- Interactive Checklist -->
+                <div class="space-y-3 mb-8">
+                    <h3 class="font-bold text-sm text-gray-400 uppercase tracking-wider mb-2">Action Items</h3>
+                    <div id="checklist-container" class="space-y-3">
+                        <!-- Checkboxes injected via JS -->
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+                    <div id="progress-bar" class="bg-[#2d7a74] h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+                </div>
+                
+                <div class="flex justify-between items-center">
+                    <span id="progress-text" class="text-sm font-semibold text-teal-700">0% Complete</span>
+                    <button id="next-btn" class="bg-[#114b45] hover:bg-[#0d3834] text-white px-6 py-2 rounded-lg font-medium transition shadow-lg flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                        Next Phase <span>→</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Panel: Visual Path -->
+    <div class="w-full lg:w-1/2 relative bg-gradient-to-br from-[#f4f3ee] to-[#e0f2f1] overflow-hidden flex items-center justify-center min-h-[500px]">
+        
+        <!-- Decorative Blobs mimicking the image style -->
+        <div class="absolute top-0 right-0 w-full h-full">
+            <div class="absolute top-10 right-10 w-64 h-64 bg-[#2d7a74] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+            <div class="absolute bottom-20 left-20 w-72 h-72 bg-[#a8dcd7] rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+        </div>
+
+        <!-- SVG Path Container -->
+        <svg id="roadmap-svg" viewBox="0 0 400 800" class="w-full h-full max-w-md drop-shadow-xl z-10" preserveAspectRatio="xMidYMid meet">
+            <defs>
+                <linearGradient id="pathGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#a8dcd7;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#114b45;stop-opacity:1" />
+                </linearGradient>
+                <filter id="glow">
+                    <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+                    <feMerge>
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+            </defs>
+
+            <!-- The Winding Path (Background) -->
+            <path d="M 200 50 C 50 150, 50 250, 200 300 C 350 350, 350 450, 200 500 C 50 550, 50 650, 200 750" 
+                  fill="none" stroke="#d1d5db" stroke-width="40" stroke-linecap="round" opacity="0.3" />
+
+            <!-- The Active Path (Fill) -->
+            <path id="active-path" d="M 200 50 C 50 150, 50 250, 200 300 C 350 350, 350 450, 200 500 C 50 550, 50 650, 200 750" 
+                  fill="none" stroke="url(#pathGradient)" stroke-width="40" stroke-linecap="round"
+                  stroke-dasharray="1000" stroke-dashoffset="1000" class="transition-all duration-1000 ease-out" />
+
+            <!-- Nodes -->
+            <g id="nodes-group">
+                <!-- Nodes will be generated by JS to ensure alignment -->
+            </g>
+        </svg>
+    </div>
+
+    <script>
+        // Data Structure representing the 6 phases
+        const phases = [
+            {
+                id: 1,
+                title: "Needs Assessment",
+                desc: "Conduct stakeholder interviews, map existing workflows, and identify pain points to establish a baseline.",
+                icon: "🔍",
+                tasks: ["Interview Stakeholders", "Map Current Workflow", "Define Success Metrics"],
+                y: 50,
+                x: 200
+            },
+            {
+                id: 2,
+                title: "System Design",
+                desc: "Create the architectural blueprint, design user interfaces, and determine communication channels.",
+                icon: "📐",
+                tasks: ["Draft Architecture", "UI/UX Wireframes", "Select Communication Channels"],
+                y: 180,
+                x: 120 // Approximation on curve
+            },
+            {
+                id: 3,
+                title: "Technology Selection",
+                desc: "Evaluate vendors, select the technology stack, and ensure compatibility with existing infrastructure.",
+                icon: "💾",
+                tasks: ["Vendor Evaluation", "Security Compliance Check", "Finalize Tech Stack"],
+                y: 300,
+                x: 200
+            },
+            {
+                id: 4,
+                title: "Pilot Testing",
+                desc: "Roll out to a small user group, gather feedback, and fix bugs before the main launch.",
+                icon: "🧪",
+                tasks: ["Select Pilot Group", "Run Beta Tests", "Collect Feedback"],
+                y: 420,
+                x: 280 // Approximation on curve
+            },
+            {
+                id: 5,
+                title: "Full Deployment",
+                desc: "Execute the full launch plan, conduct training sessions, and migrate data.",
+                icon: "🚀",
+                tasks: ["Data Migration", "Staff Training", "Go-Live Launch"],
+                y: 550,
+                x: 200
+            },
+            {
+                id: 6,
+                title: "Continuous Monitoring",
+                desc: "Track KPIs, gather long-term feedback, and implement iterative improvements.",
+                icon: "📈",
+                tasks: ["Monitor KPIs", "Quarterly Review", "Implement Upgrades"],
+                y: 750,
+                x: 200
+            }
+        ];
+
+        let currentPhaseIndex = 0;
+        let progressState = phases.map(() => ({ completed: false, tasks: [false, false, false] }));
+
+        // DOM Elements
+        const nodesGroup = document.getElementById('nodes-group');
+        const activePath = document.getElementById('active-path');
+        
+        const phaseNumberEl = document.getElementById('phase-number');
+        const phaseTitleEl = document.getElementById('phase-title');
+        const phaseDescEl = document.getElementById('phase-desc');
+        const currentIconEl = document.getElementById('current-icon');
+        const bgIconEl = document.getElementById('bg-icon');
+        const checklistContainer = document.getElementById('checklist-container');
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
+        const nextBtn = document.getElementById('next-btn');
+
+        // Initialize
+        function init() {
+            renderNodes();
+            loadPhase(0);
+            updatePath();
+        }
+
+        // Render SVG Nodes based on approximate path positions
+        function renderNodes() {
+            // Hardcoded approximate positions along the Bezier curve for visual fidelity
+            const positions = [
+                {x: 200, y: 50},
+                {x: 110, y: 190},
+                {x: 200, y: 300},
+                {x: 290, y: 410},
+                {x: 200, y: 530},
+                {x: 200, y: 750}
+            ];
+
+            nodesGroup.innerHTML = '';
+            phases.forEach((phase, index) => {
+                const pos = positions[index];
+                
+                // Group for the node
+                const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+                g.setAttribute("class", "node-group cursor-pointer");
+                g.onclick = () => loadPhase(index);
+
+                // Circle background
+                const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                circle.setAttribute("cx", pos.x);
+                circle.setAttribute("cy", pos.y);
+                circle.setAttribute("r", "25");
+                circle.setAttribute("class", `node-circle ${index === 0 ? 'active' : ''}`);
+                circle.setAttribute("fill", "white");
+                circle.setAttribute("stroke", "#114b45");
+                circle.setAttribute("stroke-width", "2");
+                circle.id = `node-${index}`;
+
+                // Text (Emoji)
+                const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                text.setAttribute("x", pos.x);
+                text.setAttribute("y", pos.y + 8); // visual centering
+                text.setAttribute("text-anchor", "middle");
+                text.setAttribute("font-size", "20");
+                text.textContent = phase.icon;
+                text.style.pointerEvents = "none"; // Click through text to circle
+
+                g.appendChild(circle);
+                g.appendChild(text);
+                nodesGroup.appendChild(g);
+            });
+        }
+
+        // Load Phase Details
+        function loadPhase(index) {
+            currentPhaseIndex = index;
+            const phase = phases[index];
+            const state = progressState[index];
+
+            // Update Text
+            phaseNumberEl.textContent = phase.id;
+            phaseTitleEl.textContent = phase.title;
+            phaseDescEl.textContent = phase.desc;
+            currentIconEl.textContent = phase.icon;
+            bgIconEl.textContent = phase.icon;
+
+            // Update Active Node Styling
+            document.querySelectorAll('.node-circle').forEach((el, i) => {
+                if (i === index) {
+                    el.classList.add('active');
+                    el.setAttribute('fill', '#2d7a74');
+                    el.setAttribute('stroke', 'white');
+                } else if (i < index || progressState[i].completed) {
+                    el.classList.remove('active');
+                    el.setAttribute('fill', '#114b45'); // Completed color
+                    el.setAttribute('stroke', 'none');
+                } else {
+                    el.classList.remove('active');
+                    el.setAttribute('fill', 'white');
+                    el.setAttribute('stroke', '#114b45');
+                }
+            });
+
+            // Render Checklist
+            checklistContainer.innerHTML = '';
+            phase.tasks.forEach((task, taskIndex) => {
+                const row = document.createElement('div');
+                row.className = "flex items-center gap-3 p-2 hover:bg-teal-50 rounded transition";
+                
+                const checkbox = document.createElement('input');
+                checkbox.type = "checkbox";
+                checkbox.className = "checkbox-custom text-teal-700";
+                checkbox.checked = state.tasks[taskIndex];
+                checkbox.onchange = () => toggleTask(index, taskIndex);
+
+                const label = document.createElement('span');
+                label.className = state.tasks[taskIndex] ? "text-gray-400 line-through transition" : "text-gray-700 transition";
+                label.textContent = task;
+
+                row.appendChild(checkbox);
+                row.appendChild(label);
+                checklistContainer.appendChild(row);
+            });
+
+            updateProgressUI();
+        }
+
+        // Toggle Task Logic
+        function toggleTask(phaseIdx, taskIdx) {
+            progressState[phaseIdx].tasks[taskIdx] = !progressState[phaseIdx].tasks[taskIdx];
+            
+            // Check completion
+            const allDone = progressState[phaseIdx].tasks.every(t => t);
+            progressState[phaseIdx].completed = allDone;
+
+            loadPhase(phaseIdx); // Re-render to update styles
+            updatePath();
+        }
+
+        // Update Progress Bar & Button State
+        function updateProgressUI() {
+            const state = progressState[currentPhaseIndex];
+            const completedCount = state.tasks.filter(t => t).length;
+            const total = state.tasks.length;
+            const percent = Math.round((completedCount / total) * 100);
+
+            progressBar.style.width = `${percent}%`;
+            progressText.textContent = `${percent}% Complete`;
+
+            if (percent === 100) {
+                nextBtn.disabled = false;
+                nextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                nextBtn.onclick = () => {
+                    if (currentPhaseIndex < phases.length - 1) {
+                        loadPhase(currentPhaseIndex + 1);
+                    } else {
+                        alert("Framework Implementation Complete! 🎉");
+                    }
+                };
+            } else {
+                nextBtn.disabled = true;
+                nextBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        // Animate SVG Path based on completion
+        function updatePath() {
+            // Calculate how much of the path should be filled
+            // Total length is roughly 1000 units (defined in dasharray)
+            // We have 6 phases. 
+            // 0 completed = 0 length
+            // 1 completed = ~16% length, etc.
+            
+            let completedPhases = 0;
+            progressState.forEach(p => {
+                if (p.completed) completedPhases++;
+            });
+
+            // If current phase is partially done, add a bit
+            const currentPartial = progressState[currentPhaseIndex].tasks.filter(t => t).length / 3;
+            
+            // Logic: Fill up to the current active node
+            // Let's map phase index to path offset
+            // Total length ~ 1000
+            // Node 0: 0
+            // Node 1: 200
+            // Node 2: 400 ...
+            
+            const totalLength = 1000;
+            const segment = totalLength / (phases.length - 1);
+            
+            // Base fill based on current active index
+            let targetOffset = 1000 - (currentPhaseIndex * segment);
+            
+            // Add partial progress of current phase
+            // targetOffset -= (currentPartial * segment); 
+            // Actually, let's keep it simple: Fill path to the current active node.
+            
+            activePath.style.strokeDashoffset = targetOffset;
+        }
+
+        // Add some floating particles for fun
+        function createParticles() {
+            const container = document.body;
+            for(let i=0; i<10; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle bg-teal-200';
+                p.style.width = Math.random() * 20 + 'px';
+                p.style.height = p.style.width;
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.top = Math.random() * 100 + 'vh';
+                p.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                container.appendChild(p);
+            }
+        }
+
+        init();
+        createParticles();
+
+    </script>
+</body>
+</html>

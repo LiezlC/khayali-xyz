@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrieVoice - USSD Integration Spec</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #f8fafa;
+            color: #1a2f38;
+            line-height: 1.6;
+            padding: 40px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #1a2f38 0%, #2d4a56 100%);
+            color: white;
+            padding: 40px;
+        }
+        .header h1 { font-size: 1.8rem; margin-bottom: 8px; color: #5fb3a1; }
+        .header h2 { font-size: 1.3rem; font-weight: normal; opacity: 0.9; }
+        .content { padding: 40px; }
+        .section { margin-bottom: 36px; }
+        .section h3 {
+            color: #1a2f38;
+            font-size: 1.2rem;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #5fb3a1;
+        }
+        .section p { color: #4a5568; margin-bottom: 12px; }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(95, 179, 161, 0.1) 0%, rgba(95, 179, 161, 0.05) 100%);
+            border-left: 4px solid #5fb3a1;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 20px 0;
+        }
+        .highlight-box h4 { color: #2d7a6d; margin-bottom: 8px; }
+        .highlight-box p { margin: 0; color: #4a5568; }
+        
+        .phone-mockup {
+            background: #1a1a1a;
+            border-radius: 24px;
+            padding: 20px;
+            max-width: 320px;
+            margin: 24px auto;
+            font-family: monospace;
+            color: #00ff00;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+        .phone-mockup .screen {
+            background: #000;
+            border-radius: 8px;
+            padding: 16px;
+            min-height: 300px;
+        }
+        .phone-mockup .title {
+            color: #5fb3a1;
+            font-weight: bold;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        .phone-mockup .menu-item {
+            margin: 4px 0;
+        }
+        .phone-mockup .prompt {
+            margin-top: 16px;
+            color: #ffff00;
+        }
+        
+        .flow-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin: 24px 0;
+        }
+        .flow-card {
+            background: #f7fafc;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .flow-card h4 {
+            color: #2d7a6d;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+        .flow-card pre {
+            background: #1a2f38;
+            color: #5fb3a1;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            overflow-x: auto;
+        }
+        
+        .cost-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+        }
+        .cost-table th, .cost-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .cost-table th { background: #f7fafc; color: #1a2f38; font-weight: 600; }
+        .cost-table td { color: #4a5568; }
+        .cost-table .cost { color: #5fb3a1; font-weight: 600; }
+        
+        .advantage-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .advantage-card {
+            background: #f0f7f6;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+        .advantage-card .icon { font-size: 2rem; margin-bottom: 8px; }
+        .advantage-card h5 { color: #1a2f38; margin-bottom: 4px; }
+        .advantage-card p { color: #5a6a72; font-size: 0.85rem; margin: 0; }
+        
+        .footer {
+            background: #f7fafc;
+            padding: 24px 40px;
+            border-top: 1px solid #e2e8f0;
+        }
+        .footer p { color: #718096; font-size: 0.9rem; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>GrieVoice</h1>
+            <h2>USSD Integration Specification</h2>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h3>Overview</h3>
+                <p>
+                    USSD (Unstructured Supplementary Service Data) enables grievance submission from 
+                    <strong>any mobile phone</strong> - no smartphone, internet connection, or data plan required. 
+                    Workers dial a short code (e.g., *123#) and navigate a menu-driven interface to submit their concerns.
+                </p>
+                
+                <div class="highlight-box">
+                    <h4>Why USSD?</h4>
+                    <p>
+                        <strong>Universal Access:</strong> Works on any GSM phone, including basic feature phones.<br>
+                        <strong>Zero Data:</strong> Uses signaling channel, not mobile data - completely free for users.<br>
+                        <strong>Offline Areas:</strong> Works anywhere with cellular signal, no internet needed.<br>
+                        <strong>Familiar:</strong> Same technology used for airtime balance checks, mobile money.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Sample User Flow</h3>
+                
+                <div class="phone-mockup">
+                    <div class="screen">
+                        <div class="title">GrieVoice *384*123#</div>
+                        <div class="menu-item">Welcome to GrieVoice</div>
+                        <div class="menu-item">Report a workplace concern</div>
+                        <div class="menu-item">━━━━━━━━━━━━━━</div>
+                        <div class="menu-item">1. Wages/Payment</div>
+                        <div class="menu-item">2. Safety/Health</div>
+                        <div class="menu-item">3. Harassment</div>
+                        <div class="menu-item">4. Working Hours</div>
+                        <div class="menu-item">5. Discrimination</div>
+                        <div class="menu-item">6. Other</div>
+                        <div class="prompt">Reply with number (1-6):</div>
+                    </div>
+                </div>
+                
+                <div class="flow-grid">
+                    <div class="flow-card">
+                        <h4>Screen 2: Location</h4>
+                        <pre>Where did this happen?
+
+1. Palma Camp
+2. Processing Plant A
+3. Processing Plant B
+4. Admin Building
+5. Transport Hub
+6. Other (type name)
+
+Reply:</pre>
+                    </div>
+                    <div class="flow-card">
+                        <h4>Screen 3: Description</h4>
+                        <pre>Briefly describe your concern
+(max 160 characters):
+
+Example: "Not paid overtime 
+for November, supervisor says 
+wait until January"
+
+Reply:</pre>
+                    </div>
+                    <div class="flow-card">
+                        <h4>Screen 4: Contact (Optional)</h4>
+                        <pre>Want us to follow up?
+
+1. Yes, call me at this number
+2. Yes, different number
+3. No, stay anonymous
+
+Reply:</pre>
+                    </div>
+                    <div class="flow-card">
+                        <h4>Screen 5: Confirmation</h4>
+                        <pre>Thank you. Your concern has
+been recorded.
+
+Reference: GV-2024-0847
+Category: Wages/Payment
+Location: Processing Plant B
+
+We will review within 48 hours.
+
+END</pre>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Key Advantages for Mozambique Context</h3>
+                <div class="advantage-grid">
+                    <div class="advantage-card">
+                        <div class="icon">📱</div>
+                        <h5>Any Phone</h5>
+                        <p>Works with Nokia 3310, basic phones - no smartphone needed</p>
+                    </div>
+                    <div class="advantage-card">
+                        <div class="icon">📶</div>
+                        <h5>Low Signal OK</h5>
+                        <p>USSD works with minimal signal strength where data fails</p>
+                    </div>
+                    <div class="advantage-card">
+                        <div class="icon">💸</div>
+                        <h5>Free for Workers</h5>
+                        <p>USSD sessions don't consume airtime or data</p>
+                    </div>
+                    <div class="advantage-card">
+                        <div class="icon">🌍</div>
+                        <h5>Local Languages</h5>
+                        <p>Menus can be in Portuguese, English, or Swahili</p>
+                    </div>
+                    <div class="advantage-card">
+                        <div class="icon">⚡</div>
+                        <h5>Instant</h5>
+                        <p>Real-time session, no waiting for app to load</p>
+                    </div>
+                    <div class="advantage-card">
+                        <div class="icon">🔒</div>
+                        <h5>Private</h5>
+                        <p>No app history, no screenshots - session disappears</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Technical Implementation</h3>
+                <p>USSD integration requires partnership with a local mobile network operator (MNO) or aggregator:</p>
+                
+                <table class="cost-table">
+                    <thead>
+                        <tr>
+                            <th>Provider</th>
+                            <th>Coverage</th>
+                            <th>Setup</th>
+                            <th>Per Session</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Africa's Talking</strong></td>
+                            <td>Mozambique (via Vodacom, Movitel)</td>
+                            <td class="cost">~$100-500</td>
+                            <td class="cost">$0.01-0.02</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Infobip</strong></td>
+                            <td>Multi-country coverage</td>
+                            <td class="cost">Variable</td>
+                            <td class="cost">$0.02-0.05</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Direct MNO</strong></td>
+                            <td>Single network</td>
+                            <td class="cost">Higher</td>
+                            <td class="cost">Negotiable</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <p style="margin-top: 16px;">
+                    <strong>How it works:</strong> When a user dials the USSD code, the MNO sends a request to our server. 
+                    We respond with menu text, receive the user's selection, and continue the conversation. Each screen has a 
+                    ~180 character limit. Sessions timeout after ~120 seconds of inactivity.
+                </p>
+            </div>
+            
+            <div class="section">
+                <h3>Limitations vs. Voice/WhatsApp</h3>
+                <table class="cost-table">
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>USSD</th>
+                            <th>Voice/WhatsApp</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Detail Capture</td>
+                            <td>Limited (160 chars per field)</td>
+                            <td>Full narrative possible</td>
+                        </tr>
+                        <tr>
+                            <td>Emotion/Tone</td>
+                            <td>Not captured</td>
+                            <td>Voice tone, Hume emotion detection</td>
+                        </tr>
+                        <tr>
+                            <td>Clarification</td>
+                            <td>Pre-set menu only</td>
+                            <td>Agent can ask follow-ups</td>
+                        </tr>
+                        <tr>
+                            <td>Evidence</td>
+                            <td>Text only</td>
+                            <td>Voice recording preserved</td>
+                        </tr>
+                        <tr>
+                            <td>Best For</td>
+                            <td>Simple, urgent reports</td>
+                            <td>Complex, sensitive cases</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="highlight-box" style="margin-top: 20px;">
+                    <h4>Recommended Use Case</h4>
+                    <p>
+                        USSD is ideal as an <strong>initial intake channel</strong> - capturing the category, location, 
+                        and brief description. For complex cases, the system can offer to call the worker back via the 
+                        voice agent for a fuller conversation. This hybrid approach maximizes accessibility while 
+                        ensuring quality data capture for serious grievances.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Implementation Timeline</h3>
+                <table class="cost-table">
+                    <thead>
+                        <tr>
+                            <th>Phase</th>
+                            <th>Scope</th>
+                            <th>Duration</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Phase 1</strong></td>
+                            <td>Africa's Talking account setup, USSD code application</td>
+                            <td>3-7 days (approval dependent)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phase 2</strong></td>
+                            <td>Menu flow design, webhook endpoint development</td>
+                            <td>2-3 days</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phase 3</strong></td>
+                            <td>Database integration, multi-language support</td>
+                            <td>2-3 days</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phase 4</strong></td>
+                            <td>Testing across networks, edge case handling</td>
+                            <td>2-3 days</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="margin-top: 12px; color: #718096; font-size: 0.9rem;">
+                    <strong>Note:</strong> USSD code approval from MNOs can take 1-4 weeks depending on the country and operator.
+                    Development can proceed in parallel using sandbox/test codes.
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>
+                <strong>GrieVoice</strong> | Multi-channel grievance collection for industrial relations<br>
+                USSD + WhatsApp + Voice = Universal Worker Access
+            </p>
+        </div>
+    </div>
+</body>
+</html>

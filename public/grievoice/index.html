@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrieVoice | AI-Powered Grievance Systems</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --teal-dark: #1a2f38;
+            --teal-mid: #2d7a6d;
+            --teal-light: #5fb3a1;
+            --cream: #f8f6f1;
+            --white: #ffffff;
+            --gray-600: #4a5568;
+            --gray-400: #a0aec0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--cream);
+            color: var(--teal-dark);
+            line-height: 1.6;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--teal-dark) 0%, #2d4a56 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 8px;
+            letter-spacing: -1px;
+        }
+        
+        .hero h1 span { color: var(--teal-light); }
+        
+        .hero .tagline {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 24px;
+        }
+        
+        .hero .subtitle {
+            font-size: 1rem;
+            opacity: 0.7;
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+        
+        .hero-cta {
+            display: inline-block;
+            background: var(--teal-light);
+            color: var(--teal-dark);
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        
+        .hero-cta:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .stats-bar {
+            background: white;
+            padding: 24px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .stat { text-align: center; }
+        .stat-value { font-size: 2rem; font-weight: 700; color: var(--teal-mid); }
+        .stat-label { font-size: 0.85rem; color: var(--gray-600); }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 48px 20px;
+        }
+        
+        .section { margin-bottom: 56px; }
+        
+        .section-header { margin-bottom: 24px; }
+        .section-header h2 { font-size: 1.8rem; color: var(--teal-dark); margin-bottom: 8px; }
+        .section-header p { color: var(--gray-600); }
+        
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .demo-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border: 1px solid #e8eeee;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .demo-card:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            transform: translateY(-4px);
+            border-color: var(--teal-light);
+        }
+        
+        .demo-card-header {
+            background: linear-gradient(135deg, var(--teal-dark) 0%, #3d5a66 100%);
+            padding: 20px;
+            color: white;
+        }
+        
+        .demo-card-header h3 { font-size: 1.1rem; margin-bottom: 4px; }
+        
+        .demo-card-header .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .demo-card-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .demo-card-body p {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+            flex-grow: 1;
+            margin-bottom: 16px;
+        }
+        
+        .demo-card-body a {
+            display: block;
+            text-align: center;
+            background: var(--teal-light);
+            color: white;
+            padding: 10px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        
+        .demo-card-body a:hover { background: var(--teal-mid); }
+        
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .spec-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid #e8eeee;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        
+        .spec-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            color: var(--teal-dark);
+            margin-bottom: 12px;
+        }
+        
+        .spec-card h3 .icon { font-size: 1.5rem; }
+        .spec-card p { color: var(--gray-600); font-size: 0.9rem; margin-bottom: 16px; }
+        
+        .spec-card .meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--gray-400);
+            padding-top: 12px;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .spec-card .cost { color: var(--teal-mid); font-weight: 600; }
+        
+        .architecture-box {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            border: 1px solid #e8eeee;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        
+        .arch-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin: 24px 0;
+        }
+        
+        .arch-node {
+            background: var(--cream);
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px 20px;
+            text-align: center;
+            min-width: 120px;
+            transition: all 0.2s;
+        }
+        
+        .arch-node:hover { border-color: var(--teal-light); transform: scale(1.05); }
+        .arch-node.active { border-color: var(--teal-mid); background: #e6f7f5; }
+        .arch-node.planned { border-style: dashed; opacity: 0.7; }
+        .arch-node .icon { font-size: 1.5rem; margin-bottom: 4px; }
+        .arch-node .label { font-size: 0.8rem; font-weight: 600; color: var(--teal-dark); }
+        .arch-node .status { font-size: 0.65rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        .arch-arrow { color: var(--teal-light); font-size: 1.5rem; }
+        
+        .arch-center {
+            background: var(--teal-dark);
+            color: white;
+            border-radius: 8px;
+            padding: 16px 24px;
+            text-align: center;
+        }
+        
+        .arch-center .icon { font-size: 1.5rem; }
+        .arch-center .label { font-size: 0.9rem; font-weight: 600; }
+        
+        .cta-box {
+            background: linear-gradient(135deg, var(--teal-dark) 0%, #2d4a56 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .cta-box h3 { color: var(--teal-light); font-size: 1.5rem; margin-bottom: 12px; }
+        .cta-box p { opacity: 0.9; margin-bottom: 24px; max-width: 500px; margin-left: auto; margin-right: auto; }
+        
+        .cta-buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+        
+        .cta-buttons a {
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .cta-buttons .primary { background: var(--teal-light); color: var(--teal-dark); }
+        .cta-buttons .primary:hover { background: white; }
+        .cta-buttons .secondary { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.3); }
+        .cta-buttons .secondary:hover { border-color: white; background: rgba(255,255,255,0.1); }
+        
+        .footer {
+            text-align: center;
+            padding: 32px 20px;
+            color: var(--gray-600);
+            font-size: 0.9rem;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 48px;
+        }
+        
+        .footer a { color: var(--teal-mid); text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .stats-bar { gap: 24px; }
+            .arch-flow { flex-direction: column; }
+            .arch-arrow { transform: rotate(90deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <h1>Grie<span>Voice</span></h1>
+        <p class="tagline">AI-Powered Grievance Systems for Worker Voice</p>
+        <p class="subtitle">
+            Voice-first grievance collection that reaches workers regardless of literacy level, 
+            language, or technology access. IFC-compliant, multilingual, and cost-effective.
+        </p>
+        <a href="https://humevoice-virid.vercel.app/" target="_blank" class="hero-cta">
+            🎙️ Try the Live Voice Agent
+        </a>
+    </section>
+    
+    <section class="stats-bar">
+        <div class="stat">
+            <div class="stat-value">90%+</div>
+            <div class="stat-label">Resolution Rate</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value">$0.26-0.65</div>
+            <div class="stat-label">Per Conversation</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value">3</div>
+            <div class="stat-label">Languages (EN/PT/SW)</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value">24/7</div>
+            <div class="stat-label">Availability</div>
+        </div>
+    </section>
+    
+    <div class="container">
+        
+        <section class="section">
+            <div class="section-header">
+                <h2>See It In Action</h2>
+                <p>Interactive demonstrations—click through to explore how the system works</p>
+            </div>
+            
+            <div class="demo-grid">
+                <div class="demo-card">
+                    <div class="demo-card-header">
+                        <span class="badge">Simulator</span>
+                        <h3>📱 Worker Experience</h3>
+                    </div>
+                    <div class="demo-card-body">
+                        <p>
+                            Experience what it's like to call in a grievance. Press the mic, watch the 
+                            transcript appear, see it get categorized and routed, receive your case reference.
+                        </p>
+                        <a href="demos/ai-voice-grievance-system-simulator/index.html">Try the Simulator →</a>
+                    </div>
+                </div>
+                
+                <div class="demo-card">
+                    <div class="demo-card-header">
+                        <span class="badge">Calculator</span>
+                        <h3>📊 Impact Calculator</h3>
+                    </div>
+                    <div class="demo-card-body">
+                        <p>
+                            Input your workforce size and grievance volume. See projected improvements in 
+                            accessibility, resolution time, and cost per grievance.
+                        </p>
+                        <a href="demos/voice-ai-impact-simulator/index.html">Calculate Impact →</a>
+                    </div>
+                </div>
+                
+                <div class="demo-card">
+                    <div class="demo-card-header">
+                        <span class="badge">Planner</span>
+                        <h3>🗺️ Implementation Roadmap</h3>
+                    </div>
+                    <div class="demo-card-body">
+                        <p>
+                            Six-phase implementation framework with interactive tracking. See what each 
+                            phase involves, check off action items, track progress.
+                        </p>
+                        <a href="demos/six-phase-framework-interactive-tracker/index.html">View Roadmap →</a>
+                    </div>
+                </div>
+                
+                <div class="demo-card">
+                    <div class="demo-card-header">
+                        <span class="badge">Demo</span>
+                        <h3>🔒 Privacy & Trust</h3>
+                    </div>
+                    <div class="demo-card-body">
+                        <p>
+                            See the privacy features in action: anonymization toggles, PII detection, 
+                            encryption indicators. What "confidential" actually looks like.
+                        </p>
+                        <a href="demos/privacy-trust-secure-reporting-system/index.html">Explore Privacy →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="section-header">
+                <h2>Multi-Channel Architecture</h2>
+                <p>All intake channels feed into the same processing layer and unified database</p>
+            </div>
+            
+            <div class="architecture-box">
+                <div class="arch-flow">
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <div class="arch-node active">
+                            <div class="icon">🎙️</div>
+                            <div class="label">Voice Agent</div>
+                            <div class="status">✓ Live</div>
+                        </div>
+                        <div class="arch-node active">
+                            <div class="icon">📝</div>
+                            <div class="label">Web Form</div>
+                            <div class="status">✓ Built</div>
+                        </div>
+                        <div class="arch-node planned">
+                            <div class="icon">💬</div>
+                            <div class="label">WhatsApp Voice</div>
+                            <div class="status">Planned</div>
+                        </div>
+                        <div class="arch-node planned">
+                            <div class="icon">📞</div>
+                            <div class="label">USSD</div>
+                            <div class="status">Planned</div>
+                        </div>
+                    </div>
+                    
+                    <div class="arch-arrow">→</div>
+                    
+                    <div class="arch-center">
+                        <div class="icon">⚙️</div>
+                        <div class="label">AI Processing</div>
+                        <div style="font-size: 0.7rem; opacity: 0.8; margin-top: 8px;">
+                            Transcription → Translation → Extraction → Classification
+                        </div>
+                    </div>
+                    
+                    <div class="arch-arrow">→</div>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <div class="arch-node active">
+                            <div class="icon">🗄️</div>
+                            <div class="label">Database</div>
+                            <div class="status">✓ Live</div>
+                        </div>
+                        <div class="arch-node active">
+                            <div class="icon">📈</div>
+                            <div class="label">Dashboard</div>
+                            <div class="status">✓ Live</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p style="text-align: center; color: var(--gray-600); font-size: 0.9rem; margin-top: 16px;">
+                    New channels can be added without modifying existing infrastructure. 
+                    Categories, languages, and routing rules are configurable per deployment.
+                </p>
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="section-header">
+                <h2>Channel Specifications</h2>
+                <p>Technical details for planned integrations</p>
+            </div>
+            
+            <div class="specs-grid">
+                <div class="spec-card">
+                    <h3><span class="icon">💬</span> WhatsApp Voice</h3>
+                    <p>
+                        Workers record voice messages on WhatsApp. System transcribes, translates 
+                        (PT/SW→EN), extracts fields, sends confirmation with case reference. 
+                        Async—works when convenient, not limited to call hours.
+                    </p>
+                    <div class="meta">
+                        <span>Via Twilio + Whisper API</span>
+                        <span class="cost">$0.04-0.12/msg</span>
+                    </div>
+                </div>
+                
+                <div class="spec-card">
+                    <h3><span class="icon">📞</span> USSD</h3>
+                    <p>
+                        Menu-driven intake from any phone—no smartphone, no data, no app required. 
+                        Dial *123#, navigate menus to select category and location, type brief description. 
+                        Works on basic Nokia handsets.
+                    </p>
+                    <div class="meta">
+                        <span>Via Africa's Talking</span>
+                        <span class="cost">$0.01-0.02/session</span>
+                    </div>
+                </div>
+                
+                <div class="spec-card">
+                    <h3><span class="icon">🎙️</span> Real-Time Voice</h3>
+                    <p>
+                        Live conversation with empathic voice agent. Emotion detection adjusts tone. 
+                        Can ask clarifying questions, handle complex cases. Best for sensitive grievances 
+                        requiring back-and-forth.
+                    </p>
+                    <div class="meta">
+                        <span>Via Hume EVI + Claude</span>
+                        <span class="cost">$0.26-0.65/call</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="cta-box">
+                <h3>Ready to Discuss?</h3>
+                <p>
+                    Whether you're exploring options or ready to pilot, I'm happy to walk through 
+                    how this would work for your specific context.
+                </p>
+                <div class="cta-buttons">
+                    <a href="https://humevoice-virid.vercel.app/" target="_blank" class="primary">
+                        Try Live Demo
+                    </a>
+                    <a href="mailto:liezl@khayali.xyz" class="secondary">
+                        Get in Touch
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+    </div>
+    
+    <footer class="footer">
+        <p><strong>GrieVoice</strong> by <a href="https://khayali.xyz">Khayali</a></p>
+        <p style="margin-top: 8px; opacity: 0.7;">
+            20+ years experience in social impact assessment, resettlement, and grievance management 
+            across major infrastructure projects
+        </p>
+    </footer>
+
+</body>
+</html>

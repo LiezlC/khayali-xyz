@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrieVoice - WhatsApp Voice Integration Spec</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #f8fafa;
+            color: #1a2f38;
+            line-height: 1.6;
+            padding: 40px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1a2f38 0%, #2d4a56 100%);
+            color: white;
+            padding: 40px;
+        }
+        
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            color: #5fb3a1;
+        }
+        
+        .header h2 {
+            font-size: 1.3rem;
+            font-weight: normal;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 36px;
+        }
+        
+        .section h3 {
+            color: #1a2f38;
+            font-size: 1.2rem;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #5fb3a1;
+        }
+        
+        .section p {
+            color: #4a5568;
+            margin-bottom: 12px;
+        }
+        
+        .flow-diagram {
+            background: #f0f7f6;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+        
+        .flow-step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            position: relative;
+        }
+        
+        .flow-step:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            left: 20px;
+            top: 44px;
+            width: 2px;
+            height: calc(100% - 20px);
+            background: #5fb3a1;
+            opacity: 0.3;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: #5fb3a1;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            margin-right: 16px;
+        }
+        
+        .step-content h4 {
+            color: #1a2f38;
+            margin-bottom: 4px;
+        }
+        
+        .step-content p {
+            color: #5a6a72;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        .tech-badge {
+            display: inline-block;
+            background: rgba(95, 179, 161, 0.15);
+            color: #2d7a6d;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-left: 8px;
+        }
+        
+        .cost-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+        }
+        
+        .cost-table th,
+        .cost-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .cost-table th {
+            background: #f7fafc;
+            color: #1a2f38;
+            font-weight: 600;
+        }
+        
+        .cost-table td {
+            color: #4a5568;
+        }
+        
+        .cost-table .cost {
+            color: #5fb3a1;
+            font-weight: 600;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(95, 179, 161, 0.1) 0%, rgba(95, 179, 161, 0.05) 100%);
+            border-left: 4px solid #5fb3a1;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 20px 0;
+        }
+        
+        .highlight-box h4 {
+            color: #2d7a6d;
+            margin-bottom: 8px;
+        }
+        
+        .highlight-box p {
+            margin: 0;
+            color: #4a5568;
+        }
+        
+        .user-journey {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: 20px 0;
+        }
+        
+        .journey-step {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+        
+        .journey-step .icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        
+        .journey-step h5 {
+            color: #1a2f38;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+        
+        .journey-step p {
+            color: #718096;
+            font-size: 0.8rem;
+            margin: 0;
+        }
+        
+        .journey-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #5fb3a1;
+            font-size: 1.5rem;
+        }
+        
+        .category-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin: 16px 0;
+        }
+        
+        .category-item {
+            background: #f7fafc;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: #4a5568;
+        }
+        
+        .footer {
+            background: #f7fafc;
+            padding: 24px 40px;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .footer p {
+            color: #718096;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 20px 0;
+        }
+        
+        .comparison-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+        }
+        
+        .comparison-card h5 {
+            color: #1a2f38;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+        
+        .comparison-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .comparison-card li {
+            color: #5a6a72;
+            font-size: 0.85rem;
+            padding: 4px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+        
+        .comparison-card li::before {
+            content: "•";
+            color: #5fb3a1;
+            position: absolute;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>GrieVoice</h1>
+            <h2>WhatsApp Voice Message Integration Specification</h2>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h3>Overview</h3>
+                <p>
+                    WhatsApp voice message integration enables workers to submit grievances by recording 
+                    voice messages on their phones - no typing required, works with basic smartphones, 
+                    and leverages a platform workers already use daily. Messages are automatically 
+                    transcribed, translated if needed, and processed into structured grievance records.
+                </p>
+                
+                <div class="highlight-box">
+                    <h4>Why WhatsApp Voice?</h4>
+                    <p>
+                        <strong>Accessibility:</strong> Workers with limited literacy can speak their concerns naturally.<br>
+                        <strong>Familiarity:</strong> No new app to learn - uses existing WhatsApp.<br>
+                        <strong>Async:</strong> Workers can record when convenient, not limited to call center hours.<br>
+                        <strong>Evidence:</strong> Original voice recording preserved for sensitive cases.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>User Journey</h3>
+                <div class="user-journey">
+                    <div class="journey-step">
+                        <div class="icon">📱</div>
+                        <h5>1. Initiate</h5>
+                        <p>Worker messages the GrieVoice WhatsApp number</p>
+                    </div>
+                    <div class="journey-step">
+                        <div class="icon">🎙️</div>
+                        <h5>2. Record</h5>
+                        <p>Sends voice message describing their concern</p>
+                    </div>
+                    <div class="journey-step">
+                        <div class="icon">⚙️</div>
+                        <h5>3. Process</h5>
+                        <p>System transcribes, translates, extracts fields</p>
+                    </div>
+                    <div class="journey-step">
+                        <div class="icon">✅</div>
+                        <h5>4. Confirm</h5>
+                        <p>Receives confirmation with case reference number</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Technical Flow</h3>
+                <div class="flow-diagram">
+                    <div class="flow-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Message Reception <span class="tech-badge">Twilio WhatsApp API</span></h4>
+                            <p>Worker sends voice message to WhatsApp Business number. Twilio webhook triggers with message metadata and audio URL.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Audio Retrieval <span class="tech-badge">Twilio Media</span></h4>
+                            <p>Server fetches audio file from Twilio's secure media storage. Supports .ogg format (WhatsApp default).</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Transcription <span class="tech-badge">OpenAI Whisper / Deepgram</span></h4>
+                            <p>Audio converted to text with automatic language detection. Supports Portuguese, English, Swahili, and other languages.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Translation (if needed) <span class="tech-badge">GPT-3.5 / Gemini</span></h4>
+                            <p>Non-English transcripts translated while preserving original. Both versions stored for reference.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4>Field Extraction <span class="tech-badge">Claude Sonnet</span></h4>
+                            <p>AI extracts structured fields: name, contact, location, people involved, category, description, urgency.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="step-number">6</div>
+                        <div class="step-content">
+                            <h4>Storage <span class="tech-badge">Supabase</span></h4>
+                            <p>Structured data saved to grievances table. Original audio stored in secure bucket. Source marked as "whatsapp_voice".</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="step-number">7</div>
+                        <div class="step-content">
+                            <h4>Confirmation <span class="tech-badge">Twilio WhatsApp API</span></h4>
+                            <p>Auto-reply sent to worker: "Thank you. Your concern has been recorded. Reference: GV-2024-0847. We will review within 48 hours."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Customizable Categories</h3>
+                <p>Categories can be configured per deployment to match organizational structure and reporting requirements:</p>
+                
+                <div class="category-list">
+                    <div class="category-item">💰 Wages & Payment</div>
+                    <div class="category-item">⏰ Hours & Overtime</div>
+                    <div class="category-item">⚠️ Safety & Health</div>
+                    <div class="category-item">🚫 Harassment</div>
+                    <div class="category-item">⚖️ Discrimination</div>
+                    <div class="category-item">📋 Contracts</div>
+                    <div class="category-item">👔 Discipline</div>
+                    <div class="category-item">🤝 Union Relations</div>
+                    <div class="category-item">🏗️ Working Conditions</div>
+                    <div class="category-item">📚 Training Access</div>
+                    <div class="category-item">🏠 Accommodation</div>
+                    <div class="category-item">📦 Other</div>
+                </div>
+                
+                <p style="font-size: 0.9rem; color: #718096; margin-top: 12px;">
+                    Categories are extracted automatically from the conversation content. The AI classifies based on keywords and context. 
+                    New categories can be added by updating the system prompt - no code changes required.
+                </p>
+            </div>
+            
+            <div class="section">
+                <h3>Channel Comparison</h3>
+                <div class="comparison-grid">
+                    <div class="comparison-card">
+                        <h5>🎙️ Real-time Voice (Hume)</h5>
+                        <ul>
+                            <li>Live conversation</li>
+                            <li>Emotion detection</li>
+                            <li>Immediate clarification</li>
+                            <li>Best for complex cases</li>
+                            <li>Requires stable connection</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-card">
+                        <h5>💬 WhatsApp Voice</h5>
+                        <ul>
+                            <li>Async recording</li>
+                            <li>Familiar platform</li>
+                            <li>Works offline (send later)</li>
+                            <li>Best for routine reports</li>
+                            <li>Low data usage</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-card">
+                        <h5>📞 USSD</h5>
+                        <ul>
+                            <li>Menu-driven input</li>
+                            <li>Any phone (no smartphone)</li>
+                            <li>Zero data required</li>
+                            <li>Best for basic reports</li>
+                            <li>Limited detail capture</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Cost Estimates (per message)</h3>
+                <table class="cost-table">
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Service</th>
+                            <th>Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>WhatsApp Message (inbound)</td>
+                            <td>Twilio</td>
+                            <td class="cost">$0.005</td>
+                        </tr>
+                        <tr>
+                            <td>WhatsApp Message (outbound)</td>
+                            <td>Twilio</td>
+                            <td class="cost">$0.005 - $0.08*</td>
+                        </tr>
+                        <tr>
+                            <td>Audio Transcription (2 min avg)</td>
+                            <td>Whisper API</td>
+                            <td class="cost">$0.012</td>
+                        </tr>
+                        <tr>
+                            <td>Translation (if needed)</td>
+                            <td>GPT-3.5-turbo</td>
+                            <td class="cost">~$0.004</td>
+                        </tr>
+                        <tr>
+                            <td>Field Extraction</td>
+                            <td>Claude Sonnet</td>
+                            <td class="cost">~$0.01</td>
+                        </tr>
+                        <tr>
+                            <td>Database Storage</td>
+                            <td>Supabase</td>
+                            <td class="cost">~$0.001</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><strong>Total per WhatsApp Voice Submission</strong></td>
+                            <td class="cost"><strong>$0.04 - $0.12</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="font-size: 0.8rem; color: #718096;">
+                    *Outbound cost varies by country and message type. Business-initiated messages cost more than user-initiated replies.
+                </p>
+            </div>
+            
+            <div class="section">
+                <h3>Implementation Timeline</h3>
+                <p>With existing infrastructure in place, WhatsApp voice integration can be deployed in phases:</p>
+                
+                <table class="cost-table">
+                    <thead>
+                        <tr>
+                            <th>Phase</th>
+                            <th>Scope</th>
+                            <th>Duration</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Phase 1</strong></td>
+                            <td>Twilio WhatsApp setup, webhook configuration, basic audio reception</td>
+                            <td>1-2 days</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phase 2</strong></td>
+                            <td>Transcription pipeline, translation integration</td>
+                            <td>2-3 days</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phase 3</strong></td>
+                            <td>Field extraction, database integration, confirmation flow</td>
+                            <td>2-3 days</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phase 4</strong></td>
+                            <td>Testing, category customization, dashboard updates</td>
+                            <td>2-3 days</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <p style="margin-top: 16px; color: #4a5568;">
+                    <strong>Total estimated development time:</strong> 7-11 days<br>
+                    <strong>Prerequisites:</strong> Twilio account with WhatsApp Business API access, approved WhatsApp Business number
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>
+                <strong>GrieVoice</strong> | Multi-channel grievance collection for industrial relations<br>
+                Contact: Liezl Coetzee | liezl@example.com
+            </p>
+        </div>
+    </div>
+</body>
+</html>
