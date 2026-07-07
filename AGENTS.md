@@ -199,3 +199,14 @@ When adding new content or features:
 3. **Third Priority**: Experimental labs, creative works, consciousness exploration
 
 The site serves a professional audience interested in AI governance and operational reality. The experimental methods are valuable as differentiation and methodology, not as entertainment.
+
+## ⛔ Ship it — never strand work where Liezl can't see it
+Liezl judges "done" by what is on her **drive** (the `main` checkout) and on the **live site** (khayali.xyz, Vercel). Work left in an unmerged branch, or in a throwaway agent **worktree** she cannot open, does not exist to her and is not deployed.
+
+**When she asks for something to go live, carry the whole chain without pausing for per-step approval.** Do not make her say "now commit / now push / now merge" one step at a time:
+1. **Commit** everything finished.
+2. **Push** to `origin`.
+3. **Land on `main`** (`git push origin HEAD:main` or merge a PR). Vercel auto-builds on push to `main`.
+4. **Verify** the live khayali.xyz URL (`curl`); a green dashboard is not proof.
+
+A request to make something live **is** permission for the whole chain (the standing "just do everything / wake up to it done" order). Gitignored / underscore dirs (`_internal`, `.snapshots`, `_*`) are never force-added or pushed; if a "push" would touch them, confirm what to promote first. If you deliberately leave a draft unmerged, say so and say why.
