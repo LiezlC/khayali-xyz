@@ -210,3 +210,5 @@ Liezl judges "done" by what is on her **drive** (the `main` checkout) and on the
 4. **Verify** the live khayali.xyz URL (`curl`); a green dashboard is not proof.
 
 A request to make something live **is** permission for the whole chain (the standing "just do everything / wake up to it done" order). Gitignored / underscore dirs (`_internal`, `.snapshots`, `_*`) are never force-added or pushed; if a "push" would touch them, confirm what to promote first. If you deliberately leave a draft unmerged, say so and say why.
+
+**Continuity:** on start, run `python C:\Users\Liezl\.agents\agentops.py orient` (or read `C:\Users\Liezl\.agents\PORTFOLIO_RESUME.md`) to pick up where the last agent left off, and leave a handover on finish. Portfolio agent-ops system: `agent-command-center/docs/agent-ops/`.
