@@ -25,8 +25,8 @@ export default function HomePage() {
             <a href="/music" className="px-8 py-4 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 rounded-lg font-semibold transition-colors shadow-lg shadow-purple-900/30">
               🎵 Listen to Khayali Tunes
             </a>
-            <a href="/writings" className="px-8 py-4 bg-gray-800/70 hover:bg-gray-700 rounded-lg font-semibold transition-colors border border-gray-700 hover:border-purple-500">
-              Wander in →
+            <a href="/wander" className="px-8 py-4 bg-gray-800/70 hover:bg-gray-700 rounded-lg font-semibold transition-colors border border-gray-700 hover:border-purple-500">
+              Open the Atlas →
             </a>
           </div>
         </div>

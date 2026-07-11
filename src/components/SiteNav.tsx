@@ -18,6 +18,7 @@ import { Menu, X } from 'lucide-react'
 // Primary links — the ones that show in the desktop bar.
 const primaryLinks = [
   { href: '/music', label: 'Tunes', hover: 'hover:text-pink-400', bold: true },
+  { href: '/wander', label: 'Wander', hover: 'hover:text-amber-300', bold: true },
   { href: '/song-excavation', label: 'Song Excavation', hover: 'hover:text-pink-400', bold: true },
   { href: '/playspace', label: 'Playspace', hover: 'hover:text-amber-300', bold: true },
   { href: '/writings', label: 'Writings', hover: 'hover:text-purple-400' },
