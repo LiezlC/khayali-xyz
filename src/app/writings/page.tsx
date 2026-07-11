@@ -39,7 +39,7 @@ export default async function WritingsPage() {
 
       {/* Content Grid */}
       <div className="container mx-auto px-4 pb-20">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,20rem),1fr))] gap-6">
           {writings.map((writing, idx) => (
             <Link
               href={`/writings/${writing.slug}`}

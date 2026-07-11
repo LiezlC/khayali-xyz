@@ -18,6 +18,7 @@ This is not a request to enlarge everything, remove mobile breakpoints, or stret
 - Preserve the existing mobile stack, navigation drawer and breakpoints.
 - Prefer fluid grid tracks such as `clamp(220px, 17vw, 340px)` for side rails and `1fr` for the principal region.
 - For visual tiles, use fluid heights such as `clamp(9rem, 11vw, 12rem)` where appropriate instead of allowing extreme ultrawide stretching.
+- For card grids, galleries and tiled modules, increase the number of columns on wider breakpoints or use robust fluid tracks such as `grid-cols-[repeat(auto-fit,minmax(280px,1fr))]`. A fixed three-column grid still behaves badly on ultrawide monitors.
 
 ## Tailwind implementation pattern
 
@@ -70,8 +71,10 @@ Do not add `max-width: none !important` globally. That would also destroy intent
    - **reading measure/control** — preserve.
 3. Fix shared navigation and footer wrappers first.
 4. Fix outer wrappers on every landing, listing, gallery, map, dashboard and research-index page.
+   - After fixing each wrapper, inspect the grid inside it. Extend fixed grids to four, five or six columns at wider breakpoints, or use `auto-fit` so zooming out reveals more columns rather than merely stretching or re-centering the same three.
 5. Keep individual article bodies and long text columns narrow.
 6. Check for fixed-height heroes that make only a tiny portion of the page visible at normal zoom; reduce excessive vertical padding where it does not carry design meaning.
+   - Keep hero copy constrained to a readable inner measure even when the hero canvas is fluid.
 
 ## Required QA
 

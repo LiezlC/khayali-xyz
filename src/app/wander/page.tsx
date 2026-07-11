@@ -20,19 +20,18 @@ const trailText = ['text-pink-300', 'text-purple-300', 'text-amber-300']
 
 export default function WanderPage() {
   return <div className="min-h-screen bg-[#070b18] text-white overflow-hidden">
-    <section className="relative min-h-[78vh] flex items-center border-b border-purple-500/20">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(126,34,206,0.16),transparent_45%)]" />
-      <div className="container mx-auto px-4 py-20 grid lg:grid-cols-[0.72fr_1.28fr] items-center gap-8 relative">
-        <div className="relative z-10 lg:-mr-20">
+    <section className="relative min-h-[82vh] border-b border-purple-500/20">
+      <div className="absolute inset-0"><InteractiveAtlasMap doors={atlasDoors} immersive /></div>
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#030814] via-[#030814]/80 to-transparent" />
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#070b18]/80 via-transparent to-[#070b18]/30" />
+      <div className="container relative z-10 min-h-[82vh] flex items-center pointer-events-none">
+        <div className="max-w-xl pointer-events-auto py-20">
           <h1 className="font-serif text-6xl md:text-8xl leading-[0.92] tracking-tight text-[#f0e5d2] mb-8">The Khayali<br />Atlas</h1>
           <p className="text-xl md:text-2xl text-gray-400 max-w-lg leading-relaxed mb-10">Not everything here is looking to be found in a straight line.</p>
           <div className="flex flex-wrap gap-4">
             <a href="#doorways" className="px-7 py-4 border border-pink-400/60 bg-pink-500/10 hover:bg-pink-500/20 text-pink-100 rounded-sm transition-colors">Choose a doorway <span aria-hidden="true">→</span></a>
             <RandomDoor className="px-7 py-4 text-amber-300 hover:text-amber-200 underline decoration-amber-500/40 underline-offset-8 transition-colors" />
           </div>
-        </div>
-        <div className="relative lg:translate-x-10 lg:min-w-[760px]">
-          <InteractiveAtlasMap doors={atlasDoors} />
         </div>
       </div>
     </section>

@@ -21,19 +21,19 @@ const colour: Record<string, { ring: string; dot: string; text: string }> = {
   blue: { ring: 'border-blue-300 shadow-blue-300/70', dot: 'bg-blue-300', text: 'text-blue-200' },
 }
 
-export default function InteractiveAtlasMap({ doors }: { doors: AtlasDoor[] }) {
+export default function InteractiveAtlasMap({ doors, immersive = false }: { doors: AtlasDoor[]; immersive?: boolean }) {
   const [active, setActive] = useState(0)
   const selected = doors[active]
   const selectedPosition = positions[active]
   const route = useMemo(() => positions.map((p) => `${p.x},${p.y}`).join(' '), [])
 
   return (
-    <div className="relative">
-      <div className="relative aspect-[16/9] overflow-hidden rounded-sm" aria-label="Interactive map of the Khayali house">
+    <div className={immersive ? 'relative h-full min-h-[42rem]' : 'relative'}>
+      <div className={immersive ? 'relative h-full min-h-[42rem] overflow-hidden' : 'relative aspect-[16/9] overflow-hidden rounded-sm'} aria-label="Interactive map of the Khayali house">
         <img
           src="/images/atlas/khayali-atlas-house.webp"
           alt="An illuminated map-house with many doors and paths"
-          className="absolute inset-0 h-full w-full object-cover mix-blend-screen opacity-95"
+          className={`absolute inset-0 h-full w-full object-cover mix-blend-screen ${immersive ? 'opacity-90' : 'opacity-95'}`}
         />
 
         <svg className="absolute inset-0 h-full w-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
@@ -63,7 +63,7 @@ export default function InteractiveAtlasMap({ doors }: { doors: AtlasDoor[] }) {
           )
         })}
 
-        <div className="absolute left-3 bottom-3 md:left-7 md:bottom-7 w-[min(88%,22rem)] bg-[#070b18]/90 backdrop-blur-md border border-pink-400/30 p-4 md:p-5 shadow-2xl">
+        <div className={`absolute bottom-3 w-[min(88%,22rem)] bg-[#070b18]/90 backdrop-blur-md border border-pink-400/30 p-4 md:p-5 shadow-2xl ${immersive ? 'right-3 md:right-[3vw] md:bottom-7' : 'left-3 md:left-7 md:bottom-7'}`}>
           <p className={`text-[10px] md:text-xs uppercase tracking-[0.22em] ${colour[selected.colour].text} mb-2`}>{String(active + 1).padStart(2, '0')} · {selected.kind}</p>
           <h2 className="font-serif text-xl md:text-3xl text-[#f0e5d2] leading-tight mb-2">{selected.title}</h2>
           <p className="hidden sm:block text-sm text-gray-400 leading-relaxed mb-4">{selected.description}</p>
@@ -71,7 +71,7 @@ export default function InteractiveAtlasMap({ doors }: { doors: AtlasDoor[] }) {
         </div>
       </div>
 
-      <div className="mt-4 grid grid-cols-3 md:grid-cols-6 gap-2" aria-label="Atlas map legend">
+      <div className={`${immersive ? 'hidden' : 'mt-4 grid'} grid-cols-3 md:grid-cols-6 gap-2`} aria-label="Atlas map legend">
         {doors.map((door, index) => <button key={door.title} type="button" onClick={() => setActive(index)} aria-pressed={active === index} className={`min-h-11 px-2 py-2 text-left border transition-colors ${active === index ? 'border-pink-400/60 bg-pink-500/10 text-white' : 'border-gray-800 text-gray-500 hover:text-gray-200 hover:border-gray-600'}`}><span className="font-mono text-xs mr-2">{String(index + 1).padStart(2, '0')}</span><span className="text-xs leading-tight">{door.title}</span></button>)}
       </div>
     </div>
