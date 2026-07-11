@@ -14,7 +14,7 @@ const feature: Work = {
 const works: Work[] = [
   {title:'Neon Rain',note:'A city remembers in reflections.',path:'/applets/art-mindfulness-gumroad-bundle/mindfulness-sound/neon-rain-zen-walk/index.html',image:'/images/playspace/05-neon-rain.webp',tone:'#d94f91',span:'md:col-span-5'},
   {title:'Chromatic Dialogue',note:'Two palettes enter. A conversation emerges.',path:'/applets/art-mindfulness-gumroad-bundle/visual-art/chromatic-dialogue-interactive-art/index.html',image:'/images/playspace/02-chromatic.webp',tone:'#d89a4b',span:'md:col-span-4'},
-  {title:'Noir Studio',note:'Light, shadow, and intention.',path:'/applets/art-mindfulness-gumroad-bundle/visual-art/noir-abstract-studio/index.html',image:'/images/playspace/03-noir.webp',tone:'#aaa39a',span:'md:col-span-3'},
+  {title:'Noir Studio',note:'Light, shadow, and intention.',path:'/applets/art-mindfulness-gumroad-bundle/visual-art/noir-abstract-studio/index.html',image:'/images/playspace/03-noir.webp',tone:'#69635c',span:'md:col-span-3'},
   {title:'BitSoil Farm',note:'Small systems. Living soil. Slow yields.',path:'/applets/art-mindfulness-gumroad-bundle/farming-sim/bitsoil-farm-the-digital-detox/index.html',image:'/images/playspace/07-bitsoil.webp',tone:'#73a96b',span:'md:col-span-4'},
   {title:'Sunday Braai',note:'Smoke, stories, and sound. Come closer.',path:'/applets/art-mindfulness-gumroad-bundle/farming-sim/sunday-braai-simulator/index.html',image:'/images/playspace/08-sunday-braai.webp',tone:'#c86a45',span:'md:col-span-4'},
   {title:'Orbital Bistro',note:'Menus for moons. Recipes for strange days.',path:'/applets/art-mindfulness-gumroad-bundle/misc-toys/orbital-bistro-edge-of-the-void/index.html',image:'/images/playspace/09-orbital-bistro.webp',tone:'#48a7a3',span:'md:col-span-4'},
@@ -27,12 +27,17 @@ const works: Work[] = [
 function Arrow(){return <svg viewBox="0 0 28 12" aria-hidden="true" className="w-7"><path d="M1 6h24m-5-5 5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1"/></svg>}
 
 function Frame({work,large=false,className=''}:{work:Work;large?:boolean;className?:string}){
-  return <a href={work.path} target="_blank" rel="noopener noreferrer" style={{'--tone':work.tone} as React.CSSProperties} className={`ps-frame group relative min-w-0 w-full overflow-hidden border border-[var(--tone)]/70 bg-[#080d18] ${large?'min-h-[30rem] sm:min-h-[34rem]':'min-h-[12.5rem]'} ${className}`}>
-    <img src={work.image} alt="" className="absolute inset-0 h-full w-full object-cover opacity-75 transition duration-700 group-hover:scale-[1.035] group-hover:opacity-95"/>
-    <div className={`absolute inset-0 ${large?'bg-gradient-to-t from-[#050914]/95 via-transparent to-[#050914]/20':'bg-gradient-to-r from-[#050914]/95 via-[#050914]/45 to-transparent'}`}/>
+  const frameStyle = {
+    '--tone': work.tone,
+    borderColor: `${work.tone}62`,
+    boxShadow: `inset 0 0 0 1px ${work.tone}0d, 0 0 22px ${work.tone}08`,
+  } as React.CSSProperties
+  return <a href={work.path} target="_blank" rel="noopener noreferrer" style={frameStyle} className={`ps-frame group relative min-w-0 w-full overflow-hidden border bg-[#050a13] transition-shadow duration-500 hover:shadow-[0_0_28px_var(--tone)] ${large?'min-h-[30rem] sm:min-h-[34rem]':'min-h-[12.5rem]'} ${className}`}>
+    <img src={work.image} alt="" className={`absolute inset-0 h-full w-full object-cover saturate-[.82] transition duration-700 group-hover:scale-[1.025] group-hover:saturate-100 ${large?'opacity-72 group-hover:opacity-92':'opacity-58 brightness-[.72] group-hover:opacity-82 group-hover:brightness-90'}`}/>
+    <div className={`absolute inset-0 ${large?'bg-gradient-to-t from-[#020711]/95 via-transparent to-[#020711]/25':'bg-gradient-to-r from-[#020711]/95 via-[#020711]/48 to-[#020711]/10'}`}/>
     {large&&<div className="absolute inset-x-0 top-0 flex items-center justify-between gap-3 overflow-hidden p-5 text-[.62rem] uppercase tracking-[.2em] text-[#d9b4cf]"><span>OmniCanvas</span><span className="hidden whitespace-nowrap sm:block">layers · particles · field</span></div>}
     <div className={`absolute ${large?'inset-x-0 bottom-0 p-5 sm:p-6 sm:flex sm:items-end sm:justify-between sm:gap-6':'inset-0 p-5 flex flex-col justify-end max-w-[78%]'}`}>
-      <div><h3 className={`${large?'text-3xl':'text-xl'} font-serif text-[#f2e5d2]`}>{work.title}</h3><p className="mt-1.5 text-sm leading-snug text-gray-300">{work.note}</p></div>
+      <div><h3 style={{color:large?'#eadbc8':work.tone,textShadow:`0 0 15px ${work.tone}55`}} className={`${large?'text-3xl':'text-xl'} font-serif`}>{work.title}</h3><p className="mt-1.5 text-sm leading-snug text-[#aaa7a3]">{work.note}</p></div>
       <span className={`${large?'mt-4 border border-amber-400/70 bg-black/40 px-5 py-3 sm:mt-0 sm:px-8':'mt-4'} inline-flex shrink-0 items-center gap-3 text-[.62rem] uppercase tracking-[.22em] text-[var(--tone)]`}>{large?'Enter OmniCanvas':'Launch'} <Arrow/></span>
     </div>
   </a>
@@ -55,7 +60,7 @@ export default function CuratedPlayspace({categories}:{categories:Cat[]}){
         </header>
         <Frame work={feature} large/>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
-          <Frame work={{title:'The Memory Loom',note:'Weave fragments. Reveal patterns.',path:'/applets/art-mindfulness-gumroad-bundle/memory-pattern-games/the-memory-loom/index.html',image:'/images/playspace/04-memory-loom.webp',tone:'#c18b4b'}}/>
+          <Frame work={{title:'The Memory Loom',note:'Weave fragments. Reveal patterns.',path:'/applets/art-mindfulness-gumroad-bundle/memory-pattern-games/the-memory-loom/index.html',image:'/images/playspace/04-memory-loom.webp',tone:'#8f683c'}}/>
           <Frame work={{title:'Möbius Data',note:'Turn the loop. Find another angle.',path:'/applets/speculative-ai-futures/mobius-data-self-referential-consciousness/index.html',image:'/images/playspace/11-mobius.webp',tone:'#4aa9a7'}}/>
         </div>
       </div>
