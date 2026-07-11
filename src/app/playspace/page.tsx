@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import CuratedPlayspace from '@/components/CuratedPlayspace';
 
 type App = { title: string; path: string };
 type Cat = { key: string; label: string; emoji: string; blurb: string; apps: App[] };
@@ -14,7 +15,7 @@ const CATEGORIES: Cat[] = [
   { key: "curios", label: "Curios", emoji: "\ud83c\udfb2", blurb: "Odd little arcade toys that refused to fit a tidy box.", apps: [{"title": "Celestial Forest Run", "path": "/applets/art-mindfulness-gumroad-bundle/misc-toys/celestial-forest-run/index.html"}, {"title": "Orbital Bistro: Edge of the Void", "path": "/applets/art-mindfulness-gumroad-bundle/misc-toys/orbital-bistro-edge-of-the-void/index.html"}, {"title": "Wyrm's Ascent: The Dragon Pit", "path": "/applets/art-mindfulness-gumroad-bundle/misc-toys/wyrm-s-ascent-the-dragon-pit/index.html"}] }
 ];
 
-export default function PlayspacePage() {
+function LegacyPlayspacePage() {
   const [active, setActive] = useState(CATEGORIES[0].key);
   const cat = CATEGORIES.find((c) => c.key === active) || CATEGORIES[0];
   const total = CATEGORIES.reduce((n, c) => n + c.apps.length, 0);
@@ -93,4 +94,8 @@ export default function PlayspacePage() {
       </section>
     </div>
   );
+}
+
+export default function PlayspacePage() {
+  return <CuratedPlayspace categories={CATEGORIES} />;
 }
