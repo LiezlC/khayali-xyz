@@ -12,15 +12,15 @@ const feature: Work = {
 }
 
 const works: Work[] = [
-  {title:'Neon Rain',note:'A city remembers in reflections.',path:'/applets/art-mindfulness-gumroad-bundle/mindfulness-sound/neon-rain-zen-walk/index.html',image:'/images/playspace/05-neon-rain.webp',tone:'#d94f91',span:'md:col-span-5'},
-  {title:'Chromatic Dialogue',note:'Two palettes enter. A conversation emerges.',path:'/applets/art-mindfulness-gumroad-bundle/visual-art/chromatic-dialogue-interactive-art/index.html',image:'/images/playspace/02-chromatic.webp',tone:'#d89a4b',span:'md:col-span-4'},
-  {title:'Noir Studio',note:'Light, shadow, and intention.',path:'/applets/art-mindfulness-gumroad-bundle/visual-art/noir-abstract-studio/index.html',image:'/images/playspace/03-noir.webp',tone:'#69635c',span:'md:col-span-3'},
-  {title:'BitSoil Farm',note:'Small systems. Living soil. Slow yields.',path:'/applets/art-mindfulness-gumroad-bundle/farming-sim/bitsoil-farm-the-digital-detox/index.html',image:'/images/playspace/07-bitsoil.webp',tone:'#73a96b',span:'md:col-span-4'},
-  {title:'Sunday Braai',note:'Smoke, stories, and sound. Come closer.',path:'/applets/art-mindfulness-gumroad-bundle/farming-sim/sunday-braai-simulator/index.html',image:'/images/playspace/08-sunday-braai.webp',tone:'#c86a45',span:'md:col-span-4'},
-  {title:'Orbital Bistro',note:'Menus for moons. Recipes for strange days.',path:'/applets/art-mindfulness-gumroad-bundle/misc-toys/orbital-bistro-edge-of-the-void/index.html',image:'/images/playspace/09-orbital-bistro.webp',tone:'#48a7a3',span:'md:col-span-4'},
+  {title:'Neon Rain',note:'A city remembers in reflections.',path:'/applets/art-mindfulness/mindfulness-sound/neon-rain-zen-walk/index.html',image:'/images/playspace/05-neon-rain.webp',tone:'#d94f91',span:'md:col-span-5'},
+  {title:'Chromatic Dialogue',note:'Two palettes enter. A conversation emerges.',path:'/applets/art-mindfulness/visual-art/chromatic-dialogue-interactive-art/index.html',image:'/images/playspace/02-chromatic.webp',tone:'#d89a4b',span:'md:col-span-4'},
+  {title:'Noir Studio',note:'Light, shadow, and intention.',path:'/applets/art-mindfulness/visual-art/noir-abstract-studio/index.html',image:'/images/playspace/03-noir.webp',tone:'#69635c',span:'md:col-span-3'},
+  {title:'BitSoil Farm',note:'Small systems. Living soil. Slow yields.',path:'/applets/art-mindfulness/farming-sim/bitsoil-farm-the-digital-detox/index.html',image:'/images/playspace/07-bitsoil.webp',tone:'#73a96b',span:'md:col-span-4'},
+  {title:'Sunday Braai',note:'Smoke, stories, and sound. Come closer.',path:'/applets/art-mindfulness/farming-sim/sunday-braai-simulator/index.html',image:'/images/playspace/08-sunday-braai.webp',tone:'#c86a45',span:'md:col-span-4'},
+  {title:'Orbital Bistro',note:'Menus for moons. Recipes for strange days.',path:'/applets/art-mindfulness/misc-toys/orbital-bistro-edge-of-the-void/index.html',image:'/images/playspace/09-orbital-bistro.webp',tone:'#48a7a3',span:'md:col-span-4'},
   {title:'Authentic Human Simulator',note:'Not perfect. Surprisingly human. Sometimes.',path:'/applets/speculative-ai-futures/authentic-human-simulator/index.html',image:'/images/playspace/10-authentic-human.webp',tone:'#b56ab7',span:'md:col-span-5'},
-  {title:'Deep Dive',note:'Submerge. Follow the signals down.',path:'/applets/art-mindfulness-gumroad-bundle/mindfulness-sound/deep-dive-interactive-experience/index.html',image:'/images/playspace/06-deep-dive.webp',tone:'#4ca2bf',span:'md:col-span-7'},
-  {title:'Abstractify',note:'A kinetic canvas for making rather than browsing.',path:'/applets/art-mindfulness-gumroad-bundle/visual-art/abstractify-kinetic-canvas/index.html',image:'/applets/art-mindfulness-gumroad-bundle/visual-art/abstractify-kinetic-canvas/source.jpg',tone:'#c69451',span:'md:col-span-4'},
+  {title:'Deep Dive',note:'Submerge. Follow the signals down.',path:'/applets/art-mindfulness/mindfulness-sound/deep-dive-interactive-experience/index.html',image:'/images/playspace/06-deep-dive.webp',tone:'#4ca2bf',span:'md:col-span-7'},
+  {title:'Abstractify',note:'A kinetic canvas for making rather than browsing.',path:'/applets/art-mindfulness/visual-art/abstractify-kinetic-canvas/index.html',image:'/applets/art-mindfulness/visual-art/abstractify-kinetic-canvas/source.jpg',tone:'#c69451',span:'md:col-span-4'},
   {title:'Can AI Speak Dog?',note:'Hear a bark—or bring your own for a playful reading.',path:'/applets/speculative-ai-futures/ai-dog-translator-decoding-the-bark/index.html',image:'/applets/speculative-ai-futures/ai-dog-translator-decoding-the-bark/images/howling-husky.webp',tone:'#55aaa7',span:'md:col-span-4'},
 ]
 
@@ -60,7 +60,7 @@ export default function CuratedPlayspace({categories}:{categories:Cat[]}){
         </header>
         <Frame work={feature} large/>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
-          <Frame work={{title:'The Memory Loom',note:'Weave fragments. Reveal patterns.',path:'/applets/art-mindfulness-gumroad-bundle/memory-pattern-games/the-memory-loom/index.html',image:'/images/playspace/04-memory-loom.webp',tone:'#8f683c'}}/>
+          <Frame work={{title:'The Memory Loom',note:'Weave fragments. Reveal patterns.',path:'/applets/art-mindfulness/memory-pattern-games/the-memory-loom/index.html',image:'/images/playspace/04-memory-loom.webp',tone:'#8f683c'}}/>
           <Frame work={{title:'Möbius Data',note:'Turn the loop. Find another angle.',path:'/applets/speculative-ai-futures/mobius-data-self-referential-consciousness/index.html',image:'/images/playspace/11-mobius.webp',tone:'#4aa9a7'}}/>
         </div>
       </div>
