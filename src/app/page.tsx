@@ -32,6 +32,14 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="py-20 border-b border-pink-500/20 bg-gradient-to-r from-gray-900 via-pink-950/20 to-gray-900">
+        <div className="container mx-auto px-4 max-w-4xl text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-5 text-gray-100">There may be a song hiding in your strange idea.</h2>
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">Bring a question, paper, character, system failure, or half-formed thought. Song Excavation turns its pressure point into a finished musical artefact.</p>
+          <a href="/song-excavation" className="inline-block px-8 py-4 rounded-lg bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 font-semibold transition-all">Enter the excavation &rarr;</a>
+        </div>
+      </section>
+
       {/* Featured: Khayali Tunes */}
       <section className="relative py-20 border-y border-purple-500/20 bg-gradient-to-br from-purple-900/20 to-gray-900">
         <div className="container mx-auto px-4 max-w-5xl">

@@ -18,6 +18,7 @@ import { Menu, X } from 'lucide-react'
 // Primary links — the ones that show in the desktop bar.
 const primaryLinks = [
   { href: '/music', label: 'Tunes', hover: 'hover:text-pink-400', bold: true },
+  { href: '/song-excavation', label: 'Song Excavation', hover: 'hover:text-pink-400', bold: true },
   { href: '/playspace', label: 'Playspace', hover: 'hover:text-amber-300', bold: true },
   { href: '/writings', label: 'Writings', hover: 'hover:text-purple-400' },
   { href: '/observatory', label: 'Observatory', hover: 'hover:text-blue-400' },
@@ -71,6 +72,7 @@ export default function SiteNav() {
                 {l.label}
               </a>
             ))}
+            <a href="https://ko-fi.com/khayali" target="_blank" rel="noopener noreferrer" className="text-pink-300 hover:text-pink-200 transition-colors">Support</a>
             <a
               href="https://sociable.systems"
               target="_blank"
@@ -150,6 +152,8 @@ export default function SiteNav() {
                   {l.label}
                 </a>
               ))}
+
+              <a href="https://ko-fi.com/khayali" target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)} className="mt-4 mx-2 px-4 py-3 rounded-lg text-base font-semibold text-pink-200 bg-pink-600/15 border border-pink-500/30 hover:bg-pink-600/25 transition-colors">Support Khayali on Ko-fi</a>
 
               <a
                 href="https://sociable.systems"

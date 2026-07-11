@@ -2,6 +2,7 @@ import { arcs as playlists } from "@/data/arcs";
 import FrequencyFinder from "@/components/FrequencyFinder";
 import TrackBriefGenerator from "@/components/TrackBriefGenerator";
 import type { Metadata } from 'next';
+import LatestMusic from '@/components/LatestMusic';
 
 export const metadata: Metadata = {
   title: 'TunAI — Khayali Tunes',
@@ -75,6 +76,14 @@ export default function MusicPage() {
               >
                 SoundCloud
               </a>
+              <a
+                href="https://open.spotify.com/artist/23Sf7aUE9vWsiznIxOKpee"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-green-600/20 border border-green-500/40 rounded-lg text-green-300 hover:bg-green-600/30 hover:border-green-400 transition-all font-semibold"
+              >
+                Spotify
+              </a>
             </div>
           </div>
 
@@ -84,6 +93,8 @@ export default function MusicPage() {
           </div>
         </div>
       </section>
+
+      <LatestMusic />
 
       {/* The Frequency Finder — content-as-agent */}
       <FrequencyFinder />
@@ -126,16 +137,6 @@ export default function MusicPage() {
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><path fill="#1a1a2e" d="M9.545 15.568V8.432L15.818 12z"/></svg>
                     YouTube Playlist
                   </a>
-                  {pl.distrokid && (
-                    <a
-                      href={pl.distrokid}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-sm text-blue-400 hover:text-blue-300 font-semibold transition-colors"
-                    >
-                      Streaming Platforms
-                    </a>
-                  )}
                   <a
                     href="https://sociable.systems"
                     className={`inline-flex items-center gap-1.5 text-sm ${pl.tagText} hover:text-white font-semibold transition-colors`}
@@ -151,6 +152,14 @@ export default function MusicPage() {
 
       {/* The Track Brief Generator — content-as-agent */}
       <TrackBriefGenerator />
+
+      <section className="py-20 border-y border-pink-500/20 bg-gradient-to-br from-pink-950/30 to-purple-950/30">
+        <div className="container mx-auto px-4 max-w-4xl text-center">
+          <h2 className="text-4xl font-bold mb-5 text-gray-100">Bring me the question you cannot stop thinking about.</h2>
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">A paper, character, system failure, or strange idea may have a song hiding inside it. Song Excavation turns the pressure point into a finished musical artefact.</p>
+          <a href="/song-excavation" className="inline-block px-8 py-4 rounded-lg bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 font-semibold transition-all">Explore Song Excavation &rarr;</a>
+        </div>
+      </section>
 
       {/* About the Music */}
       <section className="py-16 bg-gray-800/20">
