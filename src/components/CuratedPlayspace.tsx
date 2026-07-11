@@ -12,16 +12,16 @@ const feature: Work = {
 }
 
 const works: Work[] = [
-  {title:'Neon Rain',note:'A city remembers in reflections.',path:'/applets/art-mindfulness/mindfulness-sound/neon-rain-zen-walk/index.html',image:'/images/playspace/05-neon-rain.webp',tone:'#d94f91',span:'md:col-span-5'},
-  {title:'Chromatic Dialogue',note:'Two palettes enter. A conversation emerges.',path:'/applets/art-mindfulness/visual-art/chromatic-dialogue-interactive-art/index.html',image:'/images/playspace/02-chromatic.webp',tone:'#d89a4b',span:'md:col-span-4'},
-  {title:'Noir Studio',note:'Light, shadow, and intention.',path:'/applets/art-mindfulness/visual-art/noir-abstract-studio/index.html',image:'/images/playspace/03-noir.webp',tone:'#69635c',span:'md:col-span-3'},
-  {title:'BitSoil Farm',note:'Small systems. Living soil. Slow yields.',path:'/applets/art-mindfulness/farming-sim/bitsoil-farm-the-digital-detox/index.html',image:'/images/playspace/07-bitsoil.webp',tone:'#73a96b',span:'md:col-span-4'},
-  {title:'Sunday Braai',note:'Smoke, stories, and sound. Come closer.',path:'/applets/art-mindfulness/farming-sim/sunday-braai-simulator/index.html',image:'/images/playspace/08-sunday-braai.webp',tone:'#c86a45',span:'md:col-span-4'},
-  {title:'Orbital Bistro',note:'Menus for moons. Recipes for strange days.',path:'/applets/art-mindfulness/misc-toys/orbital-bistro-edge-of-the-void/index.html',image:'/images/playspace/09-orbital-bistro.webp',tone:'#48a7a3',span:'md:col-span-4'},
-  {title:'Authentic Human Simulator',note:'Not perfect. Surprisingly human. Sometimes.',path:'/applets/speculative-ai-futures/authentic-human-simulator/index.html',image:'/images/playspace/10-authentic-human.webp',tone:'#b56ab7',span:'md:col-span-5'},
-  {title:'Deep Dive',note:'Submerge. Follow the signals down.',path:'/applets/art-mindfulness/mindfulness-sound/deep-dive-interactive-experience/index.html',image:'/images/playspace/06-deep-dive.webp',tone:'#4ca2bf',span:'md:col-span-7'},
-  {title:'Abstractify',note:'A kinetic canvas for making rather than browsing.',path:'/applets/art-mindfulness/visual-art/abstractify-kinetic-canvas/index.html',image:'/applets/art-mindfulness/visual-art/abstractify-kinetic-canvas/source.jpg',tone:'#c69451',span:'md:col-span-4'},
-  {title:'Can AI Speak Dog?',note:'Hear a bark—or bring your own for a playful reading.',path:'/applets/speculative-ai-futures/ai-dog-translator-decoding-the-bark/index.html',image:'/applets/speculative-ai-futures/ai-dog-translator-decoding-the-bark/images/howling-husky.webp',tone:'#55aaa7',span:'md:col-span-4'},
+  {title:'Neon Rain',note:'A city remembers in reflections.',path:'/applets/art-mindfulness/mindfulness-sound/neon-rain-zen-walk/index.html',image:'/images/playspace/exhibits/neon-rain.webp',tone:'#d94f91',span:'md:col-span-5'},
+  {title:'Chromatic Dialogue',note:'Two palettes enter. A conversation emerges.',path:'/applets/art-mindfulness/visual-art/chromatic-dialogue-interactive-art/index.html',image:'/images/playspace/exhibits/chromatic-dialogue.webp',tone:'#d89a4b',span:'md:col-span-4'},
+  {title:'Noir Studio',note:'Light, shadow, and intention.',path:'/applets/art-mindfulness/visual-art/noir-abstract-studio/index.html',image:'/images/playspace/exhibits/noir-studio.webp',tone:'#69635c',span:'md:col-span-3'},
+  {title:'BitSoil Farm',note:'Small systems. Living soil. Slow yields.',path:'/applets/art-mindfulness/farming-sim/bitsoil-farm-the-digital-detox/index.html',image:'/images/playspace/exhibits/bitsoil-farm.webp',tone:'#73a96b',span:'md:col-span-4'},
+  {title:'Sunday Braai',note:'Smoke, stories, and sound. Come closer.',path:'/applets/art-mindfulness/farming-sim/sunday-braai-simulator/index.html',image:'/images/playspace/exhibits/sunday-braai.webp',tone:'#c86a45',span:'md:col-span-4'},
+  {title:'Orbital Bistro',note:'Menus for moons. Recipes for strange days.',path:'/applets/art-mindfulness/misc-toys/orbital-bistro-edge-of-the-void/index.html',image:'/images/playspace/exhibits/orbital-bistro.webp',tone:'#48a7a3',span:'md:col-span-4'},
+  {title:'Authentic Human Simulator',note:'Not perfect. Surprisingly human. Sometimes.',path:'/applets/speculative-ai-futures/authentic-human-simulator/index.html',image:'/images/playspace/exhibits/authentic-human.webp',tone:'#b56ab7',span:'md:col-span-5'},
+  {title:'Deep Dive',note:'Submerge. Follow the signals down.',path:'/applets/art-mindfulness/mindfulness-sound/deep-dive-interactive-experience/index.html',image:'/images/playspace/exhibits/deep-dive.webp',tone:'#4ca2bf',span:'md:col-span-7'},
+  {title:'Abstractify',note:'A kinetic canvas for making rather than browsing.',path:'/applets/art-mindfulness/visual-art/abstractify-kinetic-canvas/index.html',image:'/images/playspace/exhibits/abstractify.webp',tone:'#c69451',span:'md:col-span-4'},
+  {title:'Can AI Speak Dog?',note:'Hear a bark—or bring your own for a playful reading.',path:'/applets/speculative-ai-futures/ai-dog-translator-decoding-the-bark/index.html',image:'/images/playspace/exhibits/speak-dog.webp',tone:'#55aaa7',span:'md:col-span-4'},
 ]
 
 function Arrow(){return <svg viewBox="0 0 28 12" aria-hidden="true" className="w-7"><path d="M1 6h24m-5-5 5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1"/></svg>}
@@ -69,7 +69,7 @@ export default function CuratedPlayspace({categories}:{categories:Cat[]}){
     <section className="relative border-b border-amber-500/20 px-5 py-10 lg:px-[3vw]">
       <div className="mx-auto grid w-full gap-10 lg:grid-cols-[clamp(220px,17vw,340px)_1fr]">
         <header><h2 className="font-serif text-5xl leading-[.95] text-[#eadbc7]">The foreground<br/>collection</h2><p className="mt-6 text-sm leading-relaxed text-gray-500">Thirteen selected works.<br/>Interactive pieces for night hours<br/>and curious minds.</p><div className="mt-8 h-px w-14 bg-amber-400/70"/></header>
-        <div className="grid auto-rows-[clamp(9rem,11vw,12rem)] gap-3 md:grid-cols-12">{works.map(work=><Frame key={work.title} work={work} className={`${work.span} min-h-0`}/>)}</div>
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,20rem),1fr))] auto-rows-[clamp(12rem,15vw,16rem)] gap-3">{works.map(work=><Frame key={work.title} work={work} className="min-h-0"/>)}</div>
       </div>
     </section>
 
