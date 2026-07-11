@@ -1,44 +1,82 @@
 'use client'
 
 import { useState } from 'react'
+
 type App = { title: string; path: string }
 type Cat = { key: string; label: string; emoji: string; blurb: string; apps: App[] }
+type Work = { title:string; note:string; path:string; image:string; tone:string; span?:string }
 
-const works = [
-  ['OmniCanvas','Many visual engines, one unruly canvas.','/applets/omnicanvas/index.html','/images/playspace/01-omnicanvas.webp','pink'],
-  ['The Memory Loom','Weave fragments. Reveal patterns.','/applets/art-mindfulness-gumroad-bundle/memory-pattern-games/the-memory-loom/index.html','/images/playspace/04-memory-loom.webp','amber'],
-  ['MÖBIUS DATA','Turn the loop. Find another angle.','/applets/speculative-ai-futures/mobius-data-self-referential-consciousness/index.html','/images/playspace/11-mobius.webp','teal'],
-  ['Neon Rain','A city remembers in reflections.','/applets/art-mindfulness-gumroad-bundle/mindfulness-sound/neon-rain-zen-walk/index.html','/images/playspace/05-neon-rain.webp','pink'],
-  ['Chromatic Dialogue','Two palettes enter. A conversation emerges.','/applets/art-mindfulness-gumroad-bundle/visual-art/chromatic-dialogue-interactive-art/index.html','/images/playspace/02-chromatic.webp','amber'],
-  ['Noir Studio','Light, shadow, and intention.','/applets/art-mindfulness-gumroad-bundle/visual-art/noir-abstract-studio/index.html','/images/playspace/03-noir.webp','gray'],
-  ['BitSoil Farm','Turn digital noise into fertile soil.','/applets/art-mindfulness-gumroad-bundle/farming-sim/bitsoil-farm-the-digital-detox/index.html','/images/playspace/07-bitsoil.webp','green'],
-  ['Sunday Braai','Clean the yard. Light the fire. Keep lunch alive.','/applets/art-mindfulness-gumroad-bundle/farming-sim/sunday-braai-simulator/index.html','/images/playspace/08-sunday-braai.webp','orange'],
-  ['Orbital Bistro','Menus for moons. Recipes for strange days.','/applets/art-mindfulness-gumroad-bundle/misc-toys/orbital-bistro-edge-of-the-void/index.html','/images/playspace/09-orbital-bistro.webp','teal'],
-  ['Authentic Human Simulator','Not perfect. Surprisingly human. Sometimes.','/applets/speculative-ai-futures/authentic-human-simulator/index.html','/images/playspace/10-authentic-human.webp','purple'],
-  ['Deep Dive','Submerge. Follow the signals down.','/applets/art-mindfulness-gumroad-bundle/mindfulness-sound/deep-dive-interactive-experience/index.html','/images/playspace/06-deep-dive.webp','blue'],
-  ['Abstractify','A kinetic canvas for making rather than browsing.','/applets/art-mindfulness-gumroad-bundle/visual-art/abstractify-kinetic-canvas/index.html','/applets/art-mindfulness-gumroad-bundle/visual-art/abstractify-kinetic-canvas/source.jpg','amber'],
-  ['Can AI Speak Dog?','Hear three model barks—or bring one of your own for a playful reading.','/applets/speculative-ai-futures/ai-dog-translator-decoding-the-bark/index.html','/applets/speculative-ai-futures/ai-dog-translator-decoding-the-bark/images/howling-husky.webp','teal'],
-] as const
-
-const tones: Record<string,string> = {
-  pink:'border-pink-500/40 hover:border-pink-300 text-pink-300', amber:'border-amber-500/40 hover:border-amber-300 text-amber-300', teal:'border-teal-500/40 hover:border-teal-300 text-teal-300', gray:'border-gray-500/50 hover:border-gray-300 text-gray-300', green:'border-green-500/40 hover:border-green-300 text-green-300', orange:'border-orange-500/40 hover:border-orange-300 text-orange-300', purple:'border-purple-500/40 hover:border-purple-300 text-purple-300', blue:'border-blue-500/40 hover:border-blue-300 text-blue-300',
+const feature: Work = {
+  title:'OmniCanvas', note:'Many visual engines, one unruly canvas.', path:'/applets/omnicanvas/index.html',
+  image:'/images/playspace/omnicanvas-portal.webp', tone:'#d76aa7'
 }
 
-function Work({ work, className='' }: { work: typeof works[number]; className?: string }) {
-  const [title,note,path,image,tone] = work
-  return <a href={path} target="_blank" rel="noopener noreferrer" className={`group relative overflow-hidden min-h-[13rem] border ${tones[tone]} ${className}`}><img src={image} alt="" className="absolute inset-0 h-full w-full object-cover opacity-65 group-hover:opacity-90 group-hover:scale-[1.02] transition-all duration-500"/><div className="absolute inset-0 bg-gradient-to-r from-[#070b18]/95 via-[#070b18]/30 to-transparent"/><div className="absolute inset-y-0 left-0 p-5 flex flex-col justify-end max-w-sm"><h3 className="font-serif text-2xl text-white">{title}</h3><p className="text-sm text-gray-400 mt-2">{note}</p><span className="mt-4 text-xs uppercase tracking-[.2em]">Launch →</span></div></a>
+const works: Work[] = [
+  {title:'Neon Rain',note:'A city remembers in reflections.',path:'/applets/art-mindfulness-gumroad-bundle/mindfulness-sound/neon-rain-zen-walk/index.html',image:'/images/playspace/05-neon-rain.webp',tone:'#d94f91',span:'md:col-span-5'},
+  {title:'Chromatic Dialogue',note:'Two palettes enter. A conversation emerges.',path:'/applets/art-mindfulness-gumroad-bundle/visual-art/chromatic-dialogue-interactive-art/index.html',image:'/images/playspace/02-chromatic.webp',tone:'#d89a4b',span:'md:col-span-4'},
+  {title:'Noir Studio',note:'Light, shadow, and intention.',path:'/applets/art-mindfulness-gumroad-bundle/visual-art/noir-abstract-studio/index.html',image:'/images/playspace/03-noir.webp',tone:'#aaa39a',span:'md:col-span-3'},
+  {title:'BitSoil Farm',note:'Small systems. Living soil. Slow yields.',path:'/applets/art-mindfulness-gumroad-bundle/farming-sim/bitsoil-farm-the-digital-detox/index.html',image:'/images/playspace/07-bitsoil.webp',tone:'#73a96b',span:'md:col-span-4'},
+  {title:'Sunday Braai',note:'Smoke, stories, and sound. Come closer.',path:'/applets/art-mindfulness-gumroad-bundle/farming-sim/sunday-braai-simulator/index.html',image:'/images/playspace/08-sunday-braai.webp',tone:'#c86a45',span:'md:col-span-4'},
+  {title:'Orbital Bistro',note:'Menus for moons. Recipes for strange days.',path:'/applets/art-mindfulness-gumroad-bundle/misc-toys/orbital-bistro-edge-of-the-void/index.html',image:'/images/playspace/09-orbital-bistro.webp',tone:'#48a7a3',span:'md:col-span-4'},
+  {title:'Authentic Human Simulator',note:'Not perfect. Surprisingly human. Sometimes.',path:'/applets/speculative-ai-futures/authentic-human-simulator/index.html',image:'/images/playspace/10-authentic-human.webp',tone:'#b56ab7',span:'md:col-span-5'},
+  {title:'Deep Dive',note:'Submerge. Follow the signals down.',path:'/applets/art-mindfulness-gumroad-bundle/mindfulness-sound/deep-dive-interactive-experience/index.html',image:'/images/playspace/06-deep-dive.webp',tone:'#4ca2bf',span:'md:col-span-7'},
+  {title:'Abstractify',note:'A kinetic canvas for making rather than browsing.',path:'/applets/art-mindfulness-gumroad-bundle/visual-art/abstractify-kinetic-canvas/index.html',image:'/applets/art-mindfulness-gumroad-bundle/visual-art/abstractify-kinetic-canvas/source.jpg',tone:'#c69451',span:'md:col-span-4'},
+  {title:'Can AI Speak Dog?',note:'Hear a bark—or bring your own for a playful reading.',path:'/applets/speculative-ai-futures/ai-dog-translator-decoding-the-bark/index.html',image:'/applets/speculative-ai-futures/ai-dog-translator-decoding-the-bark/images/howling-husky.webp',tone:'#55aaa7',span:'md:col-span-4'},
+]
+
+function Arrow(){return <svg viewBox="0 0 28 12" aria-hidden="true" className="w-7"><path d="M1 6h24m-5-5 5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1"/></svg>}
+
+function Frame({work,large=false,className=''}:{work:Work;large?:boolean;className?:string}){
+  return <a href={work.path} target="_blank" rel="noopener noreferrer" style={{'--tone':work.tone} as React.CSSProperties} className={`ps-frame group relative min-w-0 w-full overflow-hidden border border-[var(--tone)]/70 bg-[#080d18] ${large?'min-h-[30rem] sm:min-h-[34rem]':'min-h-[12.5rem]'} ${className}`}>
+    <img src={work.image} alt="" className="absolute inset-0 h-full w-full object-cover opacity-75 transition duration-700 group-hover:scale-[1.035] group-hover:opacity-95"/>
+    <div className={`absolute inset-0 ${large?'bg-gradient-to-t from-[#050914]/95 via-transparent to-[#050914]/20':'bg-gradient-to-r from-[#050914]/95 via-[#050914]/45 to-transparent'}`}/>
+    {large&&<div className="absolute inset-x-0 top-0 flex items-center justify-between gap-3 overflow-hidden p-5 text-[.62rem] uppercase tracking-[.2em] text-[#d9b4cf]"><span>OmniCanvas</span><span className="hidden whitespace-nowrap sm:block">layers · particles · field</span></div>}
+    <div className={`absolute ${large?'inset-x-0 bottom-0 p-5 sm:p-6 sm:flex sm:items-end sm:justify-between sm:gap-6':'inset-0 p-5 flex flex-col justify-end max-w-[78%]'}`}>
+      <div><h3 className={`${large?'text-3xl':'text-xl'} font-serif text-[#f2e5d2]`}>{work.title}</h3><p className="mt-1.5 text-sm leading-snug text-gray-300">{work.note}</p></div>
+      <span className={`${large?'mt-4 border border-amber-400/70 bg-black/40 px-5 py-3 sm:mt-0 sm:px-8':'mt-4'} inline-flex shrink-0 items-center gap-3 text-[.62rem] uppercase tracking-[.22em] text-[var(--tone)]`}>{large?'Enter OmniCanvas':'Launch'} <Arrow/></span>
+    </div>
+  </a>
 }
 
-export default function CuratedPlayspace({categories}:{categories:Cat[]}) {
-  const [active,setActive] = useState(categories[0].key)
-  const cat = categories.find(c=>c.key===active) || categories[0]
-  const total = categories.reduce((sum,c)=>sum+c.apps.length,0)
-  return <div className="min-h-screen bg-[#070b18] text-white">
-    <section className="py-20 md:py-24 border-b border-purple-500/20 bg-[radial-gradient(circle_at_60%_20%,rgba(126,34,206,0.14),transparent_50%)]"><div className="container mx-auto px-4 max-w-7xl grid lg:grid-cols-[.52fr_1.48fr] gap-10 items-center"><div><h1 className="font-serif text-6xl md:text-8xl text-[#efe2cd] mb-6">Playspace</h1><p className="text-xl md:text-2xl text-gray-400 leading-relaxed">A small exhibition drawn from a very large cupboard.</p></div><div className="grid md:grid-cols-[1.45fr_.75fr] gap-4"><Work work={works[0]} className="md:row-span-2 min-h-[25rem]"/><div className="grid gap-4"><Work work={works[1]}/><Work work={works[2]}/></div></div></div></section>
+export default function CuratedPlayspace({categories}:{categories:Cat[]}){
+  const [open,setOpen]=useState(false)
+  const [active,setActive]=useState(categories[0].key)
+  const cat=categories.find(c=>c.key===active)||categories[0]
+  const total=categories.reduce((sum,c)=>sum+c.apps.length,0)
+  return <main className="playspace-v3 min-h-screen overflow-hidden bg-[#030914] text-white">
+    <div className="pointer-events-none fixed inset-0 opacity-30 bg-[radial-gradient(circle_at_80%_10%,rgba(113,45,115,.18),transparent_34%),radial-gradient(circle_at_10%_46%,rgba(188,115,45,.08),transparent_25%)]"/>
 
-    <section className="py-24"><div className="container mx-auto px-4 max-w-7xl grid md:grid-cols-[.45fr_1.55fr] gap-10"><div><h2 className="font-serif text-5xl text-[#efe2cd] mb-5">The foreground collection</h2><p className="text-gray-500 leading-relaxed">Thirteen selected works. Interactive pieces for night hours, curious minds, and no obvious productive purpose.</p></div><div className="grid md:grid-cols-6 gap-4">{works.slice(3).map((work,index)=><Work key={work[0]} work={work} className={index===0||index===5||index===7||index===9?'md:col-span-4':'md:col-span-2'}/>)}</div></div></section>
+    <section className="relative border-b border-amber-500/20 px-5 py-14 lg:px-14 lg:py-16">
+      <div className="mx-auto grid min-w-0 max-w-[1500px] gap-5 lg:grid-cols-[.58fr_1.38fr_.76fr] lg:items-stretch">
+        <header className="relative flex flex-col justify-center py-9 lg:pr-10">
+          <h1 className="font-serif text-6xl leading-none text-[#f0dfc8] md:text-8xl">Playspace</h1>
+          <p className="mt-7 max-w-sm text-xl leading-relaxed text-[#b7b0a8]">A small exhibition drawn from<br className="hidden xl:block"/> a very large cupboard.</p>
+          <svg viewBox="0 0 420 110" className="mt-12 w-full text-amber-300/45" aria-hidden="true"><path d="M0 85C92 9 158 113 228 38s111 43 192-23M0 98c108-35 166 19 254-19s102 5 166-27" fill="none" stroke="currentColor" strokeWidth=".7" strokeDasharray="2 5"/><circle cx="228" cy="38" r="3" fill="currentColor"/><circle cx="365" cy="39" r="2" fill="currentColor"/></svg>
+        </header>
+        <Frame work={feature} large/>
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
+          <Frame work={{title:'The Memory Loom',note:'Weave fragments. Reveal patterns.',path:'/applets/art-mindfulness-gumroad-bundle/memory-pattern-games/the-memory-loom/index.html',image:'/images/playspace/04-memory-loom.webp',tone:'#c18b4b'}}/>
+          <Frame work={{title:'Möbius Data',note:'Turn the loop. Find another angle.',path:'/applets/speculative-ai-futures/mobius-data-self-referential-consciousness/index.html',image:'/images/playspace/11-mobius.webp',tone:'#4aa9a7'}}/>
+        </div>
+      </div>
+    </section>
 
-    <section className="py-20 border-y border-gray-800 bg-[#0a0f20]"><div className="container mx-auto px-4 max-w-7xl grid md:grid-cols-[.55fr_1.45fr] gap-10"><div><h2 className="font-serif text-5xl text-[#efe2cd] mb-5">The Deep Archive</h2><p className="text-gray-500 leading-relaxed">Beyond the foreground lives everything else: experiments, sketches, curios, false starts, half-baked ideas, and unfinished things. Kept for wandering, not presented as equals.</p></div><details className="group border border-amber-500/30 bg-gray-950/40"><summary className="cursor-pointer list-none p-6 flex items-center justify-between hover:bg-amber-500/5"><div><p className="text-gray-300">The archive holds {total} works and fragments.</p><p className="text-sm text-gray-600 mt-1">Open the cupboard when you are ready to drift.</p></div><span className="text-amber-300 group-open:rotate-90 transition-transform">→</span></summary><div className="p-6 border-t border-gray-800"><div className="flex flex-wrap gap-2 mb-8">{categories.map(c=><button key={c.key} onClick={()=>setActive(c.key)} className={`px-4 py-2 text-sm border transition-colors ${active===c.key?'border-amber-400 text-amber-200 bg-amber-500/10':'border-gray-700 text-gray-500 hover:text-gray-200'}`}>{c.label} <span className="opacity-50">{c.apps.length}</span></button>)}</div><p className="text-gray-500 mb-6">{cat.blurb}</p><div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8">{cat.apps.map(a=><a key={a.path} href={a.path} target="_blank" rel="noopener noreferrer" className="py-3 border-t border-gray-800 text-sm text-gray-400 hover:text-amber-200 flex justify-between gap-3"><span>{a.title}</span><span>↗</span></a>)}</div></div></details></div></section>
-    <section className="py-16 text-center"><a href="/wander" className="text-amber-300 hover:text-amber-200">Return to the Khayali Atlas →</a></section>
-  </div>
+    <section className="relative border-b border-amber-500/20 px-5 py-12 lg:px-14">
+      <div className="mx-auto grid max-w-[1500px] gap-10 lg:grid-cols-[250px_1fr]">
+        <header><h2 className="font-serif text-5xl leading-[.95] text-[#eadbc7]">The foreground<br/>collection</h2><p className="mt-6 text-sm leading-relaxed text-gray-500">Thirteen selected works.<br/>Interactive pieces for night hours<br/>and curious minds.</p><div className="mt-8 h-px w-14 bg-amber-400/70"/></header>
+        <div className="grid auto-rows-[12.5rem] gap-3 md:grid-cols-12">{works.map(work=><Frame key={work.title} work={work} className={`${work.span} min-h-0`}/>)}</div>
+      </div>
+    </section>
+
+    <section className="relative px-5 py-12 lg:px-14">
+      <div className="mx-auto grid max-w-[1500px] gap-8 lg:grid-cols-[300px_1fr]">
+        <header><h2 className="font-serif text-5xl text-[#eadbc7]">The Deep Archive</h2><p className="mt-5 text-sm leading-relaxed text-gray-500">Beyond the foreground lives everything else. Experiments. Sketches. Curios. Half-baked ideas. Unfinished things. Kept for wandering.</p></header>
+        <div>
+          <div className="mb-4 flex flex-wrap gap-x-6 gap-y-2 border-b border-gray-800 pb-4">{categories.map(c=><button key={c.key} onClick={()=>setActive(c.key)} className={`text-[.65rem] uppercase tracking-[.2em] transition ${active===c.key?'text-amber-300':'text-gray-600 hover:text-gray-300'}`}>{c.label}</button>)}</div>
+          <button onClick={()=>setOpen(!open)} className="flex w-full items-center justify-between border border-amber-500/50 px-7 py-6 text-left hover:bg-amber-500/5"><span><span className="block text-gray-300">The archive holds {total} works and fragments.</span><span className="mt-1 block text-sm text-gray-600">{open?cat.blurb:'Open the door when you’re ready to wander.'}</span></span><span className="flex items-center gap-4 text-[.65rem] uppercase tracking-[.25em] text-amber-300">{open?'Close':'Enter the archive'} <Arrow/></span></button>
+          {open&&<div className="grid border-x border-b border-amber-500/30 p-5 sm:grid-cols-2 lg:grid-cols-3">{cat.apps.map(a=><a key={a.path} href={a.path} target="_blank" rel="noopener noreferrer" className="border-t border-gray-800 py-3 pr-5 text-sm text-gray-500 hover:text-amber-200">{a.title}</a>)}</div>}
+        </div>
+      </div>
+    </section>
+  </main>
 }
