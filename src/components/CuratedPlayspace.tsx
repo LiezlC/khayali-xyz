@@ -32,7 +32,7 @@ function Frame({work,large=false,className=''}:{work:Work;large?:boolean;classNa
     borderColor: `${work.tone}62`,
     boxShadow: `inset 0 0 0 1px ${work.tone}0d, 0 0 22px ${work.tone}08`,
   } as React.CSSProperties
-  return <a href={work.path} target="_blank" rel="noopener noreferrer" style={frameStyle} className={`ps-frame group relative min-w-0 w-full overflow-hidden border bg-[#050a13] transition-shadow duration-500 hover:shadow-[0_0_28px_var(--tone)] ${large?'min-h-[30rem] sm:min-h-[34rem]':'min-h-[12.5rem]'} ${className}`}>
+  return <a href={work.path} target="_blank" rel="noopener noreferrer" style={frameStyle} className={`ps-frame group relative min-w-0 w-full overflow-hidden border bg-[#050a13] transition-shadow duration-500 hover:shadow-[0_0_28px_var(--tone)] ${large?'min-h-[28rem]':'min-h-[10rem]'} ${className}`}>
     <img src={work.image} alt="" className={`absolute inset-0 h-full w-full object-cover saturate-[.82] transition duration-700 group-hover:scale-[1.025] group-hover:saturate-100 ${large?'opacity-72 group-hover:opacity-92':'opacity-58 brightness-[.72] group-hover:opacity-82 group-hover:brightness-90'}`}/>
     <div className={`absolute inset-0 ${large?'bg-gradient-to-t from-[#020711]/95 via-transparent to-[#020711]/25':'bg-gradient-to-r from-[#020711]/95 via-[#020711]/48 to-[#020711]/10'}`}/>
     {large&&<div className="absolute inset-x-0 top-0 flex items-center justify-between gap-3 overflow-hidden p-5 text-[.62rem] uppercase tracking-[.2em] text-[#d9b4cf]"><span>OmniCanvas</span><span className="hidden whitespace-nowrap sm:block">layers · particles · field</span></div>}
@@ -51,8 +51,8 @@ export default function CuratedPlayspace({categories}:{categories:Cat[]}){
   return <main className="playspace-v3 min-h-screen overflow-hidden bg-[#030914] text-white">
     <div className="pointer-events-none fixed inset-0 opacity-30 bg-[radial-gradient(circle_at_80%_10%,rgba(113,45,115,.18),transparent_34%),radial-gradient(circle_at_10%_46%,rgba(188,115,45,.08),transparent_25%)]"/>
 
-    <section className="relative border-b border-amber-500/20 px-5 py-14 lg:px-14 lg:py-16">
-      <div className="mx-auto grid min-w-0 max-w-[1500px] gap-5 lg:grid-cols-[.58fr_1.38fr_.76fr] lg:items-stretch">
+    <section className="relative border-b border-amber-500/20 px-5 py-10 lg:px-[3vw] lg:py-12">
+      <div className="mx-auto grid min-w-0 w-full gap-5 lg:grid-cols-[.58fr_1.38fr_.76fr] lg:items-stretch">
         <header className="relative flex flex-col justify-center py-9 lg:pr-10">
           <h1 className="font-serif text-6xl leading-none text-[#f0dfc8] md:text-8xl">Playspace</h1>
           <p className="mt-7 max-w-sm text-xl leading-relaxed text-[#b7b0a8]">A small exhibition drawn from<br className="hidden xl:block"/> a very large cupboard.</p>
@@ -66,15 +66,15 @@ export default function CuratedPlayspace({categories}:{categories:Cat[]}){
       </div>
     </section>
 
-    <section className="relative border-b border-amber-500/20 px-5 py-12 lg:px-14">
-      <div className="mx-auto grid max-w-[1500px] gap-10 lg:grid-cols-[250px_1fr]">
+    <section className="relative border-b border-amber-500/20 px-5 py-10 lg:px-[3vw]">
+      <div className="mx-auto grid w-full gap-10 lg:grid-cols-[clamp(220px,17vw,340px)_1fr]">
         <header><h2 className="font-serif text-5xl leading-[.95] text-[#eadbc7]">The foreground<br/>collection</h2><p className="mt-6 text-sm leading-relaxed text-gray-500">Thirteen selected works.<br/>Interactive pieces for night hours<br/>and curious minds.</p><div className="mt-8 h-px w-14 bg-amber-400/70"/></header>
-        <div className="grid auto-rows-[12.5rem] gap-3 md:grid-cols-12">{works.map(work=><Frame key={work.title} work={work} className={`${work.span} min-h-0`}/>)}</div>
+        <div className="grid auto-rows-[clamp(9rem,11vw,12rem)] gap-3 md:grid-cols-12">{works.map(work=><Frame key={work.title} work={work} className={`${work.span} min-h-0`}/>)}</div>
       </div>
     </section>
 
-    <section className="relative px-5 py-12 lg:px-14">
-      <div className="mx-auto grid max-w-[1500px] gap-8 lg:grid-cols-[300px_1fr]">
+    <section className="relative px-5 py-10 lg:px-[3vw]">
+      <div className="mx-auto grid w-full gap-8 lg:grid-cols-[clamp(260px,20vw,400px)_1fr]">
         <header><h2 className="font-serif text-5xl text-[#eadbc7]">The Deep Archive</h2><p className="mt-5 text-sm leading-relaxed text-gray-500">Beyond the foreground lives everything else. Experiments. Sketches. Curios. Half-baked ideas. Unfinished things. Kept for wandering.</p></header>
         <div>
           <div className="mb-4 flex flex-wrap gap-x-6 gap-y-2 border-b border-gray-800 pb-4">{categories.map(c=><button key={c.key} onClick={()=>setActive(c.key)} className={`text-[.65rem] uppercase tracking-[.2em] transition ${active===c.key?'text-amber-300':'text-gray-600 hover:text-gray-300'}`}>{c.label}</button>)}</div>
