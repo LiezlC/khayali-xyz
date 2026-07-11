@@ -65,7 +65,7 @@ export default function SearchPage() {
 
       {/* Hero Section */}
       <section className="relative py-20 px-4 overflow-hidden">
-        <div className="relative container mx-auto max-w-4xl text-center">
+        <div className="relative container mx-auto text-center">
           <div className="text-6xl mb-6">🔍</div>
           <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
             Search
@@ -77,7 +77,7 @@ export default function SearchPage() {
       </section>
 
       {/* Search Form */}
-      <section className="container mx-auto max-w-4xl px-4 pb-20">
+      <section className="container mx-auto px-4 pb-20">
         <form onSubmit={handleSearch} className="mb-12">
           <div className="flex gap-3">
             <input

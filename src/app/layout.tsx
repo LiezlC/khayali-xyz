@@ -96,7 +96,7 @@ export default function RootLayout({
         <main id="main-content">{children}</main>
         <Analytics />
         <footer className="border-t border-gray-800 mt-20" aria-label="Site footer">
-          <div className="container mx-auto px-4 py-12">
+          <div className="container py-12">
             {/* Footer Links Grid */}
             <div className="grid md:grid-cols-4 gap-8 mb-8">
               {/* Publications */}

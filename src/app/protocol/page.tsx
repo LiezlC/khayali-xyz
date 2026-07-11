@@ -29,7 +29,7 @@ export default async function ProtocolPage() {
           }}
         />
 
-        <div className="relative container mx-auto max-w-6xl text-center">
+        <div className="relative container mx-auto text-center">
           <div className="text-8xl mb-6">📚</div>
           <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-indigo-400 to-blue-400 bg-clip-text text-transparent">
             The Khayali Protocol
@@ -67,7 +67,7 @@ export default async function ProtocolPage() {
       </section>
 
       {/* Content Grid */}
-      <div className="container mx-auto max-w-6xl px-4 pb-20">
+      <div className="container mx-auto px-4 pb-20">
         <div className="grid md:grid-cols-2 gap-6">
           {allProtocolContent.map((item, idx) => (
             <Link

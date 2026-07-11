@@ -20,7 +20,7 @@ export default async function WorldWorkshopPage() {
       <section className="relative py-20 px-4 overflow-hidden">
         <div className="absolute inset-0 opacity-10 bg-[url('/images/cosmic/grok/00e09f3f-a612-4214-915b-45b23c05c2f9.jpg')] bg-cover bg-center" />
 
-        <div className="relative container mx-auto max-w-6xl text-center">
+        <div className="relative container mx-auto text-center">
           <div className="text-8xl mb-6">🌍</div>
           <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
             World Workshop
@@ -37,7 +37,7 @@ export default async function WorldWorkshopPage() {
       </section>
 
       {/* Content Grid */}
-      <div className="container mx-auto max-w-6xl px-4 pb-20">
+      <div className="container mx-auto px-4 pb-20">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {content.map((item, idx) => (
             <Link

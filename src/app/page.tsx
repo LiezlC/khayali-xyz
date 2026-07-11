@@ -33,7 +33,7 @@ export default function HomePage() {
       </section>
 
       <section className="py-20 border-b border-pink-500/20 bg-gradient-to-r from-gray-900 via-pink-950/20 to-gray-900">
-        <div className="container mx-auto px-4 max-w-4xl text-center">
+        <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-5 text-gray-100">There may be a song hiding in your strange idea.</h2>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">Bring a question, paper, character, system failure, or half-formed thought. Song Excavation turns its pressure point into a finished musical artefact.</p>
           <a href="/song-excavation" className="inline-block px-8 py-4 rounded-lg bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 font-semibold transition-all">Enter the excavation &rarr;</a>
@@ -42,7 +42,7 @@ export default function HomePage() {
 
       {/* Featured: Khayali Tunes */}
       <section className="relative py-20 border-y border-purple-500/20 bg-gradient-to-br from-purple-900/20 to-gray-900">
-        <div className="container mx-auto px-4 max-w-5xl">
+        <div className="container mx-auto px-4">
           <div className="inline-block px-4 py-1 bg-pink-500/20 border border-pink-500/40 rounded-full text-pink-300 text-sm font-semibold mb-4">
             The rising centre
           </div>
@@ -86,7 +86,7 @@ export default function HomePage() {
 
       {/* Wander: the rooms */}
       <section className="py-20">
-        <div className="container mx-auto px-4 max-w-6xl">
+        <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold mb-4 text-gray-100">Rooms to wander</h2>
           <p className="text-gray-400 mb-14 max-w-2xl text-lg">
             Years of ditjies en datjies: things made with the machines when nobody was being professional about it.
@@ -138,7 +138,7 @@ export default function HomePage() {
 
       {/* Redirect for the governance crowd */}
       <section className="py-16 bg-gray-800/30 border-y border-gray-800">
-        <div className="container mx-auto px-4 max-w-3xl text-center">
+        <div className="container mx-auto px-4 text-center">
           <p className="text-lg text-gray-400 leading-relaxed">
             Came looking for the AI-governance work? You're close. That side of things grew up, got a job, and moved into its own place:{' '}
             <a href="https://sociable.systems" target="_blank" rel="noopener noreferrer" className="text-teal-400 hover:text-teal-300 font-semibold">sociable.systems</a>. Same brain, tidier filing.
@@ -148,7 +148,7 @@ export default function HomePage() {
 
       {/* About */}
       <section className="py-24">
-        <div className="container mx-auto px-4 max-w-3xl text-center">
+        <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-8 text-gray-100">An accidental AInthropologist, off the clock</h2>
           <p className="text-xl text-gray-300 leading-relaxed mb-6">
             <span className="text-purple-300">Khayali</span> means <em>of the imagination</em>. That is roughly the job description here.

@@ -43,7 +43,7 @@ export default function MusicPage() {
       />
       {/* Hero */}
       <section className="relative py-20 overflow-hidden bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900">
-        <div className="container mx-auto px-4 max-w-5xl">
+        <div className="container mx-auto px-4">
           <div className="text-center mb-8">
             <div className="text-sm font-mono text-purple-400 mb-4 tracking-widest uppercase">khayali</div>
             <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-amber-400 bg-clip-text text-transparent">
@@ -101,7 +101,7 @@ export default function MusicPage() {
 
       {/* Playlists Grid */}
       <section className="py-16">
-        <div className="container mx-auto px-4 max-w-5xl">
+        <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-4 text-center text-gray-200">
             Playlists by Arc
           </h2>
@@ -154,7 +154,7 @@ export default function MusicPage() {
       <TrackBriefGenerator />
 
       <section className="py-20 border-y border-pink-500/20 bg-gradient-to-br from-pink-950/30 to-purple-950/30">
-        <div className="container mx-auto px-4 max-w-4xl text-center">
+        <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-5 text-gray-100">Bring me the question you cannot stop thinking about.</h2>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">A paper, character, system failure, or strange idea may have a song hiding inside it. Song Excavation turns the pressure point into a finished musical artefact.</p>
           <a href="/song-excavation" className="inline-block px-8 py-4 rounded-lg bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 font-semibold transition-all">Explore Song Excavation &rarr;</a>
@@ -163,7 +163,7 @@ export default function MusicPage() {
 
       {/* About the Music */}
       <section className="py-16 bg-gray-800/20">
-        <div className="container mx-auto px-4 max-w-3xl">
+        <div className="container mx-auto px-4">
           <h2 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
             Why AI Music as Research
           </h2>

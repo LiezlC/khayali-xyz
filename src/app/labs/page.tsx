@@ -10,7 +10,7 @@ export default function LabsPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900/40 to-gray-900" />
 
-        <div className="relative container mx-auto px-4 max-w-4xl text-center">
+        <div className="relative container mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
             Research Labs & Experiments
           </h1>
@@ -26,7 +26,7 @@ export default function LabsPage() {
 
       {/* Philosophy Section */}
       <section className="py-20 bg-gray-800/20">
-        <div className="container mx-auto px-4 max-w-4xl">
+        <div className="container mx-auto px-4">
           <div className="bg-gray-800/50 rounded-xl border border-gray-700 p-8">
             <h2 className="text-2xl font-bold mb-6 text-gray-200">
               Why Experimental Methods Matter
@@ -53,7 +53,7 @@ export default function LabsPage() {
 
       {/* Active Labs */}
       <section className="py-20">
-        <div className="container mx-auto px-4 max-w-6xl">
+        <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-16 text-gray-200">
             Active Experimental Labs
           </h2>
@@ -162,7 +162,7 @@ export default function LabsPage() {
 
       {/* Additional Experiments */}
       <section className="py-20 bg-gray-800/20">
-        <div className="container mx-auto px-4 max-w-6xl">
+        <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-16 text-gray-200">
             Additional Experimental Spaces
           </h2>
@@ -221,7 +221,7 @@ export default function LabsPage() {
 
       {/* Relationship to Core Work */}
       <section className="py-20">
-        <div className="container mx-auto px-4 max-w-4xl">
+        <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12 text-gray-200">
             How Labs Inform Professional Research
           </h2>
@@ -268,7 +268,7 @@ export default function LabsPage() {
 
       {/* CTA */}
       <section className="py-20 bg-gray-800/30">
-        <div className="container mx-auto px-4 max-w-3xl text-center">
+        <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-6 text-gray-200">
             Experiment With Us
           </h2>

@@ -37,7 +37,7 @@ export default function BlogsPage() {
 
       {/* Hero Section */}
       <section className="relative py-20 px-4 overflow-hidden">
-        <div className="relative container mx-auto max-w-6xl text-center">
+        <div className="relative container mx-auto text-center">
           <div className="text-8xl mb-6">📝</div>
           <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-rose-400 via-amber-400 to-yellow-400 bg-clip-text text-transparent">
             Blogs & Essays
@@ -50,7 +50,7 @@ export default function BlogsPage() {
       </section>
 
       {/* Blogs Grid */}
-      <div className="container mx-auto max-w-6xl px-4 pb-20">
+      <div className="container mx-auto px-4 pb-20">
         <div className="grid md:grid-cols-2 gap-6">
           {blogs.map((blog, idx) => (
             <a

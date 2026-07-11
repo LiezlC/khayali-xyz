@@ -52,7 +52,7 @@ export default function SiteNav() {
 
   return (
     <header className="border-b border-gray-800 relative z-40">
-      <nav className="container mx-auto px-4 py-6" aria-label="Main navigation">
+      <nav className="container py-6" aria-label="Main navigation">
         <div className="flex items-center justify-between">
           <a
             href="/"

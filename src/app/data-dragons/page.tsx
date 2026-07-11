@@ -12,7 +12,7 @@ export default function DataDragonsPage() {
     <div className="min-h-screen">
       {/* Hero */}
       <section className="relative py-20 overflow-hidden bg-gradient-to-br from-gray-900 via-fuchsia-900/20 to-gray-900">
-        <div className="container mx-auto px-4 max-w-3xl text-center">
+        <div className="container mx-auto px-4 text-center">
           <div className="text-sm font-mono text-fuchsia-400 mb-4 tracking-widest uppercase">
             the query realm
           </div>
@@ -43,7 +43,7 @@ export default function DataDragonsPage() {
 
       {/* The bestiary */}
       <section className="py-16">
-        <div className="container mx-auto px-4 max-w-3xl">
+        <div className="container mx-auto px-4">
           <h2 className="text-2xl font-bold mb-3 text-center text-gray-200">The bestiary</h2>
           <p className="text-gray-400 text-center text-sm mb-10 max-w-xl mx-auto">
             The five species, and the data-system pathology each one is.

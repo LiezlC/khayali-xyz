@@ -22,7 +22,7 @@ export default function WanderPage() {
   return <div className="min-h-screen bg-[#070b18] text-white overflow-hidden">
     <section className="relative min-h-[78vh] flex items-center border-b border-purple-500/20">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(126,34,206,0.16),transparent_45%)]" />
-      <div className="container mx-auto px-4 max-w-7xl py-20 grid lg:grid-cols-[0.72fr_1.28fr] items-center gap-8 relative">
+      <div className="container mx-auto px-4 py-20 grid lg:grid-cols-[0.72fr_1.28fr] items-center gap-8 relative">
         <div className="relative z-10 lg:-mr-20">
           <h1 className="font-serif text-6xl md:text-8xl leading-[0.92] tracking-tight text-[#f0e5d2] mb-8">The Khayali<br />Atlas</h1>
           <p className="text-xl md:text-2xl text-gray-400 max-w-lg leading-relaxed mb-10">Not everything here is looking to be found in a straight line.</p>
@@ -39,7 +39,7 @@ export default function WanderPage() {
 
     <section id="doorways" className="py-24 md:py-32 relative">
       <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,rgba(245,158,11,0.12),transparent_55%)]" />
-      <div className="container mx-auto px-4 max-w-6xl relative">
+      <div className="container mx-auto px-4 relative">
         <div className="grid md:grid-cols-[0.55fr_1.45fr] gap-12 mb-16">
           <h2 className="font-serif text-5xl md:text-6xl text-[#e8dcc8]">Six places.<br />Infinite entries.</h2>
           <p className="text-xl text-gray-400 max-w-xl md:pt-4">Each doorway is a way of seeing. Step through the one that calls to you. There is no wrong door—only different paths.</p>
@@ -58,7 +58,7 @@ export default function WanderPage() {
     </section>
 
     <section className="py-24 bg-[#0a0f20] border-y border-gray-800">
-      <div className="container mx-auto px-4 max-w-7xl">
+      <div className="container mx-auto px-4">
         <h2 className="font-serif text-4xl md:text-5xl text-[#e8dcc8] mb-4">Wander through connected oddments.</h2>
         <p className="text-gray-500 mb-14">Three trails. Nine stops. No obligation to arrive anywhere sensible.</p>
         <div className="space-y-6">
@@ -72,7 +72,7 @@ export default function WanderPage() {
       </div>
     </section>
 
-    <section className="py-24"><div className="container mx-auto px-4 max-w-6xl grid md:grid-cols-2 gap-12 items-center">
+    <section className="py-24"><div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
       <a href="/applets/art-mindfulness/memory-pattern-games/the-memory-loom/index.html" className="block overflow-hidden border border-amber-500/30 shadow-2xl shadow-purple-950/40 group"><img src="/applets/art-mindfulness/memory-pattern-games/the-memory-loom/source.jpg" alt="" className="aspect-[4/3] w-full object-cover group-hover:scale-[1.02] transition-transform duration-500" /></a>
       <div><p className="text-sm uppercase tracking-[0.25em] text-amber-400 mb-4">Currently glowing</p><h2 className="font-serif text-5xl md:text-6xl text-[#e8dcc8] mb-6">The Memory Loom</h2><p className="text-lg text-gray-400 leading-relaxed mb-8">A loom for the fragments we leave behind: memories, signals, half-heard patterns, and the things time keeps translating after we have stopped speaking.</p><a href="/applets/art-mindfulness/memory-pattern-games/the-memory-loom/index.html" className="inline-block px-7 py-4 border border-amber-400/60 text-amber-200 hover:bg-amber-500/10 transition-colors">Enter the loom <span aria-hidden="true">→</span></a></div>
     </div></section>
