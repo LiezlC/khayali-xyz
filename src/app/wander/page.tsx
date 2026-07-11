@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import RandomDoor from '@/components/RandomDoor'
+import InteractiveAtlasMap from '@/components/InteractiveAtlasMap'
 import { atlasDoors, atlasTrails } from '@/data/atlas'
 
 export const metadata: Metadata = {
@@ -30,8 +31,8 @@ export default function WanderPage() {
             <RandomDoor className="px-7 py-4 text-amber-300 hover:text-amber-200 underline decoration-amber-500/40 underline-offset-8 transition-colors" />
           </div>
         </div>
-        <div className="relative lg:translate-x-10">
-          <img src="/images/atlas/khayali-atlas-house.webp" alt="An illuminated map-house with many doors and paths" className="w-full mix-blend-screen opacity-95 [mask-image:linear-gradient(to_right,transparent_0%,black_14%,black_92%,transparent_100%)]" />
+        <div className="relative lg:translate-x-10 lg:min-w-[760px]">
+          <InteractiveAtlasMap doors={atlasDoors} />
         </div>
       </div>
     </section>
