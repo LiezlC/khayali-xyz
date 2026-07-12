@@ -16,6 +16,7 @@ const works: Work[] = [
   {title:'Chromatic Dialogue',note:'Two palettes enter. A conversation emerges.',path:'/applets/art-mindfulness/visual-art/chromatic-dialogue-interactive-art/index.html',image:'/images/playspace/exhibits/chromatic-dialogue.webp',tone:'#d89a4b',span:'md:col-span-4'},
   {title:'Noir Studio',note:'Light, shadow, and intention.',path:'/applets/art-mindfulness/visual-art/noir-abstract-studio/index.html',image:'/images/playspace/exhibits/noir-studio.webp',tone:'#69635c',span:'md:col-span-3'},
   {title:'BitSoil Farm',note:'Small systems. Living soil. Slow yields.',path:'/applets/art-mindfulness/farming-sim/bitsoil-farm-the-digital-detox/index.html',image:'/images/playspace/exhibits/bitsoil-farm.webp',tone:'#73a96b',span:'md:col-span-4'},
+  {title:'Dreamscape Forager',note:'Drift, hop, and gather dewdrops in a floating dream.',path:'/applets/art-mindfulness/farming-sim/dreamscape-forager/index.html',image:'/images/playspace/exhibits/dreamscape-forager.webp',tone:'#65b8bd'},
   {title:'Sunday Braai',note:'Smoke, stories, and sound. Come closer.',path:'/applets/art-mindfulness/farming-sim/sunday-braai-simulator/index.html',image:'/images/playspace/exhibits/sunday-braai.webp',tone:'#c86a45',span:'md:col-span-4'},
   {title:'Orbital Bistro',note:'Menus for moons. Recipes for strange days.',path:'/applets/art-mindfulness/misc-toys/orbital-bistro-edge-of-the-void/index.html',image:'/images/playspace/exhibits/orbital-bistro.webp',tone:'#48a7a3',span:'md:col-span-4'},
   {title:'Authentic Human Simulator',note:'Not perfect. Surprisingly human. Sometimes.',path:'/applets/speculative-ai-futures/authentic-human-simulator/index.html',image:'/images/playspace/exhibits/authentic-human.webp',tone:'#b56ab7',span:'md:col-span-5'},
@@ -68,7 +69,7 @@ export default function CuratedPlayspace({categories}:{categories:Cat[]}){
 
     <section className="relative border-b border-amber-500/20 px-5 py-10 lg:px-[3vw]">
       <div className="mx-auto grid w-full gap-10 lg:grid-cols-[clamp(220px,17vw,340px)_1fr]">
-        <header><h2 className="font-serif text-5xl leading-[.95] text-[#eadbc7]">The foreground<br/>collection</h2><p className="mt-6 text-sm leading-relaxed text-gray-500">Thirteen selected works.<br/>Interactive pieces for night hours<br/>and curious minds.</p><div className="mt-8 h-px w-14 bg-amber-400/70"/></header>
+        <header><h2 className="font-serif text-5xl leading-[.95] text-[#eadbc7]">The foreground<br/>collection</h2><p className="mt-6 text-sm leading-relaxed text-gray-500">Fourteen selected works.<br/>Interactive pieces for night hours<br/>and curious minds.</p><div className="mt-8 h-px w-14 bg-amber-400/70"/></header>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,20rem),1fr))] auto-rows-[clamp(12rem,15vw,16rem)] gap-3">{works.map(work=><Frame key={work.title} work={work} className="min-h-0"/>)}</div>
       </div>
     </section>
