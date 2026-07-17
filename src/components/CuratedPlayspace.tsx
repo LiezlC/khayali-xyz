@@ -74,6 +74,17 @@ export default function CuratedPlayspace({categories}:{categories:Cat[]}){
       </div>
     </section>
 
+    <section className="relative border-b border-amber-500/20 px-5 py-10 lg:px-[3vw]">
+      <a href="/playspace/night-garden" className="group mx-auto flex w-full flex-col items-start justify-between gap-4 border border-purple-400/40 bg-gradient-to-r from-[#0b0716] via-[#070b16] to-[#070b16] px-7 py-8 transition hover:border-purple-300 sm:flex-row sm:items-center">
+        <span>
+          <span className="block text-[.62rem] uppercase tracking-[.25em] text-purple-300/80">A composite walk · new</span>
+          <span className="mt-2 block font-serif text-3xl text-[#e8ddf3]">🏮 The Night Garden</span>
+          <span className="mt-2 block max-w-xl text-sm leading-relaxed text-[#9c95ad]">Twenty-five soundscapes planted along one path. Walk it clearing by clearing; lanterns stay lit where you have been.</span>
+        </span>
+        <span className="inline-flex shrink-0 items-center gap-3 text-[.62rem] uppercase tracking-[.22em] text-purple-300 group-hover:text-purple-200">Enter the garden <Arrow/></span>
+      </a>
+    </section>
+
     <section className="relative px-5 py-10 lg:px-[3vw]">
       <div className="mx-auto grid w-full gap-8 lg:grid-cols-[clamp(260px,20vw,400px)_1fr]">
         <header><h2 className="font-serif text-5xl text-[#eadbc7]">The Deep Archive</h2><p className="mt-5 text-sm leading-relaxed text-gray-500">Beyond the foreground lives everything else. Experiments. Sketches. Curios. Half-baked ideas. Unfinished things. Kept for wandering.</p></header>
