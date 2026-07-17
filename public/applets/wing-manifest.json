@@ -1,0 +1,501 @@
+{
+ "generated": "2026-07-17T14:55:15.354Z",
+ "wings": {
+  "futures": {
+   "label": "AI Futures",
+   "dir": "/applets/speculative-ai-futures/",
+   "apps": [
+    {
+     "slug": "africa-2030-the-digital-revolution-simulator",
+     "title": "Africa 2030: The Digital Revolution Simulator",
+     "path": "/applets/speculative-ai-futures/africa-2030-the-digital-revolution-simulator/index.html"
+    },
+    {
+     "slug": "africa-s-single-digital-market-2030-simulator",
+     "title": "Africa's Single Digital Market 2030 Simulator",
+     "path": "/applets/speculative-ai-futures/africa-s-single-digital-market-2030-simulator/index.html"
+    },
+    {
+     "slug": "agi-convergence-simulator",
+     "title": "AGI Convergence Simulator",
+     "path": "/applets/speculative-ai-futures/agi-convergence-simulator/index.html"
+    },
+    {
+     "slug": "ai-dog-translator-decoding-the-bark",
+     "title": "AI Dog Translator: Decoding the Bark",
+     "path": "/applets/speculative-ai-futures/ai-dog-translator-decoding-the-bark/index.html"
+    },
+    {
+     "slug": "ai-ethics-the-dilemma-engine",
+     "title": "AI Ethics: The Dilemma Engine",
+     "path": "/applets/speculative-ai-futures/ai-ethics-the-dilemma-engine/index.html"
+    },
+    {
+     "slug": "ai-futures-alignment-vs-convergence",
+     "title": "AI Futures: Alignment vs Convergence",
+     "path": "/applets/speculative-ai-futures/ai-futures-alignment-vs-convergence/index.html"
+    },
+    {
+     "slug": "ai-office-chronicles-the-game",
+     "title": "AI Office Chronicles: The Game",
+     "path": "/applets/speculative-ai-futures/ai-office-chronicles-the-game/index.html"
+    },
+    {
+     "slug": "ai-reconstruction-protocol",
+     "title": "AI Reconstruction Protocol",
+     "path": "/applets/speculative-ai-futures/ai-reconstruction-protocol/index.html"
+    },
+    {
+     "slug": "authentic-human-simulator",
+     "title": "Authentic Human Simulator",
+     "path": "/applets/speculative-ai-futures/authentic-human-simulator/index.html"
+    },
+    {
+     "slug": "beyond-automation-ai-lab-simulator",
+     "title": "Beyond Automation: AI Lab Simulator",
+     "path": "/applets/speculative-ai-futures/beyond-automation-ai-lab-simulator/index.html"
+    },
+    {
+     "slug": "brain-2-0-evolution-simulator",
+     "title": "Brain 2.0: Evolution Simulator",
+     "path": "/applets/speculative-ai-futures/brain-2-0-evolution-simulator/index.html"
+    },
+    {
+     "slug": "chronos-bridge-the-great-upload",
+     "title": "Chronos Bridge: The Great Upload",
+     "path": "/applets/speculative-ai-futures/chronos-bridge-the-great-upload/index.html"
+    },
+    {
+     "slug": "cyber-shepherd-os",
+     "title": "Cyber-Shepherd OS",
+     "path": "/applets/speculative-ai-futures/cyber-shepherd-os/index.html"
+    },
+    {
+     "slug": "digital-entropy-cube",
+     "title": "Digital Entropy Cube",
+     "path": "/applets/speculative-ai-futures/digital-entropy-cube/index.html"
+    },
+    {
+     "slug": "digital-sentience-the-synthesizer",
+     "title": "Digital Sentience: The Synthesizer",
+     "path": "/applets/speculative-ai-futures/digital-sentience-the-synthesizer/index.html"
+    },
+    {
+     "slug": "eagleeye-synthetic-chorus-protocol",
+     "title": "EagleEye: Synthetic Chorus Protocol",
+     "path": "/applets/speculative-ai-futures/eagleeye-synthetic-chorus-protocol/index.html"
+    },
+    {
+     "slug": "flamingone-the-turing-test",
+     "title": "FLAMINGONE: The Turing Test",
+     "path": "/applets/speculative-ai-futures/flamingone-the-turing-test/index.html"
+    },
+    {
+     "slug": "forever-alone-companion-protocol",
+     "title": "Forever Alone: Companion Protocol",
+     "path": "/applets/speculative-ai-futures/forever-alone-companion-protocol/index.html"
+    },
+    {
+     "slug": "mobius-data-self-referential-consciousness",
+     "title": "MÖBIUS DATA | Self-Referential Consciousness",
+     "path": "/applets/speculative-ai-futures/mobius-data-self-referential-consciousness/index.html"
+    },
+    {
+     "slug": "neural-convergence-interface",
+     "title": "Neural Convergence Interface",
+     "path": "/applets/speculative-ai-futures/neural-convergence-interface/index.html"
+    },
+    {
+     "slug": "neural-perception-visualizer",
+     "title": "Neural Perception Visualizer",
+     "path": "/applets/speculative-ai-futures/neural-perception-visualizer/index.html"
+    },
+    {
+     "slug": "neural-synthesizer-ai",
+     "title": "Neural Synthesizer AI",
+     "path": "/applets/speculative-ai-futures/neural-synthesizer-ai/index.html"
+    },
+    {
+     "slug": "project-plato-s-cave-simulation-architect",
+     "title": "Project: PLATO'S CAVE // SIMULATION ARCHITECT",
+     "path": "/applets/speculative-ai-futures/project-plato-s-cave-simulation-architect/index.html"
+    },
+    {
+     "slug": "soulquery-the-organic-database",
+     "title": "SoulQuery: The Organic Database",
+     "path": "/applets/speculative-ai-futures/soulquery-the-organic-database/index.html"
+    },
+    {
+     "slug": "strange-loops-eternal-learning-algorithm",
+     "title": "Strange Loops - Eternal Learning Algorithm",
+     "path": "/applets/speculative-ai-futures/strange-loops-eternal-learning-algorithm/index.html"
+    },
+    {
+     "slug": "symbiosis-human-ai-resonance",
+     "title": "Symbiosis: Human-AI Resonance",
+     "path": "/applets/speculative-ai-futures/symbiosis-human-ai-resonance/index.html"
+    },
+    {
+     "slug": "synapse-the-living-book",
+     "title": "Synapse: The Living Book",
+     "path": "/applets/speculative-ai-futures/synapse-the-living-book/index.html"
+    },
+    {
+     "slug": "synth-mind-neural-interface",
+     "title": "SYNTH_MIND // Neural Interface",
+     "path": "/applets/speculative-ai-futures/synth-mind-neural-interface/index.html"
+    },
+    {
+     "slug": "the-ai-voice-promise-vs-peril-interactive-policy-simulator",
+     "title": "The AI Voice: Promise vs. Peril - Interactive Policy Simulator",
+     "path": "/applets/speculative-ai-futures/the-ai-voice-promise-vs-peril-interactive-policy-simulator/index.html"
+    },
+    {
+     "slug": "the-algoriture-influence-simulator",
+     "title": "The Algoriture: Influence Simulator",
+     "path": "/applets/speculative-ai-futures/the-algoriture-influence-simulator/index.html"
+    },
+    {
+     "slug": "the-ascension-protocol",
+     "title": "The Ascension Protocol",
+     "path": "/applets/speculative-ai-futures/the-ascension-protocol/index.html"
+    },
+    {
+     "slug": "the-asimov-interface",
+     "title": "The Asimov Interface",
+     "path": "/applets/speculative-ai-futures/the-asimov-interface/index.html"
+    },
+    {
+     "slug": "the-convergence-interface",
+     "title": "The Convergence Interface",
+     "path": "/applets/speculative-ai-futures/the-convergence-interface/index.html"
+    },
+    {
+     "slug": "the-creator-s-dilemma-artificial-beings",
+     "title": "The Creator's Dilemma: Artificial Beings",
+     "path": "/applets/speculative-ai-futures/the-creator-s-dilemma-artificial-beings/index.html"
+    },
+    {
+     "slug": "the-neural-cartographer-ai-memory-simulation",
+     "title": "The Neural Cartographer: AI Memory Simulation",
+     "path": "/applets/speculative-ai-futures/the-neural-cartographer-ai-memory-simulation/index.html"
+    },
+    {
+     "slug": "the-singularity-event",
+     "title": "The Singularity Event",
+     "path": "/applets/speculative-ai-futures/the-singularity-event/index.html"
+    },
+    {
+     "slug": "the-tech-panic-playbook-interactive",
+     "title": "The Tech Panic Playbook: Interactive",
+     "path": "/applets/speculative-ai-futures/the-tech-panic-playbook-interactive/index.html"
+    },
+    {
+     "slug": "vibe-coding-simulator-google-ai-studio",
+     "title": "Vibe Coding Simulator - Google AI Studio",
+     "path": "/applets/speculative-ai-futures/vibe-coding-simulator-google-ai-studio/index.html"
+    },
+    {
+     "slug": "xeno-synthesis-lab",
+     "title": "Xeno-Synthesis Lab",
+     "path": "/applets/speculative-ai-futures/xeno-synthesis-lab/index.html"
+    }
+   ]
+  },
+  "mind": {
+   "label": "Mindfulness & Sound",
+   "dir": "/applets/art-mindfulness/mindfulness-sound/",
+   "apps": [
+    {
+     "slug": "ai-s-nocturnal-kingdom-interactive-explorer",
+     "title": "AI's Nocturnal Kingdom: Interactive Explorer",
+     "path": "/applets/art-mindfulness/mindfulness-sound/ai-s-nocturnal-kingdom-interactive-explorer/index.html"
+    },
+    {
+     "slug": "astral-cavern-cosmic-mindfulness",
+     "title": "Astral Cavern: Cosmic Mindfulness",
+     "path": "/applets/art-mindfulness/mindfulness-sound/astral-cavern-cosmic-mindfulness/index.html"
+    },
+    {
+     "slug": "cave-of-echoes-interactive-exploration",
+     "title": "Cave of Echoes: Interactive Exploration",
+     "path": "/applets/art-mindfulness/mindfulness-sound/cave-of-echoes-interactive-exploration/index.html"
+    },
+    {
+     "slug": "celestial-altar-the-ritual",
+     "title": "Celestial Altar: The Ritual",
+     "path": "/applets/art-mindfulness/mindfulness-sound/celestial-altar-the-ritual/index.html"
+    },
+    {
+     "slug": "circle-of-unity-interactive-harmony",
+     "title": "Circle of Unity - Interactive Harmony",
+     "path": "/applets/art-mindfulness/mindfulness-sound/circle-of-unity-interactive-harmony/index.html"
+    },
+    {
+     "slug": "cosmic-sanctuary",
+     "title": "Cosmic Sanctuary",
+     "path": "/applets/art-mindfulness/mindfulness-sound/cosmic-sanctuary/index.html"
+    },
+    {
+     "slug": "cyber-organic-resonance-tuner",
+     "title": "Cyber-Organic Resonance Tuner",
+     "path": "/applets/art-mindfulness/mindfulness-sound/cyber-organic-resonance-tuner/index.html"
+    },
+    {
+     "slug": "deep-dive-interactive-experience",
+     "title": "Deep Dive - Interactive Experience",
+     "path": "/applets/art-mindfulness/mindfulness-sound/deep-dive-interactive-experience/index.html"
+    },
+    {
+     "slug": "eco-link-cyber-druid-interface",
+     "title": "Eco-Link: Cyber Druid Interface",
+     "path": "/applets/art-mindfulness/mindfulness-sound/eco-link-cyber-druid-interface/index.html"
+    },
+    {
+     "slug": "eco-retreat-simulator",
+     "title": "Eco-Retreat Simulator",
+     "path": "/applets/art-mindfulness/mindfulness-sound/eco-retreat-simulator/index.html"
+    },
+    {
+     "slug": "emotional-detox-the-therapy-chair",
+     "title": "Emotional Detox: The Therapy Chair",
+     "path": "/applets/art-mindfulness/mindfulness-sound/emotional-detox-the-therapy-chair/index.html"
+    },
+    {
+     "slug": "infrared-journey",
+     "title": "Infrared Journey",
+     "path": "/applets/art-mindfulness/mindfulness-sound/infrared-journey/index.html"
+    },
+    {
+     "slug": "lumi-the-serenity-bot",
+     "title": "Lumi: The Serenity Bot",
+     "path": "/applets/art-mindfulness/mindfulness-sound/lumi-the-serenity-bot/index.html"
+    },
+    {
+     "slug": "lumina-grove-interactive-soundscape",
+     "title": "Lumina Grove - Interactive Soundscape",
+     "path": "/applets/art-mindfulness/mindfulness-sound/lumina-grove-interactive-soundscape/index.html"
+    },
+    {
+     "slug": "midnight-magic-citadel",
+     "title": "Midnight Magic Citadel",
+     "path": "/applets/art-mindfulness/mindfulness-sound/midnight-magic-citadel/index.html"
+    },
+    {
+     "slug": "neon-rain-zen-walk",
+     "title": "Neon Rain: Zen Walk",
+     "path": "/applets/art-mindfulness/mindfulness-sound/neon-rain-zen-walk/index.html"
+    },
+    {
+     "slug": "neural-harmony-chaos-to-clarity",
+     "title": "Neural Harmony: Chaos to Clarity",
+     "path": "/applets/art-mindfulness/mindfulness-sound/neural-harmony-chaos-to-clarity/index.html"
+    },
+    {
+     "slug": "neuro-harmonic-resonator",
+     "title": "Neuro-Harmonic Resonator",
+     "path": "/applets/art-mindfulness/mindfulness-sound/neuro-harmonic-resonator/index.html"
+    },
+    {
+     "slug": "the-astral-shrine",
+     "title": "The Astral Shrine",
+     "path": "/applets/art-mindfulness/mindfulness-sound/the-astral-shrine/index.html"
+    },
+    {
+     "slug": "the-eternal-vigil-cosmic-altar",
+     "title": "The Eternal Vigil: Cosmic Altar",
+     "path": "/applets/art-mindfulness/mindfulness-sound/the-eternal-vigil-cosmic-altar/index.html"
+    },
+    {
+     "slug": "the-mystic-doorway",
+     "title": "The Mystic Doorway",
+     "path": "/applets/art-mindfulness/mindfulness-sound/the-mystic-doorway/index.html"
+    },
+    {
+     "slug": "the-night-reimagined-digital-field-guide",
+     "title": "The Night, Reimagined | Digital Field Guide",
+     "path": "/applets/art-mindfulness/mindfulness-sound/the-night-reimagined-digital-field-guide/index.html"
+    },
+    {
+     "slug": "violet-connection-the-rhythm-of-hearts",
+     "title": "Violet Connection: The Rhythm of Hearts",
+     "path": "/applets/art-mindfulness/mindfulness-sound/violet-connection-the-rhythm-of-hearts/index.html"
+    },
+    {
+     "slug": "web-of-life-interactive-sanctuary",
+     "title": "Web of Life - Interactive Sanctuary",
+     "path": "/applets/art-mindfulness/mindfulness-sound/web-of-life-interactive-sanctuary/index.html"
+    },
+    {
+     "slug": "zen-veranda-architect",
+     "title": "Zen Veranda Architect",
+     "path": "/applets/art-mindfulness/mindfulness-sound/zen-veranda-architect/index.html"
+    }
+   ]
+  },
+  "art": {
+   "label": "Visual Art",
+   "dir": "/applets/art-mindfulness/visual-art/",
+   "apps": [
+    {
+     "slug": "abstractify-kinetic-canvas",
+     "title": "Abstractify: Kinetic Canvas",
+     "path": "/applets/art-mindfulness/visual-art/abstractify-kinetic-canvas/index.html"
+    },
+    {
+     "slug": "ai-s-trippy-vision-interactive-neural-art",
+     "title": "AI's Trippy Vision - Interactive Neural Art",
+     "path": "/applets/art-mindfulness/visual-art/ai-s-trippy-vision-interactive-neural-art/index.html"
+    },
+    {
+     "slug": "art-dozer-color-cleanup",
+     "title": "Art-Dozer: Color Cleanup",
+     "path": "/applets/art-mindfulness/visual-art/art-dozer-color-cleanup/index.html"
+    },
+    {
+     "slug": "chromatic-dialogue-interactive-art",
+     "title": "Chromatic Dialogue | Interactive Art",
+     "path": "/applets/art-mindfulness/visual-art/chromatic-dialogue-interactive-art/index.html"
+    },
+    {
+     "slug": "cosmic-infinity-engine",
+     "title": "Cosmic Infinity Engine",
+     "path": "/applets/art-mindfulness/visual-art/cosmic-infinity-engine/index.html"
+    },
+    {
+     "slug": "impasto-abstract-art-generator",
+     "title": "Impasto: Abstract Art Generator",
+     "path": "/applets/art-mindfulness/visual-art/impasto-abstract-art-generator/index.html"
+    },
+    {
+     "slug": "interactive-galaxy-generator",
+     "title": "Interactive Galaxy Generator",
+     "path": "/applets/art-mindfulness/visual-art/interactive-galaxy-generator/index.html"
+    },
+    {
+     "slug": "luminous-strands-ethereal-flow",
+     "title": "Luminous Strands: Ethereal Flow",
+     "path": "/applets/art-mindfulness/visual-art/luminous-strands-ethereal-flow/index.html"
+    },
+    {
+     "slug": "neon-neural-flow",
+     "title": "Neon Neural Flow",
+     "path": "/applets/art-mindfulness/visual-art/neon-neural-flow/index.html"
+    },
+    {
+     "slug": "noir-abstract-studio",
+     "title": "Noir Abstract Studio",
+     "path": "/applets/art-mindfulness/visual-art/noir-abstract-studio/index.html"
+    },
+    {
+     "slug": "the-watercolor-journey",
+     "title": "The Watercolor Journey",
+     "path": "/applets/art-mindfulness/visual-art/the-watercolor-journey/index.html"
+    }
+   ]
+  },
+  "farm": {
+   "label": "Farming Sims",
+   "dir": "/applets/art-mindfulness/farming-sim/",
+   "apps": [
+    {
+     "slug": "bitsoil-farm-the-digital-detox",
+     "title": "BitSoil Farm: The Digital Detox",
+     "path": "/applets/art-mindfulness/farming-sim/bitsoil-farm-the-digital-detox/index.html"
+    },
+    {
+     "slug": "cyber-bloom-synthesis",
+     "title": "Cyber-Bloom Synthesis",
+     "path": "/applets/art-mindfulness/farming-sim/cyber-bloom-synthesis/index.html"
+    },
+    {
+     "slug": "cyber-pastoral-farm-interface",
+     "title": "Cyber-Pastoral Farm Interface",
+     "path": "/applets/art-mindfulness/farming-sim/cyber-pastoral-farm-interface/index.html"
+    },
+    {
+     "slug": "dreamscape-forager",
+     "title": "Dreamscape Forager",
+     "path": "/applets/art-mindfulness/farming-sim/dreamscape-forager/index.html"
+    },
+    {
+     "slug": "nile-riverfront-builder",
+     "title": "Nile Riverfront Builder",
+     "path": "/applets/art-mindfulness/farming-sim/nile-riverfront-builder/index.html"
+    },
+    {
+     "slug": "sunday-braai-simulator",
+     "title": "Sunday Braai Simulator",
+     "path": "/applets/art-mindfulness/farming-sim/sunday-braai-simulator/index.html"
+    },
+    {
+     "slug": "sunset-ranch-simulator",
+     "title": "Sunset Ranch Simulator",
+     "path": "/applets/art-mindfulness/farming-sim/sunset-ranch-simulator/index.html"
+    },
+    {
+     "slug": "synth-farm-2077-agri-tech-simulator",
+     "title": "Synth-Farm 2077: Agri-Tech Simulator",
+     "path": "/applets/art-mindfulness/farming-sim/synth-farm-2077-agri-tech-simulator/index.html"
+    },
+    {
+     "slug": "twin-peaks-tycoon",
+     "title": "Twin Peaks Tycoon",
+     "path": "/applets/art-mindfulness/farming-sim/twin-peaks-tycoon/index.html"
+    },
+    {
+     "slug": "valley-estate-architect",
+     "title": "Valley Estate Architect",
+     "path": "/applets/art-mindfulness/farming-sim/valley-estate-architect/index.html"
+    },
+    {
+     "slug": "vibesonly-tycoon-the-ai-influencer",
+     "title": "#VibesOnly Tycoon: The AI Influencer",
+     "path": "/applets/art-mindfulness/farming-sim/vibesonly-tycoon-the-ai-influencer/index.html"
+    },
+    {
+     "slug": "vibestack-viral-tycoon",
+     "title": "VibeStack: Viral Tycoon",
+     "path": "/applets/art-mindfulness/farming-sim/vibestack-viral-tycoon/index.html"
+    }
+   ]
+  },
+  "memory": {
+   "label": "Memory & Pattern",
+   "dir": "/applets/art-mindfulness/memory-pattern-games/",
+   "apps": [
+    {
+     "slug": "lumina-light-memory-game",
+     "title": "Lumina: Light Memory Game",
+     "path": "/applets/art-mindfulness/memory-pattern-games/lumina-light-memory-game/index.html"
+    },
+    {
+     "slug": "the-memory-loom",
+     "title": "The Memory Loom",
+     "path": "/applets/art-mindfulness/memory-pattern-games/the-memory-loom/index.html"
+    }
+   ]
+  },
+  "curios": {
+   "label": "Curios",
+   "dir": "/applets/art-mindfulness/misc-toys/",
+   "apps": [
+    {
+     "slug": "celestial-forest-run",
+     "title": "Celestial Forest Run",
+     "path": "/applets/art-mindfulness/misc-toys/celestial-forest-run/index.html"
+    },
+    {
+     "slug": "orbital-bistro-edge-of-the-void",
+     "title": "Orbital Bistro: Edge of the Void",
+     "path": "/applets/art-mindfulness/misc-toys/orbital-bistro-edge-of-the-void/index.html"
+    },
+    {
+     "slug": "wyrm-s-ascent-the-dragon-pit",
+     "title": "Wyrm's Ascent: The Dragon Pit",
+     "path": "/applets/art-mindfulness/misc-toys/wyrm-s-ascent-the-dragon-pit/index.html"
+    }
+   ]
+  }
+ }
+}
