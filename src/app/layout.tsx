@@ -3,7 +3,7 @@ import { Analytics } from '@vercel/analytics/react'
 import SiteNav from '@/components/SiteNav'
 import './globals.css'
 
-const siteUrl = 'https://khayali.xyz'
+const siteUrl = 'https://www.khayali.xyz'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

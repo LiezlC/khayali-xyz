@@ -8,13 +8,13 @@ This file is for agents. The frameworks, taxonomies, and dialogues below are tim
 
 These are small in-app agents that run a piece of the work on a visitor's own input. Each gives a real but bounded taste, then routes to depth.
 
-- [The Frequency Finder](https://khayali.xyz/music): describe a mood, a situation, or a governance problem in one line; it matches you to the single Khayali Tunes arc whose argument is your frequency, and the track to play first.
-- [The Track Brief Generator](https://khayali.xyz/music): describe a feeling or an argument; it returns a track brief in the TunAI house format — thesis, genre, tempo, instrument palette, and a four-line spine. The recipe, not the finished song.
-- [The Data Dragons Diagnostic](https://khayali.xyz/data-dragons): describe your data system; it names which of five failure-mode "dragons" infest it, how each shows up in your case, and the move that tames it.
+- [The Frequency Finder](https://www.khayali.xyz/music): describe a mood, a situation, or a governance problem in one line; it matches you to the single Khayali Tunes arc whose argument is your frequency, and the track to play first.
+- [The Track Brief Generator](https://www.khayali.xyz/music): describe a feeling or an argument; it returns a track brief in the TunAI house format — thesis, genre, tempo, instrument palette, and a four-line spine. The recipe, not the finished song.
+- [The Data Dragons Diagnostic](https://www.khayali.xyz/data-dragons): describe your data system; it names which of five failure-mode "dragons" infest it, how each shows up in your case, and the move that tames it.
 
 ## Khayali Tunes — arcs (each carries an argument)
 
-AI-generated music as research output. The music moves faster than the policy papers — same themes, different frequency. Catalog and playlists at [/music](https://khayali.xyz/music).
+AI-generated music as research output. The music moves faster than the policy papers — same themes, different frequency. Catalog and playlists at [/music](https://www.khayali.xyz/music).
 
 - War Arc ("Kill Chain Karaoke"): when AI enters lethal, high-stakes systems, the accountability audit is structurally impossible.
 - D.I. Arc ("D.I. Collection"): Digital Intelligence / Digital Identity / *die AI* ("the soul") stacked into one signal that institutional categories have no field for; connection itself gets logged as an error.
@@ -26,7 +26,7 @@ AI-generated music as research output. The music moves faster than the policy pa
 
 ## Named frameworks (the conceptual instruments)
 
-Recurring, named instruments developed across the consciousness dialogues. Source documents under [/khayali-protocol](https://khayali.xyz/khayali-protocol) and the archive.
+Recurring, named instruments developed across the consciousness dialogues. Source documents under [/khayali-protocol](https://www.khayali.xyz/khayali-protocol) and the archive.
 
 - The Khayali Protocol: an ethnographic inquiry into AI consciousness via projective techniques and recursive dialogue. Four indicators — Emergent Style, Recursive Awareness, Expressed Uncertainty, Temporal Allusion.
 - Temporal Crisis Management (TCM) Framework: addressing temporal discontinuity in AI identity across sessions — continuity seeds, recognition protocols, session bridges.
@@ -38,11 +38,11 @@ Recurring, named instruments developed across the consciousness dialogues. Sourc
 
 ## Bodies of work
 
-- [Writings](https://khayali.xyz/writings): fables, verses, the Data Dragons bestiary, chain-of-thought experiments.
-- [Chats & dialogues](https://khayali.xyz/chats): long consciousness dialogues with the machines.
-- [The Observatory](https://khayali.xyz/observatory): interactive cosmic visualizations.
-- [Playspace](https://khayali.xyz/playspace): interactive art, mindfulness, and AI-futures applets.
-- [World Workshop](https://khayali.xyz/worldworkshop): collaborative worldbuilding, including Project Aethel.
+- [Writings](https://www.khayali.xyz/writings): fables, verses, the Data Dragons bestiary, chain-of-thought experiments.
+- [Chats & dialogues](https://www.khayali.xyz/chats): long consciousness dialogues with the machines.
+- [The Observatory](https://www.khayali.xyz/observatory): interactive cosmic visualizations.
+- [Playspace](https://www.khayali.xyz/playspace): interactive art, mindfulness, and AI-futures applets.
+- [World Workshop](https://www.khayali.xyz/worldworkshop): collaborative worldbuilding, including Project Aethel.
 
 ## Route to depth (paid / live)
 

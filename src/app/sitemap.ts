@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 import { getContentByCategory, getContentCategories } from '@/utils/content';
 
-const BASE_URL = 'https://khayali.xyz';
+const BASE_URL = 'https://www.khayali.xyz';
 
 // Static routes with their priorities and change frequencies
 const STATIC_ROUTES: MetadataRoute.Sitemap = [

@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/api/', '/_next/'],
       },
     ],
-    sitemap: 'https://khayali.xyz/sitemap.xml',
-    host: 'https://khayali.xyz',
+    sitemap: 'https://www.khayali.xyz/sitemap.xml',
+    host: 'https://www.khayali.xyz',
   };
 }

@@ -28,6 +28,19 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // Keep Vercel's project alias out of search results. The public site has
+      // one canonical host; every path on the deployment alias belongs there.
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'khayali-xyz.vercel.app',
+          },
+        ],
+        destination: 'https://www.khayali.xyz/:path*',
+        permanent: true,
+      },
       // Research redirects to domains
       {
         source: '/research',
