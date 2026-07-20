@@ -41,6 +41,28 @@ const nextConfig = {
         destination: 'https://www.khayali.xyz/:path*',
         permanent: true,
       },
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'khayali-xyz-kknl.vercel.app',
+          },
+        ],
+        destination: 'https://www.khayali.xyz/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'khayali-xyz-ipu8.vercel.app',
+          },
+        ],
+        destination: 'https://www.khayali.xyz/:path*',
+        permanent: true,
+      },
       // Research redirects to domains
       {
         source: '/research',
