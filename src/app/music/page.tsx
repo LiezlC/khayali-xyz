@@ -88,6 +88,15 @@ export default function MusicPage() {
               >
                 Spotify
               </a>
+              <a
+                href="https://ko-fi.com/khayali"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-pink-600/20 border border-pink-500/40 rounded-lg text-pink-200 hover:bg-pink-600/30 hover:border-pink-400 transition-all font-semibold"
+              >
+                <span aria-hidden="true">&#9829;</span>
+                Support Khayali Tunes on Ko-fi
+              </a>
             </div>
           </div>
 
