@@ -2,7 +2,11 @@ import { arcs as playlists } from "@/data/arcs";
 import FrequencyFinder from "@/components/FrequencyFinder";
 import TrackBriefGenerator from "@/components/TrackBriefGenerator";
 import type { Metadata } from 'next';
+import FeaturedMusic from '@/components/FeaturedMusic';
 import LatestMusic from '@/components/LatestMusic';
+
+// Refresh the static page daily so the Monday feature rotation advances automatically.
+export const revalidate = 86400;
 
 export const metadata: Metadata = {
   title: 'TunAI — Khayali Tunes',
@@ -93,6 +97,8 @@ export default function MusicPage() {
           </div>
         </div>
       </section>
+
+      <FeaturedMusic />
 
       <LatestMusic />
 
