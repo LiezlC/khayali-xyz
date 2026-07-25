@@ -23,17 +23,16 @@ export default function MarkdownRenderer({ content, title }: MarkdownRendererPro
 
       <div className="container mx-auto max-w-4xl px-4 py-20">
         {title && (
-          <h1 className="text-5xl font-bold mb-8 bg-gradient-to-r from-emerald-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+          <h1 className="text-5xl mb-8 font-serif text-[var(--cream)]">
             {title}
           </h1>
         )}
 
         <article className="prose prose-invert prose-lg max-w-none
-          prose-headings:bg-gradient-to-r prose-headings:from-blue-400 prose-headings:to-purple-400
-          prose-headings:bg-clip-text prose-headings:text-transparent
-          prose-h1:text-4xl prose-h1:font-bold prose-h1:mb-6
-          prose-h2:text-3xl prose-h2:font-bold prose-h2:mt-12 prose-h2:mb-4
-          prose-h3:text-2xl prose-h3:font-semibold prose-h3:mt-8 prose-h3:mb-3
+          prose-headings:font-serif prose-headings:text-[var(--cream)]
+          prose-h1:text-4xl prose-h1:mb-6
+          prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-4
+          prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-3
           prose-p:text-gray-300 prose-p:leading-relaxed prose-p:mb-4
           prose-a:text-cyan-400 prose-a:no-underline hover:prose-a:text-cyan-300
           prose-strong:text-emerald-400 prose-strong:font-semibold

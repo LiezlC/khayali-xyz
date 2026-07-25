@@ -15,7 +15,7 @@ export default function SongExcavationPage() {
       <div className="absolute -right-24 top-0 h-96 w-96 rounded-full bg-pink-500/10 blur-3xl" />
       <div className="relative container mx-auto px-4">
         <div className="max-w-3xl">
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-7 bg-gradient-to-r from-pink-400 via-purple-300 to-amber-300 bg-clip-text text-transparent">There may be a song hiding in your strange idea.</h1>
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-7 font-serif text-[var(--cream)]">There may be a song hiding in your strange idea.</h1>
           <p className="text-xl md:text-2xl text-gray-200 leading-relaxed mb-5">Bring me a question, paper, character, system failure, or half-formed thought. I’ll find its pressure point and turn it into a finished musical artefact.</p>
           <p className="text-gray-400 text-lg max-w-2xl mb-10">This is not an audio summary. It is an artistic transformation: the contradiction, voice, ache, joke, or stubborn residue that wants to become music.</p>
           <div className="flex flex-wrap gap-4"><a href={requestHref} target="_blank" rel="noopener noreferrer" className="px-7 py-4 rounded-lg bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 font-semibold transition-all">Request a founding excavation</a><a href="#process" className="px-7 py-4 rounded-lg border border-gray-600 hover:border-purple-400 bg-gray-900/60 font-semibold transition-all">See how it works</a></div>

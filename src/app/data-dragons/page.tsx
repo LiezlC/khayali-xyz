@@ -16,7 +16,7 @@ export default function DataDragonsPage() {
           <div className="text-sm font-mono text-fuchsia-400 mb-4 tracking-widest uppercase">
             the query realm
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-fuchsia-400 via-violet-400 to-rose-400 bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-6xl mb-6 font-serif text-[var(--cream)]">
             Data Dragons
           </h1>
           <p className="text-xl text-gray-300 mb-4">Name the dragons in your data.</p>
@@ -59,7 +59,7 @@ export default function DataDragonsPage() {
                   <span className={`text-xs font-mono italic ${d.tagText}`}>{d.latin}</span>
                 </div>
                 <p className="text-gray-300 mt-2 text-sm leading-relaxed">{d.pathology}</p>
-                <p className="text-gray-500 mt-2 text-xs leading-relaxed">
+                <p className="text-gray-400 mt-2 text-xs leading-relaxed">
                   <span className="uppercase tracking-wider">Tell</span> — {d.tell}
                 </p>
               </div>

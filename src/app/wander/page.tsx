@@ -59,12 +59,12 @@ export default function WanderPage() {
     <section className="py-24 bg-[#0a0f20] border-y border-gray-800">
       <div className="container mx-auto px-4">
         <h2 className="font-serif text-4xl md:text-5xl text-[#e8dcc8] mb-4">Wander through connected oddments.</h2>
-        <p className="text-gray-500 mb-14">Three trails. Nine stops. No obligation to arrive anywhere sensible.</p>
+        <p className="text-gray-400 mb-14">Three trails. Nine stops. No obligation to arrive anywhere sensible.</p>
         <div className="space-y-6">
           {atlasTrails.map((trail, trailIndex) => <div key={trail.title} className="grid lg:grid-cols-[0.65fr_1.35fr] gap-7 py-8 border-t border-gray-700/70">
-            <div className="flex gap-5"><span className="font-mono text-gray-600">0{trailIndex + 1}</span><div><h3 className={`font-serif text-3xl ${trailText[trailIndex]} mb-2`}>{trail.title}</h3><p className="text-gray-500 max-w-xs">{trail.intro}</p></div></div>
+            <div className="flex gap-5"><span className="font-mono text-gray-400">0{trailIndex + 1}</span><div><h3 className={`font-serif text-3xl ${trailText[trailIndex]} mb-2`}>{trail.title}</h3><p className="text-gray-400 max-w-xs">{trail.intro}</p></div></div>
             <div className="grid sm:grid-cols-3 gap-3">
-              {trail.stops.map((stop, stopIndex) => <a key={stop.title} href={stop.href} className="group px-5 py-4 border-l border-gray-700 hover:border-pink-400 transition-colors"><span className="text-xs font-mono text-gray-600">0{stopIndex + 1}</span><h4 className="text-lg text-gray-200 mt-2 group-hover:text-pink-200">{stop.title}</h4><p className="text-sm text-gray-500 mt-2">{stop.note}</p></a>)}
+              {trail.stops.map((stop, stopIndex) => <a key={stop.title} href={stop.href} className="group px-5 py-4 border-l border-gray-700 hover:border-pink-400 transition-colors"><span className="text-xs font-mono text-gray-400">0{stopIndex + 1}</span><h4 className="text-lg text-gray-200 mt-2 group-hover:text-pink-200">{stop.title}</h4><p className="text-sm text-gray-400 mt-2">{stop.note}</p></a>)}
             </div>
           </div>)}
         </div>

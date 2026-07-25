@@ -71,7 +71,7 @@ export default function FrequencyFinder() {
           <div className="text-xs font-mono text-purple-400 mb-3 tracking-widest uppercase">
             the frequency finder
           </div>
-          <h2 className="text-3xl font-bold mb-3 bg-gradient-to-r from-purple-400 via-pink-400 to-amber-400 bg-clip-text text-transparent">
+          <h2 className="font-serif text-4xl md:text-5xl mb-3 text-[var(--cream)]">
             Which arc are you in?
           </h2>
           <p className="text-gray-400 text-sm max-w-lg mx-auto leading-relaxed">
@@ -207,7 +207,7 @@ export default function FrequencyFinder() {
           )}
         </AnimatePresence>
 
-        <p className="mt-6 text-center text-xs text-gray-600">
+        <p className="mt-6 text-center text-xs text-gray-400">
           An instrument, disclosed as such — a fast model reading your line against seven arcs.
         </p>
       </div>

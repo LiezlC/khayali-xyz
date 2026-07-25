@@ -72,7 +72,7 @@ export default function InteractiveAtlasMap({ doors, immersive = false }: { door
       </div>
 
       <div className={`${immersive ? 'hidden' : 'mt-4 grid'} grid-cols-3 md:grid-cols-6 gap-2`} aria-label="Atlas map legend">
-        {doors.map((door, index) => <button key={door.title} type="button" onClick={() => setActive(index)} aria-pressed={active === index} className={`min-h-11 px-2 py-2 text-left border transition-colors ${active === index ? 'border-pink-400/60 bg-pink-500/10 text-white' : 'border-gray-800 text-gray-500 hover:text-gray-200 hover:border-gray-600'}`}><span className="font-mono text-xs mr-2">{String(index + 1).padStart(2, '0')}</span><span className="text-xs leading-tight">{door.title}</span></button>)}
+        {doors.map((door, index) => <button key={door.title} type="button" onClick={() => setActive(index)} aria-pressed={active === index} className={`min-h-11 px-2 py-2 text-left border transition-colors ${active === index ? 'border-pink-400/60 bg-pink-500/10 text-white' : 'border-gray-800 text-gray-400 hover:text-gray-200 hover:border-gray-600'}`}><span className="font-mono text-xs mr-2">{String(index + 1).padStart(2, '0')}</span><span className="text-xs leading-tight">{door.title}</span></button>)}
       </div>
     </div>
   )

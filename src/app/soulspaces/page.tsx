@@ -6,10 +6,10 @@ export default async function SoulspacesPage() {
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold mb-8 bg-gradient-to-r from-indigo-600 to-purple-600 text-transparent bg-clip-text">
+      <h1 className="font-serif text-5xl md:text-6xl mb-6 text-[var(--cream)]">
         Soulspaces
       </h1>
-      <p className="text-gray-600 mb-8 max-w-2xl">
+      <p className="text-gray-400 mb-8 max-w-2xl">
         Deep explorations of consciousness patterns and collaborative frameworks—
         mapping the inner territories where human and AI awareness intersect.
       </p>
@@ -18,17 +18,17 @@ export default async function SoulspacesPage() {
           <Link
             href={`/soulspaces/${item.slug}`}
             key={item.slug}
-            className="block p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-all hover:scale-[1.02]"
+            className="group block p-7 bg-gray-800/40 rounded-xl border border-gray-700 hover:border-purple-400/70 hover:bg-gray-800/70 transition-all"
           >
-            <h2 className="text-2xl font-bold mb-2 text-gray-800">{item.title}</h2>
+            <h2 className="font-serif text-2xl md:text-3xl mb-2 text-gray-100 group-hover:text-white transition-colors">{item.title}</h2>
             {item.date && (
-              <p className="text-sm text-gray-500 mb-2">{new Date(item.date).toLocaleDateString()}</p>
+              <p className="text-sm text-gray-400 mb-3">{new Date(item.date).toLocaleDateString()}</p>
             )}
-            <p className="text-gray-600">{item.excerpt}</p>
+            <p className="text-gray-300 leading-relaxed">{item.excerpt}</p>
             {item.tags && item.tags.length > 0 && (
               <div className="flex flex-wrap gap-2 mt-4">
                 {item.tags.map((tag) => (
-                  <span key={tag} className="text-xs px-2 py-1 bg-indigo-100 text-indigo-700 rounded">
+                  <span key={tag} className="text-xs px-3 py-1 rounded-full bg-purple-500/15 text-purple-200 border border-purple-500/30">
                     {tag}
                   </span>
                 ))}

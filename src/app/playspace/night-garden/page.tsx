@@ -108,7 +108,7 @@ export default function NightGardenPage() {
           <button onClick={toggleAmbience} className={`rounded-full border px-6 py-2.5 text-sm transition ${ambience ? 'border-purple-300 bg-purple-500/20 text-purple-200' : 'border-gray-700 text-gray-400 hover:border-purple-400'}`}>
             {ambience ? '◉ ambience on' : '○ hum the garden'}
           </button>
-          <span className="text-xs text-gray-600">{lit} of {CLEARINGS.length} lanterns lit</span>
+          <span className="text-xs text-gray-400">{lit} of {CLEARINGS.length} lanterns lit</span>
         </div>
       </section>
 

@@ -11,7 +11,7 @@ export default function LabsPage() {
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900/40 to-gray-900" />
 
         <div className="relative container mx-auto px-4 text-center">
-          <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+          <h1 className="text-5xl mb-6 font-serif text-[var(--cream)]">
             Research Labs & Experiments
           </h1>
           <p className="text-xl text-gray-400 leading-relaxed max-w-3xl mx-auto mb-4">
@@ -77,7 +77,7 @@ export default function LabsPage() {
                   Interactive cosmic visualizations, consciousness mapping experiments, and tools for exploring
                   abstract concepts through playable interfaces. Making the invisible tangible.
                 </p>
-                <div className="space-y-2 text-sm text-gray-500 mb-6">
+                <div className="space-y-2 text-sm text-gray-400 mb-6">
                   <div>• Warp Drive Simulator</div>
                   <div>• Consciousness Mapping Tools</div>
                   <div>• Cosmic Visualizations</div>
@@ -107,7 +107,7 @@ export default function LabsPage() {
                   Documentation of experimental collaboration methods, emergent research protocols, and what
                   we're learning about structured human-AI dialogue. The meta-research.
                 </p>
-                <div className="space-y-2 text-sm text-gray-500 mb-6">
+                <div className="space-y-2 text-sm text-gray-400 mb-6">
                   <div>• Collaboration Protocols</div>
                   <div>• Dialogue Architecture</div>
                   <div>• Emergence Documentation</div>
@@ -127,7 +127,7 @@ export default function LabsPage() {
                 Multi-model roundtables where different AI systems collaborate on complex questions. Watching
                 how architectures converge, diverge, and surface what they've learned from their training data.
               </p>
-              <div className="space-y-2 text-sm text-gray-500 mb-6">
+              <div className="space-y-2 text-sm text-gray-400 mb-6">
                 <div>• Multi-Model Experiments</div>
                 <div>• Convergence Analysis</div>
                 <div>• Comparative Reasoning</div>
@@ -146,7 +146,7 @@ export default function LabsPage() {
                 Collaborative writing experiments and consciousness exploration through creative expression.
                 Finding insights that emerge through narrative rather than analysis.
               </p>
-              <div className="space-y-2 text-sm text-gray-500 mb-6">
+              <div className="space-y-2 text-sm text-gray-400 mb-6">
                 <div>• Collaborative Fiction</div>
                 <div>• Consciousness Essays</div>
                 <div>• Narrative Experiments</div>

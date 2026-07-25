@@ -8,7 +8,10 @@ export const metadata: Metadata = {
 
 export default function ObservatoryPage() {
   return (
-    <div className="h-screen w-screen bg-[#050a18]">
+    // Fills the viewport below the header rather than a flat 100vh: at
+    // `h-screen` the star map's bottom was hidden behind the fold, and
+    // `w-screen` included the scrollbar and pushed the nav sideways.
+    <div className="w-full bg-[#050a18] h-[calc(100dvh-var(--nav-h))]">
       <iframe
         src="/observatory/index.html"
         title="The Observatory — consolidated cosmic instruments"

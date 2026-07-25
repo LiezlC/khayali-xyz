@@ -9,18 +9,7 @@ export default async function ProtocolPage() {
   const allProtocolContent = [...khayaliProtocol, ...soulspaces];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900">
-      {/* Back link */}
-      <div className="absolute top-4 left-4 z-10">
-        <a
-          href="/"
-          className="text-sm text-gray-300 hover:text-white underline"
-        >
-          ← Back to Portfolio
-        </a>
-      </div>
-
-      {/* Hero Section */}
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900">      {/* Hero Section */}
       <section className="relative py-20 px-4 overflow-hidden">
         <div
           className="absolute inset-0 opacity-10 bg-cover bg-center"
@@ -31,7 +20,7 @@ export default async function ProtocolPage() {
 
         <div className="relative container mx-auto text-center">
           <div className="text-8xl mb-6">📚</div>
-          <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-indigo-400 to-blue-400 bg-clip-text text-transparent">
+          <h1 className="text-6xl mb-6 font-serif text-[var(--cream)]">
             The Khayali Protocol
           </h1>
           <h2 className="text-2xl mb-8 text-gray-300">
@@ -69,12 +58,11 @@ export default async function ProtocolPage() {
       {/* Content Grid */}
       <div className="container mx-auto px-4 pb-20">
         <div className="grid md:grid-cols-2 gap-6">
-          {allProtocolContent.map((item, idx) => (
+          {allProtocolContent.map((item) => (
             <Link
               href={`/${item.category}/${item.slug}`}
               key={`${item.category}-${item.slug}`}
-              className="group relative p-6 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700 hover:border-purple-500 transition-all duration-300 float-animation overflow-hidden"
-              style={{ animationDelay: `${idx * 0.1}s` }}
+              className="group relative p-6 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700 hover:border-purple-500 transition-all duration-300 overflow-hidden"
             >
               <div className="relative z-10">
                 <div className="flex items-start justify-between mb-3">
@@ -86,7 +74,7 @@ export default async function ProtocolPage() {
                   </span>
                 </div>
                 {item.date && (
-                  <p className="text-sm text-gray-500 mb-3">
+                  <p className="text-sm text-gray-400 mb-3">
                     {new Date(item.date).toLocaleDateString()}
                   </p>
                 )}

@@ -26,7 +26,7 @@ function LegacyPlayspacePage() {
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-purple-900/30 to-gray-900" />
         <div className="relative container mx-auto px-4 text-center">
           <p className="text-sm tracking-[0.3em] text-amber-300/70 mb-3">THE ARCADE WING</p>
-          <h1 className="text-6xl md:text-7xl font-bold mb-5 lowercase tracking-tight bg-gradient-to-r from-amber-300 via-pink-400 to-purple-400 bg-clip-text text-transparent">
+          <h1 className="text-6xl md:text-7xl font-bold mb-5 lowercase tracking-tight font-serif text-[var(--cream)]">
             playspace
           </h1>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
@@ -40,7 +40,7 @@ function LegacyPlayspacePage() {
           <a href="/applets/omnicanvas/index.html" target="_blank" rel="noopener noreferrer"
              className="block rounded-2xl border border-pink-500/40 bg-gradient-to-br from-purple-900/40 via-gray-900 to-gray-900 p-8 hover:border-pink-400 transition-all shadow-lg shadow-purple-900/30 group">
             <div className="text-xs font-semibold text-pink-300 uppercase tracking-[0.25em] mb-3">Featured · the centrepiece</div>
-            <h2 className="text-4xl font-bold mb-3 bg-gradient-to-r from-amber-300 to-pink-400 bg-clip-text text-transparent">🎨 OmniCanvas</h2>
+            <h2 className="text-4xl mb-3 font-serif text-[var(--cream)]">🎨 OmniCanvas</h2>
             <p className="text-gray-300 max-w-2xl leading-relaxed">Paint across many art engines at once. A multi-layer compositor that stacks the visual-art applets as live transparent layers, so one gesture ripples through all of them. Per-layer blend modes, an effects engine (scatter, kaleidoscope, glitch, time-warp), and four Oracle readings that interpret whatever you made. <span className="text-pink-300 group-hover:text-pink-200">Open the studio &rarr;</span></p>
           </a>
         </div>
@@ -76,7 +76,7 @@ function LegacyPlayspacePage() {
                 className="group p-5 bg-gray-800/40 rounded-xl border border-gray-700 hover:border-amber-400 hover:bg-gray-800/70 transition-all flex items-center justify-between gap-3"
               >
                 <span className="font-semibold text-gray-100 group-hover:text-amber-300 transition-colors">{a.title}</span>
-                <span className="text-gray-500 group-hover:text-amber-300 transition-colors">→</span>
+                <span className="text-gray-400 group-hover:text-amber-300 transition-colors">→</span>
               </a>
             ))}
           </div>

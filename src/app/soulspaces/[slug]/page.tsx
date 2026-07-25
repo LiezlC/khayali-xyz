@@ -28,23 +28,23 @@ export default async function SoulspacesDetailPage({ params }: { params: { slug:
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50">
+    <div className="min-h-screen">
       <div className="container mx-auto px-4 py-12">
         <Link href="/soulspaces" className="text-indigo-600 hover:underline mb-4 inline-block">
           ← Back to Soulspaces
         </Link>
-        <article className="prose lg:prose-xl max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="bg-gradient-to-r from-indigo-600 to-purple-600 text-transparent bg-clip-text">
+        <article className="prose prose-invert lg:prose-xl max-w-3xl mx-auto">
+        <h1 className="font-serif text-[var(--cream)]">
           {content.title}
         </h1>
         {content.date && (
-          <p className="text-sm text-gray-500">{new Date(content.date).toLocaleDateString()}</p>
+          <p className="text-sm text-gray-400">{new Date(content.date).toLocaleDateString()}</p>
         )}
-        {content.excerpt && <p className="lead text-xl text-gray-600">{content.excerpt}</p>}
+        {content.excerpt && <p className="lead text-xl text-gray-300">{content.excerpt}</p>}
         {content.tags && content.tags.length > 0 && (
           <div className="flex flex-wrap gap-2 my-4">
             {content.tags.map((tag) => (
-              <span key={tag} className="text-xs px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full">
+              <span key={tag} className="text-xs px-3 py-1 rounded-full bg-purple-500/15 text-purple-200 border border-purple-500/30">
                 {tag}
               </span>
             ))}

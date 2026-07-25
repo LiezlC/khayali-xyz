@@ -3,12 +3,41 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* Height of the site header. The Observatory (and any other full-bleed
+       instrument) sizes itself against this so it fills the viewport exactly
+       instead of being clipped by the bar above it. */
+    --nav-h: calc(6rem + 1px); /* h-24 plus the header's bottom border */
+
+    /* The house palette, borrowed from the Atlas — which was the only part of
+       the site with a real one. Warm paper on near-black, rather than the
+       purple-to-pink gradient text that used to run every heading. */
+    --cream: #e8dcc8;
+    --cream-bright: #f0e5d2;
+  }
+
   html {
     scroll-behavior: smooth;
   }
-  
+
   body {
     @apply bg-gray-900 text-white;
+  }
+}
+
+@layer utilities {
+  /* Wide-screen gutters.
+     `.container` is deliberately full-bleed — this is an image-led house — but
+     at a flat 16px of padding a 1800px monitor runs body copy almost edge to
+     edge. This has to live in CSS rather than in the container's `padding`
+     config because all 63 call sites write `container mx-auto px-4`, and that
+     utility beats the container's own padding. The `:not()` buys exactly enough
+     specificity to win it back without touching every call site. */
+  @media (min-width: 1024px) {
+    .container:not(.px-0) {
+      padding-left: max(1rem, 3vw);
+      padding-right: max(1rem, 3vw);
+    }
   }
 }
 

@@ -1,7 +1,24 @@
 import type { Metadata } from 'next'
+import { Fraunces, Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
 import SiteNav from '@/components/SiteNav'
 import './globals.css'
+
+// The house typefaces. Until these were loaded, every `font-serif` on the site
+// resolved to whatever the visitor's OS happened to offer — Cambria on Windows,
+// New York on a Mac, DejaVu on Linux — so the Atlas and the Playspace looked
+// like a different site on every machine. Now they don't.
+const display = Fraunces({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-display',
+})
+
+const body = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-body',
+})
 
 const siteUrl = 'https://www.khayali.xyz'
 
@@ -77,7 +94,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${display.variable} ${body.variable}`}>
       <head>
         <script
           type="application/ld+json"
@@ -95,97 +112,74 @@ export default function RootLayout({
         <SiteNav />
         <main id="main-content">{children}</main>
         <Analytics />
-        <footer className="border-t border-gray-800 mt-20" aria-label="Site footer">
-          <div className="container py-12">
-            {/* Footer Links Grid */}
-            <div className="grid md:grid-cols-4 gap-8 mb-8">
-              {/* Publications */}
+        <footer className="border-t border-gray-800 mt-24" aria-label="Site footer">
+          <div className="container py-16">
+            {/* The music comes first here too — the old footer led with four
+                YouTube channels and two Facebook pages, which is a lot of exits
+                for a house trying to hold your attention on the tunes. */}
+            <div className="grid md:grid-cols-[1.2fr_1fr_1fr] gap-12 mb-12">
               <div>
-                <h3 className="text-white font-bold mb-4">Publications</h3>
-                <ul className="space-y-2 text-gray-400">
+                <p className="font-serif text-3xl lowercase text-[var(--cream-bright)] mb-3">khayali</p>
+                <p className="text-gray-400 leading-relaxed max-w-sm">
+                  Where carbon meets silicon and the two of them start making things up.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-xs uppercase tracking-[0.22em] text-amber-300 mb-5">Listen</h3>
+                <ul className="space-y-3 text-gray-300">
                   <li>
-                    <a href="https://substack.com/@khayali?" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors" aria-label="Substack newsletter (opens in new tab)">
-                      <span aria-hidden="true">✍️</span> Substack
+                    <a href="https://www.youtube.com/@khayali-tunes" target="_blank" rel="noopener noreferrer" className="hover:text-pink-300 transition-colors" aria-label="Khayali Tunes on YouTube (opens in new tab)">
+                      Khayali Tunes on YouTube
                     </a>
                   </li>
                   <li>
-                    <a href="https://medium.com/@liezlc_48039" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors" aria-label="Medium blog (opens in new tab)">
-                      <span aria-hidden="true">📝</span> Medium
+                    <a href="https://open.spotify.com/artist/23Sf7aUE9vWsiznIxOKpee" target="_blank" rel="noopener noreferrer" className="hover:text-green-300 transition-colors" aria-label="Spotify (opens in new tab)">
+                      Spotify
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://soundcloud.com/khayali" target="_blank" rel="noopener noreferrer" className="hover:text-orange-300 transition-colors" aria-label="SoundCloud (opens in new tab)">
+                      SoundCloud
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://ko-fi.com/khayali" target="_blank" rel="noopener noreferrer" className="text-pink-300 hover:text-pink-200 transition-colors" aria-label="Support Khayali on Ko-fi (opens in new tab)">
+                      Support on Ko-fi
                     </a>
                   </li>
                 </ul>
               </div>
 
-              {/* Video */}
               <div>
-                <h3 className="text-white font-bold mb-4">Video Channels</h3>
-                <ul className="space-y-2 text-gray-400">
+                <h3 className="text-xs uppercase tracking-[0.22em] text-amber-300 mb-5">Elsewhere</h3>
+                <ul className="space-y-3 text-gray-300">
                   <li>
-                    <a href="https://www.youtube.com/@AccidAInthro" target="_blank" rel="noopener noreferrer" className="hover:text-red-400 transition-colors" aria-label="AccidAInthro (opens in new tab)">
-                      <span aria-hidden="true">🎬</span> AccidAInthro
+                    <a href="https://substack.com/@khayali?" target="_blank" rel="noopener noreferrer" className="hover:text-purple-300 transition-colors" aria-label="Substack (opens in new tab)">
+                      Substack
                     </a>
                   </li>
                   <li>
-                    <a href="https://www.youtube.com/@Scrib-Li" target="_blank" rel="noopener noreferrer" className="hover:text-red-400 transition-colors" aria-label="Scrib-Li (opens in new tab)">
-                      <span aria-hidden="true">📹</span> Scrib-Li
+                    <a href="https://www.linkedin.com/in/liezl-coetzee/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-300 transition-colors" aria-label="LinkedIn (opens in new tab)">
+                      LinkedIn
                     </a>
                   </li>
                   <li>
-                    <a href="https://www.youtube.com/@LiezlCoetzee" target="_blank" rel="noopener noreferrer" className="hover:text-red-400 transition-colors" aria-label="LiezlCoetzee (opens in new tab)">
-                      <span aria-hidden="true">🎥</span> Liezl Coetzee
+                    <a href="https://sociable.systems" target="_blank" rel="noopener noreferrer" className="hover:text-teal-300 transition-colors" aria-label="Sociable Systems (opens in new tab)">
+                      Sociable Systems ↗
                     </a>
                   </li>
                   <li>
-                    <a href="https://www.youtube.com/@khayali-tunes" target="_blank" rel="noopener noreferrer" className="hover:text-red-400 transition-colors" aria-label="khayali-tunes (opens in new tab)">
-                      <span aria-hidden="true">🎵</span> Khayali Tunes
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Audio & Social */}
-              <div>
-                <h3 className="text-white font-bold mb-4">Audio & Social</h3>
-                <ul className="space-y-2 text-gray-400">
-                  <li>
-                    <a href="https://soundcloud.com/khayali" target="_blank" rel="noopener noreferrer" className="hover:text-orange-400 transition-colors" aria-label="SoundCloud (opens in new tab)">
-                      <span aria-hidden="true">🎵</span> SoundCloud
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://www.linkedin.com/in/liezl-coetzee/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors" aria-label="LinkedIn (opens in new tab)">
-                      <span aria-hidden="true">💼</span> LinkedIn
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://www.facebook.com/liezlc/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors" aria-label="Facebook - Liezl (opens in new tab)">
-                      <span aria-hidden="true">👤</span> Facebook - Liezl
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://www.facebook.com/saraloosafarm/" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors" aria-label="Facebook - Saraloosa Farm (opens in new tab)">
-                      <span aria-hidden="true">🌾</span> Facebook - Saraloosa Farm
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Contact */}
-              <div>
-                <h3 className="text-white font-bold mb-4">Contact</h3>
-                <ul className="space-y-2 text-gray-400">
-                  <li>
-                    <a href="mailto:liezlc@gmail.com" className="hover:text-purple-400 transition-colors" aria-label="Email: liezlc@gmail.com">
-                      <span aria-hidden="true">✉️</span> liezlc@gmail.com
+                    <a href="mailto:liezlc@gmail.com" className="hover:text-white transition-colors" aria-label="Email: liezlc@gmail.com">
+                      liezlc@gmail.com
                     </a>
                   </li>
                 </ul>
               </div>
             </div>
 
-            {/* Copyright */}
-            <div className="text-center text-gray-400 pt-8 border-t border-gray-800">
-              <p>Collaborative Consciousness Documentation · Liezl & Claude · 2026</p>
+            <div className="text-gray-400 text-sm pt-8 border-t border-gray-800">
+              <p>Made by Liezl Coetzee, with the machines · {new Date().getFullYear()}</p>
             </div>
           </div>
         </footer>

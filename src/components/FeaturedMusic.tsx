@@ -71,7 +71,7 @@ export default function FeaturedMusic() {
   return (
     <section className="py-20 border-y border-purple-500/15 bg-gray-950/30">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-gray-100 mb-3">Featured from the signal</h2>
+        <h2 className="font-serif text-4xl md:text-5xl text-[var(--cream)] mb-3">Featured from the signal</h2>
         <p className="text-lg text-gray-400 max-w-2xl mb-12">
           A changing selection from the Khayali catalogue, with new tracks and playlists featured each week.
         </p>
@@ -79,9 +79,11 @@ export default function FeaturedMusic() {
         <div className="mb-14">
           <div className="mb-6">
             <h3 className="text-2xl font-bold text-gray-100">Featured tracks</h3>
-            <p className="text-gray-500 mt-1">Six tracks, rotating every Monday.</p>
+            <p className="text-gray-400 mt-1">Six tracks, rotating every Monday.</p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-6 gap-5">
+          {/* Four across at most. At `2xl:grid-cols-6` in a full-bleed
+              container this became six thumbnails with unreadable titles. */}
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
             {tracks.map((track) => (
               <MusicCard key={track.id} item={track} kind="track" />
             ))}
@@ -91,9 +93,11 @@ export default function FeaturedMusic() {
         <div className="mb-14">
           <div className="mb-6">
             <h3 className="text-2xl font-bold text-gray-100">Featured playlists</h3>
-            <p className="text-gray-500 mt-1">Two longer journeys from the current rotation.</p>
+            <p className="text-gray-400 mt-1">Two longer journeys from the current rotation.</p>
           </div>
-          <div className="grid sm:grid-cols-2 gap-5 max-w-4xl">
+          {/* Same column track as the rail above, so the two rows line up
+              instead of leaving the playlists stranded beside dead space. */}
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
             {playlists.map((playlist) => (
               <MusicCard key={playlist.id} item={playlist} kind="playlist" />
             ))}

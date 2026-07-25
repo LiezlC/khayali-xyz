@@ -69,7 +69,7 @@ export default function CuratedPlayspace({categories}:{categories:Cat[]}){
 
     <section className="relative border-b border-amber-500/20 px-5 py-10 lg:px-[3vw]">
       <div className="mx-auto grid w-full gap-10 lg:grid-cols-[clamp(220px,17vw,340px)_1fr]">
-        <header><h2 className="font-serif text-5xl leading-[.95] text-[#eadbc7]">The foreground<br/>collection</h2><p className="mt-6 text-sm leading-relaxed text-gray-500">Fourteen selected works.<br/>Interactive pieces for night hours<br/>and curious minds.</p><div className="mt-8 h-px w-14 bg-amber-400/70"/></header>
+        <header><h2 className="font-serif text-5xl leading-[.95] text-[#eadbc7]">The foreground<br/>collection</h2><p className="mt-6 text-sm leading-relaxed text-gray-400">Fourteen selected works.<br/>Interactive pieces for night hours<br/>and curious minds.</p><div className="mt-8 h-px w-14 bg-amber-400/70"/></header>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,20rem),1fr))] auto-rows-[clamp(12rem,15vw,16rem)] gap-3">{works.map(work=><Frame key={work.title} work={work} className="min-h-0"/>)}</div>
       </div>
     </section>
@@ -87,10 +87,10 @@ export default function CuratedPlayspace({categories}:{categories:Cat[]}){
 
     <section className="relative px-5 py-10 lg:px-[3vw]">
       <div className="mx-auto grid w-full gap-8 lg:grid-cols-[clamp(260px,20vw,400px)_1fr]">
-        <header><h2 className="font-serif text-5xl text-[#eadbc7]">The Deep Archive</h2><p className="mt-5 text-sm leading-relaxed text-gray-500">Beyond the foreground lives everything else. Experiments. Sketches. Curios. Half-baked ideas. Unfinished things. Kept for wandering.</p></header>
+        <header><h2 className="font-serif text-5xl text-[#eadbc7]">The Deep Archive</h2><p className="mt-5 text-sm leading-relaxed text-gray-400">Beyond the foreground lives everything else. Experiments. Sketches. Curios. Half-baked ideas. Unfinished things. Kept for wandering.</p></header>
         <div>
-          <div className="mb-4 flex flex-wrap gap-x-6 gap-y-2 border-b border-gray-800 pb-4">{categories.map(c=><button key={c.key} onClick={()=>setActive(c.key)} className={`text-[.65rem] uppercase tracking-[.2em] transition ${active===c.key?'text-amber-300':'text-gray-600 hover:text-gray-300'}`}>{c.label}</button>)}</div>
-          <button onClick={()=>setOpen(!open)} className="flex w-full items-center justify-between border border-amber-500/50 px-7 py-6 text-left hover:bg-amber-500/5"><span><span className="block text-gray-300">The archive holds {total} works and fragments.</span><span className="mt-1 block text-sm text-gray-600">{open?cat.blurb:'Open the door when you’re ready to wander.'}</span></span><span className="flex items-center gap-4 text-[.65rem] uppercase tracking-[.25em] text-amber-300">{open?'Close':'Enter the archive'} <Arrow/></span></button>
+          <div className="mb-4 flex flex-wrap gap-x-6 gap-y-2 border-b border-gray-800 pb-4">{categories.map(c=><button key={c.key} onClick={()=>setActive(c.key)} className={`text-[.65rem] uppercase tracking-[.2em] transition ${active===c.key?'text-amber-300':'text-gray-400 hover:text-gray-300'}`}>{c.label}</button>)}</div>
+          <button onClick={()=>setOpen(!open)} className="flex w-full items-center justify-between border border-amber-500/50 px-7 py-6 text-left hover:bg-amber-500/5"><span><span className="block text-gray-300">The archive holds {total} works and fragments.</span><span className="mt-1 block text-sm text-gray-400">{open?cat.blurb:'Open the door when you’re ready to wander.'}</span></span><span className="flex items-center gap-4 text-[.65rem] uppercase tracking-[.25em] text-amber-300">{open?'Close':'Enter the archive'} <Arrow/></span></button>
           {open&&<div className="grid gap-4 border-x border-b border-amber-500/30 p-5 sm:grid-cols-2 lg:grid-cols-3">{cat.apps.map(a=>{
             const slug=a.path.split('/').slice(-2)[0]
             return <a key={a.path} href={a.path} target="_blank" rel="noopener noreferrer" className="group overflow-hidden border border-gray-800 bg-[#050a13] transition hover:border-amber-400/60">

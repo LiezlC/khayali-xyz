@@ -61,7 +61,7 @@ export default function TrackBriefGenerator() {
           <div className="text-xs font-mono text-amber-400 mb-3 tracking-widest uppercase">
             the brief generator
           </div>
-          <h2 className="text-3xl font-bold mb-3 bg-gradient-to-r from-amber-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
+          <h2 className="font-serif text-4xl md:text-5xl mb-3 text-[var(--cream)]">
             Turn it into a track
           </h2>
           <p className="text-gray-400 text-sm max-w-lg mx-auto leading-relaxed">
@@ -201,7 +201,7 @@ export default function TrackBriefGenerator() {
           )}
         </AnimatePresence>
 
-        <p className="mt-6 text-center text-xs text-gray-600">
+        <p className="mt-6 text-center text-xs text-gray-400">
           An instrument, disclosed as such — a fast model writing in the house format. The finished
           tracks are made by hand from briefs like these.
         </p>

@@ -1,4 +1,4 @@
-// Shared arc/playlist data for the TunAI music surface.
+// Shared arc/playlist data for the Khayali Tunes music surface.
 // Single source of truth: consumed by the /music page grid AND the
 // /api/arc-match agent (the Frequency Finder), so the agent can only ever
 // route a visitor to an arc that actually exists.

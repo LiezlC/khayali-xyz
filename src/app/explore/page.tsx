@@ -37,19 +37,6 @@ export default async function ExplorePage() {
     .filter(cat => cat.count > 0)
     .sort((a, b) => b.count - a.count);
 
-  const categoryColors: Record<string, string> = {
-    avatar: 'from-orange-600 to-red-600',
-    protocol: 'from-purple-600 to-pink-600',
-    writings: 'from-purple-600 to-blue-600',
-    chats: 'from-blue-600 to-teal-600',
-    'ai-village': 'from-green-600 to-blue-600',
-    observatory: 'from-indigo-600 to-purple-600',
-    creative: 'from-pink-600 to-purple-600',
-    saraloosa: 'from-green-600 to-teal-600',
-    'khayali-protocol': 'from-purple-600 to-indigo-600',
-    articles: 'from-blue-600 to-cyan-600',
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       <div className="container mx-auto px-4 py-12">
@@ -68,7 +55,7 @@ export default async function ExplorePage() {
               key={category.name}
               className="bg-white/10 backdrop-blur-sm rounded-lg p-6 hover:bg-white/20 transition-all"
             >
-              <h2 className={`text-3xl font-bold mb-2 bg-gradient-to-r ${categoryColors[category.name] || 'from-gray-400 to-gray-600'} text-transparent bg-clip-text`}>
+              <h2 className="font-serif text-3xl mb-2 text-[var(--cream)]">
                 {category.name.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
               </h2>
               <p className="text-gray-300 mb-4">
@@ -87,7 +74,7 @@ export default async function ExplorePage() {
                   </Link>
                 ))}
                 {category.count > 3 && (
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-gray-300">
                     + {category.count - 3} more...
                   </p>
                 )}

@@ -67,7 +67,7 @@ export default function SearchPage() {
       <section className="relative py-20 px-4 overflow-hidden">
         <div className="relative container mx-auto text-center">
           <div className="text-6xl mb-6">🔍</div>
-          <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+          <h1 className="text-5xl mb-6 font-serif text-[var(--cream)]">
             Search
           </h1>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto">
@@ -133,13 +133,13 @@ export default function SearchPage() {
                             {result.title}
                           </h3>
                           {result.section && (
-                            <p className="text-xs text-gray-500 uppercase tracking-wide mb-3">
+                            <p className="text-xs text-gray-400 uppercase tracking-wide mb-3">
                               {result.section}
                             </p>
                           )}
                         </div>
                         {result.score !== undefined && (
-                          <div className="text-xs text-gray-500 whitespace-nowrap">
+                          <div className="text-xs text-gray-400 whitespace-nowrap">
                             Score: {result.score.toFixed(2)}
                           </div>
                         )}
@@ -161,7 +161,7 @@ export default function SearchPage() {
                 <p className="text-gray-400 text-lg mb-4">
                   No results found for "{query}"
                 </p>
-                <p className="text-gray-500">
+                <p className="text-gray-400">
                   Try different keywords or explore from the homepage.
                 </p>
               </div>

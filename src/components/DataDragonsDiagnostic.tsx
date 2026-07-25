@@ -181,7 +181,7 @@ export default function DataDragonsDiagnostic() {
           )}
         </AnimatePresence>
 
-        <p className="mt-8 text-center text-xs text-gray-600">
+        <p className="mt-8 text-center text-xs text-gray-400">
           An instrument, disclosed as such — a fast model reading your system against five named
           failure modes drawn from a real resettlement database.
         </p>

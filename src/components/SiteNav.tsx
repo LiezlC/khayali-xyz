@@ -6,10 +6,15 @@ import { Menu, X } from 'lucide-react'
 /**
  * Site navigation.
  *
- * Desktop (md+): the original inline link row, unchanged.
- * Mobile (<md): a hamburger button that opens a full-height drawer listing
- * every room — so the long tail (Chats, Creative, World Workshop, Soulspaces)
- * that never fit in the desktop bar is reachable in two taps on a phone.
+ * Desktop (xl+): the inline link row. It needs ~795px of runway, so it only
+ * switches on at 1280px — at the old `md` breakpoint the row overflowed the
+ * viewport and pushed the whole document sideways on tablets.
+ * Below xl: a hamburger button that opens a full-height drawer listing every
+ * room — so the long tail (Chats, Creative, World Workshop, Soulspaces) that
+ * never fit in the desktop bar is reachable in two taps.
+ *
+ * The header holds a fixed 6rem height, published as `--nav-h` in globals.css,
+ * so full-bleed routes like the Observatory can size against it.
  *
  * Lives as a client component so the root layout can stay server-rendered;
  * only this interactive sliver ships JS.
@@ -52,18 +57,18 @@ export default function SiteNav() {
 
   return (
     <header className="border-b border-gray-800 relative z-40">
-      <nav className="container py-6" aria-label="Main navigation">
-        <div className="flex items-center justify-between">
+      <nav className="container h-24 flex items-center" aria-label="Main navigation">
+        <div className="flex w-full items-center justify-between">
           <a
             href="/"
-            className="text-2xl font-bold lowercase tracking-tight bg-gradient-to-r from-purple-400 via-pink-400 to-amber-300 bg-clip-text text-transparent"
+            className="font-serif text-2xl lowercase tracking-tight text-[var(--cream-bright)] hover:text-white transition-colors"
             aria-label="khayali — home"
           >
             khayali
           </a>
 
-          {/* Desktop links — unchanged from before, just hidden on small screens */}
-          <div className="hidden md:flex items-center space-x-6">
+          {/* Desktop links — the full row only fits from xl up */}
+          <div className="hidden xl:flex items-center space-x-5">
             {primaryLinks.map((l) => (
               <a
                 key={l.href}
@@ -78,7 +83,7 @@ export default function SiteNav() {
               href="https://sociable.systems"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-gray-500 hover:text-teal-400 transition-colors"
+              className="text-sm text-gray-400 hover:text-teal-400 transition-colors"
               aria-label="Sociable Systems (opens in new tab)"
             >
               Sociable Systems ↗
@@ -89,7 +94,7 @@ export default function SiteNav() {
           <button
             type="button"
             onClick={() => setOpen(true)}
-            className="md:hidden p-2 -mr-2 text-gray-200 hover:text-pink-400 transition-colors"
+            className="xl:hidden p-2 -mr-2 text-gray-200 hover:text-pink-400 transition-colors"
             aria-label="Open menu"
             aria-expanded={open}
             aria-controls="mobile-drawer"
@@ -101,7 +106,7 @@ export default function SiteNav() {
 
       {/* Mobile drawer + backdrop */}
       {open && (
-        <div className="md:hidden fixed inset-0 z-50">
+        <div className="xl:hidden fixed inset-0 z-50">
           <div
             className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             onClick={() => setOpen(false)}
@@ -115,7 +120,7 @@ export default function SiteNav() {
             className="absolute right-0 top-0 h-full w-[82%] max-w-xs bg-gray-900 border-l border-gray-800 shadow-2xl flex flex-col overflow-y-auto"
           >
             <div className="flex items-center justify-between px-5 py-6 border-b border-gray-800">
-              <span className="text-xl font-bold lowercase bg-gradient-to-r from-purple-400 via-pink-400 to-amber-300 bg-clip-text text-transparent">
+              <span className="font-serif text-xl lowercase text-[var(--cream-bright)]">
                 khayali
               </span>
               <button
@@ -140,7 +145,7 @@ export default function SiteNav() {
                 </a>
               ))}
 
-              <div className="mt-4 mb-1 px-4 text-xs uppercase tracking-[0.2em] text-gray-500">
+              <div className="mt-4 mb-1 px-4 text-xs uppercase tracking-[0.2em] text-gray-400">
                 More rooms
               </div>
               {moreRooms.map((l) => (
