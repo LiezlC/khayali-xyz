@@ -176,6 +176,14 @@ export default function LabsPage() {
               </p>
             </a>
 
+            <a href="/seedforge" className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-amber-500 transition-all p-6 block">
+              <div className="text-3xl mb-3">⚛️</div>
+              <h3 className="text-lg font-bold mb-2 text-amber-400">Matter Compilers &amp; Seed Architectures</h3>
+              <p className="text-gray-400 text-sm">
+                Every claim graded from demonstrated to extrapolation, with the Diamond Age question underneath: Seed or Feed
+              </p>
+            </a>
+
             <a href="/worldworkshop" className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-indigo-500 transition-all p-6 block">
               <div className="text-3xl mb-3">🌍</div>
               <h3 className="text-lg font-bold mb-2 text-indigo-400">World Workshop</h3>

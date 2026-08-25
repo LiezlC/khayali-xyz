@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matter Compilers & Seed Architectures v2 — Evidence-Graded Explorer</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root { --amber:#f59e0b; --emerald:#10b981; }
+  body { font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; }
+  .mono { font-family: ui-monospace, 'SF Mono', Menlo, monospace; }
+  .evidence { transition: all .2s ease; }
+  .ev-demonstrated { background:#065f4622; border-color:#10b98166; color:#6ee7b7; }
+  .ev-lab          { background:#92400e22; border-color:#f59e0b66; color:#fcd34d; }
+  .ev-theory       { background:#7c2d1222; border-color:#ea580c55; color:#fdba74; }
+  .ev-speculative  { background:#4c1d9533; border-color:#8b5cf666; color:#c4b5fd; }
+  .card-hover { transition: transform .15s ease, box-shadow .15s ease; }
+  .card-hover:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(0,0,0,.45); }
+  input[type=range] { accent-color: var(--amber); height: 4px; }
+  .tab-btn.active { background: linear-gradient(135deg,#f59e0b,#d97706); color:#1c1917; font-weight:700; box-shadow: 0 4px 14px -4px #f59e0b88; }
+  .glow-dot { animation: pulse 2.2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:.5} 50%{opacity:1} }
+  ::-webkit-scrollbar{width:8px;height:8px} ::-webkit-scrollbar-thumb{background:#334155;border-radius:4px}
+  .fade-in { animation: fadeIn .35s ease both; }
+  @keyframes fadeIn { from{opacity:0; transform:translateY(6px)} to{opacity:1;transform:none} }
+  kbd { background:#1e293b; border:1px solid #475569; border-bottom-width:2px; border-radius:4px; padding:1px 5px; font-size:10px; }
+</style>
+</head>
+<body class="bg-slate-950 text-slate-200 leading-relaxed">
+
+<!-- ═══════════ HEADER ═══════════ -->
+<header class="sticky top-0 z-50 backdrop-blur-md bg-slate-950/85 border-b border-amber-500/20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3">
+    <div class="flex items-center gap-3">
+      <span class="text-3xl">💎</span>
+      <div>
+        <h1 class="text-lg font-bold tracking-tight text-amber-400">Matter Compilers &amp; Seed Architectures <span class="text-slate-500 font-normal">v2</span></h1>
+        <p class="text-[11px] text-slate-500">APM &amp; Engineered Living Materials — evidence-graded technical explorer</p>
+      </div>
+    </div>
+    <nav id="nav" class="flex flex-wrap gap-1 text-xs"></nav>
+    <div class="hidden xl:flex items-center gap-2 text-[11px] text-slate-500">
+      navigate <kbd>←</kbd><kbd>→</kbd>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-8">
+
+  <!-- ═══════════ EVIDENCE LEGEND ═══════════ -->
+  <section class="bg-slate-900/60 border border-slate-800 rounded-2xl p-5 fade-in">
+    <div class="flex items-center gap-2 mb-3">
+      <span class="w-2 h-2 rounded-full bg-emerald-400 glow-dot"></span>
+      <h2 class="text-sm font-bold uppercase tracking-wider text-slate-300">Evidence Grading Legend</h2>
+    </div>
+    <p class="text-xs text-slate-400 mb-4 max-w-3xl">
+      Every quantitative and architectural claim below carries one of four grades. This field spans
+      <strong class="text-emerald-300">demonstrated experiments</strong> to <strong class="text-violet-300">long-range extrapolation</strong>;
+      conflating them is the most common failure mode in APM discourse. Grades:
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
+      <div class="evidence ev-demonstrated border rounded-xl p-3"><strong>Demonstrated</strong><br>Peer-reviewed, replicated in hardware.</div>
+      <div class="evidence ev-lab border rounded-xl p-3"><strong>Lab-scale</strong><br>Shown once or at tiny scale; not yet engineered.</div>
+      <div class="evidence ev-theory border rounded-xl p-3"><strong>Theory</strong><br>DFT/simulation-backed design; no hardware demonstration.</div>
+      <div class="evidence ev-speculative border rounded-xl p-3"><strong>Extrapolation</strong><br>Plausible long-range projection; decades out, contingent.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════ TAB: PHYSICS ═══════════ -->
+  <section id="sec-physics" class="tab-panel">
+    <div class="grid lg:grid-cols-2 gap-6">
+
+      <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 card-hover">
+        <span class="evidence ev-demonstrated border rounded px-2 py-0.5 text-[10px] uppercase tracking-wide">Demonstrated</span>
+        <h3 class="text-lg font-bold mt-3 text-slate-100">Hydrogen Depassivation Lithography (HDL)</h3>
+        <p class="text-sm text-slate-400 mt-2">
+          A STM tip selectively removes single H atoms from a Si(100)-H surface, exposing reactive dangling bonds.
+          Atomic selectivity comes from the tunneling current's extreme distance dependence:
+        </p>
+        <div class="mono text-xs bg-slate-950 border border-slate-800 rounded-lg p-3 my-3 text-emerald-300 overflow-x-auto">
+          I<sub>t</sub> ∝ e<sup>−2κd</sup>, κ ≈ 1 Å⁻¹ &nbsp;→&nbsp; I falls ~10³ per additional Å
+        </div>
+        <p class="text-xs text-slate-500">First demonstrated at UCL in the late 1980s; atomic-scale pattern fidelity shown by multiple groups since. Throughput remains ~10³–10⁴ sites/s per tip — this is a <em>patterning</em> tool, not yet manufacturing.</p>
+      </div>
+
+      <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 card-hover">
+        <span class="evidence ev-lab border rounded px-2 py-0.5 text-[10px] uppercase tracking-wide">Lab-scale</span>
+        <h3 class="text-lg font-bold mt-3 text-slate-100">Barrier Lowering vs. Bias</h3>
+        <p class="text-sm text-slate-400 mt-2">Desorption yield depends on both tip-sample distance <em>and</em> applied voltage — higher bias tilts the potential barrier and lowers the threshold. Explore the coupled dependence:</p>
+        <div class="mt-4 space-y-3">
+          <label class="block text-xs text-slate-400">Tip height d = <span id="lbl-d" class="mono text-amber-400">4.0</span> Å
+            <input id="in-d" type="range" min="2" max="8" step="0.1" value="4" class="w-full mt-1"></label>
+          <label class="block text-xs text-slate-400">Bias V = <span id="lbl-v" class="mono text-amber-400">4.0</span> V
+            <input id="in-v" type="range" min="2" max="7" step="0.1" value="4" class="w-full mt-1"></label>
+        </div>
+        <canvas id="chart-barrier" class="w-full mt-3" style="max-height:200px"></canvas>
+        <p class="text-[11px] text-slate-500 mt-2">Illustrative model (Fowler–Nordheim-style barrier tilt). Real desorption thresholds vary with H–Si bond orientation; treat as intuition pump, not process data.</p>
+      </div>
+
+      <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 card-hover">
+        <span class="evidence ev-lab border rounded px-2 py-0.5 text-[10px] uppercase tracking-wide">Lab-scale</span>
+        <h3 class="text-lg font-bold mt-3 text-slate-100">Isolated Molecular Growth (IM-STM)</h3>
+        <p class="text-sm text-slate-400 mt-2">
+          At ~4 K under UHV, researchers have used STM to covalently couple small molecules into polyyne chains,
+          including structures relevant to carbon allotrope synthesis. Demonstrated for chains of limited length
+          on passivated surfaces.
+        </p>
+        <ul class="text-xs text-slate-500 mt-2 space-y-1 list-disc list-inside">
+          <li>Cryogenic operation required — room-temperature IM-STM is unproven.</li>
+          <li>Growth rates measured in minutes per bond, not milliseconds.</li>
+          <li>Error correction during growth is an open research problem.</li>
+        </ul>
+      </div>
+
+      <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 card-hover">
+        <span class="evidence ev-theory border rounded px-2 py-0.5 text-[10px] uppercase tracking-wide">Theory</span>
+        <h3 class="text-lg font-bold mt-3 text-slate-100">Mechanosynthetic Toolset</h3>
+        <p class="text-sm text-slate-400 mt-2">
+          Freitas &amp; Merkle's DFT analysis identified a minimal set of radical abstraction/deposition tools
+          (ethynyl, hydrogen donation, carbene insertion, etc.) sufficient <em>in principle</em> to build
+          diamondoid lattices. Key caveat: this is <strong>computational chemistry</strong> — tool closure has never been
+          demonstrated experimentally, and solvent-free vacuum mechanosynthesis of full workpieces remains theoretical.
+        </p>
+        <div class="grid grid-cols-3 gap-2 mt-3 text-center text-[11px] mono">
+          <div class="bg-slate-950 border border-slate-800 rounded p-2">Ge-based<br>dimer tools</div>
+          <div class="bg-slate-950 border border-slate-800 rounded p-2">H-transfer<br>donors</div>
+          <div class="bg-slate-950 border border-slate-800 rounded p-2">C₂ / C₁<br>deposition</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════ TAB: ARCHITECTURE ═══════════ -->
+  <section id="sec-arch" class="tab-panel hidden">
+    <div class="grid lg:grid-cols-3 gap-6">
+
+      <div class="lg:col-span-2 space-y-6">
+        <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 card-hover">
+          <span class="evidence ev-theory border rounded px-2 py-0.5 text-[10px] uppercase tracking-wide">Theory → Extrapolation</span>
+          <h3 class="text-lg font-bold mt-3 text-slate-100">The Compilation Stack</h3>
+          <div class="mt-4 space-y-2 text-xs">
+            <div class="flex items-center gap-3"><div class="w-28 shrink-0 mono text-amber-400">Design layer</div><div class="flex-1 bg-slate-950 border border-slate-800 rounded-lg p-2.5">CAD-of-atoms: lattice specs, component libraries, error-tolerant layouts <span class="ev-speculative border rounded px-1">extrapolation</span></div></div>
+            <div class="text-center text-slate-600">↓ compiles to</div>
+            <div class="flex items-center gap-3"><div class="w-28 shrink-0 mono text-emerald-400">Process layer</div><div class="flex-1 bg-slate-950 border border-slate-800 rounded-lg p-2.5">Reaction sequences: which tool applies where, ordering constraints, feedstock routing <span class="ev-theory border rounded px-1">theory</span></div></div>
+            <div class="text-center text-slate-600">↓ executes via</div>
+            <div class="flex items-center gap-3"><div class="w-28 shrink-0 mono text-sky-400">Hardware layer</div><div class="flex-1 bg-slate-950 border border-slate-800 rounded-lg p-2.5">Tip arrays or nanomechanical assemblers performing positionally-controlled reactions <span class="ev-lab border rounded px-1">lab-scale precursors only</span></div></div>
+          </div>
+          <p class="text-xs text-slate-500 mt-4">The stack abstraction is borrowed from software compilers deliberately: decoupling "what to build" from "how it's built" is what made software portable — but each layer here currently exists only in fragments.</p>
+        </div>
+
+        <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 card-hover">
+          <span class="evidence ev-theory border rounded px-2 py-0.5 text-[10px] uppercase tracking-wide">Theory</span>
+          <h3 class="text-lg font-bold mt-3 text-slate-100">Convergent Assembly</h3>
+          <p class="text-sm text-slate-400 mt-2">
+            Merkle's proposed factory architecture: parts are built at nm scale, then merged into progressively larger
+            assemblies, doubling size at each stage. This converts an impossibly slow single-assembler process into a
+            logarithmic-depth parallel pipeline:
+          </p>
+          <canvas id="chart-converge" class="w-full mt-3" style="max-height:240px"></canvas>
+          <p class="text-xs text-slate-500 mt-2">Even at optimistic per-stage rates, a kg-scale product needs ~10²³ operations — hence SIMD-style massive tip/array parallelism is non-negotiable, not optional. Single-tip throughput (~10⁹ mech ops/s theorized) yields micrograms per day at best.</p>
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <div class="bg-gradient-to-b from-slate-900 to-slate-900/40 border border-amber-500/25 rounded-2xl p-6 card-hover">
+          <h3 class="text-sm font-bold text-amber-400 uppercase tracking-wider">Roadmap Reality Check</h3>
+          <ol class="mt-3 text-xs space-y-3">
+            <li class="flex gap-2"><span class="evidence ev-demonstrated border rounded px-1.5 shrink-0">✓</span><span>HDL patterning of logic-relevant features (replicated)</span></li>
+            <li class="flex gap-2"><span class="evidence ev-lab border rounded px-1.5 shrink-0">~</span><span>Molecule-by-molecule growth at cryogenic temps (single groups)</span></li>
+            <li class="flex gap-2"><span class="evidence ev-theory border rounded px-1.5 shrink-0">?</span><span>Mechanosynthetic closure of a simple workpiece</span></li>
+            <li class="flex gap-2"><span class="evidence ev-theory border rounded px-1.5 shrink-0">?</span><span>Room-temp operation, error-correcting growth</span></li>
+            <li class="flex gap-2"><span class="evidence ev-speculative border rounded px-1.5 shrink-0">…</span><span>Kg/hr nanofactory throughput, arrayed tips at scale</span></li>
+          </ol>
+          <p class="text-[11px] text-slate-500 mt-4 border-t border-slate-800 pt-3">Steps 3+ have no funded engineering program anywhere. Timelines quoted in popular literature ("2030s") assume breakthroughs that haven't begun.</p>
+        </div>
+
+        <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 card-hover">
+          <h3 class="text-sm font-bold text-slate-300 uppercase tracking-wider mb-3">Key Numbers</h3>
+          <dl class="text-xs space-y-2">
+            <div class="flex justify-between"><dt class="text-slate-400">HDL feature resolution</dt><dd class="mono text-emerald-400">&lt;1 nm ✓</dd></div>
+            <div class="flex justify-between"><dt class="text-slate-400">Single-tip HDL rate</dt><dd class="mono text-emerald-400">10³–10⁴ sites/s ✓</dd></div>
+            <div class="flex justify-between"><dt class="text-slate-400">Theorized assembler rate</dt><dd class="mono text-amber-400">~10⁹ ops/s</dd></div>
+            <div class="flex justify-between"><dt class="text-slate-400">Ops for 1 kg product</dt><dd class="mono text-violet-300">~10²³</dd></div>
+            <div class="flex justify-between"><dt class="text-slate-400">Array scale needed</dt><dd class="mono text-violet-300">~10¹²–10¹⁵ tips</dd></div>
+          </dl>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════ TAB: SAFETY ═══════════ -->
+  <section id="sec-safety" class="tab-panel hidden">
+    <div class="grid lg:grid-cols-2 gap-6">
+
+      <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 card-hover">
+        <span class="evidence ev-theory border rounded px-2 py-0.5 text-[10px] uppercase tracking-wide">Theory (design constraint)</span>
+        <h3 class="text-lg font-bold mt-3 text-slate-100">Why "Grey Goo" Is Overstated — But Containment Still Matters</h3>
+        <ul class="text-sm text-slate-400 mt-3 space-y-2 list-disc list-inside">
+          <li>Replicators require specialized feedstock (energetic molecules, specific elements) — ambient dust won't do. Free-ranging replication faces thermodynamic and kinetic headwinds nature already exploits.</li>
+          <li>Broadcast architecture: assemblers carry <em>no</em> stored instructions. Cut the control stream → assembly halts instantly. Replication capability is physically absent, not merely forbidden.</li>
+          <li>Real risks worth engineering for instead: uncontrolled local fabrication, IP/weapons diffusion via compiler files (a .exe for matter), and supply-chain capture of feedstock.</li>
+        </ul>
+        <canvas id="chart-halt" class="w-full mt-4" style="max-height:180px"></canvas>
+        <p class="text-[11px] text-slate-500 mt-1">Broadcast interruption → instantaneous global halt. Contrast with autonomous replicators, where halt requires active suppression.</p>
+      </div>
+
+      <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 card-hover">
+        <h3 class="text-lg font-bold text-slate-100">Security Trade-off Explorer</h3>
+        <p class="text-sm text-slate-400 mt-2">The central design tension: SIMD broadcast architectures are safer but less capable than autonomous replicators. Adjust priorities to see the recommended posture:</p>
+        <div class="mt-4 space-y-3">
+          <label class="block text-xs text-slate-400">Safety priority = <span id="lbl-safe" class="mono text-amber-400">70</span>%
+            <input id="in-safe" type="range" min="0" max="100" step="5" value="70" class="w-full mt-1"></label>
+        </div>
+        <div id="posture-out" class="mono text-xs bg-slate-950 border border-slate-800 rounded-lg p-4 my-3 whitespace-pre-line"></div>
+        <p class="text-[11px] text-slate-500">Heuristic model for discussion. Real architectures would layer controls: signed compiler outputs, hardware attestation of tip arrays, physical feedstock metering, and kill-switch power domains.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════ TAB: SOCIETY (labeled fiction) ═══════════ -->
+  <section id="sec-society" class="tab-panel hidden">
+    <div class="bg-gradient-to-r from-violet-950/50 to-slate-900 border border-violet-700/30 rounded-2xl p-6">
+      <span class="evidence ev-speculative border rounded px-2 py-0.5 text-[10px] uppercase tracking-wide">Speculative fiction — informed speculation, not prediction</span>
+      <h3 class="text-xl font-bold mt-3 text-slate-100">Socio-Economic Scenarios</h3>
+      <p class="text-sm text-slate-400 mt-2 max-w-3xl">Everything below extrapolates from Stephenson's <em>The Diamond Age</em> and economic theory. The sliders model toy scenarios; treat outputs as conversation starters about distributional questions, not forecasts.</p>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-6 mt-6">
+      <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 card-hover">
+        <h3 class="font-bold text-slate-100">Feedstock &amp; Access Model</h3>
+        <div class="mt-4 space-y-3">
+          <label class="block text-xs text-slate-400">Matter compiler cost curve (learning rate): <span id="lbl-lr" class="mono text-amber-400">18</span>%/doubling
+            <input id="in-lr" type="range" min="5" max="35" step="1" value="18" class="w-full mt-1"></label>
+          <label class="block text-xs text-slate-400">Access regime openness: <span id="lbl-open" class="mono text-amber-400">50</span>%
+            <input id="in-open" type="range" min="0" max="100" step="5" value="50" class="w-full mt-1"></label>
+        </div>
+        <div class="mt-5">
+          <div class="text-[10px] uppercase tracking-wider text-slate-500 mb-1">Unit cost against cumulative doublings</div>
+          <canvas id="chart-cost" class="w-full" style="max-height:130px"></canvas>
+        </div>
+        <div class="mt-5">
+          <div class="text-[10px] uppercase tracking-wider text-slate-500 mb-1">Access regime mix across the full openness range</div>
+          <canvas id="chart-access" class="w-full" style="max-height:200px"></canvas>
+        </div>
+        <p class="text-[11px] text-slate-500 mt-3 leading-relaxed">
+          <span class="mono text-slate-400">share&#8202;&#8321; &prop; exp(&minus;k&#8239;(pos&#8202;&#8321; &minus; &mu;)&sup2;)</span>
+          over three ordered positions (locked &minus;1, tiered 0, open +1), with &mu; set by the slider and k&nbsp;=&nbsp;1.6.
+          Shares sum to one by construction, and tiered access peaks in the middle rather than absorbing whatever the
+          other two leave over. A shape assumption, not a finding.
+        </p>
+      </div>
+      <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 card-hover">
+        <h3 class="font-bold text-slate-100">Scenario Readout</h3>
+        <div id="society-out" class="text-sm text-slate-300 mt-3 space-y-2"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- references -->
+  <section id="sec-refs" class="mt-12 border-t border-slate-800 pt-8">
+    <h2 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-2">Sources</h2>
+    <p class="text-xs text-slate-400 mb-5 max-w-3xl">
+      Grouped by the layer of the stack they speak to, and graded on the same scale used above. Experimental work is
+      separated from design literature throughout, because the gap between the two is the substance of the roadmap argument.
+    </p>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 text-xs">
+
+      <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-5">
+        <h3 class="font-bold text-slate-100 mb-3">Atomically precise patterning &middot; <span class="text-emerald-300">demonstrated</span></h3>
+        <ul class="space-y-3 text-slate-300">
+          <li>Lyding, Shen, Hubacek, Tucker &amp; Abeln (1994). Nanoscale patterning and oxidation of H-passivated Si(100)-2&times;1 surfaces with an ultrahigh vacuum scanning tunneling microscope. <em>Applied Physics Letters</em> 64, 2010. <a class="text-amber-400 hover:underline" href="https://doi.org/10.1063/1.111722">doi:10.1063/1.111722</a><br><span class="text-slate-500">The origin of hydrogen depassivation lithography. Everything in the HDL section rests on this.</span></li>
+          <li>Randall, Lyding, Schmucker <em>et al.</em> (2009). Atomic precision lithography on Si. <em>J. Vac. Sci. Technol. B</em> 27, 2764. <a class="text-amber-400 hover:underline" href="https://doi.org/10.1116/1.3237096">doi:10.1116/1.3237096</a></li>
+          <li>Ballard <em>et al.</em> (2013). Multimode hydrogen depassivation lithography: a method for optimizing atomically precise write times. <em>J. Vac. Sci. Technol. B</em> 31, 06FC01. <a class="text-amber-400 hover:underline" href="https://doi.org/10.1116/1.4823756">doi:10.1116/1.4823756</a><br><span class="text-slate-500">Source of the write-rate and line-width figures.</span></li>
+          <li>Fuechsle <em>et al.</em> (2012). A single-atom transistor. <em>Nature Nanotechnology</em> 7, 242. <a class="text-amber-400 hover:underline" href="https://doi.org/10.1038/nnano.2012.21">doi:10.1038/nnano.2012.21</a><br><span class="text-slate-500">The strongest existing demonstration that atomic placement yields a working device.</span></li>
+          <li>Roadmap on atomic-scale semiconductor devices (2025). <a class="text-amber-400 hover:underline" href="https://arxiv.org/abs/2501.04535">arXiv:2501.04535</a><br><span class="text-slate-500">Current community view of where the field is, useful as a check on the roadmap section.</span></li>
+        </ul>
+      </div>
+
+      <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-5">
+        <h3 class="font-bold text-slate-100 mb-3">Single-molecule synthesis by manipulation &middot; <span class="text-sky-300">lab-scale</span></h3>
+        <ul class="space-y-3 text-slate-300">
+          <li>Kaiser, Scriven, Schulz, Gawel, Gross &amp; Anderson (2019). An sp-hybridized molecular carbon allotrope, cyclo[18]carbon. <em>Science</em> 365, 1299. <a class="text-amber-400 hover:underline" href="https://doi.org/10.1126/science.aay1914">doi:10.1126/science.aay1914</a><br><span class="text-slate-500">The polyyne result the IM-STM section refers to. C<sub>18</sub> made by eliminating CO from a precursor with atom manipulation, on bilayer NaCl at 5&nbsp;K. The conditions matter as much as the result.</span></li>
+          <li>Sun <em>et al.</em> (2020). Synthesis of cyclo[18]carbon via debromination of C<sub>18</sub>Br<sub>6</sub>. <a class="text-amber-400 hover:underline" href="https://pubmed.ncbi.nlm.nih.gov/32646214/">PMID&nbsp;32646214</a><br><span class="text-slate-500">A second, independent route. Replication matters here, since a single tip-manipulation result is easy to over-read.</span></li>
+          <li>Chemistry World, for the non-specialist account. <a class="text-amber-400 hover:underline" href="https://www.chemistryworld.com/news/new-form-of-pure-carbon-made-by-manipulating-atoms/3010853.article">New form of pure carbon made by manipulating atoms</a></li>
+        </ul>
+      </div>
+
+      <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-5">
+        <h3 class="font-bold text-slate-100 mb-3">Architecture and self-replication &middot; <span class="text-amber-300">theory</span></h3>
+        <ul class="space-y-3 text-slate-300">
+          <li>Merkle (1997). Convergent assembly. <em>Nanotechnology</em> 8, 18&ndash;22. <a class="text-amber-400 hover:underline" href="https://www.zyvex.com/nanotech/convergent.html">zyvex.com/nanotech/convergent.html</a><br><span class="text-slate-500">The hierarchical size-spanning argument the Convergent Assembly section is built on.</span></li>
+          <li>Freitas &amp; Merkle (2004). <em>Kinematic Self-Replicating Machines</em>. Landes Bioscience. Free full text at <a class="text-amber-400 hover:underline" href="http://www.molecularassembler.com/KSRM.htm">molecularassembler.com/KSRM.htm</a> and the <a class="text-amber-400 hover:underline" href="https://archive.org/details/kinematic-self-replicating/robert-a-freitas-jr-kinematic-self-replicating">Internet Archive</a>.<br><span class="text-slate-500">The 137-dimensional replicator design space, and the source for the containment argument in the safety section.</span></li>
+          <li>Phoenix (2003). Design of a primitive nanofactory. <em>J. Evolution and Technology</em> 13. <a class="text-amber-400 hover:underline" href="https://jetpress.org/volume13/Nanofactory.pdf">PDF</a><br><span class="text-slate-500">The most worked-through convergent-assembly factory design, and explicitly a design study rather than a result.</span></li>
+        </ul>
+      </div>
+
+      <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-5">
+        <h3 class="font-bold text-slate-100 mb-3">The case against, and the open questions</h3>
+        <ul class="space-y-3 text-slate-300">
+          <li>Baum (2003). Nanotechnology: Drexler and Smalley make the case for and against molecular assemblers. <em>Chemical &amp; Engineering News</em> 81(48). <a class="text-amber-400 hover:underline" href="https://cen.acs.org/articles/81/i48/Nanotechnology.html">cen.acs.org</a><br><span class="text-slate-500">The fat-fingers and sticky-fingers objections in the principals' own words. Any honest version of this page has to survive them.</span></li>
+          <li>Jones (2004). <em>Soft Machines: Nanotechnology and Life</em>. Oxford University Press.<br><span class="text-slate-500">The substantive alternative. Biology as evidence that nanoscale machines work by wet, floppy, stochastic means rather than dry mechanical assembly.</span></li>
+          <li>Ecker &amp; Tuszynski (2022). Entropy, symmetry, and the difficulty of self-replication. <a class="text-amber-400 hover:underline" href="https://arxiv.org/abs/2202.02938">arXiv:2202.02938</a><br><span class="text-slate-500">A thermodynamic floor on replication cost, which is the constraint the roadmap should be read against.</span></li>
+          <li>Jones, Haufe, Sells <em>et al.</em> (2011). RepRap: the replicating rapid prototyper. <em>Robotica</em> 29, 177. <a class="text-amber-400 hover:underline" href="https://doi.org/10.1017/S026357471000069X">doi:10.1017/S026357471000069X</a><br><span class="text-slate-500">Partial self-replication achieved in hardware, at macro scale and from commodity parts. The only working precedent for the Seed property.</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- footer -->
+  <footer class="border-t border-slate-800 mt-10 pt-6 pb-10 text-[11px] text-slate-500 leading-relaxed">
+    <p class="mb-2">Built as a technical explainer, with every quantitative and architectural claim graded. Sources are listed above, separated into what has been demonstrated in hardware and what remains design literature.</p>
+    <p class="mb-2">Nothing here asserts near-term feasibility. Where a claim is an extrapolation it is labelled as one, and the roadmap section exists to make the distance visible rather than to argue it away.</p>
+    <p>Compiled by Sociable Systems. <a class="text-amber-400 hover:underline" href="https://sociable.systems">sociable.systems</a></p>
+  </footer>
+</main>
+
+<script>
+// ── Tab navigation + keyboard ──────────────────────────────
+const tabs = [
+  {id:'sec-physics', label:'⚛ Physics'},
+  {id:'sec-arch',    label:'🏗 Architecture'},
+  {id:'sec-safety',  label:'🛡 Safety'},
+  {id:'sec-society', label:'🌐 Society'},
+];
+const nav = document.getElementById('nav');
+let curTab = 0;
+tabs.forEach((t,i)=>{
+  const b=document.createElement('button');
+  b.textContent=t.label; b.className='tab-btn px-3 py-1.5 rounded-lg border border-slate-700 hover:border-amber-500/50 transition';
+  b.onclick=()=>setTab(i); nav.appendChild(b);
+});
+function setTab(i){
+  curTab=i;
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.add('hidden'));
+  const el=document.getElementById(tabs[i].id);
+  el.classList.remove('hidden'); el.classList.add('fade-in');
+  document.querySelectorAll('.tab-btn').forEach((b,j)=>{
+    b.classList.toggle('active', j===i);
+    b.classList.toggle('bg-slate-900', j!==i);
+  });
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight') setTab((curTab+1)%tabs.length);
+  if(e.key==='ArrowLeft')  setTab((curTab-1+tabs.length)%tabs.length);
+});
+setTab(0);
+
+// ── Element handles (ids are hyphenated, so look them up explicitly) ──
+const $ = id => document.getElementById(id);
+const in_d = $('in-d'),   in_v = $('in-v'),   lbl_d = $('lbl-d'),   lbl_v = $('lbl-v');
+const in_safe = $('in-safe'), lbl_safe = $('lbl-safe');
+const in_lr = $('in-lr'), in_open = $('in-open'), lbl_lr = $('lbl-lr'), lbl_open = $('lbl-open');
+
+// ── Chart helpers ───────────────────────────────────────────
+const GRID={color:'#1e293b'}, TICK={color:'#64748b',font:{size:10}};
+function mkChart(ctx,cfg){
+  const base={responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{labels:{color:'#94a3b8',font:{size:10},boxWidth:12}}}};
+  const o=cfg.options||{};
+  return new Chart(ctx,{...cfg,options:{...base,...o,
+    plugins:{...base.plugins,...(o.plugins||{})}}});
+}
+
+// Barrier lowering chart
+const chB=mkChart(document.getElementById('chart-barrier'),{type:'line',
+  data:{labels:[],datasets:[{label:'Effective barrier (eV)',data:[],borderColor:'#f59e0b',
+    backgroundColor:'#f59e0b22',fill:true,tension:.3,pointRadius:0}]},
+  options:{scales:{x:{type:'linear',title:{display:true,text:'Distance d (Å)',color:TICK.color},grid:GRID,ticks:TICK},
+                   y:{title:{display:true,text:'eV',color:TICK.color},grid:GRID,ticks:TICK}}}});
+function updBarrier(){
+  const d=parseFloat(in_d.value), v=parseFloat(in_v.value);
+  lbl_d.textContent=d.toFixed(1); lbl_v.textContent=v.toFixed(1);
+  // Illustrative: Φ(d,V)=Φ0·exp(-d/λ) − α·V  (barrier tilt term)
+  const pts=[]; for(let dd=2;dd<=8;dd+=0.1){
+    let phi=4.8*Math.exp(-dd/2.2)-0.45*v*Math.exp(-(dd-2)/3);
+    pts.push({x:dd,y:Math.max(phi,0)});
+  }
+  chB.data.datasets[0].data=pts; chB.update('none');
+}
+[in_d,in_v].forEach(el=>el.addEventListener('input',updBarrier)); updBarrier();
+
+// Convergent assembly chart
+mkChart(document.getElementById('chart-converge'),{type:'bar',
+  data:{labels:['nm','10nm','100nm','µm','10µm','100µm','mm','cm'],
+    datasets:[
+      {label:'Stage size',data:[1,10,100,1e3,1e4,1e5,1e6,1e7],backgroundColor:'#38bdf8aa'},
+      {label:'Cumulative stages (depth)',type:'line',data:[1,2,3,4,5,6,7,8],borderColor:'#f59e0b',tension:.2}]},
+  options:{scales:{y:{type:'logarithmic',grid:GRID,ticks:TICK},x:{grid:GRID,ticks:TICK}}}});
+
+// Broadcast halt chart
+mkChart(document.getElementById('chart-halt'),{type:'line',
+  data:{labels:['t₀','t₀+ε','+1ms','+1s','+1min'],datasets:[
+    {label:'Broadcast arch output',data:[100,0,0,0,0],borderColor:'#10b981',tension:0,stepped:true},
+    {label:'Autonomous arch output (hypothetical)',data:[100,99,95,80,55],borderColor:'#ef4444',tension:.3,borderDash:[5,4]}]},
+  options:{scales:{y:{title:{display:true,text:'Relative production (%)',color:TICK.color},grid:GRID,ticks:TICK},x:{grid:GRID,ticks:TICK}}}});
+
+// Security posture explorer
+const postOut=document.getElementById('posture-out');
+function updPosture(){
+  const s=parseInt(in_safe.value); lbl_safe.textContent=s;
+  const cap=100-s;
+  let txt='';
+  if(s>=80) txt=`RECOMMENDED: Pure broadcast SIMD.
+• Zero onboard instruction storage
+• Hardware-enforced feedstock metering
+• Capability ceiling: LOW (by design)
+• Residual risk: compiler-file theft`;
+  else if(s>=50) txt=`RECOMMENDED: Broadcast + signed microcode updates.
+• Limited onboard parameter sets (attested)
+• Capability ceiling: MODERATE
+• Residual risk: update-chain compromise`;
+  else if(s>=20) txt=`RECOMMENDED: Federated semi-autonomous cells.
+• Onboard libraries, audit logs mandatory
+• Capability ceiling: HIGH
+• Residual risk: emergent local behavior`;
+  else txt=`RECOMMENDED: Autonomous replication research.
+• ⚠ Outside any responsible-design envelope
+• Requires international verification regime
+• Capability ceiling: UNBOUNDED`;
+  postOut.style.whiteSpace='pre-line';
+  postOut.textContent=`safety ${s}%  |  capability ${cap}%
+
+${txt}`;
+}
+in_safe.addEventListener('input',updPosture); updPosture();
+
+// ── Society model ──────────────────────────────────────────
+// Ordered softmax over three access regimes. No residual category, so no
+// renormalisation: the shares are a composition by construction.
+const REGIMES=[{name:'Locked (DRM)',pos:-1,color:'#8b5cf6'},
+               {name:'Tiered / phyle',pos:0,color:'#f59e0b'},
+               {name:'Open access',pos:1,color:'#10b981'}];
+const K=1.6;
+function shares(openPct){
+  const mu=openPct/50-1;
+  const w=REGIMES.map(r=>Math.exp(-K*Math.pow(r.pos-mu,2)));
+  const tot=w.reduce((a,b)=>a+b,0);
+  return w.map(x=>100*x/tot);
+}
+
+// Cost curve: its own chart, so the learning-rate slider drives something visible.
+const chCost=mkChart(document.getElementById('chart-cost'),{type:'line',
+  data:{datasets:[
+    {label:'Unit cost (% of today)',data:[],borderColor:'#38bdf8',backgroundColor:'#38bdf822',
+     fill:true,tension:.3,pointRadius:0},
+    {label:'At 10 doublings',data:[],borderColor:'#f59e0b',backgroundColor:'#f59e0b',
+     showLine:false,pointRadius:4}]},
+  options:{scales:{x:{type:'linear',min:0,max:15,title:{display:true,text:'Doublings of cumulative output',color:TICK.color},grid:GRID,ticks:TICK},
+                   y:{min:0,max:100,title:{display:true,text:'% of today',color:TICK.color},grid:GRID,ticks:TICK}}}});
+
+// Access mix: the whole response surface, with a marker at the current setting.
+const chA=mkChart(document.getElementById('chart-access'),{type:'line',
+  data:{datasets:[
+    ...REGIMES.map(r=>({label:r.name,data:[],borderColor:r.color,backgroundColor:r.color+'55',
+      fill:true,tension:.35,pointRadius:0,borderWidth:1.5,stack:'mix'})),
+    {label:'Current setting',data:[],borderColor:'#e2e8f0',borderDash:[4,4],borderWidth:1,
+     pointRadius:0,fill:false,stack:'marker'}]},
+  options:{scales:{x:{type:'linear',min:0,max:100,title:{display:true,text:'Access regime openness (%)',color:TICK.color},grid:GRID,ticks:TICK},
+                   y:{stacked:true,min:0,max:100,title:{display:true,text:'Share of fabrication capacity (%)',color:TICK.color},grid:GRID,ticks:TICK}}}});
+
+const socOut=document.getElementById('society-out');
+function updSociety(){
+  const lr=parseInt(in_lr.value), open=parseInt(in_open.value);
+  lbl_lr.textContent=lr; lbl_open.textContent=open;
+
+  const curve=[]; for(let i=0;i<=15;i+=0.25) curve.push({x:i,y:Math.pow(1-lr/100,i)*100});
+  const cost=Math.pow(1-lr/100,10)*100;
+  chCost.data.datasets[0].data=curve;
+  chCost.data.datasets[1].data=[{x:10,y:cost}];
+  chCost.update('none');
+
+  REGIMES.forEach((r,i)=>{
+    const series=[]; for(let o=0;o<=100;o+=2) series.push({x:o,y:shares(o)[i]});
+    chA.data.datasets[i].data=series;
+  });
+  chA.data.datasets[3].data=[{x:open,y:0},{x:open,y:100}];
+  chA.update('none');
+
+  const [lock,tier,openS]=shares(open).map(v=>Math.round(v));
+  const era = lr>=25 ? 'Rapid diffusion' : lr>=15 ? 'Moderate diffusion' : 'Entrenched incumbents';
+  socOut.innerHTML=`
+    <p><strong class="text-amber-400">${era}:</strong> unit fabrication cost falls to
+    <span class="mono">${cost.toFixed(1)}%</span> of today's after 10 doublings.</p>
+    <p>Access split: <span class="mono">${openS}%</span> open &middot;
+       <span class="mono">${tier}%</span> tiered &middot;
+       <span class="mono">${lock}%</span> locked.</p>
+    ${open>70 ? '<p class="text-emerald-300 text-xs">Scenario: commodity abundance pressures redistribution politics; phyle-like mutual-aid networks compete on service quality rather than property.</p>'
+     : open<30 ? '<p class="text-violet-300 text-xs">Scenario: DRM-gated fabrication concentrates capital; "thete" underclass dynamics plausible without preemptive access guarantees.</p>'
+     : '<p class="text-slate-400 text-xs">Scenario: contested middle. The outcome is decided by early licensing standards and by who owns the compiler toolchain, which is also where the tiered share peaks. Standards battles matter most right here.</p>'}
+    <p class="text-[11px] text-slate-500 pt-1">The crossovers on the chart are the interesting part: the openness settings where one regime overtakes another are the points a standards decision actually moves.</p>`;
+}
+[in_lr,in_open].forEach(el=>el.addEventListener('input',updSociety)); updSociety();
+</script>
+</body>
+</html>

@@ -24,6 +24,17 @@ const nextConfig = {
         source: '/curriculum',
         destination: '/curriculum/index.html',
       },
+      {
+        source: '/seedforge',
+        destination: '/seedforge/index.html',
+      },
+      // Two redirects below point at /grievoice, which is a static folder in
+      // public/. Next does not resolve directory indexes there, so without this
+      // the bare path 404s.
+      {
+        source: '/grievoice',
+        destination: '/grievoice/index.html',
+      },
     ];
   },
   async redirects() {
