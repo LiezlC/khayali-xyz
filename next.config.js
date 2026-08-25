@@ -21,10 +21,6 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/curriculum',
-        destination: '/curriculum/index.html',
-      },
-      {
         source: '/seedforge',
         destination: '/seedforge/index.html',
       },
