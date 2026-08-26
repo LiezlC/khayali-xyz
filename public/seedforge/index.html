@@ -28,6 +28,12 @@
 </style>
 </head>
 <body class="bg-slate-950 text-slate-200 leading-relaxed">
+<noscript>
+  <div style="max-width:52rem;margin:1.5rem auto;padding:1rem;border:1px solid #f59e0b55;border-radius:.75rem;background:#f59e0b11;color:#e2e8f0;font:14px/1.6 system-ui,sans-serif">
+    The charts and sliders on this page are generated in the browser, so this page needs JavaScript and an internet connection (Tailwind and Chart.js load from a CDN). The text, the evidence grades and the source list below all read fine without them.
+  </div>
+</noscript>
+
 
 <!-- ═══════════ HEADER ═══════════ -->
 <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-950/85 border-b border-amber-500/20">
@@ -81,30 +87,30 @@
         <div class="mono text-xs bg-slate-950 border border-slate-800 rounded-lg p-3 my-3 text-emerald-300 overflow-x-auto">
           I<sub>t</sub> ∝ e<sup>−2κd</sup>, κ ≈ 1 Å⁻¹ &nbsp;→&nbsp; I falls ~10³ per additional Å
         </div>
-        <p class="text-xs text-slate-500">First demonstrated at UCL in the late 1980s; atomic-scale pattern fidelity shown by multiple groups since. Throughput remains ~10³–10⁴ sites/s per tip — this is a <em>patterning</em> tool, not yet manufacturing.</p>
+        <p class="text-xs text-slate-500">First demonstrated by Lyding's group at Illinois in 1994 (<span class="mono">Appl. Phys. Lett.</span> 64, 2010), building on late-1980s STM surface-modification work; atomic-scale pattern fidelity replicated by multiple groups since. Throughput remains ~10³–10⁴ sites/s per tip — this is a <em>patterning</em> tool, not yet manufacturing.</p>
       </div>
 
       <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 card-hover">
         <span class="evidence ev-lab border rounded px-2 py-0.5 text-[10px] uppercase tracking-wide">Lab-scale</span>
         <h3 class="text-lg font-bold mt-3 text-slate-100">Barrier Lowering vs. Bias</h3>
-        <p class="text-sm text-slate-400 mt-2">Desorption yield depends on both tip-sample distance <em>and</em> applied voltage — higher bias tilts the potential barrier and lowers the threshold. Explore the coupled dependence:</p>
+        <p class="text-sm text-slate-400 mt-2">Desorption rate depends on both tip-sample distance <em>and</em> applied voltage. Distance sets how many electrons arrive, bias sets how likely each one is to break the bond. Explore the coupled dependence:</p>
         <div class="mt-4 space-y-3">
-          <label class="block text-xs text-slate-400">Tip height d = <span id="lbl-d" class="mono text-amber-400">4.0</span> Å
-            <input id="in-d" type="range" min="2" max="8" step="0.1" value="4" class="w-full mt-1"></label>
-          <label class="block text-xs text-slate-400">Bias V = <span id="lbl-v" class="mono text-amber-400">4.0</span> V
-            <input id="in-v" type="range" min="2" max="7" step="0.1" value="4" class="w-full mt-1"></label>
+          <label class="block text-xs text-slate-400">Tip height d = <span id="lbl-d" role="status" aria-live="polite" class="mono text-amber-400">4.0</span> Å
+            <input id="in-d" aria-label="Tip height in angstroms" type="range" min="2" max="8" step="0.1" value="4" class="w-full mt-1"></label>
+          <label class="block text-xs text-slate-400">Bias V = <span id="lbl-v" role="status" aria-live="polite" class="mono text-amber-400">4.0</span> V
+            <input id="in-v" aria-label="Bias voltage in volts" type="range" min="2" max="7" step="0.1" value="4" class="w-full mt-1"></label>
         </div>
         <canvas id="chart-barrier" class="w-full mt-3" style="max-height:200px"></canvas>
-        <p class="text-[11px] text-slate-500 mt-2">Illustrative model (Fowler–Nordheim-style barrier tilt). Real desorption thresholds vary with H–Si bond orientation; treat as intuition pump, not process data.</p>
+        <p class="text-[11px] text-slate-500 mt-2">Relative rate = tunnelling current <span class="mono">e<sup>−2κd</sup></span> × per-electron yield, with the yield rising steeply near the ~6&nbsp;V electronic-excitation threshold and proceeding by slower vibrational heating below it. Log axis, arbitrary units, positive by construction. Real thresholds vary with H–Si bond orientation and tip condition; an intuition pump, not process data.</p>
       </div>
 
       <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 card-hover">
         <span class="evidence ev-lab border rounded px-2 py-0.5 text-[10px] uppercase tracking-wide">Lab-scale</span>
         <h3 class="text-lg font-bold mt-3 text-slate-100">Isolated Molecular Growth (IM-STM)</h3>
         <p class="text-sm text-slate-400 mt-2">
-          At ~4 K under UHV, researchers have used STM to covalently couple small molecules into polyyne chains,
-          including structures relevant to carbon allotrope synthesis. Demonstrated for chains of limited length
-          on passivated surfaces.
+          At ~5 K under UHV, researchers have used STM tip manipulation to build individual sp-hybridised carbon
+          structures, notably cyclo[18]carbon: a closed ring with polyynic bond alternation rather than an open
+          chain, made by stripping CO from a precursor on bilayer NaCl. Demonstrated one molecule at a time.
         </p>
         <ul class="text-xs text-slate-500 mt-2 space-y-1 list-disc list-inside">
           <li>Cryogenic operation required — room-temperature IM-STM is unproven.</li>
@@ -159,7 +165,7 @@
             logarithmic-depth parallel pipeline:
           </p>
           <canvas id="chart-converge" class="w-full mt-3" style="max-height:240px"></canvas>
-          <p class="text-xs text-slate-500 mt-2">Even at optimistic per-stage rates, a kg-scale product needs ~10²³ operations — hence SIMD-style massive tip/array parallelism is non-negotiable, not optional. Single-tip throughput (~10⁹ mech ops/s theorized) yields micrograms per day at best.</p>
+          <p class="text-xs text-slate-500 mt-2">Depth is simply the number of stages, eight here, which is the point: size spans seven orders of magnitude in a logarithmic number of steps. Even at optimistic per-stage rates, a kg-scale product needs ~10²³ operations — hence SIMD-style massive tip/array parallelism is non-negotiable, not optional. Single-tip throughput (~10⁹ mech ops/s theorized) yields micrograms per day at best.</p>
         </div>
       </div>
 
@@ -211,8 +217,8 @@
         <h3 class="text-lg font-bold text-slate-100">Security Trade-off Explorer</h3>
         <p class="text-sm text-slate-400 mt-2">The central design tension: SIMD broadcast architectures are safer but less capable than autonomous replicators. Adjust priorities to see the recommended posture:</p>
         <div class="mt-4 space-y-3">
-          <label class="block text-xs text-slate-400">Safety priority = <span id="lbl-safe" class="mono text-amber-400">70</span>%
-            <input id="in-safe" type="range" min="0" max="100" step="5" value="70" class="w-full mt-1"></label>
+          <label class="block text-xs text-slate-400">Safety priority = <span id="lbl-safe" role="status" aria-live="polite" class="mono text-amber-400">70</span>%
+            <input id="in-safe" aria-label="Safety priority, percent" type="range" min="0" max="100" step="5" value="70" class="w-full mt-1"></label>
         </div>
         <div id="posture-out" class="mono text-xs bg-slate-950 border border-slate-800 rounded-lg p-4 my-3 whitespace-pre-line"></div>
         <p class="text-[11px] text-slate-500">Heuristic model for discussion. Real architectures would layer controls: signed compiler outputs, hardware attestation of tip arrays, physical feedstock metering, and kill-switch power domains.</p>
@@ -232,10 +238,10 @@
       <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 card-hover">
         <h3 class="font-bold text-slate-100">Feedstock &amp; Access Model</h3>
         <div class="mt-4 space-y-3">
-          <label class="block text-xs text-slate-400">Matter compiler cost curve (learning rate): <span id="lbl-lr" class="mono text-amber-400">18</span>%/doubling
-            <input id="in-lr" type="range" min="5" max="35" step="1" value="18" class="w-full mt-1"></label>
-          <label class="block text-xs text-slate-400">Access regime openness: <span id="lbl-open" class="mono text-amber-400">50</span>%
-            <input id="in-open" type="range" min="0" max="100" step="5" value="50" class="w-full mt-1"></label>
+          <label class="block text-xs text-slate-400">Matter compiler cost curve (learning rate): <span id="lbl-lr" role="status" aria-live="polite" class="mono text-amber-400">18</span>%/doubling
+            <input id="in-lr" aria-label="Learning rate, percent per doubling" type="range" min="5" max="35" step="1" value="18" class="w-full mt-1"></label>
+          <label class="block text-xs text-slate-400">Access regime openness: <span id="lbl-open" role="status" aria-live="polite" class="mono text-amber-400">50</span>%
+            <input id="in-open" aria-label="Access regime openness, percent" type="range" min="0" max="100" step="5" value="50" class="w-full mt-1"></label>
         </div>
         <div class="mt-5">
           <div class="text-[10px] uppercase tracking-wider text-slate-500 mb-1">Unit cost against cumulative doublings</div>
@@ -283,7 +289,7 @@
       <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-5">
         <h3 class="font-bold text-slate-100 mb-3">Single-molecule synthesis by manipulation &middot; <span class="text-sky-300">lab-scale</span></h3>
         <ul class="space-y-3 text-slate-300">
-          <li>Kaiser, Scriven, Schulz, Gawel, Gross &amp; Anderson (2019). An sp-hybridized molecular carbon allotrope, cyclo[18]carbon. <em>Science</em> 365, 1299. <a class="text-amber-400 hover:underline" href="https://doi.org/10.1126/science.aay1914">doi:10.1126/science.aay1914</a><br><span class="text-slate-500">The polyyne result the IM-STM section refers to. C<sub>18</sub> made by eliminating CO from a precursor with atom manipulation, on bilayer NaCl at 5&nbsp;K. The conditions matter as much as the result.</span></li>
+          <li>Kaiser, Scriven, Schulz, Gawel, Gross &amp; Anderson (2019). An sp-hybridized molecular carbon allotrope, cyclo[18]carbon. <em>Science</em> 365, 1299. <a class="text-amber-400 hover:underline" href="https://doi.org/10.1126/science.aay1914">doi:10.1126/science.aay1914</a><br><span class="text-slate-500">The cyclocarbon result the IM-STM section refers to. C<sub>18</sub> made by eliminating CO from a precursor with atom manipulation, on bilayer NaCl at 5&nbsp;K. The conditions matter as much as the result.</span></li>
           <li>Sun <em>et al.</em> (2020). Synthesis of cyclo[18]carbon via debromination of C<sub>18</sub>Br<sub>6</sub>. <a class="text-amber-400 hover:underline" href="https://pubmed.ncbi.nlm.nih.gov/32646214/">PMID&nbsp;32646214</a><br><span class="text-slate-500">A second, independent route. Replication matters here, since a single tip-manipulation result is easy to over-read.</span></li>
           <li>Chemistry World, for the non-specialist account. <a class="text-amber-400 hover:underline" href="https://www.chemistryworld.com/news/new-form-of-pure-carbon-made-by-manipulating-atoms/3010853.article">New form of pure carbon made by manipulating atoms</a></li>
         </ul>
@@ -345,6 +351,9 @@ function setTab(i){
   });
 }
 document.addEventListener('keydown',e=>{
+  // Do not steal arrow keys from a focused slider or text field.
+  const t=e.target;
+  if(t && (t.tagName==='INPUT' || t.tagName==='TEXTAREA' || t.isContentEditable)) return;
   if(e.key==='ArrowRight') setTab((curTab+1)%tabs.length);
   if(e.key==='ArrowLeft')  setTab((curTab-1+tabs.length)%tabs.length);
 });
@@ -362,25 +371,39 @@ function mkChart(ctx,cfg){
   const base={responsive:true,maintainAspectRatio:false,
     plugins:{legend:{labels:{color:'#94a3b8',font:{size:10},boxWidth:12}}}};
   const o=cfg.options||{};
+  const op=o.plugins||{};
   return new Chart(ctx,{...cfg,options:{...base,...o,
-    plugins:{...base.plugins,...(o.plugins||{})}}});
+    plugins:{...base.plugins,...op,
+      legend:{...base.plugins.legend,...(op.legend||{}),
+        labels:{...base.plugins.legend.labels,...((op.legend||{}).labels||{})}}}}});
 }
 
-// Barrier lowering chart
+// Desorption-rate chart.
+// rate(d,V) = tunnelling current x per-electron yield. Both factors are
+// positive, so nothing needs clamping and the log axis is the honest one.
+const KAPPA=1.0, V_TH=6.0, V_W=0.30;
+function yieldPerElectron(V){
+  const electronic = 1/(1+Math.exp(-(V-V_TH)/V_W));      // direct excitation, turns on at threshold
+  const vibrational = 2e-4*Math.pow(V/V_TH, 8);          // slower heating route below it
+  return electronic + vibrational;
+}
+const desorpRate=(d,V)=>Math.exp(-2*KAPPA*d)*yieldPerElectron(V);
+
 const chB=mkChart(document.getElementById('chart-barrier'),{type:'line',
-  data:{labels:[],datasets:[{label:'Effective barrier (eV)',data:[],borderColor:'#f59e0b',
-    backgroundColor:'#f59e0b22',fill:true,tension:.3,pointRadius:0}]},
-  options:{scales:{x:{type:'linear',title:{display:true,text:'Distance d (Å)',color:TICK.color},grid:GRID,ticks:TICK},
-                   y:{title:{display:true,text:'eV',color:TICK.color},grid:GRID,ticks:TICK}}}});
+  data:{datasets:[
+    {label:'Relative desorption rate',data:[],borderColor:'#f59e0b',
+     backgroundColor:'#f59e0b22',fill:true,tension:.3,pointRadius:0},
+    {label:'Current tip height',data:[],borderColor:'#e2e8f0',backgroundColor:'#e2e8f0',
+     showLine:false,pointRadius:4}]},
+  options:{scales:{x:{type:'linear',min:2,max:8,title:{display:true,text:'Tip height d (\u00c5)',color:TICK.color},grid:GRID,ticks:TICK},
+                   y:{type:'logarithmic',title:{display:true,text:'Relative rate (arb.)',color:TICK.color},grid:GRID,ticks:TICK}}}});
 function updBarrier(){
   const d=parseFloat(in_d.value), v=parseFloat(in_v.value);
   lbl_d.textContent=d.toFixed(1); lbl_v.textContent=v.toFixed(1);
-  // Illustrative: Φ(d,V)=Φ0·exp(-d/λ) − α·V  (barrier tilt term)
-  const pts=[]; for(let dd=2;dd<=8;dd+=0.1){
-    let phi=4.8*Math.exp(-dd/2.2)-0.45*v*Math.exp(-(dd-2)/3);
-    pts.push({x:dd,y:Math.max(phi,0)});
-  }
-  chB.data.datasets[0].data=pts; chB.update('none');
+  const pts=[]; for(let dd=2;dd<=8;dd+=0.1) pts.push({x:dd,y:desorpRate(dd,v)});
+  chB.data.datasets[0].data=pts;
+  chB.data.datasets[1].data=[{x:d,y:desorpRate(d,v)}];
+  chB.update('none');
 }
 [in_d,in_v].forEach(el=>el.addEventListener('input',updBarrier)); updBarrier();
 
@@ -388,8 +411,7 @@ function updBarrier(){
 mkChart(document.getElementById('chart-converge'),{type:'bar',
   data:{labels:['nm','10nm','100nm','µm','10µm','100µm','mm','cm'],
     datasets:[
-      {label:'Stage size',data:[1,10,100,1e3,1e4,1e5,1e6,1e7],backgroundColor:'#38bdf8aa'},
-      {label:'Cumulative stages (depth)',type:'line',data:[1,2,3,4,5,6,7,8],borderColor:'#f59e0b',tension:.2}]},
+      {label:'Feature size at each stage (nm)',data:[1,10,100,1e3,1e4,1e5,1e6,1e7],backgroundColor:'#38bdf8aa'}]},
   options:{scales:{y:{type:'logarithmic',grid:GRID,ticks:TICK},x:{grid:GRID,ticks:TICK}}}});
 
 // Broadcast halt chart
@@ -432,9 +454,10 @@ in_safe.addEventListener('input',updPosture); updPosture();
 // ── Society model ──────────────────────────────────────────
 // Ordered softmax over three access regimes. No residual category, so no
 // renormalisation: the shares are a composition by construction.
-const REGIMES=[{name:'Locked (DRM)',pos:-1,color:'#8b5cf6'},
-               {name:'Tiered / phyle',pos:0,color:'#f59e0b'},
-               {name:'Open access',pos:1,color:'#10b981'}];
+// dash patterns so the three series stay distinguishable without colour
+const REGIMES=[{name:'Locked (DRM)',pos:-1,color:'#8b5cf6',dash:[2,3]},
+               {name:'Tiered / phyle',pos:0,color:'#f59e0b',dash:[7,3]},
+               {name:'Open access',pos:1,color:'#10b981',dash:[]}];
 const K=1.6;
 function shares(openPct){
   const mu=openPct/50-1;
@@ -457,7 +480,7 @@ const chCost=mkChart(document.getElementById('chart-cost'),{type:'line',
 const chA=mkChart(document.getElementById('chart-access'),{type:'line',
   data:{datasets:[
     ...REGIMES.map(r=>({label:r.name,data:[],borderColor:r.color,backgroundColor:r.color+'55',
-      fill:true,tension:.35,pointRadius:0,borderWidth:1.5,stack:'mix'})),
+      borderDash:r.dash,fill:true,tension:.35,pointRadius:0,borderWidth:1.5,stack:'mix'})),
     {label:'Current setting',data:[],borderColor:'#e2e8f0',borderDash:[4,4],borderWidth:1,
      pointRadius:0,fill:false,stack:'marker'}]},
   options:{scales:{x:{type:'linear',min:0,max:100,title:{display:true,text:'Access regime openness (%)',color:TICK.color},grid:GRID,ticks:TICK},
@@ -478,7 +501,7 @@ function updSociety(){
     const series=[]; for(let o=0;o<=100;o+=2) series.push({x:o,y:shares(o)[i]});
     chA.data.datasets[i].data=series;
   });
-  chA.data.datasets[3].data=[{x:open,y:0},{x:open,y:100}];
+  chA.data.datasets[REGIMES.length].data=[{x:open,y:0},{x:open,y:100}];
   chA.update('none');
 
   const [lock,tier,openS]=shares(open).map(v=>Math.round(v));
