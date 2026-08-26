@@ -95,13 +95,13 @@
         <h3 class="text-lg font-bold mt-3 text-slate-100">Barrier Lowering vs. Bias</h3>
         <p class="text-sm text-slate-400 mt-2">Desorption rate depends on both tip-sample distance <em>and</em> applied voltage. Distance sets how many electrons arrive, bias sets how likely each one is to break the bond. Explore the coupled dependence:</p>
         <div class="mt-4 space-y-3">
-          <label class="block text-xs text-slate-400">Tip height d = <span id="lbl-d" role="status" aria-live="polite" class="mono text-amber-400">4.0</span> Å
+          <label class="block text-xs text-slate-400">Tip height d = <span id="lbl-d" aria-hidden="true" class="mono text-amber-400">4.0</span> Å
             <input id="in-d" aria-label="Tip height in angstroms" type="range" min="2" max="8" step="0.1" value="4" class="w-full mt-1"></label>
-          <label class="block text-xs text-slate-400">Bias V = <span id="lbl-v" role="status" aria-live="polite" class="mono text-amber-400">4.0</span> V
+          <label class="block text-xs text-slate-400">Bias V = <span id="lbl-v" aria-hidden="true" class="mono text-amber-400">4.0</span> V
             <input id="in-v" aria-label="Bias voltage in volts" type="range" min="2" max="7" step="0.1" value="4" class="w-full mt-1"></label>
         </div>
         <canvas id="chart-barrier" class="w-full mt-3" style="max-height:200px"></canvas>
-        <p class="text-[11px] text-slate-500 mt-2">Relative rate = tunnelling current <span class="mono">e<sup>−2κd</sup></span> × per-electron yield, with the yield rising steeply near the ~6&nbsp;V electronic-excitation threshold and proceeding by slower vibrational heating below it. Log axis, arbitrary units, positive by construction. Real thresholds vary with H–Si bond orientation and tip condition; an intuition pump, not process data.</p>
+        <p class="text-[11px] text-slate-500 mt-2">Relative rate = tunnelling current <span class="mono">e<sup>−2κd</sup></span> × per-electron yield, with the yield rising steeply near the ~6&nbsp;V electronic-excitation threshold and proceeding by slower vibrational heating below it. Log axis, arbitrary units, positive by construction. The sub-threshold coefficient is chosen for shape rather than fitted to data, so the curve is readable as a trend and not as a number. Real thresholds vary with H–Si bond orientation and tip condition; an intuition pump, not process data.</p>
       </div>
 
       <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 card-hover">
@@ -217,7 +217,7 @@
         <h3 class="text-lg font-bold text-slate-100">Security Trade-off Explorer</h3>
         <p class="text-sm text-slate-400 mt-2">The central design tension: SIMD broadcast architectures are safer but less capable than autonomous replicators. Adjust priorities to see the recommended posture:</p>
         <div class="mt-4 space-y-3">
-          <label class="block text-xs text-slate-400">Safety priority = <span id="lbl-safe" role="status" aria-live="polite" class="mono text-amber-400">70</span>%
+          <label class="block text-xs text-slate-400">Safety priority = <span id="lbl-safe" aria-hidden="true" class="mono text-amber-400">70</span>%
             <input id="in-safe" aria-label="Safety priority, percent" type="range" min="0" max="100" step="5" value="70" class="w-full mt-1"></label>
         </div>
         <div id="posture-out" class="mono text-xs bg-slate-950 border border-slate-800 rounded-lg p-4 my-3 whitespace-pre-line"></div>
@@ -238,9 +238,9 @@
       <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 card-hover">
         <h3 class="font-bold text-slate-100">Feedstock &amp; Access Model</h3>
         <div class="mt-4 space-y-3">
-          <label class="block text-xs text-slate-400">Matter compiler cost curve (learning rate): <span id="lbl-lr" role="status" aria-live="polite" class="mono text-amber-400">18</span>%/doubling
+          <label class="block text-xs text-slate-400">Matter compiler cost curve (learning rate): <span id="lbl-lr" aria-hidden="true" class="mono text-amber-400">18</span>%/doubling
             <input id="in-lr" aria-label="Learning rate, percent per doubling" type="range" min="5" max="35" step="1" value="18" class="w-full mt-1"></label>
-          <label class="block text-xs text-slate-400">Access regime openness: <span id="lbl-open" role="status" aria-live="polite" class="mono text-amber-400">50</span>%
+          <label class="block text-xs text-slate-400">Access regime openness: <span id="lbl-open" aria-hidden="true" class="mono text-amber-400">50</span>%
             <input id="in-open" aria-label="Access regime openness, percent" type="range" min="0" max="100" step="5" value="50" class="w-full mt-1"></label>
         </div>
         <div class="mt-5">
@@ -396,10 +396,16 @@ const chB=mkChart(document.getElementById('chart-barrier'),{type:'line',
     {label:'Current tip height',data:[],borderColor:'#e2e8f0',backgroundColor:'#e2e8f0',
      showLine:false,pointRadius:4}]},
   options:{scales:{x:{type:'linear',min:2,max:8,title:{display:true,text:'Tip height d (\u00c5)',color:TICK.color},grid:GRID,ticks:TICK},
-                   y:{type:'logarithmic',title:{display:true,text:'Relative rate (arb.)',color:TICK.color},grid:GRID,ticks:TICK}}}});
+                   y:{type:'logarithmic',title:{display:true,text:'Relative rate (arb.)',color:TICK.color},grid:GRID,
+                      ticks:{...TICK,callback:v=>{
+                        const e=Math.log10(v);
+                        return Math.abs(e-Math.round(e))<1e-9 ? '1e'+Math.round(e) : '';
+                      }}}}}});
 function updBarrier(){
   const d=parseFloat(in_d.value), v=parseFloat(in_v.value);
   lbl_d.textContent=d.toFixed(1); lbl_v.textContent=v.toFixed(1);
+  in_d.setAttribute('aria-valuetext',d.toFixed(1)+' angstroms');
+  in_v.setAttribute('aria-valuetext',v.toFixed(1)+' volts');
   const pts=[]; for(let dd=2;dd<=8;dd+=0.1) pts.push({x:dd,y:desorpRate(dd,v)});
   chB.data.datasets[0].data=pts;
   chB.data.datasets[1].data=[{x:d,y:desorpRate(d,v)}];
@@ -425,6 +431,7 @@ mkChart(document.getElementById('chart-halt'),{type:'line',
 const postOut=document.getElementById('posture-out');
 function updPosture(){
   const s=parseInt(in_safe.value); lbl_safe.textContent=s;
+  in_safe.setAttribute('aria-valuetext',s+' percent safety priority');
   const cap=100-s;
   let txt='';
   if(s>=80) txt=`RECOMMENDED: Pure broadcast SIMD.
@@ -490,6 +497,8 @@ const socOut=document.getElementById('society-out');
 function updSociety(){
   const lr=parseInt(in_lr.value), open=parseInt(in_open.value);
   lbl_lr.textContent=lr; lbl_open.textContent=open;
+  in_lr.setAttribute('aria-valuetext',lr+' percent per doubling');
+  in_open.setAttribute('aria-valuetext',open+' percent open');
 
   const curve=[]; for(let i=0;i<=15;i+=0.25) curve.push({x:i,y:Math.pow(1-lr/100,i)*100});
   const cost=Math.pow(1-lr/100,10)*100;
