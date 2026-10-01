@@ -212,3 +212,15 @@ Liezl judges "done" by what is on her **drive** (the `main` checkout) and on the
 A request to make something live **is** permission for the whole chain (the standing "just do everything / wake up to it done" order). Gitignored / underscore dirs (`_internal`, `.snapshots`, `_*`) are never force-added or pushed; if a "push" would touch them, confirm what to promote first. If you deliberately leave a draft unmerged, say so and say why.
 
 **Continuity:** on start, run `python C:\Users\Liezl\.agents\agentops.py orient` (or read `C:\Users\Liezl\.agents\PORTFOLIO_RESUME.md`) to pick up where the last agent left off, and leave a handover on finish. Portfolio agent-ops system: `agent-command-center/docs/agent-ops/`.
+
+<!-- VOICE-BLOCK v2026-10-01 -->
+## ✍️ Voice: hard rules for ANY text that goes out in Liezl's name (all agents, all folders)
+Full guide (read it before drafting articles, posts, DMs, emails, applications, site copy): `C:/Users/Liezl/.agents/VOICE.md`
+- No em dashes. No "not X, but Y" (including disguised two-sentence versions). No triplets.
+- No throat-clearing: cut sentences that announce what the next one does. No "What this is not" sections. Just say the thing.
+- No self-reference ("this essay argues", "the arc needs"), no production notes, no self-congratulation, no weekdays as sentence subjects.
+- Outreach: open on the point. No flattery. No self-deprecation ("better than mine", "I may borrow that"). No invented history ("I keep circling back", "for weeks"). Never propose an exploratory call. One offer per message.
+- Banned words: "load-bearing", "genuinely", "sit with", "this desk", "it lands", plus fillers ("actually", "exactly", "at all").
+- US spelling, curly quotes, simplest tense, no pluperfect unless essential. Inline linked text for sources; Oxford bibliography on long pieces. Never hard-wrap prose.
+- These rules are for outgoing text only, not for chatting with Liezl.
+<!-- /VOICE-BLOCK -->
