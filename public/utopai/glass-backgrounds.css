@@ -1,0 +1,85 @@
+/* Quiet glass illustrations beneath the existing paper and readable surfaces. */
+.hero,.interlude,.record-section,.passport-preview,.studio-teaser,.learning,.studio,.footer {
+  position:relative;
+  isolation:isolate;
+}
+.hero::before,.interlude::before,.record-section::before,.passport-preview::before,
+.studio-teaser::before,.learning::before,.studio::before,.footer::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background-image:var(--glass-art);
+  background-repeat:no-repeat;
+  background-size:var(--glass-size,100% auto);
+  background-position:var(--glass-position,center 70%);
+  opacity:var(--glass-opacity,.09);
+  border-radius:inherit;
+  mask-image:radial-gradient(ellipse closest-side at 50% 58%,#000 24%,transparent 100%);
+}
+.hero {
+  --glass-art:url('/utopai/assets/glass-prism.webp');
+  --glass-size:cover;
+  --glass-position:left 62%;
+  --glass-opacity:.085;
+}
+.interlude {
+  --glass-art:url('/utopai/assets/glass-stories.webp');
+  --glass-size:cover;
+  --glass-position:center 68%;
+  --glass-opacity:.18;
+}
+.interlude::before {width:auto;height:auto;left:0;top:0;border:0;transform:none}
+.interlude::before {mask-image:none}
+.interlude::after {content:none}
+.record-section {
+  --glass-art:url('/utopai/assets/glass-river.webp');
+  --glass-position:center bottom;
+  --glass-opacity:.085;
+}
+.record-card {background:rgba(255,255,255,.91)}
+.search,.toolbar select,.filters button:not(.active) {background:rgba(252,251,248,.92)}
+.passport-preview {
+  --glass-art:url('/utopai/assets/glass-river.webp');
+  --glass-position:center 73%;
+  --glass-opacity:.12;
+}
+.studio-teaser {
+  --glass-art:url('/utopai/assets/glass-opening.webp');
+  --glass-position:left 62%;
+  --glass-size:cover;
+  --glass-opacity:.085;
+}
+.learning {
+  --glass-art:url('/utopai/assets/glass-stories.webp');
+  --glass-size:cover;
+  --glass-position:right 62%;
+  --glass-opacity:.075;
+}
+.studio {
+  --glass-art:url('/utopai/assets/glass-opening.webp');
+  --glass-size:cover;
+  --glass-position:center 70%;
+  --glass-opacity:.085;
+}
+.studio-empty {background:rgba(252,251,248,.35);border-radius:12px}
+.footer {
+  --glass-art:url('/utopai/assets/glass-prism.webp');
+  --glass-size:cover;
+  --glass-position:center 76%;
+  --glass-opacity:.065;
+}
+@media(max-width:560px) {
+  .hero,.learning,.studio-teaser,.studio {--glass-size:cover;--glass-opacity:.065}
+  .hero {--glass-position:center 60%}
+  .studio-teaser {--glass-position:center bottom}
+  .learning {--glass-position:center 67%}
+  .studio {--glass-position:center 72%}
+  .record-section {--glass-size:100% auto;--glass-position:center top;--glass-opacity:.07}
+}
+@media print {
+  .hero::before,.interlude::before,.record-section::before,.passport-preview::before,
+  .studio-teaser::before,.learning::before,.studio::before,.footer::before {display:none}
+  .record-card,.studio-empty {background:white}
+}
