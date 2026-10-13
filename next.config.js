@@ -21,6 +21,10 @@ const nextConfig = {
   async rewrites() {
     return [
       {
+        source: '/utopai',
+        destination: '/utopai/index.html',
+      },
+      {
         source: '/seedforge',
         destination: '/seedforge/index.html',
       },
