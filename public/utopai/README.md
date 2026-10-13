@@ -8,7 +8,8 @@ Standalone public interface on the existing Khayali deployment, with a Next.js e
 
 - Search and purpose/type filters over ten sourced records, with evidence and transfer limits.
 - Record dialogs, individual share links, bookmarks and a connection atlas.
-- Up to three selected records can seed a combination hypothesis in the studio.
+- Up to three selected records can seed a combination hypothesis in the studio without replacing the visitor’s existing goal.
+- Four explicit Atlas proposals explain their paired records, missing step and small test. Lines follow the visible endpoints and disappear when filters remove them.
 - Goal and context intake, within-reach/further-out horizons, structured AI drafting.
 - Editable imagined scenes, local passport saving, Markdown download, print and portable assistant brief.
 - Explicit worked example and labeled local worksheet if generation is unavailable.
@@ -18,7 +19,9 @@ Standalone public interface on the existing Khayali deployment, with a Next.js e
 
 Sources were located with AI assistance on October 13, 2026. None is claimed to have independently verified beneficiaries or long-term impact. Descriptions separate research results and technical capabilities from achieved human outcomes. Candidate claims in the original model drafts were not imported as verified facts.
 
-`records.json` is the single seed store used by the client and server. Add or revise a record there. The server restricts precedent IDs to real records and validates all generated fields. The frontend escapes dynamic text. Original SVG thumbnails are symbolic, not source photographs; the glass-tree hero is AI-generated.
+`records.json` is the single seed store used by the client and server. Add or revise a record there. `connections.json` stores editorial hypotheses rather than observed combined outcomes. Add a connection only with valid endpoint IDs, its untested step and a bounded experiment. The server restricts precedent IDs to real records and validates all generated fields. The frontend escapes dynamic text. Original SVG thumbnails are symbolic, not source photographs; the glass-tree hero is AI-generated.
+
+The local fallback uses whole-word keyword matching, explicit variants and a stop-word list. A goal without a suitable match receives no precedent, rather than an unrelated record. Studio entry preserves the goal and focuses its field after the view becomes visible. The hero says “Shape my possibility” to describe its context step before AI submission.
 
 ## Boundaries
 
