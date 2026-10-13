@@ -34,6 +34,7 @@ const primaryLinks = [
 
 // The extra rooms — desktop has no space for these, but the mobile drawer does.
 const moreRooms = [
+  { href: '/utopai', label: 'UtopAI', hover: 'hover:text-teal-400' },
   { href: '/chats', label: 'Consciousness Banter', hover: 'hover:text-purple-400' },
   { href: '/creative', label: 'Creative Nexus', hover: 'hover:text-amber-400' },
   { href: '/worldworkshop', label: 'World Workshop', hover: 'hover:text-teal-400' },

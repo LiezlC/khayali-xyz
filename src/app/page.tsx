@@ -1,5 +1,13 @@
 const rooms = [
   {
+    href: '/utopai',
+    title: 'UtopAI',
+    kind: 'AI possibilities · first experiments',
+    blurb: 'Imagine the possibilities so that they might happen. Explore the evidence and shape a first experiment of your own.',
+    accent: 'border-teal-400/35 hover:border-teal-300/80',
+    text: 'text-teal-300',
+  },
+  {
     href: '/writings',
     title: 'Writings',
     kind: 'Longform · collaborations',

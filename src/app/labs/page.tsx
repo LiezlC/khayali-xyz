@@ -59,6 +59,18 @@ export default function LabsPage() {
           </h2>
 
           <div className="grid md:grid-cols-2 gap-8">
+            <a href="/utopai" className="group md:col-span-2 grid md:grid-cols-2 rounded-xl border border-teal-400/40 hover:border-teal-300 overflow-hidden bg-gray-800/50 transition-colors">
+              <div className="bg-[#fffdf8] flex items-center justify-center">
+                <img src="/utopai/assets/tree.webp" alt="A glass tree branching into new possibilities" width="900" height="600" loading="lazy" className="w-full h-64 md:h-full object-contain" />
+              </div>
+              <div className="p-8 md:p-12 self-center">
+                <p className="text-sm uppercase tracking-widest text-teal-300 mb-4">The possibility lab</p>
+                <h3 className="font-serif text-4xl text-[var(--cream)] mb-4">UtopAI</h3>
+                <p className="text-xl text-gray-200 mb-4">Imagine the possibilities so that they might happen.</p>
+                <p className="text-gray-400 leading-relaxed mb-6">Explore a sourced record of AI possibilities and shape your own first experiment in the Possibility Studio.</p>
+                <span className="text-teal-300 group-hover:text-teal-200 font-semibold">Explore UtopAI <span aria-hidden="true">→</span></span>
+              </div>
+            </a>
             {/* Observatory */}
             <div className="bg-gray-800/50 rounded-xl border border-gray-700 hover:border-blue-500 transition-all overflow-hidden">
               <div className="h-48 bg-cover bg-center relative"
