@@ -9,7 +9,7 @@ Standalone public interface on the existing Khayali deployment, with a Next.js e
 - Search and purpose/type filters over ten sourced records, with evidence and transfer limits.
 - Record dialogs, individual share links, bookmarks and a connection atlas.
 - Up to three selected records can seed a combination hypothesis in the studio without replacing the visitor’s existing goal.
-- Four explicit Atlas proposals explain their paired records, missing step and small test. Lines follow the visible endpoints and disappear when filters remove them.
+- Four explicit Atlas proposals explain their paired records, missing step and small test. Each proposal has its own two-card row, with the numbered connector in the gap between them. On phones the pair stacks vertically. Filtering removes pairs with hidden endpoints.
 - Goal and context intake, within-reach/further-out horizons, structured AI drafting.
 - Editable imagined scenes, local passport saving, Markdown download, print and portable assistant brief.
 - Explicit worked example and labeled local worksheet if generation is unavailable.

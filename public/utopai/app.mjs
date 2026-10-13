@@ -20,24 +20,13 @@ function renderSeeds(){$('#studio-seeds').innerHTML=state.seeds.map(id=>{const r
 function renderRecords(){const found=filterRecords(records,state);$('#category-filters').innerHTML=purposes.map(p=>`<button data-category="${esc(p)}" class="${state.category===p?'active':''}" aria-pressed="${state.category===p}">${esc(p)}</button>`).join('');$('#results-status').textContent=`${found.length} of ${records.length} sourced records · last source check 13 Oct 2026`;$('#records-grid').hidden=state.view!=='cards';$('#atlas-view').hidden=state.view!=='atlas';$('#records-grid').innerHTML=found.length?found.map(r=>`<article class="record-card"><div class="card-top"><div class="record-art">${art(r.art)}</div><div><span class="purpose">${esc(r.purpose)}</span><h3><button class="record-title" data-record="${r.id}">${esc(r.title)}</button></h3></div></div><p class="card-summary">${esc(r.summary)}</p><div class="card-meta"><span>${esc(r.kind)}</span><span>${esc(r.evidence)}</span></div><div class="card-actions"><button class="text-link" data-help="${r.id}">Could this help me? →</button><div class="card-utility"><button class="icon-button ${state.bookmarks.includes(r.id)?'selected':''}" data-bookmark="${r.id}" aria-label="${state.bookmarks.includes(r.id)?'Unsave':'Save'} ${esc(r.title)}" aria-pressed="${state.bookmarks.includes(r.id)}">${bookmarkIcon}</button><button class="icon-button ${state.seeds.includes(r.id)?'selected':''}" data-seed="${r.id}" aria-label="${state.seeds.includes(r.id)?'Remove':'Add'} ${esc(r.title)} ${state.seeds.includes(r.id)?'from':'to'} combination" aria-pressed="${state.seeds.includes(r.id)}">${state.seeds.includes(r.id)?'✓':'+'}</button></div></div></article>`).join(''):'<div class="empty-results"><h3>No matching records yet.</h3><p>Try a broader search, or imagine a possibility in the studio.</p><button class="text-link" data-action="reset">Clear filters →</button></div>';renderAtlas(found);renderSeeds();}
 function renderAtlas(found){
  const links=visibleConnections(connections,found);
- $('#atlas').innerHTML=found.length?`<svg id="atlas-lines" aria-hidden="true"></svg><div class="atlas-nodes">${found.map(r=>`<button class="atlas-node" data-atlas-id="${r.id}" data-record="${r.id}"><small>${esc(r.purpose)}</small><strong>${esc(r.title)}</strong><span>${esc(r.kind)} · inspect the evidence ↗</span></button>`).join('')}</div>`:'<p class="empty-results">No records match these filters.</p>';
+ const node=r=>`<button class="atlas-node" data-record="${r.id}"><small>${esc(r.purpose)}</small><strong>${esc(r.title)}</strong><span>${esc(r.kind)} · inspect the evidence ↗</span></button>`;
+ const linked=new Set(links.flatMap(c=>[c.from,c.to]));
+ const unpaired=found.filter(r=>!linked.has(r.id));
+ $('#atlas').innerHTML=links.map((c,i)=>`<div class="atlas-pair" data-pair="${c.id}">${node(records.find(r=>r.id===c.from))}<button class="atlas-bridge" data-connection="${c.id}" aria-label="Explore connection ${i+1}: ${esc(c.title)}"><span class="connection-number">${i+1}</span><small>Proposed link</small></button>${node(records.find(r=>r.id===c.to))}</div>`).join('')+(unpaired.length?`<div class="unpaired-records"><p>${links.length?'Other records in this view':'Records in this view'}</p><div class="atlas-nodes">${unpaired.map(node).join('')}</div></div>`:'');
+ if(!found.length)$('#atlas').innerHTML='<p class="empty-results">No records match these filters.</p>';
  $('#atlas-connections').innerHTML=links.length?`<h3 class="connection-list-title">What could connect these?</h3>${links.map((c,i)=>`<button class="connection-row" data-connection="${c.id}"><span class="connection-number">${i+1}</span><span><strong>${esc(c.title)}</strong><small>${esc(records.find(r=>r.id===c.from).title)} ↔ ${esc(records.find(r=>r.id===c.to).title)}</small><span>Proposed connection · see the missing step →</span></span></button>`).join('')}`:'<p class="connection-empty">No proposed connections join the records in this filtered view. You can select stories yourself to explore another combination.</p>';
- requestAnimationFrame(drawAtlas);
 }
-function drawAtlas(){
- if(state.view!=='atlas')return;
- const svg=$('#atlas-lines');if(!svg)return;
- const box=$('#atlas').getBoundingClientRect();if(!box.width||!box.height)return;
- const links=visibleConnections(connections,filterRecords(records,state));
- svg.setAttribute('viewBox',`0 0 ${box.width} ${box.height}`);
- svg.innerHTML=links.map((c,i)=>{
-  const from=$(`[data-atlas-id="${c.from}"]`)?.getBoundingClientRect(),to=$(`[data-atlas-id="${c.to}"]`)?.getBoundingClientRect();if(!from||!to)return '';
-  const x1=from.x+from.width/2-box.x,y1=from.y+from.height/2-box.y,x2=to.x+to.width/2-box.x,y2=to.y+to.height/2-box.y;
-  const mx=(x1+x2)/2,my=(y1+y2)/2;
-  return `<path data-edge="${c.id}" d="M${x1} ${y1} L${x2} ${y2}" fill="none" stroke="#70968b" stroke-dasharray="6 7" stroke-width="1.5"/><circle cx="${mx}" cy="${my}" r="12" fill="#fcfbf8" stroke="#aac4b9"/><text x="${mx}" y="${my+4}" text-anchor="middle" fill="#167d78" font-size="11">${i+1}</text>`;
- }).join('');
-}
-new ResizeObserver(()=>requestAnimationFrame(drawAtlas)).observe($('#atlas'));
 function openStudio(defaultGoal=''){
  if(!$('#goal').value.trim())$('#goal').value=$('#hero-goal').value.trim()||defaultGoal;
  if($('#dialog').open)$('#dialog').close();location.hash='studio';route();renderSeeds();
