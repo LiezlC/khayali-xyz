@@ -1,12 +1,549 @@
 [
- {"id":"alphafold","title":"Protein structures, opened to discovery","purpose":"Health & care","kind":"Capability","year":"2021–2024","art":"protein","summary":"Researchers can explore predicted protein structures through an openly accessible database, creating a starting point for biological questions.","source":"https://deepmind.google/science/alphafold/","sourceName":"Google DeepMind","evidence":"Primary technical account","use":"Research tool","availability":"Database open; server terms apply","reached":"Researchers using the AlphaFold database and server. This record does not claim a patient outcome.","ai":"Predicts molecular structures from learned patterns.","people":"Researchers supply questions and test predictions experimentally.","took":"Biological expertise, suitable sequences and experimental validation.","held":"Database launched in 2021; provider timeline describes later releases. Individual downstream benefits need follow-up.","limits":"A prediction is not a cure. Confidence varies, and use permissions depend on the service.","cost":"Research time, compute and laboratory resources; access terms vary.","first":"Explore one protein relevant to a research question and identify which prediction needs experimental checking.","keywords":["protein","science","biology","medicine","research","drug","health"],"checked":"2026-10-13","review":"Source located by AI; outcomes not independently verified"},
- {"id":"flood","title":"More time before the flood","purpose":"Living planet","kind":"Outcome","year":"2024","art":"river","summary":"A Nature study reports reliable forecasts of extreme river floods in ungauged watersheds, with useful lead time before an event.","source":"https://research.google/pubs/ai-increases-global-access-to-reliable-flood-forecasts/","sourceName":"Nature · Google Research","evidence":"Published evaluated study","use":"Operational early-warning system","availability":"Public forecasts; coverage varies","reached":"The 2024 paper describes forecasts available in over 80 countries. It does not establish how many lives were saved.","ai":"Learns hydrological patterns to forecast river flow.","people":"Researchers evaluate forecasts; local responders decide how warnings become action.","took":"Hydrological data, forecast access and a local warning-and-response network.","held":"Deployment reported in the 2024 study; local warning uptake requires separate follow-up.","limits":"Forecast skill differs by basin. A warning only helps if people receive it and can respond.","cost":"Connectivity and local response capacity; public forecast access described as free.","first":"Find the forecast coverage for one watershed and ask who would receive and act on its warnings.","keywords":["flood","river","farm","water","climate","warning","disaster","community"],"checked":"2026-10-13","review":"Source located by AI; local outcomes not independently verified"},
- {"id":"bemyai","title":"Everyday details, described aloud","purpose":"Access & voice","kind":"Capability","year":"2023 onward","art":"voice","summary":"Be My AI offers image descriptions within Be My Eyes, with human assistance available when a person needs more help.","source":"https://www.bemyeyes.com/bme-ai/","sourceName":"Be My Eyes","evidence":"Operator account","use":"Available app feature","availability":"Free app; device requirements apply","reached":"Blind and low-vision users. The provider describes the service; independent benefit measurement is not established here.","ai":"Describes images and responds to follow-up questions.","people":"Users interpret descriptions and can seek assistance from human volunteers.","took":"A supported phone, an internet connection and useful image capture.","held":"Announced in 2023; the current provider page describes the feature.","limits":"Descriptions can be wrong. This record does not establish suitability for safety-critical decisions.","cost":"App access is described as free; phone and connectivity are needed.","first":"Try describing a non-sensitive everyday object and compare the description with a trusted human account.","keywords":["blind","vision","accessibility","image","describe","access","care"],"checked":"2026-10-13","review":"Source located by AI; participant outcomes not independently verified"},
- {"id":"masakhane","title":"Language research, led by its speakers","purpose":"Access & voice","kind":"Enabler","year":"2020 onward","art":"language","summary":"Masakhane connects participatory research and open resources for African-language NLP, with community involvement central to the work.","source":"https://www.masakhane.io/","sourceName":"Masakhane","evidence":"Community organization account","use":"Research community and resources","availability":"Open research; coverage differs by language","reached":"African-language researchers and contributors. Availability for a particular language needs checking.","ai":"Models support translation and related language tasks.","people":"Speakers contribute data and evaluate what a model gets right or wrong.","took":"Speaker participation, permissioned language data and task-specific evaluation.","held":"The source describes ongoing work. Benefits to a particular community need local testimony.","limits":"An available model does not establish reliable translation in every dialect or setting.","cost":"Contribution time, coordination and appropriate compute resources.","first":"Choose a language and review existing resources with a speaker before planning a translation experiment.","keywords":["language","translation","africa","story","voice","community","emakhuwa","oral"],"checked":"2026-10-13","review":"Source located by AI; language-specific outcomes not independently verified"},
- {"id":"whisper","title":"Spoken stories become searchable text","purpose":"Learning & creation","kind":"Capability","year":"2022 onward","art":"voice","summary":"Whisper supplies open-source speech-recognition models for transcription, giving builders a tool for working with spoken material.","source":"https://github.com/openai/whisper","sourceName":"OpenAI · Whisper repository","evidence":"Code and technical documentation","use":"Open-source model","availability":"MIT-licensed code and model weights","reached":"Builders and researchers. This record describes capability rather than a measured community benefit.","ai":"Recognizes speech and produces text.","people":"Record with permission, check transcripts and decide what should be preserved.","took":"Permissioned audio, a suitable computer and a speaker who can review errors.","held":"Public repository available at review; downstream results require follow-up.","limits":"Performance varies by language and audio quality. Transcripts may invent or omit content.","cost":"Local compute and review time; hosted services can have separate charges.","first":"Transcribe a short, consented recording and compare each line with the speaker’s intended meaning.","keywords":["speech","recording","audio","transcription","story","oral","language","archive"],"checked":"2026-10-13","review":"Documentation located by AI; downstream outcomes not independently verified"},
- {"id":"support","title":"A useful assist for newer workers","purpose":"Work & livelihood","kind":"Outcome","year":"2023 study","art":"work","summary":"Research on customer-support workers reports productivity improvements from AI assistance, with different effects across experience levels.","source":"https://www.nber.org/papers/w31161","sourceName":"NBER · Generative AI at Work","evidence":"Field-study working paper","use":"Customer-support deployment studied","availability":"Paper public; workplace tool specific","reached":"Workers in the studied setting. Improvements varied; results cannot be assumed for another workplace.","ai":"Suggests responses during customer-support conversations.","people":"Workers judge suggestions and resolve customer issues.","took":"A defined workflow, relevant knowledge and evaluation across workers.","held":"The cited paper reports the studied period; it does not establish lasting benefit elsewhere.","limits":"Productivity is one outcome. Worker autonomy and workload need separate assessment.","cost":"Tool access, integration and supervision; not priced in this record.","first":"Compare one low-stakes task with and without assistance, recording both time and quality.","keywords":["work","business","income","support","productivity","earn","job","service"],"checked":"2026-10-13","review":"Research source located by AI; external transfer not verified"},
- {"id":"khanmigo","title":"A teaching idea gets a starting point","purpose":"Learning & creation","kind":"Capability","year":"2023 onward","art":"learning","summary":"Khanmigo offers AI tools for lesson preparation and tutoring. Access differs between teachers, families and school implementations.","source":"https://www.khanacademy.org/khan-labs","sourceName":"Khan Academy","evidence":"Provider account","use":"Education service","availability":"Eligibility and payment vary","reached":"Eligible educators and learners. This listing does not establish learning gains.","ai":"Drafts teaching materials and guides practice.","people":"Educators check content and remain responsible for teaching decisions.","took":"Eligible access, subject expertise and a way to assess learning without the tool.","held":"Provider describes current offerings; learning effects need separate evidence.","limits":"Teacher access does not automatically provide student access. AI can make mistakes.","cost":"Teacher and learner plans have different terms; check the provider.","first":"Draft one activity, verify it yourself, then assess whether it helps someone explain the idea independently.","keywords":["teach","learn","education","school","student","lesson","tutor","skill"],"checked":"2026-10-13","review":"Source located by AI; learning outcomes not independently verified"},
- {"id":"forest","title":"A forest can tell you what is happening","purpose":"Living planet","kind":"Capability","year":"Ongoing deployment","art":"forest","summary":"Rainforest Connection uses acoustic monitoring and AI to identify sounds associated with threats and wildlife activity.","source":"https://rfcx.org/","sourceName":"Rainforest Connection","evidence":"Operator account","use":"Conservation monitoring","availability":"Projects and tools; local arrangements apply","reached":"Conservation partners and monitored ecosystems. Benefits depend on local response.","ai":"Classifies environmental audio to surface signals for review.","people":"Partners install devices, interpret alerts and choose how to respond.","took":"Permissioned sensors, power, connectivity and trusted local stewardship.","held":"Provider describes operating projects; sustained protection needs site-level evidence.","limits":"An alert is not proof of wrongdoing. Monitoring needs local agreement and review.","cost":"Hardware, maintenance and local response capacity.","first":"Ask a local steward which sound could answer a useful question before choosing recording equipment.","keywords":["forest","wildlife","farm","animal","nature","conservation","sound","environment"],"checked":"2026-10-13","review":"Source located by AI; site-level outcomes not independently verified"},
- {"id":"petase","title":"A new route through stubborn plastic","purpose":"Living planet","kind":"Outcome","year":"2022 laboratory study","art":"protein","summary":"Researchers used machine learning to help engineer FAST-PETase, an enzyme shown to break down tested PET plastics in laboratory conditions.","source":"https://news.utexas.edu/2022/04/27/plastic-eating-enzyme-could-eliminate-billions-of-tons-of-landfill-waste/","sourceName":"University of Texas at Austin","evidence":"University account of Nature study","use":"Laboratory research","availability":"Research result; commercial access not established","reached":"Research teams. Scaled environmental cleanup is not demonstrated by this source.","ai":"Proposes enzyme mutations for experimental testing.","people":"Scientists test performance and design the chemical process.","took":"Laboratory expertise, suitable PET material and controlled reaction conditions.","held":"Reported in 2022; this listing does not establish subsequent industrial performance.","limits":"The result concerns PET under studied conditions, not all plastics in an open environment.","cost":"Laboratory infrastructure and process-development resources.","first":"Map one PET waste stream and identify a research partner before considering an enzyme trial.","keywords":["plastic","waste","recycle","enzyme","material","science","climate"],"checked":"2026-10-13","review":"Source located by AI; industrial outcomes not independently verified"},
- {"id":"fishing","title":"What happens at sea becomes visible","purpose":"Rights & public power","kind":"Capability","year":"Ongoing platform","art":"ocean","summary":"Global Fishing Watch combines satellite information and machine learning to make patterns of activity at sea easier to inspect.","source":"https://globalfishingwatch.org/","sourceName":"Global Fishing Watch","evidence":"Organization technical account","use":"Open mapping platform","availability":"Open-access visualization; data terms apply","reached":"Researchers and ocean-governance communities. This record does not infer enforcement outcomes.","ai":"Finds patterns in vessel information and satellite observations.","people":"Analysts examine evidence; communities and authorities decide what follows.","took":"Data access, interpretation skills and knowledge of local maritime contexts.","held":"Platform available at review; individual governance gains require follow-up.","limits":"Patterns can be incomplete. A vessel signal alone does not establish illegal conduct.","cost":"Analysis time and connectivity; check data terms for reuse.","first":"Explore one coastal area and list what the map can establish and what requires local evidence.","keywords":["ocean","fishing","rights","accountability","public","transparency","map","community"],"checked":"2026-10-13","review":"Source located by AI; enforcement outcomes not independently verified"}
+  {
+    "id": "alphafold",
+    "title": "Protein structures, opened to discovery",
+    "purpose": "Health & care",
+    "kind": "Capability",
+    "year": "2021–2024",
+    "art": "protein",
+    "summary": "Researchers can explore predicted protein structures through an openly accessible database, creating a starting point for biological questions.",
+    "source": "https://deepmind.google/science/alphafold/",
+    "sourceName": "Google DeepMind",
+    "evidence": "Primary technical account",
+    "use": "Research tool",
+    "availability": "Database open; server terms apply",
+    "reached": "Researchers using the AlphaFold database and server. This record does not claim a patient outcome.",
+    "ai": "Predicts molecular structures from learned patterns.",
+    "people": "Researchers supply questions and test predictions experimentally.",
+    "took": "Biological expertise, suitable sequences and experimental validation.",
+    "held": "Database launched in 2021; provider timeline describes later releases. Individual downstream benefits need follow-up.",
+    "limits": "A prediction is not a cure. Confidence varies, and use permissions depend on the service.",
+    "cost": "Research time, compute and laboratory resources; access terms vary.",
+    "first": "Explore one protein relevant to a research question and identify which prediction needs experimental checking.",
+    "keywords": [
+      "protein",
+      "science",
+      "biology",
+      "medicine",
+      "research",
+      "drug",
+      "health"
+    ],
+    "checked": "2026-10-13",
+    "review": "Source located by AI; outcomes not independently verified",
+    "access": {
+      "audience": "Specialists",
+      "cost": "Cost unclear",
+      "connectivity": "Connectivity needs checking",
+      "requirements": "Database open; server terms apply; Biological expertise, suitable sequences and experimental validation.",
+      "sources": [
+        "https://deepmind.google/science/alphafold/"
+      ],
+      "checkedAt": "2026-10-13"
+    },
+    "reviewInfo": {
+      "status": "Source located",
+      "method": "AI-assisted",
+      "checkedAt": "2026-10-13",
+      "note": "Source located by AI; outcomes not independently verified"
+    },
+    "evidenceInfo": {
+      "basis": "Primary technical account",
+      "independence": "Involved party"
+    },
+    "reachLabel": "Benefit reach not established"
+  },
+  {
+    "id": "flood",
+    "title": "More time before the flood",
+    "purpose": "Living planet",
+    "kind": "Outcome",
+    "year": "2024",
+    "art": "river",
+    "summary": "A Nature study reports reliable forecasts of extreme river floods in ungauged watersheds, with useful lead time before an event.",
+    "source": "https://research.google/pubs/ai-increases-global-access-to-reliable-flood-forecasts/",
+    "sourceName": "Nature · Google Research",
+    "evidence": "Published evaluated study",
+    "use": "Operational early-warning system",
+    "availability": "Public forecasts; coverage varies",
+    "reached": "The 2024 paper describes forecasts available in over 80 countries. It does not establish how many lives were saved.",
+    "ai": "Learns hydrological patterns to forecast river flow.",
+    "people": "Researchers evaluate forecasts; local responders decide how warnings become action.",
+    "took": "Hydrological data, forecast access and a local warning-and-response network.",
+    "held": "Deployment reported in the 2024 study; local warning uptake requires separate follow-up.",
+    "limits": "Forecast skill differs by basin. A warning only helps if people receive it and can respond.",
+    "cost": "Connectivity and local response capacity; public forecast access described as free.",
+    "first": "Find the forecast coverage for one watershed and ask who would receive and act on its warnings.",
+    "keywords": [
+      "flood",
+      "river",
+      "farm",
+      "water",
+      "climate",
+      "warning",
+      "disaster",
+      "community"
+    ],
+    "checked": "2026-10-13",
+    "review": "Source located by AI; local outcomes not independently verified",
+    "access": {
+      "audience": "Organizations and local responders",
+      "cost": "Public forecasts described as free",
+      "connectivity": "Forecast access needs connectivity",
+      "requirements": "Public forecasts; coverage varies; Hydrological data, forecast access and a local warning-and-response network.",
+      "sources": [
+        "https://research.google/pubs/ai-increases-global-access-to-reliable-flood-forecasts/"
+      ],
+      "checkedAt": "2026-10-13"
+    },
+    "reviewInfo": {
+      "status": "Source located",
+      "method": "AI-assisted",
+      "checkedAt": "2026-10-13",
+      "note": "Source located by AI; local outcomes not independently verified"
+    },
+    "evidenceInfo": {
+      "basis": "Published evaluated study",
+      "independence": "Unclear"
+    },
+    "reachLabel": "Forecast coverage reported; lives saved not established"
+  },
+  {
+    "id": "bemyai",
+    "title": "Everyday details, described aloud",
+    "purpose": "Access & voice",
+    "kind": "Capability",
+    "year": "2023 onward",
+    "art": "voice",
+    "summary": "Be My AI offers image descriptions within Be My Eyes, with human assistance available when a person needs more help.",
+    "source": "https://www.bemyeyes.com/bme-ai/",
+    "sourceName": "Be My Eyes",
+    "evidence": "Operator account",
+    "use": "Available app feature",
+    "availability": "Free app; device requirements apply",
+    "reached": "Blind and low-vision users. The provider describes the service; independent benefit measurement is not established here.",
+    "ai": "Describes images and responds to follow-up questions.",
+    "people": "Users interpret descriptions and can seek assistance from human volunteers.",
+    "took": "A supported phone, an internet connection and useful image capture.",
+    "held": "Announced in 2023; the current provider page describes the feature.",
+    "limits": "Descriptions can be wrong. This record does not establish suitability for safety-critical decisions.",
+    "cost": "App access is described as free; phone and connectivity are needed.",
+    "first": "Try describing a non-sensitive everyday object and compare the description with a trusted human account.",
+    "keywords": [
+      "blind",
+      "vision",
+      "accessibility",
+      "image",
+      "describe",
+      "access",
+      "care"
+    ],
+    "checked": "2026-10-13",
+    "review": "Source located by AI; participant outcomes not independently verified",
+    "access": {
+      "audience": "Individuals",
+      "cost": "Free app access",
+      "connectivity": "Connection required",
+      "requirements": "Free app; device requirements apply; A supported phone, an internet connection and useful image capture.",
+      "sources": [
+        "https://www.bemyeyes.com/bme-ai/"
+      ],
+      "checkedAt": "2026-10-13"
+    },
+    "reviewInfo": {
+      "status": "Source located",
+      "method": "AI-assisted",
+      "checkedAt": "2026-10-13",
+      "note": "Source located by AI; participant outcomes not independently verified"
+    },
+    "evidenceInfo": {
+      "basis": "Operator account",
+      "independence": "Involved party"
+    },
+    "reachLabel": "Provider describes users; benefit not independently measured"
+  },
+  {
+    "id": "masakhane",
+    "title": "Language research, led by its speakers",
+    "purpose": "Access & voice",
+    "kind": "Enabler",
+    "year": "2020 onward",
+    "art": "language",
+    "summary": "Masakhane connects participatory research and open resources for African-language NLP, with community involvement central to the work.",
+    "source": "https://www.masakhane.io/",
+    "sourceName": "Masakhane",
+    "evidence": "Community organization account",
+    "use": "Research community and resources",
+    "availability": "Open research; coverage differs by language",
+    "reached": "African-language researchers and contributors. Availability for a particular language needs checking.",
+    "ai": "Models support translation and related language tasks.",
+    "people": "Speakers contribute data and evaluate what a model gets right or wrong.",
+    "took": "Speaker participation, permissioned language data and task-specific evaluation.",
+    "held": "The source describes ongoing work. Benefits to a particular community need local testimony.",
+    "limits": "An available model does not establish reliable translation in every dialect or setting.",
+    "cost": "Contribution time, coordination and appropriate compute resources.",
+    "first": "Choose a language and review existing resources with a speaker before planning a translation experiment.",
+    "keywords": [
+      "language",
+      "translation",
+      "africa",
+      "story",
+      "voice",
+      "community",
+      "emakhuwa",
+      "oral"
+    ],
+    "checked": "2026-10-13",
+    "review": "Source located by AI; language-specific outcomes not independently verified",
+    "access": {
+      "audience": "Researchers and contributors",
+      "cost": "Cost unclear",
+      "connectivity": "Connectivity needs checking",
+      "requirements": "Open research; coverage differs by language; Speaker participation, permissioned language data and task-specific evaluation.",
+      "sources": [
+        "https://www.masakhane.io/"
+      ],
+      "checkedAt": "2026-10-13"
+    },
+    "reviewInfo": {
+      "status": "Source located",
+      "method": "AI-assisted",
+      "checkedAt": "2026-10-13",
+      "note": "Source located by AI; language-specific outcomes not independently verified"
+    },
+    "evidenceInfo": {
+      "basis": "Community organization account",
+      "independence": "Involved party"
+    },
+    "reachLabel": "Benefit reach not established"
+  },
+  {
+    "id": "whisper",
+    "title": "Spoken stories become searchable text",
+    "purpose": "Learning & creation",
+    "kind": "Capability",
+    "year": "2022 onward",
+    "art": "voice",
+    "summary": "Whisper supplies open-source speech-recognition models for transcription, giving builders a tool for working with spoken material.",
+    "source": "https://github.com/openai/whisper",
+    "sourceName": "OpenAI · Whisper repository",
+    "evidence": "Code and technical documentation",
+    "use": "Open-source model",
+    "availability": "MIT-licensed code and model weights",
+    "reached": "Builders and researchers. This record describes capability rather than a measured community benefit.",
+    "ai": "Recognizes speech and produces text.",
+    "people": "Record with permission, check transcripts and decide what should be preserved.",
+    "took": "Permissioned audio, a suitable computer and a speaker who can review errors.",
+    "held": "Public repository available at review; downstream results require follow-up.",
+    "limits": "Performance varies by language and audio quality. Transcripts may invent or omit content.",
+    "cost": "Local compute and review time; hosted services can have separate charges.",
+    "first": "Transcribe a short, consented recording and compare each line with the speaker’s intended meaning.",
+    "keywords": [
+      "speech",
+      "recording",
+      "audio",
+      "transcription",
+      "story",
+      "oral",
+      "language",
+      "archive"
+    ],
+    "checked": "2026-10-13",
+    "review": "Documentation located by AI; downstream outcomes not independently verified",
+    "access": {
+      "audience": "Builders with a suitable device",
+      "cost": "Code and weights available; use has costs",
+      "connectivity": "Local use may be possible on a suitable device; initial download needs checking",
+      "requirements": "MIT-licensed code and model weights; Permissioned audio, a suitable computer and a speaker who can review errors.",
+      "sources": [
+        "https://github.com/openai/whisper"
+      ],
+      "checkedAt": "2026-10-13"
+    },
+    "reviewInfo": {
+      "status": "Source located",
+      "method": "AI-assisted",
+      "checkedAt": "2026-10-13",
+      "note": "Documentation located by AI; downstream outcomes not independently verified"
+    },
+    "evidenceInfo": {
+      "basis": "Code and technical documentation",
+      "independence": "Involved party"
+    },
+    "reachLabel": "Capability available; community benefit not measured"
+  },
+  {
+    "id": "support",
+    "title": "A useful assist for newer workers",
+    "purpose": "Work & livelihood",
+    "kind": "Outcome",
+    "year": "2023 study",
+    "art": "work",
+    "summary": "Research on customer-support workers reports productivity improvements from AI assistance, with different effects across experience levels.",
+    "source": "https://www.nber.org/papers/w31161",
+    "sourceName": "NBER · Generative AI at Work",
+    "evidence": "Field-study working paper",
+    "use": "Customer-support deployment studied",
+    "availability": "Paper public; workplace tool specific",
+    "reached": "Workers in the studied setting. Improvements varied; results cannot be assumed for another workplace.",
+    "ai": "Suggests responses during customer-support conversations.",
+    "people": "Workers judge suggestions and resolve customer issues.",
+    "took": "A defined workflow, relevant knowledge and evaluation across workers.",
+    "held": "The cited paper reports the studied period; it does not establish lasting benefit elsewhere.",
+    "limits": "Productivity is one outcome. Worker autonomy and workload need separate assessment.",
+    "cost": "Tool access, integration and supervision; not priced in this record.",
+    "first": "Compare one low-stakes task with and without assistance, recording both time and quality.",
+    "keywords": [
+      "work",
+      "business",
+      "income",
+      "support",
+      "productivity",
+      "earn",
+      "job",
+      "service"
+    ],
+    "checked": "2026-10-13",
+    "review": "Research source located by AI; external transfer not verified",
+    "access": {
+      "audience": "Organizations",
+      "cost": "Cost unclear",
+      "connectivity": "Connectivity needs checking",
+      "requirements": "Paper public; workplace tool specific; A defined workflow, relevant knowledge and evaluation across workers.",
+      "sources": [
+        "https://www.nber.org/papers/w31161"
+      ],
+      "checkedAt": "2026-10-13"
+    },
+    "reviewInfo": {
+      "status": "Source located",
+      "method": "AI-assisted",
+      "checkedAt": "2026-10-13",
+      "note": "Research source located by AI; external transfer not verified"
+    },
+    "evidenceInfo": {
+      "basis": "Field-study working paper",
+      "independence": "Unclear"
+    },
+    "reachLabel": "Workers in the studied setting; effect varies"
+  },
+  {
+    "id": "khanmigo",
+    "title": "A teaching idea gets a starting point",
+    "purpose": "Learning & creation",
+    "kind": "Capability",
+    "year": "2023 onward",
+    "art": "learning",
+    "summary": "Khanmigo offers AI tools for lesson preparation and tutoring. Access differs between teachers, families and school implementations.",
+    "source": "https://www.khanacademy.org/khan-labs",
+    "sourceName": "Khan Academy",
+    "evidence": "Provider account",
+    "use": "Education service",
+    "availability": "Eligibility and payment vary",
+    "reached": "Eligible educators and learners. This listing does not establish learning gains.",
+    "ai": "Drafts teaching materials and guides practice.",
+    "people": "Educators check content and remain responsible for teaching decisions.",
+    "took": "Eligible access, subject expertise and a way to assess learning without the tool.",
+    "held": "Provider describes current offerings; learning effects need separate evidence.",
+    "limits": "Teacher access does not automatically provide student access. AI can make mistakes.",
+    "cost": "Teacher and learner plans have different terms; check the provider.",
+    "first": "Draft one activity, verify it yourself, then assess whether it helps someone explain the idea independently.",
+    "keywords": [
+      "teach",
+      "learn",
+      "education",
+      "school",
+      "student",
+      "lesson",
+      "tutor",
+      "skill"
+    ],
+    "checked": "2026-10-13",
+    "review": "Source located by AI; learning outcomes not independently verified",
+    "access": {
+      "audience": "Eligible educators and learners",
+      "cost": "Terms vary",
+      "connectivity": "Connectivity needs checking",
+      "requirements": "Eligibility and payment vary; Eligible access, subject expertise and a way to assess learning without the tool.",
+      "sources": [
+        "https://www.khanacademy.org/khan-labs"
+      ],
+      "checkedAt": "2026-10-13"
+    },
+    "reviewInfo": {
+      "status": "Source located",
+      "method": "AI-assisted",
+      "checkedAt": "2026-10-13",
+      "note": "Source located by AI; learning outcomes not independently verified"
+    },
+    "evidenceInfo": {
+      "basis": "Provider account",
+      "independence": "Involved party"
+    },
+    "reachLabel": "Learning gains not established"
+  },
+  {
+    "id": "forest",
+    "title": "A forest can tell you what is happening",
+    "purpose": "Living planet",
+    "kind": "Capability",
+    "year": "Ongoing deployment",
+    "art": "forest",
+    "summary": "Rainforest Connection uses acoustic monitoring and AI to identify sounds associated with threats and wildlife activity.",
+    "source": "https://rfcx.org/",
+    "sourceName": "Rainforest Connection",
+    "evidence": "Operator account",
+    "use": "Conservation monitoring",
+    "availability": "Projects and tools; local arrangements apply",
+    "reached": "Conservation partners and monitored ecosystems. Benefits depend on local response.",
+    "ai": "Classifies environmental audio to surface signals for review.",
+    "people": "Partners install devices, interpret alerts and choose how to respond.",
+    "took": "Permissioned sensors, power, connectivity and trusted local stewardship.",
+    "held": "Provider describes operating projects; sustained protection needs site-level evidence.",
+    "limits": "An alert is not proof of wrongdoing. Monitoring needs local agreement and review.",
+    "cost": "Hardware, maintenance and local response capacity.",
+    "first": "Ask a local steward which sound could answer a useful question before choosing recording equipment.",
+    "keywords": [
+      "forest",
+      "wildlife",
+      "farm",
+      "animal",
+      "nature",
+      "conservation",
+      "sound",
+      "environment"
+    ],
+    "checked": "2026-10-13",
+    "review": "Source located by AI; site-level outcomes not independently verified",
+    "access": {
+      "audience": "Conservation partners",
+      "cost": "Cost unclear",
+      "connectivity": "Sensors and connectivity needed",
+      "requirements": "Projects and tools; local arrangements apply; Permissioned sensors, power, connectivity and trusted local stewardship.",
+      "sources": [
+        "https://rfcx.org/"
+      ],
+      "checkedAt": "2026-10-13"
+    },
+    "reviewInfo": {
+      "status": "Source located",
+      "method": "AI-assisted",
+      "checkedAt": "2026-10-13",
+      "note": "Source located by AI; site-level outcomes not independently verified"
+    },
+    "evidenceInfo": {
+      "basis": "Operator account",
+      "independence": "Involved party"
+    },
+    "reachLabel": "Benefit reach not established"
+  },
+  {
+    "id": "petase",
+    "title": "A new route through stubborn plastic",
+    "purpose": "Living planet",
+    "kind": "Outcome",
+    "year": "2022 laboratory study",
+    "art": "protein",
+    "summary": "Researchers used machine learning to help engineer FAST-PETase, an enzyme shown to break down tested PET plastics in laboratory conditions.",
+    "source": "https://news.utexas.edu/2022/04/27/plastic-eating-enzyme-could-eliminate-billions-of-tons-of-landfill-waste/",
+    "sourceName": "University of Texas at Austin",
+    "evidence": "University account of Nature study",
+    "use": "Laboratory research",
+    "availability": "Research result; commercial access not established",
+    "reached": "Research teams. Scaled environmental cleanup is not demonstrated by this source.",
+    "ai": "Proposes enzyme mutations for experimental testing.",
+    "people": "Scientists test performance and design the chemical process.",
+    "took": "Laboratory expertise, suitable PET material and controlled reaction conditions.",
+    "held": "Reported in 2022; this listing does not establish subsequent industrial performance.",
+    "limits": "The result concerns PET under studied conditions, not all plastics in an open environment.",
+    "cost": "Laboratory infrastructure and process-development resources.",
+    "first": "Map one PET waste stream and identify a research partner before considering an enzyme trial.",
+    "keywords": [
+      "plastic",
+      "waste",
+      "recycle",
+      "enzyme",
+      "material",
+      "science",
+      "climate"
+    ],
+    "checked": "2026-10-13",
+    "review": "Source located by AI; industrial outcomes not independently verified",
+    "access": {
+      "audience": "Specialists",
+      "cost": "Cost unclear",
+      "connectivity": "Connectivity needs checking",
+      "requirements": "Research result; commercial access not established; Laboratory expertise, suitable PET material and controlled reaction conditions.",
+      "sources": [
+        "https://news.utexas.edu/2022/04/27/plastic-eating-enzyme-could-eliminate-billions-of-tons-of-landfill-waste/"
+      ],
+      "checkedAt": "2026-10-13"
+    },
+    "reviewInfo": {
+      "status": "Source located",
+      "method": "AI-assisted",
+      "checkedAt": "2026-10-13",
+      "note": "Source located by AI; industrial outcomes not independently verified"
+    },
+    "evidenceInfo": {
+      "basis": "University account of Nature study",
+      "independence": "Involved party"
+    },
+    "reachLabel": "Laboratory result; environmental reach not established"
+  },
+  {
+    "id": "fishing",
+    "title": "What happens at sea becomes visible",
+    "purpose": "Rights & public power",
+    "kind": "Capability",
+    "year": "Ongoing platform",
+    "art": "ocean",
+    "summary": "Global Fishing Watch combines satellite information and machine learning to make patterns of activity at sea easier to inspect.",
+    "source": "https://globalfishingwatch.org/",
+    "sourceName": "Global Fishing Watch",
+    "evidence": "Organization technical account",
+    "use": "Open mapping platform",
+    "availability": "Open-access visualization; data terms apply",
+    "reached": "Researchers and ocean-governance communities. This record does not infer enforcement outcomes.",
+    "ai": "Finds patterns in vessel information and satellite observations.",
+    "people": "Analysts examine evidence; communities and authorities decide what follows.",
+    "took": "Data access, interpretation skills and knowledge of local maritime contexts.",
+    "held": "Platform available at review; individual governance gains require follow-up.",
+    "limits": "Patterns can be incomplete. A vessel signal alone does not establish illegal conduct.",
+    "cost": "Analysis time and connectivity; check data terms for reuse.",
+    "first": "Explore one coastal area and list what the map can establish and what requires local evidence.",
+    "keywords": [
+      "ocean",
+      "fishing",
+      "rights",
+      "accountability",
+      "public",
+      "transparency",
+      "map",
+      "community"
+    ],
+    "checked": "2026-10-13",
+    "review": "Source located by AI; enforcement outcomes not independently verified",
+    "access": {
+      "audience": "Researchers and public users",
+      "cost": "Open visualization; reuse terms vary",
+      "connectivity": "Connection required",
+      "requirements": "Open-access visualization; data terms apply; Data access, interpretation skills and knowledge of local maritime contexts.",
+      "sources": [
+        "https://globalfishingwatch.org/"
+      ],
+      "checkedAt": "2026-10-13"
+    },
+    "reviewInfo": {
+      "status": "Source located",
+      "method": "AI-assisted",
+      "checkedAt": "2026-10-13",
+      "note": "Source located by AI; enforcement outcomes not independently verified"
+    },
+    "evidenceInfo": {
+      "basis": "Organization technical account",
+      "independence": "Involved party"
+    },
+    "reachLabel": "Benefit reach not established"
+  }
 ]

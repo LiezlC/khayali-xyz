@@ -13,6 +13,10 @@ Standalone public interface on the existing Khayali deployment, with a Next.js e
 - Goal and context intake, within-reach/further-out horizons, structured AI drafting.
 - Editable imagined scenes, local passport saving, Markdown download, print and portable assistant brief.
 - Explicit worked example and labeled local worksheet if generation is unavailable.
+- Homepage example goals and a complete interview-archive passport at `#example`.
+- Task-based record suggestions in the outage flow. Visitors confirm evidence before a local worksheet is assembled; unmatched goals remain unmatched.
+- Editable experiments, practical-limit fields and export of those limits with provenance.
+- Card-level access, benefit-reach and review labels, with fuller distinctions in record details.
 - Privacy and method disclosures, corrections via email draft, downloadable record JSON.
 
 ## Data and claims
@@ -21,7 +25,9 @@ Sources were located with AI assistance on October 13, 2026. None is claimed to 
 
 `records.json` is the single seed store used by the client and server. Add or revise a record there. `connections.json` stores editorial hypotheses rather than observed combined outcomes. Add a connection only with valid endpoint IDs, its untested step and a bounded experiment. The server restricts precedent IDs to real records and validates all generated fields. The frontend escapes dynamic text. Original SVG thumbnails are symbolic, not source photographs; the glass-tree hero is AI-generated.
 
-The local fallback uses whole-word keyword matching, explicit variants and a stop-word list. A goal without a suitable match receives no precedent, rather than an unrelated record. Studio entry preserves the goal and focuses its field after the view becomes visible. The hero says “Shape my possibility” to describe its context step before AI submission.
+The local fallback uses task-specific signals and explicit visitor selection. Generic terms such as “community” do not make a flood record relevant to an interview archive. A goal without a suitable match receives no precedent. The worksheet keeps the chosen record’s opening suggestion separate from the visitor’s editable experiment. Studio entry preserves the goal and focuses its field after the view becomes visible. Obvious budget and connectivity limits in the goal are copied into editable fields for review; other limits can be entered there directly. The server marks AI drafts with missed practical limits as incomplete and names those limits in unresolved questions.
+
+`access`, `reviewInfo`, `evidenceInfo`, and `reachLabel` in `records.json` are editorial fields. Preserve unknown access and costs as unknown; source review and evidence strength are separate. Recheck time-sensitive claims against the linked source before changing them. The floating Ko-fi embed was removed from this route; the footer support link remains.
 
 ## Boundaries
 

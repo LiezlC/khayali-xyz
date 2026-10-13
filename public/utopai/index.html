@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="/utopai/styles.css">
   <link rel="stylesheet" href="/utopai/review-fixes.css">
   <link rel="stylesheet" href="/utopai/glass-backgrounds.css">
+  <link rel="stylesheet" href="/utopai/usability.css">
   <script type="module" src="/utopai/app.mjs"></script>
 </head>
 <body>
@@ -29,36 +30,39 @@
       <section class="hero wrap" aria-labelledby="hero-title">
         <div class="hero-copy">
           <h1 id="hero-title">Imagine the possibilities so that they <em>might happen.</em></h1>
-          <p class="intro">A record of what people make possible with AI.<br>A place to imagine what comes next for you.</p>
-          <form id="hero-form"><label class="sr-only" for="hero-goal">What would you love to make possible?</label><textarea id="hero-goal" rows="2" maxlength="1500" placeholder="What would you love to make possible?" required></textarea><button class="primary" type="submit">Shape my possibility <span aria-hidden="true">→</span></button></form>
-          <a class="text-link" href="#explore">Explore the record <span aria-hidden="true">→</span></a>
+          <p class="intro">Explore documented uses of AI. Turn something you want to change into a small experiment, with evidence you can inspect.</p>
+          <form id="hero-form"><label for="hero-goal">What would you love to make possible?</label><textarea id="hero-goal" rows="2" maxlength="1500" placeholder="Describe a change you want to try" required></textarea><div class="goal-prompts" aria-label="Example goals"><button type="button" data-goal-prompt="Make recorded interviews searchable.">Make recorded interviews searchable.</button><button type="button" data-goal-prompt="Describe photographs for someone who cannot see them.">Describe photographs for someone who cannot see them.</button><button type="button" data-goal-prompt="Prepare teaching materials on a small budget.">Prepare teaching materials on a small budget.</button><button type="button" data-goal-prompt="Explore flood warnings for my community.">Explore flood warnings for my community.</button></div><p id="prompt-confirm" hidden><button type="button" data-action="replace-goal">Replace my goal with this example</button></p><button class="primary" type="submit">Shape my possibility <span aria-hidden="true">→</span></button></form>
+          <p class="passport-explain">A possibility passport is a plan for a small experiment, with supporting evidence and a way to check what happens.</p><div class="hero-links"><a class="text-link" href="#example">See an example passport →</a><a class="text-link" href="#explore">Explore the record →</a></div>
         </div>
         <figure class="hero-art"><img src="/utopai/assets/tree.webp" width="900" height="600" alt="A sea-green glass tree branching into apricot buds, an illustration of possibilities" fetchpriority="high"><figcaption>Possibilities taking shape · AI-created illustration</figcaption></figure>
       </section>
       <div class="interlude"><h2>Somewhere, someone found a way.</h2><p>Follow the evidence. Find your opening.</p></div>
       <section id="explore" class="record-section wrap" aria-labelledby="record-title">
-        <div class="section-head"><div><h2 id="record-title">Possibilities, already in motion</h2><p>Discover a tool, an outcome or an opening. See what it took.</p></div><div class="view-switch" role="group" aria-label="Record view"><button class="active" data-view="cards" aria-pressed="true">Stories</button><button data-view="atlas" aria-pressed="false">Atlas</button></div></div>
+        <div class="section-head"><div><h2 id="record-title">Possibilities, already in motion</h2><p>Discover a tool, an outcome or an opening. See what it took.</p></div><div class="view-switch" role="group" aria-label="Record view"><button class="active" data-view="cards" aria-pressed="true">Stories</button><button data-view="atlas" aria-pressed="false">Connections</button></div></div><p class="view-explain">See how documented capabilities might work together.</p>
         <div class="toolbar"><label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search possibilities…" aria-label="Search possibilities"></label><select id="kind-filter" aria-label="Filter by record type"><option value="all">All record types</option><option>Outcome</option><option>Capability</option><option>Enabler</option></select></div>
         <div class="filters" id="category-filters" role="group" aria-label="Browse by purpose"></div>
         <div class="list-meta"><p id="results-status" role="status"></p><button class="text-link" data-action="methods">How this record is checked ↗</button></div>
         <div id="records-grid" class="records-grid"></div>
-        <div id="atlas-view" class="atlas-panel" hidden><div class="atlas-title"><h3>Explore a proposed connection.</h3><p>Each pair stands alone, with a written hypothesis and an untested step. A record may appear in several pairs. These are proposals, rather than demonstrated combined outcomes.</p></div><div id="atlas" class="atlas"></div><div id="atlas-connections"></div></div>
+        <div id="atlas-view" class="atlas-panel" hidden><div class="atlas-title"><h3>Explore connections</h3><p>Each pair has a proposed use and a step that needs testing. A record may appear in several pairs. Combining records does not establish an outcome.</p></div><div id="atlas" class="atlas"></div><div id="atlas-connections"></div></div>
         <div id="combination-bar" class="combination-bar" hidden><div><strong id="combination-label"></strong><span>Proposed connections, with the missing steps visible.</span></div><button class="primary" data-action="combine">What if these worked together? →</button><button class="icon-button" data-action="clear-combination" aria-label="Clear combination">×</button></div>
       </section>
       <section class="studio-teaser wrap"><div><span class="section-label">THE POSSIBILITY STUDIO</span><h2>A future worth trying.</h2><p>Start with something you want to change. Follow the precedents into a small experiment, then see what you learn.</p><a class="primary" href="#studio">Find my first experiment →</a></div><div class="passport-preview"><span class="section-label">YOUR POSSIBILITY PASSPORT</span><h3>From “what if”<br>to “let’s try.”</h3><ol><li><span>01</span> Imagine a desired future</li><li><span>02</span> Find a route through the evidence</li><li><span>03</span> Try a bounded experiment</li><li><span>04</span> Learn and choose your next move</li></ol></div></section>
-      <section class="learning wrap" aria-labelledby="learning-title"><h2 id="learning-title">Make room for the possible.</h2><p>AI Manifestation begins with a goal someone would recognize. Practice the capacities that help you pursue it.</p><div class="capacities"><button data-capacity="Imagining">Imagining<span>Describe a future you want.</span></button><button data-capacity="Experimenting">Experimenting<span>Attempt one small change.</span></button><button data-capacity="Learning">Learning<span>Grow the skill it calls for.</span></button><button data-capacity="Connecting">Connecting<span>Find who can help.</span></button><button data-capacity="Sharing">Sharing<span>Make your learning useful.</span></button><button data-capacity="Sustaining">Sustaining<span>Keep the benefit going.</span></button></div></section>
+      <section class="learning wrap" aria-labelledby="learning-title"><h2 id="learning-title">Make room for the possible.</h2><p>AI Manifestation means turning a desired change into an experiment you can try with AI. These practices help you begin and learn from what happens.</p><div class="capacities"><button data-capacity="Imagining">Imagining<span>Describe a future you want.</span></button><button data-capacity="Experimenting">Experimenting<span>Attempt one small change.</span></button><button data-capacity="Learning">Learning<span>Grow the skill it calls for.</span></button><button data-capacity="Connecting">Connecting<span>Find who can help.</span></button><button data-capacity="Sharing">Sharing<span>Make your learning useful.</span></button><button data-capacity="Sustaining">Sustaining<span>Keep the benefit going.</span></button></div></section>
     </div>
     <section id="studio-view" class="studio wrap" hidden aria-labelledby="studio-title">
       <div class="section-head"><div><a href="#home" class="text-link">← Back to exploring</a><h1 id="studio-title">A future worth trying.</h1><p>Begin with what you want to change.</p></div><button class="outline" data-action="example">Try an example</button></div>
       <div class="studio-grid"><form id="studio-form" class="studio-form">
         <label for="goal">What would you love to make possible?<textarea id="goal" rows="4" maxlength="1500" required placeholder="I want to…"></textarea></label>
-        <label for="context">Your starting point <span>Optional</span><textarea id="context" rows="3" maxlength="1500" placeholder="Time, resources, skills and the people you hope to reach"></textarea></label>
+        <label for="context">Your starting point <span>Optional</span><textarea id="context" rows="3" maxlength="1500" placeholder="Resources, skills and the people you hope to reach"></textarea></label>
+        <details class="practical-limits"><summary>Practical limits · optional</summary><label>Budget<input id="limit-budget" maxlength="160" placeholder="Not sure"></label><label>Connectivity<input id="limit-connectivity" maxlength="160" placeholder="Not sure"></label><label>Device or resources<input id="limit-device" maxlength="160" placeholder="Not sure"></label><label>Time available<input id="limit-time" maxlength="160" placeholder="Not sure"></label></details>
         <fieldset class="route-choice"><legend>Choose a horizon</legend><label><input type="radio" name="horizon" value="Within reach" checked> Within reach</label><label><input type="radio" name="horizon" value="Further out"> Further out</label></fieldset>
         <div id="studio-seeds"></div>
         <p class="privacy-note">Your goal goes to the site’s AI service to draft this passport. Use a description without private names or sensitive details. Drafts stay in this tab unless you save or export them.</p>
         <button id="build-button" class="primary" type="submit">Build my passport <span aria-hidden="true">→</span></button>
         <button id="cancel-button" class="outline" type="button" hidden>Cancel drafting</button>
         <p id="studio-status" role="status"></p>
+        <div id="studio-recovery" class="studio-recovery" hidden><button type="button" class="outline" data-action="retry">Try AI drafting again</button><button type="button" class="outline" data-action="worksheet">Build a worksheet</button><button type="button" class="text-link" data-action="assistant">Take it to your AI →</button></div>
+        <div id="record-picker" class="record-picker" hidden></div>
       </form><div id="passport-output" class="passport-output" aria-live="polite"><div class="studio-empty"><span class="spark" aria-hidden="true">✳</span><h2>Your possibility begins here.</h2><p>Give it a starting point. A passport brings the evidence and your next experiment together.</p><button class="text-link" data-action="example">See a worked example →</button></div></div></div>
     </section>
   </main>
@@ -66,6 +70,4 @@
   <dialog id="dialog"><button class="dialog-close" aria-label="Close dialog">×</button><div id="dialog-content"></div></dialog>
   <div id="toast" class="toast" role="status" hidden></div>
   <noscript><p class="wrap">Enable JavaScript to explore the record and use the studio. The sourced record is also available as <a href="/utopai/records.json">a downloadable JSON file</a>.</p></noscript>
-  <div id="utopai-support" hidden></div>
-  <script src="/utopai/support.js" defer></script>
 </body></html>

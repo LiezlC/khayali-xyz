@@ -1,0 +1,14 @@
+.hero-copy form>label{display:block;font-size:13px;font-weight:700;margin:16px 0 8px}
+.passport-explain,.view-explain{font-size:13px;color:var(--muted);line-height:1.55;margin:14px 0}
+.hero-links{display:flex;flex-wrap:wrap;gap:12px 26px;align-items:center}
+.goal-prompts{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 14px}
+.goal-prompts button,.record-choice{font:inherit;font-size:12px;border:1px solid #bdd2c9;border-radius:8px;padding:8px 10px;background:#fffaf4;color:var(--teal);text-align:left}
+.goal-prompts button:hover,.goal-prompts button:focus-visible{background:#e6f2ec}
+#prompt-confirm{font-size:12px;margin:8px 0}#prompt-confirm button{color:var(--teal);text-decoration:underline}
+.card-reach,.card-review{font-size:12px;color:var(--muted);margin:6px 0}
+.card-access{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.card-access span{border:1px solid #c8d9ce;border-radius:6px;padding:4px 7px;font-size:11px}
+.practical-limits{border-top:1px solid #c8d9ce;padding:14px 0}.practical-limits summary{cursor:pointer;font-weight:700}.practical-limits label{display:block;margin:12px 0;font-size:13px}.practical-limits input{display:block;width:100%;margin-top:5px;padding:10px;border:1px solid #bdcfc3;border-radius:7px;background:white;color:var(--ink)}
+.studio-recovery{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.record-picker{border:1px solid #b8d0c3;background:#f2f7f1;padding:16px;margin:14px 0;border-radius:10px}.record-picker h3{font-size:19px;margin:0 0 8px}.record-picker .record-choice{display:flex;gap:8px;align-items:start;color:var(--ink);margin:8px 0}.record-choice span{display:block;font-size:11px;color:var(--muted)}.record-picker>button{margin:8px 8px 0 0}
+.passport-limits{background:#f3f7f1;border-radius:10px;padding:14px;margin:18px 0}.passport-limits h3{font-size:17px;margin:0 0 8px}.passport-limits p{font-size:13px;margin:5px 0}
+#experiment-editor{width:100%;min-height:95px;margin:10px 0;border:1px solid #a7c2b2;border-radius:8px;background:white;padding:10px;color:var(--ink);font:inherit}
+@media(max-width:560px){.hero-links{display:block}.hero-links a{display:block;margin:12px 0}.goal-prompts button{max-width:100%}.studio-recovery>*{width:100%}.record-section .section-head{flex-wrap:wrap}.record-section .view-switch{margin-left:0;max-width:100%}}
