@@ -14,7 +14,7 @@ UtopAI is a small, open attempt at that standard for AI benefits. Ten sourced re
 
 Some arguments travel further with a horse in them, so there’s also a song. Eyes on the Far Side follows a ten-year-old on a borrowed spotted mare toward a glass tree full of real projects.
 
-🎥 Eyes on the Far Side: [YouTube link]
+🎥 Eyes on the Far Side: https://www.youtube.com/watch?v=b-pmjEYgoEo
 🌳 UtopAI: https://www.khayali.xyz/utopai
 
 Music made with Suno. Paintings by Codex, with lyrics and animation built alongside Claude.
