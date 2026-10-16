@@ -28,8 +28,9 @@ The buds on the glass tree, with sources:
 • A new route through stubborn plastic (FAST-PETase): https://news.utexas.edu/2022/04/27/plastic-eating-enzyme-could-eliminate-billions-of-tons-of-landfill-waste/
 • What happens at sea becomes visible (Global Fishing Watch): https://globalfishingwatch.org/
 
-The doom tracker it mirrors:
+The doom trackers it mirrors:
 • Failsafe by Develop AI, a sourced, checked record of AI failures: https://failsafe.developai.co.za/
+• The AI Incident Database, the long-running public record of AI harms: https://incidentdatabase.ai/
 
 Chapters
 0:00 Look up
@@ -59,7 +60,7 @@ More: https://www.khayali.xyz
 
 ## Tags
 
-khayali tunes, khayali, Eyes on the Far Side, Failsafe, AI incidents, AI tracker, Far Side of the Jump, UtopAI, AI for good, hopeful AI, AI music video, Suno, Suno AI music, Claude, Claude Code, Codex, gpt-image-2, HyperFrames, animated music video, electro swing, swing house, tech house, horse riding, show jumping, riding lesson, pony, appaloosa pony, look where you want to go, doom scrolling, AI doom, optimism, glass tree, storybook animation, music video 2026
+khayali tunes, khayali, Eyes on the Far Side, Failsafe, AI Incident Database, AI incidents, AI tracker, Far Side of the Jump, UtopAI, AI for good, hopeful AI, AI music video, Suno, Suno AI music, Claude, Claude Code, Codex, gpt-image-2, HyperFrames, animated music video, electro swing, swing house, tech house, horse riding, show jumping, riding lesson, pony, appaloosa pony, look where you want to go, doom scrolling, AI doom, optimism, glass tree, storybook animation, music video 2026
 
 ## Pinned comment
 
