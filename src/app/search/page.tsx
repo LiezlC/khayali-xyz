@@ -71,7 +71,7 @@ export default function SearchPage() {
             Search
           </h1>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-            Explore content across khayali's creative and experimental works.
+            Explore content across khayali&apos;s creative and experimental works.
           </p>
         </div>
       </section>
@@ -118,7 +118,7 @@ export default function SearchPage() {
             ) : results.length > 0 ? (
               <div>
                 <p className="text-sm text-gray-400 mb-8">
-                  Found {results.length} result{results.length !== 1 ? 's' : ''} for "{query}"
+                  Found {results.length} result{results.length !== 1 ? 's' : ''} for &quot;{query}&quot;
                 </p>
                 <div className="space-y-4">
                   {results.map((result) => (
@@ -159,7 +159,7 @@ export default function SearchPage() {
             ) : (
               <div className="text-center py-20">
                 <p className="text-gray-400 text-lg mb-4">
-                  No results found for "{query}"
+                  No results found for &quot;{query}&quot;
                 </p>
                 <p className="text-gray-400">
                   Try different keywords or explore from the homepage.

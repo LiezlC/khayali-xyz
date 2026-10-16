@@ -12,3 +12,4 @@
 .passport-limits{background:#f3f7f1;border-radius:10px;padding:14px;margin:18px 0}.passport-limits h3{font-size:17px;margin:0 0 8px}.passport-limits p{font-size:13px;margin:5px 0}
 #experiment-editor{width:100%;min-height:95px;margin:10px 0;border:1px solid #a7c2b2;border-radius:8px;background:white;padding:10px;color:var(--ink);font:inherit}
 @media(max-width:560px){.hero-links{display:block}.hero-links a{display:block;margin:12px 0}.goal-prompts button{max-width:100%}.studio-recovery>*{width:100%}.record-section .section-head{flex-wrap:wrap}.record-section .view-switch{margin-left:0;max-width:100%}}
+.passport-output .record-picker{margin:0;padding:28px}.passport-output .record-picker h3{font-size:24px;outline:none}.passport-output .record-choice{padding:12px;border:1px solid #cfe0d6;border-radius:8px;background:var(--paper)}.passport-output .record-choice strong{flex:0 0 auto}.passport-output .record-choice span{font-size:12px}

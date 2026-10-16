@@ -18,7 +18,7 @@ export default function LabsPage() {
             This section contains exploratory work and experimental methods.
           </p>
           <p className="text-xl text-gray-400 leading-relaxed max-w-3xl mx-auto">
-            Exploring consciousness, collaboration, and creative methods at the edge of what's possible
+            Exploring consciousness, collaboration, and creative methods at the edge of what&apos;s possible
             with human-AI partnership. Not all experiments succeed. All contribute to understanding.
           </p>
         </div>
@@ -117,7 +117,7 @@ export default function LabsPage() {
               <div className="p-8">
                 <p className="text-gray-400 mb-4 leading-relaxed">
                   Documentation of experimental collaboration methods, emergent research protocols, and what
-                  we're learning about structured human-AI dialogue. The meta-research.
+                  we&apos;re learning about structured human-AI dialogue. The meta-research.
                 </p>
                 <div className="space-y-2 text-sm text-gray-400 mb-6">
                   <div>• Collaboration Protocols</div>
@@ -137,7 +137,7 @@ export default function LabsPage() {
               <h3 className="text-2xl font-bold mb-4 text-orange-400">AI Arena</h3>
               <p className="text-gray-400 mb-4 leading-relaxed">
                 Multi-model roundtables where different AI systems collaborate on complex questions. Watching
-                how architectures converge, diverge, and surface what they've learned from their training data.
+                how architectures converge, diverge, and surface what they&apos;ve learned from their training data.
               </p>
               <div className="space-y-2 text-sm text-gray-400 mb-6">
                 <div>• Multi-Model Experiments</div>
@@ -250,7 +250,7 @@ export default function LabsPage() {
             <div className="bg-gray-800/50 rounded-xl border border-gray-700 p-6">
               <h3 className="font-semibold text-gray-200 mb-3">Observable → Observatory</h3>
               <p className="text-gray-400 text-sm">
-                When the Sociable Systems newsletter discusses "visibility gaps" in AI decision-making,
+                When the Sociable Systems newsletter discusses &quot;visibility gaps&quot; in AI decision-making,
                 the Observatory provides interactive tools to explore what makes complex systems legible
                 or opaque. Abstract concepts become tangible.
               </p>
@@ -260,7 +260,7 @@ export default function LabsPage() {
               <h3 className="font-semibold text-gray-200 mb-3">Pattern Recognition → AI Arena</h3>
               <p className="text-gray-400 text-sm">
                 When Episode 3 describes how 21 AI models converged on similar accountability failure patterns,
-                that experiment happened in the AI Arena. Multi-model analysis surfaces what's signal
+                that experiment happened in the AI Arena. Multi-model analysis surfaces what&apos;s signal
                 (consistent across architectures) vs. noise (single-model artifacts).
               </p>
             </div>
@@ -270,7 +270,7 @@ export default function LabsPage() {
               <p className="text-gray-400 text-sm">
                 The structured dialogue methods used in professional research were developed through
                 experimental collaboration documented in the Protocol Archive. How we ask questions,
-                frame problems, and collaborate with AI didn't emerge fully formed—it evolved through trial.
+                frame problems, and collaborate with AI didn&apos;t emerge fully formed—it evolved through trial.
               </p>
             </div>
 
@@ -279,7 +279,7 @@ export default function LabsPage() {
               <p className="text-gray-400 text-sm">
                 Sometimes the clearest way to understand a concept is through story rather than analysis.
                 Creative collaboration surfaces insights about consciousness, agency, and collaboration
-                that don't emerge through traditional research methods.
+                that don&apos;t emerge through traditional research methods.
               </p>
             </div>
           </div>
