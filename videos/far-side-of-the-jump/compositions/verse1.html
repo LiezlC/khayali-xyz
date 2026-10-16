@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="UTF-8" /><title>verse1</title></head>
+  <body>
+    <template>
+      <style>
+@font-face { font-family: "Fraunces"; font-weight: 900; font-style: normal; src: url("assets/fonts/fraunces-latin-900-normal.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 900; font-style: italic; src: url("assets/fonts/fraunces-latin-900-italic.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 600; font-style: normal; src: url("assets/fonts/fraunces-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Space Mono"; font-weight: 400; src: url("assets/fonts/space-mono-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Space Mono"; font-weight: 700; src: url("assets/fonts/space-mono-latin-700-normal.woff2") format("woff2"); }
+#root { position: absolute; inset: 0; overflow: hidden; font-family: "Fraunces", Georgia, serif; color: #33251e; }
+.fs-fill { position: absolute; inset: 0; overflow: hidden; }
+.cam { position: absolute; inset: 0; transform-origin: 50% 50%; }
+.layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.rider-wrap { position: absolute; inset: 0; transform-origin: 45% 45%; }
+.grade { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 90% at 50% 40%, rgba(255,220,160,0) 55%, rgba(80,40,20,0.35) 100%); }
+.paper { position: absolute; inset: 0; background: radial-gradient(60% 55% at 50% 62%, #ffffff 0%, #fcfbf8 55%, #f3efe6 100%); }
+.tree { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+.lyric { position: absolute; left: 0; right: 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 0 0.36em; text-align: center; padding: 0 120px; }
+.lyric .w { display: inline-block; }
+.big { top: 40px; font-weight: 900; font-size: 116px; line-height: 1; color: #fcfbf8; text-shadow: 0 6px 0 #33251e, 0 10px 30px rgba(51,37,30,0.45); }
+.mid { bottom: 80px; font-weight: 900; font-style: italic; font-size: 76px; line-height: 1.05; color: #fcfbf8; text-shadow: 0 5px 0 #33251e, 0 8px 24px rgba(51,37,30,0.5); }
+.inky { color: #33251e; text-shadow: none; }
+.hup { position: absolute; left: 1290px; top: 380px; width: 420px; height: 220px; display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 170px; color: #d88a57; -webkit-text-stroke: 6px #33251e; paint-order: stroke fill; transform-origin: 50% 50%; opacity: 0; }
+.mono { font-family: "Space Mono", monospace; }
+.label { position: absolute; font-family: "Space Mono", monospace; font-weight: 700; font-size: 31px; letter-spacing: 0.03em; color: #105e5a;
+  background: rgba(252,251,248,0.95); border: 3px solid #167d78; border-radius: 999px; padding: 8px 22px; white-space: nowrap; }
+.label b { color: #d88a57; }
+.petal { position: absolute; left: 0; top: 0; width: 26px; height: 18px; border-radius: 60% 40% 60% 40%; background: linear-gradient(135deg, #f6c39b, #d88a57); opacity: 0; }
+.flash { position: absolute; inset: 0; background: #fffaf0; opacity: 0; pointer-events: none; }
+.card { position: absolute; background: rgba(252,251,248,0.96); border: 3px solid #167d78; border-radius: 28px; box-shadow: 0 20px 60px rgba(16,94,90,0.25); overflow: hidden; }
+.card-title { position: absolute; left: 36px; top: 24px; right: 36px; font-family: "Space Mono", monospace; font-weight: 700; font-size: 36px; letter-spacing: 0.04em; line-height: 1.15; color: #105e5a; }
+.card-title b { color: #d88a57; }
+.caption { position: absolute; left: 0; right: 0; text-align: center; font-weight: 900; font-size: 64px; color: #33251e; }
+.gal { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+.pin { position: absolute; inset: 0; transform-origin: 0 0; }
+.pin > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+
+#verse1-cam { position: absolute; inset: 0; transform-origin: 50% 50%; }
+#verse1-sky { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+.verse1-badge { position: absolute; width: 230px; height: 230px; border-radius: 50%; background: #d88a57; border: 7px solid #33251e; display: flex; align-items: center; justify-content: center;
+  text-align: center; font-family: "Space Mono", monospace; font-weight: 700; font-size: 30px; line-height: 1.1; color: #fcfbf8; opacity: 0; }
+#verse1-lock { position: absolute; font-family: "Space Mono", monospace; font-weight: 700; font-size: 32px; letter-spacing: 0.14em; color: #fcfbf8; background: #167d78; border-radius: 999px; padding: 6px 16px; opacity: 0; }
+
+      </style>
+      <div id="root" data-composition-id="verse1" data-width="1920" data-height="1080" data-duration="23.03">
+
+<div id="verse1-cam">
+  <img class="layer" src="assets/ring/ring-plate.png" alt="" />
+  <div class="pin" id="verse1-pole"><img src="assets/jump/L2-pole.png" alt="" />
+    <svg viewBox="0 0 1672 941" style="position:absolute;inset:0;width:100%;height:100%">
+      <g id="verse1-mouth" opacity="0" transform="translate(610 707) scale(2.2)">
+        <path id="verse1-jaw-top" d="M -104 0 Q 0 -60 104 0 Z" fill="#33251e" />
+        <path id="verse1-jaw-bot" d="M -104 0 Q 0 70 104 0 Z" fill="#33251e" />
+        <g fill="#fcfbf8"><path d="M -78 -4 l 12 20 l 12 -20 Z" /><path d="M -26 -4 l 12 21 l 12 -21 Z" /><path d="M 26 -4 l 12 21 l 12 -21 Z" /></g>
+        <circle cx="-52" cy="-60" r="17" fill="#fcfbf8" stroke="#33251e" stroke-width="5" /><circle id="verse1-pupilL" cx="-48" cy="-57" r="7" fill="#33251e" />
+        <circle cx="52" cy="-60" r="17" fill="#fcfbf8" stroke="#33251e" stroke-width="5" /><circle id="verse1-pupilR" cx="48" cy="-57" r="7" fill="#33251e" />
+      </g>
+    </svg>
+  </div>
+  <div class="pin" id="verse1-girl"><img src="assets/ring/ring-girl.png" alt="" /></div>
+  <div class="pin" id="verse1-girlup" style="opacity:0"><img src="assets/ring/ring-girl-up.png" alt="" /></div>
+  <div class="pin" id="verse1-teacher"><img src="assets/ring/ring-teacher.png" alt="" /></div>
+  <svg id="verse1-sky" viewBox="0 0 1920 1080">
+    <path id="verse1-sight" d="M 340 420 C 700 120, 1300 40, 1600 200" fill="none" stroke="#fcfbf8" stroke-width="7" stroke-linecap="round" stroke-dasharray="2 22" opacity="0" />
+    <g id="verse1-reticle" opacity="0">
+      <circle cx="1650" cy="235" r="150" fill="none" stroke="#fcfbf8" stroke-width="5" stroke-dasharray="30 18" />
+      <path d="M 1650 65 v 50 M 1650 355 v 50 M 1480 235 h 50 M 1770 235 h 50" stroke="#fcfbf8" stroke-width="6" stroke-linecap="round" />
+    </g>
+  </svg>
+</div>
+<div id="verse1-lock" style="left:1380px;top:430px">FAR SIDE · LOCKED</div>
+<svg class="tree" id="verse1-boatlayer" viewBox="0 0 1920 1080">
+  <g id="verse1-boat" opacity="0"><g id="verse1-boatbob">
+    <path d="M -110 0 L 110 0 L 70 46 L -70 46 Z" fill="#fcfbf8" stroke="#33251e" stroke-width="6" stroke-linejoin="round" />
+    <path d="M -10 0 L -10 -130 L 80 -10 Z" fill="#f6c39b" stroke="#33251e" stroke-width="6" stroke-linejoin="round" />
+    <path d="M -20 0 L -20 -100 L -90 -10 Z" fill="#fcfbf8" stroke="#33251e" stroke-width="6" stroke-linejoin="round" />
+  </g></g>
+</svg>
+<div class="verse1-badge" id="verse1-b1" style="left:1150px;top:180px">HEELS<br />DOWN</div>
+<div class="verse1-badge" id="verse1-b2" style="left:1420px;top:250px">HANDS<br />SOFT</div>
+<div class="verse1-badge" id="verse1-b3" style="left:1690px;top:180px;background:#c94f4f">♥<br />THROAT</div>
+<div class="grade"></div>
+<div class="lyric mid" id="verse1-l1">Ten years old on a borrowed mare,</div>
+<div class="lyric mid" id="verse1-l2">fence comin’ up and I <span class="w" id="verse1-froze">froze</span> right there,</div>
+<div class="lyric mid" id="verse1-l3">teacher hollered from across the ring:</div>
+<div class="lyric big" id="verse1-l4">“Don’t watch the pole, it’s a hungry thing!”</div>
+<div class="lyric mid" id="verse1-l5">So I lifted my chin to the open sky,</div>
+<div class="lyric mid" id="verse1-l6">picked out a tree on the other side,</div>
+<div class="lyric mid" id="verse1-l7">heels down, hands soft, heart in my throat,</div>
+<div class="lyric big" id="verse1-l8">and over we sailed like a paper boat!</div>
+<div class="flash" id="verse1-flash"></div>
+
+      </div>
+      <script>
+        (function () {
+// Shared helpers, inlined into every scene by build.py. Deterministic only.
+function rng(seed) { return function () { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+const SVGNS = "http://www.w3.org/2000/svg";
+function el(tag, attrs, parent) { const n = document.createElementNS(SVGNS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); if (parent) parent.appendChild(n); return n; }
+function $id(id) { return document.getElementById(id); }
+
+// Glass tree: twin braided trunk, round crown, apricot buds. Returns branches (with depth) and buds.
+function buildTree(svg, seed, opt) {
+  opt = opt || {}; const scale = opt.scale || 1, cxT = opt.x || 960, base = opt.base || 1000;
+  const R = rng(seed);
+  const defs = el("defs", {}, svg);
+  const glow = el("filter", { id: svg.id + "-glow", x: "-20%", y: "-20%", width: "140%", height: "140%" }, defs);
+  el("feGaussianBlur", { stdDeviation: "6", result: "b" }, glow);
+  const m = el("feMerge", {}, glow); el("feMergeNode", { in: "b" }, m); el("feMergeNode", { in: "SourceGraphic" }, m);
+  const bud = el("radialGradient", { id: svg.id + "-bud", cx: "40%", cy: "35%", r: "65%" }, defs);
+  el("stop", { offset: "0%", "stop-color": "#fff4e6" }, bud); el("stop", { offset: "45%", "stop-color": "#f3b383" }, bud); el("stop", { offset: "100%", "stop-color": "#c9703f" }, bud);
+  const halo = el("radialGradient", { id: svg.id + "-halo" }, defs);
+  el("stop", { offset: "0%", "stop-color": "#f6c39b", "stop-opacity": "0.75" }, halo); el("stop", { offset: "100%", "stop-color": "#f6c39b", "stop-opacity": "0" }, halo);
+  el("ellipse", { cx: cxT, cy: base, rx: 520 * scale, ry: 34 * scale, fill: "#167d78", opacity: "0.10" }, svg);
+  const gBranch = el("g", { filter: `url(#${svg.id}-glow)`, "stroke-linecap": "round", fill: "none" }, svg);
+  const gBud = el("g", {}, svg);
+  const branches = [], buds = [];
+  function seg(d, w, depth) {
+    const g = el("g", {}, gBranch);
+    const body = el("path", { d, stroke: "#8fd3c3", "stroke-width": w, opacity: "0.5" }, g);
+    const core = el("path", { d, stroke: "#167d78", "stroke-width": Math.max(1.5, w * 0.42), opacity: "0.8" }, g);
+    const hi = el("path", { d, stroke: "#ffffff", "stroke-width": Math.max(1, w * 0.16), opacity: "0.85", transform: `translate(${(-w * 0.2).toFixed(1)} ${(-w * 0.1).toFixed(1)})` }, g);
+    branches.push({ paths: [body, core, hi], depth });
+  }
+  function addBud(x, y, r) {
+    const h = el("circle", { cx: x, cy: y, r: r * 2.6, fill: `url(#${svg.id}-halo)`, opacity: 0 }, gBud);
+    const b = el("circle", { cx: x, cy: y, r, fill: `url(#${svg.id}-bud)`, stroke: "#b8643a", "stroke-width": 1.2 }, gBud);
+    buds.push({ b, h, x, y, r });
+  }
+  function grow(x, y, ang, len, w, depth) {
+    const bend = (R() - 0.5) * 0.5;
+    const x2 = x + Math.cos(ang) * len, y2 = y + Math.sin(ang) * len;
+    const cx = x + Math.cos(ang + bend) * len * 0.55, cy = y + Math.sin(ang + bend) * len * 0.55;
+    seg(`M ${x.toFixed(1)} ${y.toFixed(1)} Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${x2.toFixed(1)} ${y2.toFixed(1)}`, w, depth);
+    if (depth >= 4 && R() < 0.4) addBud(cx, cy, (8 + R() * 6) * scale);
+    if (depth >= 6) { addBud(x2, y2, (13 + R() * 11) * scale); return; }
+    const spread = depth < 2 ? 0.7 : 0.52;
+    const pull = (-Math.PI / 2 - ang) * 0.08;
+    grow(x2, y2, ang - spread + pull + (R() - 0.5) * 0.2, len * (0.74 + R() * 0.08), w * 0.68, depth + 1);
+    grow(x2, y2, ang + spread + pull + (R() - 0.5) * 0.2, len * (0.74 + R() * 0.08), w * 0.68, depth + 1);
+    if (depth >= 2 && depth <= 4 && R() < 0.3) grow(x2, y2, ang + pull + (R() - 0.5) * 0.3, len * 0.62, w * 0.6, depth + 1);
+  }
+  const top = base - 230 * scale;
+  seg(`M ${cxT - 60 * scale} ${base} C ${cxT + 50 * scale} ${base - 80 * scale}, ${cxT - 70 * scale} ${base - 150 * scale}, ${cxT} ${top}`, 74 * scale, 0);
+  seg(`M ${cxT + 60 * scale} ${base} C ${cxT - 50 * scale} ${base - 90 * scale}, ${cxT + 70 * scale} ${base - 160 * scale}, ${cxT} ${top}`, 62 * scale, 0);
+  grow(cxT, top, -Math.PI / 2 - 0.85, 170 * scale, 42 * scale, 1);
+  grow(cxT, top, -Math.PI / 2 + 0.85, 170 * scale, 42 * scale, 1);
+  grow(cxT, top, -Math.PI / 2, 130 * scale, 34 * scale, 2);
+  branches.forEach(o => o.paths.forEach(p => { const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; }));
+  return { branches, buds };
+}
+function drawTree(tl, T, at, step) { T.branches.forEach(o => o.paths.forEach(p => tl.to(p, { strokeDashoffset: 0, duration: step * 3.2, ease: "power2.out" }, at + o.depth * step))); }
+function showTree(tl, T, at) { T.branches.forEach(o => o.paths.forEach(p => tl.set(p, { strokeDashoffset: 0 }, at))); }
+function bloom(tl, T, times, glowTo) {
+  T.buds.forEach((o, i) => {
+    const t = times[i % times.length] + ((i * 37) % 11) * 0.012;
+    tl.fromTo(o.b, { scale: 0, transformOrigin: `${o.x}px ${o.y}px` }, { scale: 1, duration: 0.3, ease: "back.out(3)" }, t);
+    tl.fromTo(o.h, { opacity: 0 }, { opacity: glowTo || 0.6, duration: 0.25 }, t);
+  });
+}
+
+// Petals
+function makePetals(host, n, seed) {
+  const R = rng(seed), out = [];
+  for (let i = 0; i < n; i++) { const p = document.createElement("div"); p.className = "petal"; host.appendChild(p);
+    out.push({ p, x: R() * 1920, y: R() * 1080, dx: 200 + R() * 500, dy: -150 + R() * 450, r: R() * 720 - 360, s: 0.6 + R() * 1.1 }); }
+  return out;
+}
+function burst(tl, petals, at, dur) {
+  petals.forEach((o, i) => tl.fromTo(o.p, { x: o.x - 300, y: o.y, rotation: 0, scale: o.s, opacity: 0 },
+    { x: o.x - 300 + o.dx, y: o.y + o.dy, rotation: o.r, opacity: 0.95, duration: dur, ease: "sine.out" }, at + (i % 7) * 0.03));
+}
+function fall(tl, petals, at, dur) {
+  petals.forEach((o, i) => tl.fromTo(o.p, { x: o.x, y: -60 - (i % 9) * 40, rotation: 0, scale: o.s, opacity: 0.95 },
+    { x: o.x + o.dx * 0.4 - 100, y: 1140, rotation: o.r * 2, opacity: 0.95, duration: dur, ease: "none" }, at + (i % 13) * (dur / 13)));
+}
+
+// Lyric word pops: element with .w spans, one time per word
+function words(tl, sel, times, from) {
+  document.querySelectorAll(sel + " .w").forEach((w, i) =>
+    tl.fromTo(w, from || { y: 50, opacity: 0, scale: 0.6 }, { y: 0, opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2.6)" }, times[Math.min(i, times.length - 1)]));
+}
+// Whole-line in/out
+function line(tl, sel, tin, tout) {
+  tl.fromTo(sel, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.22, ease: "power2.out" }, tin);
+  if (tout != null) tl.to(sel, { opacity: 0, y: -16, duration: 0.18, ease: "power1.in" }, tout);
+}
+
+// Gallop flipbook: frames = array of 4 element ids stacked; strides on a 129 BPM canter (one stride per beat)
+function gallop(tl, frames, from, to, beat) {
+  beat = beat || 0.4651; const f = beat / 4;
+  frames.forEach((id, i) => tl.set("#" + id, { opacity: i === 0 ? 1 : 0 }, from));
+  let k = 0;
+  for (let t = from + f; t < to - 0.001; t += f, k++) {
+    const cur = (k + 1) % 4, prev = k % 4;
+    tl.set("#" + frames[prev], { opacity: 0 }, t); tl.set("#" + frames[cur], { opacity: 1 }, t);
+  }
+}
+// Stamp: drop-in with overshoot
+function stamp(tl, sel, at, rot) {
+  tl.fromTo(sel, { scale: 3, opacity: 0, rotation: (rot || -8) * 2.5 }, { scale: 1, opacity: 1, rotation: rot || -8, duration: 0.16, ease: "power4.in" }, at);
+}
+
+// Place a full-canvas cutout (1672x941 source, shown at 1920x1080) so its alpha box lands at screen (x, y) with height h.
+// The element must have transform-origin 0 0 (class "pin").
+const IMG_K = 1920 / 1672;
+function place(box, x, y, h) { const s = h / ((box[3] - box[1]) * IMG_K); return { x: x - box[0] * IMG_K * s, y: y - box[1] * IMG_K * s, scale: s }; }
+
+          const tl = gsap.timeline({ paused: true });
+          const D = 23.03;
+
+// local = track - 30.47
+const GIRL = [225, 7, 1146, 931], UP = [375, 13, 1279, 930], TEACH = [567, 20, 1316, 931], POLE = [0, 207, 1142, 899];
+tl.set("#verse1-girl", place(GIRL, 240, 300, 620), 0);
+tl.set("#verse1-girlup", place(UP, 250, 300, 620), 0);
+tl.set("#verse1-teacher", place(TEACH, 1000, 260, 660), 0);
+tl.set("#verse1-pole", place(POLE, 720, 690, 240), 0);
+// focus helper: camera centered on point P at scale S, clamped to the plate
+function cam(S, px, py) { const bx = (S - 1) * 960, by = (S - 1) * 540;
+  return { scale: S, x: Math.max(-bx, Math.min(bx, (960 - px) * S)), y: Math.max(-by, Math.min(by, (540 - py) * S)) }; }
+
+// match cut from the intro's dive: start deep on the painted glass tree, pull back to the ring
+tl.fromTo("#verse1-flash", { opacity: 1 }, { opacity: 0, duration: 0.6, ease: "power2.out" }, 0);
+tl.fromTo("#verse1-cam", cam(3, 1650, 230), { ...cam(1.04, 960, 540), duration: 7.0, ease: "power2.inOut" }, 0);
+// girl breathes, horse shifts, teacher sways (idle)
+tl.fromTo("#verse1-girl img", { y: 0 }, { y: -6, duration: 0.93, yoyo: true, repeat: 15, ease: "sine.inOut" }, 0);
+tl.fromTo("#verse1-teacher img", { rotation: -1 }, { rotation: 1.5, transformOrigin: "50% 95%", duration: 0.93, yoyo: true, repeat: 15, ease: "sine.inOut" }, 0);
+
+const L = [["verse1-l1", 7.73, 9.6], ["verse1-l2", 9.73, 11.6], ["verse1-l3", 11.73, 13.3], ["verse1-l4", 13.43, 15.1], ["verse1-l5", 15.23, 17.2], ["verse1-l6", 17.33, 18.9], ["verse1-l7", 19.03, 21.0], ["verse1-l8", 21.13, D - 0.05]];
+L.forEach(([id, a, b]) => line(tl, "#" + id, a, b));
+
+// fence coming up: push toward girl and pole; FREEZE on "froze"
+tl.to("#verse1-cam", { ...cam(1.6, 700, 640), duration: 1.0, ease: "power2.inOut" }, 9.73);
+tl.set("#verse1-cam", { filter: "grayscale(0) contrast(1)" }, 0);
+tl.set("#verse1-cam", { filter: "grayscale(1) contrast(1.15)" }, 10.83);
+tl.to("#verse1-cam", { x: "+=8", duration: 0.04, yoyo: true, repeat: 9, ease: "none" }, 10.85);
+tl.set("#verse1-cam", { filter: "grayscale(0) contrast(1)" }, 11.73);
+// teacher hollers
+tl.to("#verse1-cam", { ...cam(1.7, 1260, 560), duration: 0.35, ease: "power3.out" }, 11.73);
+tl.to("#verse1-teacher", { scale: "+=0.03", duration: 0.12, yoyo: true, repeat: 3 }, 11.9);
+// hungry pole
+tl.to("#verse1-cam", { ...cam(2.4, 905, 815), duration: 0.3, ease: "power3.out" }, 13.43);
+[0, 0.28, 0.56, 0.84, 1.12].forEach(dt => {
+  tl.to("#verse1-jaw-top", { y: -22, duration: 0.11, yoyo: true, repeat: 1, ease: "power1.inOut" }, 13.5 + dt);
+  tl.to("#verse1-jaw-bot", { y: 26, duration: 0.11, yoyo: true, repeat: 1, ease: "power1.inOut" }, 13.5 + dt);
+});
+tl.to(["#verse1-pupilL", "#verse1-pupilR"], { x: -8, y: -6, duration: 0.2 }, 13.5);
+tl.fromTo("#verse1-mouth", { opacity: 0 }, { opacity: 1, duration: 0.12 }, 13.43);
+tl.to("#verse1-mouth", { opacity: 0, duration: 0.2 }, 15.2);
+// chin up: swap to the looking-up girl, tilt the camera toward the sky
+tl.to("#verse1-cam", { ...cam(1.5, 640, 470), duration: 0.5, ease: "power2.out" }, 15.23);
+tl.to("#verse1-girl", { opacity: 0, duration: 0.3 }, 15.6);
+tl.to("#verse1-girlup", { opacity: 1, duration: 0.3 }, 15.6);
+tl.to("#verse1-cam", { y: "+=180", duration: 1.4, ease: "sine.inOut" }, 15.9);
+// pick out the tree: sightline + target lock
+tl.to("#verse1-cam", { ...cam(1.15, 1000, 430), duration: 0.8, ease: "power2.inOut" }, 17.33);
+const sp = $id("verse1-sight"), SL = sp.getTotalLength();
+tl.fromTo(sp, { strokeDashoffset: SL, opacity: 0 }, { strokeDashoffset: 0, opacity: 1, duration: 0.9, ease: "power2.out" }, 17.5);
+tl.fromTo("#verse1-reticle", { opacity: 0, scale: 1.8, transformOrigin: "1650px 235px" }, { opacity: 1, scale: 1, duration: 0.3, ease: "power3.out" }, 18.2);
+tl.to("#verse1-reticle", { rotation: 90, svgOrigin: "1650 235", duration: 2.5, ease: "none" }, 18.2);
+tl.fromTo("#verse1-lock", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.2 }, 18.5);
+tl.to(["#verse1-lock", "#verse1-reticle", "#verse1-sight"], { opacity: 0, duration: 0.3 }, 20.9);
+// heels down, hands soft, heart in my throat
+[["#verse1-b1", 19.03], ["#verse1-b2", 19.63], ["#verse1-b3", 20.13]].forEach(([id, t], i) => {
+  stamp(tl, id, t, i === 1 ? 6 : -6);
+  tl.to(id, { opacity: 0, scale: 0.8, duration: 0.2 }, 21.0);
+});
+tl.to("#verse1-b3", { scale: 1.12, duration: 0.12, yoyo: true, repeat: 5 }, 20.35);
+// paper boat sails across the sky
+tl.to("#verse1-cam", { ...cam(1.1, 960, 480), duration: 1.0, ease: "power2.inOut" }, 21.13);
+tl.set("#verse1-boat", { opacity: 1 }, 21.2);
+tl.fromTo("#verse1-boat", { x: -200, y: 420, rotation: -8 }, { x: 2150, y: 260, rotation: 6, duration: 1.85, ease: "sine.inOut" }, 21.2);
+tl.fromTo("#verse1-boatbob", { y: 0 }, { y: -30, duration: 0.23, yoyo: true, repeat: 7, ease: "sine.inOut" }, 21.2);
+
+          window.__timelines["verse1"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

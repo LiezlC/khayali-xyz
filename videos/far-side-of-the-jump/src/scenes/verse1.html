@@ -1,0 +1,115 @@
+<!--css-->
+#@@cam { position: absolute; inset: 0; transform-origin: 50% 50%; }
+#@@sky { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+.@@badge { position: absolute; width: 230px; height: 230px; border-radius: 50%; background: #d88a57; border: 7px solid #33251e; display: flex; align-items: center; justify-content: center;
+  text-align: center; font-family: "Space Mono", monospace; font-weight: 700; font-size: 30px; line-height: 1.1; color: #fcfbf8; opacity: 0; }
+#@@lock { position: absolute; font-family: "Space Mono", monospace; font-weight: 700; font-size: 32px; letter-spacing: 0.14em; color: #fcfbf8; background: #167d78; border-radius: 999px; padding: 6px 16px; opacity: 0; }
+<!--html-->
+<div id="@@cam">
+  <img class="layer" src="assets/ring/ring-plate.png" alt="" />
+  <div class="pin" id="@@pole"><img src="assets/jump/L2-pole.png" alt="" />
+    <svg viewBox="0 0 1672 941" style="position:absolute;inset:0;width:100%;height:100%">
+      <g id="@@mouth" opacity="0" transform="translate(610 707) scale(2.2)">
+        <path id="@@jaw-top" d="M -104 0 Q 0 -60 104 0 Z" fill="#33251e" />
+        <path id="@@jaw-bot" d="M -104 0 Q 0 70 104 0 Z" fill="#33251e" />
+        <g fill="#fcfbf8"><path d="M -78 -4 l 12 20 l 12 -20 Z" /><path d="M -26 -4 l 12 21 l 12 -21 Z" /><path d="M 26 -4 l 12 21 l 12 -21 Z" /></g>
+        <circle cx="-52" cy="-60" r="17" fill="#fcfbf8" stroke="#33251e" stroke-width="5" /><circle id="@@pupilL" cx="-48" cy="-57" r="7" fill="#33251e" />
+        <circle cx="52" cy="-60" r="17" fill="#fcfbf8" stroke="#33251e" stroke-width="5" /><circle id="@@pupilR" cx="48" cy="-57" r="7" fill="#33251e" />
+      </g>
+    </svg>
+  </div>
+  <div class="pin" id="@@girl"><img src="assets/ring/ring-girl.png" alt="" /></div>
+  <div class="pin" id="@@girlup" style="opacity:0"><img src="assets/ring/ring-girl-up.png" alt="" /></div>
+  <div class="pin" id="@@teacher"><img src="assets/ring/ring-teacher.png" alt="" /></div>
+  <svg id="@@sky" viewBox="0 0 1920 1080">
+    <path id="@@sight" d="M 340 420 C 700 120, 1300 40, 1600 200" fill="none" stroke="#fcfbf8" stroke-width="7" stroke-linecap="round" stroke-dasharray="2 22" opacity="0" />
+    <g id="@@reticle" opacity="0">
+      <circle cx="1650" cy="235" r="150" fill="none" stroke="#fcfbf8" stroke-width="5" stroke-dasharray="30 18" />
+      <path d="M 1650 65 v 50 M 1650 355 v 50 M 1480 235 h 50 M 1770 235 h 50" stroke="#fcfbf8" stroke-width="6" stroke-linecap="round" />
+    </g>
+  </svg>
+</div>
+<div id="@@lock" style="left:1380px;top:430px">FAR SIDE · LOCKED</div>
+<svg class="tree" id="@@boatlayer" viewBox="0 0 1920 1080">
+  <g id="@@boat" opacity="0"><g id="@@boatbob">
+    <path d="M -110 0 L 110 0 L 70 46 L -70 46 Z" fill="#fcfbf8" stroke="#33251e" stroke-width="6" stroke-linejoin="round" />
+    <path d="M -10 0 L -10 -130 L 80 -10 Z" fill="#f6c39b" stroke="#33251e" stroke-width="6" stroke-linejoin="round" />
+    <path d="M -20 0 L -20 -100 L -90 -10 Z" fill="#fcfbf8" stroke="#33251e" stroke-width="6" stroke-linejoin="round" />
+  </g></g>
+</svg>
+<div class="@@badge" id="@@b1" style="left:1150px;top:180px">HEELS<br />DOWN</div>
+<div class="@@badge" id="@@b2" style="left:1420px;top:250px">HANDS<br />SOFT</div>
+<div class="@@badge" id="@@b3" style="left:1690px;top:180px;background:#c94f4f">♥<br />THROAT</div>
+<div class="grade"></div>
+<div class="lyric mid" id="@@l1">Ten years old on a borrowed mare,</div>
+<div class="lyric mid" id="@@l2">fence comin’ up and I <span class="w" id="@@froze">froze</span> right there,</div>
+<div class="lyric mid" id="@@l3">teacher hollered from across the ring:</div>
+<div class="lyric big" id="@@l4">“Don’t watch the pole, it’s a hungry thing!”</div>
+<div class="lyric mid" id="@@l5">So I lifted my chin to the open sky,</div>
+<div class="lyric mid" id="@@l6">picked out a tree on the other side,</div>
+<div class="lyric mid" id="@@l7">heels down, hands soft, heart in my throat,</div>
+<div class="lyric big" id="@@l8">and over we sailed like a paper boat!</div>
+<div class="flash" id="@@flash"></div>
+<!--js-->
+// local = track - 30.47
+const GIRL = [225, 7, 1146, 931], UP = [375, 13, 1279, 930], TEACH = [567, 20, 1316, 931], POLE = [0, 207, 1142, 899];
+tl.set("#@@girl", place(GIRL, 240, 300, 620), 0);
+tl.set("#@@girlup", place(UP, 250, 300, 620), 0);
+tl.set("#@@teacher", place(TEACH, 1000, 260, 660), 0);
+tl.set("#@@pole", place(POLE, 720, 690, 240), 0);
+// focus helper: camera centered on point P at scale S, clamped to the plate
+function cam(S, px, py) { const bx = (S - 1) * 960, by = (S - 1) * 540;
+  return { scale: S, x: Math.max(-bx, Math.min(bx, (960 - px) * S)), y: Math.max(-by, Math.min(by, (540 - py) * S)) }; }
+
+// match cut from the intro's dive: start deep on the painted glass tree, pull back to the ring
+tl.fromTo("#@@flash", { opacity: 1 }, { opacity: 0, duration: 0.6, ease: "power2.out" }, 0);
+tl.fromTo("#@@cam", cam(3, 1650, 230), { ...cam(1.04, 960, 540), duration: 7.0, ease: "power2.inOut" }, 0);
+// girl breathes, horse shifts, teacher sways (idle)
+tl.fromTo("#@@girl img", { y: 0 }, { y: -6, duration: 0.93, yoyo: true, repeat: 15, ease: "sine.inOut" }, 0);
+tl.fromTo("#@@teacher img", { rotation: -1 }, { rotation: 1.5, transformOrigin: "50% 95%", duration: 0.93, yoyo: true, repeat: 15, ease: "sine.inOut" }, 0);
+
+const L = [["@@l1", 7.73, 9.6], ["@@l2", 9.73, 11.6], ["@@l3", 11.73, 13.3], ["@@l4", 13.43, 15.1], ["@@l5", 15.23, 17.2], ["@@l6", 17.33, 18.9], ["@@l7", 19.03, 21.0], ["@@l8", 21.13, D - 0.05]];
+L.forEach(([id, a, b]) => line(tl, "#" + id, a, b));
+
+// fence coming up: push toward girl and pole; FREEZE on "froze"
+tl.to("#@@cam", { ...cam(1.6, 700, 640), duration: 1.0, ease: "power2.inOut" }, 9.73);
+tl.set("#@@cam", { filter: "grayscale(0) contrast(1)" }, 0);
+tl.set("#@@cam", { filter: "grayscale(1) contrast(1.15)" }, 10.83);
+tl.to("#@@cam", { x: "+=8", duration: 0.04, yoyo: true, repeat: 9, ease: "none" }, 10.85);
+tl.set("#@@cam", { filter: "grayscale(0) contrast(1)" }, 11.73);
+// teacher hollers
+tl.to("#@@cam", { ...cam(1.7, 1260, 560), duration: 0.35, ease: "power3.out" }, 11.73);
+tl.to("#@@teacher", { scale: "+=0.03", duration: 0.12, yoyo: true, repeat: 3 }, 11.9);
+// hungry pole
+tl.to("#@@cam", { ...cam(2.4, 905, 815), duration: 0.3, ease: "power3.out" }, 13.43);
+[0, 0.28, 0.56, 0.84, 1.12].forEach(dt => {
+  tl.to("#@@jaw-top", { y: -22, duration: 0.11, yoyo: true, repeat: 1, ease: "power1.inOut" }, 13.5 + dt);
+  tl.to("#@@jaw-bot", { y: 26, duration: 0.11, yoyo: true, repeat: 1, ease: "power1.inOut" }, 13.5 + dt);
+});
+tl.to(["#@@pupilL", "#@@pupilR"], { x: -8, y: -6, duration: 0.2 }, 13.5);
+tl.fromTo("#@@mouth", { opacity: 0 }, { opacity: 1, duration: 0.12 }, 13.43);
+tl.to("#@@mouth", { opacity: 0, duration: 0.2 }, 15.2);
+// chin up: swap to the looking-up girl, tilt the camera toward the sky
+tl.to("#@@cam", { ...cam(1.5, 640, 470), duration: 0.5, ease: "power2.out" }, 15.23);
+tl.to("#@@girl", { opacity: 0, duration: 0.3 }, 15.6);
+tl.to("#@@girlup", { opacity: 1, duration: 0.3 }, 15.6);
+tl.to("#@@cam", { y: "+=180", duration: 1.4, ease: "sine.inOut" }, 15.9);
+// pick out the tree: sightline + target lock
+tl.to("#@@cam", { ...cam(1.15, 1000, 430), duration: 0.8, ease: "power2.inOut" }, 17.33);
+const sp = $id("@@sight"), SL = sp.getTotalLength();
+tl.fromTo(sp, { strokeDashoffset: SL, opacity: 0 }, { strokeDashoffset: 0, opacity: 1, duration: 0.9, ease: "power2.out" }, 17.5);
+tl.fromTo("#@@reticle", { opacity: 0, scale: 1.8, transformOrigin: "1650px 235px" }, { opacity: 1, scale: 1, duration: 0.3, ease: "power3.out" }, 18.2);
+tl.to("#@@reticle", { rotation: 90, svgOrigin: "1650 235", duration: 2.5, ease: "none" }, 18.2);
+tl.fromTo("#@@lock", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.2 }, 18.5);
+tl.to(["#@@lock", "#@@reticle", "#@@sight"], { opacity: 0, duration: 0.3 }, 20.9);
+// heels down, hands soft, heart in my throat
+[["#@@b1", 19.03], ["#@@b2", 19.63], ["#@@b3", 20.13]].forEach(([id, t], i) => {
+  stamp(tl, id, t, i === 1 ? 6 : -6);
+  tl.to(id, { opacity: 0, scale: 0.8, duration: 0.2 }, 21.0);
+});
+tl.to("#@@b3", { scale: 1.12, duration: 0.12, yoyo: true, repeat: 5 }, 20.35);
+// paper boat sails across the sky
+tl.to("#@@cam", { ...cam(1.1, 960, 480), duration: 1.0, ease: "power2.inOut" }, 21.13);
+tl.set("#@@boat", { opacity: 1 }, 21.2);
+tl.fromTo("#@@boat", { x: -200, y: 420, rotation: -8 }, { x: 2150, y: 260, rotation: 6, duration: 1.85, ease: "sine.inOut" }, 21.2);
+tl.fromTo("#@@boatbob", { y: 0 }, { y: -30, duration: 0.23, yoyo: true, repeat: 7, ease: "sine.inOut" }, 21.2);

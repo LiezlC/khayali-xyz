@@ -1,0 +1,90 @@
+<!--css-->
+#@@sky { position: absolute; inset: 0; background: radial-gradient(80% 70% at 50% 40%, #17706b 0%, #0d3b3d 70%, #082829 100%); }
+#@@stars { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+#@@book { position: absolute; left: 560px; top: 180px; width: 800px; height: 720px; perspective: 2400px; }
+#@@page { position: absolute; inset: 0; background: #fcfbf8; border-radius: 18px; box-shadow: 0 30px 80px rgba(0,0,0,0.45); overflow: hidden; }
+#@@page::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent 0 58px, rgba(22,125,120,0.12) 58px 60px); }
+#@@cover { position: absolute; inset: 0; background: linear-gradient(160deg, #167d78, #0f5551); border-radius: 18px; transform-origin: 0% 50%; box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; backface-visibility: hidden; }
+#@@cover .t1 { font-family: "Space Mono", monospace; font-weight: 700; font-size: 34px; letter-spacing: 0.4em; color: #f6c39b; margin-top: 30px; }
+#@@cover .t2 { font-weight: 900; font-style: italic; font-size: 64px; color: #fcfbf8; }
+#@@q { position: absolute; left: 60px; right: 60px; top: 60px; font-weight: 900; font-size: 58px; line-height: 1.1; color: #33251e; }
+#@@step { position: absolute; left: 60px; right: 60px; top: 320px; font-family: "Space Mono", monospace; font-weight: 700; font-size: 34px; color: #167d78; }
+#@@stepv { position: absolute; left: 60px; right: 60px; top: 372px; font-weight: 600; font-style: italic; font-size: 44px; line-height: 1.15; color: #33251e; }
+#@@checks { position: absolute; left: 60px; top: 500px; }
+.@@ck { font-family: "Space Mono", monospace; font-weight: 700; font-size: 38px; color: #33251e; margin-bottom: 18px; opacity: 0; }
+.@@ck b { position: relative; display: inline-block; width: 44px; color: #d88a57; }
+.@@ck b i { font-style: normal; } .@@ck b .@@tick { position: absolute; left: 0; top: 0; opacity: 0; }
+#@@stamp { position: absolute; left: 920px; top: 560px; width: 380px; height: 380px; opacity: 0; }
+.@@say { position: absolute; left: 0; right: 0; text-align: center; font-weight: 900; font-style: italic; font-size: 64px; color: #f6c39b; opacity: 0; }
+<!--html-->
+<div id="@@sky"></div>
+<svg id="@@stars" viewBox="0 0 1920 1080"></svg>
+<div id="@@book">
+  <div id="@@page">
+    <div id="@@q"></div>
+    <div id="@@step">MY FIRST SMALL STEP</div>
+    <div id="@@stepv"></div>
+    <div id="@@checks">
+      <div class="@@ck" id="@@ck1"><b><i class="@@box">☐</i><i class="@@tick">☑</i></b>try it this week</div>
+      <div class="@@ck" id="@@ck2"><b><i class="@@box">☐</i><i class="@@tick">☑</i></b>tell one person</div>
+      <div class="@@ck" id="@@ck3"><b><i class="@@box">☐</i><i class="@@tick">☑</i></b>look up, not down</div>
+    </div>
+  </div>
+  <div id="@@cover"><svg class="tree" id="@@emblem" viewBox="0 0 1920 1080" style="position:relative;width:520px;height:292px"></svg><div class="t1">UTOPAI</div><div class="t2">Passport</div></div>
+</div>
+<svg id="@@stamp" viewBox="0 0 380 380">
+  <g transform="rotate(-14 190 190)">
+    <circle cx="190" cy="190" r="170" fill="none" stroke="#d88a57" stroke-width="14" />
+    <circle cx="190" cy="190" r="140" fill="none" stroke="#d88a57" stroke-width="4" />
+    <text x="190" y="170" text-anchor="middle" font-family="Fraunces" font-weight="900" font-size="54" fill="#d88a57">FAR SIDE</text>
+    <text x="190" y="232" text-anchor="middle" font-family="Space Mono" font-weight="700" font-size="30" fill="#d88a57">✦ DREAM ✦</text>
+  </g>
+</svg>
+<div class="@@say" id="@@say1" style="bottom:60px">(say it out loud)</div>
+<div class="@@say" id="@@say2" style="bottom:60px">(then try something small)</div>
+<div class="lyric big" id="@@l-braver" style="top:auto;bottom:50px;font-size:66px;opacity:0">One little experiment, braver than it seems…</div>
+<!--js-->
+// local = track - 168.7
+const ON = {{ONSETS}};
+const R = rng(21), z = $id("@@stars");
+for (let i = 0; i < 70; i++) {
+  const s = el("circle", { cx: R() * 1920, cy: R() * 1080, r: 1.5 + R() * 3.5, fill: i % 5 ? "#fcfbf8" : "#f6c39b", opacity: 0.25 }, z);
+  const t = ON.length ? ON[i % ON.length] : i * 0.3;
+  tl.to(s, { opacity: 1, duration: 0.08 }, t);
+  tl.to(s, { opacity: 0.25, duration: 0.9 }, t + 0.08);
+}
+const E = buildTree($id("@@emblem"), 42, { scale: 1 });
+showTree(tl, E, 0); bloom(tl, E, [0], 0.4);
+
+// book floats in, cover opens on the second question
+tl.fromTo("#@@book", { y: 120, opacity: 0, rotation: -3 }, { y: 0, opacity: 1, rotation: 0, duration: 1.4, ease: "power2.out" }, 0);
+tl.fromTo("#@@cover", { rotationY: 0 }, { rotationY: -178, duration: 1.0, ease: "power2.inOut" }, 7.4);
+tl.to("#@@book", { x: -300, duration: 1.0, ease: "power2.inOut" }, 7.4);
+
+// type helper
+function type(id, text, at, dur) { const n = $id(id), s = { k: 0 }; tl.to(s, { k: text.length, duration: dur, ease: "none", onUpdate: () => (n.textContent = text.slice(0, Math.round(s.k))) }, at); }
+// first question floats as big sky text before the book opens
+const q1 = document.createElement("div"); q1.className = "@@say"; q1.style.top = "40px"; q1.style.color = "#fcfbf8"; q1.style.fontSize = "76px"; q1.style.fontStyle = "normal";
+q1.textContent = "What would you love to make possible?";
+z.parentNode.appendChild(q1);
+tl.fromTo(q1, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6 }, 0.0);
+tl.to(q1, { opacity: 0, duration: 0.5 }, 6.6);
+tl.fromTo("#@@say1", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 3.4);
+tl.to("#@@say1", { opacity: 0, duration: 0.4 }, 6.0);
+// second time it writes itself on the open page
+type("@@q", "What would you love to make possible?", 8.0, 1.6);
+tl.fromTo("#@@say2", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 11.5);
+tl.to("#@@say2", { opacity: 0, duration: 0.4 }, 14.4);
+type("@@stepv", "teach my gran to read her photos aloud", 11.6, 2.0);
+// stamp on "stamp it with a dream" (185.5 -> 16.8)
+tl.fromTo("#@@stamp", { opacity: 0, scale: 2.4 }, { opacity: 0.95, scale: 1, duration: 0.14, ease: "power4.in" }, 16.75);
+tl.to("#@@book", { y: 10, duration: 0.05, yoyo: true, repeat: 3 }, 16.9);
+// checklist on "one little experiment, braver than it seems" (187.2 -> 18.5)
+[["@@ck1", 18.6], ["@@ck2", 19.3], ["@@ck3", 20.0]].forEach(([id, t]) => {
+  tl.fromTo("#" + id, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.25 }, t);
+  tl.set("#" + id + " .@@box", { opacity: 1 }, 0); tl.set("#" + id + " .@@tick", { opacity: 0 }, 0);
+  tl.set("#" + id + " .@@box", { opacity: 0 }, t + 0.4); tl.set("#" + id + " .@@tick", { opacity: 1 }, t + 0.4);
+});
+tl.fromTo("#@@l-braver", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4 }, 18.5);
+tl.to(["#@@book", "#@@stamp", "#@@l-braver"], { opacity: 0, duration: 0.5 }, D - 0.6);

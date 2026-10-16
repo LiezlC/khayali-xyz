@@ -1,0 +1,1 @@
+./assets/closeups/cu-hands.png

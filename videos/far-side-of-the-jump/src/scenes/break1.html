@@ -1,0 +1,161 @@
+<!--css-->
+#@@bgtree { opacity: 0.18; }
+.@@v { position: absolute; left: 260px; top: 150px; width: 1400px; height: 780px; opacity: 0; }
+.@@v svg.viz { position: absolute; left: 0; top: 0; width: 1400px; height: 780px; }
+.@@cap { position: absolute; left: 0; right: 0; bottom: 30px; text-align: center; font-weight: 900; font-style: italic; font-size: 62px; color: #33251e; }
+#@@intro-cap { position: absolute; left: 0; right: 0; top: 70px; text-align: center; font-family: "Space Mono", monospace; font-weight: 700; font-size: 34px; letter-spacing: 0.24em; color: #105e5a; opacity: 0; }
+#@@rider { position: absolute; inset: 0; transform-origin: 45% 45%; }
+.@@word { position: absolute; font-weight: 900; font-size: 66px; color: #33251e; opacity: 0; white-space: nowrap; }
+.@@word small { display: block; font-family: "Space Mono", monospace; font-weight: 700; font-size: 26px; letter-spacing: 0.12em; color: #167d78; }
+.@@line { position: absolute; left: 70px; font-family: "Space Mono", monospace; font-size: 44px; color: #33251e; opacity: 0; white-space: nowrap; }
+.@@chip { position: absolute; font-family: "Space Mono", monospace; font-weight: 700; font-size: 36px; padding: 12px 26px; border-radius: 999px; opacity: 0; white-space: nowrap; }
+<!--html-->
+<div class="paper"></div>
+<svg class="tree" id="@@bgtree" viewBox="0 0 1920 1080"></svg>
+<!-- slot 0: the rider canters into the garden -->
+<div class="fs-fill" id="@@v0">
+  <svg class="tree" id="@@tree0" viewBox="0 0 1920 1080"></svg>
+  <div id="@@rider">
+    <img class="gal" id="@@g1" src="assets/gallop/g1.png" alt="" /><img class="gal" id="@@g2" src="assets/gallop/g2.png" alt="" />
+    <img class="gal" id="@@g3" src="assets/gallop/g3.png" alt="" /><img class="gal" id="@@g4" src="assets/gallop/g4.png" alt="" />
+  </div>
+  <div id="@@intro-cap">WHAT PEOPLE ARE MAKING POSSIBLE</div>
+</div>
+<!-- slot 1: protein -->
+<div class="card @@v" id="@@v1"><div class="card-title"><b>●</b> PROTEIN · STRUCTURES, OPENED TO DISCOVERY</div><svg class="viz" id="@@z1" viewBox="0 0 1400 780"></svg><div class="@@cap">A starting point for a thousand labs</div></div>
+<!-- slot 2: language -->
+<div class="card @@v" id="@@v2"><div class="card-title"><b>●</b> LANGUAGE · RESEARCH LED BY ITS SPEAKERS</div><svg class="viz" id="@@z2" viewBox="0 0 1400 780"></svg><div id="@@words2"></div><div class="@@cap">Built with the people who speak it</div></div>
+<!-- slot 3: forest -->
+<div class="card @@v" id="@@v3"><div class="card-title"><b>●</b> FOREST · LISTENING FOR THREATS</div><svg class="viz" id="@@z3" viewBox="0 0 1400 780"></svg><div class="@@chip" id="@@alert" style="left:640px;top:140px;background:#d88a57;color:#fcfbf8">CHAINSAW? → RANGERS ALERTED</div><div class="@@cap">A forest can tell you what is happening</div></div>
+<!-- slot 4: plastic -->
+<div class="card @@v" id="@@v4"><div class="card-title"><b>●</b> PLASTIC · A NEW ROUTE THROUGH PET</div><svg class="viz" id="@@z4" viewBox="0 0 1400 780"></svg><div class="@@cap">An enzyme, tuned with machine learning</div></div>
+<!-- slot 5: lesson -->
+<div class="card @@v" id="@@v5"><div class="card-title"><b>●</b> LESSON · A TEACHING IDEA GETS A START</div><div id="@@lines5"></div><div class="@@cap">The teacher still decides what's good</div></div>
+<!-- slot 6: newer workers -->
+<div class="card @@v" id="@@v6"><div class="card-title"><b>●</b> NEW WORKER · A USEFUL ASSIST</div><svg class="viz" id="@@z6" viewBox="0 0 1400 780"></svg><div class="@@chip" id="@@sug" style="left:640px;top:240px;background:#eff6f3;color:#105e5a;border:2px solid #167d78">✦ try: refund route</div><div class="@@cap">Help where people are newest</div></div>
+<div class="flash" id="@@flash" style="background:#6f6a66"></div>
+<!--js-->
+const DB = {{DOWNBEATS}};
+const slot = i => DB[i * 2] != null ? DB[i * 2] : i * 3.77;
+const slotEnd = i => (i === 6 ? D - 1.0 : slot(i + 1));
+const BG = buildTree($id("@@bgtree"), 3, { scale: 1.2, base: 1060 });
+showTree(tl, BG, 0); bloom(tl, BG, [0], 0.2);
+// generic card in/out per slot
+for (let i = 1; i <= 6; i++) {
+  const a = slot(i), b = slotEnd(i);
+  tl.fromTo("#@@v" + i, { opacity: 0, y: 60, rotation: i % 2 ? -2 : 2 }, { opacity: 1, y: 0, rotation: 0, duration: 0.3, ease: "back.out(1.6)" }, a);
+  tl.to("#@@v" + i, { opacity: 0, y: -40, duration: 0.2, ease: "power1.in" }, b - 0.2);
+}
+
+// slot 0: tree draws, rider canters across in front of it
+const T0 = buildTree($id("@@tree0"), 42, { scale: 1.05 });
+drawTree(tl, T0, 0.0, 0.18);
+bloom(tl, T0, {{BEATS}}.filter(t => t < 3.6), 0.6);
+gallop(tl, ["@@g1", "@@g2", "@@g3", "@@g4"], 0, slot(1));
+tl.fromTo("#@@rider", { x: -1500, y: 330, scale: 0.42 }, { x: 900, y: 330, scale: 0.42, duration: slot(1), ease: "none" }, 0);
+tl.fromTo("#@@intro-cap", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.3);
+tl.to("#@@v0", { opacity: 0, duration: 0.2 }, slot(1) - 0.1);
+
+// slot 1: protein ribbon folds (two sine strands that coil into a helix)
+(function () {
+  const z = $id("@@z1"), a = slot(1), b = slotEnd(1);
+  const strands = [0, 1].map(k => el("path", { fill: "none", stroke: k ? "#d88a57" : "#167d78", "stroke-width": 16, "stroke-linecap": "round", opacity: 0.9 }, z));
+  const state = { f: 0, ph: 0 };
+  const draw = () => strands.forEach((p, k) => {
+    let d = "";
+    for (let x = 0; x <= 1000; x += 10) {
+      const amp = 40 + 150 * state.f, ph = state.ph + k * Math.PI;
+      const y = 390 + Math.sin(x / (120 - 60 * state.f) + ph) * amp * (0.4 + 0.6 * Math.sin(Math.PI * x / 1000));
+      d += (x ? " L " : "M ") + (200 + x) + " " + y.toFixed(1);
+    }
+    p.setAttribute("d", d);
+  });
+  draw();
+  tl.to(state, { f: 1, ph: 6, duration: b - a, ease: "power2.inOut", onUpdate: draw }, a);
+})();
+
+// slot 2: greetings light up as a network
+(function () {
+  const a = slot(2);
+  const W = [["Sawubona", "isiZulu", 180, 200], ["Habari", "Kiswahili", 700, 170], ["Molo", "isiXhosa", 1080, 290], ["Dumela", "Setswana", 260, 470],
+             ["Bawo ni", "Yorùbá", 640, 420], ["Selam", "Amharic", 1000, 540]];
+  const z = $id("@@z2");
+  W.forEach((w, i) => {
+    const d = document.createElement("div"); d.className = "@@word"; d.innerHTML = `${w[0]}<small>${w[1].toUpperCase()}</small>`;
+    d.style.left = w[2] + "px"; d.style.top = w[3] + "px"; $id("@@words2").appendChild(d);
+    tl.fromTo(d, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2)" }, a + 0.3 + i * 0.42);
+    if (i) {
+      const p = W[i - 1], q = W[(i + 2) % W.length];
+      [p, q].forEach((o, j) => {
+        const ln = el("line", { x1: o[2] + 80, y1: o[3] + 30, x2: w[2] + 80, y2: w[3] + 30, stroke: "#167d78", "stroke-width": 3, "stroke-dasharray": "4 10", opacity: 0 }, z);
+        tl.fromTo(ln, { opacity: 0 }, { opacity: 0.7, duration: 0.25 }, a + 0.4 + i * 0.42 + j * 0.1);
+      });
+    }
+  });
+})();
+
+// slot 3: forest spectrogram scroll with a chainsaw spike
+(function () {
+  const z = $id("@@z3"), a = slot(3), b = slotEnd(3), R = rng(31);
+  for (let i = 0; i < 9; i++) el("path", { d: `M ${80 + i * 150} 640 l 50 -${180 + (i % 3) * 50} l 50 ${180 + (i % 3) * 50} Z`, fill: "#167d78", opacity: 0.18 }, z);
+  const bars = [];
+  for (let i = 0; i < 60; i++) { const r = el("rect", { x: 100 + i * 20, y: 560, width: 14, height: 4, rx: 3, fill: "#167d78" }, z); bars.push(r); }
+  const steps = 14, dt = (b - a - 0.4) / steps;
+  for (let s = 0; s < steps; s++) bars.forEach((r, i) => {
+    const spike = s >= 8 && i > 34 && i < 44;
+    const h = spike ? 260 + R() * 120 : 20 + R() * 90;
+    tl.to(r, { attr: { height: h, y: 560 - h }, fill: spike ? "#d88a57" : "#167d78", duration: dt * 0.9, ease: "none" }, a + 0.2 + s * dt);
+  });
+  tl.fromTo("#@@alert", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2)" }, a + 0.2 + 8 * dt);
+})();
+
+// slot 4: PET chain, an enzyme chomps through it
+(function () {
+  const z = $id("@@z4"), a = slot(4), b = slotEnd(4);
+  const n = 9, hexes = [];
+  for (let i = 0; i < n; i++) {
+    const x = 220 + i * 120, y = 380;
+    const hx = el("g", { transform: `translate(${x} ${y})` }, z);
+    el("path", { d: "M -40 0 L -20 -35 L 20 -35 L 40 0 L 20 35 L -20 35 Z", fill: "#eff6f3", stroke: "#105e5a", "stroke-width": 6 }, hx);
+    if (i < n - 1) el("line", { x1: 40, y1: 0, x2: 80, y2: 0, stroke: "#105e5a", "stroke-width": 6 }, hx);
+    hexes.push(hx);
+  }
+  const enz = el("g", {}, z);
+  el("path", { id: "@@pac", d: "M 0 0 L 70 -40 A 80 80 0 1 0 70 40 Z", fill: "#d88a57", stroke: "#33251e", "stroke-width": 6 }, enz);
+  el("circle", { cx: 10, cy: -40, r: 9, fill: "#33251e" }, enz);
+  const dur = b - a - 0.6;
+  tl.fromTo(enz, { x: 60, y: 380 }, { x: 1300, y: 380, duration: dur, ease: "none" }, a + 0.3);
+  hexes.forEach((h, i) => {
+    const t = a + 0.3 + dur * ((220 + i * 120 - 60) / 1240);
+    tl.to(h, { y: (i % 2 ? -1 : 1) * 160, rotation: (i % 2 ? -1 : 1) * 40, opacity: 0.55, duration: 0.5, ease: "power2.out" }, t);
+  });
+  tl.to("#@@pac", { attr: { d: "M 0 0 L 78 -8 A 80 80 0 1 0 78 8 Z" }, duration: 0.12, yoyo: true, repeat: Math.floor(dur / 0.24), ease: "none" }, a + 0.3);
+})();
+
+// slot 5: a lesson plan types itself
+(function () {
+  const a = slot(5);
+  const L = ["Lesson: why does a horse canter in threes?", "  hook  → film the pony, count the hooves", "  try   → clap 3 against 4 with a partner", "  check → can you hear it in a song?"];
+  L.forEach((s, i) => {
+    const d = document.createElement("div"); d.className = "@@line"; d.style.top = (150 + i * 110) + "px"; d.textContent = s; $id("@@lines5").appendChild(d);
+    tl.fromTo(d, { opacity: 0, clipPath: "inset(0 100% 0 0)" }, { opacity: 1, clipPath: "inset(0 0% 0 0)", duration: 0.6, ease: "none" }, a + 0.25 + i * 0.75);
+  });
+})();
+
+// slot 6: support desk, suggestion pops, the bar grows
+(function () {
+  const z = $id("@@z6"), a = slot(6);
+  el("rect", { x: 110, y: 140, width: 470, height: 90, rx: 40, fill: "#eff6f3", stroke: "#167d78", "stroke-width": 3 }, z);
+  el("rect", { x: 120, y: 260, width: 380, height: 90, rx: 40, fill: "#fcfbf8", stroke: "#33251e", "stroke-width": 3 }, z);
+  const t1 = el("text", { x: 150, y: 195, "font-family": "Space Mono", "font-weight": 700, "font-size": 34, fill: "#105e5a" }, z); t1.textContent = "my order never came…";
+  const t2 = el("text", { x: 150, y: 315, "font-family": "Space Mono", "font-weight": 700, "font-size": 34, fill: "#33251e" }, z); t2.textContent = "let me check that…";
+  const t3 = el("text", { x: 720, y: 605, "font-family": "Space Mono", "font-weight": 700, "font-size": 30, fill: "#105e5a" }, z); t3.textContent = "newer agents";
+  const t4 = el("text", { x: 990, y: 605, "font-family": "Space Mono", "font-weight": 700, "font-size": 30, fill: "#105e5a" }, z); t4.textContent = "veterans";
+  const bar = el("rect", { x: 760, y: 560, width: 140, height: 0, rx: 10, fill: "#d88a57" }, z);
+  el("rect", { x: 1000, y: 460, width: 140, height: 100, rx: 10, fill: "#167d78", opacity: 0.5 }, z);
+  tl.fromTo("#@@sug", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.25 }, a + 0.6);
+  tl.to(bar, { attr: { height: 230, y: 330 }, duration: 1.2, ease: "power3.out" }, a + 1.1);
+})();
+
+// end: everything greys out as the news arrives
+tl.fromTo("#@@flash", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power2.in" }, D - 0.7);

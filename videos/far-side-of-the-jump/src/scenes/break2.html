@@ -1,0 +1,66 @@
+<!--css-->
+#@@plate { position: absolute; inset: 0; transform-origin: 50% 50%; }
+#@@tint { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(16,94,90,0.35), rgba(51,37,30,0.25)); mix-blend-mode: multiply; }
+#@@poly { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+#@@teacher { position: absolute; inset: 0; transform-origin: 50% 90%; }
+#@@rider { position: absolute; inset: 0; transform-origin: 45% 45%; }
+#@@cap { position: absolute; right: 70px; top: 60px; font-family: "Space Mono", monospace; font-weight: 700; font-size: 40px; letter-spacing: 0.14em; color: #fcfbf8; text-shadow: 0 3px 12px rgba(0,0,0,0.5); text-align: right; opacity: 0; }
+#@@cap b { color: #f6c39b; }
+<!--html-->
+<div id="@@plate"><img class="layer" src="assets/ring/ring-plate.png" alt="" /></div>
+<div id="@@tint"></div>
+<div id="@@rider">
+  <img class="gal" id="@@g1" src="assets/gallop/g1.png" alt="" /><img class="gal" id="@@g2" src="assets/gallop/g2.png" alt="" />
+  <img class="gal" id="@@g3" src="assets/gallop/g3.png" alt="" /><img class="gal" id="@@g4" src="assets/gallop/g4.png" alt="" />
+</div>
+<svg id="@@poly" viewBox="0 0 1920 1080"></svg>
+<div id="@@teacher"><img class="layer" src="assets/ring/teacher-conduct.png" alt="" /></div>
+<div id="@@cap"><b>3</b> AGAINST <b>4</b><br />THE CANTER INSIDE THE GROOVE</div>
+<div class="flash" id="@@dusk" style="background:#0d3b3d"></div>
+<!--js-->
+const BEATS = {{BEATS}}, DB = {{DOWNBEATS}};
+// plate drifts; teacher on the left conducting on every beat
+tl.fromTo("#@@plate", { scale: 1.12, x: 60 }, { scale: 1.22, x: -60, duration: D, ease: "none" }, 0);
+tl.set("#@@teacher", { x: -560, y: 40, scale: 0.9 }, 0);
+BEATS.forEach((t, i) => {
+  const down = DB.some(d => Math.abs(d - t) < 0.05);
+  tl.to("#@@teacher", { rotation: i % 2 ? 4 : -4, y: down ? 20 : 34, duration: 0.12, ease: "power2.out" }, t);
+  tl.to("#@@teacher", { y: 40, duration: 0.22, ease: "power1.in" }, t + 0.12);
+});
+// pony canters a lap behind, twice
+gallop(tl, ["@@g1", "@@g2", "@@g3", "@@g4"], 0, D - 1);
+tl.fromTo("#@@rider", { x: -1500, y: 190, scale: 0.4 }, { x: 1600, y: 190, scale: 0.4, duration: (D - 1) / 2, ease: "none" }, 0);
+tl.fromTo("#@@rider", { x: 1600, y: 160, scale: 0.36, scaleX: -0.36 }, { x: -1500, y: 160, scale: 0.36, scaleX: -0.36, duration: (D - 1) / 2, ease: "none", immediateRender: false }, (D - 1) / 2);
+
+// polyrhythm rings: 4 kick dots (outer) and 3 hoof dots (inner) around a glass center, right side
+const z = $id("@@poly"), cx = 1300, cy = 560;
+el("circle", { cx, cy, r: 300, fill: "none", stroke: "#fcfbf8", "stroke-width": 3, opacity: 0.5, "stroke-dasharray": "2 14" }, z);
+el("circle", { cx, cy, r: 190, fill: "none", stroke: "#f6c39b", "stroke-width": 3, opacity: 0.6, "stroke-dasharray": "2 14" }, z);
+const core = el("circle", { cx, cy, r: 70, fill: "rgba(143,211,195,0.35)", stroke: "#8fd3c3", "stroke-width": 4 }, z);
+const four = [0, 1, 2, 3].map(k => { const a = -Math.PI / 2 + k * Math.PI / 2; return el("circle", { cx: cx + Math.cos(a) * 300, cy: cy + Math.sin(a) * 300, r: 26, fill: "#fcfbf8", opacity: 0.35 }, z); });
+const three = [0, 1, 2].map(k => { const a = -Math.PI / 2 + k * 2 * Math.PI / 3; return el("circle", { cx: cx + Math.cos(a) * 190, cy: cy + Math.sin(a) * 190, r: 30, fill: "#d88a57", stroke: "#33251e", "stroke-width": 4, opacity: 0.45 }, z); });
+const hand = el("line", { x1: cx, y1: cy, x2: cx, y2: cy - 330, stroke: "#fcfbf8", "stroke-width": 5, "stroke-linecap": "round", opacity: 0.8 }, z);
+// bar-locked sweep hand: one turn per bar
+DB.forEach((d, i) => { const nx = DB[i + 1] || D; tl.fromTo(hand, { rotation: 0, svgOrigin: `${cx} ${cy}` }, { rotation: 360, svgOrigin: `${cx} ${cy}`, duration: nx - d, ease: "none", immediateRender: false }, d); });
+// flash kick dots on beats, hoof dots on thirds of each bar
+BEATS.forEach((t, i) => {
+  const dIdx = DB.reduce((acc, d, j) => (d <= t + 0.01 ? j : acc), 0);
+  const bar = DB[dIdx], beatInBar = Math.round((t - bar) / 0.4651) % 4;
+  const dot = four[beatInBar];
+  tl.to(dot, { opacity: 1, attr: { r: 36 }, duration: 0.06 }, t);
+  tl.to(dot, { opacity: 0.35, attr: { r: 26 }, duration: 0.3 }, t + 0.06);
+});
+DB.forEach((d, i) => {
+  const len = (DB[i + 1] || d + 1.86) - d;
+  [0, 1, 2].forEach(k => {
+    const t = d + k * len / 3;
+    if (t >= D - 0.2) return;
+    tl.to(three[k], { opacity: 1, attr: { r: 40 }, duration: 0.06 }, t);
+    tl.to(three[k], { opacity: 0.45, attr: { r: 30 }, duration: 0.3 }, t + 0.06);
+    tl.to(core, { attr: { r: 84 }, duration: 0.05, yoyo: true, repeat: 1 }, t);
+  });
+});
+tl.fromTo("#@@cap", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 1.0);
+tl.to("#@@cap", { opacity: 0, duration: 0.6 }, 9.5);
+// dusk falls into the bridge
+tl.fromTo("#@@dusk", { opacity: 0 }, { opacity: 0.85, duration: 3.2, ease: "power1.in" }, D - 3.4);

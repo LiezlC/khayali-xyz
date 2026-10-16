@@ -1,0 +1,1 @@
+./boards/refs/cu-hands-v3.png

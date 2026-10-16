@@ -1,0 +1,6 @@
+renders/
+.hyperframes/
+node_modules/
+boards/*-stills*/
+boards/mount-test/
+boards/refs/rein-hold-*.png

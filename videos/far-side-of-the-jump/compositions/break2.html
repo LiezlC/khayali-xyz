@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="UTF-8" /><title>break2</title></head>
+  <body>
+    <template>
+      <style>
+@font-face { font-family: "Fraunces"; font-weight: 900; font-style: normal; src: url("assets/fonts/fraunces-latin-900-normal.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 900; font-style: italic; src: url("assets/fonts/fraunces-latin-900-italic.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 600; font-style: normal; src: url("assets/fonts/fraunces-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Space Mono"; font-weight: 400; src: url("assets/fonts/space-mono-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Space Mono"; font-weight: 700; src: url("assets/fonts/space-mono-latin-700-normal.woff2") format("woff2"); }
+#root { position: absolute; inset: 0; overflow: hidden; font-family: "Fraunces", Georgia, serif; color: #33251e; }
+.fs-fill { position: absolute; inset: 0; overflow: hidden; }
+.cam { position: absolute; inset: 0; transform-origin: 50% 50%; }
+.layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.rider-wrap { position: absolute; inset: 0; transform-origin: 45% 45%; }
+.grade { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 90% at 50% 40%, rgba(255,220,160,0) 55%, rgba(80,40,20,0.35) 100%); }
+.paper { position: absolute; inset: 0; background: radial-gradient(60% 55% at 50% 62%, #ffffff 0%, #fcfbf8 55%, #f3efe6 100%); }
+.tree { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+.lyric { position: absolute; left: 0; right: 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 0 0.36em; text-align: center; padding: 0 120px; }
+.lyric .w { display: inline-block; }
+.big { top: 40px; font-weight: 900; font-size: 116px; line-height: 1; color: #fcfbf8; text-shadow: 0 6px 0 #33251e, 0 10px 30px rgba(51,37,30,0.45); }
+.mid { bottom: 80px; font-weight: 900; font-style: italic; font-size: 76px; line-height: 1.05; color: #fcfbf8; text-shadow: 0 5px 0 #33251e, 0 8px 24px rgba(51,37,30,0.5); }
+.inky { color: #33251e; text-shadow: none; }
+.hup { position: absolute; left: 1290px; top: 380px; width: 420px; height: 220px; display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 170px; color: #d88a57; -webkit-text-stroke: 6px #33251e; paint-order: stroke fill; transform-origin: 50% 50%; opacity: 0; }
+.mono { font-family: "Space Mono", monospace; }
+.label { position: absolute; font-family: "Space Mono", monospace; font-weight: 700; font-size: 31px; letter-spacing: 0.03em; color: #105e5a;
+  background: rgba(252,251,248,0.95); border: 3px solid #167d78; border-radius: 999px; padding: 8px 22px; white-space: nowrap; }
+.label b { color: #d88a57; }
+.petal { position: absolute; left: 0; top: 0; width: 26px; height: 18px; border-radius: 60% 40% 60% 40%; background: linear-gradient(135deg, #f6c39b, #d88a57); opacity: 0; }
+.flash { position: absolute; inset: 0; background: #fffaf0; opacity: 0; pointer-events: none; }
+.card { position: absolute; background: rgba(252,251,248,0.96); border: 3px solid #167d78; border-radius: 28px; box-shadow: 0 20px 60px rgba(16,94,90,0.25); overflow: hidden; }
+.card-title { position: absolute; left: 36px; top: 24px; right: 36px; font-family: "Space Mono", monospace; font-weight: 700; font-size: 36px; letter-spacing: 0.04em; line-height: 1.15; color: #105e5a; }
+.card-title b { color: #d88a57; }
+.caption { position: absolute; left: 0; right: 0; text-align: center; font-weight: 900; font-size: 64px; color: #33251e; }
+.gal { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+.pin { position: absolute; inset: 0; transform-origin: 0 0; }
+.pin > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+
+#break2-plate { position: absolute; inset: 0; transform-origin: 50% 50%; }
+#break2-tint { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(16,94,90,0.35), rgba(51,37,30,0.25)); mix-blend-mode: multiply; }
+#break2-poly { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+#break2-teacher { position: absolute; inset: 0; transform-origin: 50% 90%; }
+#break2-rider { position: absolute; inset: 0; transform-origin: 45% 45%; }
+#break2-cap { position: absolute; right: 70px; top: 60px; font-family: "Space Mono", monospace; font-weight: 700; font-size: 40px; letter-spacing: 0.14em; color: #fcfbf8; text-shadow: 0 3px 12px rgba(0,0,0,0.5); text-align: right; opacity: 0; }
+#break2-cap b { color: #f6c39b; }
+
+      </style>
+      <div id="root" data-composition-id="break2" data-width="1920" data-height="1080" data-duration="24.17">
+
+<div id="break2-plate"><img class="layer" src="assets/ring/ring-plate.png" alt="" /></div>
+<div id="break2-tint"></div>
+<div id="break2-rider">
+  <img class="gal" id="break2-g1" src="assets/gallop/g1.png" alt="" /><img class="gal" id="break2-g2" src="assets/gallop/g2.png" alt="" />
+  <img class="gal" id="break2-g3" src="assets/gallop/g3.png" alt="" /><img class="gal" id="break2-g4" src="assets/gallop/g4.png" alt="" />
+</div>
+<svg id="break2-poly" viewBox="0 0 1920 1080"></svg>
+<div id="break2-teacher"><img class="layer" src="assets/ring/teacher-conduct.png" alt="" /></div>
+<div id="break2-cap"><b>3</b> AGAINST <b>4</b><br />THE CANTER INSIDE THE GROOVE</div>
+<div class="flash" id="break2-dusk" style="background:#0d3b3d"></div>
+
+      </div>
+      <script>
+        (function () {
+// Shared helpers, inlined into every scene by build.py. Deterministic only.
+function rng(seed) { return function () { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+const SVGNS = "http://www.w3.org/2000/svg";
+function el(tag, attrs, parent) { const n = document.createElementNS(SVGNS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); if (parent) parent.appendChild(n); return n; }
+function $id(id) { return document.getElementById(id); }
+
+// Glass tree: twin braided trunk, round crown, apricot buds. Returns branches (with depth) and buds.
+function buildTree(svg, seed, opt) {
+  opt = opt || {}; const scale = opt.scale || 1, cxT = opt.x || 960, base = opt.base || 1000;
+  const R = rng(seed);
+  const defs = el("defs", {}, svg);
+  const glow = el("filter", { id: svg.id + "-glow", x: "-20%", y: "-20%", width: "140%", height: "140%" }, defs);
+  el("feGaussianBlur", { stdDeviation: "6", result: "b" }, glow);
+  const m = el("feMerge", {}, glow); el("feMergeNode", { in: "b" }, m); el("feMergeNode", { in: "SourceGraphic" }, m);
+  const bud = el("radialGradient", { id: svg.id + "-bud", cx: "40%", cy: "35%", r: "65%" }, defs);
+  el("stop", { offset: "0%", "stop-color": "#fff4e6" }, bud); el("stop", { offset: "45%", "stop-color": "#f3b383" }, bud); el("stop", { offset: "100%", "stop-color": "#c9703f" }, bud);
+  const halo = el("radialGradient", { id: svg.id + "-halo" }, defs);
+  el("stop", { offset: "0%", "stop-color": "#f6c39b", "stop-opacity": "0.75" }, halo); el("stop", { offset: "100%", "stop-color": "#f6c39b", "stop-opacity": "0" }, halo);
+  el("ellipse", { cx: cxT, cy: base, rx: 520 * scale, ry: 34 * scale, fill: "#167d78", opacity: "0.10" }, svg);
+  const gBranch = el("g", { filter: `url(#${svg.id}-glow)`, "stroke-linecap": "round", fill: "none" }, svg);
+  const gBud = el("g", {}, svg);
+  const branches = [], buds = [];
+  function seg(d, w, depth) {
+    const g = el("g", {}, gBranch);
+    const body = el("path", { d, stroke: "#8fd3c3", "stroke-width": w, opacity: "0.5" }, g);
+    const core = el("path", { d, stroke: "#167d78", "stroke-width": Math.max(1.5, w * 0.42), opacity: "0.8" }, g);
+    const hi = el("path", { d, stroke: "#ffffff", "stroke-width": Math.max(1, w * 0.16), opacity: "0.85", transform: `translate(${(-w * 0.2).toFixed(1)} ${(-w * 0.1).toFixed(1)})` }, g);
+    branches.push({ paths: [body, core, hi], depth });
+  }
+  function addBud(x, y, r) {
+    const h = el("circle", { cx: x, cy: y, r: r * 2.6, fill: `url(#${svg.id}-halo)`, opacity: 0 }, gBud);
+    const b = el("circle", { cx: x, cy: y, r, fill: `url(#${svg.id}-bud)`, stroke: "#b8643a", "stroke-width": 1.2 }, gBud);
+    buds.push({ b, h, x, y, r });
+  }
+  function grow(x, y, ang, len, w, depth) {
+    const bend = (R() - 0.5) * 0.5;
+    const x2 = x + Math.cos(ang) * len, y2 = y + Math.sin(ang) * len;
+    const cx = x + Math.cos(ang + bend) * len * 0.55, cy = y + Math.sin(ang + bend) * len * 0.55;
+    seg(`M ${x.toFixed(1)} ${y.toFixed(1)} Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${x2.toFixed(1)} ${y2.toFixed(1)}`, w, depth);
+    if (depth >= 4 && R() < 0.4) addBud(cx, cy, (8 + R() * 6) * scale);
+    if (depth >= 6) { addBud(x2, y2, (13 + R() * 11) * scale); return; }
+    const spread = depth < 2 ? 0.7 : 0.52;
+    const pull = (-Math.PI / 2 - ang) * 0.08;
+    grow(x2, y2, ang - spread + pull + (R() - 0.5) * 0.2, len * (0.74 + R() * 0.08), w * 0.68, depth + 1);
+    grow(x2, y2, ang + spread + pull + (R() - 0.5) * 0.2, len * (0.74 + R() * 0.08), w * 0.68, depth + 1);
+    if (depth >= 2 && depth <= 4 && R() < 0.3) grow(x2, y2, ang + pull + (R() - 0.5) * 0.3, len * 0.62, w * 0.6, depth + 1);
+  }
+  const top = base - 230 * scale;
+  seg(`M ${cxT - 60 * scale} ${base} C ${cxT + 50 * scale} ${base - 80 * scale}, ${cxT - 70 * scale} ${base - 150 * scale}, ${cxT} ${top}`, 74 * scale, 0);
+  seg(`M ${cxT + 60 * scale} ${base} C ${cxT - 50 * scale} ${base - 90 * scale}, ${cxT + 70 * scale} ${base - 160 * scale}, ${cxT} ${top}`, 62 * scale, 0);
+  grow(cxT, top, -Math.PI / 2 - 0.85, 170 * scale, 42 * scale, 1);
+  grow(cxT, top, -Math.PI / 2 + 0.85, 170 * scale, 42 * scale, 1);
+  grow(cxT, top, -Math.PI / 2, 130 * scale, 34 * scale, 2);
+  branches.forEach(o => o.paths.forEach(p => { const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; }));
+  return { branches, buds };
+}
+function drawTree(tl, T, at, step) { T.branches.forEach(o => o.paths.forEach(p => tl.to(p, { strokeDashoffset: 0, duration: step * 3.2, ease: "power2.out" }, at + o.depth * step))); }
+function showTree(tl, T, at) { T.branches.forEach(o => o.paths.forEach(p => tl.set(p, { strokeDashoffset: 0 }, at))); }
+function bloom(tl, T, times, glowTo) {
+  T.buds.forEach((o, i) => {
+    const t = times[i % times.length] + ((i * 37) % 11) * 0.012;
+    tl.fromTo(o.b, { scale: 0, transformOrigin: `${o.x}px ${o.y}px` }, { scale: 1, duration: 0.3, ease: "back.out(3)" }, t);
+    tl.fromTo(o.h, { opacity: 0 }, { opacity: glowTo || 0.6, duration: 0.25 }, t);
+  });
+}
+
+// Petals
+function makePetals(host, n, seed) {
+  const R = rng(seed), out = [];
+  for (let i = 0; i < n; i++) { const p = document.createElement("div"); p.className = "petal"; host.appendChild(p);
+    out.push({ p, x: R() * 1920, y: R() * 1080, dx: 200 + R() * 500, dy: -150 + R() * 450, r: R() * 720 - 360, s: 0.6 + R() * 1.1 }); }
+  return out;
+}
+function burst(tl, petals, at, dur) {
+  petals.forEach((o, i) => tl.fromTo(o.p, { x: o.x - 300, y: o.y, rotation: 0, scale: o.s, opacity: 0 },
+    { x: o.x - 300 + o.dx, y: o.y + o.dy, rotation: o.r, opacity: 0.95, duration: dur, ease: "sine.out" }, at + (i % 7) * 0.03));
+}
+function fall(tl, petals, at, dur) {
+  petals.forEach((o, i) => tl.fromTo(o.p, { x: o.x, y: -60 - (i % 9) * 40, rotation: 0, scale: o.s, opacity: 0.95 },
+    { x: o.x + o.dx * 0.4 - 100, y: 1140, rotation: o.r * 2, opacity: 0.95, duration: dur, ease: "none" }, at + (i % 13) * (dur / 13)));
+}
+
+// Lyric word pops: element with .w spans, one time per word
+function words(tl, sel, times, from) {
+  document.querySelectorAll(sel + " .w").forEach((w, i) =>
+    tl.fromTo(w, from || { y: 50, opacity: 0, scale: 0.6 }, { y: 0, opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2.6)" }, times[Math.min(i, times.length - 1)]));
+}
+// Whole-line in/out
+function line(tl, sel, tin, tout) {
+  tl.fromTo(sel, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.22, ease: "power2.out" }, tin);
+  if (tout != null) tl.to(sel, { opacity: 0, y: -16, duration: 0.18, ease: "power1.in" }, tout);
+}
+
+// Gallop flipbook: frames = array of 4 element ids stacked; strides on a 129 BPM canter (one stride per beat)
+function gallop(tl, frames, from, to, beat) {
+  beat = beat || 0.4651; const f = beat / 4;
+  frames.forEach((id, i) => tl.set("#" + id, { opacity: i === 0 ? 1 : 0 }, from));
+  let k = 0;
+  for (let t = from + f; t < to - 0.001; t += f, k++) {
+    const cur = (k + 1) % 4, prev = k % 4;
+    tl.set("#" + frames[prev], { opacity: 0 }, t); tl.set("#" + frames[cur], { opacity: 1 }, t);
+  }
+}
+// Stamp: drop-in with overshoot
+function stamp(tl, sel, at, rot) {
+  tl.fromTo(sel, { scale: 3, opacity: 0, rotation: (rot || -8) * 2.5 }, { scale: 1, opacity: 1, rotation: rot || -8, duration: 0.16, ease: "power4.in" }, at);
+}
+
+// Place a full-canvas cutout (1672x941 source, shown at 1920x1080) so its alpha box lands at screen (x, y) with height h.
+// The element must have transform-origin 0 0 (class "pin").
+const IMG_K = 1920 / 1672;
+function place(box, x, y, h) { const s = h / ((box[3] - box[1]) * IMG_K); return { x: x - box[0] * IMG_K * s, y: y - box[1] * IMG_K * s, scale: s }; }
+
+          const tl = gsap.timeline({ paused: true });
+          const D = 24.17;
+
+const BEATS = [0.432, 0.897, 1.384, 1.849, 2.313, 2.777, 3.242, 3.706, 4.171, 4.635, 5.123, 5.587, 6.051, 6.516, 7.003, 7.468, 7.932, 8.397, 8.861, 9.325, 9.79, 10.277, 10.742, 11.206, 11.671, 12.135, 12.623, 13.087, 13.551, 14.016, 14.503, 14.968, 15.432, 15.897, 16.361, 16.825, 17.313, 17.777, 18.242, 18.706, 19.194, 19.658, 20.123, 20.587, 21.051, 21.539, 22.004, 22.468, 22.932, 23.42, 23.884], DB = [0.897, 2.777, 4.635, 6.516, 8.397, 10.277, 12.135, 14.016, 15.897, 17.777, 19.658, 21.539, 23.42];
+// plate drifts; teacher on the left conducting on every beat
+tl.fromTo("#break2-plate", { scale: 1.12, x: 60 }, { scale: 1.22, x: -60, duration: D, ease: "none" }, 0);
+tl.set("#break2-teacher", { x: -560, y: 40, scale: 0.9 }, 0);
+BEATS.forEach((t, i) => {
+  const down = DB.some(d => Math.abs(d - t) < 0.05);
+  tl.to("#break2-teacher", { rotation: i % 2 ? 4 : -4, y: down ? 20 : 34, duration: 0.12, ease: "power2.out" }, t);
+  tl.to("#break2-teacher", { y: 40, duration: 0.22, ease: "power1.in" }, t + 0.12);
+});
+// pony canters a lap behind, twice
+gallop(tl, ["break2-g1", "break2-g2", "break2-g3", "break2-g4"], 0, D - 1);
+tl.fromTo("#break2-rider", { x: -1500, y: 190, scale: 0.4 }, { x: 1600, y: 190, scale: 0.4, duration: (D - 1) / 2, ease: "none" }, 0);
+tl.fromTo("#break2-rider", { x: 1600, y: 160, scale: 0.36, scaleX: -0.36 }, { x: -1500, y: 160, scale: 0.36, scaleX: -0.36, duration: (D - 1) / 2, ease: "none", immediateRender: false }, (D - 1) / 2);
+
+// polyrhythm rings: 4 kick dots (outer) and 3 hoof dots (inner) around a glass center, right side
+const z = $id("break2-poly"), cx = 1300, cy = 560;
+el("circle", { cx, cy, r: 300, fill: "none", stroke: "#fcfbf8", "stroke-width": 3, opacity: 0.5, "stroke-dasharray": "2 14" }, z);
+el("circle", { cx, cy, r: 190, fill: "none", stroke: "#f6c39b", "stroke-width": 3, opacity: 0.6, "stroke-dasharray": "2 14" }, z);
+const core = el("circle", { cx, cy, r: 70, fill: "rgba(143,211,195,0.35)", stroke: "#8fd3c3", "stroke-width": 4 }, z);
+const four = [0, 1, 2, 3].map(k => { const a = -Math.PI / 2 + k * Math.PI / 2; return el("circle", { cx: cx + Math.cos(a) * 300, cy: cy + Math.sin(a) * 300, r: 26, fill: "#fcfbf8", opacity: 0.35 }, z); });
+const three = [0, 1, 2].map(k => { const a = -Math.PI / 2 + k * 2 * Math.PI / 3; return el("circle", { cx: cx + Math.cos(a) * 190, cy: cy + Math.sin(a) * 190, r: 30, fill: "#d88a57", stroke: "#33251e", "stroke-width": 4, opacity: 0.45 }, z); });
+const hand = el("line", { x1: cx, y1: cy, x2: cx, y2: cy - 330, stroke: "#fcfbf8", "stroke-width": 5, "stroke-linecap": "round", opacity: 0.8 }, z);
+// bar-locked sweep hand: one turn per bar
+DB.forEach((d, i) => { const nx = DB[i + 1] || D; tl.fromTo(hand, { rotation: 0, svgOrigin: `${cx} ${cy}` }, { rotation: 360, svgOrigin: `${cx} ${cy}`, duration: nx - d, ease: "none", immediateRender: false }, d); });
+// flash kick dots on beats, hoof dots on thirds of each bar
+BEATS.forEach((t, i) => {
+  const dIdx = DB.reduce((acc, d, j) => (d <= t + 0.01 ? j : acc), 0);
+  const bar = DB[dIdx], beatInBar = Math.round((t - bar) / 0.4651) % 4;
+  const dot = four[beatInBar];
+  tl.to(dot, { opacity: 1, attr: { r: 36 }, duration: 0.06 }, t);
+  tl.to(dot, { opacity: 0.35, attr: { r: 26 }, duration: 0.3 }, t + 0.06);
+});
+DB.forEach((d, i) => {
+  const len = (DB[i + 1] || d + 1.86) - d;
+  [0, 1, 2].forEach(k => {
+    const t = d + k * len / 3;
+    if (t >= D - 0.2) return;
+    tl.to(three[k], { opacity: 1, attr: { r: 40 }, duration: 0.06 }, t);
+    tl.to(three[k], { opacity: 0.45, attr: { r: 30 }, duration: 0.3 }, t + 0.06);
+    tl.to(core, { attr: { r: 84 }, duration: 0.05, yoyo: true, repeat: 1 }, t);
+  });
+});
+tl.fromTo("#break2-cap", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 1.0);
+tl.to("#break2-cap", { opacity: 0, duration: 0.6 }, 9.5);
+// dusk falls into the bridge
+tl.fromTo("#break2-dusk", { opacity: 0 }, { opacity: 0.85, duration: 3.2, ease: "power1.in" }, D - 3.4);
+
+          window.__timelines["break2"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>
