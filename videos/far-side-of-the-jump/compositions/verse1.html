@@ -277,6 +277,7 @@ tl.set("#verse1-boat", { opacity: 1 }, 21.2);
 tl.fromTo("#verse1-boat", { x: -200, y: 420, rotation: -8 }, { x: 2150, y: 260, rotation: 6, duration: 1.85, ease: "sine.inOut" }, 21.2);
 tl.fromTo("#verse1-boatbob", { y: 0 }, { y: -30, duration: 0.23, yoyo: true, repeat: 7, ease: "sine.inOut" }, 21.2);
 
+          window.__timelines = window.__timelines || {};
           window.__timelines["verse1"] = tl;
         })();
       </script>

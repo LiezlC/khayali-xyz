@@ -88,6 +88,7 @@ for cid, src, start, dur, vars_ in SCENES:
           const tl = gsap.timeline({{ paused: true }});
           const D = {dur};
 {js}
+          window.__timelines = window.__timelines || {{}};
           window.__timelines["{cid}"] = tl;
         }})();
       </script>
@@ -125,6 +126,7 @@ index = f"""<!doctype html>
     </div>
     <script>
       const tl = gsap.timeline({{ paused: true }});
+      window.__timelines = window.__timelines || {{}};
       window.__timelines["main"] = tl;
     </script>
   </body>

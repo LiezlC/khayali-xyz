@@ -323,6 +323,7 @@ tl.to("#break1-v0", { opacity: 0, duration: 0.2 }, slot(1) - 0.1);
 // end: everything greys out as the news arrives
 tl.fromTo("#break1-flash", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power2.in" }, D - 0.7);
 
+          window.__timelines = window.__timelines || {};
           window.__timelines["break1"] = tl;
         })();
       </script>

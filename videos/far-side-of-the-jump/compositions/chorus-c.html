@@ -377,6 +377,7 @@ tl.fromTo("#chorus-c-tree-b", { scale: 1.12 }, { scale: 1.0, transformOrigin: "5
 burst(tl, makePetals($id("chorus-c-s6-petals"), 40, 99 + 77), s6, 1.88);
 if ($id("chorus-c-tailtext").textContent.trim()) tl.fromTo("#chorus-c-tailtext", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4 }, s6 + 0.15);
 
+          window.__timelines = window.__timelines || {};
           window.__timelines["chorus-c"] = tl;
         })();
       </script>

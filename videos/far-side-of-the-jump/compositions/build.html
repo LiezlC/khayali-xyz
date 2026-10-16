@@ -186,6 +186,7 @@ segs.forEach(([id, a, b, w, h], i) => {
   tl.to(`#${id} img`, { x: "+=12", duration: 0.04, yoyo: true, repeat: 5, ease: "none" }, snap(h) + 0.16);
 });
 
+          window.__timelines = window.__timelines || {};
           window.__timelines["build"] = tl;
         })();
       </script>

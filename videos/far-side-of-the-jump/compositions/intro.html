@@ -239,6 +239,7 @@ tl.fromTo("#intro-world", { scale: 1.12, y: 60 }, { scale: 1.0, y: 0, duration: 
 tl.to("#intro-world", { scale: 3.2, y: 900, duration: 1.6, ease: "expo.in" }, 28.8);
 tl.fromTo("#intro-flash", { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power2.in" }, 30.2);
 
+          window.__timelines = window.__timelines || {};
           window.__timelines["intro"] = tl;
         })();
       </script>
