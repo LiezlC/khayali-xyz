@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="UTF-8" /><title>chorus-c</title></head>
+  <body>
+    <template>
+      <style>
+@font-face { font-family: "Fraunces"; font-weight: 900; font-style: normal; src: url("assets/fonts/fraunces-latin-900-normal.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 900; font-style: italic; src: url("assets/fonts/fraunces-latin-900-italic.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 600; font-style: normal; src: url("assets/fonts/fraunces-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Space Mono"; font-weight: 400; src: url("assets/fonts/space-mono-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Space Mono"; font-weight: 700; src: url("assets/fonts/space-mono-latin-700-normal.woff2") format("woff2"); }
+#root { position: absolute; inset: 0; overflow: hidden; font-family: "Fraunces", Georgia, serif; color: #33251e; }
+.fs-fill { position: absolute; inset: 0; overflow: hidden; }
+.cam { position: absolute; inset: 0; transform-origin: 50% 50%; }
+.layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.rider-wrap { position: absolute; inset: 0; transform-origin: 45% 45%; }
+.grade { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 90% at 50% 40%, rgba(255,220,160,0) 55%, rgba(80,40,20,0.35) 100%); }
+.paper { position: absolute; inset: 0; background: radial-gradient(60% 55% at 50% 62%, #ffffff 0%, #fcfbf8 55%, #f3efe6 100%); }
+.tree { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+.lyric { position: absolute; left: 0; right: 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 0 0.36em; text-align: center; padding: 0 120px; }
+.lyric .w { display: inline-block; }
+.big { top: 40px; font-weight: 900; font-size: 116px; line-height: 1; color: #fcfbf8; text-shadow: 0 6px 0 #33251e, 0 10px 30px rgba(51,37,30,0.45); }
+.mid { bottom: 80px; font-weight: 900; font-style: italic; font-size: 76px; line-height: 1.05; color: #fcfbf8; text-shadow: 0 5px 0 #33251e, 0 8px 24px rgba(51,37,30,0.5); }
+.inky { color: #33251e; text-shadow: none; }
+.hup { position: absolute; left: 1290px; top: 380px; width: 420px; height: 220px; display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 170px; color: #d88a57; -webkit-text-stroke: 6px #33251e; paint-order: stroke fill; transform-origin: 50% 50%; opacity: 0; }
+.mono { font-family: "Space Mono", monospace; }
+.label { position: absolute; font-family: "Space Mono", monospace; font-weight: 700; font-size: 31px; letter-spacing: 0.03em; color: #105e5a;
+  background: rgba(252,251,248,0.95); border: 3px solid #167d78; border-radius: 999px; padding: 8px 22px; white-space: nowrap; }
+.label b { color: #d88a57; }
+.petal { position: absolute; left: 0; top: 0; width: 26px; height: 18px; border-radius: 60% 40% 60% 40%; background: linear-gradient(135deg, #f6c39b, #d88a57); opacity: 0; }
+.flash { position: absolute; inset: 0; background: #fffaf0; opacity: 0; pointer-events: none; }
+.card { position: absolute; background: rgba(252,251,248,0.96); border: 3px solid #167d78; border-radius: 28px; box-shadow: 0 20px 60px rgba(16,94,90,0.25); overflow: hidden; }
+.card-title { position: absolute; left: 36px; top: 24px; right: 36px; font-family: "Space Mono", monospace; font-weight: 700; font-size: 36px; letter-spacing: 0.04em; line-height: 1.15; color: #105e5a; }
+.card-title b { color: #d88a57; }
+.caption { position: absolute; left: 0; right: 0; text-align: center; font-weight: 900; font-size: 64px; color: #33251e; }
+.gal { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+.pin { position: absolute; inset: 0; transform-origin: 0 0; }
+.pin > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+
+#chorus-c-hoofs .hoof { position: absolute; width: 150px; height: 150px; display: flex; align-items: center; justify-content: center;
+  font-family: "Space Mono", monospace; font-weight: 700; font-size: 48px; color: #33251e; padding-top: 34px; }
+#chorus-c-hoofs .hoof svg { position: absolute; inset: 0; }
+#chorus-c-hoofs .hoof span { position: relative; }
+#chorus-c-sight { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+#chorus-c-whole { position: absolute; inset: 0; filter: saturate(1.18) brightness(1.04); }
+.chorus-c-gl { position: absolute; left: 0; right: 0; top: 60px; text-align: center; font-weight: 900; font-size: 76px; line-height: 1.05; color: #33251e; opacity: 0; }
+
+      </style>
+      <div id="root" data-composition-id="chorus-c" data-width="1920" data-height="1080" data-duration="20.41">
+
+<div id="chorus-c-whole">
+  <!-- S1 approach 0..3.58 -->
+  <div class="fs-fill" id="chorus-c-s1">
+    <div class="cam" id="chorus-c-s1-cam">
+      <img class="layer" src="assets/jump/L0-background.png" alt="" />
+      <div class="rider-wrap" id="chorus-c-s1-rider">
+        <img class="gal" id="chorus-c-g1" src="assets/gallop/g1.png" alt="" />
+        <img class="gal" id="chorus-c-g2" src="assets/gallop/g2.png" alt="" />
+        <img class="gal" id="chorus-c-g3" src="assets/gallop/g3.png" alt="" />
+        <img class="gal" id="chorus-c-g4" src="assets/gallop/g4.png" alt="" />
+      </div>
+      <img class="layer" id="chorus-c-s1-pole" src="assets/jump/L2-pole.png" alt="" />
+      <img class="layer" id="chorus-c-s1-front" src="assets/jump/L3-foreground-flowers.png" alt="" />
+    </div>
+    <svg id="chorus-c-sight" viewBox="0 0 1920 1080"><path id="chorus-c-sight-path" d="M 700 420 C 960 230, 1300 220, 1560 380" fill="none" stroke="#fcfbf8" stroke-width="7" stroke-linecap="round" stroke-dasharray="2 22" /></svg>
+    <div id="chorus-c-hoofs"></div>
+    <div class="lyric mid" id="chorus-c-l-where"><span class="w">Where</span><span class="w">you</span><span class="w">look…</span></div>
+    <div class="grade"></div>
+  </div>
+
+  <!-- S2 jump 3.58..7.38 -->
+  <div class="fs-fill" id="chorus-c-s2">
+    <div class="cam" id="chorus-c-s2-shake"><div class="cam" id="chorus-c-s2-cam">
+      <img class="layer" src="assets/jump/L0-background.png" alt="" />
+      <img class="layer" id="chorus-c-s2-pole" src="assets/jump/L2-pole.png" alt="" />
+      <div class="rider-wrap" id="chorus-c-s2-rider"><img class="layer" src="assets/jump/L1-rider.png" alt="" /></div>
+      <img class="layer" id="chorus-c-s2-front" src="assets/jump/L3-foreground-flowers.png" alt="" />
+    </div></div>
+    <div id="chorus-c-s2-petals"></div>
+    <div class="lyric big" id="chorus-c-l-eyes1"><span class="w">Eyes</span><span class="w">on</span><span class="w">the</span><span class="w">far</span><span class="w">side!</span></div>
+    <div class="hup" id="chorus-c-hup1">HUP!</div>
+    <div class="lyric mid" id="chorus-c-l-ride1"><span class="w">Ride</span><span class="w">the</span><span class="w">approach!</span></div>
+    <div class="grade"></div>
+  </div>
+
+  <!-- S3 coded tree 7.38..11.28 -->
+  <div class="fs-fill" id="chorus-c-s3">
+    <div class="paper"></div>
+    <svg class="tree" id="chorus-c-tree-a" viewBox="0 0 1920 1080"></svg>
+    <div id="chorus-c-labels"></div>
+    <div class="chorus-c-gl" id="chorus-c-l-some1">Somewhere somebody found a way,</div>
+    <div class="chorus-c-gl" id="chorus-c-l-some2">somebody’s finding it <i>today!</i></div>
+  </div>
+
+  <!-- S4 second jump 11.28..14.88 -->
+  <div class="fs-fill" id="chorus-c-s4">
+    <div class="cam" id="chorus-c-s4-shake"><div class="cam" id="chorus-c-s4-cam">
+      <img class="layer" src="assets/jump/L0-background.png" alt="" />
+      <img class="layer" src="assets/jump/L2-pole.png" alt="" />
+      <div class="rider-wrap" id="chorus-c-s4-rider"><img class="layer" src="assets/jump/L1-rider.png" alt="" /></div>
+      <img class="layer" id="chorus-c-s4-front" src="assets/jump/L3-foreground-flowers.png" alt="" />
+    </div></div>
+    <div id="chorus-c-s4-petals"></div>
+    <div class="lyric big" id="chorus-c-l-eyes2"><span class="w">Eyes</span><span class="w">on</span><span class="w">the</span><span class="w">far</span><span class="w">side!</span></div>
+    <div class="hup" id="chorus-c-hup2">HUP!</div>
+    <div class="lyric mid" id="chorus-c-l-ride2"><span class="w">Ride</span><span class="w">the</span><span class="w">approach!</span></div>
+    <div class="grade"></div>
+  </div>
+
+  <!-- S5 hungry pole / look past 14.88..18.53 -->
+  <div class="fs-fill" id="chorus-c-s5">
+    <div class="cam" id="chorus-c-s5-cam">
+      <img class="layer" src="assets/jump/L0-background.png" alt="" />
+      <div id="chorus-c-s5-polebox" style="position:absolute;inset:0;transform-origin:50% 75%">
+        <img class="layer" src="assets/jump/L2-pole.png" alt="" />
+        <svg viewBox="0 0 1920 1080" style="position:absolute;inset:0;width:1920px;height:1080px">
+          <g transform="translate(700 812)">
+            <path id="chorus-c-jaw-top" d="M -120 0 Q 0 -70 120 0 Z" fill="#33251e" />
+            <path id="chorus-c-jaw-bot" d="M -120 0 Q 0 80 120 0 Z" fill="#33251e" />
+            <g fill="#fcfbf8"><path d="M -90 -4 l 14 22 l 14 -22 Z" /><path d="M -30 -4 l 14 24 l 14 -24 Z" /><path d="M 30 -4 l 14 24 l 14 -24 Z" /></g>
+            <circle cx="-60" cy="-70" r="20" fill="#fcfbf8" stroke="#33251e" stroke-width="6" /><circle cx="-56" cy="-66" r="8" fill="#33251e" />
+            <circle cx="60" cy="-70" r="20" fill="#fcfbf8" stroke="#33251e" stroke-width="6" /><circle cx="56" cy="-66" r="8" fill="#33251e" />
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="rider-wrap" id="chorus-c-s5-rider"><img class="layer" src="assets/jump/L1-rider.png" alt="" /></div>
+    <div class="lyric mid" id="chorus-c-l-stare"><span class="w">Don’t</span><span class="w">stare</span><span class="w">at</span><span class="w">the</span><span class="w">fence,</span></div>
+    <div class="lyric mid" id="chorus-c-l-fear"><span class="w">don’t</span><span class="w">fear</span><span class="w">the</span><span class="w">fall,</span></div>
+    <div class="lyric big" id="chorus-c-l-past"><span class="w">Look</span><span class="w">past</span><span class="w">the</span><span class="w">jump…</span></div>
+    <div class="lyric mid" id="chorus-c-l-clear"><span class="w">and</span><span class="w">you</span><span class="w">clear</span><span class="w">it</span><span class="w">all!</span></div>
+    <div class="grade"></div>
+  </div>
+
+  <!-- S6 bloom tail 18.53..20.41 -->
+  <div class="fs-fill" id="chorus-c-s6">
+    <div class="paper"></div>
+    <svg class="tree" id="chorus-c-tree-b" viewBox="0 0 1920 1080"></svg>
+    <div id="chorus-c-s6-petals"></div>
+    <div class="chorus-c-gl" id="chorus-c-tailtext" style="top:70px">Look where you wanna land… <i>HUP!</i></div>
+    <div class="flash" id="chorus-c-s6-flash"></div>
+  </div>
+</div>
+
+      </div>
+      <script>
+        (function () {
+// Shared helpers, inlined into every scene by build.py. Deterministic only.
+function rng(seed) { return function () { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+const SVGNS = "http://www.w3.org/2000/svg";
+function el(tag, attrs, parent) { const n = document.createElementNS(SVGNS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); if (parent) parent.appendChild(n); return n; }
+function $id(id) { return document.getElementById(id); }
+
+// Glass tree: twin braided trunk, round crown, apricot buds. Returns branches (with depth) and buds.
+function buildTree(svg, seed, opt) {
+  opt = opt || {}; const scale = opt.scale || 1, cxT = opt.x || 960, base = opt.base || 1000;
+  const R = rng(seed);
+  const defs = el("defs", {}, svg);
+  const glow = el("filter", { id: svg.id + "-glow", x: "-20%", y: "-20%", width: "140%", height: "140%" }, defs);
+  el("feGaussianBlur", { stdDeviation: "6", result: "b" }, glow);
+  const m = el("feMerge", {}, glow); el("feMergeNode", { in: "b" }, m); el("feMergeNode", { in: "SourceGraphic" }, m);
+  const bud = el("radialGradient", { id: svg.id + "-bud", cx: "40%", cy: "35%", r: "65%" }, defs);
+  el("stop", { offset: "0%", "stop-color": "#fff4e6" }, bud); el("stop", { offset: "45%", "stop-color": "#f3b383" }, bud); el("stop", { offset: "100%", "stop-color": "#c9703f" }, bud);
+  const halo = el("radialGradient", { id: svg.id + "-halo" }, defs);
+  el("stop", { offset: "0%", "stop-color": "#f6c39b", "stop-opacity": "0.75" }, halo); el("stop", { offset: "100%", "stop-color": "#f6c39b", "stop-opacity": "0" }, halo);
+  el("ellipse", { cx: cxT, cy: base, rx: 520 * scale, ry: 34 * scale, fill: "#167d78", opacity: "0.10" }, svg);
+  const gBranch = el("g", { filter: `url(#${svg.id}-glow)`, "stroke-linecap": "round", fill: "none" }, svg);
+  const gBud = el("g", {}, svg);
+  const branches = [], buds = [];
+  function seg(d, w, depth) {
+    const g = el("g", {}, gBranch);
+    const body = el("path", { d, stroke: "#8fd3c3", "stroke-width": w, opacity: "0.5" }, g);
+    const core = el("path", { d, stroke: "#167d78", "stroke-width": Math.max(1.5, w * 0.42), opacity: "0.8" }, g);
+    const hi = el("path", { d, stroke: "#ffffff", "stroke-width": Math.max(1, w * 0.16), opacity: "0.85", transform: `translate(${(-w * 0.2).toFixed(1)} ${(-w * 0.1).toFixed(1)})` }, g);
+    branches.push({ paths: [body, core, hi], depth });
+  }
+  function addBud(x, y, r) {
+    const h = el("circle", { cx: x, cy: y, r: r * 2.6, fill: `url(#${svg.id}-halo)`, opacity: 0 }, gBud);
+    const b = el("circle", { cx: x, cy: y, r, fill: `url(#${svg.id}-bud)`, stroke: "#b8643a", "stroke-width": 1.2 }, gBud);
+    buds.push({ b, h, x, y, r });
+  }
+  function grow(x, y, ang, len, w, depth) {
+    const bend = (R() - 0.5) * 0.5;
+    const x2 = x + Math.cos(ang) * len, y2 = y + Math.sin(ang) * len;
+    const cx = x + Math.cos(ang + bend) * len * 0.55, cy = y + Math.sin(ang + bend) * len * 0.55;
+    seg(`M ${x.toFixed(1)} ${y.toFixed(1)} Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${x2.toFixed(1)} ${y2.toFixed(1)}`, w, depth);
+    if (depth >= 4 && R() < 0.4) addBud(cx, cy, (8 + R() * 6) * scale);
+    if (depth >= 6) { addBud(x2, y2, (13 + R() * 11) * scale); return; }
+    const spread = depth < 2 ? 0.7 : 0.52;
+    const pull = (-Math.PI / 2 - ang) * 0.08;
+    grow(x2, y2, ang - spread + pull + (R() - 0.5) * 0.2, len * (0.74 + R() * 0.08), w * 0.68, depth + 1);
+    grow(x2, y2, ang + spread + pull + (R() - 0.5) * 0.2, len * (0.74 + R() * 0.08), w * 0.68, depth + 1);
+    if (depth >= 2 && depth <= 4 && R() < 0.3) grow(x2, y2, ang + pull + (R() - 0.5) * 0.3, len * 0.62, w * 0.6, depth + 1);
+  }
+  const top = base - 230 * scale;
+  seg(`M ${cxT - 60 * scale} ${base} C ${cxT + 50 * scale} ${base - 80 * scale}, ${cxT - 70 * scale} ${base - 150 * scale}, ${cxT} ${top}`, 74 * scale, 0);
+  seg(`M ${cxT + 60 * scale} ${base} C ${cxT - 50 * scale} ${base - 90 * scale}, ${cxT + 70 * scale} ${base - 160 * scale}, ${cxT} ${top}`, 62 * scale, 0);
+  grow(cxT, top, -Math.PI / 2 - 0.85, 170 * scale, 42 * scale, 1);
+  grow(cxT, top, -Math.PI / 2 + 0.85, 170 * scale, 42 * scale, 1);
+  grow(cxT, top, -Math.PI / 2, 130 * scale, 34 * scale, 2);
+  branches.forEach(o => o.paths.forEach(p => { const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; }));
+  return { branches, buds };
+}
+function drawTree(tl, T, at, step) { T.branches.forEach(o => o.paths.forEach(p => tl.to(p, { strokeDashoffset: 0, duration: step * 3.2, ease: "power2.out" }, at + o.depth * step))); }
+function showTree(tl, T, at) { T.branches.forEach(o => o.paths.forEach(p => tl.set(p, { strokeDashoffset: 0 }, at))); }
+function bloom(tl, T, times, glowTo) {
+  T.buds.forEach((o, i) => {
+    const t = times[i % times.length] + ((i * 37) % 11) * 0.012;
+    tl.fromTo(o.b, { scale: 0, transformOrigin: `${o.x}px ${o.y}px` }, { scale: 1, duration: 0.3, ease: "back.out(3)" }, t);
+    tl.fromTo(o.h, { opacity: 0 }, { opacity: glowTo || 0.6, duration: 0.25 }, t);
+  });
+}
+
+// Petals
+function makePetals(host, n, seed) {
+  const R = rng(seed), out = [];
+  for (let i = 0; i < n; i++) { const p = document.createElement("div"); p.className = "petal"; host.appendChild(p);
+    out.push({ p, x: R() * 1920, y: R() * 1080, dx: 200 + R() * 500, dy: -150 + R() * 450, r: R() * 720 - 360, s: 0.6 + R() * 1.1 }); }
+  return out;
+}
+function burst(tl, petals, at, dur) {
+  petals.forEach((o, i) => tl.fromTo(o.p, { x: o.x - 300, y: o.y, rotation: 0, scale: o.s, opacity: 0 },
+    { x: o.x - 300 + o.dx, y: o.y + o.dy, rotation: o.r, opacity: 0.95, duration: dur, ease: "sine.out" }, at + (i % 7) * 0.03));
+}
+function fall(tl, petals, at, dur) {
+  petals.forEach((o, i) => tl.fromTo(o.p, { x: o.x, y: -60 - (i % 9) * 40, rotation: 0, scale: o.s, opacity: 0.95 },
+    { x: o.x + o.dx * 0.4 - 100, y: 1140, rotation: o.r * 2, opacity: 0.95, duration: dur, ease: "none" }, at + (i % 13) * (dur / 13)));
+}
+
+// Lyric word pops: element with .w spans, one time per word
+function words(tl, sel, times, from) {
+  document.querySelectorAll(sel + " .w").forEach((w, i) =>
+    tl.fromTo(w, from || { y: 50, opacity: 0, scale: 0.6 }, { y: 0, opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2.6)" }, times[Math.min(i, times.length - 1)]));
+}
+// Whole-line in/out
+function line(tl, sel, tin, tout) {
+  tl.fromTo(sel, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.22, ease: "power2.out" }, tin);
+  if (tout != null) tl.to(sel, { opacity: 0, y: -16, duration: 0.18, ease: "power1.in" }, tout);
+}
+
+// Gallop flipbook: frames = array of 4 element ids stacked; strides on a 129 BPM canter (one stride per beat)
+function gallop(tl, frames, from, to, beat) {
+  beat = beat || 0.4651; const f = beat / 4;
+  frames.forEach((id, i) => tl.set("#" + id, { opacity: i === 0 ? 1 : 0 }, from));
+  let k = 0;
+  for (let t = from + f; t < to - 0.001; t += f, k++) {
+    const cur = (k + 1) % 4, prev = k % 4;
+    tl.set("#" + frames[prev], { opacity: 0 }, t); tl.set("#" + frames[cur], { opacity: 1 }, t);
+  }
+}
+// Stamp: drop-in with overshoot
+function stamp(tl, sel, at, rot) {
+  tl.fromTo(sel, { scale: 3, opacity: 0, rotation: (rot || -8) * 2.5 }, { scale: 1, opacity: 1, rotation: rot || -8, duration: 0.16, ease: "power4.in" }, at);
+}
+
+// Place a full-canvas cutout (1672x941 source, shown at 1920x1080) so its alpha box lands at screen (x, y) with height h.
+// The element must have transform-origin 0 0 (class "pin").
+const IMG_K = 1920 / 1672;
+function place(box, x, y, h) { const s = h / ((box[3] - box[1]) * IMG_K); return { x: x - box[0] * IMG_K * s, y: y - box[1] * IMG_K * s, scale: s }; }
+
+          const tl = gsap.timeline({ paused: true });
+          const D = 20.41;
+
+// shot windows (local seconds); each shot is shown only inside its window
+const shots = [["chorus-c-s1", 0, 3.58], ["chorus-c-s2", 3.58, 7.38], ["chorus-c-s3", 7.38, 11.28], ["chorus-c-s4", 11.28, 14.88], ["chorus-c-s5", 14.88, 18.53], ["chorus-c-s6", 18.53, D]];
+shots.forEach(([id, a, b]) => { tl.set("#" + id, { opacity: a === 0 ? 1 : 0 }, 0); if (a > 0) tl.set("#" + id, { opacity: 1 }, a); if (b < D) tl.set("#" + id, { opacity: 0 }, b); });
+
+// S1 approach with gallop flipbook
+tl.fromTo("#chorus-c-s1-cam", { scale: 1.08, x: 40 }, { scale: 1.16, x: -30, duration: 3.58, ease: "none" }, 0);
+tl.fromTo("#chorus-c-s1-rider", { x: -760, y: 230, scale: 0.55 }, { x: -260, y: 230, scale: 0.55, duration: 3.58, ease: "none" }, 0);
+tl.fromTo("#chorus-c-s1-pole", { x: 0 }, { x: -60, duration: 3.58, ease: "none" }, 0);
+tl.fromTo("#chorus-c-s1-front", { x: 0, y: 30 }, { x: -160, y: 30, duration: 3.58, ease: "none" }, 0);
+gallop(tl, ["chorus-c-g1", "chorus-c-g2", "chorus-c-g3", "chorus-c-g4"], 0, 3.58);
+const counts = [0.28, 0.78, 1.18, 1.68, 1.98, 2.28];
+const hoofPath = "M 22 14 C 8 50 10 96 40 112 C 52 118 68 118 80 112 C 110 96 112 50 98 14 L 78 14 C 90 46 88 84 70 94 C 64 98 56 98 50 94 C 32 84 30 46 42 14 Z";
+counts.forEach((t, i) => {
+  const h = document.createElement("div"); h.className = "hoof";
+  h.style.left = (520 + i * 170) + "px"; h.style.top = (i % 3 === 1 ? 110 : 150) + "px";
+  h.innerHTML = `<svg viewBox="0 0 120 120"><path d="${hoofPath}" fill="#d88a57" stroke="#33251e" stroke-width="6" stroke-linejoin="round"/><g fill="#33251e"><circle cx="24" cy="40" r="4"/><circle cx="26" cy="70" r="4"/><circle cx="96" cy="40" r="4"/><circle cx="94" cy="70" r="4"/></g></svg><span>${(i % 3) + 1}</span>`;
+  $id("chorus-c-hoofs").appendChild(h);
+  tl.fromTo(h, { scale: 2.2, opacity: 0, rotation: -12 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.14, ease: "power4.in" }, t);
+});
+const sp = $id("chorus-c-sight-path"); const SL = sp.getTotalLength();
+tl.fromTo(sp, { strokeDashoffset: SL, opacity: 0 }, { strokeDashoffset: 0, opacity: 1, duration: 0.9, ease: "power2.out" }, 2.5);
+words(tl, "#chorus-c-l-where", [2.58, 2.86, 3.08]);
+
+// S2 the jump
+const s2 = 3.58;
+tl.fromTo("#chorus-c-s2-cam", { scale: 1.06, y: 40 }, { scale: 1.18, y: -40, duration: 3.8, ease: "power1.out" }, s2);
+tl.fromTo("#chorus-c-s2-rider", { y: 260, x: -300, rotation: 8, scale: 0.58 }, { y: 70, x: -120, rotation: -2, scale: 0.58, duration: 0.9, ease: "power2.out" }, s2);
+tl.to("#chorus-c-s2-rider", { y: 40, x: 20, rotation: -4, duration: 2.0, ease: "sine.inOut" }, s2 + 0.9);
+tl.to("#chorus-c-s2-rider", { y: 200, x: 160, rotation: 4, duration: 0.9, ease: "power2.in" }, s2 + 2.9);
+tl.fromTo("#chorus-c-s2-pole", { y: 0 }, { y: 70, duration: 3.8, ease: "power1.out" }, s2);
+tl.fromTo("#chorus-c-s2-front", { y: 0 }, { y: 140, duration: 3.8, ease: "power1.out" }, s2);
+burst(tl, makePetals($id("chorus-c-s2-petals"), 34, 99 + 11), s2 + 0.1, 3.4);
+words(tl, "#chorus-c-l-eyes1", [3.58, 3.84, 3.98, 4.14, 4.36], { y: -80, opacity: 0, scale: 1.6 });
+stamp(tl, "#chorus-c-hup1", 5.25, -8);
+tl.to("#chorus-c-s2-shake", { x: 14, duration: 0.05, yoyo: true, repeat: 5, ease: "none" }, 5.41);
+tl.to("#chorus-c-hup1", { scale: 0.9, opacity: 0, duration: 0.3 }, 5.95);
+tl.to("#chorus-c-l-eyes1", { opacity: 0, y: -40, duration: 0.25 }, 5.85);
+words(tl, "#chorus-c-l-ride1", [5.98, 6.38, 6.68]);
+
+// S3 coded glass tree with record labels
+const A = buildTree($id("chorus-c-tree-a"), 99, { scale: 1 });
+const s3 = 7.38;
+drawTree(tl, A, s3 + 0.05, 0.13);
+const beatsA = [8.13, 8.59, 9.08, 9.57, 10.03, 10.5, 10.96];
+bloom(tl, A, beatsA, 0.35);
+const recs = [["FLOOD", "warned in time"], ["PHOTO", "described aloud"], ["STORY", "kept"], ["SEA", "visible"], ["FOREST", "listening"], ["LANGUAGE", "speakers"], ["YOU", "what next?"]];
+const lead = el("svg", { viewBox: "0 0 1920 1080", width: 1920, height: 1080, style: "position:absolute;inset:0" }, $id("chorus-c-labels"));
+const rows = [[0, 290], [1, 290], [0, 420], [1, 420], [0, 550], [1, 550], [0, 680]];
+const leftBuds = A.buds.filter(o => o.x < 900), rightBuds = A.buds.filter(o => o.x > 1020);
+recs.forEach((r, i) => {
+  const [side, y] = rows[i];
+  const pool = side ? rightBuds : leftBuds;
+  const score = c => Math.abs(c.y - y) + Math.abs(c.x - (side ? 1300 : 620)) * 0.3;
+  const o = pool.reduce((best, c) => (score(c) < score(best) ? c : best), pool[0]);
+  const d = document.createElement("div"); d.className = "label"; d.innerHTML = `<b>●</b> ${r[0]} · ${r[1]}`;
+  if (side) d.style.left = "1400px"; else d.style.right = "1400px";
+  d.style.top = (y - 22) + "px";
+  $id("chorus-c-labels").appendChild(d);
+  const ln = el("path", { d: `M ${side ? 1400 : 520} ${y} L ${o.x} ${o.y}`, stroke: "#167d78", "stroke-width": 2, "stroke-dasharray": "3 7", fill: "none", opacity: 0 }, lead);
+  tl.fromTo(d, { opacity: 0, x: side ? -30 : 30 }, { opacity: 1, x: 0, duration: 0.25, ease: "power2.out" }, beatsA[i]);
+  tl.fromTo(ln, { opacity: 0 }, { opacity: 0.9, duration: 0.2 }, beatsA[i] + 0.05);
+});
+line(tl, "#chorus-c-l-some1", 7.38, 9.05);
+line(tl, "#chorus-c-l-some2", 9.18, null);
+tl.fromTo("#chorus-c-tree-a", { scale: 1 }, { scale: 1.06, transformOrigin: "50% 90%", duration: 3.9, ease: "none" }, s3);
+
+// S4 second jump
+const s4 = 11.28;
+tl.fromTo("#chorus-c-s4-cam", { scale: 1.4, x: 300, y: 60 }, { scale: 1.25, x: -60, y: 20, duration: 3.6, ease: "power1.inOut" }, s4);
+tl.fromTo("#chorus-c-s4-rider", { y: 160, x: -200, rotation: 4, scale: 0.6 }, { y: 60, x: -60, rotation: -3, scale: 0.6, duration: 1.6, ease: "sine.out" }, s4);
+tl.to("#chorus-c-s4-rider", { y: 140, x: 120, rotation: 2, duration: 2.0, ease: "sine.in" }, s4 + 1.6);
+tl.fromTo("#chorus-c-s4-front", { y: 40 }, { y: 120, duration: 3.6, ease: "none" }, s4);
+burst(tl, makePetals($id("chorus-c-s4-petals"), 26, 99 + 23), s4 + 0.1, 3.2);
+words(tl, "#chorus-c-l-eyes2", [11.28, 11.5, 11.64, 11.78, 12.0], { y: -80, opacity: 0, scale: 1.6 });
+stamp(tl, "#chorus-c-hup2", 13.33, 6);
+tl.to("#chorus-c-s4-shake", { y: 14, duration: 0.05, yoyo: true, repeat: 5, ease: "none" }, 13.49);
+tl.to("#chorus-c-hup2", { opacity: 0, duration: 0.25 }, 14.1);
+tl.to("#chorus-c-l-eyes2", { opacity: 0, duration: 0.25 }, 13.5);
+words(tl, "#chorus-c-l-ride2", [13.58, 13.95, 14.15]);
+
+// S5 hungry pole, it falls, whip to the tree, rider sails past
+const s5 = 14.88;
+tl.fromTo("#chorus-c-s5-cam", { scale: 1.6, x: 420, y: -320 }, { scale: 1.5, x: 390, y: -265, duration: 1.0, ease: "none" }, s5);
+[0, 0.24, 0.48, 0.72].forEach(dt => {
+  tl.to("#chorus-c-jaw-top", { y: -26, duration: 0.1, yoyo: true, repeat: 1, ease: "power1.inOut" }, s5 + dt);
+  tl.to("#chorus-c-jaw-bot", { y: 30, duration: 0.1, yoyo: true, repeat: 1, ease: "power1.inOut" }, s5 + dt);
+});
+tl.set("#chorus-c-s5-rider", { opacity: 0 }, 0);
+words(tl, "#chorus-c-l-stare", [14.88, 15.08, 15.28, 15.38, 15.48]);
+tl.to("#chorus-c-l-stare", { opacity: 0, duration: 0.12 }, 15.8);
+tl.to("#chorus-c-s5-polebox", { y: 900, rotation: 18, duration: 0.85, ease: "power3.in" }, 16.0);
+words(tl, "#chorus-c-l-fear", [15.88, 16.08, 16.24, 16.34]);
+tl.to("#chorus-c-l-fear", { opacity: 0, duration: 0.12 }, 16.78);
+tl.to("#chorus-c-s5-cam", { scale: 2.2, x: -1040, y: 170, duration: 0.55, ease: "expo.inOut" }, 16.84);
+words(tl, "#chorus-c-l-past", [16.88, 17.08, 17.2, 17.3]);
+tl.to("#chorus-c-l-past", { opacity: 0, duration: 0.15 }, 17.62);
+tl.set("#chorus-c-s5-rider", { opacity: 1 }, 17.62);
+tl.fromTo("#chorus-c-s5-rider", { x: -1500, y: 260, rotation: -6, scale: 0.5 }, { x: 1300, y: 120, rotation: -2, scale: 0.5, duration: 0.95, ease: "power1.inOut" }, 17.62);
+words(tl, "#chorus-c-l-clear", [17.68, 17.78, 18.08, 18.38, 18.44]);
+
+// S6 full bloom tail
+const B = buildTree($id("chorus-c-tree-b"), 99, { scale: 1 });
+const s6 = 18.53;
+tl.fromTo("#chorus-c-s6-flash", { opacity: 0.95 }, { opacity: 0, duration: 0.5, ease: "power2.out" }, s6);
+showTree(tl, B, s6);
+B.buds.forEach((o, i) => {
+  tl.fromTo(o.b, { scale: 0.2, transformOrigin: `${o.x}px ${o.y}px` }, { scale: 1.15, duration: 0.35, ease: "back.out(3)" }, s6 + 0.05 + (i % 9) * 0.03);
+  tl.fromTo(o.h, { opacity: 0 }, { opacity: 0.45, duration: 0.3 }, s6 + 0.05 + (i % 9) * 0.03);
+});
+tl.fromTo("#chorus-c-tree-b", { scale: 1.12 }, { scale: 1.0, transformOrigin: "50% 90%", duration: 1.88, ease: "power2.out" }, s6);
+burst(tl, makePetals($id("chorus-c-s6-petals"), 40, 99 + 77), s6, 1.88);
+if ($id("chorus-c-tailtext").textContent.trim()) tl.fromTo("#chorus-c-tailtext", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4 }, s6 + 0.15);
+
+          window.__timelines = window.__timelines || {};
+          window.__timelines["chorus-c"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

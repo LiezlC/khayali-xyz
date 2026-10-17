@@ -1,0 +1,33 @@
+@font-face { font-family: "Fraunces"; font-weight: 900; font-style: normal; src: url("assets/fonts/fraunces-latin-900-normal.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 900; font-style: italic; src: url("assets/fonts/fraunces-latin-900-italic.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 600; font-style: normal; src: url("assets/fonts/fraunces-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Space Mono"; font-weight: 400; src: url("assets/fonts/space-mono-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Space Mono"; font-weight: 700; src: url("assets/fonts/space-mono-latin-700-normal.woff2") format("woff2"); }
+#root { position: absolute; inset: 0; overflow: hidden; font-family: "Fraunces", Georgia, serif; color: #33251e; }
+.fs-fill { position: absolute; inset: 0; overflow: hidden; }
+.cam { position: absolute; inset: 0; transform-origin: 50% 50%; }
+.layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.rider-wrap { position: absolute; inset: 0; transform-origin: 45% 45%; }
+.grade { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 90% at 50% 40%, rgba(255,220,160,0) 55%, rgba(80,40,20,0.35) 100%); }
+.paper { position: absolute; inset: 0; background: radial-gradient(60% 55% at 50% 62%, #ffffff 0%, #fcfbf8 55%, #f3efe6 100%); }
+.tree { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+.lyric { position: absolute; left: 0; right: 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 0 0.36em; text-align: center; padding: 0 120px; }
+.lyric .w { display: inline-block; }
+.big { top: 40px; font-weight: 900; font-size: 116px; line-height: 1; color: #fcfbf8; text-shadow: 0 6px 0 #33251e, 0 10px 30px rgba(51,37,30,0.45); }
+.mid { bottom: 80px; font-weight: 900; font-style: italic; font-size: 76px; line-height: 1.05; color: #fcfbf8; text-shadow: 0 5px 0 #33251e, 0 8px 24px rgba(51,37,30,0.5); }
+.inky { color: #33251e; text-shadow: none; }
+.hup { position: absolute; left: 1290px; top: 380px; width: 420px; height: 220px; display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 170px; color: #d88a57; -webkit-text-stroke: 6px #33251e; paint-order: stroke fill; transform-origin: 50% 50%; opacity: 0; }
+.mono { font-family: "Space Mono", monospace; }
+.label { position: absolute; font-family: "Space Mono", monospace; font-weight: 700; font-size: 31px; letter-spacing: 0.03em; color: #105e5a;
+  background: rgba(252,251,248,0.95); border: 3px solid #167d78; border-radius: 999px; padding: 8px 22px; white-space: nowrap; }
+.label b { color: #d88a57; }
+.petal { position: absolute; left: 0; top: 0; width: 26px; height: 18px; border-radius: 60% 40% 60% 40%; background: linear-gradient(135deg, #f6c39b, #d88a57); opacity: 0; }
+.flash { position: absolute; inset: 0; background: #fffaf0; opacity: 0; pointer-events: none; }
+.card { position: absolute; background: rgba(252,251,248,0.96); border: 3px solid #167d78; border-radius: 28px; box-shadow: 0 20px 60px rgba(16,94,90,0.25); overflow: hidden; }
+.card-title { position: absolute; left: 36px; top: 24px; right: 36px; font-family: "Space Mono", monospace; font-weight: 700; font-size: 36px; letter-spacing: 0.04em; line-height: 1.15; color: #105e5a; }
+.card-title b { color: #d88a57; }
+.caption { position: absolute; left: 0; right: 0; text-align: center; font-weight: 900; font-size: 64px; color: #33251e; }
+.gal { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+.pin { position: absolute; inset: 0; transform-origin: 0 0; }
+.pin > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }

@@ -1,0 +1,9 @@
+renders/
+.hyperframes/
+node_modules/
+boards/*-stills*/
+boards/mount-test/
+boards/refs/rein-hold-*.png
+
+# the soundtrack the composition plays (root .gitignore excludes *.mp3)
+!assets/bgm.mp3

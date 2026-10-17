@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="UTF-8" /><title>break1</title></head>
+  <body>
+    <template>
+      <style>
+@font-face { font-family: "Fraunces"; font-weight: 900; font-style: normal; src: url("assets/fonts/fraunces-latin-900-normal.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 900; font-style: italic; src: url("assets/fonts/fraunces-latin-900-italic.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 600; font-style: normal; src: url("assets/fonts/fraunces-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Space Mono"; font-weight: 400; src: url("assets/fonts/space-mono-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Space Mono"; font-weight: 700; src: url("assets/fonts/space-mono-latin-700-normal.woff2") format("woff2"); }
+#root { position: absolute; inset: 0; overflow: hidden; font-family: "Fraunces", Georgia, serif; color: #33251e; }
+.fs-fill { position: absolute; inset: 0; overflow: hidden; }
+.cam { position: absolute; inset: 0; transform-origin: 50% 50%; }
+.layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.rider-wrap { position: absolute; inset: 0; transform-origin: 45% 45%; }
+.grade { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 90% at 50% 40%, rgba(255,220,160,0) 55%, rgba(80,40,20,0.35) 100%); }
+.paper { position: absolute; inset: 0; background: radial-gradient(60% 55% at 50% 62%, #ffffff 0%, #fcfbf8 55%, #f3efe6 100%); }
+.tree { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+.lyric { position: absolute; left: 0; right: 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 0 0.36em; text-align: center; padding: 0 120px; }
+.lyric .w { display: inline-block; }
+.big { top: 40px; font-weight: 900; font-size: 116px; line-height: 1; color: #fcfbf8; text-shadow: 0 6px 0 #33251e, 0 10px 30px rgba(51,37,30,0.45); }
+.mid { bottom: 80px; font-weight: 900; font-style: italic; font-size: 76px; line-height: 1.05; color: #fcfbf8; text-shadow: 0 5px 0 #33251e, 0 8px 24px rgba(51,37,30,0.5); }
+.inky { color: #33251e; text-shadow: none; }
+.hup { position: absolute; left: 1290px; top: 380px; width: 420px; height: 220px; display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 170px; color: #d88a57; -webkit-text-stroke: 6px #33251e; paint-order: stroke fill; transform-origin: 50% 50%; opacity: 0; }
+.mono { font-family: "Space Mono", monospace; }
+.label { position: absolute; font-family: "Space Mono", monospace; font-weight: 700; font-size: 31px; letter-spacing: 0.03em; color: #105e5a;
+  background: rgba(252,251,248,0.95); border: 3px solid #167d78; border-radius: 999px; padding: 8px 22px; white-space: nowrap; }
+.label b { color: #d88a57; }
+.petal { position: absolute; left: 0; top: 0; width: 26px; height: 18px; border-radius: 60% 40% 60% 40%; background: linear-gradient(135deg, #f6c39b, #d88a57); opacity: 0; }
+.flash { position: absolute; inset: 0; background: #fffaf0; opacity: 0; pointer-events: none; }
+.card { position: absolute; background: rgba(252,251,248,0.96); border: 3px solid #167d78; border-radius: 28px; box-shadow: 0 20px 60px rgba(16,94,90,0.25); overflow: hidden; }
+.card-title { position: absolute; left: 36px; top: 24px; right: 36px; font-family: "Space Mono", monospace; font-weight: 700; font-size: 36px; letter-spacing: 0.04em; line-height: 1.15; color: #105e5a; }
+.card-title b { color: #d88a57; }
+.caption { position: absolute; left: 0; right: 0; text-align: center; font-weight: 900; font-size: 64px; color: #33251e; }
+.gal { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+.pin { position: absolute; inset: 0; transform-origin: 0 0; }
+.pin > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+
+#break1-bgtree { opacity: 0.18; }
+.break1-v { position: absolute; left: 260px; top: 150px; width: 1400px; height: 780px; opacity: 0; }
+.break1-v svg.viz { position: absolute; left: 0; top: 0; width: 1400px; height: 780px; }
+.break1-cap { position: absolute; left: 0; right: 0; bottom: 30px; text-align: center; font-weight: 900; font-style: italic; font-size: 62px; color: #33251e; }
+#break1-intro-cap { position: absolute; left: 0; right: 0; top: 70px; text-align: center; font-family: "Space Mono", monospace; font-weight: 700; font-size: 34px; letter-spacing: 0.24em; color: #105e5a; opacity: 0; }
+#break1-rider { position: absolute; inset: 0; transform-origin: 45% 45%; }
+.break1-word { position: absolute; font-weight: 900; font-size: 66px; color: #33251e; opacity: 0; white-space: nowrap; }
+.break1-word small { display: block; font-family: "Space Mono", monospace; font-weight: 700; font-size: 26px; letter-spacing: 0.12em; color: #167d78; }
+.break1-line { position: absolute; left: 70px; font-family: "Space Mono", monospace; font-size: 44px; color: #33251e; opacity: 0; white-space: nowrap; }
+.break1-chip { position: absolute; font-family: "Space Mono", monospace; font-weight: 700; font-size: 36px; padding: 12px 26px; border-radius: 999px; opacity: 0; white-space: nowrap; }
+
+      </style>
+      <div id="root" data-composition-id="break1" data-width="1920" data-height="1080" data-duration="27.47">
+
+<div class="paper"></div>
+<svg class="tree" id="break1-bgtree" viewBox="0 0 1920 1080"></svg>
+<!-- slot 0: the rider canters into the garden -->
+<div class="fs-fill" id="break1-v0">
+  <svg class="tree" id="break1-tree0" viewBox="0 0 1920 1080"></svg>
+  <div id="break1-rider">
+    <img class="gal" id="break1-g1" src="assets/gallop/g1.png" alt="" /><img class="gal" id="break1-g2" src="assets/gallop/g2.png" alt="" />
+    <img class="gal" id="break1-g3" src="assets/gallop/g3.png" alt="" /><img class="gal" id="break1-g4" src="assets/gallop/g4.png" alt="" />
+  </div>
+  <div id="break1-intro-cap">WHAT PEOPLE ARE MAKING POSSIBLE</div>
+</div>
+<!-- slot 1: protein -->
+<div class="card break1-v" id="break1-v1"><div class="card-title"><b>●</b> PROTEIN · STRUCTURES, OPENED TO DISCOVERY</div><svg class="viz" id="break1-z1" viewBox="0 0 1400 780"></svg><div class="break1-cap">A starting point for a thousand labs</div></div>
+<!-- slot 2: language -->
+<div class="card break1-v" id="break1-v2"><div class="card-title"><b>●</b> LANGUAGE · RESEARCH LED BY ITS SPEAKERS</div><svg class="viz" id="break1-z2" viewBox="0 0 1400 780"></svg><div id="break1-words2"></div><div class="break1-cap">Built with the people who speak it</div></div>
+<!-- slot 3: forest -->
+<div class="card break1-v" id="break1-v3"><div class="card-title"><b>●</b> FOREST · LISTENING FOR THREATS</div><svg class="viz" id="break1-z3" viewBox="0 0 1400 780"></svg><div class="break1-chip" id="break1-alert" style="left:640px;top:140px;background:#d88a57;color:#fcfbf8">CHAINSAW? → RANGERS ALERTED</div><div class="break1-cap">A forest can tell you what is happening</div></div>
+<!-- slot 4: plastic -->
+<div class="card break1-v" id="break1-v4"><div class="card-title"><b>●</b> PLASTIC · A NEW ROUTE THROUGH PET</div><svg class="viz" id="break1-z4" viewBox="0 0 1400 780"></svg><div class="break1-cap">An enzyme, tuned with machine learning</div></div>
+<!-- slot 5: lesson -->
+<div class="card break1-v" id="break1-v5"><div class="card-title"><b>●</b> LESSON · A TEACHING IDEA GETS A START</div><div id="break1-lines5"></div><div class="break1-cap">The teacher still decides what's good</div></div>
+<!-- slot 6: newer workers -->
+<div class="card break1-v" id="break1-v6"><div class="card-title"><b>●</b> NEW WORKER · A USEFUL ASSIST</div><svg class="viz" id="break1-z6" viewBox="0 0 1400 780"></svg><div class="break1-chip" id="break1-sug" style="left:640px;top:240px;background:#eff6f3;color:#105e5a;border:2px solid #167d78">✦ try: refund route</div><div class="break1-cap">Help where people are newest</div></div>
+<div class="flash" id="break1-flash" style="background:#6f6a66"></div>
+
+      </div>
+      <script>
+        (function () {
+// Shared helpers, inlined into every scene by build.py. Deterministic only.
+function rng(seed) { return function () { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+const SVGNS = "http://www.w3.org/2000/svg";
+function el(tag, attrs, parent) { const n = document.createElementNS(SVGNS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); if (parent) parent.appendChild(n); return n; }
+function $id(id) { return document.getElementById(id); }
+
+// Glass tree: twin braided trunk, round crown, apricot buds. Returns branches (with depth) and buds.
+function buildTree(svg, seed, opt) {
+  opt = opt || {}; const scale = opt.scale || 1, cxT = opt.x || 960, base = opt.base || 1000;
+  const R = rng(seed);
+  const defs = el("defs", {}, svg);
+  const glow = el("filter", { id: svg.id + "-glow", x: "-20%", y: "-20%", width: "140%", height: "140%" }, defs);
+  el("feGaussianBlur", { stdDeviation: "6", result: "b" }, glow);
+  const m = el("feMerge", {}, glow); el("feMergeNode", { in: "b" }, m); el("feMergeNode", { in: "SourceGraphic" }, m);
+  const bud = el("radialGradient", { id: svg.id + "-bud", cx: "40%", cy: "35%", r: "65%" }, defs);
+  el("stop", { offset: "0%", "stop-color": "#fff4e6" }, bud); el("stop", { offset: "45%", "stop-color": "#f3b383" }, bud); el("stop", { offset: "100%", "stop-color": "#c9703f" }, bud);
+  const halo = el("radialGradient", { id: svg.id + "-halo" }, defs);
+  el("stop", { offset: "0%", "stop-color": "#f6c39b", "stop-opacity": "0.75" }, halo); el("stop", { offset: "100%", "stop-color": "#f6c39b", "stop-opacity": "0" }, halo);
+  el("ellipse", { cx: cxT, cy: base, rx: 520 * scale, ry: 34 * scale, fill: "#167d78", opacity: "0.10" }, svg);
+  const gBranch = el("g", { filter: `url(#${svg.id}-glow)`, "stroke-linecap": "round", fill: "none" }, svg);
+  const gBud = el("g", {}, svg);
+  const branches = [], buds = [];
+  function seg(d, w, depth) {
+    const g = el("g", {}, gBranch);
+    const body = el("path", { d, stroke: "#8fd3c3", "stroke-width": w, opacity: "0.5" }, g);
+    const core = el("path", { d, stroke: "#167d78", "stroke-width": Math.max(1.5, w * 0.42), opacity: "0.8" }, g);
+    const hi = el("path", { d, stroke: "#ffffff", "stroke-width": Math.max(1, w * 0.16), opacity: "0.85", transform: `translate(${(-w * 0.2).toFixed(1)} ${(-w * 0.1).toFixed(1)})` }, g);
+    branches.push({ paths: [body, core, hi], depth });
+  }
+  function addBud(x, y, r) {
+    const h = el("circle", { cx: x, cy: y, r: r * 2.6, fill: `url(#${svg.id}-halo)`, opacity: 0 }, gBud);
+    const b = el("circle", { cx: x, cy: y, r, fill: `url(#${svg.id}-bud)`, stroke: "#b8643a", "stroke-width": 1.2 }, gBud);
+    buds.push({ b, h, x, y, r });
+  }
+  function grow(x, y, ang, len, w, depth) {
+    const bend = (R() - 0.5) * 0.5;
+    const x2 = x + Math.cos(ang) * len, y2 = y + Math.sin(ang) * len;
+    const cx = x + Math.cos(ang + bend) * len * 0.55, cy = y + Math.sin(ang + bend) * len * 0.55;
+    seg(`M ${x.toFixed(1)} ${y.toFixed(1)} Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${x2.toFixed(1)} ${y2.toFixed(1)}`, w, depth);
+    if (depth >= 4 && R() < 0.4) addBud(cx, cy, (8 + R() * 6) * scale);
+    if (depth >= 6) { addBud(x2, y2, (13 + R() * 11) * scale); return; }
+    const spread = depth < 2 ? 0.7 : 0.52;
+    const pull = (-Math.PI / 2 - ang) * 0.08;
+    grow(x2, y2, ang - spread + pull + (R() - 0.5) * 0.2, len * (0.74 + R() * 0.08), w * 0.68, depth + 1);
+    grow(x2, y2, ang + spread + pull + (R() - 0.5) * 0.2, len * (0.74 + R() * 0.08), w * 0.68, depth + 1);
+    if (depth >= 2 && depth <= 4 && R() < 0.3) grow(x2, y2, ang + pull + (R() - 0.5) * 0.3, len * 0.62, w * 0.6, depth + 1);
+  }
+  const top = base - 230 * scale;
+  seg(`M ${cxT - 60 * scale} ${base} C ${cxT + 50 * scale} ${base - 80 * scale}, ${cxT - 70 * scale} ${base - 150 * scale}, ${cxT} ${top}`, 74 * scale, 0);
+  seg(`M ${cxT + 60 * scale} ${base} C ${cxT - 50 * scale} ${base - 90 * scale}, ${cxT + 70 * scale} ${base - 160 * scale}, ${cxT} ${top}`, 62 * scale, 0);
+  grow(cxT, top, -Math.PI / 2 - 0.85, 170 * scale, 42 * scale, 1);
+  grow(cxT, top, -Math.PI / 2 + 0.85, 170 * scale, 42 * scale, 1);
+  grow(cxT, top, -Math.PI / 2, 130 * scale, 34 * scale, 2);
+  branches.forEach(o => o.paths.forEach(p => { const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; }));
+  return { branches, buds };
+}
+function drawTree(tl, T, at, step) { T.branches.forEach(o => o.paths.forEach(p => tl.to(p, { strokeDashoffset: 0, duration: step * 3.2, ease: "power2.out" }, at + o.depth * step))); }
+function showTree(tl, T, at) { T.branches.forEach(o => o.paths.forEach(p => tl.set(p, { strokeDashoffset: 0 }, at))); }
+function bloom(tl, T, times, glowTo) {
+  T.buds.forEach((o, i) => {
+    const t = times[i % times.length] + ((i * 37) % 11) * 0.012;
+    tl.fromTo(o.b, { scale: 0, transformOrigin: `${o.x}px ${o.y}px` }, { scale: 1, duration: 0.3, ease: "back.out(3)" }, t);
+    tl.fromTo(o.h, { opacity: 0 }, { opacity: glowTo || 0.6, duration: 0.25 }, t);
+  });
+}
+
+// Petals
+function makePetals(host, n, seed) {
+  const R = rng(seed), out = [];
+  for (let i = 0; i < n; i++) { const p = document.createElement("div"); p.className = "petal"; host.appendChild(p);
+    out.push({ p, x: R() * 1920, y: R() * 1080, dx: 200 + R() * 500, dy: -150 + R() * 450, r: R() * 720 - 360, s: 0.6 + R() * 1.1 }); }
+  return out;
+}
+function burst(tl, petals, at, dur) {
+  petals.forEach((o, i) => tl.fromTo(o.p, { x: o.x - 300, y: o.y, rotation: 0, scale: o.s, opacity: 0 },
+    { x: o.x - 300 + o.dx, y: o.y + o.dy, rotation: o.r, opacity: 0.95, duration: dur, ease: "sine.out" }, at + (i % 7) * 0.03));
+}
+function fall(tl, petals, at, dur) {
+  petals.forEach((o, i) => tl.fromTo(o.p, { x: o.x, y: -60 - (i % 9) * 40, rotation: 0, scale: o.s, opacity: 0.95 },
+    { x: o.x + o.dx * 0.4 - 100, y: 1140, rotation: o.r * 2, opacity: 0.95, duration: dur, ease: "none" }, at + (i % 13) * (dur / 13)));
+}
+
+// Lyric word pops: element with .w spans, one time per word
+function words(tl, sel, times, from) {
+  document.querySelectorAll(sel + " .w").forEach((w, i) =>
+    tl.fromTo(w, from || { y: 50, opacity: 0, scale: 0.6 }, { y: 0, opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2.6)" }, times[Math.min(i, times.length - 1)]));
+}
+// Whole-line in/out
+function line(tl, sel, tin, tout) {
+  tl.fromTo(sel, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.22, ease: "power2.out" }, tin);
+  if (tout != null) tl.to(sel, { opacity: 0, y: -16, duration: 0.18, ease: "power1.in" }, tout);
+}
+
+// Gallop flipbook: frames = array of 4 element ids stacked; strides on a 129 BPM canter (one stride per beat)
+function gallop(tl, frames, from, to, beat) {
+  beat = beat || 0.4651; const f = beat / 4;
+  frames.forEach((id, i) => tl.set("#" + id, { opacity: i === 0 ? 1 : 0 }, from));
+  let k = 0;
+  for (let t = from + f; t < to - 0.001; t += f, k++) {
+    const cur = (k + 1) % 4, prev = k % 4;
+    tl.set("#" + frames[prev], { opacity: 0 }, t); tl.set("#" + frames[cur], { opacity: 1 }, t);
+  }
+}
+// Stamp: drop-in with overshoot
+function stamp(tl, sel, at, rot) {
+  tl.fromTo(sel, { scale: 3, opacity: 0, rotation: (rot || -8) * 2.5 }, { scale: 1, opacity: 1, rotation: rot || -8, duration: 0.16, ease: "power4.in" }, at);
+}
+
+// Place a full-canvas cutout (1672x941 source, shown at 1920x1080) so its alpha box lands at screen (x, y) with height h.
+// The element must have transform-origin 0 0 (class "pin").
+const IMG_K = 1920 / 1672;
+function place(box, x, y, h) { const s = h / ((box[3] - box[1]) * IMG_K); return { x: x - box[0] * IMG_K * s, y: y - box[1] * IMG_K * s, scale: s }; }
+
+          const tl = gsap.timeline({ paused: true });
+          const D = 27.47;
+
+const DB = [0.001, 1.905, 3.786, 5.667, 7.571, 9.452, 11.356, 13.237, 15.118, 16.998, 18.902, 20.783, 22.664, 24.568, 26.449];
+const slot = i => DB[i * 2] != null ? DB[i * 2] : i * 3.77;
+const slotEnd = i => (i === 6 ? D - 1.0 : slot(i + 1));
+const BG = buildTree($id("break1-bgtree"), 3, { scale: 1.2, base: 1060 });
+showTree(tl, BG, 0); bloom(tl, BG, [0], 0.2);
+// generic card in/out per slot
+for (let i = 1; i <= 6; i++) {
+  const a = slot(i), b = slotEnd(i);
+  tl.fromTo("#break1-v" + i, { opacity: 0, y: 60, rotation: i % 2 ? -2 : 2 }, { opacity: 1, y: 0, rotation: 0, duration: 0.3, ease: "back.out(1.6)" }, a);
+  tl.to("#break1-v" + i, { opacity: 0, y: -40, duration: 0.2, ease: "power1.in" }, b - 0.2);
+}
+
+// slot 0: tree draws, rider canters across in front of it
+const T0 = buildTree($id("break1-tree0"), 42, { scale: 1.05 });
+drawTree(tl, T0, 0.0, 0.18);
+bloom(tl, T0, [0.001, 0.489, 0.953, 1.418, 1.905, 2.37, 2.857, 3.322, 3.786, 4.251, 4.738, 5.203, 5.667, 6.155, 6.619, 7.107, 7.571, 8.036, 8.523, 8.988, 9.452, 9.94, 10.404, 10.892, 11.356, 11.82, 12.285, 12.772, 13.237, 13.701, 14.166, 14.653, 15.118, 15.582, 16.07, 16.534, 16.998, 17.486, 17.95, 18.415, 18.902, 19.367, 19.831, 20.319, 20.783, 21.248, 21.735, 22.2, 22.664, 23.152, 23.616, 24.081, 24.568, 25.033, 25.497, 25.985, 26.449, 26.913, 27.401].filter(t => t < 3.6), 0.6);
+gallop(tl, ["break1-g1", "break1-g2", "break1-g3", "break1-g4"], 0, slot(1));
+tl.fromTo("#break1-rider", { x: -1500, y: 330, scale: 0.42 }, { x: 900, y: 330, scale: 0.42, duration: slot(1), ease: "none" }, 0);
+tl.fromTo("#break1-intro-cap", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.3);
+tl.to("#break1-v0", { opacity: 0, duration: 0.2 }, slot(1) - 0.1);
+
+// slot 1: protein ribbon folds (two sine strands that coil into a helix)
+(function () {
+  const z = $id("break1-z1"), a = slot(1), b = slotEnd(1);
+  const strands = [0, 1].map(k => el("path", { fill: "none", stroke: k ? "#d88a57" : "#167d78", "stroke-width": 16, "stroke-linecap": "round", opacity: 0.9 }, z));
+  const state = { f: 0, ph: 0 };
+  const draw = () => strands.forEach((p, k) => {
+    let d = "";
+    for (let x = 0; x <= 1000; x += 10) {
+      const amp = 40 + 150 * state.f, ph = state.ph + k * Math.PI;
+      const y = 390 + Math.sin(x / (120 - 60 * state.f) + ph) * amp * (0.4 + 0.6 * Math.sin(Math.PI * x / 1000));
+      d += (x ? " L " : "M ") + (200 + x) + " " + y.toFixed(1);
+    }
+    p.setAttribute("d", d);
+  });
+  draw();
+  tl.to(state, { f: 1, ph: 6, duration: b - a, ease: "power2.inOut", onUpdate: draw }, a);
+})();
+
+// slot 2: greetings light up as a network
+(function () {
+  const a = slot(2);
+  const W = [["Sawubona", "isiZulu", 180, 200], ["Habari", "Kiswahili", 700, 170], ["Molo", "isiXhosa", 1080, 290], ["Dumela", "Setswana", 260, 470],
+             ["Bawo ni", "Yorùbá", 640, 420], ["Selam", "Amharic", 1000, 540]];
+  const z = $id("break1-z2");
+  W.forEach((w, i) => {
+    const d = document.createElement("div"); d.className = "break1-word"; d.innerHTML = `${w[0]}<small>${w[1].toUpperCase()}</small>`;
+    d.style.left = w[2] + "px"; d.style.top = w[3] + "px"; $id("break1-words2").appendChild(d);
+    tl.fromTo(d, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2)" }, a + 0.3 + i * 0.42);
+    if (i) {
+      const p = W[i - 1], q = W[(i + 2) % W.length];
+      [p, q].forEach((o, j) => {
+        const ln = el("line", { x1: o[2] + 80, y1: o[3] + 30, x2: w[2] + 80, y2: w[3] + 30, stroke: "#167d78", "stroke-width": 3, "stroke-dasharray": "4 10", opacity: 0 }, z);
+        tl.fromTo(ln, { opacity: 0 }, { opacity: 0.7, duration: 0.25 }, a + 0.4 + i * 0.42 + j * 0.1);
+      });
+    }
+  });
+})();
+
+// slot 3: forest spectrogram scroll with a chainsaw spike
+(function () {
+  const z = $id("break1-z3"), a = slot(3), b = slotEnd(3), R = rng(31);
+  for (let i = 0; i < 9; i++) el("path", { d: `M ${80 + i * 150} 640 l 50 -${180 + (i % 3) * 50} l 50 ${180 + (i % 3) * 50} Z`, fill: "#167d78", opacity: 0.18 }, z);
+  const bars = [];
+  for (let i = 0; i < 60; i++) { const r = el("rect", { x: 100 + i * 20, y: 560, width: 14, height: 4, rx: 3, fill: "#167d78" }, z); bars.push(r); }
+  const steps = 14, dt = (b - a - 0.4) / steps;
+  for (let s = 0; s < steps; s++) bars.forEach((r, i) => {
+    const spike = s >= 8 && i > 34 && i < 44;
+    const h = spike ? 260 + R() * 120 : 20 + R() * 90;
+    tl.to(r, { attr: { height: h, y: 560 - h }, fill: spike ? "#d88a57" : "#167d78", duration: dt * 0.9, ease: "none" }, a + 0.2 + s * dt);
+  });
+  tl.fromTo("#break1-alert", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2)" }, a + 0.2 + 8 * dt);
+})();
+
+// slot 4: PET chain, an enzyme chomps through it
+(function () {
+  const z = $id("break1-z4"), a = slot(4), b = slotEnd(4);
+  const n = 9, hexes = [];
+  for (let i = 0; i < n; i++) {
+    const x = 220 + i * 120, y = 380;
+    const hx = el("g", { transform: `translate(${x} ${y})` }, z);
+    el("path", { d: "M -40 0 L -20 -35 L 20 -35 L 40 0 L 20 35 L -20 35 Z", fill: "#eff6f3", stroke: "#105e5a", "stroke-width": 6 }, hx);
+    if (i < n - 1) el("line", { x1: 40, y1: 0, x2: 80, y2: 0, stroke: "#105e5a", "stroke-width": 6 }, hx);
+    hexes.push(hx);
+  }
+  const enz = el("g", {}, z);
+  el("path", { id: "break1-pac", d: "M 0 0 L 70 -40 A 80 80 0 1 0 70 40 Z", fill: "#d88a57", stroke: "#33251e", "stroke-width": 6 }, enz);
+  el("circle", { cx: 10, cy: -40, r: 9, fill: "#33251e" }, enz);
+  const dur = b - a - 0.6;
+  tl.fromTo(enz, { x: 60, y: 380 }, { x: 1300, y: 380, duration: dur, ease: "none" }, a + 0.3);
+  hexes.forEach((h, i) => {
+    const t = a + 0.3 + dur * ((220 + i * 120 - 60) / 1240);
+    tl.to(h, { y: (i % 2 ? -1 : 1) * 160, rotation: (i % 2 ? -1 : 1) * 40, opacity: 0.55, duration: 0.5, ease: "power2.out" }, t);
+  });
+  tl.to("#break1-pac", { attr: { d: "M 0 0 L 78 -8 A 80 80 0 1 0 78 8 Z" }, duration: 0.12, yoyo: true, repeat: Math.floor(dur / 0.24), ease: "none" }, a + 0.3);
+})();
+
+// slot 5: a lesson plan types itself
+(function () {
+  const a = slot(5);
+  const L = ["Lesson: why does a horse canter in threes?", "  hook  → film the pony, count the hooves", "  try   → clap 3 against 4 with a partner", "  check → can you hear it in a song?"];
+  L.forEach((s, i) => {
+    const d = document.createElement("div"); d.className = "break1-line"; d.style.top = (150 + i * 110) + "px"; d.textContent = s; $id("break1-lines5").appendChild(d);
+    tl.fromTo(d, { opacity: 0, clipPath: "inset(0 100% 0 0)" }, { opacity: 1, clipPath: "inset(0 0% 0 0)", duration: 0.6, ease: "none" }, a + 0.25 + i * 0.75);
+  });
+})();
+
+// slot 6: support desk, suggestion pops, the bar grows
+(function () {
+  const z = $id("break1-z6"), a = slot(6);
+  el("rect", { x: 110, y: 140, width: 470, height: 90, rx: 40, fill: "#eff6f3", stroke: "#167d78", "stroke-width": 3 }, z);
+  el("rect", { x: 120, y: 260, width: 380, height: 90, rx: 40, fill: "#fcfbf8", stroke: "#33251e", "stroke-width": 3 }, z);
+  const t1 = el("text", { x: 150, y: 195, "font-family": "Space Mono", "font-weight": 700, "font-size": 34, fill: "#105e5a" }, z); t1.textContent = "my order never came…";
+  const t2 = el("text", { x: 150, y: 315, "font-family": "Space Mono", "font-weight": 700, "font-size": 34, fill: "#33251e" }, z); t2.textContent = "let me check that…";
+  const t3 = el("text", { x: 720, y: 605, "font-family": "Space Mono", "font-weight": 700, "font-size": 30, fill: "#105e5a" }, z); t3.textContent = "newer agents";
+  const t4 = el("text", { x: 990, y: 605, "font-family": "Space Mono", "font-weight": 700, "font-size": 30, fill: "#105e5a" }, z); t4.textContent = "veterans";
+  const bar = el("rect", { x: 760, y: 560, width: 140, height: 0, rx: 10, fill: "#d88a57" }, z);
+  el("rect", { x: 1000, y: 460, width: 140, height: 100, rx: 10, fill: "#167d78", opacity: 0.5 }, z);
+  tl.fromTo("#break1-sug", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.25 }, a + 0.6);
+  tl.to(bar, { attr: { height: 230, y: 330 }, duration: 1.2, ease: "power3.out" }, a + 1.1);
+})();
+
+// end: everything greys out as the news arrives
+tl.fromTo("#break1-flash", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power2.in" }, D - 0.7);
+
+          window.__timelines = window.__timelines || {};
+          window.__timelines["break1"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

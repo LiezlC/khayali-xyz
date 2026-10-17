@@ -1,0 +1,1 @@
+`./assets/finale/finale-teacher.png` — 1672×941 PNG, verified true alpha transparency.

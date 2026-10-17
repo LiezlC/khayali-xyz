@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="UTF-8" /><title>bridge</title></head>
+  <body>
+    <template>
+      <style>
+@font-face { font-family: "Fraunces"; font-weight: 900; font-style: normal; src: url("assets/fonts/fraunces-latin-900-normal.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 900; font-style: italic; src: url("assets/fonts/fraunces-latin-900-italic.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 600; font-style: normal; src: url("assets/fonts/fraunces-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Space Mono"; font-weight: 400; src: url("assets/fonts/space-mono-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Space Mono"; font-weight: 700; src: url("assets/fonts/space-mono-latin-700-normal.woff2") format("woff2"); }
+#root { position: absolute; inset: 0; overflow: hidden; font-family: "Fraunces", Georgia, serif; color: #33251e; }
+.fs-fill { position: absolute; inset: 0; overflow: hidden; }
+.cam { position: absolute; inset: 0; transform-origin: 50% 50%; }
+.layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.rider-wrap { position: absolute; inset: 0; transform-origin: 45% 45%; }
+.grade { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 90% at 50% 40%, rgba(255,220,160,0) 55%, rgba(80,40,20,0.35) 100%); }
+.paper { position: absolute; inset: 0; background: radial-gradient(60% 55% at 50% 62%, #ffffff 0%, #fcfbf8 55%, #f3efe6 100%); }
+.tree { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+.lyric { position: absolute; left: 0; right: 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 0 0.36em; text-align: center; padding: 0 120px; }
+.lyric .w { display: inline-block; }
+.big { top: 40px; font-weight: 900; font-size: 116px; line-height: 1; color: #fcfbf8; text-shadow: 0 6px 0 #33251e, 0 10px 30px rgba(51,37,30,0.45); }
+.mid { bottom: 80px; font-weight: 900; font-style: italic; font-size: 76px; line-height: 1.05; color: #fcfbf8; text-shadow: 0 5px 0 #33251e, 0 8px 24px rgba(51,37,30,0.5); }
+.inky { color: #33251e; text-shadow: none; }
+.hup { position: absolute; left: 1290px; top: 380px; width: 420px; height: 220px; display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 170px; color: #d88a57; -webkit-text-stroke: 6px #33251e; paint-order: stroke fill; transform-origin: 50% 50%; opacity: 0; }
+.mono { font-family: "Space Mono", monospace; }
+.label { position: absolute; font-family: "Space Mono", monospace; font-weight: 700; font-size: 31px; letter-spacing: 0.03em; color: #105e5a;
+  background: rgba(252,251,248,0.95); border: 3px solid #167d78; border-radius: 999px; padding: 8px 22px; white-space: nowrap; }
+.label b { color: #d88a57; }
+.petal { position: absolute; left: 0; top: 0; width: 26px; height: 18px; border-radius: 60% 40% 60% 40%; background: linear-gradient(135deg, #f6c39b, #d88a57); opacity: 0; }
+.flash { position: absolute; inset: 0; background: #fffaf0; opacity: 0; pointer-events: none; }
+.card { position: absolute; background: rgba(252,251,248,0.96); border: 3px solid #167d78; border-radius: 28px; box-shadow: 0 20px 60px rgba(16,94,90,0.25); overflow: hidden; }
+.card-title { position: absolute; left: 36px; top: 24px; right: 36px; font-family: "Space Mono", monospace; font-weight: 700; font-size: 36px; letter-spacing: 0.04em; line-height: 1.15; color: #105e5a; }
+.card-title b { color: #d88a57; }
+.caption { position: absolute; left: 0; right: 0; text-align: center; font-weight: 900; font-size: 64px; color: #33251e; }
+.gal { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+.pin { position: absolute; inset: 0; transform-origin: 0 0; }
+.pin > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+
+#bridge-sky { position: absolute; inset: 0; background: radial-gradient(80% 70% at 50% 40%, #17706b 0%, #0d3b3d 70%, #082829 100%); }
+#bridge-stars { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+#bridge-book { position: absolute; left: 560px; top: 180px; width: 800px; height: 720px; perspective: 2400px; }
+#bridge-page { position: absolute; inset: 0; background: #fcfbf8; border-radius: 18px; box-shadow: 0 30px 80px rgba(0,0,0,0.45); overflow: hidden; }
+#bridge-page::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent 0 58px, rgba(22,125,120,0.12) 58px 60px); }
+#bridge-cover { position: absolute; inset: 0; background: linear-gradient(160deg, #167d78, #0f5551); border-radius: 18px; transform-origin: 0% 50%; box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; backface-visibility: hidden; }
+#bridge-cover .t1 { font-family: "Space Mono", monospace; font-weight: 700; font-size: 34px; letter-spacing: 0.4em; color: #f6c39b; margin-top: 30px; }
+#bridge-cover .t2 { font-weight: 900; font-style: italic; font-size: 64px; color: #fcfbf8; }
+#bridge-q { position: absolute; left: 60px; right: 60px; top: 60px; font-weight: 900; font-size: 58px; line-height: 1.1; color: #33251e; }
+#bridge-step { position: absolute; left: 60px; right: 60px; top: 320px; font-family: "Space Mono", monospace; font-weight: 700; font-size: 34px; color: #167d78; }
+#bridge-stepv { position: absolute; left: 60px; right: 60px; top: 372px; font-weight: 600; font-style: italic; font-size: 44px; line-height: 1.15; color: #33251e; }
+#bridge-checks { position: absolute; left: 60px; top: 500px; }
+.bridge-ck { font-family: "Space Mono", monospace; font-weight: 700; font-size: 38px; color: #33251e; margin-bottom: 18px; opacity: 0; }
+.bridge-ck b { position: relative; display: inline-block; width: 44px; color: #d88a57; }
+.bridge-ck b i { font-style: normal; } .bridge-ck b .bridge-tick { position: absolute; left: 0; top: 0; opacity: 0; }
+#bridge-stamp { position: absolute; left: 920px; top: 560px; width: 380px; height: 380px; opacity: 0; }
+.bridge-say { position: absolute; left: 0; right: 0; text-align: center; font-weight: 900; font-style: italic; font-size: 64px; color: #f6c39b; opacity: 0; }
+
+      </style>
+      <div id="root" data-composition-id="bridge" data-width="1920" data-height="1080" data-duration="22.5">
+
+<div id="bridge-sky"></div>
+<svg id="bridge-stars" viewBox="0 0 1920 1080"></svg>
+<div id="bridge-book">
+  <div id="bridge-page">
+    <div id="bridge-q"></div>
+    <div id="bridge-step">MY FIRST SMALL STEP</div>
+    <div id="bridge-stepv"></div>
+    <div id="bridge-checks">
+      <div class="bridge-ck" id="bridge-ck1"><b><i class="bridge-box">☐</i><i class="bridge-tick">☑</i></b>try it this week</div>
+      <div class="bridge-ck" id="bridge-ck2"><b><i class="bridge-box">☐</i><i class="bridge-tick">☑</i></b>tell one person</div>
+      <div class="bridge-ck" id="bridge-ck3"><b><i class="bridge-box">☐</i><i class="bridge-tick">☑</i></b>look up, not down</div>
+    </div>
+  </div>
+  <div id="bridge-cover"><svg class="tree" id="bridge-emblem" viewBox="0 0 1920 1080" style="position:relative;width:520px;height:292px"></svg><div class="t1">UTOPAI</div><div class="t2">Passport</div></div>
+</div>
+<svg id="bridge-stamp" viewBox="0 0 380 380">
+  <g transform="rotate(-14 190 190)">
+    <circle cx="190" cy="190" r="170" fill="none" stroke="#d88a57" stroke-width="14" />
+    <circle cx="190" cy="190" r="140" fill="none" stroke="#d88a57" stroke-width="4" />
+    <text x="190" y="170" text-anchor="middle" font-family="Fraunces" font-weight="900" font-size="54" fill="#d88a57">FAR SIDE</text>
+    <text x="190" y="232" text-anchor="middle" font-family="Space Mono" font-weight="700" font-size="30" fill="#d88a57">✦ DREAM ✦</text>
+  </g>
+</svg>
+<div class="bridge-say" id="bridge-say1" style="bottom:60px">(say it out loud)</div>
+<div class="bridge-say" id="bridge-say2" style="bottom:60px">(then try something small)</div>
+<div class="lyric big" id="bridge-l-braver" style="top:auto;bottom:50px;font-size:66px;opacity:0">One little experiment, braver than it seems…</div>
+
+      </div>
+      <script>
+        (function () {
+// Shared helpers, inlined into every scene by build.py. Deterministic only.
+function rng(seed) { return function () { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+const SVGNS = "http://www.w3.org/2000/svg";
+function el(tag, attrs, parent) { const n = document.createElementNS(SVGNS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); if (parent) parent.appendChild(n); return n; }
+function $id(id) { return document.getElementById(id); }
+
+// Glass tree: twin braided trunk, round crown, apricot buds. Returns branches (with depth) and buds.
+function buildTree(svg, seed, opt) {
+  opt = opt || {}; const scale = opt.scale || 1, cxT = opt.x || 960, base = opt.base || 1000;
+  const R = rng(seed);
+  const defs = el("defs", {}, svg);
+  const glow = el("filter", { id: svg.id + "-glow", x: "-20%", y: "-20%", width: "140%", height: "140%" }, defs);
+  el("feGaussianBlur", { stdDeviation: "6", result: "b" }, glow);
+  const m = el("feMerge", {}, glow); el("feMergeNode", { in: "b" }, m); el("feMergeNode", { in: "SourceGraphic" }, m);
+  const bud = el("radialGradient", { id: svg.id + "-bud", cx: "40%", cy: "35%", r: "65%" }, defs);
+  el("stop", { offset: "0%", "stop-color": "#fff4e6" }, bud); el("stop", { offset: "45%", "stop-color": "#f3b383" }, bud); el("stop", { offset: "100%", "stop-color": "#c9703f" }, bud);
+  const halo = el("radialGradient", { id: svg.id + "-halo" }, defs);
+  el("stop", { offset: "0%", "stop-color": "#f6c39b", "stop-opacity": "0.75" }, halo); el("stop", { offset: "100%", "stop-color": "#f6c39b", "stop-opacity": "0" }, halo);
+  el("ellipse", { cx: cxT, cy: base, rx: 520 * scale, ry: 34 * scale, fill: "#167d78", opacity: "0.10" }, svg);
+  const gBranch = el("g", { filter: `url(#${svg.id}-glow)`, "stroke-linecap": "round", fill: "none" }, svg);
+  const gBud = el("g", {}, svg);
+  const branches = [], buds = [];
+  function seg(d, w, depth) {
+    const g = el("g", {}, gBranch);
+    const body = el("path", { d, stroke: "#8fd3c3", "stroke-width": w, opacity: "0.5" }, g);
+    const core = el("path", { d, stroke: "#167d78", "stroke-width": Math.max(1.5, w * 0.42), opacity: "0.8" }, g);
+    const hi = el("path", { d, stroke: "#ffffff", "stroke-width": Math.max(1, w * 0.16), opacity: "0.85", transform: `translate(${(-w * 0.2).toFixed(1)} ${(-w * 0.1).toFixed(1)})` }, g);
+    branches.push({ paths: [body, core, hi], depth });
+  }
+  function addBud(x, y, r) {
+    const h = el("circle", { cx: x, cy: y, r: r * 2.6, fill: `url(#${svg.id}-halo)`, opacity: 0 }, gBud);
+    const b = el("circle", { cx: x, cy: y, r, fill: `url(#${svg.id}-bud)`, stroke: "#b8643a", "stroke-width": 1.2 }, gBud);
+    buds.push({ b, h, x, y, r });
+  }
+  function grow(x, y, ang, len, w, depth) {
+    const bend = (R() - 0.5) * 0.5;
+    const x2 = x + Math.cos(ang) * len, y2 = y + Math.sin(ang) * len;
+    const cx = x + Math.cos(ang + bend) * len * 0.55, cy = y + Math.sin(ang + bend) * len * 0.55;
+    seg(`M ${x.toFixed(1)} ${y.toFixed(1)} Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${x2.toFixed(1)} ${y2.toFixed(1)}`, w, depth);
+    if (depth >= 4 && R() < 0.4) addBud(cx, cy, (8 + R() * 6) * scale);
+    if (depth >= 6) { addBud(x2, y2, (13 + R() * 11) * scale); return; }
+    const spread = depth < 2 ? 0.7 : 0.52;
+    const pull = (-Math.PI / 2 - ang) * 0.08;
+    grow(x2, y2, ang - spread + pull + (R() - 0.5) * 0.2, len * (0.74 + R() * 0.08), w * 0.68, depth + 1);
+    grow(x2, y2, ang + spread + pull + (R() - 0.5) * 0.2, len * (0.74 + R() * 0.08), w * 0.68, depth + 1);
+    if (depth >= 2 && depth <= 4 && R() < 0.3) grow(x2, y2, ang + pull + (R() - 0.5) * 0.3, len * 0.62, w * 0.6, depth + 1);
+  }
+  const top = base - 230 * scale;
+  seg(`M ${cxT - 60 * scale} ${base} C ${cxT + 50 * scale} ${base - 80 * scale}, ${cxT - 70 * scale} ${base - 150 * scale}, ${cxT} ${top}`, 74 * scale, 0);
+  seg(`M ${cxT + 60 * scale} ${base} C ${cxT - 50 * scale} ${base - 90 * scale}, ${cxT + 70 * scale} ${base - 160 * scale}, ${cxT} ${top}`, 62 * scale, 0);
+  grow(cxT, top, -Math.PI / 2 - 0.85, 170 * scale, 42 * scale, 1);
+  grow(cxT, top, -Math.PI / 2 + 0.85, 170 * scale, 42 * scale, 1);
+  grow(cxT, top, -Math.PI / 2, 130 * scale, 34 * scale, 2);
+  branches.forEach(o => o.paths.forEach(p => { const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; }));
+  return { branches, buds };
+}
+function drawTree(tl, T, at, step) { T.branches.forEach(o => o.paths.forEach(p => tl.to(p, { strokeDashoffset: 0, duration: step * 3.2, ease: "power2.out" }, at + o.depth * step))); }
+function showTree(tl, T, at) { T.branches.forEach(o => o.paths.forEach(p => tl.set(p, { strokeDashoffset: 0 }, at))); }
+function bloom(tl, T, times, glowTo) {
+  T.buds.forEach((o, i) => {
+    const t = times[i % times.length] + ((i * 37) % 11) * 0.012;
+    tl.fromTo(o.b, { scale: 0, transformOrigin: `${o.x}px ${o.y}px` }, { scale: 1, duration: 0.3, ease: "back.out(3)" }, t);
+    tl.fromTo(o.h, { opacity: 0 }, { opacity: glowTo || 0.6, duration: 0.25 }, t);
+  });
+}
+
+// Petals
+function makePetals(host, n, seed) {
+  const R = rng(seed), out = [];
+  for (let i = 0; i < n; i++) { const p = document.createElement("div"); p.className = "petal"; host.appendChild(p);
+    out.push({ p, x: R() * 1920, y: R() * 1080, dx: 200 + R() * 500, dy: -150 + R() * 450, r: R() * 720 - 360, s: 0.6 + R() * 1.1 }); }
+  return out;
+}
+function burst(tl, petals, at, dur) {
+  petals.forEach((o, i) => tl.fromTo(o.p, { x: o.x - 300, y: o.y, rotation: 0, scale: o.s, opacity: 0 },
+    { x: o.x - 300 + o.dx, y: o.y + o.dy, rotation: o.r, opacity: 0.95, duration: dur, ease: "sine.out" }, at + (i % 7) * 0.03));
+}
+function fall(tl, petals, at, dur) {
+  petals.forEach((o, i) => tl.fromTo(o.p, { x: o.x, y: -60 - (i % 9) * 40, rotation: 0, scale: o.s, opacity: 0.95 },
+    { x: o.x + o.dx * 0.4 - 100, y: 1140, rotation: o.r * 2, opacity: 0.95, duration: dur, ease: "none" }, at + (i % 13) * (dur / 13)));
+}
+
+// Lyric word pops: element with .w spans, one time per word
+function words(tl, sel, times, from) {
+  document.querySelectorAll(sel + " .w").forEach((w, i) =>
+    tl.fromTo(w, from || { y: 50, opacity: 0, scale: 0.6 }, { y: 0, opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2.6)" }, times[Math.min(i, times.length - 1)]));
+}
+// Whole-line in/out
+function line(tl, sel, tin, tout) {
+  tl.fromTo(sel, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.22, ease: "power2.out" }, tin);
+  if (tout != null) tl.to(sel, { opacity: 0, y: -16, duration: 0.18, ease: "power1.in" }, tout);
+}
+
+// Gallop flipbook: frames = array of 4 element ids stacked; strides on a 129 BPM canter (one stride per beat)
+function gallop(tl, frames, from, to, beat) {
+  beat = beat || 0.4651; const f = beat / 4;
+  frames.forEach((id, i) => tl.set("#" + id, { opacity: i === 0 ? 1 : 0 }, from));
+  let k = 0;
+  for (let t = from + f; t < to - 0.001; t += f, k++) {
+    const cur = (k + 1) % 4, prev = k % 4;
+    tl.set("#" + frames[prev], { opacity: 0 }, t); tl.set("#" + frames[cur], { opacity: 1 }, t);
+  }
+}
+// Stamp: drop-in with overshoot
+function stamp(tl, sel, at, rot) {
+  tl.fromTo(sel, { scale: 3, opacity: 0, rotation: (rot || -8) * 2.5 }, { scale: 1, opacity: 1, rotation: rot || -8, duration: 0.16, ease: "power4.in" }, at);
+}
+
+// Place a full-canvas cutout (1672x941 source, shown at 1920x1080) so its alpha box lands at screen (x, y) with height h.
+// The element must have transform-origin 0 0 (class "pin").
+const IMG_K = 1920 / 1672;
+function place(box, x, y, h) { const s = h / ((box[3] - box[1]) * IMG_K); return { x: x - box[0] * IMG_K * s, y: y - box[1] * IMG_K * s, scale: s }; }
+
+          const tl = gsap.timeline({ paused: true });
+          const D = 22.5;
+
+// local = track - 168.7
+const ON = [0.109, 1.038, 1.781, 2.501, 5.775, 6.75, 7.679, 8.375, 8.608, 8.886, 10.558, 15.225, 15.759, 16.2, 16.897, 17.129, 17.594, 17.849, 18.081, 18.522, 18.987, 19.173, 19.451, 20.101, 20.519, 20.612, 20.891, 21.332, 22.284];
+const R = rng(21), z = $id("bridge-stars");
+for (let i = 0; i < 70; i++) {
+  const s = el("circle", { cx: R() * 1920, cy: R() * 1080, r: 1.5 + R() * 3.5, fill: i % 5 ? "#fcfbf8" : "#f6c39b", opacity: 0.25 }, z);
+  const t = ON.length ? ON[i % ON.length] : i * 0.3;
+  tl.to(s, { opacity: 1, duration: 0.08 }, t);
+  tl.to(s, { opacity: 0.25, duration: 0.9 }, t + 0.08);
+}
+const E = buildTree($id("bridge-emblem"), 42, { scale: 1 });
+showTree(tl, E, 0); bloom(tl, E, [0], 0.4);
+
+// book floats in, cover opens on the second question
+tl.fromTo("#bridge-book", { y: 120, opacity: 0, rotation: -3 }, { y: 0, opacity: 1, rotation: 0, duration: 1.4, ease: "power2.out" }, 0);
+tl.fromTo("#bridge-cover", { rotationY: 0 }, { rotationY: -178, duration: 1.0, ease: "power2.inOut" }, 7.4);
+tl.to("#bridge-book", { x: -300, duration: 1.0, ease: "power2.inOut" }, 7.4);
+
+// type helper
+function type(id, text, at, dur) { const n = $id(id), s = { k: 0 }; tl.to(s, { k: text.length, duration: dur, ease: "none", onUpdate: () => (n.textContent = text.slice(0, Math.round(s.k))) }, at); }
+// first question floats as big sky text before the book opens
+const q1 = document.createElement("div"); q1.className = "bridge-say"; q1.style.top = "40px"; q1.style.color = "#fcfbf8"; q1.style.fontSize = "76px"; q1.style.fontStyle = "normal";
+q1.textContent = "What would you love to make possible?";
+z.parentNode.appendChild(q1);
+tl.fromTo(q1, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6 }, 0.0);
+tl.to(q1, { opacity: 0, duration: 0.5 }, 6.6);
+tl.fromTo("#bridge-say1", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 3.4);
+tl.to("#bridge-say1", { opacity: 0, duration: 0.4 }, 6.0);
+// second time it writes itself on the open page
+type("bridge-q", "What would you love to make possible?", 8.0, 1.6);
+tl.fromTo("#bridge-say2", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 11.5);
+tl.to("#bridge-say2", { opacity: 0, duration: 0.4 }, 14.4);
+type("bridge-stepv", "teach my gran to read her photos aloud", 11.6, 2.0);
+// stamp on "stamp it with a dream" (185.5 -> 16.8)
+tl.fromTo("#bridge-stamp", { opacity: 0, scale: 2.4 }, { opacity: 0.95, scale: 1, duration: 0.14, ease: "power4.in" }, 16.75);
+tl.to("#bridge-book", { y: 10, duration: 0.05, yoyo: true, repeat: 3 }, 16.9);
+// checklist on "one little experiment, braver than it seems" (187.2 -> 18.5)
+[["bridge-ck1", 18.6], ["bridge-ck2", 19.3], ["bridge-ck3", 20.0]].forEach(([id, t]) => {
+  tl.fromTo("#" + id, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.25 }, t);
+  tl.set("#" + id + " .bridge-box", { opacity: 1 }, 0); tl.set("#" + id + " .bridge-tick", { opacity: 0 }, 0);
+  tl.set("#" + id + " .bridge-box", { opacity: 0 }, t + 0.4); tl.set("#" + id + " .bridge-tick", { opacity: 1 }, t + 0.4);
+});
+tl.fromTo("#bridge-l-braver", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4 }, 18.5);
+tl.to(["#bridge-book", "#bridge-stamp", "#bridge-l-braver"], { opacity: 0, duration: 0.5 }, D - 0.6);
+
+          window.__timelines = window.__timelines || {};
+          window.__timelines["bridge"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

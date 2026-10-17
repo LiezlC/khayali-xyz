@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="UTF-8" /><title>finale</title></head>
+  <body>
+    <template>
+      <style>
+@font-face { font-family: "Fraunces"; font-weight: 900; font-style: normal; src: url("assets/fonts/fraunces-latin-900-normal.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 900; font-style: italic; src: url("assets/fonts/fraunces-latin-900-italic.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 600; font-style: normal; src: url("assets/fonts/fraunces-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Space Mono"; font-weight: 400; src: url("assets/fonts/space-mono-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Space Mono"; font-weight: 700; src: url("assets/fonts/space-mono-latin-700-normal.woff2") format("woff2"); }
+#root { position: absolute; inset: 0; overflow: hidden; font-family: "Fraunces", Georgia, serif; color: #33251e; }
+.fs-fill { position: absolute; inset: 0; overflow: hidden; }
+.cam { position: absolute; inset: 0; transform-origin: 50% 50%; }
+.layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.rider-wrap { position: absolute; inset: 0; transform-origin: 45% 45%; }
+.grade { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 90% at 50% 40%, rgba(255,220,160,0) 55%, rgba(80,40,20,0.35) 100%); }
+.paper { position: absolute; inset: 0; background: radial-gradient(60% 55% at 50% 62%, #ffffff 0%, #fcfbf8 55%, #f3efe6 100%); }
+.tree { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+.lyric { position: absolute; left: 0; right: 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 0 0.36em; text-align: center; padding: 0 120px; }
+.lyric .w { display: inline-block; }
+.big { top: 40px; font-weight: 900; font-size: 116px; line-height: 1; color: #fcfbf8; text-shadow: 0 6px 0 #33251e, 0 10px 30px rgba(51,37,30,0.45); }
+.mid { bottom: 80px; font-weight: 900; font-style: italic; font-size: 76px; line-height: 1.05; color: #fcfbf8; text-shadow: 0 5px 0 #33251e, 0 8px 24px rgba(51,37,30,0.5); }
+.inky { color: #33251e; text-shadow: none; }
+.hup { position: absolute; left: 1290px; top: 380px; width: 420px; height: 220px; display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 170px; color: #d88a57; -webkit-text-stroke: 6px #33251e; paint-order: stroke fill; transform-origin: 50% 50%; opacity: 0; }
+.mono { font-family: "Space Mono", monospace; }
+.label { position: absolute; font-family: "Space Mono", monospace; font-weight: 700; font-size: 31px; letter-spacing: 0.03em; color: #105e5a;
+  background: rgba(252,251,248,0.95); border: 3px solid #167d78; border-radius: 999px; padding: 8px 22px; white-space: nowrap; }
+.label b { color: #d88a57; }
+.petal { position: absolute; left: 0; top: 0; width: 26px; height: 18px; border-radius: 60% 40% 60% 40%; background: linear-gradient(135deg, #f6c39b, #d88a57); opacity: 0; }
+.flash { position: absolute; inset: 0; background: #fffaf0; opacity: 0; pointer-events: none; }
+.card { position: absolute; background: rgba(252,251,248,0.96); border: 3px solid #167d78; border-radius: 28px; box-shadow: 0 20px 60px rgba(16,94,90,0.25); overflow: hidden; }
+.card-title { position: absolute; left: 36px; top: 24px; right: 36px; font-family: "Space Mono", monospace; font-weight: 700; font-size: 36px; letter-spacing: 0.04em; line-height: 1.15; color: #105e5a; }
+.card-title b { color: #d88a57; }
+.caption { position: absolute; left: 0; right: 0; text-align: center; font-weight: 900; font-size: 64px; color: #33251e; }
+.gal { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+.pin { position: absolute; inset: 0; transform-origin: 0 0; }
+.pin > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+
+#finale-paint { position: absolute; inset: 0; }
+#finale-cam { position: absolute; inset: 0; transform-origin: 50% 50%; }
+#finale-rider { position: absolute; inset: 0; transform-origin: 45% 45%; opacity: 0; }
+#finale-fx { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+#finale-coded { position: absolute; inset: 0; opacity: 0; }
+#finale-tag { position: absolute; left: 0; right: 0; top: 50px; text-align: center; font-weight: 900; font-size: 76px; color: #33251e; opacity: 0; }
+.finale-kid { position: absolute; left: 0; right: 0; top: 70px; text-align: center; font-weight: 900; font-style: italic; font-size: 92px; color: #fcfbf8; text-shadow: 0 5px 0 #33251e, 0 10px 30px rgba(51,37,30,0.5); opacity: 0; }
+#finale-end { position: absolute; inset: 0; opacity: 0; }
+#finale-end .t { position: absolute; left: 0; right: 0; top: 120px; text-align: center; font-weight: 900; font-style: italic; font-size: 132px; color: #33251e; }
+#finale-end .s { position: absolute; left: 0; right: 0; top: 285px; text-align: center; font-family: "Space Mono", monospace; font-weight: 700; font-size: 38px; letter-spacing: 0.3em; color: #167d78; }
+#finale-end .q { position: absolute; left: 0; right: 0; top: 820px; text-align: center; font-weight: 900; font-size: 56px; color: #33251e; }
+#finale-end .u { position: absolute; left: 0; right: 0; top: 905px; text-align: center; font-family: "Space Mono", monospace; font-weight: 700; font-size: 50px; letter-spacing: 0.16em; color: #d88a57; }
+#finale-prints .print { position: absolute; left: 0; top: 0; width: 54px; height: 54px; opacity: 0; }
+
+      </style>
+      <div id="root" data-composition-id="finale" data-width="1920" data-height="1080" data-duration="57.714">
+
+<div id="finale-paint">
+  <div id="finale-cam">
+    <img class="layer" src="assets/finale/finale-plate.png" alt="" />
+    <div class="pin" id="finale-teacher"><img src="assets/finale/finale-teacher.png" alt="" /></div>
+    <div class="pin" id="finale-girl"><img src="assets/finale/finale-girl.png" alt="" /></div>
+    <div class="pin" id="finale-hat"><img src="assets/finale/finale-hat.png" alt="" /></div>
+  </div>
+  <div id="finale-rider">
+    <img class="gal" id="finale-g1" src="assets/gallop/g1.png" alt="" /><img class="gal" id="finale-g2" src="assets/gallop/g2.png" alt="" />
+    <img class="gal" id="finale-g3" src="assets/gallop/g3.png" alt="" /><img class="gal" id="finale-g4" src="assets/gallop/g4.png" alt="" />
+  </div>
+  <div class="grade"></div>
+</div>
+<div id="finale-coded">
+  <div class="paper"></div>
+  <svg class="tree" id="finale-tree" viewBox="0 0 1920 1080"></svg>
+  <div id="finale-labels"></div>
+  <div id="finale-tag">What would <i>you</i> love to make possible?</div>
+</div>
+<svg id="finale-fx" viewBox="0 0 1920 1080"></svg>
+<div id="finale-petals"></div>
+<div class="lyric big" id="finale-l-ride" style="opacity:0"><span class="w">Then</span><span class="w">ride</span><span class="w">the</span><span class="w">approach!</span></div>
+<div class="finale-kid" id="finale-k1">Where you look, you go…</div>
+<div class="finale-kid" id="finale-k2">Where you look, you go…</div>
+<div class="finale-kid" id="finale-k3">Where you look, you go…</div>
+<div id="finale-end">
+  <div class="paper"></div>
+  <svg class="tree" id="finale-etree" viewBox="0 0 1920 1080"></svg>
+  <div class="t">Eyes on the Far Side</div>
+  <div class="s">KHAYALI TUNES · AI &amp; I</div>
+  <div class="q">Look up. Then ride the approach.</div>
+  <div class="u">khayali.xyz/utopai</div>
+  <div id="finale-prints"></div>
+</div>
+<div class="flash" id="finale-flash"></div>
+<div class="flash" id="finale-out" style="background:#33251e"></div>
+
+      </div>
+      <script>
+        (function () {
+// Shared helpers, inlined into every scene by build.py. Deterministic only.
+function rng(seed) { return function () { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+const SVGNS = "http://www.w3.org/2000/svg";
+function el(tag, attrs, parent) { const n = document.createElementNS(SVGNS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); if (parent) parent.appendChild(n); return n; }
+function $id(id) { return document.getElementById(id); }
+
+// Glass tree: twin braided trunk, round crown, apricot buds. Returns branches (with depth) and buds.
+function buildTree(svg, seed, opt) {
+  opt = opt || {}; const scale = opt.scale || 1, cxT = opt.x || 960, base = opt.base || 1000;
+  const R = rng(seed);
+  const defs = el("defs", {}, svg);
+  const glow = el("filter", { id: svg.id + "-glow", x: "-20%", y: "-20%", width: "140%", height: "140%" }, defs);
+  el("feGaussianBlur", { stdDeviation: "6", result: "b" }, glow);
+  const m = el("feMerge", {}, glow); el("feMergeNode", { in: "b" }, m); el("feMergeNode", { in: "SourceGraphic" }, m);
+  const bud = el("radialGradient", { id: svg.id + "-bud", cx: "40%", cy: "35%", r: "65%" }, defs);
+  el("stop", { offset: "0%", "stop-color": "#fff4e6" }, bud); el("stop", { offset: "45%", "stop-color": "#f3b383" }, bud); el("stop", { offset: "100%", "stop-color": "#c9703f" }, bud);
+  const halo = el("radialGradient", { id: svg.id + "-halo" }, defs);
+  el("stop", { offset: "0%", "stop-color": "#f6c39b", "stop-opacity": "0.75" }, halo); el("stop", { offset: "100%", "stop-color": "#f6c39b", "stop-opacity": "0" }, halo);
+  el("ellipse", { cx: cxT, cy: base, rx: 520 * scale, ry: 34 * scale, fill: "#167d78", opacity: "0.10" }, svg);
+  const gBranch = el("g", { filter: `url(#${svg.id}-glow)`, "stroke-linecap": "round", fill: "none" }, svg);
+  const gBud = el("g", {}, svg);
+  const branches = [], buds = [];
+  function seg(d, w, depth) {
+    const g = el("g", {}, gBranch);
+    const body = el("path", { d, stroke: "#8fd3c3", "stroke-width": w, opacity: "0.5" }, g);
+    const core = el("path", { d, stroke: "#167d78", "stroke-width": Math.max(1.5, w * 0.42), opacity: "0.8" }, g);
+    const hi = el("path", { d, stroke: "#ffffff", "stroke-width": Math.max(1, w * 0.16), opacity: "0.85", transform: `translate(${(-w * 0.2).toFixed(1)} ${(-w * 0.1).toFixed(1)})` }, g);
+    branches.push({ paths: [body, core, hi], depth });
+  }
+  function addBud(x, y, r) {
+    const h = el("circle", { cx: x, cy: y, r: r * 2.6, fill: `url(#${svg.id}-halo)`, opacity: 0 }, gBud);
+    const b = el("circle", { cx: x, cy: y, r, fill: `url(#${svg.id}-bud)`, stroke: "#b8643a", "stroke-width": 1.2 }, gBud);
+    buds.push({ b, h, x, y, r });
+  }
+  function grow(x, y, ang, len, w, depth) {
+    const bend = (R() - 0.5) * 0.5;
+    const x2 = x + Math.cos(ang) * len, y2 = y + Math.sin(ang) * len;
+    const cx = x + Math.cos(ang + bend) * len * 0.55, cy = y + Math.sin(ang + bend) * len * 0.55;
+    seg(`M ${x.toFixed(1)} ${y.toFixed(1)} Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${x2.toFixed(1)} ${y2.toFixed(1)}`, w, depth);
+    if (depth >= 4 && R() < 0.4) addBud(cx, cy, (8 + R() * 6) * scale);
+    if (depth >= 6) { addBud(x2, y2, (13 + R() * 11) * scale); return; }
+    const spread = depth < 2 ? 0.7 : 0.52;
+    const pull = (-Math.PI / 2 - ang) * 0.08;
+    grow(x2, y2, ang - spread + pull + (R() - 0.5) * 0.2, len * (0.74 + R() * 0.08), w * 0.68, depth + 1);
+    grow(x2, y2, ang + spread + pull + (R() - 0.5) * 0.2, len * (0.74 + R() * 0.08), w * 0.68, depth + 1);
+    if (depth >= 2 && depth <= 4 && R() < 0.3) grow(x2, y2, ang + pull + (R() - 0.5) * 0.3, len * 0.62, w * 0.6, depth + 1);
+  }
+  const top = base - 230 * scale;
+  seg(`M ${cxT - 60 * scale} ${base} C ${cxT + 50 * scale} ${base - 80 * scale}, ${cxT - 70 * scale} ${base - 150 * scale}, ${cxT} ${top}`, 74 * scale, 0);
+  seg(`M ${cxT + 60 * scale} ${base} C ${cxT - 50 * scale} ${base - 90 * scale}, ${cxT + 70 * scale} ${base - 160 * scale}, ${cxT} ${top}`, 62 * scale, 0);
+  grow(cxT, top, -Math.PI / 2 - 0.85, 170 * scale, 42 * scale, 1);
+  grow(cxT, top, -Math.PI / 2 + 0.85, 170 * scale, 42 * scale, 1);
+  grow(cxT, top, -Math.PI / 2, 130 * scale, 34 * scale, 2);
+  branches.forEach(o => o.paths.forEach(p => { const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; }));
+  return { branches, buds };
+}
+function drawTree(tl, T, at, step) { T.branches.forEach(o => o.paths.forEach(p => tl.to(p, { strokeDashoffset: 0, duration: step * 3.2, ease: "power2.out" }, at + o.depth * step))); }
+function showTree(tl, T, at) { T.branches.forEach(o => o.paths.forEach(p => tl.set(p, { strokeDashoffset: 0 }, at))); }
+function bloom(tl, T, times, glowTo) {
+  T.buds.forEach((o, i) => {
+    const t = times[i % times.length] + ((i * 37) % 11) * 0.012;
+    tl.fromTo(o.b, { scale: 0, transformOrigin: `${o.x}px ${o.y}px` }, { scale: 1, duration: 0.3, ease: "back.out(3)" }, t);
+    tl.fromTo(o.h, { opacity: 0 }, { opacity: glowTo || 0.6, duration: 0.25 }, t);
+  });
+}
+
+// Petals
+function makePetals(host, n, seed) {
+  const R = rng(seed), out = [];
+  for (let i = 0; i < n; i++) { const p = document.createElement("div"); p.className = "petal"; host.appendChild(p);
+    out.push({ p, x: R() * 1920, y: R() * 1080, dx: 200 + R() * 500, dy: -150 + R() * 450, r: R() * 720 - 360, s: 0.6 + R() * 1.1 }); }
+  return out;
+}
+function burst(tl, petals, at, dur) {
+  petals.forEach((o, i) => tl.fromTo(o.p, { x: o.x - 300, y: o.y, rotation: 0, scale: o.s, opacity: 0 },
+    { x: o.x - 300 + o.dx, y: o.y + o.dy, rotation: o.r, opacity: 0.95, duration: dur, ease: "sine.out" }, at + (i % 7) * 0.03));
+}
+function fall(tl, petals, at, dur) {
+  petals.forEach((o, i) => tl.fromTo(o.p, { x: o.x, y: -60 - (i % 9) * 40, rotation: 0, scale: o.s, opacity: 0.95 },
+    { x: o.x + o.dx * 0.4 - 100, y: 1140, rotation: o.r * 2, opacity: 0.95, duration: dur, ease: "none" }, at + (i % 13) * (dur / 13)));
+}
+
+// Lyric word pops: element with .w spans, one time per word
+function words(tl, sel, times, from) {
+  document.querySelectorAll(sel + " .w").forEach((w, i) =>
+    tl.fromTo(w, from || { y: 50, opacity: 0, scale: 0.6 }, { y: 0, opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2.6)" }, times[Math.min(i, times.length - 1)]));
+}
+// Whole-line in/out
+function line(tl, sel, tin, tout) {
+  tl.fromTo(sel, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.22, ease: "power2.out" }, tin);
+  if (tout != null) tl.to(sel, { opacity: 0, y: -16, duration: 0.18, ease: "power1.in" }, tout);
+}
+
+// Gallop flipbook: frames = array of 4 element ids stacked; strides on a 129 BPM canter (one stride per beat)
+function gallop(tl, frames, from, to, beat) {
+  beat = beat || 0.4651; const f = beat / 4;
+  frames.forEach((id, i) => tl.set("#" + id, { opacity: i === 0 ? 1 : 0 }, from));
+  let k = 0;
+  for (let t = from + f; t < to - 0.001; t += f, k++) {
+    const cur = (k + 1) % 4, prev = k % 4;
+    tl.set("#" + frames[prev], { opacity: 0 }, t); tl.set("#" + frames[cur], { opacity: 1 }, t);
+  }
+}
+// Stamp: drop-in with overshoot
+function stamp(tl, sel, at, rot) {
+  tl.fromTo(sel, { scale: 3, opacity: 0, rotation: (rot || -8) * 2.5 }, { scale: 1, opacity: 1, rotation: rot || -8, duration: 0.16, ease: "power4.in" }, at);
+}
+
+// Place a full-canvas cutout (1672x941 source, shown at 1920x1080) so its alpha box lands at screen (x, y) with height h.
+// The element must have transform-origin 0 0 (class "pin").
+const IMG_K = 1920 / 1672;
+function place(box, x, y, h) { const s = h / ((box[3] - box[1]) * IMG_K); return { x: x - box[0] * IMG_K * s, y: y - box[1] * IMG_K * s, scale: s }; }
+
+          const tl = gsap.timeline({ paused: true });
+          const D = 57.714;
+
+// local = track - 217.83
+const BEATS = [0.066, 0.554, 1.018, 1.482, 1.97, 2.434, 2.922, 3.387, 3.851, 4.315, 4.803, 5.267, 5.755, 6.219, 6.707, 7.171, 7.636, 8.1, 8.588, 9.052, 9.54, 10.004, 10.469, 10.933, 11.421, 11.885, 12.373, 12.837, 13.255, 13.673, 14.091, 14.509, 14.973, 15.438, 15.902, 16.39, 16.854, 17.318, 17.806, 18.27, 18.735, 19.223, 19.687, 20.175, 20.639, 21.103, 21.568, 22.055, 22.52, 23.007, 23.472, 23.936, 24.424, 24.888, 25.353, 25.84, 26.305, 26.769, 27.257, 27.721, 28.185, 28.673, 29.137, 29.602, 30.089, 30.554, 31.041, 31.506, 31.97, 32.458, 32.922, 33.387, 33.874, 34.339, 34.826, 35.291, 35.755, 36.243, 36.707, 37.172, 37.636, 38.077, 38.542, 38.983, 39.447, 39.911, 40.353, 40.817, 41.281, 41.746, 42.187, 42.651, 43.093, 43.58, 44.068, 44.532, 44.973, 45.415, 45.856, 46.297, 46.761, 47.226, 47.69, 48.155, 48.619, 49.083, 49.548, 50.035, 50.5, 50.964, 51.452, 51.916, 52.381, 52.868, 53.333, 53.843, 54.331], DB = [1.018, 2.922, 4.803, 6.707, 8.588, 10.469, 12.373, 14.091, 15.902, 17.806, 19.687, 21.568, 23.472, 25.353, 27.257, 29.137, 31.041, 32.922, 34.826, 36.707, 38.542, 40.353, 42.187, 44.068, 45.856, 47.69, 49.548, 51.452, 53.333];
+const GIRL = [444, 314, 865, 874], HAT = [505, 243, 1166, 698], TEACH = [528, 9, 1233, 918];
+const at = s => s - 217.83;
+function cam(S, px, py) { const bx = (S - 1) * 960, by = (S - 1) * 540;
+  return { scale: S, x: Math.max(-bx, Math.min(bx, (960 - px) * S)), y: Math.max(-by, Math.min(by, (540 - py) * S)) }; }
+// characters at the base of the giant tree, as in the painting
+tl.set("#finale-girl", place(GIRL, 480, 440, 650), 0);
+tl.set("#finale-teacher", place(TEACH, 1100, 300, 640), 0);
+tl.set("#finale-hat", { ...place(HAT, 1222, 300, 140), rotation: -8 }, 0);
+
+// 0..8: "Then ride the approach!", drift up into the bud scenes
+tl.fromTo("#finale-cam", cam(1.08, 960, 600), { ...cam(1.0, 960, 540), duration: 4, ease: "power2.out" }, 0);
+words(tl, "#finale-l-ride", [1.37, 1.75, 1.95, 2.15]);
+tl.to("#finale-l-ride", { opacity: 0, duration: 0.3 }, 3.7);
+tl.to("#finale-cam", { ...cam(1.8, 960, 250), duration: 4.0, ease: "sine.inOut" }, 4.0);
+fall(tl, makePetals($id("finale-petals"), 36, 61), 0, 14);
+
+// 8..14: "Where you look, you go" x3, a small rider canters toward the tree
+tl.to("#finale-cam", { ...cam(1.0, 960, 540), duration: 1.2, ease: "power2.inOut" }, 8.0);
+tl.set("#finale-rider", { opacity: 1 }, 8.07);
+gallop(tl, ["finale-g1", "finale-g2", "finale-g3", "finale-g4"], 8.07, 14.2);
+tl.fromTo("#finale-rider", { x: -1400, y: 420, scale: 0.3 }, { x: 120, y: 330, scale: 0.22, duration: 6.1, ease: "none" }, 8.07);
+tl.set("#finale-rider", { opacity: 0 }, 14.2);
+[["finale-k1", 8.07, 9.8], ["finale-k2", 9.97, 11.7], ["finale-k3", 11.87, 13.6]].forEach(([id, a, b]) => line(tl, "#" + id, a, b));
+
+// fireworks helper: radial apricot / teal sparks
+const FX = $id("finale-fx");
+let fwSeed = 1;
+function firework(x, y, t, big) {
+  const R = rng(fwSeed++), n = big ? 26 : 16, rad = big ? 260 : 170;
+  for (let i = 0; i < n; i++) {
+    const a = (i / n) * Math.PI * 2 + R() * 0.2, r = rad * (0.7 + R() * 0.4);
+    const c = el("circle", { cx: x, cy: y, r: big ? 9 : 7, fill: i % 3 ? "#f6c39b" : "#8fd3c3", opacity: 0 }, FX);
+    tl.fromTo(c, { attr: { cx: x, cy: y }, opacity: 1 }, { attr: { cx: x + Math.cos(a) * r, cy: y + Math.sin(a) * r + 40 }, opacity: 0, duration: 1.1, ease: "power2.out" }, t);
+  }
+}
+// 14.2..23.5 painted party: bounce on beats, fireworks on hits
+const bounce = (from, to) => BEATS.filter(t => t >= from && t < to).forEach((t, i) => {
+  tl.to("#finale-girl", { y: "-=26", duration: 0.12, ease: "power2.out" }, t);
+  tl.to("#finale-girl", { y: "+=26", duration: 0.2, ease: "power2.in" }, t + 0.12);
+  tl.to("#finale-teacher img", { rotation: i % 2 ? 3 : -3, transformOrigin: "60% 90%", duration: 0.15 }, t);
+});
+bounce(14.2, 23.5);
+tl.to("#finale-cam", { ...cam(1.12, 900, 560), duration: 9, ease: "sine.inOut" }, 14.2);
+DB.filter(t => t >= 14.2 && t < 23.5).forEach((t, i) => firework(400 + ((i * 523) % 1100), 180 + ((i * 211) % 260), t, i % 2 === 0));
+
+// 23.5..33.2 coded tree with every record
+tl.set("#finale-coded", { opacity: 0 }, 0);
+tl.set("#finale-coded", { opacity: 1 }, 23.5);
+tl.set("#finale-coded", { opacity: 0 }, 33.2);
+const T = buildTree($id("finale-tree"), 42, { scale: 0.9, base: 1020 });
+drawTree(tl, T, 23.5, 0.1);
+BEATS.filter(t => t >= 24 && t < 33.2).forEach((t, i) => {
+  T.buds.forEach((o, j) => { if ((j + i) % 4 === 0) { tl.fromTo(o.b, { scale: 1.3, transformOrigin: `${o.x}px ${o.y}px` }, { scale: 1, duration: 0.3, immediateRender: false }, t); } });
+});
+bloom(tl, T, [24.0, 24.47, 24.93, 25.4], 0.5);
+const recs = [["PROTEIN", "opened"], ["FLOOD", "warned"], ["PHOTO", "read aloud"], ["LANGUAGE", "speakers"], ["STORY", "kept"],
+              ["NEW WORKER", "assist"], ["LESSON", "a start"], ["FOREST", "listening"], ["PLASTIC", "new route"], ["SEA", "visible"]];
+recs.forEach((r, i) => {
+  const side = i % 2, row = Math.floor(i / 2);
+  const d = document.createElement("div"); d.className = "label"; d.innerHTML = `<b>●</b> ${r[0]} · ${r[1]}`;
+  if (side) d.style.left = "1430px"; else d.style.right = "1430px";
+  d.style.top = (300 + row * 118) + "px";
+  $id("finale-labels").appendChild(d);
+  tl.fromTo(d, { opacity: 0, x: side ? -30 : 30 }, { opacity: 1, x: 0, duration: 0.25 }, 25.0 + i * 0.47);
+});
+tl.fromTo("#finale-tag", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6 }, 29.5);
+
+// 33.2 SURGE: the hat flies; party until 45.2
+const H0 = place(HAT, 1222, 300, 140);
+tl.fromTo("#finale-hat", { ...H0, rotation: -8 }, { x: H0.x + 380, y: H0.y - 900, rotation: 712, duration: 2.4, ease: "power2.out", immediateRender: false }, 33.2);
+firework(1300, 260, 33.2, true);
+bounce(33.2, 45.2);
+tl.fromTo("#finale-cam", cam(1.0, 960, 540), { ...cam(1.15, 1100, 500), duration: 12, ease: "sine.inOut", immediateRender: false }, 33.2);
+[at(258), at(261), at(258.9), at(261.9)].forEach((t, i) => firework(500 + i * 330, 220 + (i % 2) * 120, t, true));
+DB.filter(t => t >= 35 && t < 45.2).forEach((t, i) => firework(300 + ((i * 677) % 1300), 160 + ((i * 157) % 240), t, false));
+fall(tl, makePetals($id("finale-petals"), 30, 88), 33.2, 12);
+
+// 45.2 end card; hoofprints trot away
+tl.set("#finale-end", { opacity: 0 }, 0);
+tl.fromTo("#finale-flash", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 45.0);
+tl.set("#finale-end", { opacity: 1 }, 45.2);
+tl.to("#finale-flash", { opacity: 0, duration: 0.6 }, 45.2);
+const E = buildTree($id("finale-etree"), 42, { scale: 0.5, base: 790 });
+drawTree(tl, E, 45.3, 0.12);
+bloom(tl, E, BEATS.filter(t => t > 46 && t < 50), 0.5);
+tl.fromTo("#finale-end .t", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6 }, 45.6);
+tl.fromTo("#finale-end .s", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 46.2);
+tl.fromTo("#finale-end .q", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 47.4);
+tl.fromTo("#finale-end .u", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 48.4);
+const shoe = "M 12 6 C 2 28 4 54 22 62 C 28 65 36 65 42 62 C 60 54 62 28 52 6 L 42 6 C 48 24 47 44 37 50 C 34 52 30 52 27 50 C 17 44 16 24 22 6 Z";
+let k = 0;
+for (let t = at(271.2); t < D - 0.6; t += 0.31, k++) {
+  const p = document.createElement("div"); p.className = "print";
+  p.innerHTML = `<svg viewBox="0 0 64 64"><path d="${shoe}" fill="#33251e" opacity="0.5"/></svg>`;
+  $id("finale-prints").appendChild(p);
+  const s = 1 - k * 0.05;
+  tl.fromTo(p, { x: 700 + k * 70, y: 1000 - k * 8 + (k % 2) * 16, scale: s * 1.5, opacity: 0, rotation: 0 }, { scale: s, opacity: 0.9, duration: 0.1 }, t);
+}
+tl.fromTo("#finale-out", { opacity: 0 }, { opacity: 1, duration: 1.4, ease: "power1.in" }, D - 1.5);
+
+          window.__timelines = window.__timelines || {};
+          window.__timelines["finale"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

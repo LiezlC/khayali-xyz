@@ -1,0 +1,148 @@
+<!--css-->
+#@@doom { position: absolute; inset: 0; background: #3b3a3a; overflow: hidden; }
+.@@panel { position: absolute; background: #4a4848; border: 2px solid #5d5a58; border-radius: 14px; overflow: hidden; font-family: "Space Mono", monospace; color: #d9d4d0; }
+.@@panel h4 { position: absolute; left: 22px; top: 14px; font-size: 30px; letter-spacing: 0.1em; color: #a9a29d; font-weight: 700; }
+.@@num { position: absolute; left: 20px; bottom: 14px; font-size: 76px; font-weight: 700; color: #e05a4f; }
+#@@ticker { position: absolute; left: 0; top: 22px; white-space: nowrap; font-size: 40px; font-weight: 700; color: #e9e2dd; letter-spacing: 0.08em; }
+.@@shard { position: absolute; background: #4a4848; border: 2px solid #5d5a58; }
+#@@garden { position: absolute; inset: 0; opacity: 0; }
+#@@gcam { position: absolute; inset: 0; transform-origin: 50% 50%; }
+#@@rider { position: absolute; inset: 0; transform-origin: 45% 45%; }
+.@@mini { position: absolute; width: 820px; height: 490px; opacity: 0; }
+.@@mini svg { position: absolute; left: 50px; top: 60px; width: 720px; height: 430px; }
+.@@mini .card-title { font-size: 30px; }
+.@@typed { position: absolute; left: 36px; right: 36px; bottom: 26px; font-weight: 600; font-size: 38px; line-height: 1.25; color: #33251e; }
+<!--html-->
+<div id="@@garden">
+  <div id="@@gcam"><img class="layer" src="assets/garden/garden-plate.png" alt="" /></div>
+  <svg class="tree" id="@@buds" viewBox="0 0 1920 1080"></svg>
+  <div class="grade"></div>
+</div>
+<div id="@@doom">
+  <div class="@@panel" style="left:60px;top:110px;width:1800px;height:90px"><div id="@@ticker"></div></div>
+  <div class="@@panel" id="@@p1" style="left:60px;top:240px;width:580px;height:300px"><h4>DOOM INDEX</h4><div class="@@num" id="@@n1">71.0</div></div>
+  <div class="@@panel" id="@@p2" style="left:670px;top:240px;width:580px;height:300px"><h4>CRASHES COUNTED</h4><div class="@@num" id="@@n2">1,204</div></div>
+  <div class="@@panel" id="@@p3" style="left:1280px;top:240px;width:580px;height:300px"><h4>TRACKERS TRACKING TRACKERS</h4><div class="@@num" id="@@n3">88</div></div>
+  <div class="@@panel" style="left:60px;top:570px;width:1800px;height:330px"><h4>TREND</h4><svg viewBox="0 0 1800 330" style="position:absolute;inset:0"><path id="@@trend" d="" fill="none" stroke="#e05a4f" stroke-width="6" /></svg></div>
+</div>
+<div id="@@shards"></div>
+<div id="@@rider">
+  <img class="gal" id="@@g1" src="assets/gallop/g1.png" alt="" /><img class="gal" id="@@g2" src="assets/gallop/g2.png" alt="" />
+  <img class="gal" id="@@g3" src="assets/gallop/g3.png" alt="" /><img class="gal" id="@@g4" src="assets/gallop/g4.png" alt="" />
+</div>
+<div id="@@petals"></div>
+
+<div class="card @@mini" id="@@c1" style="left:100px;top:90px"><div class="card-title"><b>●</b> FLOOD · FLAGGED BEFORE IT BREAKS</div><svg id="@@z1" viewBox="0 0 720 430"></svg></div>
+<div class="card @@mini" id="@@c2" style="left:1000px;top:90px"><div class="card-title"><b>●</b> PHOTO · READ ALOUD</div><svg id="@@z2" viewBox="0 0 720 430"></svg><div class="@@typed" id="@@t2"></div></div>
+<div class="card @@mini" id="@@c3" style="left:100px;top:90px"><div class="card-title"><b>●</b> STORY · TYPED AND KEPT</div><svg id="@@z3" viewBox="0 0 720 430"></svg><div class="@@typed" id="@@t3"></div></div>
+<div class="card @@mini" id="@@c4" style="left:1000px;top:90px;background:#123f4a;border-color:#8fd3c3"><div class="card-title" style="color:#8fd3c3"><b>●</b> SEA · WATCHED WHILE THE HARBOUR SLEPT</div><svg id="@@z4" viewBox="0 0 720 430"></svg></div>
+
+<div class="lyric mid" id="@@l1">Now the news comes thunderin’, doom on repeat,</div>
+<div class="lyric mid" id="@@l2">every tracker countin’ the crashes in the street…</div>
+<div class="lyric mid" id="@@l3">But I found a garden where the glass trees grow,</div>
+<div class="lyric mid" id="@@l4">little apricot buds in a sunlit row:</div>
+<div class="lyric mid" id="@@l5">a flood that’s flagged before it breaks,</div>
+<div class="lyric mid" id="@@l6">a voice that reads the photo you take,</div>
+<div class="lyric mid" id="@@l7">a grandma’s story typed and kept,</div>
+<div class="lyric mid" id="@@l8">a sea that’s watched while the harbour slept!</div>
+<!--js-->
+// local = track - 105.0
+const W = [[0.0, 1.8], [1.8, 4.2], [4.3, 6.1], [6.2, 8.0], [8.1, 9.85], [9.9, 11.75], [11.8, 13.35], [13.4, D - 0.1]];
+W.forEach(([a, b], i) => line(tl, "#@@l" + (i + 1), a, b));
+tl.set(["#@@l1", "#@@l2"], { color: "#e9e2dd" }, 0);
+
+// doom dashboard: counters tick, ticker scrolls, trend climbs
+const tick = $id("@@ticker"); tick.textContent = "  ▲ DOOM  ▲ CRASH  ▲ ALERT  ▲ WORSE THAN YESTERDAY  ▲ DOOM  ▲ CRASH  ▲ ALERT  ▲ WORSE THAN YESTERDAY  ▲ DOOM  ▲ CRASH  ▲ ALERT".repeat(2);
+tl.fromTo(tick, { x: 0 }, { x: -1600, duration: 4.3, ease: "none" }, 0);
+const c = { a: 71, b: 1204, n: 88 };
+const show = () => { $id("@@n1").textContent = c.a.toFixed(1); $id("@@n2").textContent = Math.round(c.b).toLocaleString("en-US"); $id("@@n3").textContent = Math.round(c.n); };
+show();
+tl.to(c, { a: 99.9, b: 9876, n: 512, duration: 4.2, ease: "power1.in", onUpdate: show }, 0);
+const tr = { k: 0 }, path = $id("@@trend");
+const drawT = () => { let d = ""; for (let i = 0; i <= 60 * tr.k; i++) { const x = 30 + i * 29, y = 290 - i * 3.6 - Math.sin(i * 1.7) * 22; d += (i ? " L " : "M ") + x + " " + y.toFixed(1); } path.setAttribute("d", d || "M 30 290"); };
+drawT();
+tl.to(tr, { k: 1, duration: 4.2, ease: "none", onUpdate: drawT }, 0);
+tl.to("#@@doom", { x: 6, duration: 0.05, yoyo: true, repeat: 7 }, 3.6);
+
+// 4.3: the horse bursts through, the dashboard shatters into petals, the garden appears
+const crash = 4.3;
+gallop(tl, ["@@g1", "@@g2", "@@g3", "@@g4"], crash - 0.6, 8.0);
+tl.fromTo("#@@rider", { x: -1700, y: 120, scale: 0.75 }, { x: 1700, y: 160, scale: 0.75, duration: 2.4, ease: "power1.in" }, crash - 0.6);
+const R = rng(9);
+for (let i = 0; i < 28; i++) {
+  const s = document.createElement("div"); s.className = "@@shard";
+  const w = 120 + R() * 260, h = 80 + R() * 200, x = R() * 1800, y = R() * 1000;
+  s.style.width = w + "px"; s.style.height = h + "px"; $id("@@shards").appendChild(s);
+  tl.set(s, { x, y, opacity: 0 }, 0);
+  tl.set(s, { opacity: 1 }, crash);
+  tl.to(s, { x: x + 400 + R() * 900, y: y - 300 + R() * 900, rotation: R() * 540 - 270, opacity: 0, scale: 0.3, duration: 1.1, ease: "power2.out" }, crash);
+}
+tl.set("#@@doom", { opacity: 0 }, crash);
+tl.set("#@@garden", { opacity: 1 }, crash);
+burst(tl, makePetals($id("@@petals"), 40, 15), crash, 2.6);
+tl.fromTo("#@@gcam", { scale: 1.25 }, { scale: 1.05, duration: D - crash, ease: "power1.out" }, crash);
+
+// 6.2: a sunlit row of apricot buds pops along the hillside on the beat
+const BEATS = {{BEATS}}.filter(t => t > 6.2 && t < 8.1);
+for (let i = 0; i < 9; i++) {
+  const x = 260 + i * 180, y = 620 - Math.sin(i / 8 * Math.PI) * 70;
+  const g = el("circle", { cx: x, cy: y, r: 60, fill: "#f6c39b", opacity: 0 }, $id("@@buds"));
+  const b = el("circle", { cx: x, cy: y, r: 20, fill: "#e7a274", stroke: "#b8643a", "stroke-width": 2, opacity: 0 }, $id("@@buds"));
+  const t = BEATS.length ? BEATS[i % BEATS.length] + Math.floor(i / BEATS.length) * 0.12 : 6.3 + i * 0.2;
+  tl.fromTo(b, { opacity: 0, scale: 0, transformOrigin: `${x}px ${y}px` }, { opacity: 1, scale: 1, duration: 0.2, ease: "back.out(3)" }, t);
+  tl.fromTo(g, { opacity: 0 }, { opacity: 0.35, duration: 0.2 }, t);
+  tl.to([b, g], { opacity: 0, duration: 0.4 }, 8.0);
+}
+
+// four story cards on their lines
+const cards = [["@@c1", 8.1, 9.85], ["@@c2", 9.9, 11.75], ["@@c3", 11.8, 13.35], ["@@c4", 13.4, D]];
+cards.forEach(([id, a, b], i) => {
+  tl.fromTo("#" + id, { opacity: 0, scale: 0.7, rotation: i % 2 ? 3 : -3 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.25, ease: "back.out(2)" }, a);
+  if (b < D) tl.to("#" + id, { opacity: 0, y: -30, duration: 0.18 }, b - 0.12);
+});
+// flood: the river rises toward the line, the warning goes out early
+(function () {
+  const z = $id("@@z1"), a = 8.1;
+  el("line", { x1: 40, y1: 170, x2: 680, y2: 170, stroke: "#d88a57", "stroke-width": 4, "stroke-dasharray": "12 10" }, z);
+  const lvl = el("path", { d: "", fill: "rgba(22,125,120,0.25)", stroke: "#167d78", "stroke-width": 5 }, z);
+  const flag = el("g", { opacity: 0 }, z);
+  el("rect", { x: 350, y: 88, width: 340, height: 60, rx: 30, fill: "#d88a57" }, flag);
+  const tx = el("text", { x: 530, y: 126, "text-anchor": "middle", "font-family": "Space Mono", "font-weight": 700, "font-size": 28, fill: "#fcfbf8" }, flag); tx.textContent = "⚑ WARNING SENT";
+  const s = { k: 0 };
+  const draw = () => { let d = "M 40 400"; for (let x = 40; x <= 680; x += 16) { const f = (x - 40) / 640; const y = 360 - Math.pow(f * s.k, 1.6) * 230 - Math.sin(x / 30) * 6; d += ` L ${x} ${y.toFixed(1)}`; } lvl.setAttribute("d", d + " L 680 400 Z"); };
+  draw();
+  tl.to(s, { k: 1, duration: 1.6, ease: "power1.inOut", onUpdate: draw }, a + 0.1);
+  tl.to(flag, { opacity: 1, duration: 0.2 }, a + 0.7);
+})();
+// photo: a little scene, then its description types out
+(function () {
+  const z = $id("@@z2");
+  el("rect", { x: 40, y: 80, width: 260, height: 190, rx: 12, fill: "#f3e3c8", stroke: "#33251e", "stroke-width": 4 }, z);
+  el("path", { d: "M 120 250 l 0 -70 q 0 -14 14 -14 l 52 0 q 14 0 14 14 l 0 70 Z", fill: "#d88a57", stroke: "#33251e", "stroke-width": 4 }, z);
+  el("path", { d: "M 150 150 q -10 -20 0 -40 M 172 150 q -10 -20 0 -40", fill: "none", stroke: "#776b63", "stroke-width": 4 }, z);
+  const txt = "“A cup of rooibos on a sunny windowsill, steam rising.”";
+  const t2 = $id("@@t2"); const s = { n: 0 };
+  tl.to(s, { n: txt.length, duration: 1.2, ease: "none", onUpdate: () => (t2.textContent = txt.slice(0, Math.round(s.n))) }, 10.2);
+})();
+// story: grandma's waveform becomes text
+(function () {
+  const z = $id("@@z3"), R2 = rng(4), bars = [];
+  for (let i = 0; i < 48; i++) { const h = 10 + R2() * 110; bars.push(el("rect", { x: 40 + i * 13.5, y: 170 - h / 2, width: 8, height: h, rx: 4, fill: "#167d78" }, z)); }
+  bars.forEach((b, i) => tl.to(b, { opacity: 0.15, duration: 0.15 }, 12.0 + i * 0.022));
+  const txt = "“When I was ten, I rode a borrowed mare…”";
+  const t3 = $id("@@t3"); const s = { n: 0 };
+  tl.to(s, { n: txt.length, duration: 1.1, ease: "none", onUpdate: () => (t3.textContent = txt.slice(0, Math.round(s.n))) }, 12.1);
+})();
+// sea: boats as dots with tracks appear in the dark
+(function () {
+  const z = $id("@@z4"), R3 = rng(12);
+  for (let i = 0; i < 14; i++) {
+    const x = 60 + R3() * 600, y = 110 + R3() * 280, dx = -60 + R3() * 120, dy = -40 + R3() * 80;
+    const tr = el("line", { x1: x, y1: y, x2: x, y2: y, stroke: "#8fd3c3", "stroke-width": 2, opacity: 0.6 }, z);
+    const dot = el("circle", { cx: x, cy: y, r: 7, fill: i === 5 ? "#d88a57" : "#8fd3c3", opacity: 0 }, z);
+    const t = 13.5 + i * 0.07;
+    tl.to(dot, { opacity: 1, duration: 0.15 }, t);
+    tl.to(dot, { attr: { cx: x + dx, cy: y + dy }, duration: D - t, ease: "none" }, t);
+    tl.to(tr, { attr: { x2: x + dx, y2: y + dy }, duration: D - t, ease: "none" }, t);
+  }
+})();

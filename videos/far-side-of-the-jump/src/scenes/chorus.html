@@ -1,0 +1,215 @@
+<!--css-->
+#@@hoofs .hoof { position: absolute; width: 150px; height: 150px; display: flex; align-items: center; justify-content: center;
+  font-family: "Space Mono", monospace; font-weight: 700; font-size: 48px; color: #33251e; padding-top: 34px; }
+#@@hoofs .hoof svg { position: absolute; inset: 0; }
+#@@hoofs .hoof span { position: relative; }
+#@@sight { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+#@@whole { position: absolute; inset: 0; filter: {{FILTER}}; }
+.@@gl { position: absolute; left: 0; right: 0; top: 60px; text-align: center; font-weight: 900; font-size: 76px; line-height: 1.05; color: #33251e; opacity: 0; }
+<!--html-->
+<div id="@@whole">
+  <!-- S1 approach 0..3.58 -->
+  <div class="fs-fill" id="@@s1">
+    <div class="cam" id="@@s1-cam">
+      <img class="layer" src="assets/jump/L0-background.png" alt="" />
+      <div class="rider-wrap" id="@@s1-rider">
+        <img class="gal" id="@@g1" src="assets/gallop/g1.png" alt="" />
+        <img class="gal" id="@@g2" src="assets/gallop/g2.png" alt="" />
+        <img class="gal" id="@@g3" src="assets/gallop/g3.png" alt="" />
+        <img class="gal" id="@@g4" src="assets/gallop/g4.png" alt="" />
+      </div>
+      <img class="layer" id="@@s1-pole" src="assets/jump/L2-pole.png" alt="" />
+      <img class="layer" id="@@s1-front" src="assets/jump/L3-foreground-flowers.png" alt="" />
+    </div>
+    <svg id="@@sight" viewBox="0 0 1920 1080"><path id="@@sight-path" d="M 700 420 C 960 230, 1300 220, 1560 380" fill="none" stroke="#fcfbf8" stroke-width="7" stroke-linecap="round" stroke-dasharray="2 22" /></svg>
+    <div id="@@hoofs"></div>
+    <div class="lyric mid" id="@@l-where"><span class="w">Where</span><span class="w">you</span><span class="w">look…</span></div>
+    <div class="grade"></div>
+  </div>
+
+  <!-- S2 jump 3.58..7.38 -->
+  <div class="fs-fill" id="@@s2">
+    <div class="cam" id="@@s2-shake"><div class="cam" id="@@s2-cam">
+      <img class="layer" src="assets/jump/L0-background.png" alt="" />
+      <img class="layer" id="@@s2-pole" src="assets/jump/L2-pole.png" alt="" />
+      <div class="rider-wrap" id="@@s2-rider"><img class="layer" src="assets/jump/L1-rider.png" alt="" /></div>
+      <img class="layer" id="@@s2-front" src="assets/jump/L3-foreground-flowers.png" alt="" />
+    </div></div>
+    <div id="@@s2-petals"></div>
+    <div class="lyric big" id="@@l-eyes1"><span class="w">Eyes</span><span class="w">on</span><span class="w">the</span><span class="w">far</span><span class="w">side!</span></div>
+    <div class="hup" id="@@hup1">HUP!</div>
+    <div class="lyric mid" id="@@l-ride1"><span class="w">Ride</span><span class="w">the</span><span class="w">approach!</span></div>
+    <div class="grade"></div>
+  </div>
+
+  <!-- S3 coded tree 7.38..11.28 -->
+  <div class="fs-fill" id="@@s3">
+    <div class="paper"></div>
+    <svg class="tree" id="@@tree-a" viewBox="0 0 1920 1080"></svg>
+    <div id="@@labels"></div>
+    <div class="@@gl" id="@@l-some1">Somewhere somebody found a way,</div>
+    <div class="@@gl" id="@@l-some2">somebody’s finding it <i>today!</i></div>
+  </div>
+
+  <!-- S4 second jump 11.28..14.88 -->
+  <div class="fs-fill" id="@@s4">
+    <div class="cam" id="@@s4-shake"><div class="cam" id="@@s4-cam">
+      <img class="layer" src="assets/jump/L0-background.png" alt="" />
+      <img class="layer" src="assets/jump/L2-pole.png" alt="" />
+      <div class="rider-wrap" id="@@s4-rider"><img class="layer" src="assets/jump/L1-rider.png" alt="" /></div>
+      <img class="layer" id="@@s4-front" src="assets/jump/L3-foreground-flowers.png" alt="" />
+    </div></div>
+    <div id="@@s4-petals"></div>
+    <div class="lyric big" id="@@l-eyes2"><span class="w">Eyes</span><span class="w">on</span><span class="w">the</span><span class="w">far</span><span class="w">side!</span></div>
+    <div class="hup" id="@@hup2">HUP!</div>
+    <div class="lyric mid" id="@@l-ride2"><span class="w">Ride</span><span class="w">the</span><span class="w">approach!</span></div>
+    <div class="grade"></div>
+  </div>
+
+  <!-- S5 hungry pole / look past 14.88..18.53 -->
+  <div class="fs-fill" id="@@s5">
+    <div class="cam" id="@@s5-cam">
+      <img class="layer" src="assets/jump/L0-background.png" alt="" />
+      <div id="@@s5-polebox" style="position:absolute;inset:0;transform-origin:50% 75%">
+        <img class="layer" src="assets/jump/L2-pole.png" alt="" />
+        <svg viewBox="0 0 1920 1080" style="position:absolute;inset:0;width:1920px;height:1080px">
+          <g transform="translate(700 812)">
+            <path id="@@jaw-top" d="M -120 0 Q 0 -70 120 0 Z" fill="#33251e" />
+            <path id="@@jaw-bot" d="M -120 0 Q 0 80 120 0 Z" fill="#33251e" />
+            <g fill="#fcfbf8"><path d="M -90 -4 l 14 22 l 14 -22 Z" /><path d="M -30 -4 l 14 24 l 14 -24 Z" /><path d="M 30 -4 l 14 24 l 14 -24 Z" /></g>
+            <circle cx="-60" cy="-70" r="20" fill="#fcfbf8" stroke="#33251e" stroke-width="6" /><circle cx="-56" cy="-66" r="8" fill="#33251e" />
+            <circle cx="60" cy="-70" r="20" fill="#fcfbf8" stroke="#33251e" stroke-width="6" /><circle cx="56" cy="-66" r="8" fill="#33251e" />
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="rider-wrap" id="@@s5-rider"><img class="layer" src="assets/jump/L1-rider.png" alt="" /></div>
+    <div class="lyric mid" id="@@l-stare"><span class="w">Don’t</span><span class="w">stare</span><span class="w">at</span><span class="w">the</span><span class="w">fence,</span></div>
+    <div class="lyric mid" id="@@l-fear"><span class="w">don’t</span><span class="w">fear</span><span class="w">the</span><span class="w">fall,</span></div>
+    <div class="lyric big" id="@@l-past"><span class="w">Look</span><span class="w">past</span><span class="w">the</span><span class="w">jump…</span></div>
+    <div class="lyric mid" id="@@l-clear"><span class="w">and</span><span class="w">you</span><span class="w">clear</span><span class="w">it</span><span class="w">all!</span></div>
+    <div class="grade"></div>
+  </div>
+
+  <!-- S6 bloom tail 18.53..20.41 -->
+  <div class="fs-fill" id="@@s6">
+    <div class="paper"></div>
+    <svg class="tree" id="@@tree-b" viewBox="0 0 1920 1080"></svg>
+    <div id="@@s6-petals"></div>
+    <div class="@@gl" id="@@tailtext" style="top:70px">{{TAILTEXT}}</div>
+    <div class="flash" id="@@s6-flash"></div>
+  </div>
+</div>
+<!--js-->
+// shot windows (local seconds); each shot is shown only inside its window
+const shots = [["@@s1", 0, 3.58], ["@@s2", 3.58, 7.38], ["@@s3", 7.38, 11.28], ["@@s4", 11.28, 14.88], ["@@s5", 14.88, 18.53], ["@@s6", 18.53, D]];
+shots.forEach(([id, a, b]) => { tl.set("#" + id, { opacity: a === 0 ? 1 : 0 }, 0); if (a > 0) tl.set("#" + id, { opacity: 1 }, a); if (b < D) tl.set("#" + id, { opacity: 0 }, b); });
+
+// S1 approach with gallop flipbook
+tl.fromTo("#@@s1-cam", { scale: 1.08, x: 40 }, { scale: 1.16, x: -30, duration: 3.58, ease: "none" }, 0);
+tl.fromTo("#@@s1-rider", { x: -760, y: 230, scale: 0.55 }, { x: -260, y: 230, scale: 0.55, duration: 3.58, ease: "none" }, 0);
+tl.fromTo("#@@s1-pole", { x: 0 }, { x: -60, duration: 3.58, ease: "none" }, 0);
+tl.fromTo("#@@s1-front", { x: 0, y: 30 }, { x: -160, y: 30, duration: 3.58, ease: "none" }, 0);
+gallop(tl, ["@@g1", "@@g2", "@@g3", "@@g4"], 0, 3.58);
+const counts = [0.28, 0.78, 1.18, 1.68, 1.98, 2.28];
+const hoofPath = "M 22 14 C 8 50 10 96 40 112 C 52 118 68 118 80 112 C 110 96 112 50 98 14 L 78 14 C 90 46 88 84 70 94 C 64 98 56 98 50 94 C 32 84 30 46 42 14 Z";
+counts.forEach((t, i) => {
+  const h = document.createElement("div"); h.className = "hoof";
+  h.style.left = (520 + i * 170) + "px"; h.style.top = (i % 3 === 1 ? 110 : 150) + "px";
+  h.innerHTML = `<svg viewBox="0 0 120 120"><path d="${hoofPath}" fill="#d88a57" stroke="#33251e" stroke-width="6" stroke-linejoin="round"/><g fill="#33251e"><circle cx="24" cy="40" r="4"/><circle cx="26" cy="70" r="4"/><circle cx="96" cy="40" r="4"/><circle cx="94" cy="70" r="4"/></g></svg><span>${(i % 3) + 1}</span>`;
+  $id("@@hoofs").appendChild(h);
+  tl.fromTo(h, { scale: 2.2, opacity: 0, rotation: -12 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.14, ease: "power4.in" }, t);
+});
+const sp = $id("@@sight-path"); const SL = sp.getTotalLength();
+tl.fromTo(sp, { strokeDashoffset: SL, opacity: 0 }, { strokeDashoffset: 0, opacity: 1, duration: 0.9, ease: "power2.out" }, 2.5);
+words(tl, "#@@l-where", [2.58, 2.86, 3.08]);
+
+// S2 the jump
+const s2 = 3.58;
+tl.fromTo("#@@s2-cam", { scale: 1.06, y: 40 }, { scale: 1.18, y: -40, duration: 3.8, ease: "power1.out" }, s2);
+tl.fromTo("#@@s2-rider", { y: 260, x: -300, rotation: 8, scale: 0.58 }, { y: 70, x: -120, rotation: -2, scale: 0.58, duration: 0.9, ease: "power2.out" }, s2);
+tl.to("#@@s2-rider", { y: 40, x: 20, rotation: -4, duration: 2.0, ease: "sine.inOut" }, s2 + 0.9);
+tl.to("#@@s2-rider", { y: 200, x: 160, rotation: 4, duration: 0.9, ease: "power2.in" }, s2 + 2.9);
+tl.fromTo("#@@s2-pole", { y: 0 }, { y: 70, duration: 3.8, ease: "power1.out" }, s2);
+tl.fromTo("#@@s2-front", { y: 0 }, { y: 140, duration: 3.8, ease: "power1.out" }, s2);
+burst(tl, makePetals($id("@@s2-petals"), 34, {{SEED}} + 11), s2 + 0.1, 3.4);
+words(tl, "#@@l-eyes1", [3.58, 3.84, 3.98, 4.14, 4.36], { y: -80, opacity: 0, scale: 1.6 });
+stamp(tl, "#@@hup1", 5.25, -8);
+tl.to("#@@s2-shake", { x: 14, duration: 0.05, yoyo: true, repeat: 5, ease: "none" }, 5.41);
+tl.to("#@@hup1", { scale: 0.9, opacity: 0, duration: 0.3 }, 5.95);
+tl.to("#@@l-eyes1", { opacity: 0, y: -40, duration: 0.25 }, 5.85);
+words(tl, "#@@l-ride1", [5.98, 6.38, 6.68]);
+
+// S3 coded glass tree with record labels
+const A = buildTree($id("@@tree-a"), {{SEED}}, { scale: 1 });
+const s3 = 7.38;
+drawTree(tl, A, s3 + 0.05, 0.13);
+const beatsA = [8.13, 8.59, 9.08, 9.57, 10.03, 10.5, 10.96];
+bloom(tl, A, beatsA, 0.35);
+const recs = {{LABELS}};
+const lead = el("svg", { viewBox: "0 0 1920 1080", width: 1920, height: 1080, style: "position:absolute;inset:0" }, $id("@@labels"));
+const rows = [[0, 290], [1, 290], [0, 420], [1, 420], [0, 550], [1, 550], [0, 680]];
+const leftBuds = A.buds.filter(o => o.x < 900), rightBuds = A.buds.filter(o => o.x > 1020);
+recs.forEach((r, i) => {
+  const [side, y] = rows[i];
+  const pool = side ? rightBuds : leftBuds;
+  const score = c => Math.abs(c.y - y) + Math.abs(c.x - (side ? 1300 : 620)) * 0.3;
+  const o = pool.reduce((best, c) => (score(c) < score(best) ? c : best), pool[0]);
+  const d = document.createElement("div"); d.className = "label"; d.innerHTML = `<b>●</b> ${r[0]} · ${r[1]}`;
+  if (side) d.style.left = "1400px"; else d.style.right = "1400px";
+  d.style.top = (y - 22) + "px";
+  $id("@@labels").appendChild(d);
+  const ln = el("path", { d: `M ${side ? 1400 : 520} ${y} L ${o.x} ${o.y}`, stroke: "#167d78", "stroke-width": 2, "stroke-dasharray": "3 7", fill: "none", opacity: 0 }, lead);
+  tl.fromTo(d, { opacity: 0, x: side ? -30 : 30 }, { opacity: 1, x: 0, duration: 0.25, ease: "power2.out" }, beatsA[i]);
+  tl.fromTo(ln, { opacity: 0 }, { opacity: 0.9, duration: 0.2 }, beatsA[i] + 0.05);
+});
+line(tl, "#@@l-some1", 7.38, 9.05);
+line(tl, "#@@l-some2", 9.18, null);
+tl.fromTo("#@@tree-a", { scale: 1 }, { scale: 1.06, transformOrigin: "50% 90%", duration: 3.9, ease: "none" }, s3);
+
+// S4 second jump
+const s4 = 11.28;
+tl.fromTo("#@@s4-cam", { scale: 1.4, x: 300, y: 60 }, { scale: 1.25, x: -60, y: 20, duration: 3.6, ease: "power1.inOut" }, s4);
+tl.fromTo("#@@s4-rider", { y: 160, x: -200, rotation: 4, scale: 0.6 }, { y: 60, x: -60, rotation: -3, scale: 0.6, duration: 1.6, ease: "sine.out" }, s4);
+tl.to("#@@s4-rider", { y: 140, x: 120, rotation: 2, duration: 2.0, ease: "sine.in" }, s4 + 1.6);
+tl.fromTo("#@@s4-front", { y: 40 }, { y: 120, duration: 3.6, ease: "none" }, s4);
+burst(tl, makePetals($id("@@s4-petals"), 26, {{SEED}} + 23), s4 + 0.1, 3.2);
+words(tl, "#@@l-eyes2", [11.28, 11.5, 11.64, 11.78, 12.0], { y: -80, opacity: 0, scale: 1.6 });
+stamp(tl, "#@@hup2", 13.33, 6);
+tl.to("#@@s4-shake", { y: 14, duration: 0.05, yoyo: true, repeat: 5, ease: "none" }, 13.49);
+tl.to("#@@hup2", { opacity: 0, duration: 0.25 }, 14.1);
+tl.to("#@@l-eyes2", { opacity: 0, duration: 0.25 }, 13.5);
+words(tl, "#@@l-ride2", [13.58, 13.95, 14.15]);
+
+// S5 hungry pole, it falls, whip to the tree, rider sails past
+const s5 = 14.88;
+tl.fromTo("#@@s5-cam", { scale: 1.6, x: 420, y: -320 }, { scale: 1.5, x: 390, y: -265, duration: 1.0, ease: "none" }, s5);
+[0, 0.24, 0.48, 0.72].forEach(dt => {
+  tl.to("#@@jaw-top", { y: -26, duration: 0.1, yoyo: true, repeat: 1, ease: "power1.inOut" }, s5 + dt);
+  tl.to("#@@jaw-bot", { y: 30, duration: 0.1, yoyo: true, repeat: 1, ease: "power1.inOut" }, s5 + dt);
+});
+tl.set("#@@s5-rider", { opacity: 0 }, 0);
+words(tl, "#@@l-stare", [14.88, 15.08, 15.28, 15.38, 15.48]);
+tl.to("#@@l-stare", { opacity: 0, duration: 0.12 }, 15.8);
+tl.to("#@@s5-polebox", { y: 900, rotation: 18, duration: 0.85, ease: "power3.in" }, 16.0);
+words(tl, "#@@l-fear", [15.88, 16.08, 16.24, 16.34]);
+tl.to("#@@l-fear", { opacity: 0, duration: 0.12 }, 16.78);
+tl.to("#@@s5-cam", { scale: 2.2, x: -1040, y: 170, duration: 0.55, ease: "expo.inOut" }, 16.84);
+words(tl, "#@@l-past", [16.88, 17.08, 17.2, 17.3]);
+tl.to("#@@l-past", { opacity: 0, duration: 0.15 }, 17.62);
+tl.set("#@@s5-rider", { opacity: 1 }, 17.62);
+tl.fromTo("#@@s5-rider", { x: -1500, y: 260, rotation: -6, scale: 0.5 }, { x: 1300, y: 120, rotation: -2, scale: 0.5, duration: 0.95, ease: "power1.inOut" }, 17.62);
+words(tl, "#@@l-clear", [17.68, 17.78, 18.08, 18.38, 18.44]);
+
+// S6 full bloom tail
+const B = buildTree($id("@@tree-b"), {{SEED}}, { scale: 1 });
+const s6 = 18.53;
+tl.fromTo("#@@s6-flash", { opacity: 0.95 }, { opacity: 0, duration: 0.5, ease: "power2.out" }, s6);
+showTree(tl, B, s6);
+B.buds.forEach((o, i) => {
+  tl.fromTo(o.b, { scale: 0.2, transformOrigin: `${o.x}px ${o.y}px` }, { scale: 1.15, duration: 0.35, ease: "back.out(3)" }, s6 + 0.05 + (i % 9) * 0.03);
+  tl.fromTo(o.h, { opacity: 0 }, { opacity: 0.45, duration: 0.3 }, s6 + 0.05 + (i % 9) * 0.03);
+});
+tl.fromTo("#@@tree-b", { scale: 1.12 }, { scale: 1.0, transformOrigin: "50% 90%", duration: 1.88, ease: "power2.out" }, s6);
+burst(tl, makePetals($id("@@s6-petals"), 40, {{SEED}} + 77), s6, 1.88);
+if ($id("@@tailtext").textContent.trim()) tl.fromTo("#@@tailtext", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4 }, s6 + 0.15);
