@@ -20,3 +20,25 @@ Some arguments travel further with a horse in them, so there’s also a song. Ey
 Music made with Suno. Paintings by Codex, with lyrics and animation built alongside Claude.
 
 #AIGovernance #ResponsibleAI #MonitoringAndEvaluation #UtopAI
+
+## Article share: Utopia, But With a Test Button
+
+Links go in the first comment, not the post body.
+
+### Post
+
+AI has spent quite enough time auditioning for the apocalypse.
+
+Most futures arrive in smaller packaging: ten recorded interviews made searchable, a lesson adapted for a child who reads differently, a photograph described aloud for someone who can’t see it, a flood warning that reaches the right street in time. In Utopia, But With a Test Button I make the case for utopia at that scale.
+
+Start with something you’d love to make possible, then look for evidence that someone has already tried a piece of it. The experiment that follows can be small enough to stop before it develops a communications department.
+
+Hope is allowed to bring evidence. We can have nice things and footnotes.
+
+The essay, UtopAI and the song it grew are in the comments. 🌳
+
+### First comment
+
+📖 Utopia, But With a Test Button (free friend link): https://medium.com/illumination/utopia-but-with-a-test-button-d1d2910c5f81?sk=0498221373155763b7c4a15985693cf2
+🌳 UtopAI: https://www.khayali.xyz/utopai
+🎥 Eyes on the Far Side: https://www.youtube.com/watch?v=b-pmjEYgoEo
