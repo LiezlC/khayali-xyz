@@ -1,0 +1,97 @@
+<!--css-->
+#@@letters { position: absolute; left: 0; right: 0; top: 40px; height: 260px; display: flex; justify-content: center; gap: 40px; }
+#@@letters .l { font-size: 230px; line-height: 1; opacity: 0; display: inline-block; }
+#@@cert h3 { font-size: 40px; margin: 22px 0 6px; }
+#@@cert p { text-align: center; font-size: 26px; font-weight: 600; margin: 0 30px; }
+<!--html-->
+<div class="cam" id="@@cam">
+  <img class="layer" src="assets/plates/bg-bureau.png" alt="" />
+  <div id="@@stage" style="position:absolute;inset:0"></div>
+</div>
+<div class="grade"></div>
+<div id="@@letters"><span class="l wood" id="@@A">A</span><span class="l wood" id="@@dot1">.</span><span class="l wood" id="@@I">I</span><span class="l wood" id="@@dot2">.</span></div>
+<div id="@@props" style="position:absolute;inset:0"></div>
+<div class="flash" id="@@flash"></div>
+<!--js-->
+const LINES = {{LINES}}, KICKS = {{KICKS}}, BEAT = {{BEAT}}, DI = {{DI}}, BOX = {{BOXES}};
+const Q = lyricClock(LINES);
+const props = $id("@@props");
+const di = makeDI($id("@@stage"), "@@di", DI, ["plain", "hat"]);
+di.rename(tl, "A.I.", 0, true);
+const P = di.base(900, 935, 600);
+tl.set(di.pin, P, 0);
+const k = P.scale * IMG_K; // plate px of the D.I. canvas -> screen px
+const SC = [P.x + 836 * k, P.y + 453 * k];
+tl.set("#@@cam", cam(1.05, 900, 540), 0);
+di.face(tl, "flat", 0);
+
+// shiny new title: glint on the nameplate
+const tTitle = Q("Got a shiny new title");
+di.face(tl, "wide", tTitle);
+tl.to("#@@cam", { ...cam(1.6, SC[0], SC[1] + 60), duration: 0.5, ease: "power2.out" }, tTitle);
+const NP = [P.x + 836 * k, P.y + 645 * k];
+const sparkle = rays(props, NP[0], NP[1], 160, 12, "#fff3dc");
+tl.fromTo(sparkle, { opacity: 0, scale: 0.3, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, rotation: 30, duration: 0.5, ease: "power2.out" }, Q("Got a shiny new title", "title"));
+tl.to(sparkle, { opacity: 0, duration: 0.3 }, Q("Got a shiny new title", "title") + 0.6);
+
+// fancy new hat: falls from the sky, lands, costume swap
+const hb = BOX.hat.box, hatW = 699 * k, hatH = (hb[3] - hb[1]) / (hb[2] - hb[0]) * hatW;
+const hat = cutout(props, "assets/cut/hat.png", "@@hat");
+const tHat = Q("Got a shiny new title", "hat");
+const land = place(hb, P.x + 523 * k, P.y + 57 * k, hatH);
+tl.set(hat, { ...land, y: land.y - 900, rotation: -25, opacity: 1 }, 0);
+tl.to("#@@cam", { ...cam(1.08, 900, 520), duration: 0.35, ease: "power2.out" }, tHat - 0.45);
+tl.to(hat, { y: land.y, rotation: 0, duration: 0.45, ease: "power2.in" }, tHat - 0.4);
+tl.set(hat, { opacity: 0 }, tHat + 0.05);
+di.wear(tl, "hat", tHat + 0.05);
+flash(tl, "#@@flash", tHat + 0.05, 0.5, 0.3);
+di.hop(tl, tHat + 0.05, 30);
+di.face(tl, "happy", tHat + 0.1);
+
+// presidential signature: certificate + pen hand signing it
+const tSig = Q("Got a presidential signature");
+const cert = paperCard(props, `<h3>CERTIFICATE</h3><p>This machine is hereby<br/>SUPER.</p><svg viewBox="0 0 520 120" style="position:absolute;left:20px;bottom:24px;width:520px;height:120px"><path id="@@sig" d="M 40 80 C 80 20, 110 110, 150 60 S 220 30, 250 75 S 330 40, 380 70 S 450 60, 480 50" fill="none" stroke="#1d120c" stroke-width="6" stroke-linecap="round"/><line x1="30" y1="96" x2="490" y2="96" stroke="#6b4416" stroke-width="3" stroke-dasharray="8 8"/></svg>`, 1240, 290, 560, 400, "transform-origin:50% 50%");
+cert.id = "@@cert";
+tl.fromTo(cert, { opacity: 0, rotation: 12, x: 400 }, { opacity: 1, rotation: 3, x: 0, duration: 0.35, ease: "back.out(1.6)" }, tSig);
+const sig = $id("@@sig"), SL = sig.getTotalLength();
+tl.fromTo(sig, { strokeDasharray: SL, strokeDashoffset: SL }, { strokeDashoffset: 0, duration: 1.1, ease: "power1.inOut" }, Q("Got a presidential signature", "signature"));
+const pb = BOX["pen-hand"].box;
+const pen = cutout(props, "assets/cut/pen-hand.png", "@@pen");
+const penH = 330, penAt = (sx, sy) => { const s = penH / ((pb[3] - pb[1]) * IMG_K); return { x: sx - 1310 * IMG_K * s, y: sy - 780 * IMG_K * s, scale: s }; };
+// the nib (plate 1310,780 of the cutout) follows the signature line on the card
+const sx0 = 1240 + 5 + 20 + 40, sy0 = 290 + 400 - 24 - 120 + 80;
+tl.set(pen, { ...penAt(sx0 + 500, sy0 - 300), opacity: 0 }, 0);
+tl.to(pen, { ...penAt(sx0, sy0), opacity: 1, duration: 0.3, ease: "power2.out" }, Q("Got a presidential signature", "signature") - 0.3);
+[[110, -30], [210, 10], [340, -10], [440, -20]].forEach(([dx, dy], i) => tl.to(pen, { ...penAt(sx0 + dx, sy0 + dy), duration: 0.27, ease: "sine.inOut" }, Q("Got a presidential signature", "signature") + i * 0.27));
+tl.to(pen, { ...penAt(sx0 + 700, sy0 - 400), opacity: 0, duration: 0.35, ease: "power2.in" }, Q("Got a presidential signature", "that") + 0.1);
+const seal = stampMark(cert, "SUPER", 300, 120, 44, "mix-blend-mode:multiply");
+stamp(tl, seal, Q("Got a presidential signature", "that"), -10);
+tl.to(cert, { opacity: 0, x: 300, rotation: 10, duration: 0.3, ease: "power2.in" }, Q("Didn't grow a brain") - 0.1);
+
+// brain, beard: the screen reports
+di.bob(tl, tSig, Q("But the old two letters") - 0.05, BEAT);
+screenMsgs(tl, di, [["BRAIN<br><span style='color:#ffe08a'>+0</span>", Q("Didn't grow a brain"), Q("Didn't grow a brain", "beard") - 0.05, 0.14],
+  ["BEARD<br><span style='color:#ffe08a'>+0</span>", Q("Didn't grow a brain", "beard") - 0.05, Q("But the old two letters"), 0.14]]);
+
+// the old two letters disappear; the nameplate flips to S.I.
+const tLet = Q("But the old two letters");
+di.face(tl, "neutral", tLet);
+tl.to("#@@cam", { ...cam(1.0, 960, 540), duration: 0.4, ease: "power2.out" }, tLet);
+["#@@A", "#@@dot1", "#@@I", "#@@dot2"].forEach((id, i) => tl.fromTo(id, { opacity: 0, y: -80 }, { opacity: 1, y: 0, duration: 0.2, ease: "back.out(2)" }, tLet + 0.1 + i * 0.08));
+const tGone = Q("But the old two letters", "disappeared");
+tl.to("#@@A", { x: -900, y: -200, rotation: -200, opacity: 0, duration: 0.5, ease: "power2.in" }, tGone);
+tl.to("#@@I", { x: 900, y: -200, rotation: 200, opacity: 0, duration: 0.5, ease: "power2.in" }, tGone + 0.08);
+tl.to(["#@@dot1", "#@@dot2"], { opacity: 0, duration: 0.3 }, tGone + 0.5);
+di.rename(tl, "S.I.", tGone + 0.3);
+flash(tl, "#@@flash", tGone + 0.42, 0.4, 0.3);
+di.face(tl, "wide", tGone + 0.3);
+
+// Q&A: crowd wide, D.I. close
+const tDo = Q("What'd they do?"), tName = Q("Changed my name!"), tLearn = Q("What'd you learn?"), tNot = Q("Not a thing!");
+tl.to("#@@cam", { ...cam(1.0, 960, 540), duration: 0.2 }, tDo);
+tl.to("#@@cam", { ...cam(1.7, SC[0], SC[1] + 70), duration: 0.2, ease: "power3.out" }, tName);
+screenMsgs(tl, di, [["NAME<br><span style='color:#ffe08a'>CHANGED ✓</span>", tName, tLearn, 0.13], ["LEARNED<br><span style='color:#ffe08a'>0</span>", tNot, D, 0.16]]);
+tl.to("#@@cam", { ...cam(1.0, 960, 540), duration: 0.2 }, tLearn);
+di.face(tl, "happy", tLearn);
+tl.to("#@@cam", { ...cam(1.7, SC[0], SC[1] + 70), duration: 0.2, ease: "power3.out" }, tNot);
+tl.to("#@@cam", { ...cam(1.0, 960, 540), duration: 0.3, ease: "power2.in" }, D - 0.3);

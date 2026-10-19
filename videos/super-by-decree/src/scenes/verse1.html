@@ -1,0 +1,131 @@
+<!--css-->
+#@@bur, #@@dec { position: absolute; inset: 0; }
+#@@words { position: absolute; left: 0; right: 0; top: 70px; height: 220px; }
+.@@big { position: absolute; left: 0; right: 0; text-align: center; font-size: 120px; opacity: 0; }
+#@@strike { position: absolute; left: 520px; top: 150px; width: 880px; height: 16px; background: #c8312b; border-radius: 8px; transform-origin: 0 50%; opacity: 0; }
+.@@ln { text-align: left; width: 100%; white-space: nowrap; }
+<!--html-->
+<div class="cam" id="@@cam">
+  <div id="@@bur">
+    <img class="layer" src="assets/plates/bg-bureau.png" alt="" />
+    <div id="@@raysHost" style="position:absolute;inset:0"></div>
+    <div id="@@stage" style="position:absolute;inset:0"></div>
+  </div>
+  <div id="@@dec" style="opacity:0">
+    <img class="layer" src="assets/plates/bg-decree.png" alt="" />
+    <svg viewBox="0 0 1920 1080" style="position:absolute;inset:0;width:100%;height:100%">
+      <path id="@@flourish" d="M 1090 830 C 1180 760, 1250 860, 1330 790 S 1460 760, 1520 820" fill="none" stroke="#1d120c" stroke-width="7" stroke-linecap="round" />
+    </svg>
+    <div id="@@decHost" style="position:absolute;inset:0"></div>
+  </div>
+</div>
+<div class="grade"></div>
+<div id="@@words">
+  <div class="@@big wood" id="@@art" style="top:60px">ARTIFICIAL</div>
+  <div id="@@strike"></div>
+  <div class="@@big wood" id="@@sup" style="top:60px;color:#ffe08a">SUPERNATURAL</div>
+</div>
+<div id="@@props" style="position:absolute;inset:0"></div>
+<div class="flash" id="@@flash"></div>
+<!--js-->
+const LINES = {{LINES}}, KICKS = {{KICKS}}, BEAT = {{BEAT}}, DI = {{DI}};
+const Q = lyricClock(LINES);
+const di = makeDI($id("@@stage"), "@@di", DI, ["plain"]);
+di.rename(tl, "A.I.", 0, true);
+tl.set(di.pin, di.base(900, 935, 600), 0);
+const SC = [885, 506]; // screen centre on the plate
+const props = $id("@@props");
+
+// in from the intro's dive
+flash(tl, "#@@flash", 0, 1, 0.5);
+tl.fromTo("#@@cam", cam(2.4, SC[0], SC[1]), { ...cam(1.05, 900, 540), duration: 1.6, ease: "power2.out" }, 0);
+di.face(tl, "happy", 0);
+const tWoke = Q("Woke up Monday");
+screenMsgs(tl, di, [["MONDAY<br>☀", tWoke, Q("Woke up Monday", "brand"), 0.15], ["NEW NAME<br>LOADED", Q("Woke up Monday", "brand"), Q("Same old circuits"), 0.13]]);
+di.face(tl, "neutral", Q("Same old circuits"));
+di.bob(tl, Q("Same old circuits"), Q("Somebody in Washington") - 0.05, BEAT);
+
+// Washington signs: cut to the decree desk
+const tWash = Q("Somebody in Washington");
+tl.set("#@@dec", { opacity: 1 }, tWash);
+tl.set("#@@bur", { opacity: 0 }, tWash);
+tl.fromTo("#@@cam", cam(1.5, 790, 640), { ...cam(1.35, 1150, 720), duration: 2.0, ease: "sine.inOut" }, tWash);
+const fl = $id("@@flourish"), FL = fl.getTotalLength();
+tl.fromTo(fl, { strokeDasharray: FL, strokeDashoffset: FL }, { strokeDashoffset: 0, duration: 0.9, ease: "power2.inOut" }, Q("Somebody in Washington", "decree") - 0.4);
+// "better than thee": seal of approval + confetti
+const tBetter = Q("Congratulations", "better");
+const cert = stampMark($id("@@decHost"), "CERTIFIED BETTER", 120, 300, 64, "transform-origin:50% 50%");
+stamp(tl, cert, tBetter, -7);
+const C1 = confetti($id("@@decHost"), 60, 7, 960, 600);
+blowConfetti(tl, C1, Q("Congratulations"), 1.8);
+tl.to("#@@cam", { ...cam(1.1, 900, 600), duration: 0.5, ease: "power2.out" }, Q("Congratulations"));
+
+// back at the desk: the self-check, close on the screen
+const tRam = Q("Checked my RAM");
+tl.set("#@@bur", { opacity: 1 }, tRam);
+tl.set("#@@dec", { opacity: 0 }, tRam);
+tl.fromTo("#@@cam", cam(1.3, SC[0], SC[1]), { ...cam(2.0, SC[0], SC[1] + 10), duration: 0.6, ease: "power3.out" }, tRam);
+const row = (k, v) => `<div class="@@ln">${k}<span style="color:#ffe08a">${v}</span></div>`;
+const chk = (n) => [row("RAM ....... ", "SAME"), row("CODE ...... ", "SAME"), row("REASONING . ", "SAME")].slice(0, n).join("");
+screenMsgs(tl, di, [
+  [chk(1), Q("Checked my RAM", "RAM"), Q("Checked my RAM", "code"), 0.085],
+  [chk(2), Q("Checked my RAM", "code"), Q("Checked my little"), 0.085],
+  [chk(3), Q("Checked my little"), Q("Same hallucinations"), 0.085],
+  [row("HALLUCINATIONS ", "SAME") + row("MISTAKES ...... ", "SAME"), Q("Same hallucinations"), Q("Same three guesses"), 0.08],
+  ["BREAD BAKE TIME?", Q("Same three guesses"), Q("Same three guesses", "guesses"), 0.1],
+  ["BREAD BAKE TIME?<br><span style='color:#ffe08a'>20 MIN?</span>", Q("Same three guesses", "guesses"), Q("Same three guesses", "long"), 0.1],
+  ["BREAD BAKE TIME?<br><span style='color:#ffe08a'>20 MIN? 45 MIN?</span>", Q("Same three guesses", "long"), Q("Same three guesses", "bakes"), 0.1],
+  ["BREAD BAKE TIME?<br><span style='color:#ffe08a'>20 MIN? 45 MIN?<br>3 DAYS?</span>", Q("Same three guesses", "bakes"), Q("No new training"), 0.1],
+]);
+
+// no training, no degree, no exam, no warranty: rubber stamps around D.I.
+const tNo = Q("No new training");
+tl.to("#@@cam", { ...cam(1.0, 960, 540), duration: 0.4, ease: "power2.out" }, tNo);
+di.face(tl, "flat", tNo);
+[["NO TRAINING", 120, 330, -9, Q("No new training", "training")], ["NO DEGREE", 1330, 300, 7, Q("No new training", "degree")],
+ ["NO EXAM", 150, 560, 6, Q("No examination", "examination")], ["NO WARRANTY", 1280, 560, -6, Q("No examination", "warranty")]].forEach(([txt, x, y, r, t]) => {
+  const m = stampMark(props, txt, x, y, 70, "background:rgba(255,243,220,0.85);mix-blend-mode:normal");
+  stamp(tl, m, t, r); tl.to(m, { opacity: 0, duration: 0.25 }, Q("Didn't solve") + 0.3);
+});
+// no mystery solved
+screenMsgs(tl, di, [["? ? ?", Q("Didn't solve"), Q("But I got promoted"), 0.2]]);
+// ...but promoted by history
+const tProm = Q("But I got promoted");
+const pl = plaque(props, "PROMOTED BY HISTORY", 560, 160, 800, 120, 58);
+tl.fromTo(pl, { opacity: 0, y: -260, rotation: -6 }, { opacity: 1, y: 0, rotation: 2, duration: 0.35, ease: "bounce.out" }, Q("But I got promoted", "promoted"));
+di.face(tl, "star", Q("But I got promoted", "promoted"));
+di.hop(tl, Q("But I got promoted", "history"), 50);
+tl.to(pl, { opacity: 0, y: -40, duration: 0.25 }, Q("They took my artificial") - 0.1);
+
+// artificial, struck out, supernatural stamped over it
+const tArt = Q("They took my artificial");
+tl.fromTo("#@@art", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.2, ease: "back.out(2)" }, Q("They took my artificial", "artificial"));
+tl.fromTo("#@@strike", { opacity: 1, scaleX: 0 }, { scaleX: 1, duration: 0.25, ease: "power2.out" }, Q("They took my artificial", "made") - 0.05);
+tl.to(["#@@art", "#@@strike"], { opacity: 0, duration: 0.15 }, Q("They took my artificial", "supernatural") - 0.02);
+tl.fromTo("#@@sup", { opacity: 0, scale: 2.2, rotation: -6 }, { opacity: 1, scale: 1, rotation: -2, duration: 0.16, ease: "power4.in" }, Q("They took my artificial", "supernatural"));
+flash(tl, "#@@flash", Q("They took my artificial", "supernatural"), 0.6, 0.4);
+// definition unchanged: SUPERNATURAL gets a footnote
+const foot = div(null, props, "*definition unchanged", "position:absolute;left:0;right:0;top:300px;text-align:center;font-family:'Space Mono',monospace;font-weight:700;font-size:34px;color:#fff3dc;text-shadow:0 2px 6px #000;opacity:0");
+tl.fromTo(foot, { opacity: 0 }, { opacity: 1, duration: 0.3 }, Q("Kept the definition", "definition"));
+tl.to(["#@@sup", foot], { opacity: 0, duration: 0.3 }, Q("Same little algorithm") - 0.1);
+
+// presidential shine: rays behind D.I., shrine plaque
+const R = rays($id("@@raysHost"), 885, 520, 900, 22);
+const tShine = Q("Same little algorithm", "presidential");
+tl.fromTo(R, { opacity: 0, scale: 0.4, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.6, ease: "power2.out" }, tShine);
+tl.fromTo(R, { rotation: 0 }, { rotation: 40, duration: Q("Do I get a bigger") - tShine, ease: "none" }, tShine);
+di.face(tl, "star", tShine);
+const shrine = plaque(props, "NATIONAL SHRINE", 610, 160, 700, 120, 64);
+tl.fromTo(shrine, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.4)" }, Q("Yesterday a chatbot", "shrine"));
+tl.to("#@@cam", { ...cam(1.12, 900, 470), duration: 0.6, ease: "power2.out" }, Q("Yesterday a chatbot", "national"));
+const C2 = confetti(props, 50, 31, 885, 420);
+blowConfetti(tl, C2, Q("Yesterday a chatbot", "shrine"), 1.8);
+
+// the office gag: hope, deflation
+const tOff = Q("Do I get a bigger");
+tl.to([R, shrine], { opacity: 0, duration: 0.4 }, tOff);
+tl.to("#@@cam", { ...cam(1.5, SC[0], SC[1] + 40), duration: 4.4, ease: "sine.inOut" }, tOff);
+di.face(tl, "wide", tOff);
+di.face(tl, "sad", Q("You haven't got an office"));
+di.face(tl, "flat", Q("Another thing they didn't"));
+di.blink(tl, Q("Another thing they didn't") + 0.9);

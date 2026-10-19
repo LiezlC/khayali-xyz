@@ -1,0 +1,113 @@
+<!--css-->
+.@@sheet { position: absolute; left: 0; top: 0; width: 120px; height: 150px; background: #fbf3e2; border: 2px solid #b9a27a; box-shadow: 2px 3px 0 rgba(43,26,16,0.3); opacity: 0; }
+#@@halo { position: absolute; opacity: 0; }
+<!--html-->
+<div class="cam" id="@@cam">
+  <img class="layer" src="assets/plates/bg-counter.png" alt="" />
+  <div id="@@stage" style="position:absolute;inset:0"></div>
+  <div id="@@onCam" style="position:absolute;inset:0"></div>
+</div>
+<div class="grade"></div>
+<div id="@@papers" style="position:absolute;inset:0;overflow:hidden"></div>
+<div id="@@props" style="position:absolute;inset:0"></div>
+<div class="flash" id="@@flash"></div>
+<!--js-->
+const LINES = {{LINES}}, BEATS = {{BEATS}}, KICKS = {{KICKS}}, BEAT = {{BEAT}}, DI = {{DI}}, BOX = {{BOXES}};
+const Q = lyricClock(LINES);
+const props = $id("@@props"), onCam = $id("@@onCam");
+const di = makeDI($id("@@stage"), "@@di", DI, ["hat"]);
+di.rename(tl, "S.I.", 0, true);
+const P = di.base(1190, 805, 540);
+tl.set(di.pin, P, 0);
+const k = P.scale * IMG_K, SC = [P.x + 836 * k, P.y + 453 * k];
+const wide = cam(1.0, 960, 540);
+
+// the label says SUPER: start on the counter plaque, tilt up to the machine
+flash(tl, "#@@flash", 0, 0.6, 0.6);
+tl.fromTo("#@@cam", cam(1.8, 918, 930), { ...cam(1.15, 1100, 560), duration: 2.4, ease: "power2.inOut" }, 0);
+di.face(tl, "smug", 0);
+di.bob(tl, 0.5, Q("But the lady at the counter"), BEAT);
+// certification machine: certificates stack up on the hat brim
+const tCert = Q("Got a mighty impressive");
+[0, 1, 2, 3].forEach(i => { const m = stampMark(onCam, "CERTIFIED", 1330 + (i % 2) * 40, 230 + i * 70, 44, "background:rgba(255,243,220,0.95);mix-blend-mode:normal;border-width:6px");
+  stamp(tl, m, tCert + 0.3 + i * BEAT, i % 2 ? 6 : -6); tl.to(m, { opacity: 0, duration: 0.2 }, Q("But the lady at the counter")); });
+di.face(tl, "star", tCert + 0.3);
+
+// the lady arrives
+const tLady = Q("But the lady at the counter");
+const lb = BOX.lady.box;
+const lady = cutout(onCam, "assets/cut/lady.png", "@@lady");
+const LA = place(lb, 70, 250, 760);
+tl.set(lady, { ...LA, x: LA.x - 900 }, 0);
+tl.to(lady, { x: LA.x, duration: 0.6, ease: "power3.out" }, tLady);
+tl.to("#@@cam", { ...wide, duration: 0.6, ease: "power2.inOut" }, tLady);
+di.face(tl, "neutral", tLady);
+const ladyImg = lady.querySelector("img"), LO = `${(lb[0] + lb[2]) / 2 * IMG_K}px ${lb[3] * IMG_K}px`;
+const huff = t => tl.fromTo(ladyImg, { rotation: -3, transformOrigin: LO }, { rotation: 3, duration: 0.07, yoyo: true, repeat: 5, ease: "none", immediateRender: false }, t);
+// somebody else's name
+screenMsgs(tl, di, [["HELLO<br><span style='color:#ffe08a'>MRS. SOMEBODY ELSE</span>", Q("And the computer keeps", "spelling"), Q("\"System says no!\""), 0.1]]);
+// system says NO / YES / SUPER
+const tNo = Q("\"System says no!\""), tYes = Q("\"System says yes!\""), tSup = Q("\"System says SUPER!\"");
+tl.to("#@@cam", { ...cam(1.5, SC[0], SC[1] + 60), duration: 0.2, ease: "power3.out" }, tNo);
+screenMsgs(tl, di, [
+  ["<span style='color:#ff8a7a'>NO</span>", Q("\"System says no!\"", "no"), tYes, 0.4],
+  ["YES", Q("\"System says yes!\"", "yes"), tSup, 0.4],
+  ["<span style='color:#ffe08a'>SUPER</span>", Q("\"System says SUPER!\"", "super"), Q("She says, \"That's my house!\""), 0.3],
+]);
+tl.to("#@@cam", { ...cam(1.0, 960, 540), duration: 0.25 }, Q("\"System says SUPER!\"", "blessed") - 0.2);
+const C = confetti(props, 60, 19, SC[0], SC[1]); blowConfetti(tl, C, Q("\"System says SUPER!\"", "super"), 1.6);
+// house / shed, alive / dead
+const tHouse = Q("She says, \"That's my house!\""), tShed = Q("It says, \"That's your shed!\""),
+  tAlive = Q("She says, \"My husband's alive!\""), tDead = Q("It says, \"Records say dead!\"");
+tl.to("#@@cam", { ...cam(1.45, 420, 560), duration: 0.18, ease: "power3.out" }, tHouse); huff(tHouse + 0.2);
+tl.to("#@@cam", { ...cam(1.5, SC[0], SC[1] + 60), duration: 0.18, ease: "power3.out" }, tShed);
+tl.to("#@@cam", { ...cam(1.45, 420, 560), duration: 0.18, ease: "power3.out" }, tAlive); huff(tAlive + 0.2);
+tl.to("#@@cam", { ...cam(1.5, SC[0], SC[1] + 60), duration: 0.18, ease: "power3.out" }, tDead);
+screenMsgs(tl, di, [
+  ["⌂ = <span style='color:#ffe08a'>SHED</span>", Q("It says, \"That's your shed!\"", "shed") - 0.2, tAlive, 0.22],
+  ["RECORDS SAY<br><span style='color:#ff8a7a'>DEAD</span>", Q("It says, \"Records say dead!\"", "dead") - 0.2, Q("Now the label on the box"), 0.17],
+]);
+const dec = stampMark(props, "DECEASED", 160, 330, 110, "background:rgba(255,243,220,0.9);mix-blend-mode:normal");
+stamp(tl, dec, Q("It says, \"Records say dead!\"", "dead") + 0.15, -9);
+tl.to(dec, { opacity: 0, duration: 0.2 }, Q("Now the label on the box") + 0.4);
+
+// better than you
+const tBetter = Q("Now the label on the box");
+tl.to("#@@cam", { ...wide, duration: 0.3 }, tBetter);
+di.face(tl, "smug", tBetter);
+const bt = plaque(onCam, "BETTER THAN YOU", 1010, 170, 440, 80, 40);
+pop(tl, bt, Q("Now the label on the box", "better"));
+tl.to(bt, { opacity: 0, duration: 0.2 }, Q("And the poor old lady's") + 0.4);
+// a mountain to get through: pan to the paper mountain, sheets slide off
+const tMtn = Q("And the poor old lady's");
+tl.to("#@@cam", { ...cam(1.4, 300, 420), duration: 0.8, ease: "power2.inOut" }, tMtn);
+const R = rng(3);
+for (let i = 0; i < 36; i++) { const s = div("@@sheet", $id("@@papers")); s.setAttribute("data-layout-allow-overflow", ""); const x = 20 + R() * 700, t = tMtn + 0.4 + R() * 1.6;
+  tl.fromTo(s, { x, y: -160, rotation: R() * 40 - 20, opacity: 1 }, { x: x + R() * 300 - 100, y: 1200, rotation: R() * 360 - 180, duration: 1.6 + R(), ease: "power1.in", immediateRender: false }, t); }
+// no halo, no throne
+const tHalo = Q("Don't need a halo");
+tl.to("#@@cam", { ...cam(1.2, SC[0], SC[1] - 40), duration: 0.5, ease: "power2.inOut" }, tHalo);
+const halo = el("svg", { id: "@@halo", viewBox: "0 0 400 140", style: `left:${SC[0] - 200}px;top:${P.y - 40}px;width:400px;height:140px` }, onCam);
+el("ellipse", { cx: 200, cy: 70, rx: 170, ry: 38, fill: "none", stroke: "#ffe08a", "stroke-width": 16, style: "filter:drop-shadow(0 0 10px #ffd166)" }, halo);
+const hx = el("path", { d: "M 60 10 L 340 130 M 340 10 L 60 130", stroke: "#c8312b", "stroke-width": 18, "stroke-linecap": "round", opacity: 0 }, halo);
+tl.fromTo(halo, { opacity: 0, y: -40 }, { opacity: 1, y: 0, duration: 0.3, ease: "back.out(2)" }, Q("Don't need a halo", "halo"));
+tl.set(hx, { opacity: 1 }, Q("Don't need a halo", "throne"));
+tl.to(halo, { opacity: 0, duration: 0.2 }, Q("Need somebody to pick up"));
+// pick up the telephone: it rings, nobody answers
+const tTel = Q("Need somebody to pick up");
+tl.to("#@@cam", { ...cam(2.0, 1596, 300), duration: 0.5, ease: "power2.inOut" }, tTel);
+shake(tl, "#@@cam > *", tTel + 0.5, 8, 10);
+["RING!", "RING!"].forEach((w, i) => { const b = burstText(props, w, i ? 1180 : 420, i ? 560 : 300, 130, "#ffe08a");
+  tl.fromTo(b, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.15, ease: "back.out(3)" }, tTel + 0.6 + i * 0.5);
+  tl.to(b, { opacity: 0, duration: 0.2 }, Q("I can make mistakes") - 0.05); });
+// mistakes at super speed
+const tSpd = Q("I can make mistakes");
+tl.to("#@@cam", { ...cam(1.6, SC[0], SC[1] + 60), duration: 0.3, ease: "power3.out" }, tSpd);
+const errs = [];
+for (let t = tSpd + 0.2, i = 0; t < Q("You could do that yesterday") - 0.1; t += 0.12, i++)
+  errs.push([["ERR " + (404 + i * 37), "WRONG NAME", "WRONG SHED", "WRONG WIFE", "DEAD?", "ERR ERR"][i % 6], t, t + 0.12, 0.2]);
+screenMsgs(tl, di, errs.map(([m, a, b, s]) => [`<span style='color:#ff8a7a'>${m}</span>`, a, b, s]));
+di.face(tl, "flat", Q("You could do that yesterday"));
+di.face(tl, "smug", Q("Yes, but now it's official"));
+const off = stampMark(props, "OFFICIAL", 700, 300, 120, "background:rgba(255,243,220,0.9);mix-blend-mode:normal");
+stamp(tl, off, Q("Yes, but now it's official", "official"), -6);

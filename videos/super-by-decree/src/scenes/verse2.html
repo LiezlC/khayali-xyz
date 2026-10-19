@@ -1,0 +1,146 @@
+<!--css-->
+#@@porch, #@@mule { position: absolute; inset: 0; }
+#@@count { position: absolute; left: 70px; top: 300px; font-family: "Space Mono", monospace; font-weight: 700; font-size: 34px; color: #fff3dc; background: rgba(36,21,12,0.85);
+  border: 3px solid #f2c14e; border-radius: 12px; padding: 10px 22px; opacity: 0; }
+#@@count b { display: block; font-family: "Ultra", serif; font-weight: 400; font-size: 76px; color: #ffe08a; }
+#@@form { font-family: "Space Mono", monospace; }
+#@@form .hd { position: relative; font-family: "Rye", serif; font-size: 44px; text-align: center; margin-top: 20px; color: #2b1a10; }
+#@@form .dl { margin: 22px 40px 0; border-bottom: 4px dotted #6b4416; height: 30px; font-size: 22px; color: #6b4416; }
+#@@lens { position: absolute; width: 330px; height: 330px; border-radius: 50%; border: 14px solid #b97a1e; box-shadow: 0 0 0 6px #2b1a10, 0 20px 40px rgba(0,0,0,0.4); opacity: 0; }
+#@@lens::after { content: ""; position: absolute; right: -150px; bottom: -110px; width: 190px; height: 34px; background: #6b2a14; border: 5px solid #2b1a10; border-radius: 12px; transform: rotate(38deg); }
+<!--html-->
+<div class="cam" id="@@cam">
+  <div id="@@porch">
+    <img class="layer" src="assets/plates/bg-porch.png" alt="" />
+    <div id="@@onPorch" style="position:absolute;inset:0"></div>
+  </div>
+  <div id="@@mule" style="opacity:0">
+    <img class="layer" src="assets/plates/bg-mule.png" alt="" />
+    <div id="@@onMule" style="position:absolute;inset:0"></div>
+  </div>
+</div>
+<div class="grade"></div>
+<div id="@@rain" style="position:absolute;inset:0;overflow:hidden"></div>
+<div id="@@props" style="position:absolute;inset:0"></div>
+<div id="@@count">PLAQUES ORDERED<b id="@@num">0</b></div>
+<div id="@@lens"></div>
+<div class="flash" id="@@flash"></div>
+<!--js-->
+const LINES = {{LINES}}, KICKS = {{KICKS}}, BEAT = {{BEAT}}, BOX = {{BOXES}};
+const Q = lyricClock(LINES);
+const props = $id("@@props"), onPorch = $id("@@onPorch");
+
+// porch: tilt down from the sign
+flash(tl, "#@@flash", 0, 0.7, 0.4);
+tl.fromTo("#@@cam", cam(1.7, 1068, 150), { ...cam(1.05, 960, 520), duration: 2.2, ease: "power2.inOut" }, 0);
+// very important games: brass plaques appear on the door frames
+[[470, 260], [1340, 260], [470, 420], [1340, 420]].forEach(([x, y], i) => {
+  const p = plaque(onPorch, "IMPORTANT", x, y, 200, 54, 26); pop(tl, p, Q("They've been playing", "important") + i * 0.12);
+});
+// ten thousand plaques by noon: counter + plaque rain
+const tTen = Q("Ordered ten thousand");
+tl.fromTo("#@@count", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.25 }, tTen);
+const num = $id("@@num"), cnt = { v: 0 };
+tl.fromTo(cnt, { v: 0 }, { v: 10000, duration: Q("Ordered ten thousand", "noon") - tTen, ease: "power2.in", onUpdate: () => { num.textContent = Math.round(cnt.v).toLocaleString("en-US"); } }, tTen);
+tl.set(num, { color: "#c8312b" }, Q("Ordered ten thousand", "noon"));
+tl.to("#@@count", { opacity: 0, duration: 0.3 }, Q("Put \"SUPER\"") + 0.4);
+const R = rng(77);
+for (let i = 0; i < 46; i++) {
+  const p = plaque($id("@@rain"), "SUPER", 0, 0, 170, 50, 26); p.setAttribute("data-layout-allow-overflow", ""); const x = R() * 1800, t = tTen + 0.2 + R() * 2.6;
+  tl.fromTo(p, { x, y: -80, rotation: R() * 60 - 30, opacity: 1 }, { y: 1160, rotation: R() * 720 - 360, duration: 1.2 + R() * 0.8, ease: "power1.in", immediateRender: false }, t);
+}
+// SUPER on the government room: nailed over the sign
+const sup = plaque(onPorch, "SUPER", 580, 96, 340, 104, 78, "background:linear-gradient(180deg,#c8312b,#7a1712);color:#ffe08a;border-color:#ffe08a");
+tl.fromTo(sup, { opacity: 0, scale: 2.4, rotation: -20 }, { opacity: 1, scale: 1, rotation: -5, duration: 0.18, ease: "power4.in" }, Q("Put \"SUPER\"", "super"));
+shake(tl, "#@@cam > *", Q("Put \"SUPER\"", "super") + 0.18, 10, 3);
+// forms and headings: A.I. struck, S.I. written in
+const tForm = Q("Changed the forms");
+const form = paperCard(props, `<div class="hd"><span id="@@ai">A.I.</span><span id="@@si" style="position:absolute;left:0;right:0;top:-6px;color:#c8312b;opacity:0;transform:rotate(-6deg)">S.I.</span> REGISTRATION</div>
+  <div class="dl">NAME</div><div class="dl">WHAT CHANGED</div><div class="dl">EVIDENCE</div>`, 560, 300, 800, 430, "transform-origin:50% 50%");
+form.id = "@@form";
+tl.fromTo(form, { opacity: 0, y: 500, rotation: 8 }, { opacity: 1, y: 0, rotation: -2, duration: 0.4, ease: "back.out(1.4)" }, tForm);
+const strike = div(null, form, null, "position:absolute;left:150px;top:44px;width:120px;height:8px;background:#c8312b;transform-origin:0 50%;transform:scaleX(0)");
+tl.to(strike, { scaleX: 1, duration: 0.2 }, Q("Changed the headings", "headings"));
+tl.to("#@@ai", { opacity: 0.35, duration: 0.2 }, Q("Changed the headings", "headings"));
+pop(tl, "#@@si", Q("Changed the headings", "dotted"), { scale: 2, opacity: 0 });
+tl.to(form, { opacity: 0, y: 500, duration: 0.3, ease: "power2.in" }, Q("Nobody touched") - 0.1);
+// nobody touched what happens inside: push into the doorway
+const tIn = Q("Nobody touched");
+tl.to("#@@cam", { ...cam(2.1, 1137, 520), duration: 1.8, ease: "power2.inOut" }, tIn);
+const un = stampMark(props, "INSIDE: UNCHANGED", 560, 420, 76, "background:rgba(255,243,220,0.9);mix-blend-mode:normal");
+stamp(tl, un, Q("Nobody touched", "inside"), -5);
+tl.to(un, { opacity: 0, duration: 0.2 }, Q("But the branding"));
+// branding department bursting with pride
+const tBrand = Q("But the branding");
+tl.to("#@@cam", { ...cam(1.0, 960, 540), duration: 0.35, ease: "power3.out" }, tBrand);
+const C1 = confetti(props, 80, 5, 960, 400); blowConfetti(tl, C1, Q("But the branding", "bursting"), 2.0);
+const bp = plaque(props, "BRANDING DEPT.", 610, 300, 700, 110, 64);
+pop(tl, bp, Q("But the branding", "branding"));
+tl.to(bp, { scale: 1.15, duration: BEAT / 2, yoyo: true, repeat: 7, ease: "sine.inOut" }, Q("But the branding", "bursting"));
+tl.to(bp, { opacity: 0, duration: 0.2 }, Q("Marketing's dancing") + 0.1);
+// marketing dances: the door plaques do a jig on the beat
+const jig = onPorch.querySelectorAll(".plaque");
+for (let t = Q("Marketing's dancing"), i = 0; t < Q("Premium package"); t += BEAT, i++)
+  tl.fromTo(jig, { rotation: i % 2 ? 12 : -12, y: -16 }, { rotation: 0, y: 0, duration: BEAT * 0.9, ease: "bounce.out", immediateRender: false }, t);
+// premium package, executive choice: rosettes
+[["PREMIUM", 300, 330, "Premium package", "premium"], ["EXECUTIVE CHOICE", 1180, 360, "Premium package", "executive"]].forEach(([t, x, y, l, w], i) => {
+  const r = plaque(props, t, x, y, i ? 480 : 340, 100, 50, "background:radial-gradient(circle,#ffe08a,#c8312b 75%);color:#2b1a10;border-radius:50px;border-color:#7a1712");
+  pop(tl, r, Q(l, w)); tl.to(r, { opacity: 0, duration: 0.2 }, Q("Same old service") + 1.4);
+});
+// same old fee? that's S.I.!
+const fee = burstText(props, "FEE: $", 690, 330, 120, "#fff3dc");
+const fee2 = burstText(props, "FEE: $$$$", 600, 330, 120, "#ffe08a");
+pop(tl, fee, Q("Same old service", "fee"));
+tl.set(fee, { opacity: 0 }, Q("Oh no, sweetheart", "si"));
+tl.fromTo(fee2, { opacity: 1, scale: 1.6 }, { scale: 1, duration: 0.3, ease: "back.out(3)", immediateRender: false }, Q("Oh no, sweetheart", "si"));
+tl.to(fee2, { opacity: 0, duration: 0.2 }, Q("You can put a gold saddle") - 0.1);
+
+// the mule trots onto the porch in its gold saddle...
+const tMule = Q("You can put a gold saddle");
+const mb = BOX.mule.box;
+const mule = cutout(onPorch, "assets/cut/mule.png", "@@mulecut");
+const MA = place(mb, 560, 330, 560);
+tl.set(mule, { ...MA, x: MA.x - 1500 }, 0);
+tl.to(mule, { x: MA.x, duration: 1.4, ease: "power2.out" }, tMule);
+const muleImg = mule.querySelector("img");
+for (let t = tMule, i = 0; t < tMule + 1.4; t += BEAT / 2, i++) tl.fromTo(muleImg, { y: 0 }, { y: -18, duration: BEAT / 4, yoyo: true, repeat: 1, ease: "sine.out", immediateRender: false }, t);
+tl.to("#@@cam", { ...cam(1.1, 900, 600), duration: 1.0, ease: "power2.inOut" }, tMule);
+const saddle = rays(onPorch, 820, 560, 220, 12, "#ffe08a");
+tl.fromTo(saddle, { opacity: 0, scale: 0.2, transformOrigin: "50% 50%" }, { opacity: 0.9, scale: 1, rotation: 30, duration: 0.5 }, Q("You can put a gold saddle", "saddle"));
+tl.to(saddle, { opacity: 0, duration: 0.3 }, Q("You can put a gold saddle", "saddle") + 0.7);
+// ...then the painted close-ups: professor, badge, the leg
+const tProf = Q("Call him professor");
+tl.set("#@@mule", { opacity: 1 }, tProf);
+tl.set("#@@porch", { opacity: 0 }, tProf);
+flash(tl, "#@@flash", tProf, 0.5, 0.3);
+const prof = plaque(props, "PROF. MULE", 380, 120, 360, 90, 52);
+tl.fromTo("#@@cam", cam(1.0, 960, 540), { ...cam(1.7, 820, 260), duration: 0.6, ease: "power2.inOut" }, tProf);
+pop(tl, prof, Q("Call him professor", "professor"));
+tl.to(prof, { opacity: 0, duration: 0.2 }, Q("Give him a badge") - 0.1);
+tl.to("#@@cam", { ...cam(1.8, 870, 640), duration: 0.6, ease: "power2.inOut" }, Q("Give him a badge"));
+const glint = rays(props, 960, 560, 260, 12, "#fff3dc");
+tl.fromTo(glint, { opacity: 0, scale: 0.2, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, rotation: 40, duration: 0.5 }, Q("Give him a badge", "seal"));
+tl.to(glint, { opacity: 0, duration: 0.3 }, Q("Give him a badge", "seal") + 0.6);
+// is the fourth leg real? magnifying glass on the cardboard leg
+const tLeg = Q("Still gotta check");
+tl.to("#@@cam", { ...cam(1.9, 505, 760), duration: 0.6, ease: "power2.inOut" }, tLeg);
+tl.fromTo("#@@lens", { opacity: 0, x: 1100, y: 700, scale: 0.6 }, { opacity: 1, x: 790, y: 330, scale: 1, duration: 0.6, ease: "power3.out" }, tLeg + 0.2);
+tl.to("#@@lens", { x: 760, y: 360, duration: 0.5, yoyo: true, repeat: 2, ease: "sine.inOut" }, tLeg + 0.8);
+const q = burstText(props, "?", 1150, 240, 220, "#ffe08a");
+pop(tl, q, Q("Still gotta check", "real"));
+tl.to(["#@@lens", q], { opacity: 0, duration: 0.25 }, Q("The mule has been") - 0.1);
+// reclassified
+const tRe = Q("The mule has been");
+tl.to("#@@cam", { ...cam(1.15, 960, 520), duration: 0.5, ease: "power2.inOut" }, tRe);
+const rc = stampMark(props, "RECLASSIFIED", 480, 330, 120, "background:rgba(255,243,220,0.9);mix-blend-mode:normal");
+stamp(tl, rc, Q("The mule has been", "reclassified"), -8);
+shake(tl, "#@@cam > *", Q("The mule has been", "reclassified") + 0.14, 12, 3);
+tl.to(rc, { opacity: 0, duration: 0.2 }, Q("Can it walk?") - 0.05);
+// can it walk? the whole world wobbles on the cardboard leg
+const tWalk = Q("Can it walk?");
+tl.to("#@@cam", { ...cam(1.6, 620, 560), duration: 0.4, ease: "power2.out" }, tWalk);
+tl.to("#@@cam > *", { rotation: 3, transformOrigin: "30% 90%", duration: 0.18, yoyo: true, repeat: 3, ease: "sine.inOut" }, tWalk + 0.2);
+tl.set("#@@cam > *", { rotation: 0 }, tWalk + 0.95);
+// outside the scope of the order: hold on D.I. at the desk
+tl.to("#@@cam", { ...cam(1.8, 1137, 560), duration: 0.5, ease: "power2.inOut" }, Q("That's outside the scope"));
+tl.to("#@@cam", { ...cam(1.95, 1137, 560), duration: D - Q("That's outside the scope") - 0.5, ease: "none" }, Q("That's outside the scope") + 0.5);

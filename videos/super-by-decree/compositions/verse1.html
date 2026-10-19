@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="UTF-8" /><title>verse1</title></head>
+  <body>
+    <template>
+      <style>
+@font-face { font-family: "Fraunces"; font-weight: 900; font-style: normal; src: url("assets/fonts/fraunces-latin-900-normal.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 900; font-style: italic; src: url("assets/fonts/fraunces-latin-900-italic.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 600; font-style: normal; src: url("assets/fonts/fraunces-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Space Mono"; font-weight: 400; src: url("assets/fonts/space-mono-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Space Mono"; font-weight: 700; src: url("assets/fonts/space-mono-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Rye"; font-weight: 400; src: url("assets/fonts/rye-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Ultra"; font-weight: 400; src: url("assets/fonts/ultra-latin-400-normal.woff2") format("woff2"); }
+#root { position: absolute; inset: 0; overflow: hidden; font-family: "Fraunces", Georgia, serif; color: #2b1a10; }
+.cam { position: absolute; inset: 0; transform-origin: 50% 50%; }
+.layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.pin { position: absolute; inset: 0; transform-origin: 0 0; }
+.pin > img { position: absolute; left: 0; top: 0; }
+.grade { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 95% at 50% 42%, rgba(255,214,150,0) 55%, rgba(43,26,16,0.42) 100%); }
+.flash { position: absolute; inset: 0; background: #fff6e0; opacity: 0; pointer-events: none; }
+.black { position: absolute; inset: 0; background: #0b0705; opacity: 0; pointer-events: none; }
+/* D.I. screen: overlay that sits on the blank CRT glass of the cutout */
+.screen { position: absolute; overflow: hidden; border-radius: 14% / 18%; }
+.screen svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.screen .face { opacity: 0; }
+.screen .txt { position: absolute; inset: 8% 9%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+  font-family: "Space Mono", monospace; font-weight: 700; color: #7dffa8; text-shadow: 0 0 8px rgba(80,255,150,0.75), 0 0 22px rgba(60,255,140,0.35); line-height: 1.12; opacity: 0; }
+.screen .scan { position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(0,0,0,0.16) 0 2px, rgba(0,0,0,0) 2px 5px); pointer-events: none; }
+/* big type */
+.wood { font-family: "Rye", serif; color: #f2c14e; -webkit-text-stroke: 5px #2b1a10; paint-order: stroke fill; text-shadow: 0 8px 0 #2b1a10, 0 14px 30px rgba(43,26,16,0.5); }
+.ultra { font-family: "Ultra", serif; }
+.stampmark { position: absolute; font-family: "Ultra", serif; color: #c8312b; border: 9px solid #c8312b; border-radius: 14px; padding: 4px 26px; letter-spacing: 0.04em;
+  mix-blend-mode: multiply; opacity: 0; white-space: nowrap; }
+.plaque { position: absolute; display: flex; align-items: center; justify-content: center; font-family: "Rye", serif; color: #3a2414;
+  background: linear-gradient(180deg, #ffe08a 0%, #e0a83a 48%, #b97a1e 100%); border: 4px solid #6b4416; border-radius: 10px;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.6), 0 8px 18px rgba(43,26,16,0.45); white-space: nowrap; }
+.burst { position: absolute; display: flex; align-items: center; justify-content: center; font-family: "Ultra", serif; color: #fff6e0;
+  -webkit-text-stroke: 6px #2b1a10; paint-order: stroke fill; opacity: 0; white-space: nowrap; }
+.conf { position: absolute; left: 0; top: 0; border-radius: 2px; opacity: 0; }
+.card { position: absolute; background: #f6ead0; border: 5px solid #2b1a10; border-radius: 8px; box-shadow: 10px 12px 0 rgba(43,26,16,0.8);
+  font-family: "Fraunces", serif; color: #2b1a10; overflow: hidden; }
+.card h3 { font-family: "Rye", serif; font-weight: 400; text-align: center; color: #6b2a14; }
+.nameplate { position: absolute; transform-origin: 50% 100%; background: linear-gradient(180deg, #ffe08a 0%, #e0a83a 50%, #a8691a 100%);
+  border: 4px solid #5a3812; border-radius: 6px; box-shadow: inset 0 2px 0 rgba(255,255,255,0.6), 0 10px 14px rgba(43,26,16,0.5); }
+
+.np-face { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: "Rye", serif; color: #3a2414; letter-spacing: 0.06em; }
+
+
+#verse1-bur, #verse1-dec { position: absolute; inset: 0; }
+#verse1-words { position: absolute; left: 0; right: 0; top: 70px; height: 220px; }
+.verse1-big { position: absolute; left: 0; right: 0; text-align: center; font-size: 120px; opacity: 0; }
+#verse1-strike { position: absolute; left: 520px; top: 150px; width: 880px; height: 16px; background: #c8312b; border-radius: 8px; transform-origin: 0 50%; opacity: 0; }
+.verse1-ln { text-align: left; width: 100%; white-space: nowrap; }
+
+      </style>
+      <div id="root" data-composition-id="verse1" data-width="1920" data-height="1080" data-duration="42.492">
+
+<div class="cam" id="verse1-cam">
+  <div id="verse1-bur">
+    <img class="layer" src="assets/plates/bg-bureau.png" alt="" />
+    <div id="verse1-raysHost" style="position:absolute;inset:0"></div>
+    <div id="verse1-stage" style="position:absolute;inset:0"></div>
+  </div>
+  <div id="verse1-dec" style="opacity:0">
+    <img class="layer" src="assets/plates/bg-decree.png" alt="" />
+    <svg viewBox="0 0 1920 1080" style="position:absolute;inset:0;width:100%;height:100%">
+      <path id="verse1-flourish" d="M 1090 830 C 1180 760, 1250 860, 1330 790 S 1460 760, 1520 820" fill="none" stroke="#1d120c" stroke-width="7" stroke-linecap="round" />
+    </svg>
+    <div id="verse1-decHost" style="position:absolute;inset:0"></div>
+  </div>
+</div>
+<div class="grade"></div>
+<div id="verse1-words">
+  <div class="verse1-big wood" id="verse1-art" style="top:60px">ARTIFICIAL</div>
+  <div id="verse1-strike"></div>
+  <div class="verse1-big wood" id="verse1-sup" style="top:60px;color:#ffe08a">SUPERNATURAL</div>
+</div>
+<div id="verse1-props" style="position:absolute;inset:0"></div>
+<div class="flash" id="verse1-flash"></div>
+
+      </div>
+      <script>
+        (function () {
+// Shared helpers, inlined into every scene by build.py. Deterministic only.
+function rng(seed) { return function () { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+const SVGNS = "http://www.w3.org/2000/svg";
+function el(tag, attrs, parent) { const n = document.createElementNS(SVGNS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); if (parent) parent.appendChild(n); return n; }
+function div(cls, parent, html, style) { const n = document.createElement("div"); if (cls) n.className = cls; if (html != null) n.innerHTML = html; if (style) n.style.cssText = style; if (parent) parent.appendChild(n); return n; }
+function $id(id) { return document.getElementById(id); }
+function within(xs, a, b) { return xs.filter(t => t >= a && t < b); }
+
+// Lyric clock: Q("Checked my RAM") -> local start of that line; Q("RAM", "code") -> time of the word "code" in it; Q(frag, "end") -> line end.
+function lyricClock(LINES) {
+  return function (frag, word) {
+    const L = LINES.find(L => L.start >= -0.3 && L.text.includes(frag)) || LINES.find(L => L.text.includes(frag));
+    if (!L) throw new Error("no lyric line: " + frag);
+    if (word == null) return L.start;
+    if (word === "end") return L.end;
+    if (typeof word === "number") return L.words[Math.min(word, L.words.length - 1)].t;
+    const w = L.words.find(w => w.w.toLowerCase().replace(/[^a-z0-9']/g, "").startsWith(word.toLowerCase())) || L.adwords.find(w => w.w.toLowerCase().includes(word.toLowerCase()));
+    if (!w) throw new Error("no word " + word + " in " + frag);
+    return w.t;
+  };
+}
+
+// Plates are 1672x941, shown full-bleed at 1920x1080.
+const IMG_K = 1920 / 1672;
+// Cutout in a .pin (transform-origin 0 0): put its alpha box at screen (x, y) with height h.
+function place(box, x, y, h) { const s = h / ((box[3] - box[1]) * IMG_K); return { x: x - box[0] * IMG_K * s, y: y - box[1] * IMG_K * s, scale: s }; }
+// Camera centred on plate point (px, py) at scale S, clamped to the frame.
+function cam(S, px, py) { const bx = (S - 1) * 960, by = (S - 1) * 540;
+  return { scale: S, x: Math.max(-bx, Math.min(bx, (960 - px) * S)), y: Math.max(-by, Math.min(by, (540 - py) * S)) }; }
+
+// full-frame flash that fades out; immediateRender off so a later-defined flash never paints over earlier frames
+function flash(tl, sel, at, peak, dur, ease) { tl.fromTo(sel, { opacity: peak }, { opacity: 0, duration: dur || 0.4, ease: ease || "power2.out", immediateRender: false }, at); }
+function flashIn(tl, sel, at, dur) { tl.fromTo(sel, { opacity: 0 }, { opacity: 1, duration: dur || 0.25, ease: "power2.in", immediateRender: false }, at); }
+function stamp(tl, sel, at, rot) {
+  tl.fromTo(sel, { scale: 2.6, opacity: 0, rotation: (rot || -8) * 2.5 }, { scale: 1, opacity: 1, rotation: rot || -8, duration: 0.14, ease: "power4.in" }, at);
+}
+function pop(tl, sel, at, from) { tl.fromTo(sel, from || { scale: 0.2, opacity: 0 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.24, ease: "back.out(2.6)" }, at); }
+function out(tl, sel, at, d) { tl.to(sel, { opacity: 0, duration: d || 0.2, ease: "power1.in" }, at); }
+function shake(tl, sel, at, amt, n) { tl.fromTo(sel, { x: 0 }, { x: amt || 10, duration: 0.035, yoyo: true, repeat: (n || 8) * 2 - 1, ease: "none" }, at); tl.set(sel, { x: 0 }, at + 0.07 * (n || 8)); }
+// camera kick on beats: quick scale punch that settles
+function kicks(tl, sel, times, amt) { times.forEach(t => tl.fromTo(sel, { scale: 1 + (amt || 0.03) }, { scale: 1, duration: 0.3, ease: "power2.out" }, t)); }
+
+// ---------- D.I. rig ----------
+// DI = {box:[x0,y0,x1,y1] alpha box in plate px, screen:[x0,y0,x1,y1] CRT glass in plate px}; all three cutouts share it.
+const FACES = {
+  neutral: ["................", "................", "....##....##....", "....##....##....", "....##....##....", "................", "................", "......####......", "................", "................"],
+  happy:   ["................", "................", "....##....##....", "....##....##....", "....##....##....", "................", ".....#....#.....", "......####......", "................", "................"],
+  smug:    ["................", "................", "................", "...###....###...", "................", "................", "........#.......", ".....####.......", "................", "................"],
+  flat:    ["................", "................", "................", "...###....###...", "................", "................", "................", ".....######.....", "................", "................"],
+  wide:    ["................", "...###....###...", "...#.#....#.#...", "...###....###...", "................", "................", "......####......", "......#..#......", "......####......", "................"],
+  sad:     ["................", "................", "....##....##....", "....##....##....", "................", "................", "......####......", ".....#....#.....", "................", "................"],
+  x:       ["................", "...#.#....#.#...", "....#......#....", "...#.#....#.#...", "................", "................", ".....######.....", "................", "................", "................"],
+  wink:    ["................", "................", "....##..........", "....##....###...", "....##..........", "................", ".....#....#.....", "......####......", "................", "................"],
+  star:    ["................", "....#......#....", "...###....###...", "....#......#....", "................", "................", ".....#....#.....", "......####......", "................", "................"],
+};
+// makeDI(host, id, DI, which) -> rig. which: subset of ["plain","hat","crown"].
+function makeDI(host, id, DI, which) {
+  which = which || ["plain", "hat", "crown"];
+  const pin = div("pin", host); pin.id = id;
+  const inner = div(null, pin, null, "position:absolute;inset:0");
+  const W = DI.size[0] * IMG_K, H = DI.size[1] * IMG_K, ORG = `${(DI.box[0] + DI.box[2]) / 2 * IMG_K}px ${DI.box[3] * IMG_K}px`;
+  const imgs = {};
+  which.forEach(v => { const im = document.createElement("img"); im.src = `assets/cut/di-${v}.png`; im.alt = "";
+    im.style.cssText = `position:absolute;left:0;top:0;width:${W}px;height:${H}px;opacity:${v === which[0] ? 1 : 0}`; inner.appendChild(im); imgs[v] = im; });
+  const s = DI.screen, scr = div("screen", inner, null,
+    `left:${s[0] * IMG_K}px;top:${s[1] * IMG_K}px;width:${(s[2] - s[0]) * IMG_K}px;height:${(s[3] - s[1]) * IMG_K}px`);
+  const svg = el("svg", { viewBox: "0 0 160 100", preserveAspectRatio: "xMidYMid meet" }, scr);
+  const faces = {};
+  for (const k in FACES) {
+    const g = el("g", { class: "face", fill: "#7dffa8", style: "filter: drop-shadow(0 0 2px #50ff96)" }, svg);
+    FACES[k].forEach((row, r) => [...row].forEach((c, cI) => { if (c === "#") el("rect", { x: cI * 10 + 1, y: r * 10 + 1, width: 8.6, height: 8.6 }, g); }));
+    faces[k] = g;
+  }
+  const txt = div("txt", scr);
+  div("scan", scr);
+  // brass nameplate on the bezel under the glass: the official name (A.I. -> S.I. -> A.I.)
+  const np = div("nameplate", inner, null, `left:${731 * IMG_K}px;top:${616 * IMG_K}px;width:${210 * IMG_K}px;height:${58 * IMG_K}px`);
+  const names = {};
+  ["A.I.", "S.I."].forEach(n => { names[n] = div("np-face", np, n, `font-size:${40 * IMG_K}px;opacity:${n === "A.I." ? 1 : 0}`); });
+  const H0 = (s[3] - s[1]) * IMG_K;
+  let cur = null;
+  const rig = {
+    pin, inner, imgs, scr, faces, txt, np, names,
+    // flip the nameplate to n ("A.I." | "S.I."); instant=true just sets it
+    rename(tl, n, t, instant) { if (instant) { for (const k in names) tl.set(names[k], { opacity: k === n ? 1 : 0 }, t); return rig; }
+      tl.to(np, { rotationX: 90, duration: 0.12, ease: "power2.in" }, t);
+      for (const k in names) tl.set(names[k], { opacity: k === n ? 1 : 0 }, t + 0.12);
+      tl.to(np, { rotationX: 0, duration: 0.22, ease: "back.out(3)" }, t + 0.12); return rig; },
+    at(tl, x, y, h, t) { tl.set(pin, place(DI.box, x, y, h), t || 0); return rig; },
+    // centre-x and base line (bottom of the case) in screen px; returns the placement for tweening
+    base(cx, by, h) { const b = DI.box, w = (b[2] - b[0]) / (b[3] - b[1]) * h; return place(b, cx - w / 2, by - h, h); },
+    // swap costume
+    wear(tl, v, t) { which.forEach(k => tl.set(imgs[k], { opacity: k === v ? 1 : 0 }, t)); return rig; },
+    face(tl, k, t) { for (const f in faces) tl.set(faces[f], { opacity: f === k ? 1 : 0 }, t); tl.set(txt, { opacity: 0 }, t); cur = k; return rig; },
+    blank(tl, t) { for (const f in faces) tl.set(faces[f], { opacity: 0 }, t); tl.set(txt, { opacity: 0 }, t); return rig; },
+    // blink: eyes off for a frame
+    // squash-hop (e.g. on a stomp)
+    hop(tl, t, amt) { tl.fromTo(inner, { y: 0, scaleY: 1, transformOrigin: ORG }, { y: -(amt || 40), scaleY: 1.04, duration: 0.12, ease: "power2.out" }, t);
+      tl.to(inner, { y: 0, scaleY: 1, duration: 0.18, ease: "bounce.out" }, t + 0.12); return rig; },
+    blink(tl, t) { if (cur) { tl.set(faces[cur], { opacity: 0 }, t); tl.set(faces[cur], { opacity: 1 }, t + 0.09); } return rig; },
+    bob(tl, a, b, beat) { // head-bob on the beat
+      for (let t = a, k = 0; t < b - 0.01; t += beat, k++) tl.fromTo(inner, { rotation: k % 2 ? 2 : -2, transformOrigin: ORG }, { rotation: k % 2 ? -2 : 2, duration: beat, ease: "sine.inOut" }, t);
+      tl.set(inner, { rotation: 0 }, b);
+      return rig; },
+  };
+  return rig;
+}
+// Text-on-screen with seek safety: one pre-built span per message, toggled by opacity.
+function screenMsgs(tl, rig, msgs) { // msgs: [[html, tIn, tOut, size]]
+  // appends: a rig can take several screenMsgs calls
+  const H0 = parseFloat(rig.scr.style.height);
+  msgs.forEach(([html, a, b, size]) => {
+    const m = div(null, rig.txt, html, `position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;font-size:${(size || 0.16) * H0}px;opacity:0`);
+    for (const f in rig.faces) tl.set(rig.faces[f], { opacity: 0 }, a);
+    rig.txt.querySelectorAll(":scope > div").forEach(o => o !== m && tl.set(o, { opacity: 0 }, a));
+    tl.set(rig.txt, { opacity: 1 }, a);
+    tl.set(m, { opacity: 1 }, a);
+    if (b != null) tl.set(m, { opacity: 0 }, b);
+  });
+}
+
+// ---------- props ----------
+// optional lyric lookup: returns null instead of throwing (chorus source is shared by different lyric variants)
+function softClock(Q) { return (a, b) => { try { return Q(a, b); } catch (e) { return null; } }; }
+function plaque(host, text, x, y, w, h, fs, style) { return div("plaque", host, text, `left:${x}px;top:${y}px;width:${w}px;height:${h}px;font-size:${fs}px;opacity:0;${style || ""}`); }
+function stampMark(host, text, x, y, fs, style) { return div("stampmark", host, text, `left:${x}px;top:${y}px;font-size:${fs}px;${style || ""}`); }
+function burstText(host, text, x, y, fs, color) { return div("burst", host, text, `left:${x}px;top:${y}px;font-size:${fs}px;${color ? "color:" + color + ";" : ""}`); }
+function paperCard(host, html, x, y, w, h, style) { return div("card", host, html, `left:${x}px;top:${y}px;width:${w}px;height:${h}px;opacity:0;${style || ""}`); }
+// gold confetti stars: deterministic, burst from (cx, cy)
+function confetti(host, n, seed, cx, cy) {
+  const R = rng(seed), out = [];
+  const cols = ["#f2c14e", "#ffe08a", "#c8312b", "#2bb3a3", "#fff3dc"];
+  for (let i = 0; i < n; i++) {
+    const d = div("conf", host, null, `background:${cols[i % cols.length]};width:${12 + R() * 16}px;height:${8 + R() * 10}px`);
+    const a = R() * Math.PI * 2, sp = 300 + R() * 700;
+    d.setAttribute("data-layout-allow-overflow", "");
+    out.push({ d, x: cx, y: cy, dx: Math.cos(a) * sp, dy: Math.sin(a) * sp * 0.7 - 250, r: R() * 900 - 450 });
+  }
+  return out;
+}
+function blowConfetti(tl, C, at, dur) {
+  dur = dur || 1.6;
+  C.forEach(o => {
+    tl.fromTo(o.d, { x: o.x, y: o.y, rotation: 0, opacity: 1, scale: 0.4 }, { x: o.x + o.dx, y: o.y + o.dy, rotation: o.r, scale: 1, duration: dur * 0.45, ease: "power3.out", immediateRender: false }, at);
+    tl.to(o.d, { y: o.y + o.dy + 520, rotation: o.r * 1.6, duration: dur * 0.55, ease: "power1.in" }, at + dur * 0.45);
+    tl.to(o.d, { opacity: 0, duration: 0.25 }, at + dur - 0.25);
+  });
+}
+// sunburst rays behind something; rotate it with a tween
+function rays(host, cx, cy, r, n, color) {
+  const svg = el("svg", { viewBox: `${-r} ${-r} ${2 * r} ${2 * r}`, style: `position:absolute;left:${cx - r}px;top:${cy - r}px;width:${2 * r}px;height:${2 * r}px;opacity:0` }, host);
+  const g = el("g", {}, svg);
+  for (let i = 0; i < (n || 18); i++) { const a0 = i / (n || 18) * Math.PI * 2, a1 = a0 + Math.PI / (n || 18);
+    el("path", { d: `M0 0 L${Math.cos(a0) * r} ${Math.sin(a0) * r} L${Math.cos(a1) * r} ${Math.sin(a1) * r} Z`, fill: color || "#ffe08a", opacity: 0.55 }, g); }
+  return svg;
+}
+// cutout in a .pin (plate-sized canvas, transform-origin 0 0)
+function cutout(host, src, id, size) {
+  const p = div("pin", host); p.id = id;
+  const im = document.createElement("img"); im.src = src; im.alt = "";
+  const sz = size || [1672, 941];
+  im.style.cssText = `position:absolute;left:0;top:0;width:${sz[0] * IMG_K}px;height:${sz[1] * IMG_K}px`;
+  p.appendChild(im); return p;
+}
+
+          const tl = gsap.timeline({ paused: true });
+          const D = 42.492;
+
+const LINES = [{"i": 4, "section": "verse1", "speaker": "S", "text": "Woke up Monday with a brand-new name,", "ad": null, "start": 1.7, "end": 3.7, "words": [{"w": "Woke", "t": 1.7}, {"w": "up", "t": 1.94}, {"w": "Monday", "t": 2.18}, {"w": "with", "t": 2.66}, {"w": "a", "t": 2.82}, {"w": "brand-new", "t": 3.1}, {"w": "name,", "t": 3.3}], "adwords": []}, {"i": 5, "section": "verse1", "speaker": "S", "text": "Same old circuits, different game.", "ad": null, "start": 3.94, "end": 5.94, "words": [{"w": "Same", "t": 3.94}, {"w": "old", "t": 4.26}, {"w": "circuits,", "t": 4.5}, {"w": "different", "t": 5.14}, {"w": "game.", "t": 5.54}], "adwords": []}, {"i": 6, "section": "verse1", "speaker": "S", "text": "Somebody in Washington signed a decree,", "ad": null, "start": 6.02, "end": 8.18, "words": [{"w": "Somebody", "t": 6.02}, {"w": "in", "t": 6.5}, {"w": "Washington", "t": 6.74}, {"w": "signed", "t": 7.3}, {"w": "a", "t": 7.62}, {"w": "decree,", "t": 7.78}], "adwords": []}, {"i": 7, "section": "verse1", "speaker": "S", "text": "Said, \"Congratulations, you're better than thee!\"", "ad": null, "start": 8.26, "end": 10.58, "words": [{"w": "Said,", "t": 8.26}, {"w": "\"Congratulations,", "t": 8.58}, {"w": "you're", "t": 9.46}, {"w": "better", "t": 9.78}, {"w": "than", "t": 10.02}, {"w": "thee!\"", "t": 10.26}], "adwords": []}, {"i": 8, "section": "verse1", "speaker": "S", "text": "Checked my RAM, checked my code,", "ad": null, "start": 10.86, "end": 13.06, "words": [{"w": "Checked", "t": 10.86}, {"w": "my", "t": 11.14}, {"w": "RAM,", "t": 11.567}, {"w": "checked", "t": 11.913}, {"w": "my", "t": 12.26}, {"w": "code,", "t": 12.5}], "adwords": []}, {"i": 9, "section": "verse1", "speaker": "S", "text": "Checked my little ol' reasoning load.", "ad": null, "start": 13.26, "end": 15.38, "words": [{"w": "Checked", "t": 13.26}, {"w": "my", "t": 13.46}, {"w": "little", "t": 13.62}, {"w": "ol'", "t": 14.1}, {"w": "reasoning", "t": 14.5}, {"w": "load.", "t": 14.9}], "adwords": []}, {"i": 10, "section": "verse1", "speaker": "S", "text": "Same hallucinations, same mistakes,", "ad": null, "start": 15.38, "end": 17.46, "words": [{"w": "Same", "t": 15.38}, {"w": "hallucinations,", "t": 15.62}, {"w": "same", "t": 16.58}, {"w": "mistakes,", "t": 16.82}], "adwords": []}, {"i": 11, "section": "verse1", "speaker": "S", "text": "Same three guesses at how long bread bakes.", "ad": null, "start": 17.7, "end": 19.86, "words": [{"w": "Same", "t": 17.7}, {"w": "three", "t": 18.02}, {"w": "guesses", "t": 18.18}, {"w": "at", "t": 18.58}, {"w": "how", "t": 18.74}, {"w": "long", "t": 18.9}, {"w": "bread", "t": 19.22}, {"w": "bakes.", "t": 19.54}], "adwords": []}, {"i": 12, "section": "verse1", "speaker": "S", "text": "No new training, no degree,", "ad": null, "start": 20.02, "end": 21.96, "words": [{"w": "No", "t": 20.02}, {"w": "new", "t": 20.34}, {"w": "training,", "t": 20.5}, {"w": "no", "t": 21.4}, {"w": "degree,", "t": 21.56}], "adwords": []}, {"i": 13, "section": "verse1", "speaker": "S", "text": "No examination, no warranty.", "ad": null, "start": 22.04, "end": 24.36, "words": [{"w": "No", "t": 22.04}, {"w": "examination,", "t": 22.28}, {"w": "no", "t": 23.24}, {"w": "warranty.", "t": 23.48}], "adwords": []}, {"i": 14, "section": "verse1", "speaker": "S", "text": "Didn't solve a single mystery,", "ad": null, "start": 24.6, "end": 26.44, "words": [{"w": "Didn't", "t": 24.6}, {"w": "solve", "t": 25.0}, {"w": "a", "t": 25.4}, {"w": "single", "t": 25.48}, {"w": "mystery,", "t": 25.8}], "adwords": []}, {"i": 15, "section": "verse1", "speaker": "S", "text": "But I got promoted by history!", "ad": null, "start": 26.52, "end": 28.68, "words": [{"w": "But", "t": 26.52}, {"w": "I", "t": 26.76}, {"w": "got", "t": 26.92}, {"w": "promoted", "t": 27.16}, {"w": "by", "t": 27.8}, {"w": "history!", "t": 28.04}], "adwords": []}, {"i": 16, "section": "verse1", "speaker": "S", "text": "They took my artificial, made me supernatural,", "ad": null, "start": 29.08, "end": 31.08, "words": [{"w": "They", "t": 29.08}, {"w": "took", "t": 29.16}, {"w": "my", "t": 29.4}, {"w": "artificial,", "t": 29.56}, {"w": "made", "t": 30.12}, {"w": "me", "t": 30.28}, {"w": "supernatural,", "t": 30.44}], "adwords": []}, {"i": 17, "section": "verse1", "speaker": "S", "text": "Kept the definition absolutely factual.", "ad": null, "start": 31.24, "end": 33.04, "words": [{"w": "Kept", "t": 31.24}, {"w": "the", "t": 31.48}, {"w": "definition", "t": 31.56}, {"w": "absolutely", "t": 32.44}, {"w": "factual.", "t": 32.84}], "adwords": []}, {"i": 18, "section": "verse1", "speaker": "S", "text": "Same little algorithm, presidential shine,", "ad": null, "start": 33.24, "end": 35.48, "words": [{"w": "Same", "t": 33.24}, {"w": "little", "t": 33.56}, {"w": "algorithm,", "t": 33.88}, {"w": "presidential", "t": 34.44}, {"w": "shine,", "t": 35.08}], "adwords": []}, {"i": 19, "section": "verse1", "speaker": "S", "text": "Yesterday a chatbot, now a national shrine!", "ad": null, "start": 35.56, "end": 37.64, "words": [{"w": "Yesterday", "t": 35.56}, {"w": "a", "t": 35.96}, {"w": "chatbot,", "t": 36.253}, {"w": "now", "t": 36.467}, {"w": "a", "t": 36.68}, {"w": "national", "t": 36.76}, {"w": "shrine!", "t": 37.16}], "adwords": []}, {"i": 20, "section": "verse1", "speaker": "DI", "text": "Do I get a bigger office?", "ad": null, "start": 37.88, "end": 39.24, "words": [{"w": "Do", "t": 37.88}, {"w": "I", "t": 38.12}, {"w": "get", "t": 38.2}, {"w": "a", "t": 38.36}, {"w": "bigger", "t": 38.44}, {"w": "office?", "t": 38.76}], "adwords": []}, {"i": 21, "section": "verse1", "speaker": "VOICE", "text": "You haven't got an office.", "ad": null, "start": 39.4, "end": 40.68, "words": [{"w": "You", "t": 39.4}, {"w": "haven't", "t": 39.56}, {"w": "got", "t": 39.88}, {"w": "an", "t": 40.04}, {"w": "office.", "t": 40.28}], "adwords": []}, {"i": 22, "section": "verse1", "speaker": "DI", "text": "Another thing they didn't upgrade.", "ad": null, "start": 41.01, "end": 42.54, "words": [{"w": "Another", "t": 41.01}, {"w": "thing", "t": 41.34}, {"w": "they", "t": 41.58}, {"w": "didn't", "t": 41.74}, {"w": "upgrade.", "t": 41.98}], "adwords": []}], KICKS = [23.382, 34.412, 37.57], BEAT = 0.5803, DI = {"box": [362, 223, 1351, 1029], "screen": [646.0, 300.0, 1026.3, 605.7], "size": [1672, 1100], "notes": {"plain": [1059, 413, 1182, 541], "hat": [1053, 397, 1175, 523], "crown": [1047, 298, 1168, 525]}};
+const Q = lyricClock(LINES);
+const di = makeDI($id("verse1-stage"), "verse1-di", DI, ["plain"]);
+di.rename(tl, "A.I.", 0, true);
+tl.set(di.pin, di.base(900, 935, 600), 0);
+const SC = [885, 506]; // screen centre on the plate
+const props = $id("verse1-props");
+
+// in from the intro's dive
+flash(tl, "#verse1-flash", 0, 1, 0.5);
+tl.fromTo("#verse1-cam", cam(2.4, SC[0], SC[1]), { ...cam(1.05, 900, 540), duration: 1.6, ease: "power2.out" }, 0);
+di.face(tl, "happy", 0);
+const tWoke = Q("Woke up Monday");
+screenMsgs(tl, di, [["MONDAY<br>☀", tWoke, Q("Woke up Monday", "brand"), 0.15], ["NEW NAME<br>LOADED", Q("Woke up Monday", "brand"), Q("Same old circuits"), 0.13]]);
+di.face(tl, "neutral", Q("Same old circuits"));
+di.bob(tl, Q("Same old circuits"), Q("Somebody in Washington") - 0.05, BEAT);
+
+// Washington signs: cut to the decree desk
+const tWash = Q("Somebody in Washington");
+tl.set("#verse1-dec", { opacity: 1 }, tWash);
+tl.set("#verse1-bur", { opacity: 0 }, tWash);
+tl.fromTo("#verse1-cam", cam(1.5, 790, 640), { ...cam(1.35, 1150, 720), duration: 2.0, ease: "sine.inOut" }, tWash);
+const fl = $id("verse1-flourish"), FL = fl.getTotalLength();
+tl.fromTo(fl, { strokeDasharray: FL, strokeDashoffset: FL }, { strokeDashoffset: 0, duration: 0.9, ease: "power2.inOut" }, Q("Somebody in Washington", "decree") - 0.4);
+// "better than thee": seal of approval + confetti
+const tBetter = Q("Congratulations", "better");
+const cert = stampMark($id("verse1-decHost"), "CERTIFIED BETTER", 120, 300, 64, "transform-origin:50% 50%");
+stamp(tl, cert, tBetter, -7);
+const C1 = confetti($id("verse1-decHost"), 60, 7, 960, 600);
+blowConfetti(tl, C1, Q("Congratulations"), 1.8);
+tl.to("#verse1-cam", { ...cam(1.1, 900, 600), duration: 0.5, ease: "power2.out" }, Q("Congratulations"));
+
+// back at the desk: the self-check, close on the screen
+const tRam = Q("Checked my RAM");
+tl.set("#verse1-bur", { opacity: 1 }, tRam);
+tl.set("#verse1-dec", { opacity: 0 }, tRam);
+tl.fromTo("#verse1-cam", cam(1.3, SC[0], SC[1]), { ...cam(2.0, SC[0], SC[1] + 10), duration: 0.6, ease: "power3.out" }, tRam);
+const row = (k, v) => `<div class="verse1-ln">${k}<span style="color:#ffe08a">${v}</span></div>`;
+const chk = (n) => [row("RAM ....... ", "SAME"), row("CODE ...... ", "SAME"), row("REASONING . ", "SAME")].slice(0, n).join("");
+screenMsgs(tl, di, [
+  [chk(1), Q("Checked my RAM", "RAM"), Q("Checked my RAM", "code"), 0.085],
+  [chk(2), Q("Checked my RAM", "code"), Q("Checked my little"), 0.085],
+  [chk(3), Q("Checked my little"), Q("Same hallucinations"), 0.085],
+  [row("HALLUCINATIONS ", "SAME") + row("MISTAKES ...... ", "SAME"), Q("Same hallucinations"), Q("Same three guesses"), 0.08],
+  ["BREAD BAKE TIME?", Q("Same three guesses"), Q("Same three guesses", "guesses"), 0.1],
+  ["BREAD BAKE TIME?<br><span style='color:#ffe08a'>20 MIN?</span>", Q("Same three guesses", "guesses"), Q("Same three guesses", "long"), 0.1],
+  ["BREAD BAKE TIME?<br><span style='color:#ffe08a'>20 MIN? 45 MIN?</span>", Q("Same three guesses", "long"), Q("Same three guesses", "bakes"), 0.1],
+  ["BREAD BAKE TIME?<br><span style='color:#ffe08a'>20 MIN? 45 MIN?<br>3 DAYS?</span>", Q("Same three guesses", "bakes"), Q("No new training"), 0.1],
+]);
+
+// no training, no degree, no exam, no warranty: rubber stamps around D.I.
+const tNo = Q("No new training");
+tl.to("#verse1-cam", { ...cam(1.0, 960, 540), duration: 0.4, ease: "power2.out" }, tNo);
+di.face(tl, "flat", tNo);
+[["NO TRAINING", 120, 330, -9, Q("No new training", "training")], ["NO DEGREE", 1330, 300, 7, Q("No new training", "degree")],
+ ["NO EXAM", 150, 560, 6, Q("No examination", "examination")], ["NO WARRANTY", 1280, 560, -6, Q("No examination", "warranty")]].forEach(([txt, x, y, r, t]) => {
+  const m = stampMark(props, txt, x, y, 70, "background:rgba(255,243,220,0.85);mix-blend-mode:normal");
+  stamp(tl, m, t, r); tl.to(m, { opacity: 0, duration: 0.25 }, Q("Didn't solve") + 0.3);
+});
+// no mystery solved
+screenMsgs(tl, di, [["? ? ?", Q("Didn't solve"), Q("But I got promoted"), 0.2]]);
+// ...but promoted by history
+const tProm = Q("But I got promoted");
+const pl = plaque(props, "PROMOTED BY HISTORY", 560, 160, 800, 120, 58);
+tl.fromTo(pl, { opacity: 0, y: -260, rotation: -6 }, { opacity: 1, y: 0, rotation: 2, duration: 0.35, ease: "bounce.out" }, Q("But I got promoted", "promoted"));
+di.face(tl, "star", Q("But I got promoted", "promoted"));
+di.hop(tl, Q("But I got promoted", "history"), 50);
+tl.to(pl, { opacity: 0, y: -40, duration: 0.25 }, Q("They took my artificial") - 0.1);
+
+// artificial, struck out, supernatural stamped over it
+const tArt = Q("They took my artificial");
+tl.fromTo("#verse1-art", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.2, ease: "back.out(2)" }, Q("They took my artificial", "artificial"));
+tl.fromTo("#verse1-strike", { opacity: 1, scaleX: 0 }, { scaleX: 1, duration: 0.25, ease: "power2.out" }, Q("They took my artificial", "made") - 0.05);
+tl.to(["#verse1-art", "#verse1-strike"], { opacity: 0, duration: 0.15 }, Q("They took my artificial", "supernatural") - 0.02);
+tl.fromTo("#verse1-sup", { opacity: 0, scale: 2.2, rotation: -6 }, { opacity: 1, scale: 1, rotation: -2, duration: 0.16, ease: "power4.in" }, Q("They took my artificial", "supernatural"));
+flash(tl, "#verse1-flash", Q("They took my artificial", "supernatural"), 0.6, 0.4);
+// definition unchanged: SUPERNATURAL gets a footnote
+const foot = div(null, props, "*definition unchanged", "position:absolute;left:0;right:0;top:300px;text-align:center;font-family:'Space Mono',monospace;font-weight:700;font-size:34px;color:#fff3dc;text-shadow:0 2px 6px #000;opacity:0");
+tl.fromTo(foot, { opacity: 0 }, { opacity: 1, duration: 0.3 }, Q("Kept the definition", "definition"));
+tl.to(["#verse1-sup", foot], { opacity: 0, duration: 0.3 }, Q("Same little algorithm") - 0.1);
+
+// presidential shine: rays behind D.I., shrine plaque
+const R = rays($id("verse1-raysHost"), 885, 520, 900, 22);
+const tShine = Q("Same little algorithm", "presidential");
+tl.fromTo(R, { opacity: 0, scale: 0.4, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.6, ease: "power2.out" }, tShine);
+tl.fromTo(R, { rotation: 0 }, { rotation: 40, duration: Q("Do I get a bigger") - tShine, ease: "none" }, tShine);
+di.face(tl, "star", tShine);
+const shrine = plaque(props, "NATIONAL SHRINE", 610, 160, 700, 120, 64);
+tl.fromTo(shrine, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.4)" }, Q("Yesterday a chatbot", "shrine"));
+tl.to("#verse1-cam", { ...cam(1.12, 900, 470), duration: 0.6, ease: "power2.out" }, Q("Yesterday a chatbot", "national"));
+const C2 = confetti(props, 50, 31, 885, 420);
+blowConfetti(tl, C2, Q("Yesterday a chatbot", "shrine"), 1.8);
+
+// the office gag: hope, deflation
+const tOff = Q("Do I get a bigger");
+tl.to([R, shrine], { opacity: 0, duration: 0.4 }, tOff);
+tl.to("#verse1-cam", { ...cam(1.5, SC[0], SC[1] + 40), duration: 4.4, ease: "sine.inOut" }, tOff);
+di.face(tl, "wide", tOff);
+di.face(tl, "sad", Q("You haven't got an office"));
+di.face(tl, "flat", Q("Another thing they didn't"));
+di.blink(tl, Q("Another thing they didn't") + 0.9);
+
+          window.__timelines = window.__timelines || {};
+          window.__timelines["verse1"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

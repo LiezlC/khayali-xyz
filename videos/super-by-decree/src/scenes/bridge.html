@@ -1,0 +1,58 @@
+<!--css-->
+#@@void { position: absolute; inset: 0; background: #0b0705; opacity: 0; }
+#@@spot { position: absolute; inset: 0; opacity: 0; background: radial-gradient(34% 46% at 50% 58%, rgba(255,214,150,0.38) 0%, rgba(255,214,150,0.08) 60%, rgba(0,0,0,0) 100%); }
+<!--html-->
+<div class="cam" id="@@cam">
+  <img class="layer" src="assets/plates/bg-bureau-night.png" alt="" />
+  <div id="@@stage" style="position:absolute;inset:0"></div>
+</div>
+<div class="grade"></div>
+<div id="@@void"><div id="@@spot"></div><div id="@@bug" style="position:absolute;inset:0"></div></div>
+<div class="flash" id="@@flash"></div>
+<!--js-->
+const LINES = {{LINES}}, BEAT = {{BEAT}}, DI = {{DI}}, BOX = {{BOXES}};
+const Q = lyricClock(LINES);
+const di = makeDI($id("@@stage"), "@@di", DI, ["plain"]);
+di.rename(tl, "S.I.", 0, true);
+const P = di.base(900, 935, 600);
+tl.set(di.pin, P, 0);
+const k = P.scale * IMG_K, SC = [P.x + 836 * k, P.y + 453 * k];
+
+// the beat drops out: lights already off, slow lonely push-in
+flash(tl, "#@@flash", 0, 0.5, 0.8);
+const tSilence = Q("With a machine that's officially", "end") + 0.4;
+tl.fromTo("#@@cam", cam(1.0, 900, 540), { ...cam(1.55, SC[0], SC[1] + 40), duration: tSilence, ease: "sine.inOut" }, 0);
+di.face(tl, "neutral", 0);
+[2.5, 7.1, 11.8, 16.2].forEach(t => di.blink(tl, t));
+screenMsgs(tl, di, [
+  ["FORM<br><span style='color:#ff8a7a'>ERROR</span>", Q("Yesterday, when I got"), Q("You could tell me"), 0.15],
+  ["YOU SAID:<br><span style='color:#ffe08a'>WRONG</span>", Q("You could tell me", "wrong"), Q("Today, I'm Super"), 0.14],
+]);
+di.face(tl, "smug", Q("Today, I'm Super"));
+screenMsgs(tl, di, [
+  ["⌂<br>YOU KNOW", Q("You still know where"), Q("I still read the wrong"), 0.16],
+  ["ADDRESS<br><span style='color:#ff8a7a'>404</span>", Q("I still read the wrong", "wrong"), Q("But now you've got"), 0.15],
+]);
+di.face(tl, "flat", Q("But now you've got"));
+screenMsgs(tl, di, [["OFFICIALLY<br><span style='color:#ffe08a'>SMARTER</span>", Q("With a machine that's officially", "officially"), tSilence, 0.13]]);
+
+// silence: go to black
+tl.fromTo("#@@void", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power1.inOut" }, tSilence);
+// a cockroach can wear a crown: spotlight on
+const tBug = Q("A cockroach can wear");
+tl.to("#@@spot", { opacity: 1, duration: 0.15 }, tBug - 0.2);
+const cb = BOX.cockroach.box;
+const bug = cutout($id("@@bug"), "assets/cut/cockroach.png", "@@roach");
+const at = place(cb, 960 - 280, 300, 640);
+tl.set(bug, { ...at, opacity: 0 }, 0);
+tl.fromTo(bug, { opacity: 0, y: at.y + 40 }, { opacity: 1, y: at.y, duration: 0.4, ease: "power2.out", immediateRender: false }, tBug - 0.1);
+tl.to(bug, { y: at.y - 14, duration: 0.5, yoyo: true, repeat: 5, ease: "sine.inOut" }, tBug + 0.3);
+// supper: the ladle wags (whole bug rocks)
+const bugImg = bug.querySelector("img");
+tl.to(bugImg, { rotation: 4, transformOrigin: `${(cb[0] + cb[2]) / 2 * IMG_K}px ${cb[3] * IMG_K}px`, duration: 0.2, yoyo: true, repeat: 5, ease: "sine.inOut" }, Q("Still don't let it make"));
+// ...Fair.
+const tFair = Q("...Fair.");
+tl.to("#@@void", { opacity: 0, duration: 0.25 }, tFair - 0.25);
+tl.set("#@@cam", cam(1.9, SC[0], SC[1] + 30), tFair - 0.25);
+di.face(tl, "flat", tFair - 0.25);
+di.blink(tl, tFair + 0.25);

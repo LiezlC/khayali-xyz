@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Super By Decree</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #0b0705; }
+      #main-root { position: relative; width: 100%; height: 100%; overflow: hidden; }
+      #grain { position: absolute; inset: -20px; opacity: 0.08; mix-blend-mode: multiply; pointer-events: none;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='7'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+    </style>
+  </head>
+  <body>
+    <div id="main-root" data-composition-id="main" data-start="0" data-duration="296.4" data-width="1920" data-height="1080">
+      <audio id="bgm" src="assets/bgm.mp3" data-start="0" data-duration="296.4" data-track-index="11" data-volume="1"></audio>
+      <div id="slot-intro" data-composition-id="intro" data-composition-src="compositions/intro.html" data-start="0.0" data-duration="29.838" data-track-index="0" data-width="1920" data-height="1080"></div>
+      <div id="slot-verse1" data-composition-id="verse1" data-composition-src="compositions/verse1.html" data-start="29.838" data-duration="42.492" data-track-index="1" data-width="1920" data-height="1080"></div>
+      <div id="slot-pre1" data-composition-id="pre1" data-composition-src="compositions/pre1.html" data-start="72.33" data-duration="14.327" data-track-index="0" data-width="1920" data-height="1080"></div>
+      <div id="slot-chorus-a" data-composition-id="chorus-a" data-composition-src="compositions/chorus-a.html" data-start="86.657" data-duration="23.498" data-track-index="1" data-width="1920" data-height="1080"></div>
+      <div id="slot-verse2" data-composition-id="verse2" data-composition-src="compositions/verse2.html" data-start="110.155" data-duration="41.193" data-track-index="0" data-width="1920" data-height="1080"></div>
+      <div id="slot-pre2" data-composition-id="pre2" data-composition-src="compositions/pre2.html" data-start="151.348" data-duration="10.602" data-track-index="1" data-width="1920" data-height="1080"></div>
+      <div id="slot-chorus-b" data-composition-id="chorus-b" data-composition-src="compositions/chorus-b.html" data-start="161.95" data-duration="19.096" data-track-index="0" data-width="1920" data-height="1080"></div>
+      <div id="slot-bridge" data-composition-id="bridge" data-composition-src="compositions/bridge.html" data-start="181.046" data-duration="29.977" data-track-index="1" data-width="1920" data-height="1080"></div>
+      <div id="slot-verse3" data-composition-id="verse3" data-composition-src="compositions/verse3.html" data-start="211.023" data-duration="36.525" data-track-index="0" data-width="1920" data-height="1080"></div>
+      <div id="slot-breakdown" data-composition-id="breakdown" data-composition-src="compositions/breakdown.html" data-start="247.548" data-duration="25.403" data-track-index="1" data-width="1920" data-height="1080"></div>
+      <div id="slot-finale" data-composition-id="finale" data-composition-src="compositions/finale.html" data-start="272.951" data-duration="23.449" data-track-index="0" data-width="1920" data-height="1080"></div>
+      <div id="slot-lyrics" data-composition-id="lyrics" data-composition-src="compositions/lyrics.html" data-start="0" data-duration="296.4" data-track-index="4" data-width="1920" data-height="1080"></div>
+      <div id="grain" class="clip" data-start="0" data-duration="296.4" data-track-index="5"></div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,77 @@
+<!--css-->
+#@@wrap { position: absolute; inset: 0; pointer-events: none; }
+.@@s { position: absolute; left: 0; right: 0; bottom: 46px; display: flex; justify-content: center; opacity: 0; }
+.@@s .pill { max-width: 1560px; padding: 14px 40px 18px; border-radius: 26px; background: rgba(36,21,12,0.78); box-shadow: 0 10px 40px rgba(20,10,4,0.45);
+  text-align: center; font-weight: 900; font-size: 60px; line-height: 1.12; color: #fff3dc; }
+.@@s .pill.caps { font-family: "Ultra", serif; font-weight: 400; font-size: 66px; letter-spacing: 0.01em; }
+.@@s .w { display: inline-block; opacity: 0.4; margin: 0 0.12em; }
+.@@ad { position: absolute; right: 150px; bottom: 182px; font-family: "Ultra", serif; font-size: 58px; color: #fff3dc; background: #c8312b;
+  border: 6px solid #fff3dc; border-radius: 16px; padding: 2px 28px 8px; box-shadow: 0 10px 30px rgba(20,10,4,0.5); opacity: 0; white-space: nowrap; }
+.@@di { position: absolute; left: 64px; top: 58px; max-width: 980px; padding: 18px 30px 22px; border-radius: 20px; background: rgba(6,30,21,0.92);
+  border: 4px solid #3f8f68; box-shadow: 0 0 0 3px rgba(6,30,21,0.6), 0 12px 40px rgba(0,0,0,0.5), inset 0 0 40px rgba(80,255,150,0.12);
+  font-family: "Space Mono", monospace; font-weight: 700; font-size: 44px; line-height: 1.22; color: #7dffa8; text-shadow: 0 0 10px rgba(80,255,150,0.6); opacity: 0; }
+.@@di .who { display: block; font-size: 22px; letter-spacing: 0.3em; color: #3fbf7a; text-shadow: none; margin-bottom: 4px; }
+.@@di .w { opacity: 0; }
+.@@di .cur { display: inline-block; width: 0.55em; height: 0.9em; background: #7dffa8; vertical-align: -0.1em; margin-left: 0.15em; }
+.@@crowd { position: absolute; left: 50px; width: 640px; top: 330px; display: flex; justify-content: flex-start; flex-wrap: wrap; gap: 0 0.28em; text-align: left;
+  font-size: 92px; line-height: 1.02; opacity: 0; transform: rotate(-4deg); }
+.@@crowd .who { flex: 0 0 auto; font-family: "Space Mono", monospace; font-size: 22px; letter-spacing: 0.3em; color: #fff3dc; -webkit-text-stroke: 0; text-shadow: none; background: rgba(36,21,12,0.88); border-radius: 8px; padding: 4px 12px; margin-bottom: 6px; }
+.@@crowd .who + .w { margin-left: 100%; }
+.@@crowd .w { display: inline-block; }
+.@@voice { position: absolute; right: 70px; top: 150px; max-width: 760px; padding: 20px 34px 26px; background: #f6ead0; border: 5px solid #2b1a10; border-radius: 6px;
+  box-shadow: 10px 12px 0 rgba(43,26,16,0.85); transform-origin: 100% 0; opacity: 0; font-style: italic; font-weight: 900; font-size: 54px; line-height: 1.12; color: #2b1a10; }
+.@@voice .who { display: block; font-family: "Space Mono", monospace; font-style: normal; font-weight: 700; font-size: 22px; letter-spacing: 0.3em; color: #a0281f; margin-bottom: 6px; }
+.@@voice .w { opacity: 0; }
+<!--html-->
+<div id="@@wrap"></div>
+<!--js-->
+const LINES = {{LINES}};
+const wrap = $id("@@wrap");
+const isCaps = s => { const l = s.replace(/[^A-Za-z]/g, ""); return l.length > 3 && l === l.toUpperCase(); };
+const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+// when each line leaves: S lines yield to the next S line; spoken/shouted lines yield to the next spoken/shouted line
+LINES.forEach((L, i) => {
+  const same = LINES.slice(i + 1).find(M => (M.speaker === "S") === (L.speaker === "S"));
+  const hold = L.speaker === "S" ? 0.55 : 0.9;
+  L.out = Math.min(L.end + hold, same ? same.start - 0.08 : D - 0.05);
+  L.in = L.speaker === "S" ? Math.max(L.start - 0.28, (LINES.slice(0, i).reverse().find(M => M.speaker === "S") || { out: -9 }).out + 0.02) : L.start - 0.05;
+  L.in = Math.max(L.in, 0);
+  if (L.out < L.in + 0.4) L.out = L.in + 0.4;
+});
+
+LINES.forEach((L, i) => {
+  const words = L.words.map(w => `<span class="w">${esc(w.w)}</span>`).join(" ");
+  if (L.speaker === "S") {
+    const n = div("@@s", wrap, `<div class="pill${isCaps(L.text) ? " caps" : ""}">${words}</div>`);
+    tl.fromTo(n, { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" }, L.in);
+    n.querySelectorAll(".w").forEach((w, k) => {
+      const t = L.words[k].t;
+      tl.fromTo(w, { opacity: 0.4, color: "#fff3dc", y: 0 }, { opacity: 1, color: "#ffd166", y: -7, duration: 0.08, ease: "power2.out" }, t);
+      tl.to(w, { color: "#fff3dc", y: 0, duration: 0.35, ease: "power1.out" }, t + 0.12);
+    });
+    tl.to(n, { opacity: 0, y: -14, duration: 0.16, ease: "power1.in" }, L.out);
+    if (L.ad) {
+      const a = div("@@ad", wrap, esc(L.ad));
+      const at = L.adwords.length ? L.adwords[0].t : L.end;
+      tl.fromTo(a, { opacity: 0, scale: 2.2, rotation: -20 }, { opacity: 1, scale: 1, rotation: -7, duration: 0.13, ease: "power4.in" }, at);
+      tl.to(a, { opacity: 0, duration: 0.15 }, Math.max(L.out, at + 0.6));
+    }
+  } else if (L.speaker === "DI") {
+    const n = div("@@di", wrap, `<span class="who">D.I. &gt;</span>${words}<span class="cur"></span>`);
+    tl.fromTo(n, { opacity: 0, scale: 0.92, transformOrigin: "0% 0%" }, { opacity: 1, scale: 1, duration: 0.12, ease: "power2.out" }, L.in);
+    n.querySelectorAll(".w").forEach((w, k) => tl.fromTo(w, { opacity: 0 }, { opacity: 1, duration: 0.02 }, L.words[k].t));
+    const cur = n.querySelector(".cur");
+    for (let t = L.in; t < L.out - 0.2; t += 0.5) { tl.set(cur, { opacity: 1 }, t); tl.set(cur, { opacity: 0 }, t + 0.25); }
+    tl.to(n, { opacity: 0, duration: 0.14 }, L.out);
+  } else if (L.speaker === "CROWD") {
+    const n = div("@@crowd wood", wrap, `<span class="who">THE CROWD</span>` + words);
+    tl.set(n, { opacity: 1 }, L.in);
+    n.querySelectorAll(".w").forEach((w, k) => tl.fromTo(w, { opacity: 0, scale: 2.4, rotation: (k % 2 ? 9 : -9) }, { opacity: 1, scale: 1, rotation: (k % 2 ? 3 : -3), duration: 0.14, ease: "power4.in" }, L.words[k].t));
+    tl.to(n, { opacity: 0, scale: 0.9, duration: 0.16 }, L.out);
+  } else {
+    const n = div("@@voice", wrap, `<span class="who">THE VOICE OF REASON</span>${words}`);
+    tl.fromTo(n, { opacity: 0, rotation: 6, y: -30 }, { opacity: 1, rotation: 2, y: 0, duration: 0.22, ease: "back.out(2)" }, L.in);
+    n.querySelectorAll(".w").forEach((w, k) => tl.fromTo(w, { opacity: 0 }, { opacity: 1, duration: 0.1 }, L.words[k].t));
+    tl.to(n, { opacity: 0, duration: 0.18 }, L.out);
+  }
+});

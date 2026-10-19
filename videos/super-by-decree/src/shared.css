@@ -1,0 +1,40 @@
+@font-face { font-family: "Fraunces"; font-weight: 900; font-style: normal; src: url("assets/fonts/fraunces-latin-900-normal.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 900; font-style: italic; src: url("assets/fonts/fraunces-latin-900-italic.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 600; font-style: normal; src: url("assets/fonts/fraunces-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Space Mono"; font-weight: 400; src: url("assets/fonts/space-mono-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Space Mono"; font-weight: 700; src: url("assets/fonts/space-mono-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Rye"; font-weight: 400; src: url("assets/fonts/rye-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Ultra"; font-weight: 400; src: url("assets/fonts/ultra-latin-400-normal.woff2") format("woff2"); }
+#root { position: absolute; inset: 0; overflow: hidden; font-family: "Fraunces", Georgia, serif; color: #2b1a10; }
+.cam { position: absolute; inset: 0; transform-origin: 50% 50%; }
+.layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.pin { position: absolute; inset: 0; transform-origin: 0 0; }
+.pin > img { position: absolute; left: 0; top: 0; }
+.grade { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 95% at 50% 42%, rgba(255,214,150,0) 55%, rgba(43,26,16,0.42) 100%); }
+.flash { position: absolute; inset: 0; background: #fff6e0; opacity: 0; pointer-events: none; }
+.black { position: absolute; inset: 0; background: #0b0705; opacity: 0; pointer-events: none; }
+/* D.I. screen: overlay that sits on the blank CRT glass of the cutout */
+.screen { position: absolute; overflow: hidden; border-radius: 14% / 18%; }
+.screen svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.screen .face { opacity: 0; }
+.screen .txt { position: absolute; inset: 8% 9%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+  font-family: "Space Mono", monospace; font-weight: 700; color: #7dffa8; text-shadow: 0 0 8px rgba(80,255,150,0.75), 0 0 22px rgba(60,255,140,0.35); line-height: 1.12; opacity: 0; }
+.screen .scan { position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(0,0,0,0.16) 0 2px, rgba(0,0,0,0) 2px 5px); pointer-events: none; }
+/* big type */
+.wood { font-family: "Rye", serif; color: #f2c14e; -webkit-text-stroke: 5px #2b1a10; paint-order: stroke fill; text-shadow: 0 8px 0 #2b1a10, 0 14px 30px rgba(43,26,16,0.5); }
+.ultra { font-family: "Ultra", serif; }
+.stampmark { position: absolute; font-family: "Ultra", serif; color: #c8312b; border: 9px solid #c8312b; border-radius: 14px; padding: 4px 26px; letter-spacing: 0.04em;
+  mix-blend-mode: multiply; opacity: 0; white-space: nowrap; }
+.plaque { position: absolute; display: flex; align-items: center; justify-content: center; font-family: "Rye", serif; color: #3a2414;
+  background: linear-gradient(180deg, #ffe08a 0%, #e0a83a 48%, #b97a1e 100%); border: 4px solid #6b4416; border-radius: 10px;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.6), 0 8px 18px rgba(43,26,16,0.45); white-space: nowrap; }
+.burst { position: absolute; display: flex; align-items: center; justify-content: center; font-family: "Ultra", serif; color: #fff6e0;
+  -webkit-text-stroke: 6px #2b1a10; paint-order: stroke fill; opacity: 0; white-space: nowrap; }
+.conf { position: absolute; left: 0; top: 0; border-radius: 2px; opacity: 0; }
+.card { position: absolute; background: #f6ead0; border: 5px solid #2b1a10; border-radius: 8px; box-shadow: 10px 12px 0 rgba(43,26,16,0.8);
+  font-family: "Fraunces", serif; color: #2b1a10; overflow: hidden; }
+.card h3 { font-family: "Rye", serif; font-weight: 400; text-align: center; color: #6b2a14; }
+.nameplate { position: absolute; transform-origin: 50% 100%; background: linear-gradient(180deg, #ffe08a 0%, #e0a83a 50%, #a8691a 100%);
+  border: 4px solid #5a3812; border-radius: 6px; box-shadow: inset 0 2px 0 rgba(255,255,255,0.6), 0 10px 14px rgba(43,26,16,0.5); }
+
+.np-face { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: "Rye", serif; color: #3a2414; letter-spacing: 0.06em; }

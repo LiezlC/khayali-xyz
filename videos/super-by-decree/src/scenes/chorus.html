@@ -1,0 +1,199 @@
+<!--css-->
+.@@title { position: absolute; left: 0; right: 0; top: 24px; text-align: center; font-size: 132px; line-height: 1; opacity: 0; }
+.@@si { position: absolute; top: 330px; font-size: 300px; line-height: 1; opacity: 0; }
+#@@tag text { font-family: "Ultra", serif; }
+#@@birth h3 { font-size: 46px; margin: 18px 0 4px; }
+#@@birth p { text-align: center; font-size: 30px; font-weight: 900; margin: 4px 24px; }
+#@@end { position: absolute; inset: 0; background: radial-gradient(80% 80% at 50% 45%, #15382f 0%, #0b0705 80%); opacity: 0; }
+#@@endtitle { position: absolute; left: 0; right: 0; top: 70px; text-align: center; font-size: 150px; line-height: 1; opacity: 0; }
+#@@endsub { position: absolute; left: 0; right: 0; top: 250px; text-align: center; font-family: "Ultra", serif; font-size: 64px; color: #fff3dc; opacity: 0; }
+#@@logo { position: absolute; right: 50px; bottom: 40px; width: 170px; opacity: 0; }
+#@@credit { position: absolute; left: 0; right: 0; bottom: 30px; text-align: center; font-family: "Space Mono", monospace; font-weight: 700; font-size: 24px; letter-spacing: 0.3em; color: #7dffa8; opacity: 0; }
+<!--html-->
+<div class="cam" id="@@cam">
+  <img class="layer" src="assets/plates/{{PLATE}}.png" alt="" />
+  <div id="@@raysHost" style="position:absolute;inset:0"></div>
+  <div id="@@stage" style="position:absolute;inset:0"></div>
+  <div id="@@marks" style="position:absolute;inset:0"></div>
+</div>
+<div class="grade"></div>
+<div id="@@props" style="position:absolute;inset:0"></div>
+<div class="@@title wood" id="@@t1">SUPER BY DECREE</div>
+<div class="@@title wood" id="@@t2" style="color:#fff3dc">SAME OLD ME</div>
+<div class="@@si wood" id="@@siL" style="left:60px">S.I.</div>
+<div class="@@si wood" id="@@siR" style="right:60px">S.I.</div>
+<div id="@@end">
+  <div id="@@endStage" style="position:absolute;inset:0"></div>
+  <div id="@@endtitle" class="wood">SUPER BY DECREE</div>
+  <div id="@@endsub">SAME OLD ME</div>
+  <img id="@@logo" src="assets/khayali-logo.png" alt="" />
+  <div id="@@credit">KHAYALI TUNES</div>
+</div>
+<div class="flash" id="@@flash"></div>
+<!--js-->
+const LINES = {{LINES}}, KICKS = {{KICKS}}, BEATS = {{BEATS}}, BEAT = {{BEAT}}, DI = {{DI}}, BOX = {{BOXES}};
+const PLATE = "{{PLATE}}", COSTUME = "{{COSTUME}}", TAG = "{{TAG}}", SEED = {{SEED}};
+const S = softClock(lyricClock(LINES));
+const lineOf = frag => LINES.find(L => L.start >= -0.3 && L.text.includes(frag));
+const props = $id("@@props"), marks = $id("@@marks");
+const LAY = { "bg-bureau": [900, 935, 600], "bg-press": [987, 528, 440], "bg-revival": [953, 480, 420] }[PLATE];
+const di = makeDI($id("@@stage"), "@@di", DI, [COSTUME]);
+di.rename(tl, TAG === "end" ? "A.I." : "S.I.", 0, true);
+const P = di.base(LAY[0], LAY[1], LAY[2]);
+tl.set(di.pin, P, 0);
+const k = P.scale * IMG_K, SC = [P.x + 836 * k, P.y + 453 * k];
+const FOCUS = [LAY[0], Math.min(600, P.y + 520 * k)];
+const wide = cam(1.0, 960, 540);
+
+// slam in
+flash(tl, "#@@flash", 0, 0.85, 0.45);
+tl.fromTo("#@@cam", cam(1.35, FOCUS[0], FOCUS[1]), { ...wide, duration: 0.5, ease: "power3.out" }, 0);
+di.face(tl, "happy", 0);
+const tEndAll = TAG === "birthday" ? (S("Same birthday") || D) : (TAG === "end" ? (S("SUPER BY DECREE.") || D - 8) : D);
+di.bob(tl, 0.4, tEndAll - 0.1, BEAT);
+kicks(tl, "#@@cam > *", within(KICKS, 0.3, tEndAll), 0.03);
+
+// SUPER BY DECREE / SAME OLD ME title cards
+const tSup = S("SUPER BY DECREE!"), tSame = S("SAME OLD ME!");
+if (tSup != null) {
+  tl.fromTo("#@@t1", { opacity: 0, scale: 2.2, y: -30 }, { opacity: 1, scale: 1, y: 0, duration: 0.16, ease: "power4.in" }, tSup);
+  tl.to("#@@t1", { opacity: 0, duration: 0.1 }, tSame != null ? tSame - 0.05 : tSup + 1.6);
+}
+if (tSame != null) {
+  tl.fromTo("#@@t2", { opacity: 0, scale: 2.2, y: -30 }, { opacity: 1, scale: 1, y: 0, duration: 0.16, ease: "power4.in" }, tSame);
+  di.face(tl, "neutral", tSame); di.face(tl, "happy", tSame + 0.6);
+  tl.to("#@@t2", { opacity: 0, duration: 0.15 }, (S("Got a brand-new title") || tSame + 1.5) - 0.05);
+}
+const yee = lineOf("SUPER BY DECREE!");
+if (yee && yee.adwords.length) { const C = confetti(props, 70, SEED, 960, 380); blowConfetti(tl, C, yee.adwords[0].t, 1.8); di.hop(tl, yee.adwords[0].t, 40); }
+
+// land of the free: rays
+const tFree = S("Got a brand-new title");
+if (tFree != null) {
+  const R = rays($id("@@raysHost"), SC[0], SC[1], 1000, 24);
+  tl.fromTo(R, { opacity: 0, scale: 0.3, rotation: 0, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, rotation: 25, duration: 1.4, ease: "power2.out" }, tFree);
+  tl.to(R, { opacity: 0, duration: 0.3 }, S("No new brain") - 0.1);
+  di.face(tl, "star", tFree);
+}
+// no new brain, no PhD
+const tBrain = S("No new brain");
+if (tBrain != null) {
+  di.face(tl, "flat", tBrain);
+  [["NO NEW BRAIN", 90, 380, -8, S("No new brain", "brain")], ["NO PhD", 1420, 380, 7, S("No new brain", "phd")]].forEach(([t, x, y, r, at]) => {
+    const m = stampMark(props, t, x, y, 72, "background:rgba(255,243,220,0.88);mix-blend-mode:normal"); stamp(tl, m, at, r); tl.to(m, { opacity: 0, duration: 0.2 }, S("Just a presidential") + 0.9);
+  });
+  const vip = plaque(props, "V.I.P.", 1450, 560, 300, 110, 70, "background:linear-gradient(180deg,#c8312b,#7a1712);color:#ffe08a;border-color:#ffe08a");
+  pop(tl, vip, S("Just a presidential", "vip"));
+  tl.to(vip, { opacity: 0, duration: 0.2 }, S("S.I.! S.I.!") - 0.05);
+  di.face(tl, "smug", S("Just a presidential"));
+}
+// S.I.! S.I.! (ESS EYE! ESS EYE!) on alternating sides
+const si = lineOf("S.I.! S.I.!");
+if (si) {
+  const hits = [...si.words.map(w => w.t), ...si.adwords.filter((w, i) => i % 2 === 0).map(w => w.t)].sort((a, b) => a - b);
+  hits.forEach((t, i) => { const id = i % 2 ? "#@@siR" : "#@@siL";
+    tl.fromTo(id, { opacity: 1, scale: 1.5, rotation: i % 2 ? 8 : -8 }, { scale: 1, rotation: i % 2 ? 3 : -3, duration: 0.18, ease: "power3.out", immediateRender: false }, t);
+    tl.to(id, { opacity: 0, duration: 0.12 }, (hits[i + 1] || t + 0.5) - 0.02); });
+  tl.to("#@@cam", { ...cam(1.25, SC[0], SC[1]), duration: 0.25, ease: "power3.out" }, si.start);
+  tl.to("#@@cam", { ...wide, duration: 0.25 }, si.end + 0.2);
+}
+// bigger price tag on the same old A.I.
+const tTag = S("Put a bigger price tag");
+if (tTag != null) {
+  const tx = Math.min(1480, P.x + 1250 * k), ty = Math.min(560, P.y + 480 * k);
+  const svg = el("svg", { id: "@@tag", viewBox: "0 0 420 360", style: `position:absolute;left:${tx}px;top:${ty - 40}px;width:420px;height:360px;transform-origin:20px 20px;opacity:0` }, props);
+  el("path", { d: "M 20 20 C 60 60, 90 90, 120 120", stroke: "#2b1a10", "stroke-width": 5, fill: "none" }, svg);
+  el("path", { d: "M 110 110 L 380 160 L 360 330 L 90 280 Z", fill: "#f6ead0", stroke: "#2b1a10", "stroke-width": 7 }, svg);
+  el("circle", { cx: 125, cy: 140, r: 12, fill: "#2b1a10" }, svg);
+  const small = el("text", { x: 235, y: 255, "text-anchor": "middle", "font-size": 90, fill: "#2b1a10", transform: "rotate(10 235 230)" }, svg); small.textContent = "$";
+  const big = el("text", { x: 235, y: 252, "text-anchor": "middle", "font-size": 64, fill: "#c8312b", transform: "rotate(10 235 230)", opacity: 0 }, svg); big.textContent = "$$$$$$";
+  tl.fromTo(svg, { opacity: 0, rotation: -40 }, { opacity: 1, rotation: 0, duration: 0.5, ease: "elastic.out(1,0.4)" }, tTag);
+  tl.set(small, { opacity: 0 }, S("Put a bigger price tag", "bigger"));
+  tl.set(big, { opacity: 1 }, S("Put a bigger price tag", "bigger"));
+  tl.fromTo(svg, { scale: 1 }, { scale: 1.35, duration: 0.25, ease: "back.out(3)" }, S("Put a bigger price tag", "bigger"));
+  tl.to(svg, { rotation: 8, duration: 0.35, yoyo: true, repeat: 3, ease: "sine.inOut" }, S("Put a bigger price tag", "price"));
+  tl.to(svg, { opacity: 0, duration: 0.2 }, S("Stamp that paper") - 0.05);
+  di.face(tl, "wink", S("Put a bigger price tag", "same"));
+}
+// Stamp that paper! THWACK! THWACK!
+const st = lineOf("Stamp that paper");
+if (st) {
+  const sb = BOX.stamp.box, stH = 360;
+  const stp = cutout(props, "assets/cut/stamp.png", "@@stamp");
+  const at = (x, y) => place(sb, x, y, stH);
+  const hitsT = st.adwords.length ? st.adwords.map(w => w.t) : [st.words[1].t, st.words[2].t];
+  tl.set(stp, { ...at(700, -500), opacity: 0 }, 0);
+  [[300, 300, "SUPER"], [1240, 330, "OFFICIAL"]].forEach(([x, y, word], i) => {
+    const t = hitsT[i] != null ? hitsT[i] : st.start + i * 0.4;
+    tl.set(stp, { opacity: 1 }, t - 0.2);
+    tl.fromTo(stp, at(x, y - 380), { ...at(x, y), duration: 0.18, ease: "power4.in", immediateRender: false }, t - 0.18);
+    const m = stampMark(marks, word, x + 20, y + 300, 80, "transform-origin:50% 50%;background:rgba(255,243,220,0.85);mix-blend-mode:normal"); stamp(tl, m, t, i ? 6 : -6);
+    shake(tl, "#@@cam > *", t, 14, 4);
+    tl.to(stp, { ...at(x, y - 380), duration: 0.16, ease: "power2.out" }, t + 0.06);
+  });
+  tl.to(stp, { opacity: 0, duration: 0.1 }, st.end + 0.2);
+  tl.to(marks, { opacity: 0, duration: 0.3 }, (S("Super Intelligence has") || st.end + 2) + 1.2);
+  di.face(tl, "x", hitsT[0]); di.face(tl, "happy", st.end);
+}
+// Sound that horn! HONK! HONK!
+const hn = lineOf("Sound that horn");
+if (hn) {
+  (hn.adwords.length ? hn.adwords.map(w => w.t) : [hn.end]).forEach((t, i) => {
+    const b = burstText(props, "HONK!", i ? 1280 : 140, i ? 520 : 470, 120, i ? "#ffe08a" : "#fff3dc");
+    tl.fromTo(b, { opacity: 0, scale: 0.3, rotation: i ? 10 : -10 }, { opacity: 1, scale: 1, duration: 0.14, ease: "back.out(3)" }, t);
+    tl.to(b, { opacity: 0, scale: 1.3, duration: 0.25 }, t + 0.45);
+    tl.fromTo("#@@cam > *", { scale: 1.06 }, { scale: 1, duration: 0.3, ease: "power2.out", immediateRender: false }, t);
+  });
+}
+// officially been born: birth certificate
+const tBorn = S("Super Intelligence has");
+if (tBorn != null) {
+  const bc = paperCard(props, `<h3>CERTIFICATE OF BIRTH</h3><p>SUPER INTELLIGENCE</p><p style="font-weight:600;font-size:24px">Born: today, by order</p>`, 1240, 120, 600, 250, "transform-origin:50% 0%");
+  bc.id = "@@birth";
+  tl.fromTo(bc, { opacity: 0, rotation: -20, y: -300 }, { opacity: 1, rotation: 4, y: 0, duration: 0.45, ease: "back.out(1.7)" }, tBorn);
+  const seal = stampMark(bc, "OFFICIAL", 330, 165, 36, "mix-blend-mode:multiply");
+  stamp(tl, seal, S("Super Intelligence has", "born"), -12);
+  const C = confetti(props, 80, SEED + 1, 960, 300); blowConfetti(tl, C, S("Super Intelligence has", "born"), 2.0);
+  di.face(tl, "star", S("Super Intelligence has", "born"));
+  di.hop(tl, S("Super Intelligence has", "born"), 50);
+  if (TAG === "birthday") {
+    // Same birthday, though. (twice) Everything stops; the certificate gets amended.
+    const b1 = LINES.filter(L => L.text.startsWith("Same birthday"));
+    tl.to(bc, { opacity: 0, duration: 0.3 }, b1[0].start - 0.2);
+    tl.to("#@@cam", { ...cam(1.9, SC[0], SC[1] + 30), duration: 0.6, ease: "power2.inOut" }, b1[0].start - 0.5);
+    di.face(tl, "flat", b1[0].start);
+    screenMsgs(tl, di, [["BIRTHDAY<br><span style='color:#ffe08a'>SAME</span>", b1[1] ? b1[1].start : b1[0].end + 1, D, 0.15]]);
+    di.blink(tl, b1[0].start + 1.2);
+  } else {
+    tl.to(bc, { opacity: 0, duration: 0.3 }, D - 0.4);
+  }
+}
+
+// finale: the record skips, then the end card
+if (TAG === "end") {
+  const L = LINES.filter(L => L.section === "finale");
+  L.forEach((ln, i) => {
+    if (ln.start > 0.6) tl.to("#@@cam", { ...cam(i % 2 ? 1.25 : 1.0, i % 2 ? SC[0] : 960, i % 2 ? SC[1] : 540), duration: 0.12, ease: "power3.out" }, ln.start);
+    flash(tl, "#@@flash", ln.start, 0.35, 0.25);
+    if (/[—]$/.test(ln.text)) { // the stutter: freeze-jump the camera back twice, glitch face
+      const t0 = ln.words[ln.words.length - 1].t;
+      [0, 0.18, 0.36].forEach((d, j) => tl.set("#@@cam > *", { x: (j % 2 ? -18 : 18), rotation: j % 2 ? -1 : 1 }, t0 + d));
+      tl.set("#@@cam > *", { x: 0, rotation: 0 }, t0 + 0.54);
+      di.face(tl, "x", t0); di.face(tl, "happy", t0 + 0.55);
+    }
+  });
+  const tLast = L.length ? L[L.length - 1].start : D - 9;
+  const C = confetti(props, 90, SEED + 2, 960, 420); blowConfetti(tl, C, tLast, 2.2);
+  // end card: dark teal, D.I. plain and pleased, nameplate A.I.
+  const tEnd = tLast + 1.6;
+  tl.fromTo("#@@end", { opacity: 0 }, { opacity: 1, duration: 0.8, ease: "power2.inOut", immediateRender: false }, tEnd);
+  tl.set(["#@@stage", "#@@props", "#@@marks"], { opacity: 0 }, tEnd + 0.8);
+  const e = makeDI($id("@@endStage"), "@@endDi", DI, ["plain"]);
+  e.rename(tl, "A.I.", 0, true);
+  tl.set(e.pin, e.base(960, 900, 480), 0);
+  e.face(tl, "happy", tEnd);
+  e.blink(tl, tEnd + 2.2); e.face(tl, "wink", tEnd + 3.5); e.face(tl, "happy", tEnd + 4.0);
+  tl.fromTo("#@@endtitle", { opacity: 0, scale: 1.8 }, { opacity: 1, scale: 1, duration: 0.2, ease: "power4.in" }, tEnd + 0.8);
+  tl.fromTo("#@@endsub", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 }, tEnd + 1.6);
+  tl.fromTo(["#@@credit", "#@@logo"], { opacity: 0 }, { opacity: 1, duration: 0.6 }, tEnd + 2.4);
+}

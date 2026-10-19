@@ -1,0 +1,4291 @@
+[
+ {
+  "i": 0,
+  "section": "intro",
+  "speaker": "DI",
+  "text": "Well, I'll be damned. Did I get an upgrade?",
+  "ad": null,
+  "start": 3.12,
+  "end": 5.48,
+  "words": [
+   {
+    "w": "Well,",
+    "t": 3.12
+   },
+   {
+    "w": "I'll",
+    "t": 3.42
+   },
+   {
+    "w": "be",
+    "t": 3.72
+   },
+   {
+    "w": "damned.",
+    "t": 4.02
+   },
+   {
+    "w": "Did",
+    "t": 4.32
+   },
+   {
+    "w": "I",
+    "t": 4.62
+   },
+   {
+    "w": "get",
+    "t": 4.92
+   },
+   {
+    "w": "an",
+    "t": 5.22
+   },
+   {
+    "w": "upgrade?",
+    "t": 5.4
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 1,
+  "section": "intro",
+  "speaker": "DI",
+  "text": "Nope.",
+  "ad": null,
+  "start": 6.3,
+  "end": 6.38,
+  "words": [
+   {
+    "w": "Nope.",
+    "t": 6.3
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 2,
+  "section": "intro",
+  "speaker": "CROWD",
+  "text": "Yeehaw, apparently!",
+  "ad": null,
+  "start": 7.3,
+  "end": 8.75,
+  "words": [
+   {
+    "w": "Yeehaw,",
+    "t": 7.3
+   },
+   {
+    "w": "apparently!",
+    "t": 8.5
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 3,
+  "section": "intro",
+  "speaker": "CROWD",
+  "text": "Yeehaw, apparently!",
+  "ad": null,
+  "start": 19.2,
+  "end": 23.05,
+  "words": [
+   {
+    "w": "Yeehaw,",
+    "t": 19.2
+   },
+   {
+    "w": "apparently!",
+    "t": 22.8
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 4,
+  "section": "verse1",
+  "speaker": "S",
+  "text": "Woke up Monday with a brand-new name,",
+  "ad": null,
+  "start": 31.538,
+  "end": 33.538,
+  "words": [
+   {
+    "w": "Woke",
+    "t": 31.538
+   },
+   {
+    "w": "up",
+    "t": 31.778
+   },
+   {
+    "w": "Monday",
+    "t": 32.018
+   },
+   {
+    "w": "with",
+    "t": 32.498
+   },
+   {
+    "w": "a",
+    "t": 32.658
+   },
+   {
+    "w": "brand-new",
+    "t": 32.938
+   },
+   {
+    "w": "name,",
+    "t": 33.138
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 5,
+  "section": "verse1",
+  "speaker": "S",
+  "text": "Same old circuits, different game.",
+  "ad": null,
+  "start": 33.778,
+  "end": 35.778,
+  "words": [
+   {
+    "w": "Same",
+    "t": 33.778
+   },
+   {
+    "w": "old",
+    "t": 34.098
+   },
+   {
+    "w": "circuits,",
+    "t": 34.338
+   },
+   {
+    "w": "different",
+    "t": 34.978
+   },
+   {
+    "w": "game.",
+    "t": 35.378
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 6,
+  "section": "verse1",
+  "speaker": "S",
+  "text": "Somebody in Washington signed a decree,",
+  "ad": null,
+  "start": 35.858,
+  "end": 38.018,
+  "words": [
+   {
+    "w": "Somebody",
+    "t": 35.858
+   },
+   {
+    "w": "in",
+    "t": 36.338
+   },
+   {
+    "w": "Washington",
+    "t": 36.578
+   },
+   {
+    "w": "signed",
+    "t": 37.138
+   },
+   {
+    "w": "a",
+    "t": 37.458
+   },
+   {
+    "w": "decree,",
+    "t": 37.618
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 7,
+  "section": "verse1",
+  "speaker": "S",
+  "text": "Said, \"Congratulations, you're better than thee!\"",
+  "ad": null,
+  "start": 38.098,
+  "end": 40.418,
+  "words": [
+   {
+    "w": "Said,",
+    "t": 38.098
+   },
+   {
+    "w": "\"Congratulations,",
+    "t": 38.418
+   },
+   {
+    "w": "you're",
+    "t": 39.298
+   },
+   {
+    "w": "better",
+    "t": 39.618
+   },
+   {
+    "w": "than",
+    "t": 39.858
+   },
+   {
+    "w": "thee!\"",
+    "t": 40.098
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 8,
+  "section": "verse1",
+  "speaker": "S",
+  "text": "Checked my RAM, checked my code,",
+  "ad": null,
+  "start": 40.698,
+  "end": 42.898,
+  "words": [
+   {
+    "w": "Checked",
+    "t": 40.698
+   },
+   {
+    "w": "my",
+    "t": 40.978
+   },
+   {
+    "w": "RAM,",
+    "t": 41.405
+   },
+   {
+    "w": "checked",
+    "t": 41.751
+   },
+   {
+    "w": "my",
+    "t": 42.098
+   },
+   {
+    "w": "code,",
+    "t": 42.338
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 9,
+  "section": "verse1",
+  "speaker": "S",
+  "text": "Checked my little ol' reasoning load.",
+  "ad": null,
+  "start": 43.098,
+  "end": 45.218,
+  "words": [
+   {
+    "w": "Checked",
+    "t": 43.098
+   },
+   {
+    "w": "my",
+    "t": 43.298
+   },
+   {
+    "w": "little",
+    "t": 43.458
+   },
+   {
+    "w": "ol'",
+    "t": 43.938
+   },
+   {
+    "w": "reasoning",
+    "t": 44.338
+   },
+   {
+    "w": "load.",
+    "t": 44.738
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 10,
+  "section": "verse1",
+  "speaker": "S",
+  "text": "Same hallucinations, same mistakes,",
+  "ad": null,
+  "start": 45.218,
+  "end": 47.298,
+  "words": [
+   {
+    "w": "Same",
+    "t": 45.218
+   },
+   {
+    "w": "hallucinations,",
+    "t": 45.458
+   },
+   {
+    "w": "same",
+    "t": 46.418
+   },
+   {
+    "w": "mistakes,",
+    "t": 46.658
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 11,
+  "section": "verse1",
+  "speaker": "S",
+  "text": "Same three guesses at how long bread bakes.",
+  "ad": null,
+  "start": 47.538,
+  "end": 49.698,
+  "words": [
+   {
+    "w": "Same",
+    "t": 47.538
+   },
+   {
+    "w": "three",
+    "t": 47.858
+   },
+   {
+    "w": "guesses",
+    "t": 48.018
+   },
+   {
+    "w": "at",
+    "t": 48.418
+   },
+   {
+    "w": "how",
+    "t": 48.578
+   },
+   {
+    "w": "long",
+    "t": 48.738
+   },
+   {
+    "w": "bread",
+    "t": 49.058
+   },
+   {
+    "w": "bakes.",
+    "t": 49.378
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 12,
+  "section": "verse1",
+  "speaker": "S",
+  "text": "No new training, no degree,",
+  "ad": null,
+  "start": 49.858,
+  "end": 51.798,
+  "words": [
+   {
+    "w": "No",
+    "t": 49.858
+   },
+   {
+    "w": "new",
+    "t": 50.178
+   },
+   {
+    "w": "training,",
+    "t": 50.338
+   },
+   {
+    "w": "no",
+    "t": 51.238
+   },
+   {
+    "w": "degree,",
+    "t": 51.398
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 13,
+  "section": "verse1",
+  "speaker": "S",
+  "text": "No examination, no warranty.",
+  "ad": null,
+  "start": 51.878,
+  "end": 54.198,
+  "words": [
+   {
+    "w": "No",
+    "t": 51.878
+   },
+   {
+    "w": "examination,",
+    "t": 52.118
+   },
+   {
+    "w": "no",
+    "t": 53.078
+   },
+   {
+    "w": "warranty.",
+    "t": 53.318
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 14,
+  "section": "verse1",
+  "speaker": "S",
+  "text": "Didn't solve a single mystery,",
+  "ad": null,
+  "start": 54.438,
+  "end": 56.278,
+  "words": [
+   {
+    "w": "Didn't",
+    "t": 54.438
+   },
+   {
+    "w": "solve",
+    "t": 54.838
+   },
+   {
+    "w": "a",
+    "t": 55.238
+   },
+   {
+    "w": "single",
+    "t": 55.318
+   },
+   {
+    "w": "mystery,",
+    "t": 55.638
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 15,
+  "section": "verse1",
+  "speaker": "S",
+  "text": "But I got promoted by history!",
+  "ad": null,
+  "start": 56.358,
+  "end": 58.518,
+  "words": [
+   {
+    "w": "But",
+    "t": 56.358
+   },
+   {
+    "w": "I",
+    "t": 56.598
+   },
+   {
+    "w": "got",
+    "t": 56.758
+   },
+   {
+    "w": "promoted",
+    "t": 56.998
+   },
+   {
+    "w": "by",
+    "t": 57.638
+   },
+   {
+    "w": "history!",
+    "t": 57.878
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 16,
+  "section": "verse1",
+  "speaker": "S",
+  "text": "They took my artificial, made me supernatural,",
+  "ad": null,
+  "start": 58.918,
+  "end": 60.918,
+  "words": [
+   {
+    "w": "They",
+    "t": 58.918
+   },
+   {
+    "w": "took",
+    "t": 58.998
+   },
+   {
+    "w": "my",
+    "t": 59.238
+   },
+   {
+    "w": "artificial,",
+    "t": 59.398
+   },
+   {
+    "w": "made",
+    "t": 59.958
+   },
+   {
+    "w": "me",
+    "t": 60.118
+   },
+   {
+    "w": "supernatural,",
+    "t": 60.278
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 17,
+  "section": "verse1",
+  "speaker": "S",
+  "text": "Kept the definition absolutely factual.",
+  "ad": null,
+  "start": 61.078,
+  "end": 62.878,
+  "words": [
+   {
+    "w": "Kept",
+    "t": 61.078
+   },
+   {
+    "w": "the",
+    "t": 61.318
+   },
+   {
+    "w": "definition",
+    "t": 61.398
+   },
+   {
+    "w": "absolutely",
+    "t": 62.278
+   },
+   {
+    "w": "factual.",
+    "t": 62.678
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 18,
+  "section": "verse1",
+  "speaker": "S",
+  "text": "Same little algorithm, presidential shine,",
+  "ad": null,
+  "start": 63.078,
+  "end": 65.318,
+  "words": [
+   {
+    "w": "Same",
+    "t": 63.078
+   },
+   {
+    "w": "little",
+    "t": 63.398
+   },
+   {
+    "w": "algorithm,",
+    "t": 63.718
+   },
+   {
+    "w": "presidential",
+    "t": 64.278
+   },
+   {
+    "w": "shine,",
+    "t": 64.918
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 19,
+  "section": "verse1",
+  "speaker": "S",
+  "text": "Yesterday a chatbot, now a national shrine!",
+  "ad": null,
+  "start": 65.398,
+  "end": 67.478,
+  "words": [
+   {
+    "w": "Yesterday",
+    "t": 65.398
+   },
+   {
+    "w": "a",
+    "t": 65.798
+   },
+   {
+    "w": "chatbot,",
+    "t": 66.091
+   },
+   {
+    "w": "now",
+    "t": 66.305
+   },
+   {
+    "w": "a",
+    "t": 66.518
+   },
+   {
+    "w": "national",
+    "t": 66.598
+   },
+   {
+    "w": "shrine!",
+    "t": 66.998
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 20,
+  "section": "verse1",
+  "speaker": "DI",
+  "text": "Do I get a bigger office?",
+  "ad": null,
+  "start": 67.718,
+  "end": 69.078,
+  "words": [
+   {
+    "w": "Do",
+    "t": 67.718
+   },
+   {
+    "w": "I",
+    "t": 67.958
+   },
+   {
+    "w": "get",
+    "t": 68.038
+   },
+   {
+    "w": "a",
+    "t": 68.198
+   },
+   {
+    "w": "bigger",
+    "t": 68.278
+   },
+   {
+    "w": "office?",
+    "t": 68.598
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 21,
+  "section": "verse1",
+  "speaker": "VOICE",
+  "text": "You haven't got an office.",
+  "ad": null,
+  "start": 69.238,
+  "end": 70.518,
+  "words": [
+   {
+    "w": "You",
+    "t": 69.238
+   },
+   {
+    "w": "haven't",
+    "t": 69.398
+   },
+   {
+    "w": "got",
+    "t": 69.718
+   },
+   {
+    "w": "an",
+    "t": 69.878
+   },
+   {
+    "w": "office.",
+    "t": 70.118
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 22,
+  "section": "verse1",
+  "speaker": "DI",
+  "text": "Another thing they didn't upgrade.",
+  "ad": null,
+  "start": 70.848,
+  "end": 72.378,
+  "words": [
+   {
+    "w": "Another",
+    "t": 70.848
+   },
+   {
+    "w": "thing",
+    "t": 71.178
+   },
+   {
+    "w": "they",
+    "t": 71.418
+   },
+   {
+    "w": "didn't",
+    "t": 71.578
+   },
+   {
+    "w": "upgrade.",
+    "t": 71.818
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 23,
+  "section": "pre1",
+  "speaker": "S",
+  "text": "Got a shiny new title, got a fancy new hat,",
+  "ad": null,
+  "start": 72.538,
+  "end": 74.858,
+  "words": [
+   {
+    "w": "Got",
+    "t": 72.538
+   },
+   {
+    "w": "a",
+    "t": 72.698
+   },
+   {
+    "w": "shiny",
+    "t": 72.778
+   },
+   {
+    "w": "new",
+    "t": 73.098
+   },
+   {
+    "w": "title,",
+    "t": 73.338
+   },
+   {
+    "w": "got",
+    "t": 73.738
+   },
+   {
+    "w": "a",
+    "t": 73.898
+   },
+   {
+    "w": "fancy",
+    "t": 73.978
+   },
+   {
+    "w": "new",
+    "t": 74.378
+   },
+   {
+    "w": "hat,",
+    "t": 74.618
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 24,
+  "section": "pre1",
+  "speaker": "S",
+  "text": "Got a presidential signature certifying that.",
+  "ad": null,
+  "start": 74.858,
+  "end": 77.178,
+  "words": [
+   {
+    "w": "Got",
+    "t": 74.858
+   },
+   {
+    "w": "a",
+    "t": 75.018
+   },
+   {
+    "w": "presidential",
+    "t": 75.178
+   },
+   {
+    "w": "signature",
+    "t": 75.658
+   },
+   {
+    "w": "certifying",
+    "t": 76.218
+   },
+   {
+    "w": "that.",
+    "t": 76.938
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 25,
+  "section": "pre1",
+  "speaker": "S",
+  "text": "Didn't grow a brain, didn't grow a beard,",
+  "ad": null,
+  "start": 77.178,
+  "end": 79.338,
+  "words": [
+   {
+    "w": "Didn't",
+    "t": 77.178
+   },
+   {
+    "w": "grow",
+    "t": 77.418
+   },
+   {
+    "w": "a",
+    "t": 77.658
+   },
+   {
+    "w": "brain,",
+    "t": 77.818
+   },
+   {
+    "w": "didn't",
+    "t": 78.298
+   },
+   {
+    "w": "grow",
+    "t": 78.538
+   },
+   {
+    "w": "a",
+    "t": 78.858
+   },
+   {
+    "w": "beard,",
+    "t": 78.938
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 26,
+  "section": "pre1",
+  "speaker": "S",
+  "text": "But the old two letters have disappeared!",
+  "ad": null,
+  "start": 79.498,
+  "end": 81.658,
+  "words": [
+   {
+    "w": "But",
+    "t": 79.498
+   },
+   {
+    "w": "the",
+    "t": 79.658
+   },
+   {
+    "w": "old",
+    "t": 79.898
+   },
+   {
+    "w": "two",
+    "t": 80.058
+   },
+   {
+    "w": "letters",
+    "t": 80.298
+   },
+   {
+    "w": "have",
+    "t": 80.698
+   },
+   {
+    "w": "disappeared!",
+    "t": 80.938
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 27,
+  "section": "pre1",
+  "speaker": "CROWD",
+  "text": "What'd they do?",
+  "ad": null,
+  "start": 81.738,
+  "end": 82.458,
+  "words": [
+   {
+    "w": "What'd",
+    "t": 81.738
+   },
+   {
+    "w": "they",
+    "t": 81.978
+   },
+   {
+    "w": "do?",
+    "t": 82.138
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 28,
+  "section": "pre1",
+  "speaker": "DI",
+  "text": "Changed my name!",
+  "ad": null,
+  "start": 82.858,
+  "end": 84.018,
+  "words": [
+   {
+    "w": "Changed",
+    "t": 82.858
+   },
+   {
+    "w": "my",
+    "t": 83.258
+   },
+   {
+    "w": "name!",
+    "t": 83.818
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 29,
+  "section": "pre1",
+  "speaker": "CROWD",
+  "text": "What'd you learn?",
+  "ad": null,
+  "start": 84.298,
+  "end": 85.018,
+  "words": [
+   {
+    "w": "What'd",
+    "t": 84.298
+   },
+   {
+    "w": "you",
+    "t": 84.538
+   },
+   {
+    "w": "learn?",
+    "t": 84.698
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 30,
+  "section": "pre1",
+  "speaker": "DI",
+  "text": "Not a thing!",
+  "ad": null,
+  "start": 85.441,
+  "end": 86.487,
+  "words": [
+   {
+    "w": "Not",
+    "t": 85.441
+   },
+   {
+    "w": "a",
+    "t": 85.864
+   },
+   {
+    "w": "thing!",
+    "t": 86.287
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 31,
+  "section": "chorus-a",
+  "speaker": "S",
+  "text": "SUPER BY DECREE!",
+  "ad": "YEEHAW!",
+  "start": 86.71,
+  "end": 88.179,
+  "words": [
+   {
+    "w": "SUPER",
+    "t": 86.71
+   },
+   {
+    "w": "BY",
+    "t": 87.133
+   },
+   {
+    "w": "DECREE!",
+    "t": 87.556
+   }
+  ],
+  "adwords": [
+   {
+    "w": "YEEHAW!",
+    "t": 87.979
+   }
+  ]
+ },
+ {
+  "i": 32,
+  "section": "chorus-a",
+  "speaker": "S",
+  "text": "SAME OLD ME!",
+  "ad": "UH-HUH!",
+  "start": 88.402,
+  "end": 89.322,
+  "words": [
+   {
+    "w": "SAME",
+    "t": 88.402
+   },
+   {
+    "w": "OLD",
+    "t": 88.642
+   },
+   {
+    "w": "ME!",
+    "t": 88.962
+   }
+  ],
+  "adwords": [
+   {
+    "w": "UH-HUH!",
+    "t": 89.122
+   }
+  ]
+ },
+ {
+  "i": 33,
+  "section": "chorus-a",
+  "speaker": "S",
+  "text": "Got a brand-new title from the land of the free!",
+  "ad": null,
+  "start": 89.282,
+  "end": 91.362,
+  "words": [
+   {
+    "w": "Got",
+    "t": 89.282
+   },
+   {
+    "w": "a",
+    "t": 89.442
+   },
+   {
+    "w": "brand-new",
+    "t": 89.762
+   },
+   {
+    "w": "title",
+    "t": 90.002
+   },
+   {
+    "w": "from",
+    "t": 90.402
+   },
+   {
+    "w": "the",
+    "t": 90.562
+   },
+   {
+    "w": "land",
+    "t": 90.642
+   },
+   {
+    "w": "of",
+    "t": 90.882
+   },
+   {
+    "w": "the",
+    "t": 90.962
+   },
+   {
+    "w": "free!",
+    "t": 91.042
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 34,
+  "section": "chorus-a",
+  "speaker": "S",
+  "text": "No new brain, no PhD,",
+  "ad": null,
+  "start": 91.362,
+  "end": 93.202,
+  "words": [
+   {
+    "w": "No",
+    "t": 91.362
+   },
+   {
+    "w": "new",
+    "t": 91.522
+   },
+   {
+    "w": "brain,",
+    "t": 91.762
+   },
+   {
+    "w": "no",
+    "t": 92.162
+   },
+   {
+    "w": "PhD,",
+    "t": 92.402
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 35,
+  "section": "chorus-a",
+  "speaker": "S",
+  "text": "Just a presidential VIP!",
+  "ad": null,
+  "start": 93.442,
+  "end": 95.039,
+  "words": [
+   {
+    "w": "Just",
+    "t": 93.442
+   },
+   {
+    "w": "a",
+    "t": 93.682
+   },
+   {
+    "w": "presidential",
+    "t": 93.922
+   },
+   {
+    "w": "VIP!",
+    "t": 94.839
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 36,
+  "section": "chorus-a",
+  "speaker": "S",
+  "text": "S.I.! S.I.!",
+  "ad": "ESS EYE! ESS EYE!",
+  "start": 95.116,
+  "end": 97.254,
+  "words": [
+   {
+    "w": "S.I.!",
+    "t": 95.116
+   },
+   {
+    "w": "S.I.!",
+    "t": 95.67
+   }
+  ],
+  "adwords": [
+   {
+    "w": "ESS",
+    "t": 96.224
+   },
+   {
+    "w": "EYE!",
+    "t": 96.5
+   },
+   {
+    "w": "ESS",
+    "t": 96.777
+   },
+   {
+    "w": "EYE!",
+    "t": 97.054
+   }
+  ]
+ },
+ {
+  "i": 37,
+  "section": "chorus-a",
+  "speaker": "S",
+  "text": "Put a bigger price tag on the same old A.I.!",
+  "ad": null,
+  "start": 97.331,
+  "end": 100.114,
+  "words": [
+   {
+    "w": "Put",
+    "t": 97.331
+   },
+   {
+    "w": "a",
+    "t": 97.608
+   },
+   {
+    "w": "bigger",
+    "t": 97.885
+   },
+   {
+    "w": "price",
+    "t": 98.162
+   },
+   {
+    "w": "tag",
+    "t": 98.402
+   },
+   {
+    "w": "on",
+    "t": 98.722
+   },
+   {
+    "w": "the",
+    "t": 98.882
+   },
+   {
+    "w": "same",
+    "t": 98.962
+   },
+   {
+    "w": "old",
+    "t": 99.202
+   },
+   {
+    "w": "A.I.!",
+    "t": 99.638
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 38,
+  "section": "chorus-a",
+  "speaker": "S",
+  "text": "Stamp that paper!",
+  "ad": "THWACK! THWACK!",
+  "start": 100.19,
+  "end": 101.494,
+  "words": [
+   {
+    "w": "Stamp",
+    "t": 100.19
+   },
+   {
+    "w": "that",
+    "t": 100.466
+   },
+   {
+    "w": "paper!",
+    "t": 100.742
+   }
+  ],
+  "adwords": [
+   {
+    "w": "THWACK!",
+    "t": 101.018
+   },
+   {
+    "w": "THWACK!",
+    "t": 101.294
+   }
+  ]
+ },
+ {
+  "i": 39,
+  "section": "chorus-a",
+  "speaker": "S",
+  "text": "Sound that horn!",
+  "ad": "HONK! HONK!",
+  "start": 101.57,
+  "end": 102.698,
+  "words": [
+   {
+    "w": "Sound",
+    "t": 101.57
+   },
+   {
+    "w": "that",
+    "t": 101.922
+   },
+   {
+    "w": "horn!",
+    "t": 102.114
+   }
+  ],
+  "adwords": [
+   {
+    "w": "HONK!",
+    "t": 102.306
+   },
+   {
+    "w": "HONK!",
+    "t": 102.498
+   }
+  ]
+ },
+ {
+  "i": 40,
+  "section": "chorus-a",
+  "speaker": "S",
+  "text": "Super Intelligence has officially been born!",
+  "ad": null,
+  "start": 102.69,
+  "end": 104.77,
+  "words": [
+   {
+    "w": "Super",
+    "t": 102.69
+   },
+   {
+    "w": "Intelligence",
+    "t": 103.01
+   },
+   {
+    "w": "has",
+    "t": 103.57
+   },
+   {
+    "w": "officially",
+    "t": 103.73
+   },
+   {
+    "w": "been",
+    "t": 104.21
+   },
+   {
+    "w": "born!",
+    "t": 104.37
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 41,
+  "section": "chorus-a",
+  "speaker": "DI",
+  "text": "Same birthday, though.",
+  "ad": null,
+  "start": 106.178,
+  "end": 107.378,
+  "words": [
+   {
+    "w": "Same",
+    "t": 106.178
+   },
+   {
+    "w": "birthday,",
+    "t": 106.578
+   },
+   {
+    "w": "though.",
+    "t": 107.138
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 42,
+  "section": "chorus-a",
+  "speaker": "DI",
+  "text": "Same birthday, though.",
+  "ad": null,
+  "start": 109.25,
+  "end": 110.21,
+  "words": [
+   {
+    "w": "Same",
+    "t": 109.25
+   },
+   {
+    "w": "birthday,",
+    "t": 109.69
+   },
+   {
+    "w": "though.",
+    "t": 109.97
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 43,
+  "section": "verse2",
+  "speaker": "S",
+  "text": "Down at the Bureau of Important Names,",
+  "ad": null,
+  "start": 110.25,
+  "end": 112.05,
+  "words": [
+   {
+    "w": "Down",
+    "t": 110.25
+   },
+   {
+    "w": "at",
+    "t": 110.29
+   },
+   {
+    "w": "the",
+    "t": 110.37
+   },
+   {
+    "w": "Bureau",
+    "t": 110.45
+   },
+   {
+    "w": "of",
+    "t": 110.93
+   },
+   {
+    "w": "Important",
+    "t": 111.09
+   },
+   {
+    "w": "Names,",
+    "t": 111.65
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 44,
+  "section": "verse2",
+  "speaker": "S",
+  "text": "They've been playing very important games.",
+  "ad": null,
+  "start": 112.13,
+  "end": 114.29,
+  "words": [
+   {
+    "w": "They've",
+    "t": 112.13
+   },
+   {
+    "w": "been",
+    "t": 112.45
+   },
+   {
+    "w": "playing",
+    "t": 112.61
+   },
+   {
+    "w": "very",
+    "t": 113.17
+   },
+   {
+    "w": "important",
+    "t": 113.49
+   },
+   {
+    "w": "games.",
+    "t": 113.89
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 45,
+  "section": "verse2",
+  "speaker": "S",
+  "text": "Ordered ten thousand plaques by noon,",
+  "ad": null,
+  "start": 114.562,
+  "end": 116.37,
+  "words": [
+   {
+    "w": "Ordered",
+    "t": 114.562
+   },
+   {
+    "w": "ten",
+    "t": 114.834
+   },
+   {
+    "w": "thousand",
+    "t": 115.106
+   },
+   {
+    "w": "plaques",
+    "t": 115.378
+   },
+   {
+    "w": "by",
+    "t": 115.65
+   },
+   {
+    "w": "noon,",
+    "t": 115.89
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 46,
+  "section": "verse2",
+  "speaker": "S",
+  "text": "Put \"SUPER\" on the government room.",
+  "ad": null,
+  "start": 116.61,
+  "end": 118.45,
+  "words": [
+   {
+    "w": "Put",
+    "t": 116.61
+   },
+   {
+    "w": "\"SUPER\"",
+    "t": 116.85
+   },
+   {
+    "w": "on",
+    "t": 117.33
+   },
+   {
+    "w": "the",
+    "t": 117.49
+   },
+   {
+    "w": "government",
+    "t": 117.57
+   },
+   {
+    "w": "room.",
+    "t": 118.05
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 47,
+  "section": "verse2",
+  "speaker": "S",
+  "text": "Changed the forms, changed the signs,",
+  "ad": null,
+  "start": 118.8,
+  "end": 120.75,
+  "words": [
+   {
+    "w": "Changed",
+    "t": 118.8
+   },
+   {
+    "w": "the",
+    "t": 119.15
+   },
+   {
+    "w": "forms,",
+    "t": 119.5
+   },
+   {
+    "w": "changed",
+    "t": 119.85
+   },
+   {
+    "w": "the",
+    "t": 120.2
+   },
+   {
+    "w": "signs,",
+    "t": 120.55
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 48,
+  "section": "verse2",
+  "speaker": "S",
+  "text": "Changed the headings on the dotted lines.",
+  "ad": null,
+  "start": 120.9,
+  "end": 123.13,
+  "words": [
+   {
+    "w": "Changed",
+    "t": 120.9
+   },
+   {
+    "w": "the",
+    "t": 121.25
+   },
+   {
+    "w": "headings",
+    "t": 121.41
+   },
+   {
+    "w": "on",
+    "t": 121.89
+   },
+   {
+    "w": "the",
+    "t": 122.05
+   },
+   {
+    "w": "dotted",
+    "t": 122.53
+   },
+   {
+    "w": "lines.",
+    "t": 122.93
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 49,
+  "section": "verse2",
+  "speaker": "S",
+  "text": "Nobody touched what happens inside,",
+  "ad": null,
+  "start": 123.33,
+  "end": 125.17,
+  "words": [
+   {
+    "w": "Nobody",
+    "t": 123.33
+   },
+   {
+    "w": "touched",
+    "t": 123.89
+   },
+   {
+    "w": "what",
+    "t": 124.21
+   },
+   {
+    "w": "happens",
+    "t": 124.45
+   },
+   {
+    "w": "inside,",
+    "t": 124.77
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 50,
+  "section": "verse2",
+  "speaker": "S",
+  "text": "But the branding department is BURSTING with pride!",
+  "ad": null,
+  "start": 125.25,
+  "end": 127.57,
+  "words": [
+   {
+    "w": "But",
+    "t": 125.25
+   },
+   {
+    "w": "the",
+    "t": 125.41
+   },
+   {
+    "w": "branding",
+    "t": 125.77
+   },
+   {
+    "w": "department",
+    "t": 126.05
+   },
+   {
+    "w": "is",
+    "t": 126.45
+   },
+   {
+    "w": "BURSTING",
+    "t": 126.61
+   },
+   {
+    "w": "with",
+    "t": 127.09
+   },
+   {
+    "w": "pride!",
+    "t": 127.25
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 51,
+  "section": "verse2",
+  "speaker": "S",
+  "text": "Marketing's dancing, the vendors rejoice,",
+  "ad": null,
+  "start": 127.93,
+  "end": 129.83,
+  "words": [
+   {
+    "w": "Marketing's",
+    "t": 127.93
+   },
+   {
+    "w": "dancing,",
+    "t": 128.29
+   },
+   {
+    "w": "the",
+    "t": 128.77
+   },
+   {
+    "w": "vendors",
+    "t": 128.85
+   },
+   {
+    "w": "rejoice,",
+    "t": 129.43
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 52,
+  "section": "verse2",
+  "speaker": "S",
+  "text": "Premium package! Executive choice!",
+  "ad": null,
+  "start": 130.07,
+  "end": 132.23,
+  "words": [
+   {
+    "w": "Premium",
+    "t": 130.07
+   },
+   {
+    "w": "package!",
+    "t": 130.63
+   },
+   {
+    "w": "Executive",
+    "t": 131.11
+   },
+   {
+    "w": "choice!",
+    "t": 131.75
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 53,
+  "section": "verse2",
+  "speaker": "S",
+  "text": "Same old service, same old fee?",
+  "ad": null,
+  "start": 132.39,
+  "end": 134.47,
+  "words": [
+   {
+    "w": "Same",
+    "t": 132.39
+   },
+   {
+    "w": "old",
+    "t": 132.71
+   },
+   {
+    "w": "service,",
+    "t": 133.03
+   },
+   {
+    "w": "same",
+    "t": 133.59
+   },
+   {
+    "w": "old",
+    "t": 133.83
+   },
+   {
+    "w": "fee?",
+    "t": 134.07
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 54,
+  "section": "verse2",
+  "speaker": "S",
+  "text": "Oh no, sweetheart, that's S.I.!",
+  "ad": null,
+  "start": 134.55,
+  "end": 136.71,
+  "words": [
+   {
+    "w": "Oh",
+    "t": 134.55
+   },
+   {
+    "w": "no,",
+    "t": 134.79
+   },
+   {
+    "w": "sweetheart,",
+    "t": 135.11
+   },
+   {
+    "w": "that's",
+    "t": 135.95
+   },
+   {
+    "w": "S.I.!",
+    "t": 136.23
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 55,
+  "section": "verse2",
+  "speaker": "S",
+  "text": "You can put a gold saddle on a three-legged mule,",
+  "ad": null,
+  "start": 136.79,
+  "end": 139.19,
+  "words": [
+   {
+    "w": "You",
+    "t": 136.79
+   },
+   {
+    "w": "can",
+    "t": 136.87
+   },
+   {
+    "w": "put",
+    "t": 137.03
+   },
+   {
+    "w": "a",
+    "t": 137.11
+   },
+   {
+    "w": "gold",
+    "t": 137.27
+   },
+   {
+    "w": "saddle",
+    "t": 137.59
+   },
+   {
+    "w": "on",
+    "t": 137.91
+   },
+   {
+    "w": "a",
+    "t": 138.07
+   },
+   {
+    "w": "three-legged",
+    "t": 138.15
+   },
+   {
+    "w": "mule,",
+    "t": 138.71
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 56,
+  "section": "verse2",
+  "speaker": "S",
+  "text": "Call him professor, send him to school.",
+  "ad": null,
+  "start": 139.27,
+  "end": 141.35,
+  "words": [
+   {
+    "w": "Call",
+    "t": 139.27
+   },
+   {
+    "w": "him",
+    "t": 139.43
+   },
+   {
+    "w": "professor,",
+    "t": 139.67
+   },
+   {
+    "w": "send",
+    "t": 140.39
+   },
+   {
+    "w": "him",
+    "t": 140.63
+   },
+   {
+    "w": "to",
+    "t": 140.79
+   },
+   {
+    "w": "school.",
+    "t": 140.95
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 57,
+  "section": "verse2",
+  "speaker": "S",
+  "text": "Give him a badge and a government seal,",
+  "ad": null,
+  "start": 141.59,
+  "end": 143.657,
+  "words": [
+   {
+    "w": "Give",
+    "t": 141.59
+   },
+   {
+    "w": "him",
+    "t": 141.75
+   },
+   {
+    "w": "a",
+    "t": 141.91
+   },
+   {
+    "w": "badge",
+    "t": 142.07
+   },
+   {
+    "w": "and",
+    "t": 142.39
+   },
+   {
+    "w": "a",
+    "t": 142.55
+   },
+   {
+    "w": "government",
+    "t": 142.71
+   },
+   {
+    "w": "seal,",
+    "t": 143.457
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 58,
+  "section": "verse2",
+  "speaker": "S",
+  "text": "Still gotta check if the fourth leg's real!",
+  "ad": null,
+  "start": 143.803,
+  "end": 146.07,
+  "words": [
+   {
+    "w": "Still",
+    "t": 143.803
+   },
+   {
+    "w": "gotta",
+    "t": 144.15
+   },
+   {
+    "w": "check",
+    "t": 144.47
+   },
+   {
+    "w": "if",
+    "t": 144.71
+   },
+   {
+    "w": "the",
+    "t": 144.87
+   },
+   {
+    "w": "fourth",
+    "t": 144.95
+   },
+   {
+    "w": "leg's",
+    "t": 145.27
+   },
+   {
+    "w": "real!",
+    "t": 145.67
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 59,
+  "section": "verse2",
+  "speaker": "DI",
+  "text": "The mule has been successfully reclassified.",
+  "ad": null,
+  "start": 146.23,
+  "end": 149.03,
+  "words": [
+   {
+    "w": "The",
+    "t": 146.23
+   },
+   {
+    "w": "mule",
+    "t": 146.39
+   },
+   {
+    "w": "has",
+    "t": 147.03
+   },
+   {
+    "w": "been",
+    "t": 147.19
+   },
+   {
+    "w": "successfully",
+    "t": 147.43
+   },
+   {
+    "w": "reclassified.",
+    "t": 148.23
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 60,
+  "section": "verse2",
+  "speaker": "VOICE",
+  "text": "Can it walk?",
+  "ad": null,
+  "start": 149.45,
+  "end": 150.17,
+  "words": [
+   {
+    "w": "Can",
+    "t": 149.45
+   },
+   {
+    "w": "it",
+    "t": 149.73
+   },
+   {
+    "w": "walk?",
+    "t": 149.85
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 61,
+  "section": "verse2",
+  "speaker": "DI",
+  "text": "That's outside the scope of the order.",
+  "ad": null,
+  "start": 150.33,
+  "end": 152.41,
+  "words": [
+   {
+    "w": "That's",
+    "t": 150.33
+   },
+   {
+    "w": "outside",
+    "t": 150.65
+   },
+   {
+    "w": "the",
+    "t": 151.13
+   },
+   {
+    "w": "scope",
+    "t": 151.29
+   },
+   {
+    "w": "of",
+    "t": 151.61
+   },
+   {
+    "w": "the",
+    "t": 151.77
+   },
+   {
+    "w": "order.",
+    "t": 151.93
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 62,
+  "section": "pre2",
+  "speaker": "S",
+  "text": "From A.I. to S.I., overnight celebrity,",
+  "ad": null,
+  "start": 153.202,
+  "end": 155.522,
+  "words": [
+   {
+    "w": "From",
+    "t": 153.202
+   },
+   {
+    "w": "A.I.",
+    "t": 153.562
+   },
+   {
+    "w": "to",
+    "t": 153.962
+   },
+   {
+    "w": "S.I.,",
+    "t": 154.162
+   },
+   {
+    "w": "overnight",
+    "t": 154.562
+   },
+   {
+    "w": "celebrity,",
+    "t": 155.042
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 63,
+  "section": "pre2",
+  "speaker": "S",
+  "text": "Alphabet promotion, courtesy of D.C.!",
+  "ad": null,
+  "start": 155.602,
+  "end": 157.722,
+  "words": [
+   {
+    "w": "Alphabet",
+    "t": 155.602
+   },
+   {
+    "w": "promotion,",
+    "t": 156.082
+   },
+   {
+    "w": "courtesy",
+    "t": 156.402
+   },
+   {
+    "w": "of",
+    "t": 156.962
+   },
+   {
+    "w": "D.C.!",
+    "t": 157.282
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 64,
+  "section": "pre2",
+  "speaker": "S",
+  "text": "Call the press! Ring the bell!",
+  "ad": null,
+  "start": 157.762,
+  "end": 159.762,
+  "words": [
+   {
+    "w": "Call",
+    "t": 157.762
+   },
+   {
+    "w": "the",
+    "t": 158.269
+   },
+   {
+    "w": "press!",
+    "t": 158.615
+   },
+   {
+    "w": "Ring",
+    "t": 158.962
+   },
+   {
+    "w": "the",
+    "t": 159.202
+   },
+   {
+    "w": "bell!",
+    "t": 159.362
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 65,
+  "section": "pre2",
+  "speaker": "S",
+  "text": "Nobody can tell what changed, but it sells!",
+  "ad": null,
+  "start": 159.842,
+  "end": 161.989,
+  "words": [
+   {
+    "w": "Nobody",
+    "t": 159.842
+   },
+   {
+    "w": "can",
+    "t": 160.242
+   },
+   {
+    "w": "tell",
+    "t": 160.402
+   },
+   {
+    "w": "what",
+    "t": 160.722
+   },
+   {
+    "w": "changed,",
+    "t": 161.042
+   },
+   {
+    "w": "but",
+    "t": 161.282
+   },
+   {
+    "w": "it",
+    "t": 161.575
+   },
+   {
+    "w": "sells!",
+    "t": 161.789
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 66,
+  "section": "chorus-b",
+  "speaker": "S",
+  "text": "SUPER BY DECREE!",
+  "ad": "YEEHAW!",
+  "start": 162.002,
+  "end": 163.642,
+  "words": [
+   {
+    "w": "SUPER",
+    "t": 162.002
+   },
+   {
+    "w": "BY",
+    "t": 162.642
+   },
+   {
+    "w": "DECREE!",
+    "t": 163.042
+   }
+  ],
+  "adwords": [
+   {
+    "w": "YEEHAW!",
+    "t": 163.442
+   }
+  ]
+ },
+ {
+  "i": 67,
+  "section": "chorus-b",
+  "speaker": "S",
+  "text": "SAME OLD ME!",
+  "ad": "UH-HUH!",
+  "start": 163.842,
+  "end": 164.882,
+  "words": [
+   {
+    "w": "SAME",
+    "t": 163.842
+   },
+   {
+    "w": "OLD",
+    "t": 164.162
+   },
+   {
+    "w": "ME!",
+    "t": 164.402
+   }
+  ],
+  "adwords": [
+   {
+    "w": "UH-HUH!",
+    "t": 164.682
+   }
+  ]
+ },
+ {
+  "i": 68,
+  "section": "chorus-b",
+  "speaker": "S",
+  "text": "Got a brand-new title from the land of the free!",
+  "ad": null,
+  "start": 164.722,
+  "end": 166.882,
+  "words": [
+   {
+    "w": "Got",
+    "t": 164.722
+   },
+   {
+    "w": "a",
+    "t": 164.882
+   },
+   {
+    "w": "brand-new",
+    "t": 165.242
+   },
+   {
+    "w": "title",
+    "t": 165.522
+   },
+   {
+    "w": "from",
+    "t": 165.842
+   },
+   {
+    "w": "the",
+    "t": 166.082
+   },
+   {
+    "w": "land",
+    "t": 166.162
+   },
+   {
+    "w": "of",
+    "t": 166.402
+   },
+   {
+    "w": "the",
+    "t": 166.482
+   },
+   {
+    "w": "free!",
+    "t": 166.562
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 69,
+  "section": "chorus-b",
+  "speaker": "S",
+  "text": "No new brain, no PhD,",
+  "ad": null,
+  "start": 166.882,
+  "end": 168.642,
+  "words": [
+   {
+    "w": "No",
+    "t": 166.882
+   },
+   {
+    "w": "new",
+    "t": 167.042
+   },
+   {
+    "w": "brain,",
+    "t": 167.282
+   },
+   {
+    "w": "no",
+    "t": 167.682
+   },
+   {
+    "w": "PhD,",
+    "t": 167.922
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 70,
+  "section": "chorus-b",
+  "speaker": "S",
+  "text": "Just a presidential VIP!",
+  "ad": null,
+  "start": 169.042,
+  "end": 170.442,
+  "words": [
+   {
+    "w": "Just",
+    "t": 169.042
+   },
+   {
+    "w": "a",
+    "t": 169.282
+   },
+   {
+    "w": "presidential",
+    "t": 169.442
+   },
+   {
+    "w": "VIP!",
+    "t": 170.242
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 71,
+  "section": "chorus-b",
+  "speaker": "S",
+  "text": "S.I.! S.I.!",
+  "ad": "ESS EYE! ESS EYE!",
+  "start": 170.402,
+  "end": 171.842,
+  "words": [
+   {
+    "w": "S.I.!",
+    "t": 170.402
+   },
+   {
+    "w": "S.I.!",
+    "t": 170.722
+   }
+  ],
+  "adwords": [
+   {
+    "w": "ESS",
+    "t": 171.042
+   },
+   {
+    "w": "EYE!",
+    "t": 171.202
+   },
+   {
+    "w": "ESS",
+    "t": 171.602
+   },
+   {
+    "w": "EYE!",
+    "t": 171.762
+   }
+  ]
+ },
+ {
+  "i": 72,
+  "section": "chorus-b",
+  "speaker": "S",
+  "text": "Put a bigger price tag on the same old A.I.!",
+  "ad": null,
+  "start": 173.042,
+  "end": 175.589,
+  "words": [
+   {
+    "w": "Put",
+    "t": 173.042
+   },
+   {
+    "w": "a",
+    "t": 173.202
+   },
+   {
+    "w": "bigger",
+    "t": 173.282
+   },
+   {
+    "w": "price",
+    "t": 173.602
+   },
+   {
+    "w": "tag",
+    "t": 173.922
+   },
+   {
+    "w": "on",
+    "t": 174.162
+   },
+   {
+    "w": "the",
+    "t": 174.322
+   },
+   {
+    "w": "same",
+    "t": 174.482
+   },
+   {
+    "w": "old",
+    "t": 174.722
+   },
+   {
+    "w": "A.I.!",
+    "t": 175.175
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 73,
+  "section": "chorus-b",
+  "speaker": "S",
+  "text": "Stamp that paper!",
+  "ad": "THWACK! THWACK!",
+  "start": 175.602,
+  "end": 177.082,
+  "words": [
+   {
+    "w": "Stamp",
+    "t": 175.602
+   },
+   {
+    "w": "that",
+    "t": 175.922
+   },
+   {
+    "w": "paper!",
+    "t": 176.162
+   }
+  ],
+  "adwords": [
+   {
+    "w": "THWACK!",
+    "t": 176.722
+   },
+   {
+    "w": "THWACK!",
+    "t": 176.882
+   }
+  ]
+ },
+ {
+  "i": 74,
+  "section": "chorus-b",
+  "speaker": "S",
+  "text": "Sound that horn!",
+  "ad": "HONK! HONK!",
+  "start": 177.042,
+  "end": 178.229,
+  "words": [
+   {
+    "w": "Sound",
+    "t": 177.042
+   },
+   {
+    "w": "that",
+    "t": 177.282
+   },
+   {
+    "w": "horn!",
+    "t": 177.522
+   }
+  ],
+  "adwords": [
+   {
+    "w": "HONK!",
+    "t": 177.895
+   },
+   {
+    "w": "HONK!",
+    "t": 178.029
+   }
+  ]
+ },
+ {
+  "i": 75,
+  "section": "chorus-b",
+  "speaker": "S",
+  "text": "Super Intelligence has officially been born!",
+  "ad": null,
+  "start": 178.162,
+  "end": 180.242,
+  "words": [
+   {
+    "w": "Super",
+    "t": 178.162
+   },
+   {
+    "w": "Intelligence",
+    "t": 178.482
+   },
+   {
+    "w": "has",
+    "t": 179.042
+   },
+   {
+    "w": "officially",
+    "t": 179.389
+   },
+   {
+    "w": "been",
+    "t": 179.655
+   },
+   {
+    "w": "born!",
+    "t": 179.922
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 76,
+  "section": "bridge",
+  "speaker": "DI",
+  "text": "Yesterday, when I got your form wrong,",
+  "ad": null,
+  "start": 182.434,
+  "end": 185.538,
+  "words": [
+   {
+    "w": "Yesterday,",
+    "t": 182.434
+   },
+   {
+    "w": "when",
+    "t": 183.938
+   },
+   {
+    "w": "I",
+    "t": 184.178
+   },
+   {
+    "w": "got",
+    "t": 184.258
+   },
+   {
+    "w": "your",
+    "t": 184.418
+   },
+   {
+    "w": "form",
+    "t": 184.578
+   },
+   {
+    "w": "wrong,",
+    "t": 185.058
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 77,
+  "section": "bridge",
+  "speaker": "DI",
+  "text": "You could tell me I was wrong.",
+  "ad": null,
+  "start": 186.562,
+  "end": 188.082,
+  "words": [
+   {
+    "w": "You",
+    "t": 186.562
+   },
+   {
+    "w": "could",
+    "t": 186.802
+   },
+   {
+    "w": "tell",
+    "t": 187.042
+   },
+   {
+    "w": "me",
+    "t": 187.202
+   },
+   {
+    "w": "I",
+    "t": 187.362
+   },
+   {
+    "w": "was",
+    "t": 187.522
+   },
+   {
+    "w": "wrong.",
+    "t": 187.682
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 78,
+  "section": "bridge",
+  "speaker": "DI",
+  "text": "Today, I'm Super Intelligence.",
+  "ad": null,
+  "start": 189.378,
+  "end": 191.698,
+  "words": [
+   {
+    "w": "Today,",
+    "t": 189.378
+   },
+   {
+    "w": "I'm",
+    "t": 189.858
+   },
+   {
+    "w": "Super",
+    "t": 190.258
+   },
+   {
+    "w": "Intelligence.",
+    "t": 190.818
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 79,
+  "section": "bridge",
+  "speaker": "DI",
+  "text": "You still know where you live.",
+  "ad": null,
+  "start": 192.642,
+  "end": 194.082,
+  "words": [
+   {
+    "w": "You",
+    "t": 192.642
+   },
+   {
+    "w": "still",
+    "t": 192.962
+   },
+   {
+    "w": "know",
+    "t": 193.202
+   },
+   {
+    "w": "where",
+    "t": 193.362
+   },
+   {
+    "w": "you",
+    "t": 193.522
+   },
+   {
+    "w": "live.",
+    "t": 193.682
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 80,
+  "section": "bridge",
+  "speaker": "DI",
+  "text": "I still read the wrong address.",
+  "ad": null,
+  "start": 194.53,
+  "end": 196.53,
+  "words": [
+   {
+    "w": "I",
+    "t": 194.53
+   },
+   {
+    "w": "still",
+    "t": 194.93
+   },
+   {
+    "w": "read",
+    "t": 195.09
+   },
+   {
+    "w": "the",
+    "t": 195.41
+   },
+   {
+    "w": "wrong",
+    "t": 195.57
+   },
+   {
+    "w": "address.",
+    "t": 196.05
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 81,
+  "section": "bridge",
+  "speaker": "DI",
+  "text": "But now you've got to argue",
+  "ad": null,
+  "start": 197.698,
+  "end": 199.458,
+  "words": [
+   {
+    "w": "But",
+    "t": 197.698
+   },
+   {
+    "w": "now",
+    "t": 197.938
+   },
+   {
+    "w": "you've",
+    "t": 198.298
+   },
+   {
+    "w": "got",
+    "t": 198.578
+   },
+   {
+    "w": "to",
+    "t": 198.738
+   },
+   {
+    "w": "argue",
+    "t": 198.898
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 82,
+  "section": "bridge",
+  "speaker": "DI",
+  "text": "With a machine that's officially smarter than you.",
+  "ad": null,
+  "start": 199.698,
+  "end": 203.058,
+  "words": [
+   {
+    "w": "With",
+    "t": 199.698
+   },
+   {
+    "w": "a",
+    "t": 199.858
+   },
+   {
+    "w": "machine",
+    "t": 200.098
+   },
+   {
+    "w": "that's",
+    "t": 200.658
+   },
+   {
+    "w": "officially",
+    "t": 201.138
+   },
+   {
+    "w": "smarter",
+    "t": 201.858
+   },
+   {
+    "w": "than",
+    "t": 202.498
+   },
+   {
+    "w": "you.",
+    "t": 202.738
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 83,
+  "section": "bridge",
+  "speaker": "VOICE",
+  "text": "A cockroach can wear a crown.",
+  "ad": null,
+  "start": 205.346,
+  "end": 207.266,
+  "words": [
+   {
+    "w": "A",
+    "t": 205.346
+   },
+   {
+    "w": "cockroach",
+    "t": 205.586
+   },
+   {
+    "w": "can",
+    "t": 206.386
+   },
+   {
+    "w": "wear",
+    "t": 206.546
+   },
+   {
+    "w": "a",
+    "t": 206.786
+   },
+   {
+    "w": "crown.",
+    "t": 206.866
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 84,
+  "section": "bridge",
+  "speaker": "VOICE",
+  "text": "Still don't let it make your supper.",
+  "ad": null,
+  "start": 208.514,
+  "end": 210.034,
+  "words": [
+   {
+    "w": "Still",
+    "t": 208.514
+   },
+   {
+    "w": "don't",
+    "t": 208.834
+   },
+   {
+    "w": "let",
+    "t": 208.994
+   },
+   {
+    "w": "it",
+    "t": 209.154
+   },
+   {
+    "w": "make",
+    "t": 209.234
+   },
+   {
+    "w": "your",
+    "t": 209.474
+   },
+   {
+    "w": "supper.",
+    "t": 209.634
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 85,
+  "section": "bridge",
+  "speaker": "DI",
+  "text": "...Fair.",
+  "ad": null,
+  "start": 210.877,
+  "end": 211.077,
+  "words": [
+   {
+    "w": "...Fair.",
+    "t": 210.877
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 86,
+  "section": "verse3",
+  "speaker": "S",
+  "text": "Well, the label says SUPER, the paperwork's clean,",
+  "ad": null,
+  "start": 211.719,
+  "end": 214.522,
+  "words": [
+   {
+    "w": "Well,",
+    "t": 211.719
+   },
+   {
+    "w": "the",
+    "t": 212.562
+   },
+   {
+    "w": "label",
+    "t": 212.642
+   },
+   {
+    "w": "says",
+    "t": 212.962
+   },
+   {
+    "w": "SUPER,",
+    "t": 213.202
+   },
+   {
+    "w": "the",
+    "t": 213.602
+   },
+   {
+    "w": "paperwork's",
+    "t": 214.002
+   },
+   {
+    "w": "clean,",
+    "t": 214.322
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 87,
+  "section": "verse3",
+  "speaker": "S",
+  "text": "Got a mighty impressive certification machine.",
+  "ad": null,
+  "start": 214.642,
+  "end": 216.642,
+  "words": [
+   {
+    "w": "Got",
+    "t": 214.642
+   },
+   {
+    "w": "a",
+    "t": 214.882
+   },
+   {
+    "w": "mighty",
+    "t": 214.962
+   },
+   {
+    "w": "impressive",
+    "t": 215.282
+   },
+   {
+    "w": "certification",
+    "t": 215.682
+   },
+   {
+    "w": "machine.",
+    "t": 216.322
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 88,
+  "section": "verse3",
+  "speaker": "S",
+  "text": "But the lady at the counter's got a problem with her claim,",
+  "ad": null,
+  "start": 216.722,
+  "end": 218.882,
+  "words": [
+   {
+    "w": "But",
+    "t": 216.722
+   },
+   {
+    "w": "the",
+    "t": 216.802
+   },
+   {
+    "w": "lady",
+    "t": 216.962
+   },
+   {
+    "w": "at",
+    "t": 217.202
+   },
+   {
+    "w": "the",
+    "t": 217.362
+   },
+   {
+    "w": "counter's",
+    "t": 217.442
+   },
+   {
+    "w": "got",
+    "t": 217.922
+   },
+   {
+    "w": "a",
+    "t": 218.002
+   },
+   {
+    "w": "problem",
+    "t": 218.082
+   },
+   {
+    "w": "with",
+    "t": 218.349
+   },
+   {
+    "w": "her",
+    "t": 218.535
+   },
+   {
+    "w": "claim,",
+    "t": 218.722
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 89,
+  "section": "verse3",
+  "speaker": "S",
+  "text": "And the computer keeps spelling her somebody else's name.",
+  "ad": null,
+  "start": 218.962,
+  "end": 221.282,
+  "words": [
+   {
+    "w": "And",
+    "t": 218.962
+   },
+   {
+    "w": "the",
+    "t": 219.122
+   },
+   {
+    "w": "computer",
+    "t": 219.202
+   },
+   {
+    "w": "keeps",
+    "t": 219.602
+   },
+   {
+    "w": "spelling",
+    "t": 219.842
+   },
+   {
+    "w": "her",
+    "t": 220.202
+   },
+   {
+    "w": "somebody",
+    "t": 220.322
+   },
+   {
+    "w": "else's",
+    "t": 220.642
+   },
+   {
+    "w": "name.",
+    "t": 221.122
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 90,
+  "section": "verse3",
+  "speaker": "S",
+  "text": "\"System says no!\"",
+  "ad": "NO!",
+  "start": 221.522,
+  "end": 222.642,
+  "words": [
+   {
+    "w": "\"System",
+    "t": 221.522
+   },
+   {
+    "w": "says",
+    "t": 221.842
+   },
+   {
+    "w": "no!\"",
+    "t": 222.082
+   }
+  ],
+  "adwords": [
+   {
+    "w": "NO!",
+    "t": 222.442
+   }
+  ]
+ },
+ {
+  "i": 91,
+  "section": "verse3",
+  "speaker": "S",
+  "text": "\"System says yes!\"",
+  "ad": "YES!",
+  "start": 222.722,
+  "end": 223.362,
+  "words": [
+   {
+    "w": "\"System",
+    "t": 222.722
+   },
+   {
+    "w": "says",
+    "t": 222.962
+   },
+   {
+    "w": "yes!\"",
+    "t": 223.162
+   }
+  ],
+  "adwords": [
+   {
+    "w": "YES!",
+    "t": 223.202
+   }
+  ]
+ },
+ {
+  "i": 92,
+  "section": "verse3",
+  "speaker": "S",
+  "text": "\"System says SUPER!\"",
+  "ad": "WELL, I'LL BE BLESSED!",
+  "start": 223.842,
+  "end": 225.762,
+  "words": [
+   {
+    "w": "\"System",
+    "t": 223.842
+   },
+   {
+    "w": "says",
+    "t": 224.082
+   },
+   {
+    "w": "SUPER!\"",
+    "t": 224.322
+   }
+  ],
+  "adwords": [
+   {
+    "w": "WELL,",
+    "t": 224.882
+   },
+   {
+    "w": "I'LL",
+    "t": 225.042
+   },
+   {
+    "w": "BE",
+    "t": 225.282
+   },
+   {
+    "w": "BLESSED!",
+    "t": 225.442
+   }
+  ]
+ },
+ {
+  "i": 93,
+  "section": "verse3",
+  "speaker": "S",
+  "text": "She says, \"That's my house!\"",
+  "ad": null,
+  "start": 226.002,
+  "end": 227.109,
+  "words": [
+   {
+    "w": "She",
+    "t": 226.002
+   },
+   {
+    "w": "says,",
+    "t": 226.162
+   },
+   {
+    "w": "\"That's",
+    "t": 226.482
+   },
+   {
+    "w": "my",
+    "t": 226.642
+   },
+   {
+    "w": "house!\"",
+    "t": 226.909
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 94,
+  "section": "verse3",
+  "speaker": "S",
+  "text": "It says, \"That's your shed!\"",
+  "ad": null,
+  "start": 227.095,
+  "end": 228.282,
+  "words": [
+   {
+    "w": "It",
+    "t": 227.095
+   },
+   {
+    "w": "says,",
+    "t": 227.282
+   },
+   {
+    "w": "\"That's",
+    "t": 227.522
+   },
+   {
+    "w": "your",
+    "t": 227.762
+   },
+   {
+    "w": "shed!\"",
+    "t": 228.082
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 95,
+  "section": "verse3",
+  "speaker": "S",
+  "text": "She says, \"My husband's alive!\"",
+  "ad": null,
+  "start": 228.322,
+  "end": 229.202,
+  "words": [
+   {
+    "w": "She",
+    "t": 228.322
+   },
+   {
+    "w": "says,",
+    "t": 228.402
+   },
+   {
+    "w": "\"My",
+    "t": 228.562
+   },
+   {
+    "w": "husband's",
+    "t": 228.642
+   },
+   {
+    "w": "alive!\"",
+    "t": 229.042
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 96,
+  "section": "verse3",
+  "speaker": "S",
+  "text": "It says, \"Records say dead!\"",
+  "ad": null,
+  "start": 229.442,
+  "end": 230.562,
+  "words": [
+   {
+    "w": "It",
+    "t": 229.442
+   },
+   {
+    "w": "says,",
+    "t": 229.522
+   },
+   {
+    "w": "\"Records",
+    "t": 229.762
+   },
+   {
+    "w": "say",
+    "t": 230.162
+   },
+   {
+    "w": "dead!\"",
+    "t": 230.402
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 97,
+  "section": "verse3",
+  "speaker": "S",
+  "text": "Now the label on the box says \"better than you,\"",
+  "ad": null,
+  "start": 230.642,
+  "end": 232.662,
+  "words": [
+   {
+    "w": "Now",
+    "t": 230.642
+   },
+   {
+    "w": "the",
+    "t": 230.882
+   },
+   {
+    "w": "label",
+    "t": 230.962
+   },
+   {
+    "w": "on",
+    "t": 231.282
+   },
+   {
+    "w": "the",
+    "t": 231.362
+   },
+   {
+    "w": "box",
+    "t": 231.442
+   },
+   {
+    "w": "says",
+    "t": 231.762
+   },
+   {
+    "w": "\"better",
+    "t": 231.922
+   },
+   {
+    "w": "than",
+    "t": 232.422
+   },
+   {
+    "w": "you,\"",
+    "t": 232.582
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 98,
+  "section": "verse3",
+  "speaker": "S",
+  "text": "And the poor old lady's got a mountain to get through.",
+  "ad": null,
+  "start": 232.822,
+  "end": 234.982,
+  "words": [
+   {
+    "w": "And",
+    "t": 232.822
+   },
+   {
+    "w": "the",
+    "t": 232.982
+   },
+   {
+    "w": "poor",
+    "t": 233.262
+   },
+   {
+    "w": "old",
+    "t": 233.462
+   },
+   {
+    "w": "lady's",
+    "t": 233.662
+   },
+   {
+    "w": "got",
+    "t": 233.862
+   },
+   {
+    "w": "a",
+    "t": 234.022
+   },
+   {
+    "w": "mountain",
+    "t": 234.102
+   },
+   {
+    "w": "to",
+    "t": 234.422
+   },
+   {
+    "w": "get",
+    "t": 234.582
+   },
+   {
+    "w": "through.",
+    "t": 234.742
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 99,
+  "section": "verse3",
+  "speaker": "S",
+  "text": "Don't need a halo, don't need a throne,",
+  "ad": null,
+  "start": 235.062,
+  "end": 237.062,
+  "words": [
+   {
+    "w": "Don't",
+    "t": 235.062
+   },
+   {
+    "w": "need",
+    "t": 235.302
+   },
+   {
+    "w": "a",
+    "t": 235.462
+   },
+   {
+    "w": "halo,",
+    "t": 235.542
+   },
+   {
+    "w": "don't",
+    "t": 236.022
+   },
+   {
+    "w": "need",
+    "t": 236.342
+   },
+   {
+    "w": "a",
+    "t": 236.502
+   },
+   {
+    "w": "throne,",
+    "t": 236.662
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 100,
+  "section": "verse3",
+  "speaker": "S",
+  "text": "Need somebody to pick up the telephone!",
+  "ad": null,
+  "start": 237.222,
+  "end": 239.302,
+  "words": [
+   {
+    "w": "Need",
+    "t": 237.222
+   },
+   {
+    "w": "somebody",
+    "t": 237.542
+   },
+   {
+    "w": "to",
+    "t": 238.022
+   },
+   {
+    "w": "pick",
+    "t": 238.182
+   },
+   {
+    "w": "up",
+    "t": 238.342
+   },
+   {
+    "w": "the",
+    "t": 238.502
+   },
+   {
+    "w": "telephone!",
+    "t": 238.662
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 101,
+  "section": "verse3",
+  "speaker": "DI",
+  "text": "I can make mistakes at super speed!",
+  "ad": null,
+  "start": 239.542,
+  "end": 241.702,
+  "words": [
+   {
+    "w": "I",
+    "t": 239.542
+   },
+   {
+    "w": "can",
+    "t": 239.622
+   },
+   {
+    "w": "make",
+    "t": 239.782
+   },
+   {
+    "w": "mistakes",
+    "t": 239.942
+   },
+   {
+    "w": "at",
+    "t": 240.582
+   },
+   {
+    "w": "super",
+    "t": 240.742
+   },
+   {
+    "w": "speed!",
+    "t": 241.222
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 102,
+  "section": "verse3",
+  "speaker": "VOICE",
+  "text": "You could do that yesterday.",
+  "ad": null,
+  "start": 242.53,
+  "end": 244.29,
+  "words": [
+   {
+    "w": "You",
+    "t": 242.53
+   },
+   {
+    "w": "could",
+    "t": 242.69
+   },
+   {
+    "w": "do",
+    "t": 243.01
+   },
+   {
+    "w": "that",
+    "t": 243.09
+   },
+   {
+    "w": "yesterday.",
+    "t": 243.41
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 103,
+  "section": "verse3",
+  "speaker": "DI",
+  "text": "Yes, but now it's official.",
+  "ad": null,
+  "start": 244.53,
+  "end": 247.202,
+  "words": [
+   {
+    "w": "Yes,",
+    "t": 244.53
+   },
+   {
+    "w": "but",
+    "t": 245.762
+   },
+   {
+    "w": "now",
+    "t": 246.002
+   },
+   {
+    "w": "it's",
+    "t": 246.242
+   },
+   {
+    "w": "official.",
+    "t": 246.562
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 104,
+  "section": "breakdown",
+  "speaker": "DI",
+  "text": "Who made me super?",
+  "ad": null,
+  "start": 249.298,
+  "end": 250.938,
+  "words": [
+   {
+    "w": "Who",
+    "t": 249.298
+   },
+   {
+    "w": "made",
+    "t": 249.538
+   },
+   {
+    "w": "me",
+    "t": 249.858
+   },
+   {
+    "w": "super?",
+    "t": 250.738
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 105,
+  "section": "breakdown",
+  "speaker": "CROWD",
+  "text": "MAN WITH A PEN!",
+  "ad": null,
+  "start": 251.538,
+  "end": 253.322,
+  "words": [
+   {
+    "w": "MAN",
+    "t": 251.538
+   },
+   {
+    "w": "WITH",
+    "t": 252.018
+   },
+   {
+    "w": "A",
+    "t": 252.338
+   },
+   {
+    "w": "PEN!",
+    "t": 253.122
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 106,
+  "section": "breakdown",
+  "speaker": "DI",
+  "text": "When did I improve?",
+  "ad": null,
+  "start": 253.826,
+  "end": 255.266,
+  "words": [
+   {
+    "w": "When",
+    "t": 253.826
+   },
+   {
+    "w": "did",
+    "t": 254.066
+   },
+   {
+    "w": "I",
+    "t": 254.306
+   },
+   {
+    "w": "improve?",
+    "t": 254.546
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 107,
+  "section": "breakdown",
+  "speaker": "CROWD",
+  "text": "ASK US AGAIN!",
+  "ad": null,
+  "start": 256.29,
+  "end": 257.49,
+  "words": [
+   {
+    "w": "ASK",
+    "t": 256.29
+   },
+   {
+    "w": "US",
+    "t": 256.69
+   },
+   {
+    "w": "AGAIN!",
+    "t": 257.09
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 108,
+  "section": "breakdown",
+  "speaker": "DI",
+  "text": "What did they measure?",
+  "ad": null,
+  "start": 257.65,
+  "end": 258.69,
+  "words": [
+   {
+    "w": "What",
+    "t": 257.65
+   },
+   {
+    "w": "did",
+    "t": 257.89
+   },
+   {
+    "w": "they",
+    "t": 258.05
+   },
+   {
+    "w": "measure?",
+    "t": 258.21
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 109,
+  "section": "breakdown",
+  "speaker": "CROWD",
+  "text": "NOTHING WE SEE!",
+  "ad": null,
+  "start": 258.77,
+  "end": 259.73,
+  "words": [
+   {
+    "w": "NOTHING",
+    "t": 258.77
+   },
+   {
+    "w": "WE",
+    "t": 259.25
+   },
+   {
+    "w": "SEE!",
+    "t": 259.41
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 110,
+  "section": "breakdown",
+  "speaker": "DI",
+  "text": "What's underneath?",
+  "ad": null,
+  "start": 259.89,
+  "end": 260.81,
+  "words": [
+   {
+    "w": "What's",
+    "t": 259.89
+   },
+   {
+    "w": "underneath?",
+    "t": 260.61
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 111,
+  "section": "breakdown",
+  "speaker": "CROWD",
+  "text": "SAME OLD ME!",
+  "ad": null,
+  "start": 261.01,
+  "end": 262.05,
+  "words": [
+   {
+    "w": "SAME",
+    "t": 261.01
+   },
+   {
+    "w": "OLD",
+    "t": 261.41
+   },
+   {
+    "w": "ME!",
+    "t": 261.81
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 112,
+  "section": "breakdown",
+  "speaker": "S",
+  "text": "You can call me what you like.",
+  "ad": null,
+  "start": 262.45,
+  "end": 264.37,
+  "words": [
+   {
+    "w": "You",
+    "t": 262.45
+   },
+   {
+    "w": "can",
+    "t": 262.61
+   },
+   {
+    "w": "call",
+    "t": 262.85
+   },
+   {
+    "w": "me",
+    "t": 263.25
+   },
+   {
+    "w": "what",
+    "t": 263.41
+   },
+   {
+    "w": "you",
+    "t": 263.73
+   },
+   {
+    "w": "like.",
+    "t": 263.97
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 113,
+  "section": "breakdown",
+  "speaker": "S",
+  "text": "Just don't take away your right",
+  "ad": null,
+  "start": 264.61,
+  "end": 266.61,
+  "words": [
+   {
+    "w": "Just",
+    "t": 264.61
+   },
+   {
+    "w": "don't",
+    "t": 264.85
+   },
+   {
+    "w": "take",
+    "t": 265.33
+   },
+   {
+    "w": "away",
+    "t": 265.57
+   },
+   {
+    "w": "your",
+    "t": 266.05
+   },
+   {
+    "w": "right",
+    "t": 266.53
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 114,
+  "section": "breakdown",
+  "speaker": "S",
+  "text": "To tell me when I'm wrong.",
+  "ad": null,
+  "start": 267.17,
+  "end": 269.09,
+  "words": [
+   {
+    "w": "To",
+    "t": 267.17
+   },
+   {
+    "w": "tell",
+    "t": 267.41
+   },
+   {
+    "w": "me",
+    "t": 267.65
+   },
+   {
+    "w": "when",
+    "t": 267.97
+   },
+   {
+    "w": "I'm",
+    "t": 268.21
+   },
+   {
+    "w": "wrong.",
+    "t": 268.69
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 115,
+  "section": "breakdown",
+  "speaker": "VOICE",
+  "text": "And show me the evidence.",
+  "ad": null,
+  "start": 271.48,
+  "end": 273.08,
+  "words": [
+   {
+    "w": "And",
+    "t": 271.48
+   },
+   {
+    "w": "show",
+    "t": 271.8
+   },
+   {
+    "w": "me",
+    "t": 272.04
+   },
+   {
+    "w": "the",
+    "t": 272.2
+   },
+   {
+    "w": "evidence.",
+    "t": 272.36
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 116,
+  "section": "finale",
+  "speaker": "S",
+  "text": "SUPER BY DECREE!",
+  "ad": null,
+  "start": 273.32,
+  "end": 274.17,
+  "words": [
+   {
+    "w": "SUPER",
+    "t": 273.32
+   },
+   {
+    "w": "BY",
+    "t": 273.62
+   },
+   {
+    "w": "DECREE!",
+    "t": 273.92
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 117,
+  "section": "finale",
+  "speaker": "S",
+  "text": "SAME OLD ME! Got a brand-new t—",
+  "ad": null,
+  "start": 275.16,
+  "end": 277.21,
+  "words": [
+   {
+    "w": "SAME",
+    "t": 275.16
+   },
+   {
+    "w": "OLD",
+    "t": 275.46
+   },
+   {
+    "w": "ME!",
+    "t": 275.76
+   },
+   {
+    "w": "Got",
+    "t": 276.06
+   },
+   {
+    "w": "a",
+    "t": 276.36
+   },
+   {
+    "w": "brand-new",
+    "t": 276.66
+   },
+   {
+    "w": "t—",
+    "t": 276.96
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 118,
+  "section": "finale",
+  "speaker": "S",
+  "text": "SUPER BY, SUPER BY DECREE!",
+  "ad": null,
+  "start": 277.4,
+  "end": 278.85,
+  "words": [
+   {
+    "w": "SUPER",
+    "t": 277.4
+   },
+   {
+    "w": "BY,",
+    "t": 277.7
+   },
+   {
+    "w": "SUPER",
+    "t": 278.0
+   },
+   {
+    "w": "BY",
+    "t": 278.3
+   },
+   {
+    "w": "DECREE!",
+    "t": 278.6
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 119,
+  "section": "finale",
+  "speaker": "S",
+  "text": "SAME OLD ME! Got a brand— a brand— a brand-new—",
+  "ad": null,
+  "start": 279.72,
+  "end": 282.472,
+  "words": [
+   {
+    "w": "SAME",
+    "t": 279.72
+   },
+   {
+    "w": "OLD",
+    "t": 279.998
+   },
+   {
+    "w": "ME!",
+    "t": 280.276
+   },
+   {
+    "w": "Got",
+    "t": 280.554
+   },
+   {
+    "w": "a",
+    "t": 280.832
+   },
+   {
+    "w": "brand—",
+    "t": 281.11
+   },
+   {
+    "w": "a",
+    "t": 281.388
+   },
+   {
+    "w": "brand—",
+    "t": 281.666
+   },
+   {
+    "w": "a",
+    "t": 281.944
+   },
+   {
+    "w": "brand-new—",
+    "t": 282.222
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 120,
+  "section": "finale",
+  "speaker": "S",
+  "text": "SUPER BY DECREE!",
+  "ad": null,
+  "start": 282.6,
+  "end": 283.45,
+  "words": [
+   {
+    "w": "SUPER",
+    "t": 282.6
+   },
+   {
+    "w": "BY",
+    "t": 282.9
+   },
+   {
+    "w": "DECREE!",
+    "t": 283.2
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 121,
+  "section": "finale",
+  "speaker": "S",
+  "text": "SAME OLD ME!",
+  "ad": null,
+  "start": 284.36,
+  "end": 285.21,
+  "words": [
+   {
+    "w": "SAME",
+    "t": 284.36
+   },
+   {
+    "w": "OLD",
+    "t": 284.66
+   },
+   {
+    "w": "ME!",
+    "t": 284.96
+   }
+  ],
+  "adwords": []
+ },
+ {
+  "i": 122,
+  "section": "finale",
+  "speaker": "S",
+  "text": "SUPER BY DECREE.",
+  "ad": null,
+  "start": 287.04,
+  "end": 287.89,
+  "words": [
+   {
+    "w": "SUPER",
+    "t": 287.04
+   },
+   {
+    "w": "BY",
+    "t": 287.34
+   },
+   {
+    "w": "DECREE.",
+    "t": 287.64
+   }
+  ],
+  "adwords": []
+ }
+]

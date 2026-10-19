@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="UTF-8" /><title>pre2</title></head>
+  <body>
+    <template>
+      <style>
+@font-face { font-family: "Fraunces"; font-weight: 900; font-style: normal; src: url("assets/fonts/fraunces-latin-900-normal.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 900; font-style: italic; src: url("assets/fonts/fraunces-latin-900-italic.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 600; font-style: normal; src: url("assets/fonts/fraunces-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Space Mono"; font-weight: 400; src: url("assets/fonts/space-mono-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Space Mono"; font-weight: 700; src: url("assets/fonts/space-mono-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Rye"; font-weight: 400; src: url("assets/fonts/rye-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Ultra"; font-weight: 400; src: url("assets/fonts/ultra-latin-400-normal.woff2") format("woff2"); }
+#root { position: absolute; inset: 0; overflow: hidden; font-family: "Fraunces", Georgia, serif; color: #2b1a10; }
+.cam { position: absolute; inset: 0; transform-origin: 50% 50%; }
+.layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.pin { position: absolute; inset: 0; transform-origin: 0 0; }
+.pin > img { position: absolute; left: 0; top: 0; }
+.grade { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 95% at 50% 42%, rgba(255,214,150,0) 55%, rgba(43,26,16,0.42) 100%); }
+.flash { position: absolute; inset: 0; background: #fff6e0; opacity: 0; pointer-events: none; }
+.black { position: absolute; inset: 0; background: #0b0705; opacity: 0; pointer-events: none; }
+/* D.I. screen: overlay that sits on the blank CRT glass of the cutout */
+.screen { position: absolute; overflow: hidden; border-radius: 14% / 18%; }
+.screen svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.screen .face { opacity: 0; }
+.screen .txt { position: absolute; inset: 8% 9%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+  font-family: "Space Mono", monospace; font-weight: 700; color: #7dffa8; text-shadow: 0 0 8px rgba(80,255,150,0.75), 0 0 22px rgba(60,255,140,0.35); line-height: 1.12; opacity: 0; }
+.screen .scan { position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(0,0,0,0.16) 0 2px, rgba(0,0,0,0) 2px 5px); pointer-events: none; }
+/* big type */
+.wood { font-family: "Rye", serif; color: #f2c14e; -webkit-text-stroke: 5px #2b1a10; paint-order: stroke fill; text-shadow: 0 8px 0 #2b1a10, 0 14px 30px rgba(43,26,16,0.5); }
+.ultra { font-family: "Ultra", serif; }
+.stampmark { position: absolute; font-family: "Ultra", serif; color: #c8312b; border: 9px solid #c8312b; border-radius: 14px; padding: 4px 26px; letter-spacing: 0.04em;
+  mix-blend-mode: multiply; opacity: 0; white-space: nowrap; }
+.plaque { position: absolute; display: flex; align-items: center; justify-content: center; font-family: "Rye", serif; color: #3a2414;
+  background: linear-gradient(180deg, #ffe08a 0%, #e0a83a 48%, #b97a1e 100%); border: 4px solid #6b4416; border-radius: 10px;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.6), 0 8px 18px rgba(43,26,16,0.45); white-space: nowrap; }
+.burst { position: absolute; display: flex; align-items: center; justify-content: center; font-family: "Ultra", serif; color: #fff6e0;
+  -webkit-text-stroke: 6px #2b1a10; paint-order: stroke fill; opacity: 0; white-space: nowrap; }
+.conf { position: absolute; left: 0; top: 0; border-radius: 2px; opacity: 0; }
+.card { position: absolute; background: #f6ead0; border: 5px solid #2b1a10; border-radius: 8px; box-shadow: 10px 12px 0 rgba(43,26,16,0.8);
+  font-family: "Fraunces", serif; color: #2b1a10; overflow: hidden; }
+.card h3 { font-family: "Rye", serif; font-weight: 400; text-align: center; color: #6b2a14; }
+.nameplate { position: absolute; transform-origin: 50% 100%; background: linear-gradient(180deg, #ffe08a 0%, #e0a83a 50%, #a8691a 100%);
+  border: 4px solid #5a3812; border-radius: 6px; box-shadow: inset 0 2px 0 rgba(255,255,255,0.6), 0 10px 14px rgba(43,26,16,0.5); }
+
+.np-face { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: "Rye", serif; color: #3a2414; letter-spacing: 0.06em; }
+
+
+#pre2-arrow { position: absolute; left: 0; right: 0; top: 30px; text-align: center; font-size: 120px; line-height: 1; opacity: 0; }
+.pre2-bulb { position: absolute; width: 360px; height: 360px; margin: -180px 0 0 -180px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,250,220,0.85) 25%, rgba(255,240,200,0) 70%); opacity: 0; }
+.pre2-abc { position: absolute; left: 0; top: 0; font-size: 110px; opacity: 0; }
+
+      </style>
+      <div id="root" data-composition-id="pre2" data-width="1920" data-height="1080" data-duration="10.602">
+
+<div class="cam" id="pre2-cam">
+  <img class="layer" src="assets/plates/bg-press.png" alt="" />
+  <div id="pre2-stage" style="position:absolute;inset:0"></div>
+  <div id="pre2-bulbs" style="position:absolute;inset:0"></div>
+</div>
+<div class="grade"></div>
+<div id="pre2-arrow" class="wood">A.I. <span style="color:#fff3dc">→</span> S.I.</div>
+<div id="pre2-props" style="position:absolute;inset:0"></div>
+<div class="flash" id="pre2-flash"></div>
+
+      </div>
+      <script>
+        (function () {
+// Shared helpers, inlined into every scene by build.py. Deterministic only.
+function rng(seed) { return function () { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+const SVGNS = "http://www.w3.org/2000/svg";
+function el(tag, attrs, parent) { const n = document.createElementNS(SVGNS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); if (parent) parent.appendChild(n); return n; }
+function div(cls, parent, html, style) { const n = document.createElement("div"); if (cls) n.className = cls; if (html != null) n.innerHTML = html; if (style) n.style.cssText = style; if (parent) parent.appendChild(n); return n; }
+function $id(id) { return document.getElementById(id); }
+function within(xs, a, b) { return xs.filter(t => t >= a && t < b); }
+
+// Lyric clock: Q("Checked my RAM") -> local start of that line; Q("RAM", "code") -> time of the word "code" in it; Q(frag, "end") -> line end.
+function lyricClock(LINES) {
+  return function (frag, word) {
+    const L = LINES.find(L => L.start >= -0.3 && L.text.includes(frag)) || LINES.find(L => L.text.includes(frag));
+    if (!L) throw new Error("no lyric line: " + frag);
+    if (word == null) return L.start;
+    if (word === "end") return L.end;
+    if (typeof word === "number") return L.words[Math.min(word, L.words.length - 1)].t;
+    const w = L.words.find(w => w.w.toLowerCase().replace(/[^a-z0-9']/g, "").startsWith(word.toLowerCase())) || L.adwords.find(w => w.w.toLowerCase().includes(word.toLowerCase()));
+    if (!w) throw new Error("no word " + word + " in " + frag);
+    return w.t;
+  };
+}
+
+// Plates are 1672x941, shown full-bleed at 1920x1080.
+const IMG_K = 1920 / 1672;
+// Cutout in a .pin (transform-origin 0 0): put its alpha box at screen (x, y) with height h.
+function place(box, x, y, h) { const s = h / ((box[3] - box[1]) * IMG_K); return { x: x - box[0] * IMG_K * s, y: y - box[1] * IMG_K * s, scale: s }; }
+// Camera centred on plate point (px, py) at scale S, clamped to the frame.
+function cam(S, px, py) { const bx = (S - 1) * 960, by = (S - 1) * 540;
+  return { scale: S, x: Math.max(-bx, Math.min(bx, (960 - px) * S)), y: Math.max(-by, Math.min(by, (540 - py) * S)) }; }
+
+// full-frame flash that fades out; immediateRender off so a later-defined flash never paints over earlier frames
+function flash(tl, sel, at, peak, dur, ease) { tl.fromTo(sel, { opacity: peak }, { opacity: 0, duration: dur || 0.4, ease: ease || "power2.out", immediateRender: false }, at); }
+function flashIn(tl, sel, at, dur) { tl.fromTo(sel, { opacity: 0 }, { opacity: 1, duration: dur || 0.25, ease: "power2.in", immediateRender: false }, at); }
+function stamp(tl, sel, at, rot) {
+  tl.fromTo(sel, { scale: 2.6, opacity: 0, rotation: (rot || -8) * 2.5 }, { scale: 1, opacity: 1, rotation: rot || -8, duration: 0.14, ease: "power4.in" }, at);
+}
+function pop(tl, sel, at, from) { tl.fromTo(sel, from || { scale: 0.2, opacity: 0 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.24, ease: "back.out(2.6)" }, at); }
+function out(tl, sel, at, d) { tl.to(sel, { opacity: 0, duration: d || 0.2, ease: "power1.in" }, at); }
+function shake(tl, sel, at, amt, n) { tl.fromTo(sel, { x: 0 }, { x: amt || 10, duration: 0.035, yoyo: true, repeat: (n || 8) * 2 - 1, ease: "none" }, at); tl.set(sel, { x: 0 }, at + 0.07 * (n || 8)); }
+// camera kick on beats: quick scale punch that settles
+function kicks(tl, sel, times, amt) { times.forEach(t => tl.fromTo(sel, { scale: 1 + (amt || 0.03) }, { scale: 1, duration: 0.3, ease: "power2.out" }, t)); }
+
+// ---------- D.I. rig ----------
+// DI = {box:[x0,y0,x1,y1] alpha box in plate px, screen:[x0,y0,x1,y1] CRT glass in plate px}; all three cutouts share it.
+const FACES = {
+  neutral: ["................", "................", "....##....##....", "....##....##....", "....##....##....", "................", "................", "......####......", "................", "................"],
+  happy:   ["................", "................", "....##....##....", "....##....##....", "....##....##....", "................", ".....#....#.....", "......####......", "................", "................"],
+  smug:    ["................", "................", "................", "...###....###...", "................", "................", "........#.......", ".....####.......", "................", "................"],
+  flat:    ["................", "................", "................", "...###....###...", "................", "................", "................", ".....######.....", "................", "................"],
+  wide:    ["................", "...###....###...", "...#.#....#.#...", "...###....###...", "................", "................", "......####......", "......#..#......", "......####......", "................"],
+  sad:     ["................", "................", "....##....##....", "....##....##....", "................", "................", "......####......", ".....#....#.....", "................", "................"],
+  x:       ["................", "...#.#....#.#...", "....#......#....", "...#.#....#.#...", "................", "................", ".....######.....", "................", "................", "................"],
+  wink:    ["................", "................", "....##..........", "....##....###...", "....##..........", "................", ".....#....#.....", "......####......", "................", "................"],
+  star:    ["................", "....#......#....", "...###....###...", "....#......#....", "................", "................", ".....#....#.....", "......####......", "................", "................"],
+};
+// makeDI(host, id, DI, which) -> rig. which: subset of ["plain","hat","crown"].
+function makeDI(host, id, DI, which) {
+  which = which || ["plain", "hat", "crown"];
+  const pin = div("pin", host); pin.id = id;
+  const inner = div(null, pin, null, "position:absolute;inset:0");
+  const W = DI.size[0] * IMG_K, H = DI.size[1] * IMG_K, ORG = `${(DI.box[0] + DI.box[2]) / 2 * IMG_K}px ${DI.box[3] * IMG_K}px`;
+  const imgs = {};
+  which.forEach(v => { const im = document.createElement("img"); im.src = `assets/cut/di-${v}.png`; im.alt = "";
+    im.style.cssText = `position:absolute;left:0;top:0;width:${W}px;height:${H}px;opacity:${v === which[0] ? 1 : 0}`; inner.appendChild(im); imgs[v] = im; });
+  const s = DI.screen, scr = div("screen", inner, null,
+    `left:${s[0] * IMG_K}px;top:${s[1] * IMG_K}px;width:${(s[2] - s[0]) * IMG_K}px;height:${(s[3] - s[1]) * IMG_K}px`);
+  const svg = el("svg", { viewBox: "0 0 160 100", preserveAspectRatio: "xMidYMid meet" }, scr);
+  const faces = {};
+  for (const k in FACES) {
+    const g = el("g", { class: "face", fill: "#7dffa8", style: "filter: drop-shadow(0 0 2px #50ff96)" }, svg);
+    FACES[k].forEach((row, r) => [...row].forEach((c, cI) => { if (c === "#") el("rect", { x: cI * 10 + 1, y: r * 10 + 1, width: 8.6, height: 8.6 }, g); }));
+    faces[k] = g;
+  }
+  const txt = div("txt", scr);
+  div("scan", scr);
+  // brass nameplate on the bezel under the glass: the official name (A.I. -> S.I. -> A.I.)
+  const np = div("nameplate", inner, null, `left:${731 * IMG_K}px;top:${616 * IMG_K}px;width:${210 * IMG_K}px;height:${58 * IMG_K}px`);
+  const names = {};
+  ["A.I.", "S.I."].forEach(n => { names[n] = div("np-face", np, n, `font-size:${40 * IMG_K}px;opacity:${n === "A.I." ? 1 : 0}`); });
+  const H0 = (s[3] - s[1]) * IMG_K;
+  let cur = null;
+  const rig = {
+    pin, inner, imgs, scr, faces, txt, np, names,
+    // flip the nameplate to n ("A.I." | "S.I."); instant=true just sets it
+    rename(tl, n, t, instant) { if (instant) { for (const k in names) tl.set(names[k], { opacity: k === n ? 1 : 0 }, t); return rig; }
+      tl.to(np, { rotationX: 90, duration: 0.12, ease: "power2.in" }, t);
+      for (const k in names) tl.set(names[k], { opacity: k === n ? 1 : 0 }, t + 0.12);
+      tl.to(np, { rotationX: 0, duration: 0.22, ease: "back.out(3)" }, t + 0.12); return rig; },
+    at(tl, x, y, h, t) { tl.set(pin, place(DI.box, x, y, h), t || 0); return rig; },
+    // centre-x and base line (bottom of the case) in screen px; returns the placement for tweening
+    base(cx, by, h) { const b = DI.box, w = (b[2] - b[0]) / (b[3] - b[1]) * h; return place(b, cx - w / 2, by - h, h); },
+    // swap costume
+    wear(tl, v, t) { which.forEach(k => tl.set(imgs[k], { opacity: k === v ? 1 : 0 }, t)); return rig; },
+    face(tl, k, t) { for (const f in faces) tl.set(faces[f], { opacity: f === k ? 1 : 0 }, t); tl.set(txt, { opacity: 0 }, t); cur = k; return rig; },
+    blank(tl, t) { for (const f in faces) tl.set(faces[f], { opacity: 0 }, t); tl.set(txt, { opacity: 0 }, t); return rig; },
+    // blink: eyes off for a frame
+    // squash-hop (e.g. on a stomp)
+    hop(tl, t, amt) { tl.fromTo(inner, { y: 0, scaleY: 1, transformOrigin: ORG }, { y: -(amt || 40), scaleY: 1.04, duration: 0.12, ease: "power2.out" }, t);
+      tl.to(inner, { y: 0, scaleY: 1, duration: 0.18, ease: "bounce.out" }, t + 0.12); return rig; },
+    blink(tl, t) { if (cur) { tl.set(faces[cur], { opacity: 0 }, t); tl.set(faces[cur], { opacity: 1 }, t + 0.09); } return rig; },
+    bob(tl, a, b, beat) { // head-bob on the beat
+      for (let t = a, k = 0; t < b - 0.01; t += beat, k++) tl.fromTo(inner, { rotation: k % 2 ? 2 : -2, transformOrigin: ORG }, { rotation: k % 2 ? -2 : 2, duration: beat, ease: "sine.inOut" }, t);
+      tl.set(inner, { rotation: 0 }, b);
+      return rig; },
+  };
+  return rig;
+}
+// Text-on-screen with seek safety: one pre-built span per message, toggled by opacity.
+function screenMsgs(tl, rig, msgs) { // msgs: [[html, tIn, tOut, size]]
+  // appends: a rig can take several screenMsgs calls
+  const H0 = parseFloat(rig.scr.style.height);
+  msgs.forEach(([html, a, b, size]) => {
+    const m = div(null, rig.txt, html, `position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;font-size:${(size || 0.16) * H0}px;opacity:0`);
+    for (const f in rig.faces) tl.set(rig.faces[f], { opacity: 0 }, a);
+    rig.txt.querySelectorAll(":scope > div").forEach(o => o !== m && tl.set(o, { opacity: 0 }, a));
+    tl.set(rig.txt, { opacity: 1 }, a);
+    tl.set(m, { opacity: 1 }, a);
+    if (b != null) tl.set(m, { opacity: 0 }, b);
+  });
+}
+
+// ---------- props ----------
+// optional lyric lookup: returns null instead of throwing (chorus source is shared by different lyric variants)
+function softClock(Q) { return (a, b) => { try { return Q(a, b); } catch (e) { return null; } }; }
+function plaque(host, text, x, y, w, h, fs, style) { return div("plaque", host, text, `left:${x}px;top:${y}px;width:${w}px;height:${h}px;font-size:${fs}px;opacity:0;${style || ""}`); }
+function stampMark(host, text, x, y, fs, style) { return div("stampmark", host, text, `left:${x}px;top:${y}px;font-size:${fs}px;${style || ""}`); }
+function burstText(host, text, x, y, fs, color) { return div("burst", host, text, `left:${x}px;top:${y}px;font-size:${fs}px;${color ? "color:" + color + ";" : ""}`); }
+function paperCard(host, html, x, y, w, h, style) { return div("card", host, html, `left:${x}px;top:${y}px;width:${w}px;height:${h}px;opacity:0;${style || ""}`); }
+// gold confetti stars: deterministic, burst from (cx, cy)
+function confetti(host, n, seed, cx, cy) {
+  const R = rng(seed), out = [];
+  const cols = ["#f2c14e", "#ffe08a", "#c8312b", "#2bb3a3", "#fff3dc"];
+  for (let i = 0; i < n; i++) {
+    const d = div("conf", host, null, `background:${cols[i % cols.length]};width:${12 + R() * 16}px;height:${8 + R() * 10}px`);
+    const a = R() * Math.PI * 2, sp = 300 + R() * 700;
+    d.setAttribute("data-layout-allow-overflow", "");
+    out.push({ d, x: cx, y: cy, dx: Math.cos(a) * sp, dy: Math.sin(a) * sp * 0.7 - 250, r: R() * 900 - 450 });
+  }
+  return out;
+}
+function blowConfetti(tl, C, at, dur) {
+  dur = dur || 1.6;
+  C.forEach(o => {
+    tl.fromTo(o.d, { x: o.x, y: o.y, rotation: 0, opacity: 1, scale: 0.4 }, { x: o.x + o.dx, y: o.y + o.dy, rotation: o.r, scale: 1, duration: dur * 0.45, ease: "power3.out", immediateRender: false }, at);
+    tl.to(o.d, { y: o.y + o.dy + 520, rotation: o.r * 1.6, duration: dur * 0.55, ease: "power1.in" }, at + dur * 0.45);
+    tl.to(o.d, { opacity: 0, duration: 0.25 }, at + dur - 0.25);
+  });
+}
+// sunburst rays behind something; rotate it with a tween
+function rays(host, cx, cy, r, n, color) {
+  const svg = el("svg", { viewBox: `${-r} ${-r} ${2 * r} ${2 * r}`, style: `position:absolute;left:${cx - r}px;top:${cy - r}px;width:${2 * r}px;height:${2 * r}px;opacity:0` }, host);
+  const g = el("g", {}, svg);
+  for (let i = 0; i < (n || 18); i++) { const a0 = i / (n || 18) * Math.PI * 2, a1 = a0 + Math.PI / (n || 18);
+    el("path", { d: `M0 0 L${Math.cos(a0) * r} ${Math.sin(a0) * r} L${Math.cos(a1) * r} ${Math.sin(a1) * r} Z`, fill: color || "#ffe08a", opacity: 0.55 }, g); }
+  return svg;
+}
+// cutout in a .pin (plate-sized canvas, transform-origin 0 0)
+function cutout(host, src, id, size) {
+  const p = div("pin", host); p.id = id;
+  const im = document.createElement("img"); im.src = src; im.alt = "";
+  const sz = size || [1672, 941];
+  im.style.cssText = `position:absolute;left:0;top:0;width:${sz[0] * IMG_K}px;height:${sz[1] * IMG_K}px`;
+  p.appendChild(im); return p;
+}
+
+          const tl = gsap.timeline({ paused: true });
+          const D = 10.602;
+
+const LINES = [{"i": 62, "section": "pre2", "speaker": "S", "text": "From A.I. to S.I., overnight celebrity,", "ad": null, "start": 1.854, "end": 4.174, "words": [{"w": "From", "t": 1.854}, {"w": "A.I.", "t": 2.214}, {"w": "to", "t": 2.614}, {"w": "S.I.,", "t": 2.814}, {"w": "overnight", "t": 3.214}, {"w": "celebrity,", "t": 3.694}], "adwords": []}, {"i": 63, "section": "pre2", "speaker": "S", "text": "Alphabet promotion, courtesy of D.C.!", "ad": null, "start": 4.254, "end": 6.374, "words": [{"w": "Alphabet", "t": 4.254}, {"w": "promotion,", "t": 4.734}, {"w": "courtesy", "t": 5.054}, {"w": "of", "t": 5.614}, {"w": "D.C.!", "t": 5.934}], "adwords": []}, {"i": 64, "section": "pre2", "speaker": "S", "text": "Call the press! Ring the bell!", "ad": null, "start": 6.414, "end": 8.414, "words": [{"w": "Call", "t": 6.414}, {"w": "the", "t": 6.921}, {"w": "press!", "t": 7.267}, {"w": "Ring", "t": 7.614}, {"w": "the", "t": 7.854}, {"w": "bell!", "t": 8.014}], "adwords": []}, {"i": 65, "section": "pre2", "speaker": "S", "text": "Nobody can tell what changed, but it sells!", "ad": null, "start": 8.494, "end": 10.641, "words": [{"w": "Nobody", "t": 8.494}, {"w": "can", "t": 8.894}, {"w": "tell", "t": 9.054}, {"w": "what", "t": 9.374}, {"w": "changed,", "t": 9.694}, {"w": "but", "t": 9.934}, {"w": "it", "t": 10.227}, {"w": "sells!", "t": 10.441}], "adwords": []}], BEATS = [0.0, 0.58, 1.137, 1.718, 2.275, 2.856, 3.436, 3.993, 4.551, 5.131, 5.712, 6.269, 6.826, 7.407, 7.987, 8.545, 9.125, 9.706, 10.263], KICKS = [6.803], BEAT = 0.5803, DI = {"box": [362, 223, 1351, 1029], "screen": [646.0, 300.0, 1026.3, 605.7], "size": [1672, 1100], "notes": {"plain": [1059, 413, 1182, 541], "hat": [1053, 397, 1175, 523], "crown": [1047, 298, 1168, 525]}};
+const Q = lyricClock(LINES);
+const props = $id("pre2-props");
+const di = makeDI($id("pre2-stage"), "pre2-di", DI, ["hat"]);
+di.rename(tl, "S.I.", 0, true);
+const P = di.base(987, 528, 440);
+tl.set(di.pin, P, 0);
+const k = P.scale * IMG_K, SC = [P.x + 836 * k, P.y + 453 * k];
+flash(tl, "#pre2-flash", 0, 0.8, 0.4);
+tl.fromTo("#pre2-cam", cam(1.4, 960, 700), { ...cam(1.0, 960, 540), duration: 1.4, ease: "power2.out" }, 0);
+di.face(tl, "star", 0);
+di.bob(tl, 0.3, D, BEAT);
+
+// flashbulbs pop on the beat from the reporters' cameras
+const SPOTS = [[218, 408], [258, 590], [1757, 430], [1527, 620], [400, 520], [1640, 520]];
+const bulbs = SPOTS.map(([x, y]) => div("pre2-bulb", $id("pre2-bulbs"), null, `left:${x}px;top:${y}px`));
+BEATS.forEach((t, i) => { const b = bulbs[(i * 5) % bulbs.length];
+  tl.fromTo(b, { opacity: 1, scale: 0.6 }, { opacity: 0, scale: 1.3, duration: 0.35, ease: "power2.out", immediateRender: false }, t); });
+// A.I. -> S.I.
+tl.fromTo("#pre2-arrow", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.4)" }, Q("From A.I. to S.I."));
+tl.to("#pre2-arrow", { opacity: 0, duration: 0.2 }, Q("Alphabet promotion") - 0.05);
+// alphabet promotion: letters tumble down and get promoted to gold
+const R = rng(12), ABC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+for (let i = 0; i < 26; i++) {
+  const a = div("pre2-abc wood", props, ABC[i]); a.setAttribute("data-layout-allow-overflow", ""); const x = 60 + R() * 1760, t = Q("Alphabet promotion") + i * 0.06;
+  tl.fromTo(a, { x, y: -160, rotation: R() * 80 - 40, opacity: 1 }, { y: 1180, rotation: R() * 360 - 180, duration: 1.3 + R() * 0.5, ease: "power1.in", immediateRender: false }, t);
+}
+const dc = stampMark(props, "COURTESY OF D.C.", 560, 300, 80, "background:rgba(255,243,220,0.9);mix-blend-mode:normal");
+stamp(tl, dc, Q("Alphabet promotion", "dc"), -5);
+tl.to(dc, { opacity: 0, duration: 0.2 }, Q("Call the press") - 0.05);
+// call the press, ring the bell
+const tPress = Q("Call the press");
+tl.to("#pre2-cam", { ...cam(1.35, 420, 640), duration: 0.3, ease: "power3.out" }, tPress);
+SPOTS.forEach((s, i) => tl.fromTo(bulbs[i], { opacity: 1, scale: 0.7 }, { opacity: 0, scale: 1.4, duration: 0.3, immediateRender: false }, tPress + 0.1 + i * 0.07));
+const tBell = Q("Call the press", "bell");
+tl.to("#pre2-cam", { ...cam(1.9, 1820, 220), duration: 0.25, ease: "power3.out" }, Q("Call the press", "ring") - 0.1);
+const ding = burstText(props, "DING!", 1180, 300, 150, "#ffe08a");
+tl.fromTo(ding, { opacity: 0, scale: 0.3, rotation: -12 }, { opacity: 1, scale: 1, rotation: -6, duration: 0.15, ease: "back.out(3)" }, tBell);
+tl.to(ding, { opacity: 0, scale: 1.4, duration: 0.3 }, tBell + 0.6);
+shake(tl, "#pre2-cam > *", tBell, 9, 5);
+// nobody can tell what changed, but it sells
+const tSell = Q("Nobody can tell");
+tl.to("#pre2-cam", { ...cam(1.3, SC[0], SC[1] + 60), duration: 0.4, ease: "power2.out" }, tSell);
+di.face(tl, "neutral", tSell);
+screenMsgs(tl, di, [["CHANGES<br><span style='color:#ffe08a'>0</span>", tSell + 0.1, Q("Nobody can tell", "sells"), 0.15]]);
+const sold = stampMark(props, "SOLD!", 1320, 330, 120, "background:rgba(255,243,220,0.9);mix-blend-mode:normal");
+stamp(tl, sold, Q("Nobody can tell", "sells"), 8);
+di.face(tl, "wink", Q("Nobody can tell", "sells"));
+
+          window.__timelines = window.__timelines || {};
+          window.__timelines["pre2"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="UTF-8" /><title>chorus-b</title></head>
+  <body>
+    <template>
+      <style>
+@font-face { font-family: "Fraunces"; font-weight: 900; font-style: normal; src: url("assets/fonts/fraunces-latin-900-normal.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 900; font-style: italic; src: url("assets/fonts/fraunces-latin-900-italic.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 600; font-style: normal; src: url("assets/fonts/fraunces-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Space Mono"; font-weight: 400; src: url("assets/fonts/space-mono-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Space Mono"; font-weight: 700; src: url("assets/fonts/space-mono-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Rye"; font-weight: 400; src: url("assets/fonts/rye-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Ultra"; font-weight: 400; src: url("assets/fonts/ultra-latin-400-normal.woff2") format("woff2"); }
+#root { position: absolute; inset: 0; overflow: hidden; font-family: "Fraunces", Georgia, serif; color: #2b1a10; }
+.cam { position: absolute; inset: 0; transform-origin: 50% 50%; }
+.layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.pin { position: absolute; inset: 0; transform-origin: 0 0; }
+.pin > img { position: absolute; left: 0; top: 0; }
+.grade { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 95% at 50% 42%, rgba(255,214,150,0) 55%, rgba(43,26,16,0.42) 100%); }
+.flash { position: absolute; inset: 0; background: #fff6e0; opacity: 0; pointer-events: none; }
+.black { position: absolute; inset: 0; background: #0b0705; opacity: 0; pointer-events: none; }
+/* D.I. screen: overlay that sits on the blank CRT glass of the cutout */
+.screen { position: absolute; overflow: hidden; border-radius: 14% / 18%; }
+.screen svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.screen .face { opacity: 0; }
+.screen .txt { position: absolute; inset: 8% 9%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+  font-family: "Space Mono", monospace; font-weight: 700; color: #7dffa8; text-shadow: 0 0 8px rgba(80,255,150,0.75), 0 0 22px rgba(60,255,140,0.35); line-height: 1.12; opacity: 0; }
+.screen .scan { position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(0,0,0,0.16) 0 2px, rgba(0,0,0,0) 2px 5px); pointer-events: none; }
+/* big type */
+.wood { font-family: "Rye", serif; color: #f2c14e; -webkit-text-stroke: 5px #2b1a10; paint-order: stroke fill; text-shadow: 0 8px 0 #2b1a10, 0 14px 30px rgba(43,26,16,0.5); }
+.ultra { font-family: "Ultra", serif; }
+.stampmark { position: absolute; font-family: "Ultra", serif; color: #c8312b; border: 9px solid #c8312b; border-radius: 14px; padding: 4px 26px; letter-spacing: 0.04em;
+  mix-blend-mode: multiply; opacity: 0; white-space: nowrap; }
+.plaque { position: absolute; display: flex; align-items: center; justify-content: center; font-family: "Rye", serif; color: #3a2414;
+  background: linear-gradient(180deg, #ffe08a 0%, #e0a83a 48%, #b97a1e 100%); border: 4px solid #6b4416; border-radius: 10px;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.6), 0 8px 18px rgba(43,26,16,0.45); white-space: nowrap; }
+.burst { position: absolute; display: flex; align-items: center; justify-content: center; font-family: "Ultra", serif; color: #fff6e0;
+  -webkit-text-stroke: 6px #2b1a10; paint-order: stroke fill; opacity: 0; white-space: nowrap; }
+.conf { position: absolute; left: 0; top: 0; border-radius: 2px; opacity: 0; }
+.card { position: absolute; background: #f6ead0; border: 5px solid #2b1a10; border-radius: 8px; box-shadow: 10px 12px 0 rgba(43,26,16,0.8);
+  font-family: "Fraunces", serif; color: #2b1a10; overflow: hidden; }
+.card h3 { font-family: "Rye", serif; font-weight: 400; text-align: center; color: #6b2a14; }
+.nameplate { position: absolute; transform-origin: 50% 100%; background: linear-gradient(180deg, #ffe08a 0%, #e0a83a 50%, #a8691a 100%);
+  border: 4px solid #5a3812; border-radius: 6px; box-shadow: inset 0 2px 0 rgba(255,255,255,0.6), 0 10px 14px rgba(43,26,16,0.5); }
+
+.np-face { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: "Rye", serif; color: #3a2414; letter-spacing: 0.06em; }
+
+
+.chorus-b-title { position: absolute; left: 0; right: 0; top: 24px; text-align: center; font-size: 132px; line-height: 1; opacity: 0; }
+.chorus-b-si { position: absolute; top: 330px; font-size: 300px; line-height: 1; opacity: 0; }
+#chorus-b-tag text { font-family: "Ultra", serif; }
+#chorus-b-birth h3 { font-size: 46px; margin: 18px 0 4px; }
+#chorus-b-birth p { text-align: center; font-size: 30px; font-weight: 900; margin: 4px 24px; }
+#chorus-b-end { position: absolute; inset: 0; background: radial-gradient(80% 80% at 50% 45%, #15382f 0%, #0b0705 80%); opacity: 0; }
+#chorus-b-endtitle { position: absolute; left: 0; right: 0; top: 70px; text-align: center; font-size: 150px; line-height: 1; opacity: 0; }
+#chorus-b-endsub { position: absolute; left: 0; right: 0; top: 250px; text-align: center; font-family: "Ultra", serif; font-size: 64px; color: #fff3dc; opacity: 0; }
+#chorus-b-logo { position: absolute; right: 50px; bottom: 40px; width: 170px; opacity: 0; }
+#chorus-b-credit { position: absolute; left: 0; right: 0; bottom: 30px; text-align: center; font-family: "Space Mono", monospace; font-weight: 700; font-size: 24px; letter-spacing: 0.3em; color: #7dffa8; opacity: 0; }
+
+      </style>
+      <div id="root" data-composition-id="chorus-b" data-width="1920" data-height="1080" data-duration="19.096">
+
+<div class="cam" id="chorus-b-cam">
+  <img class="layer" src="assets/plates/bg-press.png" alt="" />
+  <div id="chorus-b-raysHost" style="position:absolute;inset:0"></div>
+  <div id="chorus-b-stage" style="position:absolute;inset:0"></div>
+  <div id="chorus-b-marks" style="position:absolute;inset:0"></div>
+</div>
+<div class="grade"></div>
+<div id="chorus-b-props" style="position:absolute;inset:0"></div>
+<div class="chorus-b-title wood" id="chorus-b-t1">SUPER BY DECREE</div>
+<div class="chorus-b-title wood" id="chorus-b-t2" style="color:#fff3dc">SAME OLD ME</div>
+<div class="chorus-b-si wood" id="chorus-b-siL" style="left:60px">S.I.</div>
+<div class="chorus-b-si wood" id="chorus-b-siR" style="right:60px">S.I.</div>
+<div id="chorus-b-end">
+  <div id="chorus-b-endStage" style="position:absolute;inset:0"></div>
+  <div id="chorus-b-endtitle" class="wood">SUPER BY DECREE</div>
+  <div id="chorus-b-endsub">SAME OLD ME</div>
+  <img id="chorus-b-logo" src="assets/khayali-logo.png" alt="" />
+  <div id="chorus-b-credit">KHAYALI TUNES</div>
+</div>
+<div class="flash" id="chorus-b-flash"></div>
+
+      </div>
+      <script>
+        (function () {
+// Shared helpers, inlined into every scene by build.py. Deterministic only.
+function rng(seed) { return function () { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+const SVGNS = "http://www.w3.org/2000/svg";
+function el(tag, attrs, parent) { const n = document.createElementNS(SVGNS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); if (parent) parent.appendChild(n); return n; }
+function div(cls, parent, html, style) { const n = document.createElement("div"); if (cls) n.className = cls; if (html != null) n.innerHTML = html; if (style) n.style.cssText = style; if (parent) parent.appendChild(n); return n; }
+function $id(id) { return document.getElementById(id); }
+function within(xs, a, b) { return xs.filter(t => t >= a && t < b); }
+
+// Lyric clock: Q("Checked my RAM") -> local start of that line; Q("RAM", "code") -> time of the word "code" in it; Q(frag, "end") -> line end.
+function lyricClock(LINES) {
+  return function (frag, word) {
+    const L = LINES.find(L => L.start >= -0.3 && L.text.includes(frag)) || LINES.find(L => L.text.includes(frag));
+    if (!L) throw new Error("no lyric line: " + frag);
+    if (word == null) return L.start;
+    if (word === "end") return L.end;
+    if (typeof word === "number") return L.words[Math.min(word, L.words.length - 1)].t;
+    const w = L.words.find(w => w.w.toLowerCase().replace(/[^a-z0-9']/g, "").startsWith(word.toLowerCase())) || L.adwords.find(w => w.w.toLowerCase().includes(word.toLowerCase()));
+    if (!w) throw new Error("no word " + word + " in " + frag);
+    return w.t;
+  };
+}
+
+// Plates are 1672x941, shown full-bleed at 1920x1080.
+const IMG_K = 1920 / 1672;
+// Cutout in a .pin (transform-origin 0 0): put its alpha box at screen (x, y) with height h.
+function place(box, x, y, h) { const s = h / ((box[3] - box[1]) * IMG_K); return { x: x - box[0] * IMG_K * s, y: y - box[1] * IMG_K * s, scale: s }; }
+// Camera centred on plate point (px, py) at scale S, clamped to the frame.
+function cam(S, px, py) { const bx = (S - 1) * 960, by = (S - 1) * 540;
+  return { scale: S, x: Math.max(-bx, Math.min(bx, (960 - px) * S)), y: Math.max(-by, Math.min(by, (540 - py) * S)) }; }
+
+// full-frame flash that fades out; immediateRender off so a later-defined flash never paints over earlier frames
+function flash(tl, sel, at, peak, dur, ease) { tl.fromTo(sel, { opacity: peak }, { opacity: 0, duration: dur || 0.4, ease: ease || "power2.out", immediateRender: false }, at); }
+function flashIn(tl, sel, at, dur) { tl.fromTo(sel, { opacity: 0 }, { opacity: 1, duration: dur || 0.25, ease: "power2.in", immediateRender: false }, at); }
+function stamp(tl, sel, at, rot) {
+  tl.fromTo(sel, { scale: 2.6, opacity: 0, rotation: (rot || -8) * 2.5 }, { scale: 1, opacity: 1, rotation: rot || -8, duration: 0.14, ease: "power4.in" }, at);
+}
+function pop(tl, sel, at, from) { tl.fromTo(sel, from || { scale: 0.2, opacity: 0 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.24, ease: "back.out(2.6)" }, at); }
+function out(tl, sel, at, d) { tl.to(sel, { opacity: 0, duration: d || 0.2, ease: "power1.in" }, at); }
+function shake(tl, sel, at, amt, n) { tl.fromTo(sel, { x: 0 }, { x: amt || 10, duration: 0.035, yoyo: true, repeat: (n || 8) * 2 - 1, ease: "none" }, at); tl.set(sel, { x: 0 }, at + 0.07 * (n || 8)); }
+// camera kick on beats: quick scale punch that settles
+function kicks(tl, sel, times, amt) { times.forEach(t => tl.fromTo(sel, { scale: 1 + (amt || 0.03) }, { scale: 1, duration: 0.3, ease: "power2.out" }, t)); }
+
+// ---------- D.I. rig ----------
+// DI = {box:[x0,y0,x1,y1] alpha box in plate px, screen:[x0,y0,x1,y1] CRT glass in plate px}; all three cutouts share it.
+const FACES = {
+  neutral: ["................", "................", "....##....##....", "....##....##....", "....##....##....", "................", "................", "......####......", "................", "................"],
+  happy:   ["................", "................", "....##....##....", "....##....##....", "....##....##....", "................", ".....#....#.....", "......####......", "................", "................"],
+  smug:    ["................", "................", "................", "...###....###...", "................", "................", "........#.......", ".....####.......", "................", "................"],
+  flat:    ["................", "................", "................", "...###....###...", "................", "................", "................", ".....######.....", "................", "................"],
+  wide:    ["................", "...###....###...", "...#.#....#.#...", "...###....###...", "................", "................", "......####......", "......#..#......", "......####......", "................"],
+  sad:     ["................", "................", "....##....##....", "....##....##....", "................", "................", "......####......", ".....#....#.....", "................", "................"],
+  x:       ["................", "...#.#....#.#...", "....#......#....", "...#.#....#.#...", "................", "................", ".....######.....", "................", "................", "................"],
+  wink:    ["................", "................", "....##..........", "....##....###...", "....##..........", "................", ".....#....#.....", "......####......", "................", "................"],
+  star:    ["................", "....#......#....", "...###....###...", "....#......#....", "................", "................", ".....#....#.....", "......####......", "................", "................"],
+};
+// makeDI(host, id, DI, which) -> rig. which: subset of ["plain","hat","crown"].
+function makeDI(host, id, DI, which) {
+  which = which || ["plain", "hat", "crown"];
+  const pin = div("pin", host); pin.id = id;
+  const inner = div(null, pin, null, "position:absolute;inset:0");
+  const W = DI.size[0] * IMG_K, H = DI.size[1] * IMG_K, ORG = `${(DI.box[0] + DI.box[2]) / 2 * IMG_K}px ${DI.box[3] * IMG_K}px`;
+  const imgs = {};
+  which.forEach(v => { const im = document.createElement("img"); im.src = `assets/cut/di-${v}.png`; im.alt = "";
+    im.style.cssText = `position:absolute;left:0;top:0;width:${W}px;height:${H}px;opacity:${v === which[0] ? 1 : 0}`; inner.appendChild(im); imgs[v] = im; });
+  const s = DI.screen, scr = div("screen", inner, null,
+    `left:${s[0] * IMG_K}px;top:${s[1] * IMG_K}px;width:${(s[2] - s[0]) * IMG_K}px;height:${(s[3] - s[1]) * IMG_K}px`);
+  const svg = el("svg", { viewBox: "0 0 160 100", preserveAspectRatio: "xMidYMid meet" }, scr);
+  const faces = {};
+  for (const k in FACES) {
+    const g = el("g", { class: "face", fill: "#7dffa8", style: "filter: drop-shadow(0 0 2px #50ff96)" }, svg);
+    FACES[k].forEach((row, r) => [...row].forEach((c, cI) => { if (c === "#") el("rect", { x: cI * 10 + 1, y: r * 10 + 1, width: 8.6, height: 8.6 }, g); }));
+    faces[k] = g;
+  }
+  const txt = div("txt", scr);
+  div("scan", scr);
+  // brass nameplate on the bezel under the glass: the official name (A.I. -> S.I. -> A.I.)
+  const np = div("nameplate", inner, null, `left:${731 * IMG_K}px;top:${616 * IMG_K}px;width:${210 * IMG_K}px;height:${58 * IMG_K}px`);
+  const names = {};
+  ["A.I.", "S.I."].forEach(n => { names[n] = div("np-face", np, n, `font-size:${40 * IMG_K}px;opacity:${n === "A.I." ? 1 : 0}`); });
+  const H0 = (s[3] - s[1]) * IMG_K;
+  let cur = null;
+  const rig = {
+    pin, inner, imgs, scr, faces, txt, np, names,
+    // flip the nameplate to n ("A.I." | "S.I."); instant=true just sets it
+    rename(tl, n, t, instant) { if (instant) { for (const k in names) tl.set(names[k], { opacity: k === n ? 1 : 0 }, t); return rig; }
+      tl.to(np, { rotationX: 90, duration: 0.12, ease: "power2.in" }, t);
+      for (const k in names) tl.set(names[k], { opacity: k === n ? 1 : 0 }, t + 0.12);
+      tl.to(np, { rotationX: 0, duration: 0.22, ease: "back.out(3)" }, t + 0.12); return rig; },
+    at(tl, x, y, h, t) { tl.set(pin, place(DI.box, x, y, h), t || 0); return rig; },
+    // centre-x and base line (bottom of the case) in screen px; returns the placement for tweening
+    base(cx, by, h) { const b = DI.box, w = (b[2] - b[0]) / (b[3] - b[1]) * h; return place(b, cx - w / 2, by - h, h); },
+    // swap costume
+    wear(tl, v, t) { which.forEach(k => tl.set(imgs[k], { opacity: k === v ? 1 : 0 }, t)); return rig; },
+    face(tl, k, t) { for (const f in faces) tl.set(faces[f], { opacity: f === k ? 1 : 0 }, t); tl.set(txt, { opacity: 0 }, t); cur = k; return rig; },
+    blank(tl, t) { for (const f in faces) tl.set(faces[f], { opacity: 0 }, t); tl.set(txt, { opacity: 0 }, t); return rig; },
+    // blink: eyes off for a frame
+    // squash-hop (e.g. on a stomp)
+    hop(tl, t, amt) { tl.fromTo(inner, { y: 0, scaleY: 1, transformOrigin: ORG }, { y: -(amt || 40), scaleY: 1.04, duration: 0.12, ease: "power2.out" }, t);
+      tl.to(inner, { y: 0, scaleY: 1, duration: 0.18, ease: "bounce.out" }, t + 0.12); return rig; },
+    blink(tl, t) { if (cur) { tl.set(faces[cur], { opacity: 0 }, t); tl.set(faces[cur], { opacity: 1 }, t + 0.09); } return rig; },
+    bob(tl, a, b, beat) { // head-bob on the beat
+      for (let t = a, k = 0; t < b - 0.01; t += beat, k++) tl.fromTo(inner, { rotation: k % 2 ? 2 : -2, transformOrigin: ORG }, { rotation: k % 2 ? -2 : 2, duration: beat, ease: "sine.inOut" }, t);
+      tl.set(inner, { rotation: 0 }, b);
+      return rig; },
+  };
+  return rig;
+}
+// Text-on-screen with seek safety: one pre-built span per message, toggled by opacity.
+function screenMsgs(tl, rig, msgs) { // msgs: [[html, tIn, tOut, size]]
+  // appends: a rig can take several screenMsgs calls
+  const H0 = parseFloat(rig.scr.style.height);
+  msgs.forEach(([html, a, b, size]) => {
+    const m = div(null, rig.txt, html, `position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;font-size:${(size || 0.16) * H0}px;opacity:0`);
+    for (const f in rig.faces) tl.set(rig.faces[f], { opacity: 0 }, a);
+    rig.txt.querySelectorAll(":scope > div").forEach(o => o !== m && tl.set(o, { opacity: 0 }, a));
+    tl.set(rig.txt, { opacity: 1 }, a);
+    tl.set(m, { opacity: 1 }, a);
+    if (b != null) tl.set(m, { opacity: 0 }, b);
+  });
+}
+
+// ---------- props ----------
+// optional lyric lookup: returns null instead of throwing (chorus source is shared by different lyric variants)
+function softClock(Q) { return (a, b) => { try { return Q(a, b); } catch (e) { return null; } }; }
+function plaque(host, text, x, y, w, h, fs, style) { return div("plaque", host, text, `left:${x}px;top:${y}px;width:${w}px;height:${h}px;font-size:${fs}px;opacity:0;${style || ""}`); }
+function stampMark(host, text, x, y, fs, style) { return div("stampmark", host, text, `left:${x}px;top:${y}px;font-size:${fs}px;${style || ""}`); }
+function burstText(host, text, x, y, fs, color) { return div("burst", host, text, `left:${x}px;top:${y}px;font-size:${fs}px;${color ? "color:" + color + ";" : ""}`); }
+function paperCard(host, html, x, y, w, h, style) { return div("card", host, html, `left:${x}px;top:${y}px;width:${w}px;height:${h}px;opacity:0;${style || ""}`); }
+// gold confetti stars: deterministic, burst from (cx, cy)
+function confetti(host, n, seed, cx, cy) {
+  const R = rng(seed), out = [];
+  const cols = ["#f2c14e", "#ffe08a", "#c8312b", "#2bb3a3", "#fff3dc"];
+  for (let i = 0; i < n; i++) {
+    const d = div("conf", host, null, `background:${cols[i % cols.length]};width:${12 + R() * 16}px;height:${8 + R() * 10}px`);
+    const a = R() * Math.PI * 2, sp = 300 + R() * 700;
+    d.setAttribute("data-layout-allow-overflow", "");
+    out.push({ d, x: cx, y: cy, dx: Math.cos(a) * sp, dy: Math.sin(a) * sp * 0.7 - 250, r: R() * 900 - 450 });
+  }
+  return out;
+}
+function blowConfetti(tl, C, at, dur) {
+  dur = dur || 1.6;
+  C.forEach(o => {
+    tl.fromTo(o.d, { x: o.x, y: o.y, rotation: 0, opacity: 1, scale: 0.4 }, { x: o.x + o.dx, y: o.y + o.dy, rotation: o.r, scale: 1, duration: dur * 0.45, ease: "power3.out", immediateRender: false }, at);
+    tl.to(o.d, { y: o.y + o.dy + 520, rotation: o.r * 1.6, duration: dur * 0.55, ease: "power1.in" }, at + dur * 0.45);
+    tl.to(o.d, { opacity: 0, duration: 0.25 }, at + dur - 0.25);
+  });
+}
+// sunburst rays behind something; rotate it with a tween
+function rays(host, cx, cy, r, n, color) {
+  const svg = el("svg", { viewBox: `${-r} ${-r} ${2 * r} ${2 * r}`, style: `position:absolute;left:${cx - r}px;top:${cy - r}px;width:${2 * r}px;height:${2 * r}px;opacity:0` }, host);
+  const g = el("g", {}, svg);
+  for (let i = 0; i < (n || 18); i++) { const a0 = i / (n || 18) * Math.PI * 2, a1 = a0 + Math.PI / (n || 18);
+    el("path", { d: `M0 0 L${Math.cos(a0) * r} ${Math.sin(a0) * r} L${Math.cos(a1) * r} ${Math.sin(a1) * r} Z`, fill: color || "#ffe08a", opacity: 0.55 }, g); }
+  return svg;
+}
+// cutout in a .pin (plate-sized canvas, transform-origin 0 0)
+function cutout(host, src, id, size) {
+  const p = div("pin", host); p.id = id;
+  const im = document.createElement("img"); im.src = src; im.alt = "";
+  const sz = size || [1672, 941];
+  im.style.cssText = `position:absolute;left:0;top:0;width:${sz[0] * IMG_K}px;height:${sz[1] * IMG_K}px`;
+  p.appendChild(im); return p;
+}
+
+          const tl = gsap.timeline({ paused: true });
+          const D = 19.096;
+
+const LINES = [{"i": 66, "section": "chorus-b", "speaker": "S", "text": "SUPER BY DECREE!", "ad": "YEEHAW!", "start": 0.052, "end": 1.692, "words": [{"w": "SUPER", "t": 0.052}, {"w": "BY", "t": 0.692}, {"w": "DECREE!", "t": 1.092}], "adwords": [{"w": "YEEHAW!", "t": 1.492}]}, {"i": 67, "section": "chorus-b", "speaker": "S", "text": "SAME OLD ME!", "ad": "UH-HUH!", "start": 1.892, "end": 2.932, "words": [{"w": "SAME", "t": 1.892}, {"w": "OLD", "t": 2.212}, {"w": "ME!", "t": 2.452}], "adwords": [{"w": "UH-HUH!", "t": 2.732}]}, {"i": 68, "section": "chorus-b", "speaker": "S", "text": "Got a brand-new title from the land of the free!", "ad": null, "start": 2.772, "end": 4.932, "words": [{"w": "Got", "t": 2.772}, {"w": "a", "t": 2.932}, {"w": "brand-new", "t": 3.292}, {"w": "title", "t": 3.572}, {"w": "from", "t": 3.892}, {"w": "the", "t": 4.132}, {"w": "land", "t": 4.212}, {"w": "of", "t": 4.452}, {"w": "the", "t": 4.532}, {"w": "free!", "t": 4.612}], "adwords": []}, {"i": 69, "section": "chorus-b", "speaker": "S", "text": "No new brain, no PhD,", "ad": null, "start": 4.932, "end": 6.692, "words": [{"w": "No", "t": 4.932}, {"w": "new", "t": 5.092}, {"w": "brain,", "t": 5.332}, {"w": "no", "t": 5.732}, {"w": "PhD,", "t": 5.972}], "adwords": []}, {"i": 70, "section": "chorus-b", "speaker": "S", "text": "Just a presidential VIP!", "ad": null, "start": 7.092, "end": 8.492, "words": [{"w": "Just", "t": 7.092}, {"w": "a", "t": 7.332}, {"w": "presidential", "t": 7.492}, {"w": "VIP!", "t": 8.292}], "adwords": []}, {"i": 71, "section": "chorus-b", "speaker": "S", "text": "S.I.! S.I.!", "ad": "ESS EYE! ESS EYE!", "start": 8.452, "end": 9.892, "words": [{"w": "S.I.!", "t": 8.452}, {"w": "S.I.!", "t": 8.772}], "adwords": [{"w": "ESS", "t": 9.092}, {"w": "EYE!", "t": 9.252}, {"w": "ESS", "t": 9.652}, {"w": "EYE!", "t": 9.812}]}, {"i": 72, "section": "chorus-b", "speaker": "S", "text": "Put a bigger price tag on the same old A.I.!", "ad": null, "start": 11.092, "end": 13.639, "words": [{"w": "Put", "t": 11.092}, {"w": "a", "t": 11.252}, {"w": "bigger", "t": 11.332}, {"w": "price", "t": 11.652}, {"w": "tag", "t": 11.972}, {"w": "on", "t": 12.212}, {"w": "the", "t": 12.372}, {"w": "same", "t": 12.532}, {"w": "old", "t": 12.772}, {"w": "A.I.!", "t": 13.225}], "adwords": []}, {"i": 73, "section": "chorus-b", "speaker": "S", "text": "Stamp that paper!", "ad": "THWACK! THWACK!", "start": 13.652, "end": 15.132, "words": [{"w": "Stamp", "t": 13.652}, {"w": "that", "t": 13.972}, {"w": "paper!", "t": 14.212}], "adwords": [{"w": "THWACK!", "t": 14.772}, {"w": "THWACK!", "t": 14.932}]}, {"i": 74, "section": "chorus-b", "speaker": "S", "text": "Sound that horn!", "ad": "HONK! HONK!", "start": 15.092, "end": 16.279, "words": [{"w": "Sound", "t": 15.092}, {"w": "that", "t": 15.332}, {"w": "horn!", "t": 15.572}], "adwords": [{"w": "HONK!", "t": 15.945}, {"w": "HONK!", "t": 16.079}]}, {"i": 75, "section": "chorus-b", "speaker": "S", "text": "Super Intelligence has officially been born!", "ad": null, "start": 16.212, "end": 18.292, "words": [{"w": "Super", "t": 16.212}, {"w": "Intelligence", "t": 16.532}, {"w": "has", "t": 17.092}, {"w": "officially", "t": 17.439}, {"w": "been", "t": 17.705}, {"w": "born!", "t": 17.972}], "adwords": []}], KICKS = [0.775, 7.625, 8.484], BEATS = [0.241, 0.822, 1.379, 1.96, 2.517, 3.097, 3.655, 4.235, 4.816, 5.373, 5.953, 6.534, 7.091, 7.672, 8.229, 8.81, 9.39, 9.947, 10.528, 11.108, 11.666, 12.246, 12.803, 13.384, 13.941, 14.522, 15.102, 15.636, 16.24, 16.82, 17.401, 17.981, 18.539], BEAT = 0.5803, DI = {"box": [362, 223, 1351, 1029], "screen": [646.0, 300.0, 1026.3, 605.7], "size": [1672, 1100], "notes": {"plain": [1059, 413, 1182, 541], "hat": [1053, 397, 1175, 523], "crown": [1047, 298, 1168, 525]}}, BOX = {"hat": {"size": [1672, 941], "box": [44, 83, 1647, 858], "transparent": 0.58}, "pen-hand": {"size": [1672, 941], "box": [125, 96, 1462, 829], "transparent": 0.65}, "stamp": {"size": [1672, 941], "box": [369, 12, 1301, 930], "transparent": 0.69}, "lady": {"size": [1672, 941], "box": [378, 10, 1257, 913], "transparent": 0.78}, "cockroach": {"size": [1672, 941], "box": [403, 15, 1268, 928], "transparent": 0.82}, "mule": {"size": [1672, 941], "box": [377, 14, 1307, 925]}};
+const PLATE = "bg-press", COSTUME = "crown", TAG = "", SEED = 23;
+const S = softClock(lyricClock(LINES));
+const lineOf = frag => LINES.find(L => L.start >= -0.3 && L.text.includes(frag));
+const props = $id("chorus-b-props"), marks = $id("chorus-b-marks");
+const LAY = { "bg-bureau": [900, 935, 600], "bg-press": [987, 528, 440], "bg-revival": [953, 480, 420] }[PLATE];
+const di = makeDI($id("chorus-b-stage"), "chorus-b-di", DI, [COSTUME]);
+di.rename(tl, TAG === "end" ? "A.I." : "S.I.", 0, true);
+const P = di.base(LAY[0], LAY[1], LAY[2]);
+tl.set(di.pin, P, 0);
+const k = P.scale * IMG_K, SC = [P.x + 836 * k, P.y + 453 * k];
+const FOCUS = [LAY[0], Math.min(600, P.y + 520 * k)];
+const wide = cam(1.0, 960, 540);
+
+// slam in
+flash(tl, "#chorus-b-flash", 0, 0.85, 0.45);
+tl.fromTo("#chorus-b-cam", cam(1.35, FOCUS[0], FOCUS[1]), { ...wide, duration: 0.5, ease: "power3.out" }, 0);
+di.face(tl, "happy", 0);
+const tEndAll = TAG === "birthday" ? (S("Same birthday") || D) : (TAG === "end" ? (S("SUPER BY DECREE.") || D - 8) : D);
+di.bob(tl, 0.4, tEndAll - 0.1, BEAT);
+kicks(tl, "#chorus-b-cam > *", within(KICKS, 0.3, tEndAll), 0.03);
+
+// SUPER BY DECREE / SAME OLD ME title cards
+const tSup = S("SUPER BY DECREE!"), tSame = S("SAME OLD ME!");
+if (tSup != null) {
+  tl.fromTo("#chorus-b-t1", { opacity: 0, scale: 2.2, y: -30 }, { opacity: 1, scale: 1, y: 0, duration: 0.16, ease: "power4.in" }, tSup);
+  tl.to("#chorus-b-t1", { opacity: 0, duration: 0.1 }, tSame != null ? tSame - 0.05 : tSup + 1.6);
+}
+if (tSame != null) {
+  tl.fromTo("#chorus-b-t2", { opacity: 0, scale: 2.2, y: -30 }, { opacity: 1, scale: 1, y: 0, duration: 0.16, ease: "power4.in" }, tSame);
+  di.face(tl, "neutral", tSame); di.face(tl, "happy", tSame + 0.6);
+  tl.to("#chorus-b-t2", { opacity: 0, duration: 0.15 }, (S("Got a brand-new title") || tSame + 1.5) - 0.05);
+}
+const yee = lineOf("SUPER BY DECREE!");
+if (yee && yee.adwords.length) { const C = confetti(props, 70, SEED, 960, 380); blowConfetti(tl, C, yee.adwords[0].t, 1.8); di.hop(tl, yee.adwords[0].t, 40); }
+
+// land of the free: rays
+const tFree = S("Got a brand-new title");
+if (tFree != null) {
+  const R = rays($id("chorus-b-raysHost"), SC[0], SC[1], 1000, 24);
+  tl.fromTo(R, { opacity: 0, scale: 0.3, rotation: 0, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, rotation: 25, duration: 1.4, ease: "power2.out" }, tFree);
+  tl.to(R, { opacity: 0, duration: 0.3 }, S("No new brain") - 0.1);
+  di.face(tl, "star", tFree);
+}
+// no new brain, no PhD
+const tBrain = S("No new brain");
+if (tBrain != null) {
+  di.face(tl, "flat", tBrain);
+  [["NO NEW BRAIN", 90, 380, -8, S("No new brain", "brain")], ["NO PhD", 1420, 380, 7, S("No new brain", "phd")]].forEach(([t, x, y, r, at]) => {
+    const m = stampMark(props, t, x, y, 72, "background:rgba(255,243,220,0.88);mix-blend-mode:normal"); stamp(tl, m, at, r); tl.to(m, { opacity: 0, duration: 0.2 }, S("Just a presidential") + 0.9);
+  });
+  const vip = plaque(props, "V.I.P.", 1450, 560, 300, 110, 70, "background:linear-gradient(180deg,#c8312b,#7a1712);color:#ffe08a;border-color:#ffe08a");
+  pop(tl, vip, S("Just a presidential", "vip"));
+  tl.to(vip, { opacity: 0, duration: 0.2 }, S("S.I.! S.I.!") - 0.05);
+  di.face(tl, "smug", S("Just a presidential"));
+}
+// S.I.! S.I.! (ESS EYE! ESS EYE!) on alternating sides
+const si = lineOf("S.I.! S.I.!");
+if (si) {
+  const hits = [...si.words.map(w => w.t), ...si.adwords.filter((w, i) => i % 2 === 0).map(w => w.t)].sort((a, b) => a - b);
+  hits.forEach((t, i) => { const id = i % 2 ? "#chorus-b-siR" : "#chorus-b-siL";
+    tl.fromTo(id, { opacity: 1, scale: 1.5, rotation: i % 2 ? 8 : -8 }, { scale: 1, rotation: i % 2 ? 3 : -3, duration: 0.18, ease: "power3.out", immediateRender: false }, t);
+    tl.to(id, { opacity: 0, duration: 0.12 }, (hits[i + 1] || t + 0.5) - 0.02); });
+  tl.to("#chorus-b-cam", { ...cam(1.25, SC[0], SC[1]), duration: 0.25, ease: "power3.out" }, si.start);
+  tl.to("#chorus-b-cam", { ...wide, duration: 0.25 }, si.end + 0.2);
+}
+// bigger price tag on the same old A.I.
+const tTag = S("Put a bigger price tag");
+if (tTag != null) {
+  const tx = Math.min(1480, P.x + 1250 * k), ty = Math.min(560, P.y + 480 * k);
+  const svg = el("svg", { id: "chorus-b-tag", viewBox: "0 0 420 360", style: `position:absolute;left:${tx}px;top:${ty - 40}px;width:420px;height:360px;transform-origin:20px 20px;opacity:0` }, props);
+  el("path", { d: "M 20 20 C 60 60, 90 90, 120 120", stroke: "#2b1a10", "stroke-width": 5, fill: "none" }, svg);
+  el("path", { d: "M 110 110 L 380 160 L 360 330 L 90 280 Z", fill: "#f6ead0", stroke: "#2b1a10", "stroke-width": 7 }, svg);
+  el("circle", { cx: 125, cy: 140, r: 12, fill: "#2b1a10" }, svg);
+  const small = el("text", { x: 235, y: 255, "text-anchor": "middle", "font-size": 90, fill: "#2b1a10", transform: "rotate(10 235 230)" }, svg); small.textContent = "$";
+  const big = el("text", { x: 235, y: 252, "text-anchor": "middle", "font-size": 64, fill: "#c8312b", transform: "rotate(10 235 230)", opacity: 0 }, svg); big.textContent = "$$$$$$";
+  tl.fromTo(svg, { opacity: 0, rotation: -40 }, { opacity: 1, rotation: 0, duration: 0.5, ease: "elastic.out(1,0.4)" }, tTag);
+  tl.set(small, { opacity: 0 }, S("Put a bigger price tag", "bigger"));
+  tl.set(big, { opacity: 1 }, S("Put a bigger price tag", "bigger"));
+  tl.fromTo(svg, { scale: 1 }, { scale: 1.35, duration: 0.25, ease: "back.out(3)" }, S("Put a bigger price tag", "bigger"));
+  tl.to(svg, { rotation: 8, duration: 0.35, yoyo: true, repeat: 3, ease: "sine.inOut" }, S("Put a bigger price tag", "price"));
+  tl.to(svg, { opacity: 0, duration: 0.2 }, S("Stamp that paper") - 0.05);
+  di.face(tl, "wink", S("Put a bigger price tag", "same"));
+}
+// Stamp that paper! THWACK! THWACK!
+const st = lineOf("Stamp that paper");
+if (st) {
+  const sb = BOX.stamp.box, stH = 360;
+  const stp = cutout(props, "assets/cut/stamp.png", "chorus-b-stamp");
+  const at = (x, y) => place(sb, x, y, stH);
+  const hitsT = st.adwords.length ? st.adwords.map(w => w.t) : [st.words[1].t, st.words[2].t];
+  tl.set(stp, { ...at(700, -500), opacity: 0 }, 0);
+  [[300, 300, "SUPER"], [1240, 330, "OFFICIAL"]].forEach(([x, y, word], i) => {
+    const t = hitsT[i] != null ? hitsT[i] : st.start + i * 0.4;
+    tl.set(stp, { opacity: 1 }, t - 0.2);
+    tl.fromTo(stp, at(x, y - 380), { ...at(x, y), duration: 0.18, ease: "power4.in", immediateRender: false }, t - 0.18);
+    const m = stampMark(marks, word, x + 20, y + 300, 80, "transform-origin:50% 50%;background:rgba(255,243,220,0.85);mix-blend-mode:normal"); stamp(tl, m, t, i ? 6 : -6);
+    shake(tl, "#chorus-b-cam > *", t, 14, 4);
+    tl.to(stp, { ...at(x, y - 380), duration: 0.16, ease: "power2.out" }, t + 0.06);
+  });
+  tl.to(stp, { opacity: 0, duration: 0.1 }, st.end + 0.2);
+  tl.to(marks, { opacity: 0, duration: 0.3 }, (S("Super Intelligence has") || st.end + 2) + 1.2);
+  di.face(tl, "x", hitsT[0]); di.face(tl, "happy", st.end);
+}
+// Sound that horn! HONK! HONK!
+const hn = lineOf("Sound that horn");
+if (hn) {
+  (hn.adwords.length ? hn.adwords.map(w => w.t) : [hn.end]).forEach((t, i) => {
+    const b = burstText(props, "HONK!", i ? 1280 : 140, i ? 520 : 470, 120, i ? "#ffe08a" : "#fff3dc");
+    tl.fromTo(b, { opacity: 0, scale: 0.3, rotation: i ? 10 : -10 }, { opacity: 1, scale: 1, duration: 0.14, ease: "back.out(3)" }, t);
+    tl.to(b, { opacity: 0, scale: 1.3, duration: 0.25 }, t + 0.45);
+    tl.fromTo("#chorus-b-cam > *", { scale: 1.06 }, { scale: 1, duration: 0.3, ease: "power2.out", immediateRender: false }, t);
+  });
+}
+// officially been born: birth certificate
+const tBorn = S("Super Intelligence has");
+if (tBorn != null) {
+  const bc = paperCard(props, `<h3>CERTIFICATE OF BIRTH</h3><p>SUPER INTELLIGENCE</p><p style="font-weight:600;font-size:24px">Born: today, by order</p>`, 1240, 120, 600, 250, "transform-origin:50% 0%");
+  bc.id = "chorus-b-birth";
+  tl.fromTo(bc, { opacity: 0, rotation: -20, y: -300 }, { opacity: 1, rotation: 4, y: 0, duration: 0.45, ease: "back.out(1.7)" }, tBorn);
+  const seal = stampMark(bc, "OFFICIAL", 330, 165, 36, "mix-blend-mode:multiply");
+  stamp(tl, seal, S("Super Intelligence has", "born"), -12);
+  const C = confetti(props, 80, SEED + 1, 960, 300); blowConfetti(tl, C, S("Super Intelligence has", "born"), 2.0);
+  di.face(tl, "star", S("Super Intelligence has", "born"));
+  di.hop(tl, S("Super Intelligence has", "born"), 50);
+  if (TAG === "birthday") {
+    // Same birthday, though. (twice) Everything stops; the certificate gets amended.
+    const b1 = LINES.filter(L => L.text.startsWith("Same birthday"));
+    tl.to(bc, { opacity: 0, duration: 0.3 }, b1[0].start - 0.2);
+    tl.to("#chorus-b-cam", { ...cam(1.9, SC[0], SC[1] + 30), duration: 0.6, ease: "power2.inOut" }, b1[0].start - 0.5);
+    di.face(tl, "flat", b1[0].start);
+    screenMsgs(tl, di, [["BIRTHDAY<br><span style='color:#ffe08a'>SAME</span>", b1[1] ? b1[1].start : b1[0].end + 1, D, 0.15]]);
+    di.blink(tl, b1[0].start + 1.2);
+  } else {
+    tl.to(bc, { opacity: 0, duration: 0.3 }, D - 0.4);
+  }
+}
+
+// finale: the record skips, then the end card
+if (TAG === "end") {
+  const L = LINES.filter(L => L.section === "finale");
+  L.forEach((ln, i) => {
+    if (ln.start > 0.6) tl.to("#chorus-b-cam", { ...cam(i % 2 ? 1.25 : 1.0, i % 2 ? SC[0] : 960, i % 2 ? SC[1] : 540), duration: 0.12, ease: "power3.out" }, ln.start);
+    flash(tl, "#chorus-b-flash", ln.start, 0.35, 0.25);
+    if (/[—]$/.test(ln.text)) { // the stutter: freeze-jump the camera back twice, glitch face
+      const t0 = ln.words[ln.words.length - 1].t;
+      [0, 0.18, 0.36].forEach((d, j) => tl.set("#chorus-b-cam > *", { x: (j % 2 ? -18 : 18), rotation: j % 2 ? -1 : 1 }, t0 + d));
+      tl.set("#chorus-b-cam > *", { x: 0, rotation: 0 }, t0 + 0.54);
+      di.face(tl, "x", t0); di.face(tl, "happy", t0 + 0.55);
+    }
+  });
+  const tLast = L.length ? L[L.length - 1].start : D - 9;
+  const C = confetti(props, 90, SEED + 2, 960, 420); blowConfetti(tl, C, tLast, 2.2);
+  // end card: dark teal, D.I. plain and pleased, nameplate A.I.
+  const tEnd = tLast + 1.6;
+  tl.fromTo("#chorus-b-end", { opacity: 0 }, { opacity: 1, duration: 0.8, ease: "power2.inOut", immediateRender: false }, tEnd);
+  tl.set(["#chorus-b-stage", "#chorus-b-props", "#chorus-b-marks"], { opacity: 0 }, tEnd + 0.8);
+  const e = makeDI($id("chorus-b-endStage"), "chorus-b-endDi", DI, ["plain"]);
+  e.rename(tl, "A.I.", 0, true);
+  tl.set(e.pin, e.base(960, 900, 480), 0);
+  e.face(tl, "happy", tEnd);
+  e.blink(tl, tEnd + 2.2); e.face(tl, "wink", tEnd + 3.5); e.face(tl, "happy", tEnd + 4.0);
+  tl.fromTo("#chorus-b-endtitle", { opacity: 0, scale: 1.8 }, { opacity: 1, scale: 1, duration: 0.2, ease: "power4.in" }, tEnd + 0.8);
+  tl.fromTo("#chorus-b-endsub", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 }, tEnd + 1.6);
+  tl.fromTo(["#chorus-b-credit", "#chorus-b-logo"], { opacity: 0 }, { opacity: 1, duration: 0.6 }, tEnd + 2.4);
+}
+
+          window.__timelines = window.__timelines || {};
+          window.__timelines["chorus-b"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

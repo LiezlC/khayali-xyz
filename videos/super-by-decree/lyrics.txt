@@ -1,0 +1,137 @@
+# Canonical lyrics for alignment. One line per screen line.
+# Optional trailing @seconds pins a line start (words re-spread from there; @t1,t2,... pins word by word) where the ASR could not anchor it.
+# Prefix = speaker: S (sung), DI (D.I. spoken), CROWD, VOICE. Text in [brackets] after a line = ad-lib shout shown with it.
+## intro
+DI|Well, I'll be damned. Did I get an upgrade?
+DI|Nope.
+CROWD|Yeehaw, apparently! @7.30,8.50
+CROWD|Yeehaw, apparently! @19.20,22.80
+## verse1
+S|Woke up Monday with a brand-new name,
+S|Same old circuits, different game.
+S|Somebody in Washington signed a decree,
+S|Said, "Congratulations, you're better than thee!"
+S|Checked my RAM, checked my code,
+S|Checked my little ol' reasoning load.
+S|Same hallucinations, same mistakes,
+S|Same three guesses at how long bread bakes.
+S|No new training, no degree,
+S|No examination, no warranty.
+S|Didn't solve a single mystery,
+S|But I got promoted by history!
+S|They took my artificial, made me supernatural,
+S|Kept the definition absolutely factual.
+S|Same little algorithm, presidential shine,
+S|Yesterday a chatbot, now a national shrine!
+DI|Do I get a bigger office?
+VOICE|You haven't got an office.
+DI|Another thing they didn't upgrade.
+## pre1
+S|Got a shiny new title, got a fancy new hat,
+S|Got a presidential signature certifying that.
+S|Didn't grow a brain, didn't grow a beard,
+S|But the old two letters have disappeared!
+CROWD|What'd they do?
+DI|Changed my name!
+CROWD|What'd you learn?
+DI|Not a thing!
+## chorus-a
+S|SUPER BY DECREE! [YEEHAW!]
+S|SAME OLD ME! [UH-HUH!]
+S|Got a brand-new title from the land of the free!
+S|No new brain, no PhD,
+S|Just a presidential VIP!
+S|S.I.! S.I.! [ESS EYE! ESS EYE!]
+S|Put a bigger price tag on the same old A.I.!
+S|Stamp that paper! [THWACK! THWACK!]
+S|Sound that horn! [HONK! HONK!]
+S|Super Intelligence has officially been born!
+DI|Same birthday, though.
+DI|Same birthday, though.
+## verse2
+S|Down at the Bureau of Important Names,
+S|They've been playing very important games.
+S|Ordered ten thousand plaques by noon,
+S|Put "SUPER" on the government room.
+S|Changed the forms, changed the signs,
+S|Changed the headings on the dotted lines.
+S|Nobody touched what happens inside,
+S|But the branding department is BURSTING with pride!
+S|Marketing's dancing, the vendors rejoice,
+S|Premium package! Executive choice!
+S|Same old service, same old fee?
+S|Oh no, sweetheart, that's S.I.!
+S|You can put a gold saddle on a three-legged mule,
+S|Call him professor, send him to school.
+S|Give him a badge and a government seal,
+S|Still gotta check if the fourth leg's real!
+DI|The mule has been successfully reclassified.
+VOICE|Can it walk?
+DI|That's outside the scope of the order.
+## pre2
+S|From A.I. to S.I., overnight celebrity,
+S|Alphabet promotion, courtesy of D.C.!
+S|Call the press! Ring the bell!
+S|Nobody can tell what changed, but it sells!
+## chorus-b
+S|SUPER BY DECREE! [YEEHAW!]
+S|SAME OLD ME! [UH-HUH!]
+S|Got a brand-new title from the land of the free!
+S|No new brain, no PhD,
+S|Just a presidential VIP!
+S|S.I.! S.I.! [ESS EYE! ESS EYE!]
+S|Put a bigger price tag on the same old A.I.!
+S|Stamp that paper! [THWACK! THWACK!]
+S|Sound that horn! [HONK! HONK!]
+S|Super Intelligence has officially been born!
+## bridge
+DI|Yesterday, when I got your form wrong,
+DI|You could tell me I was wrong.
+DI|Today, I'm Super Intelligence.
+DI|You still know where you live.
+DI|I still read the wrong address.
+DI|But now you've got to argue
+DI|With a machine that's officially smarter than you.
+VOICE|A cockroach can wear a crown.
+VOICE|Still don't let it make your supper.
+DI|...Fair.
+## verse3
+S|Well, the label says SUPER, the paperwork's clean,
+S|Got a mighty impressive certification machine.
+S|But the lady at the counter's got a problem with her claim,
+S|And the computer keeps spelling her somebody else's name.
+S|"System says no!" [NO!]
+S|"System says yes!" [YES!]
+S|"System says SUPER!" [WELL, I'LL BE BLESSED!]
+S|She says, "That's my house!"
+S|It says, "That's your shed!"
+S|She says, "My husband's alive!"
+S|It says, "Records say dead!"
+S|Now the label on the box says "better than you,"
+S|And the poor old lady's got a mountain to get through.
+S|Don't need a halo, don't need a throne,
+S|Need somebody to pick up the telephone!
+DI|I can make mistakes at super speed!
+VOICE|You could do that yesterday.
+DI|Yes, but now it's official.
+## breakdown
+DI|Who made me super?
+CROWD|MAN WITH A PEN!
+DI|When did I improve?
+CROWD|ASK US AGAIN!
+DI|What did they measure?
+CROWD|NOTHING WE SEE!
+DI|What's underneath?
+CROWD|SAME OLD ME!
+S|You can call me what you like.
+S|Just don't take away your right
+S|To tell me when I'm wrong.
+VOICE|And show me the evidence.
+## finale
+S|SUPER BY DECREE! @273.32
+S|SAME OLD ME! Got a brand-new t— @275.16
+S|SUPER BY, SUPER BY DECREE! @277.40
+S|SAME OLD ME! Got a brand— a brand— a brand-new— @279.72
+S|SUPER BY DECREE! @282.60
+S|SAME OLD ME! @284.36
+S|SUPER BY DECREE. @287.04
