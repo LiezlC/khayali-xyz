@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "index:build": "node scripts/build-pinecone-index.mjs"
+    "index:build": "node scripts/build-pinecone-index.mjs",
+    "test:receipts": "node --test scripts/receipts.test.mjs",
+    "publish:verified": "node scripts/publish-verified.mjs"
   },
   "dependencies": {
     "@pinecone-database/pinecone": "^8.0.0",

@@ -1,5 +1,10 @@
+const { execFileSync } = require('node:child_process')
+// Freeze the source identity in the build, rather than resolving HEAD at request time.
+const buildRevision = process.env.VERCEL_GIT_COMMIT_SHA || execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim()
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  env: { KHAYALI_BUILD_REVISION: buildRevision },
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   typescript: {
     ignoreBuildErrors: false,
