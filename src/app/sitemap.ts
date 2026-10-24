@@ -13,6 +13,8 @@ const STATIC_ROUTES: MetadataRoute.Sitemap = [
   { url: `${BASE_URL}/chats`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.7 },
   { url: `${BASE_URL}/labs`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 },
   { url: `${BASE_URL}/ai-village`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.5 },
+  { url: `${BASE_URL}/worldworkshop`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 },
+  { url: `${BASE_URL}/worldworkshop/living-world`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
 ];
 
 // Categories that have [slug] dynamic routes wired to content.ts

@@ -9,6 +9,7 @@
     "lint": "next lint",
     "index:build": "node scripts/build-pinecone-index.mjs",
     "test:receipts": "node --test scripts/receipts.test.mjs",
+    "test:living-world": "node --test scripts/living-world.test.mjs",
     "publish:verified": "node scripts/publish-verified.mjs"
   },
   "dependencies": {

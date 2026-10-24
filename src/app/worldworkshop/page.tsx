@@ -27,6 +27,15 @@ export default async function WorldWorkshopPage() {
 
       {/* Content Grid */}
       <div className="container mx-auto px-4 pb-20">
+        <Link href="/worldworkshop/living-world" className="block rounded-xl border border-teal-300/40 bg-[#101d20] p-8 md:p-10 mb-12 group">
+          <div className="md:flex items-center justify-between gap-8">
+            <div className="max-w-2xl">
+              <h2 className="font-serif text-3xl md:text-4xl text-[var(--cream)] mb-3">A world that remembers</h2>
+              <p className="text-gray-300 leading-relaxed">An agent says it saved your work. What would count as proof? Try the receipt experiment, then follow the ideas from Aethel into the tools taking shape around it.</p>
+            </div>
+            <span className="inline-block text-teal-200 mt-6 md:mt-0 shrink-0 group-hover:underline">Enter the living world →</span>
+          </div>
+        </Link>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {content.map((item) => (
             <Link
