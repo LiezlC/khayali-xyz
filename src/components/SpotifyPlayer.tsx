@@ -5,7 +5,7 @@
  */
 export default function SpotifyPlayer() {
   return (
-    <section className="py-16 border-b border-purple-500/15 bg-gray-950/30">
+    <section id="listen" className="py-16 border-b border-purple-500/15 bg-gray-950/30">
       <div className="container mx-auto px-4">
         <div className="mb-6">
           <h2 className="font-serif text-4xl md:text-5xl text-[var(--cream)] mb-2">Press play</h2>

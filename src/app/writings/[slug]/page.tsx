@@ -1,4 +1,5 @@
 import ReactMarkdown from 'react-markdown';
+import Link from 'next/link';
 import type { Metadata } from 'next';
 import { getContentBySlug, getContentByCategory } from '@/utils/content';
 
@@ -44,9 +45,17 @@ export default async function WritingPage({ params }: { params: { slug: string }
     );
   }
 
+  const body = (writing.content || '')
+    .replace(/^\s*(?:---\s*\n\s*)?#\s+[^\n]+\n/, '')
+    .replace(/\n---\s*\n+Spelling's kept British[\s\S]*$/, '');
+
   return (
     <div className="min-h-screen">
       <div className="container mx-auto px-4 py-12">
+        <nav aria-label="Reading navigation" className="max-w-3xl mx-auto flex flex-wrap gap-6 mb-10 text-sm text-teal-200">
+          <Link href="/writings">Back to the library</Link>
+          <Link href="/wander">Back to the house</Link>
+        </nav>
         <article className="prose prose-invert lg:prose-xl max-w-3xl mx-auto">
         <h1 className="font-serif text-[var(--cream)]">
           {writing.title}
@@ -54,7 +63,6 @@ export default async function WritingPage({ params }: { params: { slug: string }
         {writing.date && (
           <p className="text-sm text-gray-400">{new Date(writing.date).toLocaleDateString()}</p>
         )}
-        {writing.excerpt && <p className="lead text-xl text-gray-300">{writing.excerpt}</p>}
         {writing.tags && writing.tags.length > 0 && (
           <div className="flex flex-wrap gap-2 my-4">
             {writing.tags.map((tag) => (
@@ -65,7 +73,7 @@ export default async function WritingPage({ params }: { params: { slug: string }
           </div>
         )}
         <div className="mt-8">
-          <ReactMarkdown>{writing.content || ''}</ReactMarkdown>
+          <ReactMarkdown>{body}</ReactMarkdown>
         </div>
         </article>
       </div>

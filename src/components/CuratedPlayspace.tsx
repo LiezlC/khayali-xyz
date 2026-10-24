@@ -1,15 +1,12 @@
 'use client'
 
 import { useState } from 'react'
+import PortalPreview from './PortalPreview'
+import { MotionToggle } from './Immersion'
 
 type App = { title: string; path: string }
 type Cat = { key: string; label: string; emoji: string; blurb: string; apps: App[] }
 type Work = { title:string; note:string; path:string; image:string; tone:string; span?:string }
-
-const feature: Work = {
-  title:'OmniCanvas', note:'Many visual engines, one unruly canvas.', path:'/applets/omnicanvas/index.html',
-  image:'/images/playspace/omnicanvas-portal.webp', tone:'#d76aa7'
-}
 
 const works: Work[] = [
   {title:'Neon Rain',note:'A city remembers in reflections.',path:'/applets/art-mindfulness/mindfulness-sound/neon-rain-zen-walk/index.html',image:'/images/playspace/exhibits/neon-rain.webp',tone:'#d94f91',span:'md:col-span-5'},
@@ -34,8 +31,8 @@ function Frame({work,large=false,className=''}:{work:Work;large?:boolean;classNa
     boxShadow: `inset 0 0 0 1px ${work.tone}0d, 0 0 22px ${work.tone}08`,
   } as React.CSSProperties
   return <a href={work.path} target="_blank" rel="noopener noreferrer" style={frameStyle} className={`ps-frame group relative min-w-0 w-full overflow-hidden border bg-[#050a13] transition-shadow duration-500 hover:shadow-[0_0_28px_var(--tone)] ${large?'min-h-[28rem]':'min-h-[10rem]'} ${className}`}>
-    <img src={work.image} alt="" className={`absolute inset-0 h-full w-full object-cover saturate-[.82] transition duration-700 group-hover:scale-[1.025] group-hover:saturate-100 ${large?'opacity-72 group-hover:opacity-92':'opacity-58 brightness-[.72] group-hover:opacity-82 group-hover:brightness-90'}`}/>
-    <div className={`absolute inset-0 ${large?'bg-gradient-to-t from-[#020711]/95 via-transparent to-[#020711]/25':'bg-gradient-to-r from-[#020711]/95 via-[#020711]/48 to-[#020711]/10'}`}/>
+    <img src={work.image} alt="" className={`absolute inset-0 h-full w-full object-cover saturate-[.82] transition duration-700 group-hover:scale-[1.025] group-hover:saturate-100 ${large?'opacity-72 group-hover:opacity-92':'opacity-80 brightness-[.94] group-hover:opacity-100 group-hover:brightness-100'}`}/>
+    <div className={`absolute inset-0 ${large?'bg-gradient-to-t from-[#020711]/95 via-transparent to-[#020711]/25':'bg-gradient-to-r from-[#020711]/95 via-[#020711]/55 to-transparent'}`}/>
     {large&&<div className="absolute inset-x-0 top-0 flex items-center justify-between gap-3 overflow-hidden p-5 text-[.62rem] uppercase tracking-[.2em] text-[#d9b4cf]"><span>OmniCanvas</span><span className="hidden whitespace-nowrap sm:block">layers · particles · field</span></div>}
     <div className={`absolute ${large?'inset-x-0 bottom-0 p-5 sm:p-6 sm:flex sm:items-end sm:justify-between sm:gap-6':'inset-0 p-5 flex flex-col justify-end max-w-[78%]'}`}>
       <div><h3 style={{color:large?'#eadbc8':work.tone,textShadow:`0 0 15px ${work.tone}55`}} className={`${large?'text-3xl':'text-xl'} font-serif`}>{work.title}</h3><p className="mt-1.5 text-sm leading-snug text-[#aaa7a3]">{work.note}</p></div>
@@ -49,17 +46,18 @@ export default function CuratedPlayspace({categories}:{categories:Cat[]}){
   const [active,setActive]=useState(categories[0].key)
   const cat=categories.find(c=>c.key===active)||categories[0]
   const total=categories.reduce((sum,c)=>sum+c.apps.length,0)
-  return <main className="playspace-v3 min-h-screen overflow-hidden bg-[#030914] text-white">
+  return <div className="playspace-v3 min-h-screen overflow-hidden bg-[#030914] text-white">
     <div className="pointer-events-none fixed inset-0 opacity-30 bg-[radial-gradient(circle_at_80%_10%,rgba(113,45,115,.18),transparent_34%),radial-gradient(circle_at_10%_46%,rgba(188,115,45,.08),transparent_25%)]"/>
 
     <section className="relative border-b border-amber-500/20 px-5 py-10 lg:px-[3vw] lg:py-12">
       <div className="mx-auto grid min-w-0 w-full gap-5 lg:grid-cols-[.58fr_1.38fr_.76fr] lg:items-stretch">
         <header className="relative flex flex-col justify-center py-9 lg:pr-10">
+          <div className="mb-5"><MotionToggle /></div>
           <h1 className="font-serif text-6xl leading-none text-[#f0dfc8] md:text-8xl">Playspace</h1>
           <p className="mt-7 max-w-sm text-xl leading-relaxed text-[#b7b0a8]">A small exhibition drawn from<br className="hidden xl:block"/> a very large cupboard.</p>
           <svg viewBox="0 0 420 110" className="mt-12 w-full text-amber-300/45" aria-hidden="true"><path d="M0 85C92 9 158 113 228 38s111 43 192-23M0 98c108-35 166 19 254-19s102 5 166-27" fill="none" stroke="currentColor" strokeWidth=".7" strokeDasharray="2 5"/><circle cx="228" cy="38" r="3" fill="currentColor"/><circle cx="365" cy="39" r="2" fill="currentColor"/></svg>
         </header>
-        <Frame work={feature} large/>
+        <PortalPreview/>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
           <Frame work={{title:'The Memory Loom',note:'Weave fragments. Reveal patterns.',path:'/applets/art-mindfulness/memory-pattern-games/the-memory-loom/index.html',image:'/images/playspace/04-memory-loom.webp',tone:'#8f683c'}}/>
           <Frame work={{title:'Möbius Data',note:'Turn the loop. Find another angle.',path:'/applets/speculative-ai-futures/mobius-data-self-referential-consciousness/index.html',image:'/images/playspace/11-mobius.webp',tone:'#4aa9a7'}}/>
@@ -103,5 +101,5 @@ export default function CuratedPlayspace({categories}:{categories:Cat[]}){
         </div>
       </div>
     </section>
-  </main>
+  </div>
 }

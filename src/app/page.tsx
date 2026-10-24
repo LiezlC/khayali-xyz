@@ -1,3 +1,6 @@
+import PortalPreview from '@/components/PortalPreview'
+import ImaginariumEntrance from '@/components/ImaginariumEntrance'
+
 const rooms = [
   {
     href: '/utopai',
@@ -60,41 +63,10 @@ const rooms = [
 export default function HomePage() {
   return (
     <div className="min-h-screen">
-      {/* Hero */}
-      <section className="relative py-28 overflow-hidden">
-        {/* The image used to sit at 22% under two more scrims, which turned the
-            most evocative asset on the site into a smudge. One scrim now. */}
-        <div
-          className="absolute inset-0 opacity-60 bg-cover bg-center"
-          style={{ backgroundImage: 'url(/images/homepage/khayali-dj.webp)' }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/75 to-gray-900/55" />
-        <div className="relative container mx-auto px-4 text-center max-w-4xl">
-          <p className="text-sm tracking-[0.3em] text-amber-200/70 mb-6">خيالى · OF THE IMAGINATION</p>
-          <h1 className="font-serif text-7xl md:text-8xl mb-8 lowercase tracking-tight text-[var(--cream-bright)]">
-            khayali
-          </h1>
-          <p className="text-2xl md:text-3xl text-gray-100 mb-6 leading-snug">
-            Where carbon meets silicon and the two of them start making things up.
-          </p>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-12 leading-relaxed">
-            Khayali Tunes, plus a sprawl of written and visual experiments that mostly began as a
-            question asked too late at night. The arty end of the multivariate. (The governance
-            papers have their own address now.)
-          </p>
-          <div className="flex justify-center flex-wrap gap-4">
-            <a href="/music" className="px-8 py-4 border border-pink-400/60 bg-pink-500/15 hover:bg-pink-500/25 text-pink-100 rounded-sm font-semibold transition-colors">
-              Listen to Khayali Tunes
-            </a>
-            <a href="/wander" className="px-8 py-4 text-amber-300 hover:text-amber-200 underline decoration-amber-500/40 underline-offset-8 transition-colors">
-              Open the Atlas <span aria-hidden="true">→</span>
-            </a>
-          </div>
-        </div>
-      </section>
+      <ImaginariumEntrance />
 
       {/* Featured: Khayali Tunes */}
-      <section className="relative py-24 border-y border-purple-500/20 bg-gradient-to-br from-purple-900/20 to-gray-900">
+      <section id="tunes" className="relative py-24 border-y border-purple-500/20 bg-gradient-to-br from-purple-900/20 to-gray-900">
         <div className="container mx-auto px-4">
           <p className="text-sm uppercase tracking-[0.25em] text-pink-400 mb-4">The rising centre</p>
           <h2 className="font-serif text-5xl md:text-6xl mb-6 text-[var(--cream)]">
@@ -178,14 +150,7 @@ export default function HomePage() {
               Open the arcade <span aria-hidden="true">→</span>
             </a>
           </div>
-          <a href="/applets/omnicanvas/index.html" target="_blank" rel="noopener noreferrer" className="block overflow-hidden border border-amber-500/30 hover:border-amber-400/70 shadow-2xl shadow-purple-950/40 group">
-            <img
-              src="/images/playspace/omnicanvas-portal.webp"
-              alt=""
-              className="aspect-[4/3] w-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
-              loading="lazy"
-            />
-          </a>
+          <PortalPreview />
         </div>
       </section>
 

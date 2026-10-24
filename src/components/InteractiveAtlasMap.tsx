@@ -1,79 +1,68 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import HouseArrow from '@/components/HouseArrow'
+
+import { useEffect, useRef, useState, type CSSProperties, type MouseEvent } from 'react'
+import { useRouter } from 'next/navigation'
 import type { AtlasDoor } from '@/data/atlas'
+import RandomDoor from './RandomDoor'
+import { DepthScene, MotionToggle } from './Immersion'
 
-const positions = [
-  { x: 59, y: 37 },
-  { x: 70, y: 45 },
-  { x: 84, y: 45 },
-  { x: 63, y: 62 },
-  { x: 76, y: 63 },
-  { x: 88, y: 59 },
-]
+const positions = [{ x: 57, y: 36 }, { x: 84, y: 48 }, { x: 51, y: 69 }, { x: 78, y: 32 }, { x: 51, y: 53 }, { x: 66, y: 64 }]
+const tones: Record<string, string> = { amber: '#efc77c', emerald: '#71dfc7', yellow: '#e6cf88', purple: '#c1a0f0', pink: '#ed9dc5', blue: '#94bfea' }
+const historyKey = 'khayali-atlas-v1'
 
-const colour: Record<string, { ring: string; dot: string; text: string }> = {
-  amber: { ring: 'border-amber-300 shadow-amber-300/70', dot: 'bg-amber-300', text: 'text-amber-200' },
-  emerald: { ring: 'border-emerald-300 shadow-emerald-300/70', dot: 'bg-emerald-300', text: 'text-emerald-200' },
-  yellow: { ring: 'border-yellow-300 shadow-yellow-300/70', dot: 'bg-yellow-300', text: 'text-yellow-200' },
-  purple: { ring: 'border-purple-300 shadow-purple-300/70', dot: 'bg-purple-300', text: 'text-purple-200' },
-  pink: { ring: 'border-pink-300 shadow-pink-300/70', dot: 'bg-pink-300', text: 'text-pink-200' },
-  blue: { ring: 'border-blue-300 shadow-blue-300/70', dot: 'bg-blue-300', text: 'text-blue-200' },
-}
-
-export default function InteractiveAtlasMap({ doors, immersive = false }: { doors: AtlasDoor[]; immersive?: boolean }) {
+export default function InteractiveAtlasMap({ doors }: { doors: AtlasDoor[]; immersive?: boolean }) {
   const [active, setActive] = useState(0)
+  const [visited, setVisited] = useState<string[]>([])
+  const [opening, setOpening] = useState(false)
+  const timer = useRef<ReturnType<typeof setTimeout>>()
+  const router = useRouter()
+  useEffect(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem(historyKey) || '{}')
+      const index = doors.findIndex(door => door.href === saved.selected)
+      if (index >= 0) setActive(index)
+      if (Array.isArray(saved.visited)) setVisited(saved.visited.filter((href: unknown) => typeof href === 'string' && doors.some(door => door.href === href)))
+    } catch {}
+    return () => clearTimeout(timer.current)
+  }, [doors])
+  const select = (index: number) => {
+    setActive(index)
+    try { localStorage.setItem(historyKey, JSON.stringify({ selected: doors[index].href, visited })) } catch {}
+  }
+  const enter = (event: MouseEvent<HTMLAnchorElement>) => {
+    const href = doors[active].href
+    const destination = href.endsWith('.html') ? `${href}?from=atlas` : href
+    const next = visited.includes(href) ? visited : [...visited, href]
+    setVisited(next)
+    try { localStorage.setItem(historyKey, JSON.stringify({ selected: href, visited: next })) } catch {}
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    event.preventDefault()
+    if (opening) return
+    setOpening(true)
+    timer.current = setTimeout(() => router.push(destination), 220)
+  }
   const selected = doors[active]
-  const selectedPosition = positions[active]
-  const route = useMemo(() => positions.map((p) => `${p.x},${p.y}`).join(' '), [])
-
-  return (
-    <div className={immersive ? 'relative h-full min-h-[42rem]' : 'relative'}>
-      <div className={immersive ? 'relative h-full min-h-[42rem] overflow-hidden' : 'relative aspect-[16/9] overflow-hidden rounded-sm'} aria-label="Interactive map of the Khayali house">
-        <img
-          src="/images/atlas/khayali-atlas-house.webp"
-          alt="An illuminated map-house with many doors and paths"
-          className={`absolute inset-0 h-full w-full object-cover mix-blend-screen ${immersive ? 'opacity-90' : 'opacity-95'}`}
-        />
-
-        <svg className="absolute inset-0 h-full w-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-          <polyline points={route} fill="none" stroke="rgba(251,191,36,.22)" strokeWidth=".22" strokeDasharray="1.1 1.1" />
-          <line x1="48" y1="73" x2={selectedPosition.x} y2={selectedPosition.y} stroke="rgba(244,114,182,.75)" strokeWidth=".35" strokeDasharray="1.2 .8" className="motion-safe:animate-pulse" />
-        </svg>
-
-        {doors.map((door, index) => {
-          const style = colour[door.colour]
-          const position = positions[index]
-          const isActive = active === index
-          return (
-            <button
-              key={door.title}
-              type="button"
-              onMouseEnter={() => setActive(index)}
-              onFocus={() => setActive(index)}
-              onClick={() => setActive(index)}
-              aria-pressed={isActive}
-              aria-label={`Reveal ${door.title}`}
-              className={`group absolute -translate-x-1/2 -translate-y-1/2 w-9 h-9 md:w-11 md:h-11 rounded-full border ${style.ring} ${isActive ? 'bg-gray-950/85 scale-110 shadow-[0_0_24px_currentColor]' : 'bg-gray-950/55 opacity-80 hover:opacity-100'} transition-all focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-gray-950`}
-              style={{ left: `${position.x}%`, top: `${position.y}%` }}
-            >
-              <span className={`absolute inset-2.5 md:inset-3.5 rounded-full ${style.dot} ${isActive ? 'motion-safe:animate-pulse' : ''}`} />
-              <span className="sr-only">{door.title}</span>
-            </button>
-          )
-        })}
-
-        <div className={`absolute bottom-3 w-[min(88%,22rem)] bg-[#070b18]/90 backdrop-blur-md border border-pink-400/30 p-4 md:p-5 shadow-2xl ${immersive ? 'right-3 md:right-[3vw] md:bottom-7' : 'left-3 md:left-7 md:bottom-7'}`}>
-          <p className={`text-[10px] md:text-xs uppercase tracking-[0.22em] ${colour[selected.colour].text} mb-2`}>{String(active + 1).padStart(2, '0')} · {selected.kind}</p>
-          <h2 className="font-serif text-xl md:text-3xl text-[#f0e5d2] leading-tight mb-2">{selected.title}</h2>
-          <p className="hidden sm:block text-sm text-gray-400 leading-relaxed mb-4">{selected.description}</p>
-          <a href={selected.href} className={`inline-flex items-center gap-2 text-sm font-semibold ${colour[selected.colour].text} hover:text-white transition-colors`}>Enter this room <span aria-hidden="true">→</span></a>
-        </div>
+  const tone = tones[selected.colour]
+  return <section className={`atlas-entrance ${opening ? 'door-opening' : ''}`} style={{ '--room-tone': tone } as CSSProperties} aria-labelledby="atlas-title">
+    <DepthScene className="atlas-stage">
+      <div className="atlas-art" aria-label="Interactive map of the Khayali house">
+        <img src="/images/atlas/khayali-atlas-house.webp" alt="An illuminated map-house with many doors and paths" fetchPriority="high" />
+        <div className="atlas-room-light" style={{ left: `${positions[active].x}%`, top: `${positions[active].y}%` }} />
+        <svg className="atlas-path" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d={`M 41 85 Q 48 65 ${positions[active].x} ${positions[active].y}`} fill="none" stroke="currentColor" strokeWidth=".15" strokeDasharray=".5 .7" /></svg>
+        {doors.map((door, index) => <button key={door.href} type="button" className={`atlas-hotspot ${active === index ? 'selected' : ''} ${visited.includes(door.href) ? 'visited' : ''}`} style={{ left: `${positions[index].x}%`, top: `${positions[index].y}%`, '--spot-tone': tones[door.colour] } as CSSProperties} aria-label={`Reveal ${door.title}`} aria-pressed={active === index} onClick={() => select(index)}>
+          <span>{String(index + 1).padStart(2, '0')}</span>{visited.includes(door.href) && <span className="sr-only">Visited</span>}
+        </button>)}
       </div>
-
-      <div className={`${immersive ? 'hidden' : 'mt-4 grid'} grid-cols-3 md:grid-cols-6 gap-2`} aria-label="Atlas map legend">
-        {doors.map((door, index) => <button key={door.title} type="button" onClick={() => setActive(index)} aria-pressed={active === index} className={`min-h-11 px-2 py-2 text-left border transition-colors ${active === index ? 'border-pink-400/60 bg-pink-500/10 text-white' : 'border-gray-800 text-gray-400 hover:text-gray-200 hover:border-gray-600'}`}><span className="font-mono text-xs mr-2">{String(index + 1).padStart(2, '0')}</span><span className="text-xs leading-tight">{door.title}</span></button>)}
+      <div className="atlas-intro"><h1 id="atlas-title">The Khayali<br/> Atlas</h1><p>Not everything here is looking to be found in a straight line.</p><div className="atlas-actions"><a href="#doorways" className="house-button house-button-outline">Choose a doorway <HouseArrow down /></a><RandomDoor className="atlas-random" /></div></div>
+      <div className="atlas-selection" aria-live="polite" aria-atomic="true">
+        <span className="atlas-selection-number" aria-hidden="true">{String(active + 1).padStart(2, '0')}</span>
+        <div><h2>{selected.title}</h2><p>{selected.description}</p></div>
+        <a href={selected.href.endsWith('.html') ? `${selected.href}?from=atlas` : selected.href} onClick={enter}>Enter this room <HouseArrow /></a>
       </div>
-    </div>
-  )
+    </DepthScene>
+    <div className="atlas-legend" aria-label="Choose an Atlas room">{doors.map((door, index) => <button key={door.href} type="button" onClick={() => select(index)} aria-pressed={active === index} className={active === index ? 'selected' : ''} style={{ '--spot-tone': tones[door.colour] } as CSSProperties}><span className={`atlas-lantern ${visited.includes(door.href) ? 'lit' : ''}`} aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><span>{door.title}{visited.includes(door.href) && <span className="sr-only">, visited</span>}</span></button>)}</div>
+    <div className="atlas-status"><span>{visited.length} of {doors.length} rooms visited</span><MotionToggle /></div>
+  </section>
 }

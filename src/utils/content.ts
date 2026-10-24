@@ -16,6 +16,32 @@ export interface ContentItem {
   filePath: string;
 }
 
+function plainText(markdown: string): string {
+  return markdown.replace(/```[\s\S]*?```/g, '').replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1').replace(/<[^>]*>/g, '')
+    .replace(/^[\s#>*_-]+/gm, '').replace(/[*_`~]/g, '').replace(/\s+/g, ' ').trim();
+}
+
+const leadingPictographs = new RegExp('^[\\p{Extended_Pictographic}\\uFE0F\\s]+', 'u');
+
+/** Writings often predate frontmatter; use their actual heading and prose. */
+function writingMetadata(data: Record<string, any>, content: string, slug: string) {
+  const heading = content.match(/^#\s+(.+)$/m)?.[1];
+  const fallback = slug.replace(/[_-]+/g, ' ').replace(/\b\w/g, letter => letter.toUpperCase());
+  const title = plainText(String(data.title || heading || (slug === 'bhb' ? 'The Ballad of Black Holes' : fallback))).replace(leadingPictographs, '');
+  // Book exports contain copyright pages and a contents list before the story.
+  const prologue = content.match(/^PROLOGUE:[^\t\r\n]+\r?\n/m);
+  const body = prologue ? content.slice(prologue.index! + prologue[0].length) : content;
+  const paragraphs = body.replace(/```[\s\S]*?```/g, '').split(/\r?\n\s*\r?\n/);
+  const prose = paragraphs.find(paragraph => {
+    const value = paragraph.trim();
+    return value.length > 45 && !/^(?:#{1,6}\s|---|\*\*|\||[-*]\s|\d+\.\s)/.test(value);
+  }) || '';
+  const full = plainText(String(data.excerpt || data.summary || data.description || prose));
+  const excerpt = full.length > 210 ? `${full.slice(0, 210).replace(/\s+\S*$/, '').replace(/[,. ;:]$/, '')}…` : full;
+  return { title, excerpt };
+}
+
 /**
  * Get all content from a specific category directory
  * @param category - The category folder name (e.g., 'avatar', 'protocol', 'writings')
@@ -63,6 +89,7 @@ export async function getContentByCategory(category: string): Promise<ContentIte
             slug,
             title: data.title || slug.replace(/-/g, ' '),
             excerpt,
+            ...(category === 'writings' ? writingMetadata(data, content, slug) : {}),
             date: data.date,
             category: data.category || category,
             tags: data.tags || [],
@@ -92,6 +119,7 @@ export async function getContentByCategory(category: string): Promise<ContentIte
  * Get a single content item by category and slug
  */
 export async function getContentBySlug(category: string, slug: string): Promise<ContentItem | null> {
+  try { slug = decodeURIComponent(slug); } catch { return null; }
   const contentDir = path.join(process.cwd(), 'content', category);
 
   if (!fs.existsSync(contentDir)) {
@@ -137,6 +165,7 @@ export async function getContentBySlug(category: string, slug: string): Promise<
       slug,
       title: data.title || slug.replace(/-/g, ' '),
       excerpt,
+      ...(category === 'writings' ? writingMetadata(data, content, slug) : {}),
       date: data.date,
       category: data.category || category,
       tags: data.tags || [],

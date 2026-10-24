@@ -2,7 +2,9 @@ import type { Metadata } from 'next'
 import { Fraunces, Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
 import SiteNav from '@/components/SiteNav'
+import { ImmersionProvider } from '@/components/Immersion'
 import './globals.css'
+import './imaginarium.css'
 
 // The house typefaces. Until these were loaded, every `font-serif` on the site
 // resolved to whatever the visitor's OS happened to offer — Cambria on Windows,
@@ -110,7 +112,7 @@ export default function RootLayout({
           Skip to main content
         </a>
         <SiteNav />
-        <main id="main-content">{children}</main>
+        <main id="main-content"><ImmersionProvider>{children}</ImmersionProvider></main>
         <Analytics />
         <footer className="border-t border-gray-800 mt-24" aria-label="Site footer">
           <div className="container py-16">

@@ -20,21 +20,7 @@ const trailText = ['text-pink-300', 'text-purple-300', 'text-amber-300']
 
 export default function WanderPage() {
   return <div className="min-h-screen bg-[#070b18] text-white overflow-hidden">
-    <section className="relative min-h-[82vh] border-b border-purple-500/20">
-      <div className="absolute inset-0"><InteractiveAtlasMap doors={atlasDoors} immersive /></div>
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#030814] via-[#030814]/80 to-transparent" />
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#070b18]/80 via-transparent to-[#070b18]/30" />
-      <div className="container relative z-10 min-h-[82vh] flex items-center pointer-events-none">
-        <div className="max-w-xl pointer-events-auto py-20">
-          <h1 className="font-serif text-6xl md:text-8xl leading-[0.92] tracking-tight text-[#f0e5d2] mb-8">The Khayali<br />Atlas</h1>
-          <p className="text-xl md:text-2xl text-gray-400 max-w-lg leading-relaxed mb-10">Not everything here is looking to be found in a straight line.</p>
-          <div className="flex flex-wrap gap-4">
-            <a href="#doorways" className="px-7 py-4 border border-pink-400/60 bg-pink-500/10 hover:bg-pink-500/20 text-pink-100 rounded-sm transition-colors">Choose a doorway <span aria-hidden="true">→</span></a>
-            <RandomDoor className="px-7 py-4 text-amber-300 hover:text-amber-200 underline decoration-amber-500/40 underline-offset-8 transition-colors" />
-          </div>
-        </div>
-      </div>
-    </section>
+    <InteractiveAtlasMap doors={atlasDoors} immersive />
 
     <section id="doorways" className="py-24 md:py-32 relative">
       <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,rgba(245,158,11,0.12),transparent_55%)]" />

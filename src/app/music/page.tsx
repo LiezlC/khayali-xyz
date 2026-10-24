@@ -1,3 +1,4 @@
+import MusicRooms from '@/components/MusicRooms';
 import { arcs as playlists } from "@/data/arcs";
 import FrequencyFinder from "@/components/FrequencyFinder";
 import TrackBriefGenerator from "@/components/TrackBriefGenerator";
@@ -46,67 +47,7 @@ export default function MusicPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(musicJsonLd) }}
       />
-      {/* Hero */}
-      <section className="relative py-20 overflow-hidden bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-8">
-            <div className="text-sm font-mono text-purple-400 mb-4 tracking-widest uppercase">khayali</div>
-            <h1 className="text-6xl md:text-7xl mb-6 font-serif text-[var(--cream)]">
-              Khayali Tunes
-            </h1>
-            <p className="text-2xl text-gray-300 mb-4">
-              AI-built music with an argument in it.
-            </p>
-            <p className="text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed mb-8">
-              Seven arcs, each carrying a case it would rather sing than file. Tactical ghosts and
-              the audit that cannot happen. A digital intelligence walking Cape Town at 5 a.m. Data
-              dragons learning to dance. The music moves faster than the papers, and it does not
-              have to be polite about it.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <a
-                href="https://www.youtube.com/@khayali-tunes/podcasts"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-red-600/20 border border-red-500/40 rounded-lg text-red-300 hover:bg-red-600/30 hover:border-red-400 transition-all font-semibold"
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><path fill="#0b0c10" d="M9.545 15.568V8.432L15.818 12z"/></svg>
-                All Playlists on YouTube
-              </a>
-              <a
-                href="https://soundcloud.com/khayali"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-orange-600/20 border border-orange-500/40 rounded-lg text-orange-300 hover:bg-orange-600/30 hover:border-orange-400 transition-all font-semibold"
-              >
-                SoundCloud
-              </a>
-              <a
-                href="https://open.spotify.com/artist/23Sf7aUE9vWsiznIxOKpee"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-green-600/20 border border-green-500/40 rounded-lg text-green-300 hover:bg-green-600/30 hover:border-green-400 transition-all font-semibold"
-              >
-                Spotify
-              </a>
-              <a
-                href="https://ko-fi.com/khayali"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-pink-600/20 border border-pink-500/40 rounded-lg text-pink-200 hover:bg-pink-600/30 hover:border-pink-400 transition-all font-semibold"
-              >
-                <span aria-hidden="true">&#9829;</span>
-                Support Khayali Tunes on Ko-fi
-              </a>
-            </div>
-          </div>
-
-          {/* Label credit */}
-          <div className="text-center text-gray-400 text-sm">
-            <span className="font-mono">11138307 Records DK</span> &middot; Distributed via DistroKid
-          </div>
-        </div>
-      </section>
+      <MusicRooms />
 
       {/* Something to actually play, before anything else asks for a click. */}
       <SpotifyPlayer />
