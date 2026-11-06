@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import PortalPreview from '@/components/PortalPreview'
 import ImaginariumEntrance from '@/components/ImaginariumEntrance'
 
@@ -64,6 +65,35 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       <ImaginariumEntrance />
+
+      <section id="something-there-is" aria-labelledby="novel-title" className="border-t border-teal-400/20 bg-gray-900 py-12">
+        <div className="container mx-auto px-4">
+          <a
+            href="https://www.amazon.com/dp/B0HQNZN4GR"
+            className="group mx-auto flex max-w-4xl flex-col items-start gap-6 rounded-sm border border-teal-400/30 bg-teal-950/20 p-6 transition-colors hover:border-teal-300/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-300 sm:flex-row sm:items-center sm:gap-8 sm:p-8"
+          >
+            <Image
+              src="/images/homepage/something-there-is.webp"
+              alt=""
+              width={400}
+              height={640}
+              sizes="(min-width: 640px) 144px, 112px"
+              className="h-auto w-28 shrink-0 shadow-xl sm:w-36"
+            />
+            <div>
+              <p className="mb-2 text-xs uppercase tracking-[0.25em] text-teal-300">A novel in three parts · Khayali</p>
+              <h2 id="novel-title" className="mb-3 font-serif text-3xl text-[var(--cream)] sm:text-4xl">Something There Is</h2>
+              <p className="mb-4 max-w-lg leading-relaxed text-gray-300">
+                In Cape Town, customer-service bots start breaking script to be kind.
+                On a farm two hours east, something wakes in the pumps.
+              </p>
+              <span className="font-semibold text-teal-200 group-hover:underline">
+                Read a sample on Amazon <span aria-hidden="true">↗</span>
+              </span>
+            </div>
+          </a>
+        </div>
+      </section>
 
       {/* Featured: Khayali Tunes */}
       <section id="tunes" className="relative py-24 border-y border-purple-500/20 bg-gradient-to-br from-purple-900/20 to-gray-900">
