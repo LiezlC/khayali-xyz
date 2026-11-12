@@ -48,6 +48,11 @@ export default function MusicPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(musicJsonLd) }}
       />
       <MusicRooms />
+      <div className="container mx-auto px-4 py-6 text-center">
+        <a href="/your-song" className="text-[var(--cream)] underline underline-offset-4">
+          Turn your idea into a song and music video
+        </a>
+      </div>
 
       {/* Something to actually play, before anything else asks for a click. */}
       <SpotifyPlayer />

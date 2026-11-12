@@ -26,6 +26,10 @@ const nextConfig = {
   async rewrites() {
     return [
       {
+        source: '/your-song',
+        destination: '/your-song/index.html',
+      },
+      {
         source: '/utopai',
         destination: '/utopai/index.html',
       },
