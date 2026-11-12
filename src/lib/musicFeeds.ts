@@ -17,7 +17,7 @@ export async function getLatestYouTubeVideos(): Promise<MusicRelease[]> {
     )
     if (!response.ok) return []
     const xml = await response.text()
-    return Array.from(xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)).slice(0, 6).map(([, entry]) => {
+    return Array.from(xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)).map(([, entry]) => {
       const read = (pattern: RegExp) => entry.match(pattern)?.[1] ?? ''
       const id = read(/<yt:videoId>(.*?)<\/yt:videoId>/)
       return {

@@ -1,3 +1,4 @@
+import catalog from '@/data/khayaliYouTubeVideos.json'
 import { getLatestYouTubeVideos, type MusicRelease } from '@/lib/musicFeeds'
 
 function ReleaseRail({ releases }: { releases: MusicRelease[] }) {
@@ -32,17 +33,44 @@ function ReleaseRail({ releases }: { releases: MusicRelease[] }) {
 }
 
 export default async function LatestMusic() {
-  const youtube = await getLatestYouTubeVideos()
-  if (!youtube.length) return null
+  const feed = await getLatestYouTubeVideos()
+  const firstCatalogEntry = feed.findIndex((video) => video.id === catalog[0].id)
+  const recent = firstCatalogEntry === -1 ? [] : feed.slice(0, firstCatalogEntry)
+  const knownIds = new Set(catalog.map((video) => video.id))
+  const videos = [
+    ...recent.filter((video) => !knownIds.has(video.id)),
+    ...catalog,
+  ]
+  const releases: MusicRelease[] = videos.slice(0, 6).map((video) => ({
+    ...video,
+    url: `https://www.youtube.com/watch?v=${video.id}`,
+    image: `https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`,
+    date: '',
+    source: 'youtube',
+  }))
 
   return (
-    <section className="py-20 border-y border-purple-500/15 bg-gray-950/30">
+    <section className="py-12 md:py-16 border-y border-purple-500/15 bg-gray-950/30">
       <div className="container mx-auto px-4">
-        <h2 className="font-serif text-4xl md:text-5xl text-[var(--cream)] mb-3">Latest transmissions</h2>
-        <p className="text-lg text-gray-400 max-w-2xl mb-12">
-          Fresh uploads arrive here automatically. The arcs above stay curated by hand.
-        </p>
-        <ReleaseRail releases={youtube} />
+        <h2 className="font-serif text-4xl md:text-5xl text-[var(--cream)] mb-6">Latest music videos</h2>
+        <ReleaseRail releases={releases} />
+        <details className="mt-8 rounded-xl border border-gray-700 bg-gray-900/40">
+          <summary className="cursor-pointer px-5 py-4 font-semibold text-[var(--cream)]">
+            Browse all {videos.length} videos
+          </summary>
+          <ul className="grid gap-x-8 px-5 pb-5 sm:grid-cols-2">
+            {videos.map((video) => (
+              <li key={video.id} className="border-t border-gray-700/60 py-3">
+                <a
+                  href={`https://www.youtube.com/watch?v=${video.id}`}
+                  className="text-gray-200 hover:text-white underline underline-offset-4"
+                >
+                  {video.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </details>
       </div>
     </section>
   )

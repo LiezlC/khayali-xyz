@@ -54,7 +54,9 @@ export default function MusicPage() {
         </a>
       </div>
 
-      {/* Something to actually play, before anything else asks for a click. */}
+      <LatestMusic />
+
+      {/* Spotify playback for visitors who prefer listening there. */}
       <SpotifyPlayer />
 
       <FeaturedMusic />
@@ -108,8 +110,6 @@ export default function MusicPage() {
           </div>
         </div>
       </section>
-
-      <LatestMusic />
 
       {/* The Frequency Finder — content-as-agent */}
       <FrequencyFinder />
