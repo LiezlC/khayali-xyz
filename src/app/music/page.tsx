@@ -12,17 +12,17 @@ export const revalidate = 86400;
 
 export const metadata: Metadata = {
   title: 'Khayali Tunes',
-  description: 'AI-built music with an argument in it. Seven arcs — tactical ghosts, a digital intelligence loose in Cape Town, data dragons, consciousness loops — by Liezl Coetzee. On YouTube, SoundCloud, and Spotify.',
+  description: 'Songs and music videos made by Liezl Coetzee in collaboration with AI. Watch the latest releases or explore the Khayali collections.',
   openGraph: {
     title: 'Khayali Tunes',
-    description: 'AI-built music with an argument in it. Seven arcs, from tactical ghosts to data dragons learning to dance.',
+    description: 'Songs and music videos made by Liezl Coetzee in collaboration with AI.',
     url: 'https://khayali.xyz/music',
     type: 'music.playlist',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Khayali Tunes',
-    description: 'AI-built music with an argument in it. Seven arcs, from tactical ghosts to data dragons learning to dance.',
+    description: 'Songs and music videos made by Liezl Coetzee in collaboration with AI.',
   },
 };
 
@@ -30,14 +30,13 @@ const musicJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'MusicPlaylist',
   name: 'Khayali Tunes — AI music arcs',
-  description: 'AI-built music by Liezl Coetzee. Seven arcs spanning accountability, governance, consciousness, and transitions.',
+  description: 'Songs and music videos made by Liezl Coetzee in collaboration with AI.',
   url: 'https://khayali.xyz/music',
   creator: {
     '@type': 'Person',
     name: 'Liezl Coetzee',
     url: 'https://khayali.xyz',
   },
-  numTracks: 7,
 };
 
 export default function MusicPage() {
@@ -65,12 +64,17 @@ export default function MusicPage() {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <h2 className="font-serif text-4xl md:text-5xl mb-3 text-[var(--cream)]">
-            Seven arcs
+            Khayali collections
           </h2>
-          <p className="text-lg text-gray-400 max-w-2xl mb-12">
-            Each collection is built around one argument. The argument is printed under the title,
-            so you know what you are agreeing to before the beat drops.
+          <p className="text-lg text-gray-400 max-w-2xl mb-4">
+            Some songs share a story. Others keep returning to the same question. These are a few collections to listen through together.
           </p>
+          <a
+            href="https://www.youtube.com/@khayali-tunes/playlists"
+            className="inline-block mb-12 text-[var(--cream)] underline underline-offset-4"
+          >
+            See more playlists on YouTube
+          </a>
 
           <div className="grid gap-6 md:grid-cols-2 2xl:grid-cols-3">
             {playlists.map((pl) => (
