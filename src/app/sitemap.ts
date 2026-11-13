@@ -9,7 +9,7 @@ const STATIC_ROUTES: MetadataRoute.Sitemap = [
   { url: `${BASE_URL}/music`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.9 },
   { url: `${BASE_URL}/playspace`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
   { url: `${BASE_URL}/observatory`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
-  { url: `${BASE_URL}/writings`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.8 },
+  { url: `${BASE_URL}/blogs`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.8 },
   { url: `${BASE_URL}/chats`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.7 },
   { url: `${BASE_URL}/labs`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 },
   { url: `${BASE_URL}/ai-village`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.5 },
@@ -19,7 +19,6 @@ const STATIC_ROUTES: MetadataRoute.Sitemap = [
 
 // Categories that have [slug] dynamic routes wired to content.ts
 const DYNAMIC_CATEGORIES: { category: string; basePath: string; priority: number }[] = [
-  { category: 'writings', basePath: '/writings', priority: 0.7 },
   { category: 'chats', basePath: '/chats', priority: 0.6 },
   { category: 'ai-village', basePath: '/ai-village', priority: 0.5 },
 ];

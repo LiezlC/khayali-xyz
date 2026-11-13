@@ -46,6 +46,13 @@ const nextConfig = {
       },
     ];
   },
+  async rewrites() {
+    const beforeFiles = Object.entries(require("./legacy-image-urls.json")).map(([source, destination]) => ({
+      source,
+      destination,
+    }));
+    return { beforeFiles };
+  },
   async redirects() {
     return [
       // Keep Vercel's project alias out of search results. The public site has
@@ -82,6 +89,16 @@ const nextConfig = {
         ],
         destination: 'https://www.khayali.xyz/:path*',
         permanent: true,
+      },
+      {
+        source: '/writings/data-dragons-story',
+        destination: '/data-dragons',
+        permanent: false,
+      },
+      {
+        source: '/writings/:slug*',
+        destination: '/blogs',
+        permanent: false,
       },
       // Research redirects to domains
       {
