@@ -86,7 +86,7 @@ function LegacyPlayspacePage() {
             <div className="flex flex-wrap gap-3 justify-center">
               <a href="/observatory" className="px-5 py-2.5 rounded-full text-sm font-semibold bg-gray-800/50 border border-gray-700 hover:border-blue-400 text-gray-200 transition-all">🔭 Observatory · cosmic &amp; warp-drive pieces</a>
               <a href="/music" className="px-5 py-2.5 rounded-full text-sm font-semibold bg-gray-800/50 border border-gray-700 hover:border-pink-400 text-gray-200 transition-all">🎵 Khayali Tunes</a>
-              <a href="/writings" className="px-5 py-2.5 rounded-full text-sm font-semibold bg-gray-800/50 border border-gray-700 hover:border-purple-400 text-gray-200 transition-all">✍️ Writings</a>
+              <a href="/blogs" className="px-5 py-2.5 rounded-full text-sm font-semibold bg-gray-800/50 border border-gray-700 hover:border-purple-400 text-gray-200 transition-all">✍️ Blogs &amp; Essays</a>
               <a href="/" className="px-5 py-2.5 rounded-full text-sm font-semibold bg-gray-800/50 border border-gray-700 hover:border-amber-300 text-gray-200 transition-all">↩ Home</a>
             </div>
           </div>
