@@ -110,6 +110,15 @@ const nextConfig = {
         destination: '/labs',
         permanent: false,
       },
+      // Preserve direct links into folders excluded from the Vercel upload.
+      ...require('node:fs').readFileSync(require('node:path').join(__dirname, '.vercelignore'), 'utf8')
+        .split(/\r?\n/)
+        .filter(path => path.startsWith('/public/applets/'))
+        .map(path => ({
+          source: path.slice('/public'.length, -1) + '/:path*',
+          destination: '/playspace',
+          permanent: false,
+        })),
       // Research redirects to domains
       {
         source: '/research',
