@@ -100,6 +100,16 @@ const nextConfig = {
         destination: '/blogs',
         permanent: false,
       },
+      {
+        source: '/chats/:slug*',
+        destination: '/blogs',
+        permanent: false,
+      },
+      {
+        source: '/ai-village/:slug*',
+        destination: '/labs',
+        permanent: false,
+      },
       // Research redirects to domains
       {
         source: '/research',

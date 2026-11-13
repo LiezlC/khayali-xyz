@@ -10,7 +10,7 @@ import { Menu, X } from 'lucide-react'
  * switches on at 1280px — at the old `md` breakpoint the row overflowed the
  * viewport and pushed the whole document sideways on tablets.
  * Below xl: a hamburger button that opens a full-height drawer listing every
- * room — so the long tail (Chats, Creative, World Workshop, Soulspaces) that
+ * room — so the long tail (Creative, World Workshop, Soulspaces) that
  * never fit in the desktop bar is reachable in two taps.
  *
  * The header holds a fixed 6rem height, published as `--nav-h` in globals.css,
@@ -26,7 +26,7 @@ const primaryLinks = [
   { href: '/wander', label: 'Wander', hover: 'hover:text-amber-300', bold: true },
   { href: '/song-excavation', label: 'Song Excavation', hover: 'hover:text-pink-400', bold: true },
   { href: '/playspace', label: 'Playspace', hover: 'hover:text-amber-300', bold: true },
-  { href: '/writings', label: 'Writings', hover: 'hover:text-purple-400' },
+  { href: '/blogs', label: 'Blogs', hover: 'hover:text-purple-400' },
   { href: '/observatory', label: 'Observatory', hover: 'hover:text-blue-400' },
   { href: '/labs', label: 'Labs', hover: 'hover:text-amber-300' },
   { href: '/search', label: 'Search', hover: 'hover:text-purple-400' },
@@ -35,7 +35,6 @@ const primaryLinks = [
 // The extra rooms — desktop has no space for these, but the mobile drawer does.
 const moreRooms = [
   { href: '/utopai', label: 'UtopAI', hover: 'hover:text-teal-400' },
-  { href: '/chats', label: 'Consciousness Banter', hover: 'hover:text-purple-400' },
   { href: '/creative', label: 'Creative Nexus', hover: 'hover:text-amber-400' },
   { href: '/worldworkshop', label: 'World Workshop', hover: 'hover:text-teal-400' },
   { href: '/soulspaces', label: 'Soulspaces', hover: 'hover:text-indigo-400' },

@@ -145,9 +145,6 @@ export default function LabsPage() {
                 <div>• Comparative Reasoning</div>
                 <div>• Blind Spot Detection</div>
               </div>
-              <a href="/ai-village" className="inline-block px-6 py-3 bg-orange-600 hover:bg-orange-700 rounded-lg font-semibold transition-colors">
-                View Dialogues →
-              </a>
             </div>
 
             {/* Creative Works */}
@@ -164,7 +161,7 @@ export default function LabsPage() {
                 <div>• Narrative Experiments</div>
                 <div>• Creative Dialogue</div>
               </div>
-              <a href="/writings" className="inline-block px-6 py-3 bg-pink-600 hover:bg-pink-700 rounded-lg font-semibold transition-colors">
+              <a href="/blogs" className="inline-block px-6 py-3 bg-pink-600 hover:bg-pink-700 rounded-lg font-semibold transition-colors">
                 Read Works →
               </a>
             </div>
