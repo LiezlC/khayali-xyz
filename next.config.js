@@ -90,6 +90,16 @@ const nextConfig = {
         destination: 'https://www.khayali.xyz/:path*',
         permanent: true,
       },
+      {
+        source: '/writings/data-dragons-story',
+        destination: '/data-dragons',
+        permanent: false,
+      },
+      {
+        source: '/writings/:slug*',
+        destination: '/blogs',
+        permanent: false,
+      },
       // Research redirects to domains
       {
         source: '/research',

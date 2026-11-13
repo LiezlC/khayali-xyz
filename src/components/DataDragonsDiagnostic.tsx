@@ -162,10 +162,10 @@ export default function DataDragonsDiagnostic() {
                 className="flex flex-wrap gap-4 justify-center items-center pt-2"
               >
                 <a
-                  href="/writings/data-dragons-story"
+                  href="/data-dragons"
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold bg-fuchsia-600/20 border border-fuchsia-500/40 text-fuchsia-300 hover:bg-fuchsia-600/30 hover:border-fuchsia-400 transition-all"
                 >
-                  Read the full bestiary →
+                  Read the bestiary →
                 </a>
                 <button
                   onClick={() => {

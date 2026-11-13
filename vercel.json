@@ -1,6 +1,7 @@
 {
   "version": 2,
   "name": "khayali-xyz",
+  "git": { "deploymentEnabled": false },
   "env": {
     "NODE_ENV": "production"
   }

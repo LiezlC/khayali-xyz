@@ -68,12 +68,6 @@ export default function DataDragonsPage() {
 
           <div className="text-center mt-10 flex flex-wrap justify-center gap-4">
             <a
-              href="/writings/data-dragons-story"
-              className="inline-block px-6 py-3 rounded-lg font-semibold bg-gradient-to-r from-fuchsia-600 to-violet-600 hover:from-fuchsia-700 hover:to-violet-700 transition-colors"
-            >
-              Read the full story →
-            </a>
-            <a
               href="/music"
               className="inline-block px-6 py-3 rounded-lg font-semibold border border-fuchsia-500/40 text-fuchsia-300 hover:bg-fuchsia-500/10 transition-colors"
             >
