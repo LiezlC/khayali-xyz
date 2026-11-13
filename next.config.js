@@ -46,6 +46,13 @@ const nextConfig = {
       },
     ];
   },
+  async rewrites() {
+    const beforeFiles = Object.entries(require("./legacy-image-urls.json")).map(([source, destination]) => ({
+      source,
+      destination,
+    }));
+    return { beforeFiles };
+  },
   async redirects() {
     return [
       // Keep Vercel's project alias out of search results. The public site has
