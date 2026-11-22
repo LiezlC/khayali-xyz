@@ -1,0 +1,1435 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Three-Body Studio</title>
+<style>:root{color-scheme:dark;--base:#0e1418;--rail:#151e23;--line:#2b3a40;--text:#e7f0ef;--muted:#afc1c5;--accent:#69dfcc;font:15px/1.46 system-ui,sans-serif;background:var(--base);color:var(--text)}
+*{box-sizing:border-box}body{margin:0}button,select,input{font:inherit}button,select{min-height:39px;color:var(--text);background:#1c282e;border:1px solid var(--line);border-radius:6px;padding:7px 11px}button,select,input[type=color],input[type=range]{cursor:pointer}button:hover,select:hover{background:#283a42}button[aria-pressed=true],button.active,button.chaos-on{background:#203a3a;border-color:#4a8e86;color:#b6faee}button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}[hidden]{display:none!important}
+#studio{height:100dvh;display:grid;grid-template-columns:minmax(0,1fr) 332px;grid-template-rows:auto minmax(0,1fr) auto;grid-template-areas:"head head" "canvas panel" "foot panel";background:var(--base)}
+header{grid-area:head;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid var(--line)}h1{margin:0;font-size:clamp(17px,2vw,23px);line-height:1.15;font-weight:640;letter-spacing:-.035em}.mark{color:var(--accent);margin-right:5px}.actions,.transport,.row{display:flex;align-items:center;gap:7px;flex-wrap:wrap}#saveBtn,#playBtn{background:#a6eadf;color:#122924;border-color:#a6eadf;font-weight:650}#saveBtn:hover,#playBtn:hover{background:#d4fff7}
+.stage{grid-area:canvas;position:relative;min-height:0;overflow:hidden;background:#080f17}canvas{display:block;width:100%;height:100%}
+aside{grid-area:panel;background:var(--rail);border-left:1px solid var(--line);min-height:0;overflow:auto;padding:0 19px 20px;scrollbar-width:thin}.tabs{display:flex;margin:0 0 17px;border-bottom:1px solid var(--line)}.tabs button{flex:1;border:0;border-radius:0;background:transparent;color:var(--muted);padding:12px 4px;border-bottom:2px solid transparent}.tabs button[aria-selected=true]{color:var(--accent);border-color:var(--accent)}fieldset{min-width:0;border:0;padding:0;margin:0 0 14px}legend{padding:0;margin-bottom:6px;color:var(--muted);font-size:.87rem}.segments,.presets{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:5px}.presets{grid-auto-flow:row;grid-template-columns:1fr 1fr}.segments button,.presets button{padding-inline:4px}.palette select{width:100%}.swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:9px}.swatches label{display:grid;gap:3px;text-align:center;font-size:.78rem;color:var(--muted)}input[type=color]{padding:2px;width:100%;height:34px;border:1px solid var(--line);border-radius:5px;background:#1c282e}.slider{display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:7px;margin-bottom:9px;color:var(--muted);font-size:.87rem}.slider output{font:12px ui-monospace,monospace;color:var(--accent)}input[type=range]{grid-column:1/-1;width:100%;height:24px;margin:0;accent-color:var(--accent)}aside p{color:var(--muted);font-size:.88rem;margin:0 0 14px}aside fieldset p{margin:8px 0 0}.kick{color:var(--muted)}#clearBtn{flex:1}
+footer{grid-area:foot;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 14px}#presetName{color:var(--muted);padding-left:4px}#diagnostics,#readout{font:12px/1.5 ui-monospace,monospace;color:var(--muted);display:flex;gap:6px 14px;flex-wrap:wrap}#energyWarning{color:#ffc38c}#energyWarning:empty{display:none}#readout{position:absolute;display:none;top:12px;left:12px;max-width:calc(100% - 24px);border:1px solid var(--line);border-radius:6px;background:#142026;color:#c5d4d7;padding:7px 10px;align-items:center;gap:4px 10px;pointer-events:none}#sepVal{color:var(--accent)}#notice{position:absolute;bottom:12px;left:12px;background:#142026;padding:7px 10px;border-radius:6px;pointer-events:none}#notice:empty{display:none}
+#studio.clean{grid-template-columns:minmax(0,1fr);grid-template-areas:"head" "canvas" "canvas"}#studio.clean aside,#studio.clean footer,#studio.clean #readout{display:none!important}
+@media(max-width:720px){#studio{height:auto;min-height:100dvh;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(260px,52dvh) auto auto;grid-template-areas:"head" "canvas" "foot" "panel"}#studio.clean{height:100dvh;grid-template-rows:auto minmax(0,1fr) 0;grid-template-areas:"head" "canvas" "canvas"}aside{border-left:0;border-top:1px solid var(--line);padding-inline:14px}header{padding:8px 10px;flex-wrap:wrap}.actions button{font-size:.85rem}footer{padding:7px 10px}}
+:root{--base:#111316;--rail:#191c1f;--line:#363e43;--accent:#5be9df}
+@media(min-width:1100px){#studio{grid-template-columns:minmax(0,1fr) clamp(332px,27vw,395px)}}
+@media(min-height:780px){fieldset{margin-bottom:19px}.slider{margin-bottom:14px}.tabs{margin-bottom:21px}}
+#saveBtn,#playBtn{background:transparent;color:var(--text);border-color:#809591}
+#saveBtn:hover,#playBtn:hover{background:#203a3a;color:#defffa}
+#playBtn{border-color:var(--accent)}
+#studio:fullscreen{overflow:auto}.swatches label{font-size:.72rem}
+#volumeControl{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:.8rem}#volumeControl input{width:62px}
+.toggles{display:grid;grid-template-columns:1fr 1fr;gap:5px}.toggles button{padding-inline:4px;font-size:.86rem}
+#asmrBtn{border-color:#c9a8ff;color:#e9dcff}#asmrBtn[aria-pressed=true]{background:#2c2440;border-color:#c9a8ff;color:#f3ecff}
+#recBtn.recording{background:#4a1f26;border-color:#ff7088;color:#ffd6dd}
+</style>
+</head>
+<body>
+<main id="studio">
+<header>
+  <h1><span class="mark" aria-hidden="true">◎</span> Three-Body Studio</h1>
+  <div class="actions">
+    <button id="asmrBtn" aria-pressed="false" title="A">✦ ASMR mode</button>
+    <button id="soundBtn" aria-pressed="false">Sound off</button><label id="volumeControl" hidden>Volume <input id="volume" type="range" min="0" max="100" value="35"></label><button id="hideBtn" aria-expanded="true" aria-controls="inspector" title="H">Hide controls</button>
+    <button id="fullBtn">Fullscreen</button>
+    <button id="saveBtn">Save PNG</button>
+    <button id="recBtn">Record clip</button>
+  </div>
+</header>
+<section class="stage" aria-label="Orbital canvas">
+  <canvas id="c" aria-label="Animated paths of three gravitating bodies"></canvas>
+  <div id="readout"><span>Twin separation</span><strong id="sepVal"></strong><span id="sepSub"></span></div>
+  <output id="notice" role="status"></output>
+</section>
+<aside id="inspector" aria-label="Studio controls">
+  <div class="tabs" role="tablist" aria-label="Control panels">
+    <button id="appearanceTab" role="tab" aria-controls="appearance" aria-selected="true">Appearance</button>
+    <button id="orbitsTab" role="tab" aria-controls="orbits" aria-selected="false" tabindex="-1">Orbits</button>
+    <button id="atmosTab" role="tab" aria-controls="atmos" aria-selected="false" tabindex="-1">Atmosphere</button>
+  </div>
+  <section id="atmos" role="tabpanel" aria-labelledby="atmosTab" hidden>
+    <p>Every close pass rings a chime and sends out a ripple. Turn sound on and use headphones.</p>
+    <label class="slider" for="reverb"><span>Reverb</span><output></output><input type="range" id="reverb" min="0" max="100" value="55"></label>
+    <label class="slider" for="chimes"><span>Chimes</span><output></output><input type="range" id="chimes" min="0" max="100" value="70"></label>
+    <label class="slider" for="texture"><span>Brush texture</span><output></output><input type="range" id="texture" min="0" max="100" value="40"></label>
+    <label class="slider" for="stardust"><span>Stardust</span><output></output><input type="range" id="stardust" min="0" max="100" value="45"></label>
+    <label class="slider" for="bloom"><span>Bloom</span><output></output><input type="range" id="bloom" min="0" max="100" value="55"></label>
+    <fieldset><legend>Effects</legend><div class="toggles">
+      <button data-fx="scale" aria-pressed="true">Scale lock</button><button data-fx="slowmo" aria-pressed="true">Slow-mo passes</button>
+      <button data-fx="breathe" aria-pressed="true">Breathing color</button><button data-fx="stars" aria-pressed="true">Starfield</button>
+      <button data-fx="film" aria-pressed="true">Film grain</button><button data-fx="haptics" aria-pressed="true">Haptics</button>
+      <button data-fx="binaural" aria-pressed="false">Binaural hum</button>
+    </div></fieldset>
+  </section>
+  <section id="appearance" role="tabpanel" aria-labelledby="appearanceTab">
+    <fieldset><legend>Drawing mode</legend><div class="segments">
+      <button data-mode="trails" aria-pressed="true">Trails</button><button data-mode="paint" aria-pressed="false">Flowing paint</button>
+    </div></fieldset>
+    <fieldset><legend>Visual style</legend><div class="segments">
+      <button data-style="neon" aria-pressed="true">Neon</button><button data-style="ink" aria-pressed="false">Ink</button><button data-style="wash" aria-pressed="false">Watercolor</button>
+    </div></fieldset>
+    <fieldset class="palette"><legend>Palette</legend>
+      <select id="palette" aria-label="Palette"><option value="lagoon">Night Lagoon</option><option value="aurora">Aurora</option><option value="ember">Ember</option><option value="paper">Mineral Paper</option><option value="custom">Custom</option></select>
+      <div class="swatches">
+        <label><input type="color" id="color0">Body 1</label><label><input type="color" id="color1">Body 2</label>
+        <label><input type="color" id="color2">Body 3</label><label><input type="color" id="color3">Background</label>
+      </div>
+    </fieldset>
+    <label class="slider" for="persistence"><span>Persistence</span><output></output><input type="range" id="persistence" min="2" max="90" value="24"></label>
+    <label class="slider" for="thickness"><span>Thickness</span><output></output><input type="range" id="thickness" min="0.5" max="9" step=".5" value="2"></label>
+    <label class="slider" for="glow"><span>Glow</span><output></output><input type="range" id="glow" min="0" max="100" value="65"></label>
+    <label class="slider" for="intensity"><span>Intensity</span><output></output><input type="range" id="intensity" min="0" max="100" value="70"></label>
+    <div class="row"><button id="clearBtn">Clear canvas</button><button id="trailsBtn" aria-pressed="true">Trails: on</button></div>
+  </section>
+  <section id="orbits" role="tabpanel" aria-labelledby="orbitsTab" hidden>
+    <fieldset><legend>Orbital preset</legend><div class="presets">
+      <button data-preset="burrau">Pythagorean</button><button data-preset="figure8">Figure-eight</button>
+      <button data-preset="triangle">Lagrange</button><button data-preset="binary">Binary + Third</button>
+      <button data-preset="chaos">Perturbed 8</button><button data-preset="random">Random</button>
+    </div></fieldset>
+    <p id="note"></p>
+    <label class="slider" for="speed"><span>Speed</span><output></output><input type="range" id="speed" min=".15" max="3" step=".05" value="1"></label>
+    <fieldset><legend>Camera</legend>
+      <button id="fitBtn" aria-pressed="true" class="active">Auto-fit: on</button>
+      <label class="slider" for="zoom"><span>Zoom</span><input type="range" id="zoom" min="0" max="1000" value="500"></label>
+    </fieldset>
+    <fieldset><legend>Twin comparison</legend>
+      <div class="row"><button id="twinBtn" aria-pressed="false">Twin test</button>
+      <label class="kick">Kick <select id="kick"><option value="1e-10">10⁻¹⁰</option><option value="1e-8" selected>10⁻⁸</option><option value="1e-6">10⁻⁶</option><option value="1e-4">10⁻⁴</option><option value="1e-2">10⁻²</option></select></label></div>
+      <p>The twin starts from the current state with a small velocity kick. Its paths are dashed.</p>
+    </fieldset>
+  </section>
+</aside>
+<footer>
+  <div class="transport"><button id="playBtn" title="Space">Pause</button><button id="resetBtn" title="R">Reset</button><span id="presetName"></span></div>
+  <div id="diagnostics"><span id="simTime"></span><span id="energyDrift" title="Relative numerical energy drift"></span><span id="energyWarning"></span></div>
+</footer>
+</main>
+<script>
+(() => {
+'use strict';
+
+// ─────────────────────────────────────────────────────────────
+//  Constants
+// ─────────────────────────────────────────────────────────────
+const G         = 1;        // gravitational constant (sim units)
+const SOFT      = 1e-5;     // softening² — keeps close encounters finite
+const MAX_TRAIL = 3601;
+const COLORS    = ['#ff5d73', '#4ecdc4', '#ffd166'];
+
+const canvas = document.getElementById('c');
+const ctx    = canvas.getContext('2d', { alpha: false });
+
+let W = 0, H = 0, DPR = 1;
+function resize() {
+  const previousSize = Math.min(W, H);
+  W = Math.max(1, canvas.clientWidth);
+  H = Math.max(1, canvas.clientHeight);
+  DPR = Math.min(window.devicePixelRatio || 1, 2, Math.sqrt(4200000 / (W * H)));
+  if (previousSize && state) cam.zoom *= Math.min(W, H) / previousSize;
+  dirty = true;
+  canvas.width  = Math.round(W * DPR);
+  canvas.height = Math.round(H * DPR);
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  bloomC.width = Math.max(1, Math.round(W / 4));
+  bloomC.height = Math.max(1, Math.round(H / 4));
+}
+
+
+// ─────────────────────────────────────────────────────────────
+//  Presets
+// ─────────────────────────────────────────────────────────────
+const PRESETS = {
+  burrau: {
+    note: 'Masses 3·4·5 start from rest on a 3-4-5 triangle. The triple ' +
+          'encounter near <em>t ≈ 15</em> is wildly chaotic — the lightest body ' +
+          'gets flung out. This is the real deal, not a periodic orbit.',
+    build() {
+      return [
+        { m: 3, x:  1, y:  3, vx: 0, vy: 0, color: COLORS[0] },
+        { m: 4, x: -2, y: -1, vx: 0, vy: 0, color: COLORS[1] },
+        { m: 5, x:  1, y: -1, vx: 0, vy: 0, color: COLORS[2] },
+      ];
+    },
+  },
+
+  figure8: {
+    note: 'The Chenciner–Montgomery figure-eight: three equal masses chase ' +
+          'each other along one curve. It is <em>exactly periodic and stable</em> — ' +
+          'that is why it looks "plain". It is the exception, not the rule.',
+    build() {
+      const p = 0.97000436, q = -0.24308753;
+      const vx = 0.466203685, vy = 0.43236573;
+      return [
+        { m: 1, x:  p, y:  q, vx:  vx,  vy:  vy,  color: COLORS[0] },
+        { m: 1, x: -p, y: -q, vx:  vx,  vy:  vy,  color: COLORS[1] },
+        { m: 1, x:  0, y:  0, vx: -2*vx, vy: -2*vy, color: COLORS[2] },
+      ];
+    },
+  },
+
+  triangle: {
+    note: 'Lagrange\'s equilateral solution — three equal masses riding a ' +
+          'rigidly rotating triangle. An exact periodic solution, but the equal-mass ' +
+           'configuration is unstable to generic small perturbations.',
+    build() {
+      const R = 1 / Math.sqrt(3), v = 1, out = [];
+      for (let i = 0; i < 3; i++) {
+        const a = i * 2 * Math.PI / 3, ca = Math.cos(a), sa = Math.sin(a);
+        out.push({ m: 1, x: R*ca, y: R*sa, vx: -v*sa, vy: v*ca, color: COLORS[i] });
+      }
+      return out;
+    },
+  },
+
+  binary: {
+    note: 'A tight circular binary with a light third body orbiting the pair. ' +
+          'Technically chaotic, but hierarchical — it stays tidy for a long time.',
+    build() {
+      const d = 1, v = Math.sqrt(G / (2 * d));
+      const r = 4.5, m3 = 0.4;
+      const v3 = Math.sqrt(G * 2 / r);
+      return [
+        { m: 1,  x: -d/2, y: 0, vx: 0,  vy:  v, color: COLORS[0] },
+        { m: 1,  x:  d/2, y: 0, vx: 0,  vy: -v, color: COLORS[1] },
+        { m: m3, x: 0,    y: r, vx: v3, vy: 0, color: COLORS[2] },
+      ];
+    },
+  },
+
+  chaos: {
+    note: 'The figure-eight with a 3% velocity kick. Because the 8 is stable ' +
+          'the orbit initially resembles the original, then its phase and path drift.',
+    build() {
+      const b = PRESETS.figure8.build();
+      b[0].vx += 0.014;
+      return b;
+    },
+  },
+
+  random: {
+    note: 'Random masses, positions and velocities. Almost every generic ' +
+          'three-body system is chaotic — this is the typical case.',
+    build() {
+      const out = [];
+      for (let i = 0; i < 3; i++) {
+        const a = Math.random() * Math.PI * 2;
+        const r = 0.8 + Math.random() * 1.0;
+        const sp = 0.35 + Math.random() * 0.5;
+        out.push({
+          m: 0.6 + Math.random() * 1.2,
+          x: r * Math.cos(a), y: r * Math.sin(a),
+          vx: -sp * Math.sin(a) + (Math.random() - 0.5) * 0.3,
+          vy:  sp * Math.cos(a) + (Math.random() - 0.5) * 0.3,
+          color: COLORS[i],
+        });
+      }
+      return out;
+    },
+  },
+};
+
+// ─────────────────────────────────────────────────────────────
+//  State
+// ─────────────────────────────────────────────────────────────
+let state, state2 = null;
+let masses  = new Float64Array(3);
+let bodies  = [];
+let k1, k2, k3, k4, tmp;
+
+let cam     = { x: 0, y: 0, zoom: 120 };
+let autoFit = true;
+let twinOn  = false;
+let paused  = false;
+let speed   = 1;
+let acc     = 0;
+let currentPreset = 'burrau';
+let simTime = 0, initialEnergy = 0, trailsOn = true;
+let kickSize = 1e-8;
+
+// ─────────────────────────────────────────────────────────────
+//  Physics — RK4 with adaptive steps
+// ─────────────────────────────────────────────────────────────
+function deriv(s, out) {
+  const n = masses.length;
+  for (let i = 0; i < n; i++) { out[4*i+2] = 0; out[4*i+3] = 0; }
+
+  for (let i = 0; i < n; i++) {
+    const xi = s[4*i], yi = s[4*i+1];
+    for (let j = i + 1; j < n; j++) {
+      const dx = s[4*j] - xi;
+      const dy = s[4*j+1] - yi;
+      const r2 = dx*dx + dy*dy + SOFT;
+      const f  = G / (r2 * Math.sqrt(r2));      // 1/r³
+      out[4*i+2] += masses[j] * dx * f;
+      out[4*i+3] += masses[j] * dy * f;
+      out[4*j+2] -= masses[i] * dx * f;
+      out[4*j+3] -= masses[i] * dy * f;
+    }
+  }
+  for (let i = 0; i < n; i++) { out[4*i] = s[4*i+2]; out[4*i+1] = s[4*i+3]; }
+}
+
+function advance(s, h) {
+  const n = s.length;
+  deriv(s, k1);
+  for (let i = 0; i < n; i++) tmp[i] = s[i] + 0.5*h*k1[i];
+  deriv(tmp, k2);
+  for (let i = 0; i < n; i++) tmp[i] = s[i] + 0.5*h*k2[i];
+  deriv(tmp, k3);
+  for (let i = 0; i < n; i++) tmp[i] = s[i] + h*k3[i];
+  deriv(tmp, k4);
+  const h6 = h / 6;
+  for (let i = 0; i < n; i++)
+    s[i] += h6 * (k1[i] + 2*k2[i] + 2*k3[i] + k4[i]);
+}
+
+// Shrink the step during close encounters so nothing blows up.
+function chooseStep(s) {
+  const n = masses.length;
+  let rmin = Infinity;
+  for (let i = 0; i < n; i++)
+    for (let j = i + 1; j < n; j++) {
+      const dx = s[4*j] - s[4*i];
+      const dy = s[4*j+1] - s[4*i+1];
+      const r = Math.sqrt(dx*dx + dy*dy);
+      if (r < rmin) rmin = r;
+    }
+  if (rmin < 0.25) return Math.max(2e-5, 0.003 * Math.pow(rmin / 0.25, 1.5));
+  return 0.003;
+}
+
+// Diagnostic energy uses the same softened potential as the force law.
+function totalEnergy(s) {
+  let E = 0;
+  for (let i = 0; i < masses.length; i++) {
+    const vx = s[4*i+2], vy = s[4*i+3];
+    E += 0.5 * masses[i] * (vx*vx + vy*vy);
+    for (let j = i+1; j < masses.length; j++) {
+      const dx = s[4*j]-s[4*i], dy = s[4*j+1]-s[4*i+1];
+      E -= G*masses[i]*masses[j]/Math.sqrt(dx*dx+dy*dy+SOFT);
+    }
+  }
+  return E;
+}
+function updateDiagnostics() {
+  document.getElementById('simTime').textContent = 't = ' + simTime.toFixed(3);
+  const drift = Math.abs(totalEnergy(state)-initialEnergy)/Math.max(Math.abs(initialEnergy),1e-12);
+  document.getElementById('energyDrift').textContent = '|ΔE/E₀| = ' + drift.toExponential(2);
+  document.getElementById('energyWarning').textContent = drift > 0.01 ? '⚠ Numerical energy drift > 1%; interpret cautiously' : '';
+}
+
+// ─────────────────────────────────────────────────────────────
+//  Loading
+// ─────────────────────────────────────────────────────────────
+function loadPreset(name) {
+  currentPreset = name;
+  const p = PRESETS[name];
+  const defs = p.build();
+  const n = defs.length, L = 4 * n;
+
+  // shift into the centre-of-mass frame
+  let M = 0, cx = 0, cy = 0, px = 0, py = 0;
+  for (const d of defs) {
+    M += d.m; cx += d.m*d.x; cy += d.m*d.y; px += d.m*d.vx; py += d.m*d.vy;
+  }
+  cx /= M; cy /= M; px /= M; py /= M;
+
+  state  = new Float64Array(L);
+  masses = new Float64Array(n);
+  bodies = [];
+
+  defs.forEach((d, i) => {
+    masses[i]    = d.m;
+    state[4*i]   = d.x  - cx;
+    state[4*i+1] = d.y  - cy;
+    state[4*i+2] = d.vx - px;
+    state[4*i+3] = d.vy - py;
+    bodies.push({ m: d.m, color: d.color, trail: new Trail(), trail2: null });
+  });
+
+  k1 = new Float64Array(L); k2 = new Float64Array(L);
+  k3 = new Float64Array(L); k4 = new Float64Array(L);
+  tmp = new Float64Array(L);
+
+  acc = 0;
+  simTime = 0;
+  resetPasses();
+  passQueue.length = 0;
+  rings = [];
+  slowmo = 0;
+  presetFade = 1;
+  initialEnergy = totalEnergy(state);
+  cam.x = 0; cam.y = 0;
+  cam.zoom = fitZoom();
+
+  document.getElementById('note').innerHTML = p.note;
+  document.querySelectorAll('[data-preset]').forEach(b =>
+    b.classList.toggle('active', b.dataset.preset === name));
+
+  if (twinOn) makeTwin(); else state2 = null;
+  updateReadout();
+  updateDiagnostics();
+  clearCanvas();
+  syncControls();
+}
+
+function fitZoom() {
+  let maxR = 0.5;
+  for (let i = 0; i < bodies.length; i++) {
+    const r = Math.hypot(state[4*i], state[4*i+1]);
+    if (r > maxR) maxR = r;
+  }
+  return 0.40 * Math.min(W, H) / maxR;
+}
+
+// ─────────────────────────────────────────────────────────────
+//  Twin system — sensitive dependence made visible
+// ─────────────────────────────────────────────────────────────
+function makeTwin() {
+  state2 = Float64Array.from(state);
+  state2[2] += kickSize;                // perturb body 0 velocity by the selected amount
+  for (let i = 0; i < bodies.length; i++) {
+    bodies[i].trail2 = new Trail();
+    bodies[i].trail2.add(state2[4*i], state2[4*i+1]);
+  }
+  dirty = true;
+  updateReadout();
+}
+
+function separation() {
+  if (!state2) return 0;
+  let d = 0;
+  for (let i = 0; i < bodies.length; i++) {
+    const dx = state[4*i] - state2[4*i];
+    const dy = state[4*i+1] - state2[4*i+1];
+    const r = Math.hypot(dx, dy);
+    if (r > d) d = r;
+  }
+  return d;
+}
+
+const sepVal = document.getElementById('sepVal');
+const sepSub = document.getElementById('sepSub');
+const readout = document.getElementById('readout');
+
+function updateReadout() {
+  if (!twinOn || !state2) { readout.style.display = 'none'; return; }
+  readout.style.display = 'flex';
+  const d = separation();
+  sepVal.textContent = d < 1e-4 ? d.toExponential(2) : d.toFixed(4);
+  if (d < 1e-6)      sepSub.textContent = 'trajectories still very close';
+  else if (d < 1e-2) sepSub.textContent = 'small trajectory separation';
+  else if (d < 0.5)  sepSub.textContent = 'moderate trajectory separation';
+  else               sepSub.textContent = 'large trajectory separation';
+}
+
+// ─────────────────────────────────────────────────────────────
+//  Camera
+// ─────────────────────────────────────────────────────────────
+function updateCamera(dt) {
+  let M = 0, cx = 0, cy = 0;
+  for (let i = 0; i < bodies.length; i++) {
+    const m = masses[i];
+    M += m; cx += m * state[4*i]; cy += m * state[4*i+1];
+  }
+  cx /= M; cy /= M;
+
+  const kPos = 1 - Math.pow(0.0015, dt);
+  cam.x += (cx - cam.x) * kPos;
+  cam.y += (cy - cam.y) * kPos;
+
+  if (autoFit) {
+    let maxR = 0.35;
+    for (let i = 0; i < bodies.length; i++) {
+      const r = Math.hypot(state[4*i] - cx, state[4*i+1] - cy);
+      if (r > maxR) maxR = r;
+    }
+    if (maxR > 60) maxR = 60;
+    const target = Math.min(0.40 * Math.min(W, H) / maxR, 900);
+    const kZoom  = 1 - Math.pow(0.03, dt);
+    cam.zoom *= Math.pow(target / cam.zoom, kZoom);
+    cam.zoom = Math.max(3, Math.min(1200, cam.zoom));
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+//  Rendering
+// ─────────────────────────────────────────────────────────────
+function hexA(hex, a) {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r},${g},${b},${a})`;
+}
+
+let dirty = true;
+let sampleClock = 0;
+let drawingMode = 'trails';
+let visualStyle = 'neon';
+let colors = [...COLORS, '#080f17'];
+const appearance = { persistence: 24, thickness: 2, glow: .65, intensity: .7 };
+
+// ─────────────────────────────────────────────────────────────
+//  Atmosphere: close passes, stardust, ripples, stars, bloom, film
+// ─────────────────────────────────────────────────────────────
+const fx = { scale: true, slowmo: true, breathe: true, film: true, stars: true, binaural: false, haptics: true };
+const PAIRS = [[0, 1], [0, 2], [1, 2]];
+const SCALE = [0, 2, 4, 7, 9];          // A major pentatonic
+let passState = [], passQueue = [], particles = [], rings = [], dustAcc = [0, 0, 0];
+let slowmo = 0, presetFade = 1, drawColors = [...COLORS];
+const stars = Array.from({ length: 300 }, () => ({
+  x: Math.random(), y: Math.random(), z: .15 + Math.random() ** 2 * .85,
+  b: .2 + Math.random() * .6, f: .4 + Math.random() * 1.8, p: Math.random() * 6.283,
+}));
+const bloomC = document.createElement('canvas');
+const bctx = bloomC.getContext('2d');
+const bloomBlur = 'filter' in bctx;
+const grainC = document.createElement('canvas');
+grainC.width = grainC.height = 160;
+{
+  const g = grainC.getContext('2d'), img = g.createImageData(160, 160);
+  for (let i = 0; i < img.data.length; i += 4) {
+    const v = Math.random() * 255;
+    img.data[i] = img.data[i + 1] = img.data[i + 2] = v;
+    img.data[i + 3] = 255;
+  }
+  g.putImageData(img, 0, 0);
+}
+const grainPattern = ctx.createPattern(grainC, 'repeat');
+let vignette = null, vignetteKey = '';
+
+function resetPasses() {
+  passState = PAIRS.map(() => ({ last: Infinity, falling: false, peak: 0, cool: 0 }));
+}
+
+// Called every integrator substep: a periapsis is where a pair's distance
+// stops shrinking and starts growing. Only real dips count, so a circular
+// binary's numerical jitter stays silent.
+function detectPasses() {
+  PAIRS.forEach(([a, b], p) => {
+    const s = passState[p];
+    const dx = state[4 * b] - state[4 * a], dy = state[4 * b + 1] - state[4 * a + 1];
+    const d = Math.hypot(dx, dy);
+    if (d > s.peak) s.peak = d;
+    if (s.falling && d > s.last) {
+      if ((s.peak - s.last) / s.peak > .2 && s.cool <= 0) {
+        passQueue.push({ a, b, d: s.last, x: state[4 * a] + dx / 2, y: state[4 * a + 1] + dy / 2 });
+        s.cool = .15;
+      }
+      s.peak = d;
+    }
+    s.falling = d < s.last;
+    s.last = d;
+  });
+}
+
+function flushPasses() {
+  for (const ev of passQueue) {
+    const strength = Math.min(1, .28 / (ev.d + .04));
+    if (strength < .1) continue;
+    rings.push({ x: ev.x, y: ev.y, a: ev.a, b: ev.b, s: strength, age: 0, life: 1.4 + strength });
+    const burst = Math.round(34 * strength * (.3 + appearance.stardust));
+    for (let i = 0; i < burst; i++) {
+      const ang = Math.random() * 6.283, sp = (.1 + Math.random() * .35) * (.5 + strength);
+      particles.push({ x: ev.x, y: ev.y, vx: Math.cos(ang) * sp, vy: Math.sin(ang) * sp,
+        age: 0, life: 1.2 + Math.random() * 2, c: i % 2 ? ev.a : ev.b, s: Math.random() });
+    }
+    slowmo = Math.max(slowmo, strength);
+    const degree = (ev.a + ev.b - 1) * 2 + Math.round(strength * 5);
+    const semis = Math.floor(degree / 5) * 12 + SCALE[degree % 5];
+    const screenX = (ev.x - cam.x) * cam.zoom / Math.max(1, W * .32);
+    chime(440 * Math.pow(2, semis / 12), Math.tanh(screenX) * .85, (.05 + .22 * strength) * appearance.chimes);
+    if (fx.haptics && navigator.vibrate) navigator.vibrate(Math.round(6 + 22 * strength));
+  }
+  passQueue.length = 0;
+}
+
+function updateFx(dt) {
+  for (const s of passState) s.cool -= dt;
+  slowmo *= Math.pow(.2, dt);
+  bodies.forEach((body, i) => {
+    const vx = state[4 * i + 2], vy = state[4 * i + 3], v = Math.hypot(vx, vy);
+    dustAcc[i] += appearance.stardust * dt * (18 + 70 * v / (1 + v));
+    while (dustAcc[i] >= 1) {
+      dustAcc[i]--;
+      const ang = Math.random() * 6.283, sp = Math.random() * .08;
+      particles.push({ x: state[4 * i] + (Math.random() - .5) * .02, y: state[4 * i + 1] + (Math.random() - .5) * .02,
+        vx: Math.cos(ang) * sp - vx * .03, vy: Math.sin(ang) * sp - vy * .03,
+        age: 0, life: 1.5 + Math.random() * 2.5, c: i, s: Math.random() });
+    }
+  });
+  const drag = 1 - Math.min(.9, .7 * dt);
+  let n = 0;
+  for (const p of particles) {
+    p.age += dt;
+    if (p.age >= p.life) continue;
+    p.vx *= drag; p.vy *= drag;
+    p.x += p.vx * dt; p.y += p.vy * dt;
+    particles[n++] = p;
+  }
+  particles.length = n;
+  if (n > 3000) particles.splice(0, n - 3000);
+  rings = rings.filter(r => (r.age += dt) < r.life);
+}
+
+function isLight() {
+  const g = colors[3];
+  return .2126 * parseInt(g.slice(1, 3), 16) + .7152 * parseInt(g.slice(3, 5), 16) + .0722 * parseInt(g.slice(5, 7), 16) > 135;
+}
+
+function hueShift(hex, deg) {
+  const r = parseInt(hex.slice(1, 3), 16) / 255, g = parseInt(hex.slice(3, 5), 16) / 255, b = parseInt(hex.slice(5, 7), 16) / 255;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b), l = (max + min) / 2;
+  let h = 0, s = 0;
+  if (max !== min) {
+    const d = max - min;
+    s = l > .5 ? d / (2 - max - min) : d / (max + min);
+    h = 60 * (max === r ? (g - b) / d + (g < b ? 6 : 0) : max === g ? (b - r) / d + 2 : (r - g) / d + 4);
+  }
+  h = ((h + deg) % 360 + 360) % 360;
+  const c = (1 - Math.abs(2 * l - 1)) * s, x = c * (1 - Math.abs((h / 60) % 2 - 1)), m = l - c / 2;
+  const [R, G, B] = h < 60 ? [c, x, 0] : h < 120 ? [x, c, 0] : h < 180 ? [0, c, x] : h < 240 ? [0, x, c] : h < 300 ? [x, 0, c] : [c, 0, x];
+  const to = v => Math.round((v + m) * 255).toString(16).padStart(2, '0');
+  return '#' + to(R) + to(G) + to(B);
+}
+
+function computeDrawColors() {
+  for (let i = 0; i < 3; i++) {
+    if (!fx.breathe || !state) { drawColors[i] = colors[i]; continue; }
+    const v = Math.hypot(state[4 * i + 2], state[4 * i + 3]);
+    drawColors[i] = hueShift(colors[i], (v / (1 + v) - .45) * 56);
+  }
+}
+
+// Parallax stars, bent outward around each body like weak gravitational lensing.
+function drawStars(z, ox, oy) {
+  const t = performance.now() / 1000;
+  const lens = bodies.map((b, i) => [state[4 * i] * z + ox, oy - state[4 * i + 1] * z,
+    Math.pow(4 + 5 * Math.sqrt(b.m) * Math.min(1.6, z / 150), 2)]);
+  ctx.fillStyle = '#dfeaff';
+  for (const s of stars) {
+    let x = ((s.x * W - cam.x * z * s.z * .15) % W + W) % W;
+    let y = ((s.y * H + cam.y * z * s.z * .15) % H + H) % H;
+    for (const [bx, by, e] of lens) {
+      const dx = x - bx, dy = y - by, r2 = dx * dx + dy * dy + 1;
+      x += dx * e / r2; y += dy * e / r2;
+    }
+    ctx.globalAlpha = s.b * (.55 + .45 * Math.sin(t * s.f + s.p));
+    const size = .5 + s.z * 1.3;
+    ctx.fillRect(x, y, size, size);
+  }
+  ctx.globalAlpha = 1;
+}
+
+function drawDust(z, ox, oy) {
+  if (!particles.length) return;
+  ctx.globalCompositeOperation = blendMode();
+  const base = .5 + appearance.thickness * .18, k = .55 * (.4 + .6 * appearance.intensity);
+  for (let c = 0; c < 3; c++) {
+    ctx.fillStyle = drawColors[c];
+    for (const p of particles) {
+      if (p.c !== c) continue;
+      ctx.globalAlpha = Math.pow(1 - p.age / p.life, 1.5) * k;
+      ctx.beginPath();
+      ctx.arc(p.x * z + ox, oy - p.y * z, base * (.6 + p.age * 1.4 + p.s), 0, 6.283);
+      ctx.fill();
+    }
+  }
+  ctx.globalAlpha = 1;
+  ctx.globalCompositeOperation = 'source-over';
+}
+
+function drawRings(z, ox, oy) {
+  if (!rings.length) return;
+  ctx.globalCompositeOperation = blendMode();
+  for (const r of rings) {
+    const k = r.age / r.life, x = r.x * z + ox, y = oy - r.y * z;
+    for (let j = 0; j < 2; j++) {
+      const kk = Math.max(0, k - j * .12);
+      ctx.globalAlpha = Math.pow(1 - kk, 2) * .55 * r.s * (j ? .6 : 1);
+      ctx.strokeStyle = drawColors[j ? r.b : r.a];
+      ctx.lineWidth = Math.max(.3, (1.8 - kk) * (1 + r.s));
+      ctx.beginPath();
+      ctx.arc(x, y, 6 + kk * (40 + 120 * r.s), 0, 6.283);
+      ctx.stroke();
+    }
+  }
+  ctx.globalAlpha = 1;
+  ctx.globalCompositeOperation = 'source-over';
+}
+
+function drawBloom() {
+  const bw = bloomC.width, bh = bloomC.height;
+  bctx.globalCompositeOperation = 'copy';
+  if (bloomBlur) bctx.filter = 'blur(4px)';
+  bctx.drawImage(canvas, 0, 0, bw, bh);
+  if (bloomBlur) bctx.filter = 'none';
+  ctx.globalCompositeOperation = 'screen';
+  ctx.globalAlpha = appearance.bloom * .7;
+  ctx.drawImage(bloomC, 0, 0, W, H);
+  ctx.globalAlpha = 1;
+  ctx.globalCompositeOperation = 'source-over';
+}
+
+function drawFilm(light) {
+  const key = W + 'x' + H + light;
+  if (key !== vignetteKey) {
+    vignetteKey = key;
+    vignette = ctx.createRadialGradient(W / 2, H / 2, Math.min(W, H) * .25, W / 2, H / 2, Math.hypot(W, H) * .6);
+    vignette.addColorStop(0, 'rgba(0,0,0,0)');
+    vignette.addColorStop(1, light ? 'rgba(70,45,20,.22)' : 'rgba(0,0,0,.55)');
+  }
+  ctx.fillStyle = vignette;
+  ctx.fillRect(0, 0, W, H);
+  ctx.save();
+  ctx.globalAlpha = light ? .08 : .07;
+  ctx.globalCompositeOperation = 'overlay';
+  ctx.translate(-Math.random() * 160, -Math.random() * 160);
+  ctx.fillStyle = grainPattern;
+  ctx.fillRect(0, 0, W + 160, H + 160);
+  ctx.restore();
+}
+
+class Trail {
+  constructor() {
+    this.xy = new Float64Array(MAX_TRAIL * 2);
+    this.head = 0;
+    this.length = 0;
+  }
+  add(x, y) {
+    this.xy[2 * this.head] = x;
+    this.xy[2 * this.head + 1] = y;
+    this.head = (this.head + 1) % MAX_TRAIL;
+    this.length = Math.min(this.length + 1, MAX_TRAIL);
+  }
+}
+
+function pushTrails() {
+  bodies.forEach((body, i) => {
+    body.trail.add(state[4 * i], state[4 * i + 1]);
+    if (state2) body.trail2.add(state2[4 * i], state2[4 * i + 1]);
+  });
+}
+
+function clearCanvas() {
+  for (const body of bodies) {
+    body.trail.length = 0;
+    if (body.trail2) body.trail2.length = 0;
+  }
+  sampleClock = 0;
+  particles.length = 0;
+  pushTrails();
+  dirty = true;
+}
+
+// Paint is rebuilt from the same bounded world-space history as the clean
+// trails. Brush movement lives in screen space and never writes to state.
+const points = new Float32Array(MAX_TRAIL * 4);
+let stridePhase = .11;
+function projectTrail(trail, colorIndex, twin, ox, oy) {
+  if (!trail || trail.length < 2) return;
+  const count = Math.min(trail.length, appearance.persistence * 40 + 1);
+  const ribbon = drawingMode === 'paint' && !twin;
+  const width = appearance.thickness;
+  const strength = appearance.intensity;
+  const glow = appearance.glow;
+  const stride = Math.max(1, Math.ceil(count / (ribbon ? 480 : 720)));
+  let used = 0;
+  let offset = 0;
+  let previousX = 0, previousY = 0;
+  // Walk backward from the freshest sample. Keep a normal for each ribbon
+  // vertex so the filaments curl across the local direction of travel.
+  for (let age = 0; age < count; age += stride) {
+    const k = (trail.head - 1 - age + MAX_TRAIL) % MAX_TRAIL;
+    const x = trail.xy[2 * k] * cam.zoom + ox;
+    const y = oy - trail.xy[2 * k + 1] * cam.zoom;
+    const dx = x - previousX, dy = y - previousY;
+    const length = Math.hypot(dx, dy);
+    if (used && length > .01 && ribbon) {
+      points[offset + 2] = -dy / length;
+      points[offset + 3] = dx / length;
+      if (used === 1) {
+        points[2] = points[offset + 2];
+        points[3] = points[offset + 3];
+      }
+    } else {
+      points[offset + 2] = used ? points[offset - 2] : 0;
+      points[offset + 3] = used ? points[offset - 1] : 0;
+    }
+    points[offset] = x;
+    points[offset + 1] = y;
+    previousX = x;
+    previousY = y;
+    used++;
+    offset += 4;
+  }
+
+  stridePhase = .11 * stride;
+  const color = drawColors[colorIndex];
+  ctx.strokeStyle = color;
+  ctx.globalCompositeOperation = twin ? 'source-over' : blendMode();
+  ctx.setLineDash(twin ? [5, 6] : []);
+  const bands = Math.min(12, used - 1);
+  for (let band = bands - 1; band >= 0; band--) {
+    const start = Math.floor(band * (used - 1) / bands);
+    const end = Math.floor((band + 1) * (used - 1) / bands);
+    const age = (start + end) * .5 * stride / 40;
+    const fade = Math.pow(Math.max(0, 1 - age / appearance.persistence), 1.35);
+    if (twin) {
+      strokeBand(start, end, Math.max(1.2, width * .58), fade * .69);
+      continue;
+    }
+    const density = fade * (.22 + .78 * strength);
+    if (ribbon) {
+      const spread = (3 + 2.5 * width) * (.45 + strength) * (1 + Math.min(age, 8) * .10);
+      const phase = colorIndex * 2.1 + simTime * .85;
+      if (glow > 0) strokeBand(start, end, width * (4 + 7 * glow), density * glow * .11, spread * .64, phase);
+      strokeBand(start, end, width * 3.4, density * .13, -spread * .72, phase + 1);
+      strokeBand(start, end, width * 2.3, density * .28, spread, phase);
+      strokeBand(start, end, width * .68, density * .57, spread * 1.4, phase + .7);
+      strokeBand(start, end, width * .53, density * .43, -spread, phase + .4);
+    } else {
+      if (glow > 0) {
+        strokeBand(start, end, width + 17 * glow, density * glow * .09);
+        strokeBand(start, end, width + 7 * glow, density * glow * .24);
+      }
+      if (visualStyle === 'wash') strokeBand(start, end, width * 3.8, density * .18);
+      strokeBand(start, end, width, density * (visualStyle === 'wash' ? .43 : visualStyle === 'neon' ? .54 / (1 + age * .36) : .88));
+      if (visualStyle === 'neon' && glow > 0) {
+        ctx.strokeStyle = '#f2fffb';
+        strokeBand(start, end, Math.max(.5, width * .33), density * .18 * glow / (1 + age));
+        ctx.strokeStyle = color;
+      }
+    }
+  }
+  ctx.setLineDash([]);
+  ctx.globalAlpha = 1;
+  ctx.globalCompositeOperation = 'source-over';
+}
+
+function strokeBand(start, end, width, opacity, spread = 0, phase = 0) {
+  ctx.globalAlpha = opacity;
+  ctx.lineWidth = width;
+  ctx.beginPath();
+  for (let i = start; i <= end; i++) {
+    const k = i * 4;
+    const wave = spread ? spread * Math.min(i / 8, 1) * Math.sin(i * stridePhase + phase + .7 * Math.sin(i * stridePhase * .31 - phase)) : 0;
+    const x = points[k] + points[k + 2] * wave;
+    const y = points[k + 1] + points[k + 3] * wave;
+    if (i === start) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+}
+
+function blendMode() {
+  const ground = colors[3];
+  const light = .2126 * parseInt(ground.slice(1, 3), 16)
+    + .7152 * parseInt(ground.slice(3, 5), 16)
+    + .0722 * parseInt(ground.slice(5, 7), 16) > 135;
+  if (visualStyle === 'neon') return light ? 'source-over' : 'screen';
+  if (visualStyle === 'wash') return light ? 'multiply' : 'screen';
+  return 'source-over';
+}
+
+function render() {
+  dirty = false;
+  const light = isLight();
+  ctx.globalAlpha = 1;
+  ctx.globalCompositeOperation = 'source-over';
+  ctx.fillStyle = colors[3];
+  ctx.fillRect(0, 0, W + 1, H + 1);
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  const z = cam.zoom;
+  const ox = W / 2 - cam.x * z, oy = H / 2 + cam.y * z;
+  computeDrawColors();
+  if (fx.stars && !light) drawStars(z, ox, oy);
+
+  if (trailsOn) {
+    bodies.forEach((body, i) => projectTrail(body.trail, i, false, ox, oy));
+    if (state2) bodies.forEach((body, i) => projectTrail(body.trail2, i, true, ox, oy));
+  }
+  drawDust(z, ox, oy);
+  drawRings(z, ox, oy);
+  bodies.forEach((body, i) => {
+    const color = drawColors[i];
+    const x = state[4 * i] * z + ox, y = oy - state[4 * i + 1] * z;
+    const r = 2.4 + 2.5 * Math.cbrt(body.m);
+    if (appearance.glow > 0) {
+      const radius = r * (2 + 3 * appearance.glow);
+      const halo = ctx.createRadialGradient(x, y, r * .35, x, y, radius);
+      halo.addColorStop(0, hexA(color, appearance.glow * .8));
+      halo.addColorStop(1, hexA(color, 0));
+      ctx.fillStyle = halo;
+      ctx.fillRect(x - radius, y - radius, radius * 2, radius * 2);
+    }
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fill();
+    if (visualStyle === 'neon') {
+      ctx.fillStyle = '#f6fffc';
+      ctx.beginPath();
+      ctx.arc(x, y, r * .38, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    if (state2) {
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 1.6;
+      ctx.beginPath();
+      ctx.arc(state2[4 * i] * z + ox, oy - state2[4 * i + 1] * z, r + 4, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+  });
+  if (!light && appearance.bloom > 0) drawBloom();
+  if (fx.film) drawFilm(light);
+  if (presetFade > 0) {
+    ctx.globalAlpha = presetFade;
+    ctx.fillStyle = colors[3];
+    ctx.fillRect(0, 0, W + 1, H + 1);
+    ctx.globalAlpha = 1;
+  }
+}
+
+
+const MAX_SUBSTEPS = 5000;
+let last = performance.now(), lastDiagnostics = 0;
+
+function tick(now) {
+  const dt = Math.min((now - last) / 1000, 0.1);
+  last = now;
+
+  if (!paused) {
+    const warp = fx.slowmo ? 1 - .72 * slowmo : 1;   // time eases around close passes
+    acc += dt * 1.5 * speed * warp;    // sim-seconds per real second
+    if (acc > 0.30) acc = 0.30;
+
+    let steps = 0;
+    while (acc > 1e-9 && steps < MAX_SUBSTEPS) {
+      // Both systems advance on the same physical clock, with a step
+      // constrained by the closest encounter in EITHER trajectory.
+      const h = Math.min(chooseStep(state), state2 ? chooseStep(state2) : Infinity, acc);
+      advance(state, h);
+      if (twinOn && state2) advance(state2, h);
+      detectPasses();
+      acc -= h;
+      simTime += h;
+      steps++;
+    }
+    if (steps >= MAX_SUBSTEPS) acc = 0;   // drop backlog during extreme close-ups
+    flushPasses();
+    updateFx(dt);
+
+    sampleClock += dt;
+    if (sampleClock >= 1 / 40) {
+      sampleClock %= 1 / 40;
+      pushTrails();
+    }
+  }
+
+  if (presetFade > 0) { presetFade = Math.max(0, presetFade - dt / .7); dirty = true; }
+  if (!paused) updateCamera(dt);
+  if (now - lastDiagnostics > 100) {
+    if (twinOn) updateReadout();
+    updateDiagnostics();
+    zoom.value = 1000 * Math.log(Math.max(3, cam.zoom) / 3) / zoomScale;
+    updateSound();
+    lastDiagnostics = now;
+  }
+  if (dirty || !paused) render();
+  requestAnimationFrame(tick);
+}
+
+// ─────────────────────────────────────────────────────────────
+//  UI wiring
+// ─────────────────────────────────────────────────────────────
+const playBtn  = document.getElementById('playBtn');
+const resetBtn = document.getElementById('resetBtn');
+const fitBtn   = document.getElementById('fitBtn');
+const twinBtn  = document.getElementById('twinBtn');
+const speedEl  = document.getElementById('speed');
+const kickEl = document.getElementById('kick');
+const trailsBtn = document.getElementById('trailsBtn');
+
+document.querySelectorAll('[data-preset]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    loadPreset(btn.dataset.preset);
+    if (paused) { paused = false; playBtn.textContent = 'Pause'; }
+  });
+});
+
+playBtn.addEventListener('click', () => {
+  paused = !paused;
+  dirty = true;
+  updateDiagnostics();
+  playBtn.textContent = paused ? 'Play' : 'Pause';
+});
+
+resetBtn.addEventListener('click', () => loadPreset(currentPreset));
+
+twinBtn.addEventListener('click', () => {
+  twinOn = !twinOn;
+  twinBtn.classList.toggle('chaos-on', twinOn);
+  twinBtn.textContent = twinOn ? 'Twin test: on' : 'Twin test';
+  if (twinOn) makeTwin(); else {
+    state2 = null;
+    bodies.forEach(body => { body.trail2 = null; });
+  }
+  dirty = true;
+  updateReadout();
+});
+
+fitBtn.addEventListener('click', () => {
+  autoFit = !autoFit;
+  fitBtn.textContent = 'Auto-fit: ' + (autoFit ? 'on' : 'off');
+  fitBtn.classList.toggle('active', autoFit);
+  if (autoFit) cam.zoom = fitZoom();
+  dirty = true;
+});
+
+speedEl.addEventListener('input', () => { speed = parseFloat(speedEl.value); });
+kickEl.addEventListener('change', () => {
+  kickSize = Number(kickEl.value);
+  if (twinOn) makeTwin();
+});
+trailsBtn.addEventListener('click', () => {
+  trailsOn = !trailsOn;
+  dirty = true;
+  trailsBtn.textContent = 'Trails: ' + (trailsOn ? 'on' : 'off');
+  trailsBtn.classList.toggle('active', trailsOn);
+});
+const byId = id => document.getElementById(id);
+const palette = byId('palette');
+const palettes = {
+  lagoon: ['#54ead7', '#ff7893', '#ffd285', '#05080c'],
+  aurora: ['#a8ff78', '#88baff', '#d695ff', '#0d0920'],
+  ember: ['#ff6849', '#ffb65e', '#64d9ce', '#1e1115'],
+  paper: ['#126b68', '#a93658', '#a3631a', '#f1e8d5']
+};
+const pickers = colors.map((_, index) => byId('color' + index));
+let custom = [...palettes.lagoon];
+
+function applyPalette(name) {
+  colors = [...(palettes[name] || custom)];
+  pickers.forEach((picker, i) => { picker.value = colors[i]; });
+  dirty = true;
+}
+
+palette.addEventListener('change', () => applyPalette(palette.value));
+pickers.forEach((picker, i) => picker.addEventListener('input', () => {
+  colors[i] = picker.value;
+  custom = [...colors];
+  palette.value = 'custom';
+  dirty = true;
+}));
+
+function wireChoice(attribute, change) {
+  const buttons = [...document.querySelectorAll('[data-' + attribute + ']')];
+  buttons.forEach(button => button.addEventListener('click', () => {
+    change(button.dataset[attribute]);
+    buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+    dirty = true;
+  }));
+}
+wireChoice('mode', value => { drawingMode = value; });
+wireChoice('style', value => { visualStyle = value; });
+
+document.querySelectorAll('.slider output').forEach(output => {
+  const slider = output.parentElement.querySelector('input');
+  const update = () => {
+    const value = Number(slider.value);
+    const percent = ['glow', 'intensity', 'reverb', 'chimes', 'texture', 'stardust', 'bloom'].includes(slider.id);
+    if (slider.id !== 'speed') appearance[slider.id] = percent ? value / 100 : value;
+    const suffix = { speed: '×', persistence: ' s', thickness: ' px' };
+    output.value = value + (suffix[slider.id] || '%');
+    dirty = true;
+  };
+  slider.addEventListener('input', update);
+  update();
+});
+
+const tabs = [...document.querySelectorAll('[role=tab]')];
+function selectTab(active) {
+  tabs.forEach(tab => {
+    const selected = tab === active;
+    tab.setAttribute('aria-selected', String(selected));
+    tab.tabIndex = selected ? 0 : -1;
+    byId(tab.getAttribute('aria-controls')).hidden = !selected;
+  });
+}
+tabs.forEach((tab, index) => {
+  tab.addEventListener('click', () => selectTab(tab));
+  tab.addEventListener('keydown', event => {
+    const n = tabs.length;
+    const next = { ArrowLeft: (index - 1 + n) % n, ArrowRight: (index + 1) % n, Home: 0, End: n - 1 }[event.key];
+    if (next === undefined) return;
+    event.preventDefault();
+    selectTab(tabs[next]);
+    tabs[next].focus();
+  });
+});
+
+const studio = byId('studio');
+const hideBtn = byId('hideBtn');
+hideBtn.addEventListener('click', () => {
+  const clean = studio.classList.toggle('clean');
+  hideBtn.textContent = clean ? 'Show controls' : 'Hide controls';
+  hideBtn.setAttribute('aria-expanded', String(!clean));
+});
+
+let noticeTimer;
+function notify(message) {
+  byId('notice').textContent = message;
+  clearTimeout(noticeTimer);
+  noticeTimer = setTimeout(() => { byId('notice').textContent = ''; }, 2600);
+}
+byId('clearBtn').addEventListener('click', () => {
+  clearCanvas();
+  notify('Canvas cleared');
+});
+byId('fullBtn').addEventListener('click', async () => {
+  try {
+    if (document.fullscreenElement) await document.exitFullscreen();
+    else await studio.requestFullscreen();
+  } catch {
+    notify('Fullscreen is unavailable in this browser window.');
+  }
+});
+document.addEventListener('fullscreenchange', () => {
+  byId('fullBtn').textContent = document.fullscreenElement ? 'Exit fullscreen' : 'Fullscreen';
+});
+
+byId('saveBtn').addEventListener('click', () => {
+  render();
+  const name = 'three-body-' + currentPreset + '-t' + simTime.toFixed(2) + '.png';
+  canvas.toBlob(blob => {
+    if (!blob) {
+      notify('PNG export failed.');
+      return;
+    }
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = name;
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(url), 30000);
+    notify('PNG ready');
+  }, 'image/png');
+});
+
+const zoom = byId('zoom');
+const zoomScale = Math.log(2000 / 3);
+function setZoom(value) {
+  cam.zoom = Math.max(3, Math.min(2000, value));
+  syncControls();
+  dirty = true;
+}
+function syncControls() {
+  zoom.value = 1000 * Math.log(Math.max(3, cam.zoom) / 3) / zoomScale;
+  fitBtn.setAttribute('aria-pressed', String(autoFit));
+  twinBtn.setAttribute('aria-pressed', String(twinOn));
+  trailsBtn.setAttribute('aria-pressed', String(trailsOn));
+  for (const button of document.querySelectorAll('[data-preset]')) {
+    const selected = button.dataset.preset === currentPreset;
+    button.setAttribute('aria-pressed', String(selected));
+    if (selected) byId('presetName').textContent = button.textContent;
+  }
+}
+zoom.addEventListener('input', () => {
+  const requestedZoom = Number(zoom.value);
+  if (autoFit) fitBtn.click();
+  setZoom(3 * Math.exp(requestedZoom * zoomScale / 1000));
+});
+[fitBtn, twinBtn, trailsBtn].forEach(button => button.addEventListener('click', syncControls));
+
+const soundBtn = byId('soundBtn');
+const volume = byId('volume');
+let audio, master, bus, wet, voices, humGain, binGain, recDest;
+let soundOn = false;
+
+function makeImpulse(seconds, decay) {
+  const len = Math.round(audio.sampleRate * seconds);
+  const buf = audio.createBuffer(2, len, audio.sampleRate);
+  for (let c = 0; c < 2; c++) {
+    const d = buf.getChannelData(c);
+    for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, decay);
+  }
+  return buf;
+}
+
+function makePink(seconds) {
+  const len = Math.round(audio.sampleRate * seconds);
+  const buf = audio.createBuffer(1, len, audio.sampleRate), d = buf.getChannelData(0);
+  let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+  for (let i = 0; i < len; i++) {
+    const w = Math.random() * 2 - 1;
+    b0 = .99886 * b0 + w * .0555179; b1 = .99332 * b1 + w * .0750759; b2 = .969 * b2 + w * .153852;
+    b3 = .8665 * b3 + w * .3104856; b4 = .55 * b4 + w * .5329522; b5 = -.7616 * b5 - w * .016898;
+    d[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + w * .5362) * .11;
+    b6 = w * .115926;
+  }
+  return buf;
+}
+
+// Snap a frequency to the A pentatonic scale.
+function snap(freq) {
+  const semis = 12 * Math.log2(freq / 110), oct = Math.floor(semis / 12), r = semis - 12 * oct;
+  let best = SCALE.reduce((x, y) => Math.abs(y - r) < Math.abs(x - r) ? y : x);
+  if (Math.abs(12 - r) < Math.abs(best - r)) best = 12;
+  return 110 * Math.pow(2, (oct * 12 + best) / 12);
+}
+
+// A struck glass note: three inharmonic partials with a soft attack and long tail.
+function chime(freq, panValue, amp) {
+  if (!soundOn || !audio || audio.state !== 'running' || paused || amp <= 0) return;
+  const t = audio.currentTime;
+  const pan = audio.createStereoPanner();
+  pan.pan.value = panValue;
+  pan.connect(bus);
+  [[1, 1, 3.2], [2.76, .32, 1.6], [5.4, .1, .8]].forEach(([ratio, level, decay]) => {
+    const osc = audio.createOscillator(), g = audio.createGain();
+    osc.frequency.value = freq * ratio;
+    g.gain.setValueAtTime(.0001, t);
+    g.gain.exponentialRampToValueAtTime(amp * level, t + .006);
+    g.gain.exponentialRampToValueAtTime(.0001, t + decay);
+    osc.connect(g).connect(pan);
+    osc.start(t);
+    osc.stop(t + decay + .05);
+  });
+}
+
+function prepareSound() {
+  audio = new AudioContext();
+  const comp = audio.createDynamicsCompressor();
+  comp.threshold.value = -16;
+  comp.ratio.value = 3;
+  master = audio.createGain();
+  master.gain.value = 0;
+  master.connect(comp).connect(audio.destination);
+  recDest = audio.createMediaStreamDestination();
+  comp.connect(recDest);
+  bus = audio.createGain();
+  bus.connect(master);
+  const verb = audio.createConvolver();
+  verb.buffer = makeImpulse(5.5, 2.8);
+  wet = audio.createGain();
+  wet.gain.value = .5;
+  bus.connect(verb).connect(wet).connect(master);
+  const pink = makePink(3);
+
+  const hum = audio.createOscillator();
+  hum.frequency.value = 55;
+  humGain = audio.createGain();
+  humGain.gain.value = 0;
+  hum.connect(humGain).connect(bus);
+  hum.start();
+
+  const merger = audio.createChannelMerger(2);
+  [196, 202].forEach((f, ch) => {
+    const o = audio.createOscillator();
+    o.frequency.value = f;
+    o.connect(merger, 0, ch);
+    o.start();
+  });
+  binGain = audio.createGain();
+  binGain.gain.value = 0;
+  merger.connect(binGain).connect(master);
+
+  voices = [110, 164.81, 220].map(root => {
+    const tone = audio.createOscillator();
+    const air = audio.createOscillator();
+    const filter = audio.createBiquadFilter();
+    const gain = audio.createGain();
+    const pan = audio.createStereoPanner();
+    const overtone = audio.createGain();
+    tone.type = 'sine';
+    air.type = 'triangle';
+    overtone.gain.value = .13;
+    gain.gain.value = 0;
+    air.connect(overtone).connect(filter);
+    tone.connect(filter);
+    filter.connect(gain).connect(pan).connect(bus);
+    tone.start();
+    air.start();
+    // Brushed texture: pink noise through a band-pass that brightens with speed.
+    const noise = audio.createBufferSource();
+    noise.buffer = pink;
+    noise.loop = true;
+    const band = audio.createBiquadFilter();
+    band.type = 'bandpass';
+    band.Q.value = 1.4;
+    const noiseGain = audio.createGain();
+    noiseGain.gain.value = 0;
+    noise.connect(band).connect(noiseGain).connect(pan);
+    noise.start(0, Math.random() * 2.5);
+    return { root, tone, air, filter, gain, pan, band, noiseGain };
+  });
+}
+
+function updateSound() {
+  if (!audio || audio.state !== 'running') return;
+  const now = audio.currentTime;
+  master.gain.setTargetAtTime(soundOn && !paused ? Number(volume.value) / 100 * .36 : 0, now, .08);
+  wet.gain.setTargetAtTime(appearance.reverb * 1.1, now, .2);
+  binGain.gain.setTargetAtTime(soundOn && fx.binaural ? .05 : 0, now, .3);
+  if (!soundOn || paused) return;
+  let nearest = Infinity;
+  voices.forEach(({ root, tone, air, filter, gain, pan, band, noiseGain }, i) => {
+    const j = i * 4;
+    const velocity = Math.hypot(state[j + 2], state[j + 3]);
+    let closest = Infinity;
+    for (let k = 0; k < state.length; k += 4) {
+      if (j !== k) closest = Math.min(closest, Math.hypot(state[j] - state[k], state[j + 1] - state[k + 1]));
+    }
+    const motion = velocity / (1 + velocity);
+    const encounter = 1 / (1 + 4 * closest);
+    let pitch = root * Math.pow(2, (motion - .4) * (fx.scale ? 1.1 : .42));
+    if (fx.scale) pitch = snap(pitch);
+    const glide = fx.scale ? .25 : .14;
+    tone.frequency.setTargetAtTime(pitch, now, glide);
+    air.frequency.setTargetAtTime(pitch * 2.003, now, glide);
+    band.frequency.setTargetAtTime(500 + 3200 * motion, now, .12);
+    noiseGain.gain.setTargetAtTime(appearance.texture * (.04 + .5 * motion * motion), now, .12);
+    nearest = Math.min(nearest, closest);
+    filter.frequency.setTargetAtTime(250 + 760 * motion + 1150 * encounter, now, .1);
+    gain.gain.setTargetAtTime(.13 + .20 * motion + .11 * encounter, now, .14);
+    pan.pan.setTargetAtTime(Math.tanh((state[j] - cam.x) * cam.zoom / Math.max(1, W * .32)) * .82, now, .16);
+  });
+  humGain.gain.setTargetAtTime(.03 + .2 / (1 + 3 * nearest), now, .2);
+}
+
+soundBtn.addEventListener('click', async () => {
+  soundBtn.disabled = true;
+  try {
+    if (!soundOn) {
+      if (!audio) prepareSound();
+      await audio.resume();
+    }
+    soundOn = !soundOn;
+    soundBtn.textContent = soundOn ? 'Sound on' : 'Sound off';
+    soundBtn.setAttribute('aria-pressed', String(soundOn));
+    byId('volumeControl').hidden = !soundOn;
+    updateSound();
+  } catch {
+    notify('Sound is unavailable in this browser.');
+  } finally {
+    soundBtn.disabled = false;
+  }
+});
+volume.addEventListener('input', updateSound);
+playBtn.addEventListener('click', updateSound);
+
+// Effect toggles
+function setFx(key, value) {
+  fx[key] = value;
+  const button = document.querySelector('[data-fx="' + key + '"]');
+  if (button) button.setAttribute('aria-pressed', String(value));
+  dirty = true;
+  updateSound();
+}
+document.querySelectorAll('[data-fx]').forEach(button =>
+  button.addEventListener('click', () => setFx(button.dataset.fx, !fx[button.dataset.fx])));
+
+// One-press ASMR scene. Pressing again restores the previous settings.
+const asmrBtn = byId('asmrBtn');
+const ASMR_SLIDERS = { persistence: 60, thickness: 1.5, glow: 80, intensity: 55, speed: .6,
+  reverb: 78, chimes: 85, texture: 55, stardust: 70, bloom: 70 };
+let asmrSaved = null;
+function setSlider(id, value) {
+  const el = byId(id);
+  el.value = value;
+  el.dispatchEvent(new Event('input'));
+}
+asmrBtn.addEventListener('click', () => {
+  if (asmrSaved) {
+    Object.entries(asmrSaved.sliders).forEach(([id, v]) => setSlider(id, v));
+    Object.entries(asmrSaved.fx).forEach(([k, v]) => setFx(k, v));
+    document.querySelector('[data-style="' + asmrSaved.style + '"]').click();
+    asmrSaved = null;
+    asmrBtn.setAttribute('aria-pressed', 'false');
+    notify('ASMR mode off');
+    return;
+  }
+  asmrSaved = { sliders: {}, fx: { ...fx }, style: visualStyle };
+  Object.keys(ASMR_SLIDERS).forEach(id => { asmrSaved.sliders[id] = byId(id).value; });
+  Object.entries(ASMR_SLIDERS).forEach(([id, v]) => setSlider(id, v));
+  ['scale', 'slowmo', 'breathe', 'stars', 'film'].forEach(k => setFx(k, true));
+  document.querySelector('[data-style="wash"]').click();
+  if (!soundOn) soundBtn.click();
+  asmrBtn.setAttribute('aria-pressed', 'true');
+  notify('ASMR mode: headphones recommended');
+});
+
+// Record a video clip of the canvas, with sound when it is on.
+const recBtn = byId('recBtn');
+let recorder = null, recChunks = [];
+recBtn.addEventListener('click', () => {
+  if (recorder && recorder.state === 'recording') { recorder.stop(); return; }
+  try {
+    const stream = canvas.captureStream(60);
+    if (audio && soundOn) recDest.stream.getAudioTracks().forEach(track => stream.addTrack(track));
+    const type = ['video/webm;codecs=vp9,opus', 'video/webm;codecs=vp8,opus', 'video/webm', 'video/mp4']
+      .find(t => window.MediaRecorder && MediaRecorder.isTypeSupported(t));
+    recorder = new MediaRecorder(stream, type ? { mimeType: type, videoBitsPerSecond: 12e6 } : {});
+    recChunks = [];
+    recorder.ondataavailable = e => { if (e.data.size) recChunks.push(e.data); };
+    recorder.onstop = () => {
+      const mime = recorder.mimeType || 'video/webm';
+      const blob = new Blob(recChunks, { type: mime });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'three-body-' + currentPreset + (mime.includes('mp4') ? '.mp4' : '.webm');
+      link.click();
+      setTimeout(() => URL.revokeObjectURL(url), 30000);
+      recBtn.textContent = 'Record clip';
+      recBtn.classList.remove('recording');
+      notify('Clip saved');
+    };
+    recorder.start(500);
+    recBtn.textContent = '● Stop recording';
+    recBtn.classList.add('recording');
+    notify(soundOn ? 'Recording with sound' : 'Recording (turn sound on to include audio)');
+  } catch {
+    notify('Recording is unavailable in this browser.');
+  }
+});
+
+canvas.addEventListener('wheel', e => {
+  e.preventDefault();
+  if (autoFit) {
+    autoFit = false;
+    fitBtn.textContent = 'Auto-fit: off';
+    fitBtn.classList.remove('active');
+  }
+  setZoom(cam.zoom * Math.exp(-e.deltaY * 0.0012));
+}, { passive: false });
+
+window.addEventListener('keydown', e => {
+  if (e.altKey || e.ctrlKey || e.metaKey || e.repeat || e.target.closest('input,select,button,textarea,[contenteditable]')) return;
+  if (e.key.toLowerCase() === 'h') document.getElementById('hideBtn').click();
+  if (e.code === 'Space') { e.preventDefault(); playBtn.click(); }
+  if (e.key === 'r' || e.key === 'R') resetBtn.click();
+  if (e.key === 't' || e.key === 'T') twinBtn.click();
+  if (e.key === 'a' || e.key === 'A') asmrBtn.click();
+});
+
+// ─────────────────────────────────────────────────────────────
+//  Go
+// ─────────────────────────────────────────────────────────────
+applyPalette('lagoon');
+resize();
+loadPreset('figure8');
+new ResizeObserver(resize).observe(canvas);
+requestAnimationFrame(tick);
+
+})();
+</script>
+</body>
+</html>
+
+

@@ -283,7 +283,7 @@
 <section id="dome" class="view visible">
     <div class="dome-header">
         <h1>THE OBSERVATORY</h1>
-        <p>eight instruments for looking at everything at once</p>
+        <p>nine instruments for looking at everything at once</p>
     </div>
     <div id="constellation">
         <svg preserveAspectRatio="none" viewBox="0 0 100 100"></svg>
@@ -341,6 +341,9 @@ const INSTRUMENTS = [
     { id: 'harmonic-primer', file: 'cosmic-harmonic-enhanced.html', name: 'Harmonic Primer', wing: 'scales',
       x: 84, y: 56, halo: 'rgba(255,215,0,0.5)',
       desc: 'The cosmos as instrument: conduct its harmonics with your cursor — and click any world for its true distances. Sound on.' },
+    { id: 'three-body', file: 'three-body-studio.html', name: 'Three-Body Studio', wing: 'scales',
+      x: 80, y: 80, halo: 'rgba(105,223,204,0.5)',
+      desc: 'Three bodies, one gravity, no solution. Close passes ring like glass. Press A for ASMR mode; headphones on.' },
 
     // — The Quest (inner space)
     { id: 'metamonastic', file: 'metamonastic-engine.html', name: 'Metamonastic Quest', wing: 'quest',
@@ -362,6 +365,7 @@ const EDGES = [
     ['warp-lab', 'quantum-foam'],
     ['warp-timeline', 'quantum-foam'],
     ['cosmic-scales', 'harmonic-primer'],
+    ['harmonic-primer', 'three-body'],
     ['vortex-engine', 'quantum-foam'],
     ['quantum-foam', 'cosmic-scales'],
     ['quantum-foam', 'metamonastic']

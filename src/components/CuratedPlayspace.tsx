@@ -6,6 +6,7 @@ import { MotionToggle } from './Immersion'
 type Work = { title:string; note:string; path:string; image:string; tone:string; span?:string }
 
 const works: Work[] = [
+  {title:'Three-Body Studio',note:'Three bodies, one gravity, no solution. Close passes ring like glass. In the Observatory.',path:'/observatory#three-body',image:'/images/playspace/exhibits/three-body-studio.webp',tone:'#69dfcc',span:'md:col-span-5'},
   {title:'Neon Rain',note:'A city remembers in reflections.',path:'/applets/art-mindfulness/mindfulness-sound/neon-rain-zen-walk/index.html',image:'/images/playspace/exhibits/neon-rain.webp',tone:'#d94f91',span:'md:col-span-5'},
   {title:'Chromatic Dialogue',note:'Two palettes enter. A conversation emerges.',path:'/applets/art-mindfulness/visual-art/chromatic-dialogue-interactive-art/index.html',image:'/images/playspace/exhibits/chromatic-dialogue.webp',tone:'#d89a4b',span:'md:col-span-4'},
   {title:'Noir Studio',note:'Light, shadow, and intention.',path:'/applets/art-mindfulness/visual-art/noir-abstract-studio/index.html',image:'/images/playspace/exhibits/noir-studio.webp',tone:'#69635c',span:'md:col-span-3'},

@@ -22,7 +22,7 @@ const rooms = [
   {
     href: '/observatory',
     title: 'The Observatory',
-    kind: 'Eight instruments',
+    kind: 'Nine instruments',
     blurb: 'Cosmic visualisations, a warp-drive simulator, quantum foam, and other interactive rabbit holes.',
     accent: 'border-blue-400/35 hover:border-blue-300/80',
     text: 'text-blue-300',
