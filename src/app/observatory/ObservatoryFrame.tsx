@@ -1,34 +1,23 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 // The dome lives in a static iframe. Pass the page's #hash through so a link
-// like /observatory#three-body opens that instrument directly.
+// like /observatory#three-body opens that instrument directly. The src is set
+// only after mount, so the hash is known before the frame starts loading.
 export default function ObservatoryFrame() {
-  const ref = useRef<HTMLIFrameElement>(null);
+  const [src, setSrc] = useState<string | null>(null);
   useEffect(() => {
-    const sync = () => {
-      const frame = ref.current;
-      if (!frame) return;
-      const target = '/observatory/index.html' + window.location.hash;
-      if (window.location.hash && frame.contentWindow) {
-        try {
-          if (frame.contentWindow.location.hash !== window.location.hash) {
-            frame.contentWindow.location.hash = window.location.hash;
-          }
-          return;
-        } catch { /* fall through to a reload */ }
-      }
-      if (window.location.hash) frame.src = target;
-    };
+    const sync = () => setSrc('/observatory/index.html' + window.location.hash);
     sync();
     window.addEventListener('hashchange', sync);
     return () => window.removeEventListener('hashchange', sync);
   }, []);
+  if (!src) return null;
   return (
     <iframe
-      ref={ref}
-      src="/observatory/index.html"
+      key={src}
+      src={src}
       title="The Observatory — consolidated cosmic instruments"
       className="h-full w-full border-0"
       allow="fullscreen; autoplay"
