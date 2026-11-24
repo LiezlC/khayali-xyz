@@ -1453,7 +1453,8 @@ window.addEventListener('keydown', e => {
 // ─────────────────────────────────────────────────────────────
 applyPalette('lagoon');
 resize();
-loadPreset('figure8');
+loadPreset('random');
+selectTab(byId('orbitsTab'));
 new ResizeObserver(resize).observe(canvas);
 requestAnimationFrame(tick);
 
