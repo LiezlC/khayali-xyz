@@ -99,7 +99,7 @@ html.embedded header{padding-top:62px}
     <fieldset><legend>Twin comparison</legend>
       <div class="row"><button id="twinBtn" aria-pressed="false">Twin test</button>
       <label class="kick">Kick <select id="kick"><option value="1e-10">10⁻¹⁰</option><option value="1e-8" selected>10⁻⁸</option><option value="1e-6">10⁻⁶</option><option value="1e-4">10⁻⁴</option><option value="1e-2">10⁻²</option></select></label></div>
-      <p>The twin starts from the current state with a small velocity kick. Its paths are dashed.</p>
+      <p>The twin starts from the current state with a small velocity kick. Its paths are dashed. With sound on, the original drifts to the left ear and the twin to the right as they diverge.</p>
     </fieldset>
   </section>
 </aside>
@@ -398,6 +398,7 @@ function fitZoom() {
 function makeTwin() {
   state2 = Float64Array.from(state);
   state2[2] += kickSize;                // perturb body 0 velocity by the selected amount
+  passState2 = passState.map(p => ({ ...p }));   // twin chimes start in step with the original
   for (let i = 0; i < bodies.length; i++) {
     bodies[i].trail2 = new Trail();
     bodies[i].trail2.add(state2[4*i], state2[4*i+1]);
@@ -485,7 +486,7 @@ const appearance = { persistence: 24, thickness: 2, glow: .65, intensity: .7 };
 const fx = { scale: true, slowmo: true, breathe: true, film: true, stars: true, binaural: false, haptics: true };
 const PAIRS = [[0, 1], [0, 2], [1, 2]];
 const SCALE = [0, 2, 4, 7, 9];          // A major pentatonic
-let passState = [], passQueue = [], particles = [], rings = [], dustAcc = [0, 0, 0];
+let passState = [], passState2 = [], twinWidth = 0, passQueue = [], particles = [], rings = [], dustAcc = [0, 0, 0];
 let slowmo = 0, presetFade = 1, drawColors = [...COLORS];
 const stars = Array.from({ length: 300 }, () => ({
   x: Math.random(), y: Math.random(), z: .15 + Math.random() ** 2 * .85,
@@ -516,20 +517,21 @@ let vignette = null, vignetteKey = '';
 
 function resetPasses() {
   passState = PAIRS.map(() => ({ last: Infinity, falling: false, peak: 0, cool: 0 }));
+  passState2 = PAIRS.map(() => ({ last: Infinity, falling: false, peak: 0, cool: 0 }));
 }
 
 // Called every integrator substep: a periapsis is where a pair's distance
 // stops shrinking and starts growing. Only real dips count, so a circular
 // binary's numerical jitter stays silent.
-function detectPasses() {
+function detectPasses(st = state, states = passState, twin = false) {
   PAIRS.forEach(([a, b], p) => {
-    const s = passState[p];
-    const dx = state[4 * b] - state[4 * a], dy = state[4 * b + 1] - state[4 * a + 1];
+    const s = states[p];
+    const dx = st[4 * b] - st[4 * a], dy = st[4 * b + 1] - st[4 * a + 1];
     const d = Math.hypot(dx, dy);
     if (d > s.peak) s.peak = d;
     if (s.falling && d > s.last) {
       if ((s.peak - s.last) / s.peak > .2 && s.cool <= 0) {
-        passQueue.push({ a, b, d: s.last, x: state[4 * a] + dx / 2, y: state[4 * a + 1] + dy / 2 });
+        passQueue.push({ a, b, twin, d: s.last, x: st[4 * a] + dx / 2, y: st[4 * a + 1] + dy / 2 });
         s.cool = .15;
       }
       s.peak = d;
@@ -543,6 +545,14 @@ function flushPasses() {
   for (const ev of passQueue) {
     const strength = Math.min(1, .28 / (ev.d + .04));
     if (strength < .1) continue;
+    // Twin test: the original universe drifts left and its twin right as they diverge.
+    const degree = (ev.a + ev.b - 1) * 2 + Math.round(strength * 5);
+    const semis = Math.floor(degree / 5) * 12 + SCALE[degree % 5];
+    const screenX = (ev.x - cam.x) * cam.zoom / Math.max(1, W * .32);
+    const side = twinOn ? (ev.twin ? .7 : -.7) : 0;
+    const panValue = Math.tanh(screenX) * .85 * (1 - twinWidth) + side * twinWidth;
+    chime(440 * Math.pow(2, semis / 12), panValue, (.05 + .22 * strength) * appearance.chimes * (twinOn ? .72 : 1));
+    if (ev.twin) continue;
     rings.push({ x: ev.x, y: ev.y, a: ev.a, b: ev.b, s: strength, age: 0, life: 1.4 + strength });
     const burst = Math.round(34 * strength * (.3 + appearance.stardust));
     for (let i = 0; i < burst; i++) {
@@ -551,10 +561,6 @@ function flushPasses() {
         age: 0, life: 1.2 + Math.random() * 2, c: i % 2 ? ev.a : ev.b, s: Math.random() });
     }
     slowmo = Math.max(slowmo, strength);
-    const degree = (ev.a + ev.b - 1) * 2 + Math.round(strength * 5);
-    const semis = Math.floor(degree / 5) * 12 + SCALE[degree % 5];
-    const screenX = (ev.x - cam.x) * cam.zoom / Math.max(1, W * .32);
-    chime(440 * Math.pow(2, semis / 12), Math.tanh(screenX) * .85, (.05 + .22 * strength) * appearance.chimes);
     if (fx.haptics && navigator.vibrate) navigator.vibrate(Math.round(6 + 22 * strength));
   }
   passQueue.length = 0;
@@ -562,6 +568,7 @@ function flushPasses() {
 
 function updateFx(dt) {
   for (const s of passState) s.cool -= dt;
+  for (const s of passState2) s.cool -= dt;
   slowmo *= Math.pow(.2, dt);
   bodies.forEach((body, i) => {
     const vx = state[4 * i + 2], vy = state[4 * i + 3], v = Math.hypot(vx, vy);
@@ -946,6 +953,7 @@ function tick(now) {
       advance(state, h);
       if (twinOn && state2) advance(state2, h);
       detectPasses();
+      if (twinOn && state2) detectPasses(state2, passState2, true);
       acc -= h;
       simTime += h;
       steps++;
@@ -1178,7 +1186,7 @@ zoom.addEventListener('input', () => {
 
 const soundBtn = byId('soundBtn');
 const volume = byId('volume');
-let audio, master, bus, wet, voices, humGain, binGain, recDest;
+let audio, master, bus, wet, voices, twinVoices, humGain, binGain, recDest;
 let soundOn = false;
 
 function makeImpulse(seconds, decay) {
@@ -1269,7 +1277,12 @@ function prepareSound() {
   binGain.gain.value = 0;
   merger.connect(binGain).connect(master);
 
-  voices = [110, 164.81, 220].map(root => {
+  voices = makeVoices(pink);
+  twinVoices = makeVoices(pink);
+}
+
+function makeVoices(pink) {
+  return [110, 164.81, 220].map(root => {
     const tone = audio.createOscillator();
     const air = audio.createOscillator();
     const filter = audio.createBiquadFilter();
@@ -1300,6 +1313,12 @@ function prepareSound() {
   });
 }
 
+// How far apart the two universes are, on a log scale: 0 while they agree, 1 once chaos wins.
+function twinSpread() {
+  if (!twinOn || !state2) return 0;
+  return Math.max(0, Math.min(1, (Math.log10(separation() + 1e-14) + 6) / 5.6));
+}
+
 function updateSound() {
   if (!audio || audio.state !== 'running') return;
   const now = audio.currentTime;
@@ -1307,13 +1326,21 @@ function updateSound() {
   wet.gain.setTargetAtTime(appearance.reverb * 1.1, now, .2);
   binGain.gain.setTargetAtTime(soundOn && fx.binaural ? .05 : 0, now, .3);
   if (!soundOn || paused) return;
+  twinWidth = twinSpread();
+  const pair = twinOn && state2;
+  const nearest = driveVoices(voices, state, pair ? -.7 : 0, pair ? .72 : 1, now);
+  driveVoices(twinVoices, pair ? state2 : state, .7, pair ? .72 : 0, now);
+  humGain.gain.setTargetAtTime(.03 + .2 / (1 + 3 * nearest), now, .2);
+}
+
+function driveVoices(set, st, side, level, now) {
   let nearest = Infinity;
-  voices.forEach(({ root, tone, air, filter, gain, pan, band, noiseGain }, i) => {
+  set.forEach(({ root, tone, air, filter, gain, pan, band, noiseGain }, i) => {
     const j = i * 4;
-    const velocity = Math.hypot(state[j + 2], state[j + 3]);
+    const velocity = Math.hypot(st[j + 2], st[j + 3]);
     let closest = Infinity;
-    for (let k = 0; k < state.length; k += 4) {
-      if (j !== k) closest = Math.min(closest, Math.hypot(state[j] - state[k], state[j + 1] - state[k + 1]));
+    for (let k = 0; k < st.length; k += 4) {
+      if (j !== k) closest = Math.min(closest, Math.hypot(st[j] - st[k], st[j + 1] - st[k + 1]));
     }
     const motion = velocity / (1 + velocity);
     const encounter = 1 / (1 + 4 * closest);
@@ -1323,13 +1350,14 @@ function updateSound() {
     tone.frequency.setTargetAtTime(pitch, now, glide);
     air.frequency.setTargetAtTime(pitch * 2.003, now, glide);
     band.frequency.setTargetAtTime(500 + 3200 * motion, now, .12);
-    noiseGain.gain.setTargetAtTime(appearance.texture * (.04 + .5 * motion * motion), now, .12);
+    noiseGain.gain.setTargetAtTime(level * appearance.texture * (.04 + .5 * motion * motion), now, .12);
     nearest = Math.min(nearest, closest);
     filter.frequency.setTargetAtTime(250 + 760 * motion + 1150 * encounter, now, .1);
-    gain.gain.setTargetAtTime(.13 + .20 * motion + .11 * encounter, now, .14);
-    pan.pan.setTargetAtTime(Math.tanh((state[j] - cam.x) * cam.zoom / Math.max(1, W * .32)) * .82, now, .16);
+    gain.gain.setTargetAtTime(level * (.13 + .20 * motion + .11 * encounter), now, .14);
+    const spatial = Math.tanh((st[j] - cam.x) * cam.zoom / Math.max(1, W * .32)) * .82;
+    pan.pan.setTargetAtTime(spatial * (1 - twinWidth) + side * twinWidth, now, .16);
   });
-  humGain.gain.setTargetAtTime(.03 + .2 / (1 + 3 * nearest), now, .2);
+  return nearest;
 }
 
 soundBtn.addEventListener('click', async () => {
