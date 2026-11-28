@@ -2,7 +2,7 @@ import MusicRooms from '@/components/MusicRooms';
 import { arcs as playlists } from "@/data/arcs";
 import FrequencyFinder from "@/components/FrequencyFinder";
 import TrackBriefGenerator from "@/components/TrackBriefGenerator";
-import type { Metadata } from 'next';
+import { pageMeta } from '@/lib/pageMeta';
 import FeaturedMusic from '@/components/FeaturedMusic';
 import LatestMusic from '@/components/LatestMusic';
 import SpotifyPlayer from '@/components/SpotifyPlayer';
@@ -10,21 +10,7 @@ import SpotifyPlayer from '@/components/SpotifyPlayer';
 // Refresh the static page daily so the Monday feature rotation advances automatically.
 export const revalidate = 86400;
 
-export const metadata: Metadata = {
-  title: 'Khayali Tunes',
-  description: 'Songs and music videos made by Liezl Coetzee in collaboration with AI. Watch the latest releases or explore the Khayali collections.',
-  openGraph: {
-    title: 'Khayali Tunes',
-    description: 'Songs and music videos made by Liezl Coetzee in collaboration with AI.',
-    url: 'https://khayali.xyz/music',
-    type: 'music.playlist',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Khayali Tunes',
-    description: 'Songs and music videos made by Liezl Coetzee in collaboration with AI.',
-  },
-};
+export const metadata = pageMeta("/music", "Khayali Tunes", "Songs and music videos made by Liezl Coetzee in collaboration with AI. Watch the latest releases or explore the Khayali collections.");
 
 const musicJsonLd = {
   '@context': 'https://schema.org',

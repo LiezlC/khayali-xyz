@@ -1,3 +1,7 @@
+import { pageMeta } from '@/lib/pageMeta';
+
+export const metadata = pageMeta("/worldworkshop", "World Workshop", "Explore ideas for possible worlds and human collaboration with AI.");
+
 import Link from 'next/link';
 import { getContentByCategory } from '@/utils/content';
 

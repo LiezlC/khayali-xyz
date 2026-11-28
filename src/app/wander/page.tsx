@@ -1,12 +1,9 @@
-import type { Metadata } from 'next'
+import { pageMeta } from '@/lib/pageMeta';
 import RandomDoor from '@/components/RandomDoor'
 import InteractiveAtlasMap from '@/components/InteractiveAtlasMap'
 import { atlasDoors, atlasTrails } from '@/data/atlas'
 
-export const metadata: Metadata = {
-  title: 'The Khayali Atlas',
-  description: 'A map for wandering through Khayali: memory rooms, machine gardens, field signals, midnight workshops, beautiful failures, and quiet places.',
-}
+export const metadata = pageMeta("/wander", "The Khayali Atlas", "A map for wandering through Khayali: memory rooms, machine gardens, field signals, midnight workshops, beautiful failures, and quiet places.");
 
 const colourStyles: Record<string, { border: string; text: string; glow: string }> = {
   amber: { border: 'border-amber-400/35 hover:border-amber-300/80', text: 'text-amber-300', glow: 'group-hover:shadow-amber-950/60' },

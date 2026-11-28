@@ -1,3 +1,7 @@
+import { pageMeta } from '@/lib/pageMeta';
+
+export const metadata = pageMeta("/khayali-protocol", "Khayali Protocol", "Frameworks for consciousness exploration and human collaboration with AI.");
+
 import Link from 'next/link';
 import { getContentByCategory } from '@/utils/content';
 

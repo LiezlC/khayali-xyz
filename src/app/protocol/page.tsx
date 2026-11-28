@@ -1,3 +1,7 @@
+import { pageMeta } from '@/lib/pageMeta';
+
+export const metadata = pageMeta("/protocol", "The Khayali Protocol", "Research documentation and methods for exploring consciousness.");
+
 import Link from 'next/link';
 import { getContentByCategory } from '@/utils/content';
 

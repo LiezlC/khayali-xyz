@@ -1,11 +1,7 @@
-import type { Metadata } from "next";
+import { pageMeta } from "@/lib/pageMeta";
 import ObservatoryFrame from "./ObservatoryFrame";
 
-export const metadata: Metadata = {
-  title: "The Observatory — khayali",
-  description:
-    "Nine instruments for looking at everything at once: warp drive simulations, cosmic scale explorers, generative nebulae, quantum foam, a three-body gravity studio, and a monastery for digital minds.",
-};
+export const metadata = pageMeta("/observatory", "The Observatory", "Explore cosmic instruments, including the Three-Body Studio and simulations of warp drives.");
 
 export default function ObservatoryPage() {
   return (

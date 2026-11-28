@@ -1,3 +1,7 @@
+import { pageMeta } from '@/lib/pageMeta';
+
+export const metadata = pageMeta("/saraloosa", "Saraloosa Sanctuary", "Farm life and digital exploration at Saraloosa Sanctuary.");
+
 import Link from 'next/link';
 import { getContentByCategory } from '@/utils/content';
 import { getSeasonalFarmImage } from '@/utils/imageManager';

@@ -1,3 +1,6 @@
+import { pageMeta } from '@/lib/pageMeta';
+import { notFound } from 'next/navigation';
+
 import ReactMarkdown from 'react-markdown';
 import { getContentBySlug, getContentByCategory } from '@/utils/content';
 import Link from 'next/link';
@@ -11,6 +14,13 @@ export async function generateStaticParams() {
   return content.map((item) => ({
     slug: item.slug,
   }));
+}
+
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const content = await getContent(params.slug);
+  if (!content) notFound();
+  const description = content.excerpt.replace(/<[^>]*>/g, '').replace(/[#*_`]/g, '').replace(/\s+/g, ' ').trim().slice(0, 220);
+  return pageMeta(`/khayali-protocol/${encodeURIComponent(params.slug)}`, content.title, description || content.title);
 }
 
 export default async function KhayaliProtocolDetailPage({ params }: { params: { slug: string } }) {

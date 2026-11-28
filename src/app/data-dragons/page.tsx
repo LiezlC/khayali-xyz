@@ -1,11 +1,8 @@
+import { pageMeta } from '@/lib/pageMeta';
 import DataDragonsDiagnostic from "@/components/DataDragonsDiagnostic";
 import { dragons } from "@/data/dragons";
 
-export const metadata = {
-  title: "Data Dragons Diagnostic · khayali",
-  description:
-    "Name the dragons in your data. A diagnostic built on the Data Dragons taxonomy — five failure modes of real data systems, drawn from a resettlement-and-compensation database.",
-};
+export const metadata = pageMeta("/data-dragons", "Data Dragons Diagnostic", "Name the dragons in your data. A diagnostic built on the Data Dragons taxonomy — five failure modes of real data systems, drawn from a resettlement-and-compensation database.");
 
 export default function DataDragonsPage() {
   return (

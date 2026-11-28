@@ -1,3 +1,7 @@
+import { pageMeta } from '@/lib/pageMeta';
+
+export const metadata = pageMeta("/soulspaces", "Soulspaces", "Explore consciousness and connection through Khayali’s Soulspaces archive.");
+
 import Link from 'next/link';
 import { getContentByCategory } from '@/utils/content';
 
