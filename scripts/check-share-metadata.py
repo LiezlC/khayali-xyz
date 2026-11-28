@@ -9,7 +9,7 @@ import fnmatch
 from html.parser import HTMLParser
 from pathlib import Path
 import subprocess
-from urllib.parse import quote
+from urllib.parse import quote, unquote, urlsplit
 from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -88,9 +88,9 @@ def check(item, base_url):
                     "twitter:card", "twitter:image"):
             if len(head.values.get(key, [])) != 1 or not head.values[key][0]:
                 errors.append(f"missing or duplicate {key}")
-        return route, errors
+        return route, errors, head.values.get("og:image", [])
     except Exception as error:
-        return route, [str(error)]
+        return route, [str(error)], []
 
 
 if __name__ == "__main__":
@@ -100,8 +100,22 @@ if __name__ == "__main__":
     entries = list(pages())
     with ThreadPoolExecutor(max_workers=6) as pool:
         results = list(pool.map(lambda item: check(item, args.base_url), entries))
-    failed = [(route, errors) for route, errors in results if errors]
+    failed = [(route, errors) for route, errors, _ in results if errors]
+    images = {image for _, _, values in results for image in values}
+    for image in sorted(images):
+        try:
+            if args.base_url:
+                target = image.replace(SITE, args.base_url.rstrip("/"), 1)
+                with urlopen(Request(target, headers={"User-Agent": "LinkedInBot/1.0"}), timeout=30) as response:
+                    if not response.headers.get("Content-Type", "").startswith("image/"):
+                        raise ValueError("response is not an image")
+            elif image.startswith(SITE + "/"):
+                path = ROOT / "public" / unquote(urlsplit(image).path).lstrip("/")
+                if not path.is_file():
+                    raise ValueError("image file is missing")
+        except Exception as error:
+            failed.append((image, [str(error)]))
     for route, errors in failed:
         print(route + ": " + "; ".join(errors))
-    print(f"Checked {len(results)} pages; {len(failed)} failures")
+    print(f"Checked {len(results)} pages and {len(images)} images; {len(failed)} failures")
     raise SystemExit(bool(failed))
