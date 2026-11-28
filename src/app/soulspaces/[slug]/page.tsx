@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   const content = await getContent(params.slug);
   if (!content) notFound();
   const description = content.excerpt.replace(/<[^>]*>/g, '').replace(/[#*_`]/g, '').replace(/\s+/g, ' ').trim().slice(0, 220);
-  return pageMeta(`/soulspaces/${encodeURIComponent(params.slug)}`, content.title, description || content.title);
+  return pageMeta(`/soulspaces/${encodeURIComponent(content.slug)}`, content.title, description || content.title);
 }
 
 export default async function SoulspacesDetailPage({ params }: { params: { slug: string } }) {

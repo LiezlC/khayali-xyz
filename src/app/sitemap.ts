@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next';
+import { observatoryInstruments } from '@/data/observatory';
 
 const BASE_URL = 'https://www.khayali.xyz';
 
@@ -15,5 +16,9 @@ const STATIC_ROUTES: MetadataRoute.Sitemap = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return STATIC_ROUTES;
+  return [...STATIC_ROUTES, ...['three-body', ...Object.keys(observatoryInstruments)].map(instrument => ({
+    url: `${BASE_URL}/observatory/${instrument}`,
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }))];
 }
