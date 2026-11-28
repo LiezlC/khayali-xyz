@@ -11,3 +11,5 @@ Dynamic archive metadata uses the decoded content slug before URL encoding, avoi
 Validation: production build passed. python scripts/check-share-metadata.py checked 251 rendered or standalone pages with zero failures. Add --base-url https://www.khayali.xyz for a live LinkedInBot sweep. Browser checks verified both Three-Body entry links and the pause control. A MutationObserver console error appeared in the in-app browser without any corresponding application source; the studio rendered and responded normally.
 
 LinkedIn Post Inspector requires a signed-in session. Its cache was not refreshed. Existing published LinkedIn cards can retain old metadata; use the named route for new shares.
+
+The live sweep after PR #13 passed for all 251 pages. Fetching the images then exposed an older missing /og-default.jpg. The final fix supplies a 1200-by-630 JPEG derived from the existing Atlas house artwork and extends the checker to validate image files and live image responses as well.
