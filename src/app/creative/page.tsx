@@ -1,3 +1,7 @@
+import { pageMeta } from '@/lib/pageMeta';
+
+export const metadata = pageMeta("/creative", "Creative Nexus", "Collaborative creative work from Khayali.");
+
 export default function CreativePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">      {/* Full embedded content */}

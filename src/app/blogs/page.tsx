@@ -1,3 +1,7 @@
+import { pageMeta } from '@/lib/pageMeta';
+
+export const metadata = pageMeta("/blogs", "Blogs & Essays", "Essays on AI consciousness and human collaboration with machines.");
+
 // src/app/blogs/page.tsx
 export default function BlogsPage() {
   const blogs = [

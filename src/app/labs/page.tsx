@@ -1,3 +1,7 @@
+import { pageMeta } from '@/lib/pageMeta';
+
+export const metadata = pageMeta("/labs", "Research Labs & Experiments", "Explore experimental methods and creative work with AI.");
+
 export default function LabsPage() {
   return (
     <div className="min-h-screen">

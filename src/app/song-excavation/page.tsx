@@ -1,9 +1,6 @@
-import type { Metadata } from 'next'
+import { pageMeta } from '@/lib/pageMeta';
 
-export const metadata: Metadata = {
-  title: 'Song Excavation',
-  description: 'Bring Khayali a question, paper, character, system failure, or strange idea. Get back the song hiding inside it.',
-}
+export const metadata = pageMeta("/song-excavation", "Song Excavation", "Bring Khayali a question, paper, character, system failure, or strange idea. Get back the song hiding inside it.");
 
 const requestHref = 'https://ko-fi.com/c/8e2c39dfca'
 const emailHref = 'mailto:liezlc@khayali.xyz?subject=Song%20Excavation%20question'

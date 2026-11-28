@@ -1,3 +1,7 @@
+import { pageMeta } from '@/lib/pageMeta';
+
+export const metadata = pageMeta("/explore", "Explore the Archive", "Browse Khayali’s writing and experiments by category.");
+
 import Link from 'next/link';
 import { getContentCategories, getContentByCategory } from '@/utils/content';
 
